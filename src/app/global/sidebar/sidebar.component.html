@@ -1,0 +1,54 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav class="sidenav"  mode="side" opened >
+    <mat-nav-list>
+      <ul>
+        <li >
+          <a class="sidebar_title" (click)="submenuToggle(0)">
+            主监控台
+            <i class="fa fa-angle-right" *ngIf="!submenuShow[0]"></i>
+            <i class="fa fa-angle-down" *ngIf="submenuShow[0]"></i>
+          </a>
+          <ul class="sub_menu" *ngIf="submenuShow[0]">
+            <li>
+              <a mat-list-item >设备概览</a>
+            </li>
+            <li>
+              <a mat-list-item >告警记录</a>
+            </li>
+            <li>
+              <a mat-list-item >维保记录</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <li >
+          <a class="sidebar_title" (click)="submenuToggle(1)">
+            常用功能
+            <i class="fa fa-angle-right" *ngIf="!submenuShow[1]"></i>
+            <i class="fa fa-angle-down" *ngIf="submenuShow[1]"></i>
+          </a>
+          <ul class="sub_menu" *ngIf="submenuShow[1]">
+            <li>
+              <a mat-list-item >锅炉信息</a>
+            </li>
+            <li>
+              <a mat-list-item >终端管理</a>
+            </li>
+            <li>
+              <a mat-list-item >模板管理</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+
+    </mat-nav-list>
+
+  </mat-sidenav>
+</mat-sidenav-container>
+
+
+
+
+

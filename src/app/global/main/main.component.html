@@ -1,0 +1,56 @@
+<div class="site">
+  <header>
+      <app-header></app-header>
+  </header>
+  <main>
+     <app-sidebar></app-sidebar>
+      <router-outlet></router-outlet>
+  </main>
+  <!--<footer>
+     <app-footer></app-footer>
+  </footer>-->
+</div>
+
+
+
+<!--<mat-sidenav-container class="sidenav-container">
+  <header>
+    <app-header (click)="drawer.toggle()" ></app-header>
+  </header>
+  <mat-sidenav
+      #drawer
+      class="sidenav"
+      fixedInViewport="true"
+      [attr.role]="isHandset ? 'dialog' : 'navigation'"
+      mode="side"
+      [opened]="true">
+      <mat-toolbar color="primary"> 炉管家 </mat-toolbar>
+      <mat-nav-list>
+        <h4>主监控台</h4>
+        <a mat-list-item href="">设备概览</a>
+        <a mat-list-item href="">告警记录</a>
+        <a mat-list-item href="">维保记录</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar color="primary">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span>Application Title</span>
+      </mat-toolbar>
+
+
+      <footer>
+        <app-footer></app-footer>
+      </footer>
+
+
+    </mat-sidenav-content>
+
+
+</mat-sidenav-container>-->

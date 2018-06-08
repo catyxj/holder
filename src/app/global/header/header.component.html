@@ -1,0 +1,22 @@
+<mat-toolbar>
+
+  <mat-toolbar-row>
+    <a class="navbar-brand" href="">
+      <img src="/assets/images/light.png"  height="30" alt="">
+      <!--炉管家-->
+    </a>
+
+    <!-- This fills the remaining space of the current row -->
+    <span class="example-spacer"></span>
+
+    <mat-icon>home</mat-icon>
+    <button mat-button [matMenuTriggerFor]="menu">用户名</button>
+    <mat-menu #menu="matMenu" yPosition="below">
+      <button mat-menu-item>用户信息</button>
+      <button mat-menu-item>设置</button>
+      <button mat-menu-item>退出</button>
+    </mat-menu>
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
