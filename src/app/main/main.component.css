@@ -19,4 +19,5 @@ app-sidebar{
 }
 .display{
   flex: 9;
+  padding: 10px;
 }

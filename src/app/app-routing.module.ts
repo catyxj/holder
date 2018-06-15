@@ -20,7 +20,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: MainComponent,
-    children: [
+    /*children: [
       { path: '', redirectTo: 'monitor', pathMatch: 'full' },
       {
         path: 'monitor',
@@ -30,7 +30,7 @@ const routes: Routes = [
         path: 'boilers',
         component: BoilersComponent
       }
-    ]
+    ]*/
   },
   {
     path: '404',

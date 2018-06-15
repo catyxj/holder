@@ -2,7 +2,7 @@
 <div class="grid grid-pad clearfix">
   <a *ngFor="let boiler of boilers" class="col-1-4"
      (click)="getBoiler(boiler.id)"
-     routerLink="/detail/{{boiler.id}}">
+     routerLink="/admin/runtime">
     <div class="module hero">
       <h4>{{boiler.name}}</h4>
       <div>
@@ -15,7 +15,8 @@
 </div>
 
 <div>
-  <ngb-pagination [collectionSize]="totalItems" [pageSize]="4" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+  <div class="pull-left"> 共 {{totalItems}} 项</div>
+  <ngb-pagination class="pull-right" [collectionSize]="totalItems" [pageSize]="4" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
 </div>
 
 

@@ -13,14 +13,14 @@ import { MonitorRoutingModule } from './monitor-routing.module';
   imports: [
     CommonModule,
     NgbModule,
-    MonitorRoutingModule
+    RouterModule.forChild(MonitorRoutingModule),
   ],
   declarations: [
     ListComponent,
     DashboardComponent
   ],
   exports: [
-    RouterModule
+    // RouterModule
   ]
 })
 export class MonitorModule { }

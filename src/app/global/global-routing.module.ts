@@ -4,6 +4,7 @@ import {MainComponent} from '../main/main.component';
 import {MonitorMainComponent} from '../modules/monitor/monitor-main/monitor-main.component';
 import {DashboardComponent} from '../modules/monitor/dashboard/dashboard.component';
 import {BoilersComponent} from '../modules/boilers/boilers/boilers.component';
+import {BoilerMainComponent} from '../modules/boilers/boiler-main/boiler-main.component';
 
 
 
@@ -26,7 +27,14 @@ export const GlobalRoutingModule = [
       },
       {
         path: 'boilers',
-        component: BoilersComponent
+        component: BoilerMainComponent,
+        children: [
+          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+          {
+            path: 'dashboard',
+            component: BoilersComponent
+          }
+        ]
       }
     ]
   }

@@ -10,7 +10,7 @@
             <i class="fa fa-angle-right" *ngIf="!submenuShow[0]"></i>
             <i class="fa fa-angle-down" *ngIf="submenuShow[0]"></i>
           </a>
-          <ul class="sub_menu" *ngIf="submenuShow[0]">
+          <ul class="sub_menu" [class.d-none]="!submenuShow[0]">
             <li>
               <a routerLink="/admin/monitor" routerLinkActive="active" mat-list-item >设备概览</a>
             </li>

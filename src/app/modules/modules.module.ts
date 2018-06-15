@@ -7,6 +7,10 @@ import {BoilersModule} from './boilers/boilers.module';
 
 import { ModulesRoutingModule } from './modules-routing.module';
 import {MonitorMainComponent} from './monitor/monitor-main/monitor-main.component';
+import {BoilerMainComponent} from './boilers/boiler-main/boiler-main.component';
+import {RuntimeModule} from './runtime/runtime.module';
+import {RuntimeMainComponent} from './runtime/runtime-main/runtime-main.component';
+import {NgxEchartsModule} from 'ngx-echarts';
 
 
 
@@ -15,13 +19,17 @@ import {MonitorMainComponent} from './monitor/monitor-main/monitor-main.componen
     CommonModule,
     MonitorModule,
     BoilersModule,
-    ModulesRoutingModule
+    RuntimeModule,
+    RouterModule.forChild(ModulesRoutingModule),
+    NgxEchartsModule
   ],
   declarations: [
-    MonitorMainComponent
+    MonitorMainComponent,
+    BoilerMainComponent,
+    RuntimeMainComponent
   ],
   exports: [
-    RouterModule
+    // RouterModule
   ]
 })
 export class ModulesModule { }

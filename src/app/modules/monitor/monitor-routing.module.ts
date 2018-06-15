@@ -5,7 +5,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {ListComponent} from './list/list.component';
 
 
-const routes: Routes = [
+export const MonitorRoutingModule = [
   {
     path: 'monitor',
     component: MonitorMainComponent,
@@ -23,8 +23,8 @@ const routes: Routes = [
   }
 ];
 
-@NgModule({
+/*@NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class MonitorRoutingModule { }
+export class MonitorRoutingModule { }*/

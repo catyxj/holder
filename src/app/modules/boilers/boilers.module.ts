@@ -1,14 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BoilersComponent } from './boilers/boilers.component';
-import { BoilerMainComponent } from './boiler-main/boiler-main.component';
+import {RouterModule} from '@angular/router';
 
+import { BoilersComponent } from './boilers/boilers.component';
+import { BoilerInfoComponent } from './boiler-info/boiler-info.component';
+
+import {BoilersRouting} from './boilers-routing.module';
 
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild(BoilersRouting),
   ],
-  declarations: [BoilersComponent, BoilerMainComponent]
+  declarations: [
+    BoilersComponent,
+    BoilerInfoComponent
+  ]
 })
 export class BoilersModule { }
