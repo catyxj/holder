@@ -1,0 +1,29 @@
+<div class="breadcrumb">
+  常用功能 \ 锅炉信息
+</div>
+
+<div class="content">
+  <div class="mat-card-title">
+    <h5>锅炉信息</h5>
+  </div>
+  <div>
+    <table class="table table-bordered">
+      <thead>
+        <th>序号</th>
+        <th>名称</th>
+        <th>燃料</th>
+        <th>操作</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let boiler of boilers">
+          <td> {{ boiler.id }} </td>
+          <td> {{ boiler.name }} </td>
+          <td> {{ boiler.fuel }} </td>
+          <td> <button class="btn btn-info">查看</button> </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+</div>

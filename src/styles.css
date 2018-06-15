@@ -6,10 +6,48 @@
   padding: 0;
   font-size: 14px;
 }
-html,body,app-root,app-main,.site {
+html,body,app-root,app-main,mat-sidenav-container,.site {
   height: 100%;
   margin: 0;
 }
 ul,li{
   list-style: none;
 }
+.content{
+  padding: 0 20px;
+}
+
+.bg_default{
+  background-color: #607D8B;
+}
+.bg_light_default{
+  background-color: #8eacbb;
+}
+.bg_dark_default{
+  background-color: #34515e;
+}
+.bg_primary{
+  background-color: #546e7a;
+  color: #ffffff;
+}
+.bg_light_primary{
+  background-color: #819ca9;
+  color: #ffffff;
+}
+.bg_dark_primary{
+  background-color: #29434e;
+  color: #ffffff;
+}
+.bg_secondary{
+  background-color: #00838f;
+  color: #ffffff;
+}
+.bg_light_secondary{
+  background-color: #4fb3bf;
+  color: #ffffff;
+}
+.bg_dark_secondary{
+  background-color: #005662;
+  color: #ffffff;
+}
+

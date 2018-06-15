@@ -1,0 +1,12 @@
+[
+  { "id": 11, "name": "Mr. Nice", "fuel": "11", "terminal": false, "running": false, "runtime":{"111": 11, "212": 2}},
+  { "id": 12, "name": "Narco", "fuel": "12", "terminal": true, "running": true },
+  { "id": 13, "name": "Bombasto", "fuel": "13", "terminal": true, "running": true },
+  { "id": 14, "name": "Celeritas", "fuel": "13", "terminal": false, "running": false },
+  { "id": 15, "name": "Magneta", "fuel": "13", "terminal": false, "running": false },
+  { "id": 16, "name": "RubberMan", "fuel": "15", "terminal": true, "running": false },
+  { "id": 17, "name": "Dynama", "fuel": "14", "terminal": false, "running": false },
+  { "id": 18, "name": "Dr IQ", "fuel": "11", "terminal": false, "running": false },
+  { "id": 19, "name": "Magma", "fuel": "11", "terminal": true, "running": true },
+  { "id": 20, "name": "Tornado", "fuel": "12", "terminal": false, "running": false }
+]

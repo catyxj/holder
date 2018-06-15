@@ -1,0 +1,23 @@
+<div class="boiler_list">
+  <table class="table table-bordered">
+    <thead>
+      <th>编号</th>
+      <th>名称</th>
+      <th>燃料</th>
+      <th>22</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let boiler of boilers">
+        <td> {{ boiler.id }} </td>
+        <td> {{ boiler.name }} </td>
+        <td> {{ boiler.fuel }} </td>
+        <td> {{ boiler.running }} </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div>
+    <ngb-pagination [collectionSize]="totalItems" [pageSize]="10" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+  </div>
+
+</div>

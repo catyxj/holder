@@ -1,10 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+
 import { GlobalModule } from './global/global.module';
 import { ModulesModule } from './modules/modules.module';
 import { AppComponent } from './app.component';
+import { MainComponent } from './main/main.component';
+import {NotFound404Component} from './global/not-found404/not-found404.component';
+
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -14,14 +17,21 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
+import { AppRoutingModule } from './app-routing.module';
+import {HttpClientModule} from '@angular/common/http';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    MainComponent,
+    NotFound404Component
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     GlobalModule,
     ModulesModule,
     AppRoutingModule,
@@ -34,7 +44,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

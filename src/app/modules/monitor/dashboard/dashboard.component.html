@@ -1,0 +1,21 @@
+
+<div class="grid grid-pad clearfix">
+  <a *ngFor="let boiler of boilers" class="col-1-4"
+     (click)="getBoiler(boiler.id)"
+     routerLink="/detail/{{boiler.id}}">
+    <div class="module hero">
+      <h4>{{boiler.name}}</h4>
+      <div>
+        <div> {{boiler.fuel}} </div>
+        <div class="badge badge-secondary" [class.badge-info]="boiler.terminal" style="margin-right: 5px;"> {{boiler.terminal}} </div>
+        <div class="badge badge-secondary" [class.badge-info]="boiler.terminal"> {{boiler.running}} </div>
+      </div>
+    </div>
+  </a>
+</div>
+
+<div>
+  <ngb-pagination [collectionSize]="totalItems" [pageSize]="4" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+</div>
+
+

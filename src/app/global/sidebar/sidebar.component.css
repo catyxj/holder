@@ -3,9 +3,11 @@
 }
 
 .sidenav {
-  width: 230px;
+  /*width: 230px;*/
+  width: 100%;
   box-shadow: 3px 0 6px rgba(0,0,0,.24);
-  background-color: #cce5ff;
+  /*background-color: #e9ecef;*/
+
   /*background-color: #224562;*/
   /*color: #fff;*/
 }
@@ -13,6 +15,11 @@
   font-size: 14px;
   /*color: #fff;*/
   display: block;
+}
+
+.sidenav a.active{
+  background-color: #607D8B;
+  color: #ffffff;
 }
 .sidebar_title{
   font-size: 16px;
@@ -25,10 +32,13 @@
   margin-right: 10px;
   line-height: 36px;
 }
-.sub_menu li:hover{
-  background-color: rgba(72,198,255,.8);
+.sub_menu{
+  transition: all .3s linear;
+}
+.sub_menu li a:hover{
+  /*background-color: rgba(72,198,255,.8);*/
   color: #fff;
-  /*background-color: #eeeeee;*/
+  background-color: #607D8B;
   /*color: #1976d2;*/
   transition: all .3s linear;
 }
