@@ -9,7 +9,8 @@ import {ListComponent} from './monitor/list/list.component';
 import {BoilerMainComponent} from './boilers/boiler-main/boiler-main.component';
 import {BoilersComponent} from './boilers/boilers/boilers.component';
 import {BoilerInfoComponent} from './boilers/boiler-info/boiler-info.component';
-import {RuntimeMainComponent} from "./runtime/runtime-main/runtime-main.component";
+import {RuntimeMainComponent} from './runtime/runtime-main/runtime-main.component';
+import {MapComponent} from './monitor/map/map.component';
 
 
 export const ModulesRoutingModule = [
@@ -30,6 +31,10 @@ export const ModulesRoutingModule = [
           {
             path: 'list',
             component: ListComponent
+          },
+          {
+            path: 'map',
+            component: MapComponent
           }
         ]
       },

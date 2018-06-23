@@ -9,6 +9,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatTreeModule} from '@angular/material/tree';
 import {GlobalRoutingModule} from './global-routing.module';
+import {ModulesModule} from '../modules/modules.module';
 
 
 
@@ -25,6 +26,7 @@ import {GlobalRoutingModule} from './global-routing.module';
     MatMenuModule,
     MatSortModule,
     MatTreeModule,
+    ModulesModule,
     NgbModule,
   ],
   declarations: [

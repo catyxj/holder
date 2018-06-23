@@ -43,3 +43,29 @@
   /*color: #1976d2;*/
   transition: all .3s linear;
 }
+
+
+.collapse1 .fa-angle-right{
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  transition: transform 150ms,-webkit-transform 150ms;
+}
+.expand .fa-angle-right{
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  transition: transform 150ms,-webkit-transform 150ms;
+}
+.collapse1 .sub_menu{
+  visibility: hidden;
+  opacity: 0;
+  max-height: 1px;
+  transition: visibility 275ms,opacity 275ms,max-height 280ms;
+  transition-timing-function: ease-out;
+}
+.expand .sub_menu{
+  visibility: visible;
+  opacity: 1;
+  max-height: 4000px;
+  transition: visibility .5s,opacity .5s,max-height .5s;
+  transition-timing-function: ease-in-out;
+}

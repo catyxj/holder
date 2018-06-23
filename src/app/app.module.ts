@@ -21,6 +21,8 @@ import { AppRoutingModule } from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 
+import {BaiduMapModule} from 'angular2-baidu-map';
+
 
 
 @NgModule({
@@ -46,7 +48,8 @@ import {FormsModule} from '@angular/forms';
     MatIconModule,
     MatListModule,
     AngularFontAwesomeModule,
-    FormsModule
+    FormsModule,
+    BaiduMapModule
   ],
   providers: [],
   bootstrap: [AppComponent]

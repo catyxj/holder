@@ -1,4 +1,4 @@
 {
-  "heroesUrl": "api/heroes",
-  "textfile": "assets/textfile.txt"
+  "user": "aaa",
+  "password": "123456"
 }

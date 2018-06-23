@@ -4,13 +4,13 @@
   <mat-sidenav class="sidenav bg_light_default"  mode="side" opened >
     <mat-nav-list>
       <ul>
-        <li >
+        <li [class.collapse1]="!submenuShow[0]" [class.expand]="submenuShow[0]" >
           <a class="sidebar_title" (click)="submenuToggle(0)">
             主监控台
-            <i class="fa fa-angle-right" *ngIf="!submenuShow[0]"></i>
-            <i class="fa fa-angle-down" *ngIf="submenuShow[0]"></i>
+            <i class="fa fa-angle-right"></i>
+            <!--<i class="fa fa-angle-down" *ngIf="submenuShow[0]"></i>-->
           </a>
-          <ul class="sub_menu" [class.d-none]="!submenuShow[0]">
+          <ul class="sub_menu" >
             <li>
               <a routerLink="/admin/monitor" routerLinkActive="active" mat-list-item >设备概览</a>
             </li>
@@ -24,13 +24,12 @@
         </li>
       </ul>
       <ul>
-        <li >
+        <li [class.collapse1]="!submenuShow[1]" [class.expand]="submenuShow[1]">
           <a class="sidebar_title" (click)="submenuToggle(1)">
             常用功能
-            <i class="fa fa-angle-right" *ngIf="!submenuShow[1]"></i>
-            <i class="fa fa-angle-down" *ngIf="submenuShow[1]"></i>
+            <i class="fa fa-angle-right"></i>
           </a>
-          <ul class="sub_menu" *ngIf="submenuShow[1]">
+          <ul class="sub_menu">
             <li>
               <a routerLink="/admin/boilers" mat-list-item >锅炉信息</a>
             </li>

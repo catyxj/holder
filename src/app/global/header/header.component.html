@@ -10,12 +10,23 @@
     <span class="example-spacer"></span>
 
     <mat-icon>home</mat-icon>
-    <button mat-button [matMenuTriggerFor]="menu">用户名</button>
-    <mat-menu #menu="matMenu" yPosition="below">
-      <button mat-menu-item>用户信息</button>
+
+    <div ngbDropdown class="d-inline-block">
+      <button mat-button id="dropdownBasic1" ngbDropdownToggle> {{user.userName}} </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="animated fadeInDown">
+        <button class="dropdown-item">用户信息</button>
+        <button class="dropdown-item">设置</button>
+        <button class="dropdown-item">退出</button>
+      </div>
+    </div>
+
+    <!--<button mat-button [matMenuTriggerFor]="menu">用户名</button>
+    <mat-menu #menu="matMenu" >
+      <button mat-menu-item >用户信息</button>
       <button mat-menu-item>设置</button>
       <button mat-menu-item>退出</button>
-    </mat-menu>
+    </mat-menu>-->
+
   </mat-toolbar-row>
 
 </mat-toolbar>

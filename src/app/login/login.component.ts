@@ -7,6 +7,8 @@ import {
   RouterState,
   RouterStateSnapshot
 } from '@angular/router';
+import {UserService} from '../shared/user.service';
+
 
 
 @Component({
@@ -16,16 +18,27 @@ import {
 })
 export class LoginComponent implements OnInit {
   public user = { userName: '', password: '' };
+  private errMes: string ;
 
-  constructor(public router: Router, public activatedRoute: ActivatedRoute) { }
+  constructor(public router: Router, public activatedRoute: ActivatedRoute, private userService: UserService) { }
 
   ngOnInit() {
   }
 
   login() {
-    this.router.navigate(['/admin']);
+    this.getUser();
   }
 
   forgetPwd() {}
+
+  getUser(): void {
+    this.userService.getUser()
+      .subscribe(user => {
+        if ( this.user.userName === user.user && this.user.password === user. password)
+        { this.router.navigate(['/admin']); } else {
+          this.errMes = '账号密码错误';
+        }
+      });
+  }
 
 }

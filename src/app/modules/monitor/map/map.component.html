@@ -1,0 +1,10 @@
+<div style="width: 100%; height: 450px;">
+
+  <!--<div id="container"></div>-->
+  <baidu-map [options]="opts" >
+    <!--<marker [point]="point" [options]="markOpts" (loaded)="" (clicked)=""></marker>-->
+    <marker *ngFor="let marker of markers" [point]="marker.point" [options]="marker.options"></marker>
+
+  </baidu-map>
+
+</div>
