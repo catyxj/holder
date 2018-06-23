@@ -12,7 +12,8 @@ export const GlobalRoutingModule = [
   {
     path: 'admin',
     component: MainComponent,
-    children: [
+    loadChildren: '../modules/modules.module#ModulesModule'
+    /*children: [
       { path: '', redirectTo: 'monitor', pathMatch: 'full' },
       {
         path: 'monitor',
@@ -36,7 +37,7 @@ export const GlobalRoutingModule = [
           }
         ]
       }
-    ]
+    ]*/
   }
 ];
 

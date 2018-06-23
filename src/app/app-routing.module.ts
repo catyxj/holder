@@ -19,7 +19,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: MainComponent,
+    component: MainComponent
     /*children: [
       { path: '', redirectTo: 'monitor', pathMatch: 'full' },
       {
