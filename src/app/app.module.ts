@@ -22,6 +22,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 
 import {BaiduMapModule} from 'angular2-baidu-map';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 
 
@@ -51,7 +52,9 @@ import {BaiduMapModule} from 'angular2-baidu-map';
     FormsModule,
     BaiduMapModule
   ],
-  providers: [],
+  providers: [
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

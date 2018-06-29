@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { UserService } from '../../shared/user.service';
+
 
 @Component({
   selector: 'app-header',
@@ -7,18 +8,23 @@ import { UserService } from '../../shared/user.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  user = {userName: ''};
+  user = {Name: '', Role: { Name: '' } };
+  @Output() toggle = new EventEmitter<void>();
   constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.getUser();
   }
 
+  onClick() {
+    this.toggle.emit();
+  }
+
   getUser(): void {
     this.userService.getUser()
       .subscribe(user => {
-        this.user.userName = user.user;
-      });
-  }
+        this.user = user;
+});
+}
 
 }

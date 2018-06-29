@@ -1,0 +1,49 @@
+<div class="breadcrumb">
+  信息维护 / 账号管理
+</div>
+
+
+
+<div class="content">
+  <div class="mat-card-title" style="padding: 20px 0; ">
+    <h5 class="text-info">账号列表</h5>
+  </div>
+  <div>
+    <table class="table table-bordered">
+      <thead>
+      <th>登录名</th>
+      <th>用户角色</th>
+      <th>用户名称</th>
+      <th>所属企业</th>
+      <th>用户状态</th>
+      <th>操作</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let account of accounts">
+        <td> {{ account.Username }} </td>
+        <td> {{ account.Role.Name }} </td>
+        <td> {{ account.Name }} </td>
+        <td> <span *ngIf="account.Organization"> {{ account.Organization.Name }} </span>  </td>
+        <td> {{ account.Status }} </td>
+        <td> <button class="btn btn-info">查看</button> </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div>
+      <div class="pull-left"> 共 {{totalItems}} 项</div>
+      <ngb-pagination class="pull-right" [collectionSize]="totalItems" [pageSize]="10" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+    </div>
+  </div>
+
+</div>
+
+<div>
+  <!--<router-outlet></router-outlet>-->
+</div>
+
+
+
+
+
+

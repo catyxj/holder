@@ -3,6 +3,8 @@ import {ControlAnchor, MarkerOptions, NavigationControlType, Point} from 'angula
 import {MapOptions} from 'angular2-baidu-map';
 
 declare var AMap: any;
+declare var AMapUI: any;
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -59,7 +61,7 @@ export class MapComponent implements OnInit {
         },
         point: {
           lng: 120.62,   // 经度
-          lat: 31.32,    // 纬度
+          lat: 31.33,    // 纬度
         }
       },
       {
@@ -78,6 +80,21 @@ export class MapComponent implements OnInit {
 
 
 
+
+
+
+
+    let addr: { lng: Number, lat: Number, content: string}[];
+    addr = [
+      {lng: 120.19,
+        lat: 30.26,
+        content: '111hhh'
+      },
+      {lng: 121.56,
+        lat: 29.86,
+        content: '222fff'
+      }
+    ];
 
     // 高德地图
     const map = new AMap.Map('container');
@@ -100,20 +117,53 @@ export class MapComponent implements OnInit {
 
 
 
-    const infoWindow = new AMap.InfoWindow({ // 创建信息窗体
-      isCustom: true,  // 使用自定义窗体
-      content: ' <div> 信息窗体 </div> ', // 信息窗体的内容可以是任意html片段
-      offset: new AMap.Pixel(16, -45)
+    let infoWindow = new AMap.InfoWindow({ // 创建信息窗体
+      isCustom: false,  // 使用自定义窗体
+      content: addr[0].content , // 信息窗体的内容可以是任意html片段
+      offset: new AMap.Pixel(10, -25)
     });
-    const onMarkerClick  =  function(e) {
+    let onMarkerClick  =  function(e) {
       infoWindow.open(map, e.target.getPosition()); // 打开信息窗体
       // e.target就是被点击的Marker
-    }
-    const marker = new AMap.Marker({
+    };
+    let marker = new AMap.Marker({
       position: [116.481181, 39.989792]
-    })
+    });
     map.add(marker);
     marker.on('click', onMarkerClick); // 绑定click事件
+
+// 引入SimpleMarker，loadUI的路径参数为模块名中 'ui/' 之后的部分
+    AMapUI.loadUI(['overlay/SimpleMarker'], function(SimpleMarker) {
+
+      for ( let i = 0; i < 2; i++) {
+        // 创建SimpleMarker实例
+        let simpleMarker = new SimpleMarker({
+
+          // 前景文字
+          iconLabel: {
+            innerHTML: i + 1 , // 设置文字内容
+            style: {
+              color: '#fff' // 设置文字颜色
+            }
+          },
+
+          // 图标主题
+          iconTheme: 'numv1',
+
+          // 背景图标样式
+          iconStyle: 'blue',
+
+          // ...其他Marker选项...，不包括content
+          map: map,
+          position: [addr[i].lng, addr[i].lat]
+        });
+
+        map.add(simpleMarker);
+        simpleMarker.on('click', onMarkerClick); // 绑定click事件
+      }
+
+
+    });
 
 
 

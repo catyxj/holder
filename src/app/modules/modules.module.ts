@@ -11,6 +11,11 @@ import {BoilerMainComponent} from './boilers/boiler-main/boiler-main.component';
 import {RuntimeModule} from './runtime/runtime.module';
 import {RuntimeMainComponent} from './runtime/runtime-main/runtime-main.component';
 import {NgxEchartsModule} from 'ngx-echarts';
+import {OrgMainComponent} from './organization/org-main/org-main.component';
+import {ProfileMainComponent} from './profile/profile-main/profile-main.component';
+import {ProfileModule} from './profile/profile.module';
+import {UserMainComponent} from './user-account/user-main/user-main.component';
+import {UserAccountModule} from './user-account/user-account.module';
 
 
 
@@ -20,13 +25,18 @@ import {NgxEchartsModule} from 'ngx-echarts';
     MonitorModule,
     BoilersModule,
     RuntimeModule,
+    ProfileModule,
+    UserAccountModule,
     RouterModule.forChild(ModulesRoutingModule),
     NgxEchartsModule
   ],
   declarations: [
     MonitorMainComponent,
     BoilerMainComponent,
-    RuntimeMainComponent
+    RuntimeMainComponent,
+    OrgMainComponent,
+    ProfileMainComponent,
+    UserMainComponent
   ],
   exports: [
     // RouterModule

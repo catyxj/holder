@@ -11,12 +11,20 @@ import {BoilersComponent} from './boilers/boilers/boilers.component';
 import {BoilerInfoComponent} from './boilers/boiler-info/boiler-info.component';
 import {RuntimeMainComponent} from './runtime/runtime-main/runtime-main.component';
 import {MapComponent} from './monitor/map/map.component';
+import {OrgMainComponent} from './organization/org-main/org-main.component';
+import {ProfileMainComponent} from './profile/profile-main/profile-main.component';
+import {PortraitComponent} from './profile/portrait/portrait.component';
+import {InfoComponent} from './profile/info/info.component';
+import {PasswordComponent} from './profile/password/password.component';
+import {UserloginGuard} from '../shared/userlogin.guard';
+import {UserMainComponent} from './user-account/user-main/user-main.component';
 
 
 export const ModulesRoutingModule = [
   {
     path: 'admin',
     component: MainComponent,
+    canActivate: [UserloginGuard],
     children: [
       { path: '', redirectTo: 'monitor', pathMatch: 'full' },
       {
@@ -56,7 +64,34 @@ export const ModulesRoutingModule = [
       {
         path: 'runtime',
         component: RuntimeMainComponent
-      }
+      },
+      {
+        path: 'organization',
+        component: OrgMainComponent
+      },
+      {
+        path: 'profile',
+        component: ProfileMainComponent,
+        children: [
+          { path: '', redirectTo: 'portrait', pathMatch: 'full' },
+          {
+            path: 'portrait',
+            component: PortraitComponent
+          },
+          {
+            path: 'info',
+            component: InfoComponent
+          },
+          {
+            path: 'password',
+            component: PasswordComponent
+          }
+        ]
+      },
+      {
+        path: 'user-account',
+        component: UserMainComponent
+      },
     ]
   }
 ];

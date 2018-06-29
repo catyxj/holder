@@ -1,6 +1,9 @@
 <mat-toolbar >
 
   <mat-toolbar-row>
+    <button mat-icon-button (click)="onClick()" style="min-width: 88px;">
+      <mat-icon>menu</mat-icon>
+    </button>
     <a class="navbar-brand" href="">
       <img src="/assets/images/light.png"  height="30" alt="">
       <!--炉管家-->
@@ -9,13 +12,14 @@
     <!-- This fills the remaining space of the current row -->
     <span class="example-spacer"></span>
 
-    <mat-icon>home</mat-icon>
+    <mat-icon> email </mat-icon>
+    <!--<i class="fa fa-envelope-o"></i>-->
 
     <div ngbDropdown class="d-inline-block">
-      <button mat-button id="dropdownBasic1" ngbDropdownToggle> {{user.userName}} </button>
+      <button mat-button id="dropdownBasic1" ngbDropdownToggle> {{user.Name}} ( {{ user.Role.Name}} ) </button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="animated fadeInDown">
-        <button class="dropdown-item">用户信息</button>
-        <button class="dropdown-item">设置</button>
+        <a class="dropdown-item" routerLink="/admin/profile">用户信息</a>
+        <!--<button class="dropdown-item">设置</button>-->
         <button class="dropdown-item">退出</button>
       </div>
     </div>

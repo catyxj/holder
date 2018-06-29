@@ -8,7 +8,7 @@ import {
   RouterStateSnapshot
 } from '@angular/router';
 import {UserService} from '../shared/user.service';
-
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -17,28 +17,37 @@ import {UserService} from '../shared/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  public user = { userName: '', password: '' };
-  private errMes: string ;
+  public user = { username: '', password: '' , ip: ''};
+  public errMes: string ;
 
-  constructor(public router: Router, public activatedRoute: ActivatedRoute, private userService: UserService) { }
+
+  constructor(public router: Router, public activatedRoute: ActivatedRoute, private userService: UserService, private http: HttpClient) { }
 
   ngOnInit() {
-  }
-
-  login() {
-    this.getUser();
+    this.getConfig()
+      .subscribe(ipInfo => {this.user.ip = ipInfo.ip; });
   }
 
   forgetPwd() {}
 
-  getUser(): void {
-    this.userService.getUser()
-      .subscribe(user => {
-        if ( this.user.userName === user.user && this.user.password === user. password)
-        { this.router.navigate(['/admin']); } else {
-          this.errMes = '账号密码错误';
-        }
-      });
+  getConfig(): any {
+    const IP_JSON_URL = 'http://ipv4.myexternalip.com/json';
+    return this.http.get(IP_JSON_URL);
   }
+
+  login(): void {
+    console.log(this.user);
+    this.userService.login(this.user)
+      .subscribe(
+        user => {
+          this.user = user;
+          sessionStorage.user = user; console.log(sessionStorage.user);
+          this.router.navigate(['/admin']);
+          }, // success path
+        error => this.errMes = error // error path
+         );
+  }
+
+
 
 }

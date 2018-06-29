@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {MainComponent} from './main/main.component';
-import { MonitorMainComponent } from './modules/monitor/monitor-main/monitor-main.component';
 import {NotFound404Component} from './global/not-found404/not-found404.component';
-import {BoilersComponent} from './modules/boilers/boilers/boilers.component';
+import {UserloginGuard} from './shared/userlogin.guard';
 
 
 const routes: Routes = [

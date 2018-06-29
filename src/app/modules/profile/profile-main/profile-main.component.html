@@ -1,0 +1,47 @@
+<div class="breadcrumb">
+  信息维护 / 用户信息
+</div>
+
+<div class="flex flex-row">
+  <div class="content" style="flex: 2;">
+    <div class="clearfix tab-content">
+      <h5 class="pull-left text-info">
+        账户设置
+      </h5>
+      <nav class="pull-right">
+        <a routerLink="/admin/profile/info" routerLinkActive="active">个人信息</a>
+        <a routerLink="/admin/profile/portrait" routerLinkActive="active">修改头像</a>
+        <a routerLink="/admin/profile/password" routerLinkActive="active">修改密码</a>
+      </nav>
+    </div>
+
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+
+  <div class="content text-center" style="flex: 1;">
+    <div>
+      <img [src]="profile.Picture" alt="">
+
+    </div>
+    <h3 class="mt-lg-3">
+      {{ profile.Name }}
+    </h3>
+    <div>
+      <h5 class="badge badge-info" style="font-size: 100%;">
+        {{ profile.Role.Name }}
+      </h5>
+    </div>
+    <div *ngIf="profile.Organization">
+      {{ profile.Organization.Name }}
+    </div>
+
+  </div>
+</div>
+
+
+
+
+

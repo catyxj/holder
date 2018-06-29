@@ -1,53 +1,68 @@
 
-
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav class="sidenav bg_light_default"  mode="side" opened >
-    <mat-nav-list>
-      <ul>
-        <li [class.collapse1]="!submenuShow[0]" [class.expand]="submenuShow[0]" >
-          <a class="sidebar_title" (click)="submenuToggle(0)">
-            主监控台
-            <i class="fa fa-angle-right"></i>
-            <!--<i class="fa fa-angle-down" *ngIf="submenuShow[0]"></i>-->
-          </a>
-          <ul class="sub_menu" >
-            <li>
-              <a routerLink="/admin/monitor" routerLinkActive="active" mat-list-item >设备概览</a>
-            </li>
-            <li>
-              <a mat-list-item >告警记录</a>
-            </li>
-            <li>
-              <a mat-list-item >维保记录</a>
-            </li>
-          </ul>
+<mat-nav-list>
+  <ul>
+    <li [class.collapse1]="!submenuShow[0]" [class.expand]="submenuShow[0]" >
+      <a class="sidebar_title" (click)="submenuToggle(0)">
+        主监控台
+        <i class="fa fa-angle-right"></i>
+        <!--<i class="fa fa-angle-down" *ngIf="submenuShow[0]"></i>-->
+      </a>
+      <ul class="sub_menu" >
+        <li>
+          <a routerLink="/admin/monitor" routerLinkActive="active" mat-list-item >设备概览</a>
+        </li>
+        <li>
+          <a mat-list-item >告警记录</a>
+        </li>
+        <li>
+          <a mat-list-item >维保记录</a>
         </li>
       </ul>
-      <ul>
-        <li [class.collapse1]="!submenuShow[1]" [class.expand]="submenuShow[1]">
-          <a class="sidebar_title" (click)="submenuToggle(1)">
-            常用功能
-            <i class="fa fa-angle-right"></i>
-          </a>
-          <ul class="sub_menu">
-            <li>
-              <a routerLink="/admin/boilers" mat-list-item >锅炉信息</a>
-            </li>
-            <li>
-              <a mat-list-item >终端管理</a>
-            </li>
-            <li>
-              <a mat-list-item >模板管理</a>
-            </li>
-          </ul>
+    </li>
+  </ul>
+  <ul>
+    <li [class.collapse1]="!submenuShow[1]" [class.expand]="submenuShow[1]">
+      <a class="sidebar_title" (click)="submenuToggle(1)">
+        常用功能
+        <i class="fa fa-angle-right"></i>
+      </a>
+      <ul class="sub_menu">
+        <li>
+          <a routerLink="/admin/boilers" routerLinkActive="active" mat-list-item >锅炉信息</a>
+        </li>
+        <li>
+          <a mat-list-item >终端管理</a>
+        </li>
+        <li>
+          <a mat-list-item >模板管理</a>
         </li>
       </ul>
+    </li>
+  </ul>
+  <ul>
+    <li [class.collapse1]="!submenuShow[2]" [class.expand]="submenuShow[2]">
+      <a class="sidebar_title" (click)="submenuToggle(2)">
+        信息维护
+        <i class="fa fa-angle-right"></i>
+      </a>
+      <ul class="sub_menu">
+        <li>
+          <a routerLink="/admin/organization" routerLinkActive="active" mat-list-item >企业信息</a>
+        </li>
+        <li>
+          <a routerLink="/admin/user-account" routerLinkActive="active" mat-list-item >账号管理</a>
+        </li>
+        <li>
+          <a routerLink="/admin/profile" routerLinkActive="active" mat-list-item >用户信息</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
 
 
-    </mat-nav-list>
+</mat-nav-list>
 
-  </mat-sidenav>
-</mat-sidenav-container>
+
 
 
 
