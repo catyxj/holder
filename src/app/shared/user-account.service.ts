@@ -1,15 +1,21 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs/index';
 import {catchError} from 'rxjs/internal/operators';
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Authorization': 'my-auth-token'
+  })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAccountService {
 
-  private userRoleUrl = 'assets/server/user_roles.json'
-  private userAccountUrl = 'assets/server/user_list.json';  // URL to web api
+  private userRoleUrl = '/user_roles/ '; //   assets/server/user_roles.json
+  private userAccountUrl = '/user_list';  //  assets/server/user_list.json
 
   constructor(private http: HttpClient) { }
 
@@ -21,21 +27,30 @@ export class UserAccountService {
       );
   }
 
-  getAccounts(n: number, search?: string): Observable<any[]> {
+  getAccounts(n: number, search?: string): Observable<any> {
     const url = `${this.userAccountUrl}/?page=${n}&search=${search}`;
-    return this.http.get<any[]>(url)
+    return this.http.get<any>(url)
       .pipe(
         // retry(3), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
       );
   }
 
-  getAccount(id: number): Observable<any> {
-    const url = `${this.userAccountUrl}/?id=${id}&n=1&search=哈哈`;
-
-    return this.http.get<any>(url);
-    // return of(BOILERS.find(boiler => boiler.id === id));
+  // 账号删除
+  deleteAccount(uid): Observable<any> {
+    return this.http.post('/user_delete', uid, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
+
+  // 账号修改
+  saveAccount(data): Observable<any> {
+    return this.http.post('/user_update/', data, httpOptions)
+
+  }
+
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

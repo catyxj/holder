@@ -44,6 +44,13 @@ export class ProfileService {
   }
 
 
+  updateProfile(profile): Observable <any> {
+    return this.http.post<any>('/user_profile_update/', profile, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

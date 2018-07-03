@@ -16,6 +16,9 @@ import {ProfileMainComponent} from './profile/profile-main/profile-main.componen
 import {ProfileModule} from './profile/profile.module';
 import {UserMainComponent} from './user-account/user-main/user-main.component';
 import {UserAccountModule} from './user-account/user-account.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FormsModule} from '@angular/forms';
+import {OrganizationModule} from './organization/organization.module';
 
 
 
@@ -27,8 +30,11 @@ import {UserAccountModule} from './user-account/user-account.module';
     RuntimeModule,
     ProfileModule,
     UserAccountModule,
+    OrganizationModule,
     RouterModule.forChild(ModulesRoutingModule),
-    NgxEchartsModule
+    NgxEchartsModule,
+    FormsModule,
+    NgbModule
   ],
   declarations: [
     MonitorMainComponent,

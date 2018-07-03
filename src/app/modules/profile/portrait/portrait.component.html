@@ -26,7 +26,7 @@
               <input type="file"  (change)="imgChange($event)" style="position: absolute; left: 0; top: 0; opacity: 0;">
             </button>
 
-            <button class="btn btn-info" (click)="uploadImg()"> 上传头像 </button>
+            <button class="btn btn-info" (click)="uploadImg()" [disabled]="!img"> 上传头像 </button>
           </div>
         </div>
 

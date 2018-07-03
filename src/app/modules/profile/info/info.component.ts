@@ -28,7 +28,8 @@ export class InfoComponent implements OnInit {
   }
 
   updateUser() {
-
+    this.profileService.updateProfile({ fullname: this.profile.Name, mobile: this.profile.MobileNumber, email: this.profile.Email})
+      .subscribe(profile => {this.profile = profile; });
   }
 
 }

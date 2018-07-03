@@ -25,7 +25,7 @@ export class PortraitComponent implements OnInit {
       .subscribe(user => {
         this.imgUrl = user.picture;
         if ( !this.imgUrl) {
-         this.imgUrl = '/assets/images/no_image.png';
+         this.imgUrl = 'assets/images/no_image.png';
         }
       });
   }

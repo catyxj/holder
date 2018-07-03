@@ -18,7 +18,7 @@ export class BoilerService {
     // TODO: send the message _after_ fetching the heroes
     return this.http.get<Boiler[]>(this.boilersUrl)
       .pipe(
-        retry(3), // retry a failed request up to 3 times
+        // retry(3), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
       );
   }

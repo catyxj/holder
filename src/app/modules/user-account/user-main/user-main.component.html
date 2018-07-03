@@ -6,11 +6,35 @@
 
 <div class="content">
   <div class="mat-card-title" style="padding: 20px 0; ">
-    <h5 class="text-info">账号列表</h5>
+    <h5 class="text-info pull-left">账号列表</h5>
+    <div class="pull-right flex flex-row">
+
+      <div class="input-group mb-4">
+        <input type="text" class="form-control" placeholder="请输入登录名或企业" [(ngModel)]="search" >
+        <div class="input-group-append" (click)="pageChange()">
+          <button class="btn btn-info" type="button"><i class="fa fa-search"></i></button>
+          <!--<span class="input-group-text" style="cursor: pointer;"> <i class="fa fa-search"></i> </span>-->
+        </div>
+      </div>
+
+      <div class="ml-3">
+        <button class="btn btn-info" (click)="deleteG()">
+          批量删除
+        </button>
+      </div>
+
+      <!--<div class="ml-3" *ngIf="user && user.Role.RoleId <= 10">
+        <button (click)="new()" class="btn btn-info">
+          新增账号
+        </button>
+      </div>-->
+
+    </div>
   </div>
   <div>
     <table class="table table-bordered">
       <thead>
+      <th> <input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();"> </th>
       <th>登录名</th>
       <th>用户角色</th>
       <th>用户名称</th>
@@ -20,19 +44,28 @@
       </thead>
       <tbody>
       <tr *ngFor="let account of accounts">
+        <td>
+          <input type="checkbox" [(ngModel)]="account.checkDelete" (change)="checkDel(account);">
+        </td>
         <td> {{ account.Username }} </td>
         <td> {{ account.Role.Name }} </td>
         <td> {{ account.Name }} </td>
         <td> <span *ngIf="account.Organization"> {{ account.Organization.Name }} </span>  </td>
-        <td> {{ account.Status }} </td>
-        <td> <button class="btn btn-info">查看</button> </td>
+        <td> {{ account.stat.name }} </td>
+        <td> <button class="btn btn-sm btn-info" (click)="open(account)">设置</button> </td>
       </tr>
       </tbody>
     </table>
 
     <div>
       <div class="pull-left"> 共 {{totalItems}} 项</div>
-      <ngb-pagination class="pull-right" [collectionSize]="totalItems" [pageSize]="10" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+      <ngb-pagination class="pull-right"
+                      [collectionSize]="totalItems"
+                      [pageSize]="10" [(page)]="page"
+                      [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                      (pageChange)="pageChange()">
+
+      </ngb-pagination>
     </div>
   </div>
 
@@ -41,6 +74,9 @@
 <div>
   <!--<router-outlet></router-outlet>-->
 </div>
+
+
+
 
 
 

@@ -17,6 +17,7 @@ const httpOptions = {
 export class UserService {
   private userUrl = 'assets/server/config.json';  // URL to web api
   public isLoggedIn = false;
+  public userInfo;
 
   constructor(private http: HttpClient) { }
 
@@ -36,11 +37,12 @@ export class UserService {
 
   getUser(): Observable< any > {
     // TODO: send the message _after_ fetching the heroes
-    return this.http.get< any >('assets/server/user.json')  // /user
+    return this.http.get< any >('assets/server/user.json');
+   /* return this.http.get< any >('/user')  // assets/server/user.json
       .pipe(
         // retry(3), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
-      );
+      );*/
   }
 
   private handleError(error: HttpErrorResponse) {
