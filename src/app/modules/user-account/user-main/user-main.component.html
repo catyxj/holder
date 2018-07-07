@@ -11,17 +11,17 @@
 
       <div class="input-group mb-4">
         <input type="text" class="form-control" placeholder="请输入登录名或企业" [(ngModel)]="search" >
-        <div class="input-group-append" (click)="pageChange()">
+        <div class="input-group-append" (click)="searchChange()">
           <button class="btn btn-info" type="button"><i class="fa fa-search"></i></button>
           <!--<span class="input-group-text" style="cursor: pointer;"> <i class="fa fa-search"></i> </span>-->
         </div>
       </div>
 
-      <div class="ml-3">
+      <!--<div class="ml-3">
         <button class="btn btn-info" (click)="deleteG()">
           批量删除
         </button>
-      </div>
+      </div>-->
 
       <!--<div class="ml-3" *ngIf="user && user.Role.RoleId <= 10">
         <button (click)="new()" class="btn btn-info">
@@ -58,14 +58,28 @@
     </table>
 
     <div>
-      <div class="pull-left"> 共 {{totalItems}} 项</div>
+      <div class="pull-left">
+        <button class="btn btn-info" (click)="deleteG()">
+          批量删除
+        </button>
+      </div>
+
       <ngb-pagination class="pull-right"
                       [collectionSize]="totalItems"
-                      [pageSize]="10" [(page)]="page"
+                      [pageSize]="pageSize" [(page)]="page"
                       [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
                       (pageChange)="pageChange()">
 
       </ngb-pagination>
+
+      <div class="pull-right mr-3">
+        <select [(ngModel)]="pageSize" class="form-control" (change)="pageSizeChange()">
+          <option value="10">10</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+      <div class="pull-right mr-3" style="line-height: 33px;"> 共 {{totalItems}} 项</div>
     </div>
   </div>
 

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Boiler } from '../../../boiler';
 import { BoilerService } from '../../../shared/boiler.service';
 
 @Component({
@@ -9,10 +8,12 @@ import { BoilerService } from '../../../shared/boiler.service';
 })
 export class DashboardComponent implements OnInit {
 
-  boilers: Boiler[] = [];
-  boiler: Boiler;
+  boilers: any = [];
+  boiler: any;
   page = 1;
   totalItems = 0;
+  search: string;
+
   constructor(private boilerService: BoilerService) { }
 
   ngOnInit() {
@@ -21,13 +22,13 @@ export class DashboardComponent implements OnInit {
   }
 
   getBoilers(): void {
-    this.boilerService.getBoilers()
-      .subscribe(boilers => {this.boilers = boilers.slice(1, 5); this.totalItems = this.boilers.length; });
+    /*this.boilerService.getBoilers(this.page, this.search)
+      .subscribe(boilers => {this.boilers = boilers.params.slice(1, 5); this.totalItems = this.boilers.length; });*/
   }
 
-  getBoiler(id): void {
+  /*getBoiler(id): void {
     this.boilerService.getBoiler(id)
       .subscribe(boiler => this.boiler = boiler);
-  }
+  }*/
 
 }

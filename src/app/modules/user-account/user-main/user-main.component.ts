@@ -3,6 +3,10 @@ import {UserAccountService} from '../../../shared/user-account.service';
 import {UserService} from '../../../shared/user.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {SetModalComponent} from '../set-modal/set-modal.component';
+import {ActivatedRoute, ParamMap} from '@angular/router';
+import { Location } from '@angular/common';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -29,11 +33,23 @@ export class UserMainComponent implements OnInit {
   search: string;
   deleteList = [];
   allDelete = false;
+  pageSize = 10;
 
-  constructor(private userAccountService: UserAccountService, private userService: UserService, private modalService: NgbModal) { }
+  constructor(private userAccountService: UserAccountService,
+              private userService: UserService,
+              private modalService: NgbModal,
+              private route: ActivatedRoute,
+              private location: Location) { }
 
   ngOnInit() {
     this.getUser();
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        // console.log('param', params.get('name'));
+       this.search = params.get('name');
+       return (params.get('name') || []);
+      })
+    ).subscribe( );
     this.getUserAccount();
   }
 
@@ -59,13 +75,13 @@ export class UserMainComponent implements OnInit {
             this.aroles.push({ id: d.RoleId, name: d.Name });
           }
         }
-        console.log(this.aroles);
+        // console.log(this.aroles);
       });
   }
 
   // 获取账号信息
   getUserAccount(): void {
-    this.userAccountService.getAccounts(this.page, this.search)
+    this.userAccountService.getAccounts(this.page, this.pageSize, this.search)
       .subscribe(account => {
         this.accounts = account.params;
         for (let i = 0; i < this.accounts.length; i++) {
@@ -74,11 +90,11 @@ export class UserMainComponent implements OnInit {
           acc.checkDelete = false;
         }
         this.totalItems = account.counts;
-        console.log(this.accounts);
+        // console.log(this.page, this.search);
       });
   }
 
-  // 批量删除
+  // 批量选择
   checkDel(account): void {
     if ( account.checkDelete === true) {
       this.deleteList.push(account.Uid);
@@ -93,6 +109,7 @@ export class UserMainComponent implements OnInit {
     // console.log(this.deleteList);
   }
 
+  // 全选
   allDel() {
     if (this.allDelete === true) {
       for (let i = 0; i < this.accounts.length; i++) {
@@ -107,16 +124,31 @@ export class UserMainComponent implements OnInit {
     }
   }
 
+  // 批量删除
   deleteG() {
     this.userAccountService.deleteAccount({uids: this.deleteList})
-      .subscribe();
+      .subscribe(() => {this.getUserAccount(); });
     // console.log(this.deleteList);
   }
 
 
+  // 每页数量
+  pageSizeChange() {
+    this.page = 1;
+    this.pageChange();
+  }
+
   // 页码变化
   pageChange(): void {
     this.getUserAccount();
+    this.allDelete = false;
+    this.deleteList = [];
+  }
+
+  // 搜索
+  searchChange() {
+    this.page = 1;
+    this.pageChange();
   }
 
   // 打开设置模态框

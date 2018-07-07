@@ -6,7 +6,7 @@ import {BoilerInfoComponent} from './boiler-info/boiler-info.component';
 
 export const BoilersRouting = [
   {
-    path: 'boilers',
+    path: 'equipments',
     component: BoilerMainComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -15,7 +15,7 @@ export const BoilersRouting = [
         component: BoilersComponent
       },
       {
-        path: 'boiler-info',
+        path: 'equipment-info/:uid',
         component: BoilerInfoComponent
       }
     ]

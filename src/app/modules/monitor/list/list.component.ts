@@ -8,9 +8,10 @@ import {BoilerService} from '../../../shared/boiler.service';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  boilers: Boiler[];
+  boilers: any = [];
   page = 1;
   totalItems = 0;
+  search: string;
 
   constructor(private boilerService: BoilerService) { }
 
@@ -20,8 +21,8 @@ export class ListComponent implements OnInit {
   }
 
   getBoilers(): void {
-    this.boilerService.getBoilers()
-      .subscribe(boilers => {this.boilers = boilers; this.totalItems = this.boilers.length; console.log(this.boilers); });
+    /*this.boilerService.getBoilers(this.page, this.search)
+      .subscribe(boilers => {this.boilers = boilers.params; this.totalItems = boilers.counts; console.log(this.boilers); });*/
   }
 
 }

@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanActivateChild} from '@angular/router';
+import {
+  CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanActivateChild,
+  Route
+} from '@angular/router';
 import { Observable } from 'rxjs';
 import {UserService} from './user.service';
 
@@ -8,28 +11,29 @@ import {UserService} from './user.service';
 })
 export class UserloginGuard implements CanActivate {
   public userInfo: any;
-  constructor(  private user: UserService, private router: Router) {}
+  constructor(  private userService: UserService, private router: Router ) {}
+
+  GuardLogin(url): boolean {
+    // const loginStatus = sessionStorage.getItem('status');
+    if (sessionStorage.user === 'true') {
+      return true;
+    } else {
+      // this.userService.redirectUrl = url;
+      this.router.navigate(['/login']);
+      return false;
+    }
+  }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    let userlogin: boolean;
-    /*this.user.getUser().
-      subscribe(user => {
-        this.userInfo = user;
-        if (!this.userInfo) {
-          userlogin = false;
-        } else {
-          userlogin = true;
-        }
-      // return userlogin;
-      });*/
-    /*if (!sessionStorage.user) {
-      console.log('canactivate' );
-      this.router.navigate(['/login']);
-      userlogin = false;
-    } else {
-      userlogin = true;
-    }*/
+    const url: string = state.url;
+    // return this.GuardLogin(url);
     return true;
   }
+
+  canLoad(route: Route): boolean {
+    const url = `/${route.path}`;
+    return this.GuardLogin(url);
+  }
+
 }

@@ -1,3 +1,114 @@
-<p>
-  org-main works!
-</p>
+<div class="breadcrumb">
+  信息维护 / 企业信息
+</div>
+
+
+
+<div class="content">
+  <div class="mat-card-title" style="padding: 20px 0; ">
+    <h5 class="text-info pull-left">企业列表</h5>
+    <div class="pull-right flex flex-row">
+
+      <div class="input-group mb-4">
+        <input type="text" class="form-control" placeholder="请输入企业名称" [(ngModel)]="search" >
+        <div class="input-group-append" (click)="searchChange()">
+          <button class="btn btn-info" type="button"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+
+
+
+      <div class="ml-3" *ngIf="user && user.Role && user.Role.RoleId <= 10">
+        <button class="btn btn-info" (click)="newOrg()">
+          新增企业
+        </button>
+      </div>
+
+    </div>
+  </div>
+  <div>
+    <table class="table table-bordered">
+      <thead>
+      <th> <input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();"> </th>
+      <th>企业名称</th>
+      <th>区域</th>
+      <th>地址</th>
+      <th>企业类型</th>
+      <th>操作</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let org of organizations">
+        <td>
+          <input type="checkbox" [(ngModel)]="org.checkDelete" (change)="checkDel(org);" class="custom-check">
+        </td>
+        <td (click)="goAccount(org.Name)"> {{ org.Name }}  </td>
+        <td> <span> {{ org.Address?.Location.LocationName }} </span> </td>
+        <td> <span> {{ org.Address?.Address }} </span> </td>
+        <td> <span> {{ org.Type?.Name }} </span>  </td>
+
+        <td>
+          <button class="btn btn-sm btn-outline-info" (click)="view(org)"
+                  *ngIf="user.Role.RoleId > 10">
+            <i class="fa fa-eye"></i>
+            查看
+          </button>
+          <button class="btn btn-sm btn-outline-info" (click)="edit(org)"
+                  *ngIf="user.Role.RoleId <= 10">
+            <i class="fa fa-edit"></i>
+            编辑
+          </button>
+          <button class="btn btn-sm btn-outline-danger ml-2" (click)="deleteO(org)"
+                  *ngIf="user.Role.RoleId <= 10">
+            <i class="fa fa-trash"></i>
+            删除
+          </button>
+          <button class="btn btn-sm btn-outline-info ml-2" (click)="addAccount(org)"
+                  *ngIf="user.Role.RoleId <= 10">
+            <i class="fa fa-plus"></i>
+            账号
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div>
+      <div class="pull-left">
+        <button class="btn btn-info" (click)="deleteG()">
+          批量删除
+        </button>
+      </div>
+
+      <ngb-pagination class="pull-right"
+                      [collectionSize]="totalItems"
+                      [pageSize]="pageSize" [(page)]="page"
+                      [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                      (pageChange)="pageChange()">
+
+      </ngb-pagination>
+      <div class="pull-right mr-3">
+        <select [(ngModel)]="pageSize" class="form-control" (change)="pageSizeChange()">
+          <option value="10">10</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+      <div class="pull-right mr-3" style="line-height: 33px;"> 共 {{totalItems}} 项</div>
+    </div>
+  </div>
+
+</div>
+
+<div>
+  <!--<router-outlet></router-outlet>-->
+</div>
+
+
+
+
+
+
+
+
+
+

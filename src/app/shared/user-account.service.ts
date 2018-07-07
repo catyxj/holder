@@ -14,8 +14,11 @@ const httpOptions = {
 })
 export class UserAccountService {
 
-  private userRoleUrl = '/user_roles/ '; //   assets/server/user_roles.json
-  private userAccountUrl = '/user_list';  //  assets/server/user_list.json
+  // private userRoleUrl = '/user_roles/ ';
+  // private userAccountUrl = '/user_list';
+
+  private userRoleUrl = 'assets/server/user_roles.json';
+  private userAccountUrl = 'assets/server/user_list.json';
 
   constructor(private http: HttpClient) { }
 
@@ -27,8 +30,8 @@ export class UserAccountService {
       );
   }
 
-  getAccounts(n: number, search?: string): Observable<any> {
-    const url = `${this.userAccountUrl}/?page=${n}&search=${search}`;
+  getAccounts(n: number, pageSize: number, search?: string): Observable<any> {
+    const url = `${this.userAccountUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
     return this.http.get<any>(url)
       .pipe(
         // retry(3), // retry a failed request up to 3 times
@@ -47,9 +50,21 @@ export class UserAccountService {
   // 账号修改
   saveAccount(data): Observable<any> {
     return this.http.post('/user_update/', data, httpOptions)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
 
   }
 
+
+
+  // 添加账号（企业）
+  addAccount(data): Observable<any> {
+    return this.http.post('/user_add/', data, httpOptions)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
 
 
   private handleError(error: HttpErrorResponse) {

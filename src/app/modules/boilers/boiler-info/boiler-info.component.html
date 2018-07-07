@@ -1,3 +1,259 @@
-<p>
-  boiler-info works!
-</p>
+
+<div class="content">
+
+  <div class="mat-card-title clearfix" style="padding: 20px 0;">
+    <h5 class="text-info pull-left">设备信息</h5>
+    <div class="pull-right">
+      <a [routerLink]="['/admin/equipments/dashboard']" class="text-info">
+        <i class="fa fa-reply"></i>
+        返回
+      </a>
+    </div>
+  </div>
+
+  <div class="mt-lg-6 panel-group">
+
+    <!--常规信息-->
+    <div class="panel panel-info">
+      <div class="panel-heading" (click)="panel[0].open = !panel[0].open">
+        <div class="panel-title" >
+          <h6 class="text-info">常规信息</h6>
+        </div>
+      </div>
+      <div class="panel-body collapse" [class.show]="panel[0].open">
+        <div class="text-center text-muted" style="border-bottom: 1px solid #dddddd; line-height: 32px;font-weight: bold;">必填信息</div>
+        <ul class="row">
+          <li class="flex col-6">
+            <div class="list_title">
+                设备名称
+            </div>
+            <div class="list_value">
+              {{ info?.Name }}
+            </div>
+          </li>
+          <li class="flex col-6">
+            <div class="list_title">
+              设备型态
+            </div>
+            <div class="list_value">
+              {{ info?.Template.Name }}
+            </div>
+          </li>
+
+
+        </ul>
+
+        <div class="text-center text-muted" style="border-bottom: 1px solid #dddddd; line-height: 32px;font-weight: bold;">关联企业</div>
+        <ul class="row" style="border-bottom: 1px solid #dddddd;">
+          <li class="flex col-6" *ngFor="let or of info?.OrganizationsLinked">
+            <div class="list_title">
+              {{ or.type }}
+            </div>
+            <div class="list_value">
+              {{ or.Name }}
+            </div>
+          </li>
+
+        </ul>
+
+        <div class="text-center text-muted" style="border-bottom: 1px solid #dddddd; line-height: 32px;font-weight: bold;">其他信息</div>
+        <ul class="row" style="border-bottom: 1px solid #dddddd;">
+          <li class="flex col-6" *ngFor="let li of lists">
+            <div class="list_title">
+              {{ li.title }}
+            </div>
+            <div class="list_value">
+              {{ li.value }}
+            </div>
+          </li>
+
+        </ul>
+
+        <div class="p-3 text-center">
+          <button class="btn btn-outline-info btn-block" (click)="editBoiler()">
+            <i class="fa fa-edit"></i> 编辑
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!--终端信息-->
+    <div class="panel panel-info">
+      <div class="panel-heading" (click)="panel[1].open = !panel[1].open">
+          <div class="panel-title flex justify-content-between">
+            <h6 class="text-info">终端信息</h6>
+            <button class="btn btn-outline-info btn-sm" style="border-radius: 30px; padding: 0.2rem 0.45rem;">
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+      </div>
+
+      <div class="panel-body collapse" [class.show]="panel[1].open">
+        <table class="table table-bordered">
+          <tbody>
+          <tr>
+            <th>终端编码</th>
+            <th>终端名称</th>
+            <th>操作</th>
+          </tr>
+          <tr *ngFor="let ter of info?.TerminalsCombined">
+            <td> {{ter.TerminalCode}} </td>
+            <td> {{ter.Name}} </td>
+            <td>
+              <button class="btn btn-sm btn-outline-danger">
+                解绑
+              </button>
+
+              <button class="btn btn-sm btn-outline-info ml-2">
+                调试
+              </button>
+
+              <button class="btn btn-sm btn-outline-info ml-2">
+                配置
+              </button>
+
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <!--地址信息-->
+    <div class="panel panel-info">
+      <div class="panel-heading" (click)="panel[2].open = !panel[2].open">
+        <div class="panel-title">
+          <h6 class="text-info">地址信息</h6>
+        </div>
+      </div>
+
+      <div class="panel-body collapse" [class.show]="panel[2].open">
+        <table class="table table-bordered">
+          <tbody>
+          <tr>
+            <th>所在区域</th>
+            <td>{{ info?.Address?.Location.LocationName }}</td>
+            <th>使用地址</th>
+            <td>{{ info?.Address?.Address }}</td>
+          </tr>
+
+          <tr>
+            <th>经度</th>
+            <td>{{ info?.Address?.Longitude }}</td>
+            <th>纬度</th>
+            <td>{{ info?.Address?.Latitude }}</td>
+          </tr>
+          <tr>
+            <td colspan="4" style="">
+              <div style="width: 100%; height: 250px;">
+                <baidu-map [options]="opts" >
+                  <!--<marker [point]="point" [options]="markOpts" (loaded)="" (clicked)=""></marker>-->
+                  <!--<marker *ngFor="let marker of markers" [point]="marker.point" [options]="marker.options"> 1 </marker>-->
+
+                  <!--导航控件-->
+                  <control type="navigation" [options]="controlOpts"></control>
+                  <!--地图全景控件-->
+                  <control type="overviewmap" [options]="overviewmapOpts"></control>
+                  <!--比例尺-->
+                  <control type="scale" [options]="scaleOpts"></control>
+                  <!--地图类型-->
+                  <control type="maptype" [options]="mapTypeOpts"></control>
+
+                  <control type="geolocation" [options]="geolocationOpts"></control>
+                </baidu-map>
+              </div>
+            </td>
+          </tr>
+          <tr >
+            <td colspan="4" align="center">
+              <button class="btn btn-outline-info btn-block" (click)="editAddress()">
+                <i class="fa fa-edit"></i> 编辑
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+
+    <!--维护信息-->
+    <div class="panel panel-info">
+      <div class="panel-heading" (click)="panel[3].open = !panel[3].open">
+        <div class="panel-title">
+          <h6 class="text-info">维护信息</h6>
+        </div>
+      </div>
+
+      <div class="panel-body collapse" [class.show]="panel[3].open">
+        <table class="table table-bordered">
+          <tbody>
+          <tr>
+            <th colspan="4" class="text-muted text-center">联系信息</th>
+          </tr>
+          <tr>
+            <th width="18%">联系人</th>
+            <td width="32%">{{ info?.Contact?.Name }}</td>
+
+            <th width="18%">联系电话（座机）</th>
+            <td width="32%">{{ info?.Contact?.PhoneNumber }}</td>
+          </tr>
+          <tr>
+            <th>移动电话</th>
+            <td>{{ info?.Contact?.MobileNumber }}</td>
+
+            <th>邮箱地址</th>
+            <td>{{ info?.Contact?.Email }}</td>
+          </tr>
+          <tr>
+            <th colspan="4" class="text-muted text-center">维护信息</th>
+          </tr>
+          <tr>
+            <th>下次内部检测日期</th>
+            <td>{{ info?.InspectInnerDateNext | date:"yyyy-MM-dd" }}</td>
+
+            <th>下次安全阀检测日期</th>
+            <td>{{ info?.InspectValveDateNext | date:"yyyy-MM-dd" }}</td>
+          </tr>
+          <tr>
+            <th>下次外部检测日期</th>
+            <td>{{ info?.InspectOuterDateNext | date:"yyyy-MM-dd" }}</td>
+
+            <th>下次压力表检测日期</th>
+            <td>{{ info?.InspectGaugeDateNext | date:"yyyy-MM-dd" }}</td>
+          </tr>
+
+
+          <tr>
+            <td colspan="4" align="center">
+              <button class="btn btn-outline-info btn-block" (click)="editMaintain()">
+                <i class="fa fa-edit"></i> 编辑
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+
+  <div class="panel-footer">
+    <a [routerLink]="['/admin/equipments/dashboard']" class="btn btn-info mr-2" style="color: #ffffff;">
+      <i class="fa fa-reply"></i>
+      返回
+    </a>
+    <button class="btn btn-danger">
+      <i class="fa fa-trash"></i>
+      删除
+    </button>
+  </div>
+
+</div>

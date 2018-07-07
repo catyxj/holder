@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         user => {
           this.user = user;
-          sessionStorage.user = user; console.log(sessionStorage.user);
+          sessionStorage.user = true;
           this.router.navigate(['/admin']);
           }, // success path
         error => this.errMes = error // error path

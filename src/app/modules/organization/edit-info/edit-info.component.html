@@ -1,0 +1,126 @@
+<div class="modal-header">
+  <h3 class="modal-title"> 企业信息 </h3>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('close')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body" id="modal-body">
+  <div class="row">
+    <div class="form-group col-md-6">
+      <div class="input-group">
+        <span class="input-group-append">
+            <span class="input-group-text">
+              企业名称
+            </span>
+
+        </span>
+        <input type="text" [(ngModel)]="data.name"
+               [disabled]="!editing"
+               class="form-control"
+               placeholder="输入名称">
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <div class="input-group">
+        <span class="input-group-append">
+            <span class="input-group-text">
+              企业类型
+            </span>
+        </span>
+        <select [(ngModel)]="data.typeId"
+                [disabled]="!editing"
+                class="form-control">
+          <option *ngFor="let type of orgTypes" [value]="type.TypeId" >{{type.Name}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-location col-md-6 col-sm-6 flex flex-row" style="justify-content:space-between;">
+      <div class="form-group" style="flex: 1;">
+        <select [(ngModel)]="data.aProvince"
+                [disabled]="currentUser.Role.RoleId > 10"
+                (change)="changeProvince();"
+                class="form-control">
+          <option *ngFor="let prov of locations" [value]="prov.LocationId">{{prov.Name}}</option>
+        </select>
+      </div>
+      <div class="form-group" style="flex: 1;">
+        <select [(ngModel)]="data.aCity"
+                [disabled]="currentUser.Role.RoleId > 10 || data.aProvince == 0"
+                (change)="changeCities();"
+                class="form-control">
+          <option *ngFor="let city of cities" [value]="city.LocationId" >{{city.Name}}</option>
+        </select>
+      </div>
+      {{data.aProvince.cities}}
+      <div class="form-group" style="flex: 1;">
+        <select [(ngModel)]="data.aRegion"
+                [disabled]="currentUser.Role.RoleId > 10 || !data.aCity || data.aCity == 0"
+                (change)="changeRegion();"
+                class="form-control">
+          <option *ngFor="let region of regions" [value]="region.LocationId" >{{region.Name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <div class="input-group">
+        <span class="input-group-append">
+          <span class="input-group-text">
+          企业地址
+          </span>
+        </span>
+        <input type="text" [(ngModel)]="data.address"
+               [disabled]="currentUser.Role.RoleId > 10"
+               class="form-control ng-pristine ng-valid ng-touched has-success"
+               placeholder="输入地址详情">
+      </div>
+    </div>
+  </div>
+  <hr style="margin-top: 6px;" *ngIf="editing && currentUser.Role.RoleId < 10">
+  <div class="row" *ngIf="editing && currentUser.Role.RoleId < 10">
+    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+      <label class="control-label" style="font-size: 15px; margin-right: 6px;">显示企业标识</label>
+      <input [(ngModel)]="data.showBrand"
+             type="checkbox">
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+      <div class="input-group">
+        <span class="input-group-append">
+          <span class="input-group-text">
+            企业标识
+          </span>
+        </span>
+        <input type="text" [(ngModel)]="data.brandName"
+               [disabled]="!editing || !data.showBrand"
+               class="form-control ng-pristine ng-valid ng-touched has-success"
+               placeholder="{{data.showBrand ? '输入首页显示的企业标识' : '不显示'}}">
+      </div>
+    </div>
+    <div *ngIf="!editing"
+         class="form-group col-lg-6 col-md-6 col-sm-6"
+         style="padding-top: 6px;">
+      如需更改企业标识，请与平台管理员联系。
+    </div>
+  </div>
+
+  <div class="row" *ngIf="editing && currentUser.Role.RoleId < 10">
+    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+      <label class="control-label" style="font-size: 15px; margin-right: 6px;">是否主管单位</label>
+      <input [(ngModel)]="data.isSuper"
+             type="checkbox">
+    </div>
+  </div>
+
+
+
+</div>
+<div class="modal-footer">
+  <!--TODO: Temp User-->  <!--[disabled]="!name||typeId===-1"-->
+  <button class="btn btn-primary" type="button" *ngIf="editing || currentUser.Role.RoleId <= 10"
+          [disabled]="!data.name || !data.typeId"
+           (click)="save()"><span class="">保存</span></button>
+  <button class="btn btn-default" type="button" (click)="cancel()">取消</button>
+</div>

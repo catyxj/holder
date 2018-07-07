@@ -15,34 +15,49 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UserService {
-  private userUrl = 'assets/server/config.json';  // URL to web api
-  public isLoggedIn = false;
+
+  public isLoggedIn: any = false;
   public userInfo;
+  public redirectUrl: string;
 
   constructor(private http: HttpClient) { }
 
+  // 登录
   login(user): Observable< any > {
     // TODO: send the message _after_ fetching the heroes
     return this.http.post< any >('/user_login/', user, httpOptions)
+      // .subscribe(cuser => { this.userInfo = cuser; })
       .pipe(
         // retry(3), // retry a failed request up to 3 times
-        tap(val => this.isLoggedIn = true),
+        tap((val) => {
+          this.isLoggedIn = 'true';
+          sessionStorage.setItem('status', this.isLoggedIn);
+        }),
         catchError(this.handleError) // then handle the error
       );
   }
 
-  logout(): void {
-    this.isLoggedIn = false;
+  // 退出登录
+  logout(uid): Observable< any > {
+    // this.isLoggedIn = false;
+    return this.http.post<any> ('/user_logout/', uid, httpOptions)
+      .pipe(
+        tap( (val) => {
+          this.isLoggedIn = 'false';
+          sessionStorage.setItem('status', 'false');
+        })
+      );
   }
 
+
+  // 获取用户信息
   getUser(): Observable< any > {
     // TODO: send the message _after_ fetching the heroes
     return this.http.get< any >('assets/server/user.json');
-   /* return this.http.get< any >('/user')  // assets/server/user.json
-      .pipe(
-        // retry(3), // retry a failed request up to 3 times
-        catchError(this.handleError) // then handle the error
-      );*/
+    // return this.http.get< any >('/user')  // assets/server/user.json
+    //   .pipe(
+    //     catchError(this.handleError) // then handle the error
+    //   );
   }
 
   private handleError(error: HttpErrorResponse) {

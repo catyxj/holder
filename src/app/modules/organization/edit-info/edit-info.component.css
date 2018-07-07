@@ -1,0 +1,21 @@
+div.input-group.form-group,
+div.btn-group.form-group {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+div.form-group.form-selector .control-label {
+  width: 26%;
+  margin-top: 6px;
+  text-align: center;
+}
+
+div.form-group.form-selector select {
+  width: 74%;
+  float: right;
+}
+
+.form-location .form-group {
+  padding-left: 0;
+  padding-right: 0;
+}
