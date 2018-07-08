@@ -12,21 +12,23 @@
   <div class="row">
     <div class="form-location col-6 flex">
       <div class="form-group flex-grow-1">
-        <select [(ngModel)]="address.aProvince"
+        <select [(ngModel)]="address.aProvince" (click)="changeProvince()"
                 class="form-control">
-          <option *ngFor="let prov of addrList" [value]="prov.LocationId" >{{prov.Name}}</option>
+          <option *ngFor="let prov of locations" [value]="prov.LocationId" >{{prov.Name}}</option>
         </select>
       </div>
       <div class="form-group flex-grow-1">
-        <select [(ngModel)]="address.aCity"
+        <select [(ngModel)]="address.aCity" (click)=" changeCities()"
                 [disabled]="!address.aProvince || address.aProvince === 0"
                 class="form-control">
+          <option *ngFor="let city of cities" [value]="city.LocationId" >{{city.Name}}</option>
         </select>
       </div>
       <div class="form-group flex-grow-1">
-        <select [(ngModel)]="address.aRegion"
+        <select [(ngModel)]="address.aRegion" (click)="changeRegion()"
                 [disabled]="!address.aCity || address.aCity === 0"
                 class="form-control">
+          <option *ngFor="let region of regions" [value]="region.LocationId" >{{region.Name}}</option>
         </select>
       </div>
     </div>
@@ -54,7 +56,7 @@
         </span>
         <input type="number" max="180.0" min="-180.0"
                step="any"
-               [(ngModel)]="address.longitude"
+               [(ngModel)]="address.lng"
                class="form-control"
                placeholder="输入所在地经度(0.0 - 180.0)">
       </div>
@@ -68,7 +70,7 @@
         </span>
         <input type="number" max="90.0" min="0.0"
                step="any"
-               [(ngModel)]="address.latitude"
+               [(ngModel)]="address.lat"
                class="form-control"
                placeholder="输入所在地经度(0.0 - 90.0)">
       </div>

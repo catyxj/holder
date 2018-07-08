@@ -14,6 +14,7 @@ import {EditBoilerComponent} from '../edit-boiler/edit-boiler.component';
 import {OrganizationService} from '../../../shared/organization.service';
 import {EditAddressComponent} from '../edit-address/edit-address.component';
 import {EditMaintainComponent} from '../edit-maintain/edit-maintain.component';
+import {AdressService} from '../../../shared/adress.service';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class BoilerInfoComponent implements OnInit {
   public lists;
   public user;
   public orgTypes;
+  public addrList;
   public opts: MapOptions; // 百度地图参数
   public markers: Array<{ point: Point; options?: MarkerOptions }>;
   public controlOpts: NavigationControlOptions;
@@ -40,7 +42,8 @@ export class BoilerInfoComponent implements OnInit {
               private router: Router,
               private boilerService: BoilerService,
               private modalService: NgbModal,
-              private orgService: OrganizationService) {
+              private orgService: OrganizationService,
+              public addressService: AdressService) {
 
   }
 
@@ -55,6 +58,7 @@ export class BoilerInfoComponent implements OnInit {
       {title: 'rffg', value: 'vsxc'},
     ];
     this.initMap();
+    this.getAddress();
   }
 
 
@@ -81,7 +85,13 @@ export class BoilerInfoComponent implements OnInit {
     });
   }
 
-
+// 获取地址列表
+  getAddress() {
+    this.addressService.getAddress()
+      .subscribe( addr => {
+        this.addrList = addr;
+      });
+  }
 
   //  获取企业类型列表
   getOrgType() {
@@ -198,6 +208,7 @@ export class BoilerInfoComponent implements OnInit {
   editAddress() {
     const modalRef = this.modalService.open(EditAddressComponent, { size: 'lg' });
     modalRef.componentInstance.currentData = this.info;
+    modalRef.componentInstance.locations = this.addrList;
     modalRef.result.then((result) => {
       if (result === 'ok') {
         this.getInfo();

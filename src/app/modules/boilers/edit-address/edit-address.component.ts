@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {AdressService} from '../../../shared/adress.service';
 import {BoilerService} from '../../../shared/boiler.service';
 
 declare var BMap: any;
@@ -14,17 +13,29 @@ declare var BMAP_STATUS_SUCCESS: any;
 export class EditAddressComponent implements OnInit {
   @Input()
   currentData: any;
+  locations: any;
+
 
   public address: any;
-  public addrList: any;
+  public cities: any[];
+  public regions: any[];
 
   constructor(public activeModal: NgbActiveModal,
-              public addressService: AdressService,
               public boilerService: BoilerService) { }
 
 
   ngOnInit() {
-    console.log(this.currentData);
+    // console.log(this.currentData, this.locations);
+
+    this.initAddress();
+    this.initMap();
+  }
+
+
+
+  // 地址
+
+  initAddress() {
     this.address = {
       lng: this.currentData.Address ? this.currentData.Address.Longitude : 0, // 经度
       lat: this.currentData.Address ? this.currentData.Address.Latitude : 0, // 纬度
@@ -39,24 +50,63 @@ export class EditAddressComponent implements OnInit {
       } else if ( this.address.location < 10000) {
         this.address.location = this.address.location * 100;
       }
-
-      this.address.aProvince = Math.floor(this.address.location / 10000);
-      this.address.aCity = Math.floor(this.address.location / 100);
-      this.address.aRegion = this.address.location;
     }
-
-    this.getAddress();
-    this.initMap();
+    this.address.aProvince = this.address.location ? Math.floor(this.address.location / 10000) : 0;
+    this.address.aCity = this.address.location ? Math.floor(this.address.location / 100) : 0;
+    this.address.aRegion = this.address.location ? this.address.location : 0;
+    if (this.address.aProvince) {
+      this.initProvince();
+    }
+    if (this.address.aCity) {
+      this.changeCities();
+    }
+    if (this.address.aRegion) {
+      this.changeRegion();
+    }
   }
 
-  // 获取地址列表
-  getAddress() {
-    this.addressService.getAddress()
-      .subscribe( addr => {
-        this.addrList = addr;
-        console.log(this.addrList);
-      });
+  initProvince() {
+    for (let i = 0; i < this.locations.length; i++) {
+      if ( parseInt(this.address.aProvince) === 0) {
+        this.cities = [];
+        this.regions = [];
+        return;
+      }
+      if ( parseInt(this.address.aProvince) === this.locations[i].LocationId ) {
+        this.cities = this.locations[i].cities;
+      }
+    }
+    this.address.location = parseInt(this.address.aProvince);
   }
+
+  changeProvince() {
+    for (let i = 0; i < this.locations.length; i++) {
+      if ( parseInt(this.address.aProvince) === 0) {
+        this.cities = [];
+        this.regions = [];
+        return;
+      }
+      if ( parseInt(this.address.aProvince) === this.locations[i].LocationId ) {
+        this.cities = this.locations[i].cities;
+      }
+    }
+    this.address.aCity = 0;
+    this.address.aRegion = 0;
+    this.address.location = parseInt(this.address.aProvince);
+  }
+  changeCities() {
+    for (let i = 0; i < this.cities.length; i++) {
+      if ( parseInt(this.address.aCity) === this.cities[i].LocationId ) {
+        this.regions = this.cities[i].regions;
+      }
+    }
+    this.address.location = parseInt(this.address.aCity);
+  }
+
+  changeRegion() {
+    this.address.location = parseInt(this.address.aRegion);
+  }
+
 
   // 地图
   initMap() {
@@ -66,7 +116,7 @@ export class EditAddressComponent implements OnInit {
     let map = new BMap.Map('container');
 
   // 创建点坐标
-    console.log(this.address.lng, this.address.lat);
+
     let point = new BMap.Point(this.address.lng, this.address.lat);
 
     map.centerAndZoom(point, 15);
@@ -78,8 +128,8 @@ export class EditAddressComponent implements OnInit {
       geolocation.getCurrentPosition(function(r) {
         if (this.getStatus() === BMAP_STATUS_SUCCESS) {
           let mk = new BMap.Marker(r.point);
-          that.address.lng = r.point.lng;
-          that.address.lat = r.point.lat;
+          // that.address.lng = r.point.lng;
+          // that.address.lat = r.point.lat;
           map.addOverlay(mk);
           map.panTo(r.point);
           // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
@@ -90,7 +140,7 @@ export class EditAddressComponent implements OnInit {
     }
 
 
-
+    console.log(this.address.lng, this.address.lat);
 
 
     map.enableScrollWheelZoom(true);     // 开启鼠标滚轮缩放
@@ -123,6 +173,9 @@ export class EditAddressComponent implements OnInit {
 
 
   }
+
+
+
 
   save() {
     let addr = {

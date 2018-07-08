@@ -56,6 +56,12 @@ export class UserService {
     return this.http.get< any >('assets/server/user.json');
     // return this.http.get< any >('/user')  // assets/server/user.json
     //   .pipe(
+    //     tap((val) => {
+    //       if (!val) {
+    //         this.isLoggedIn = 'false';
+    //         sessionStorage.setItem('status', 'false');
+    //       }
+    //     }),
     //     catchError(this.handleError) // then handle the error
     //   );
   }
