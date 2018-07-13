@@ -17,17 +17,17 @@ const httpOptions = {
 })
 export class TerminalService {
 
-  // private terminalsUrl = 'assets/server/terminal_list.json';
-  // private messageUrl = 'assets/server/terminal_origin_message_list.json';
-  // private funcUrl = 'assets/server/term_function_code_list.json';
-  // private byteUrl = 'assets/server/term_byte_list.json';
-  // private templateUrl = 'assets/server/template_list.json';
+  private terminalsUrl = 'assets/server/terminal_list.json';
+  private messageUrl = 'assets/server/terminal_origin_message_list.json';
+  private funcUrl = 'assets/server/term_function_code_list.json';
+  private byteUrl = 'assets/server/term_byte_list.json';
+  private templateUrl = 'assets/server/template_list.json';
 
-  private terminalsUrl = '/terminal_list';
-  private messageUrl = '/terminal_origin_message_list';
-  private funcUrl = '/term_function_code_list';
-  private byteUrl = '/term_byte_list';
-  private templateUrl = '/terminal_template';
+  // private terminalsUrl = '/terminal_list';
+  // private messageUrl = '/terminal_origin_message_list';
+  // private funcUrl = '/term_function_code_list';
+  // private byteUrl = '/term_byte_list';
+  // private templateUrl = '/terminal_template';
 
   constructor(private http: HttpClient) { }
 

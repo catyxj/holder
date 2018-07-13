@@ -186,6 +186,17 @@ export class TerConfigComponent implements OnInit {
     });
   }
 
+  // 状态设置
+  setSwitchStatus(outerIndex, status) {
+    this.switchList[outerIndex].SwitchStatus = status;
+    console.log($scope.switchList);
+  }
+
+  fCodeChange (data) {
+    if (data.Func === '1' || data.Func === '2') {
+      data.BitAddress = 1;
+    }
+  };
 
 
 
