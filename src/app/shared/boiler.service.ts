@@ -18,13 +18,13 @@ const httpOptions = {
 })
 export class BoilerService {
 
-  private boilersUrl = 'assets/server/boiler_list.json';
-  private templatesUrl = 'assets/server/boiler_template_list.json';
-  private boilerUrl = 'assets/server/boiler.json';
+  // private boilersUrl = 'assets/server/boiler_list.json';
+  // private templatesUrl = 'assets/server/boiler_template_list.json';
+  // private boilerUrl = 'assets/server/boiler.json';
 
-  // private boilersUrl = '/equipment_list';
-  // private templatesUrl = '/equipment_template_list';
-  // private boilerUrl = '/equipment_detail';
+  private boilersUrl = '/equipment_list';
+  private templatesUrl = '/equipment_template';
+  private boilerUrl = '/equipment_detail';
 
   constructor(private http: HttpClient) { }
 
@@ -69,9 +69,43 @@ export class BoilerService {
     // return of(BOILERS.find(boiler => boiler.id === id));
   }
 
+  // 绑定终端
+  terBind(code: any): Observable<any> {
+    return this.http.post('/equipment_bind/', code, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 终端解绑
+  unBind(data: any): Observable<any> {
+    return this.http.post('/equipment_unbind/', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
   // 更新地址信息
-  updateAddress(address: any): Observable<any> {
-    return this.http.post('/equipment_update/', address, httpOptions)
+  updateAddress(boiler: any): Observable<any> {
+    return this.http.post('/equipment_update/?scope=location', boiler, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+  // 更新基本信息
+  updateBoiler(address: any): Observable<any> {
+    return this.http.post('/equipment_update/?scope=basic', address, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 更新维保信息
+  updateMaintain(data: any): Observable<any> {
+    return this.http.post('/equipment_update/?scope=maintain', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

@@ -78,8 +78,8 @@ export class SetModalComponent implements OnInit {
     let cf = confirm(`确认删除用户 ${this.currentData.Username} ？`);
     // this.deleteList.push(this.currentData.Uid);
     if (cf === true) {
-      this.userAccountService.deleteAccount({uids: [this.currentData.Uid]})
-        .subscribe(() => {this.activeModal.close('ok');} );
+      this.userAccountService.deleteAccount([this.currentData.Uid])
+        .subscribe(() => {this.activeModal.close('ok'); });
     } else {
       console.log('取消');
     }

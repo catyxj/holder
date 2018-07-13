@@ -23,6 +23,7 @@
     <table class="table table-bordered">
       <thead class="bg_light_primary">
         <th> <input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();"> </th>
+        <th>序号</th>
         <th>设备名称</th>
         <th>使用企业</th>
         <th>关联终端号</th>
@@ -31,10 +32,11 @@
         <th>操作</th>
       </thead>
       <tbody>
-        <tr *ngFor="let boiler of boilers">
+        <tr *ngFor="let boiler of boilers; let i = index">
           <td>
             <input type="checkbox" [(ngModel)]="boiler.checkDelete" (change)="checkDel(boiler);">
           </td>
+          <td> {{ i + 1 }} </td>
           <td> {{ boiler.Name }} </td>
           <td> {{ boiler.enterprise }} </td>
           <td>
@@ -57,6 +59,12 @@
     <div class="pull-left">
       <button class="btn btn-info" (click)="deleteG()">
         批量删除
+      </button>
+    </div>
+
+    <div class="pull-left ml-3">
+      <button class="btn btn-info" (click)="deleteG()">
+        批量启动
       </button>
     </div>
 

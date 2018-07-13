@@ -55,12 +55,16 @@ export class OrgMainComponent implements OnInit {
   getOrganization(): void {
     this.orgService.getOrganization(this.page, this.pageSize, this.search)
       .subscribe(organization => {
+        this.totalItems = organization.counts;
         this.organizations = organization.params;
+        if (this.organizations.length <= 0) {
+          return;
+        }
         for (let i = 0; i < this.organizations.length; i++) {
           let org = this.organizations[i];
           org.checkDelete = false;
         }
-        this.totalItems = organization.counts;
+
         // console.log(this.organizations);
       });
   }
@@ -80,9 +84,8 @@ export class OrgMainComponent implements OnInit {
     const cf = confirm(`确认删除企业 ${org.Name} ？`);
     if (cf === true) {
       this.orgService.deleteOrg([org.Uid])
-        .subscribe(
-          () => {this.getOrganization(); }
-        );
+        .subscribe();
+      this.getOrganization();
     } else {
 
     }
@@ -124,9 +127,9 @@ export class OrgMainComponent implements OnInit {
     const cf = confirm(`确认删除选中企业 ？`);
     if (cf === true) {
       this.orgService.deleteOrg(this.deleteList)
-        .subscribe(
-          () => {this.getOrganization(); }
-        );
+        .subscribe( () => {
+          this.pageChange();
+        });
     } else {
 
     }

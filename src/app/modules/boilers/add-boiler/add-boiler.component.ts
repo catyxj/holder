@@ -2,7 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {BoilerService} from '../../../shared/boiler.service';
 import {OrganizationService} from '../../../shared/organization.service';
-import {UserService} from '../../../shared/user.service';
+import {FormControl} from '@angular/forms';
+
 
 @Component({
   selector: 'app-add-boiler',
@@ -14,6 +15,7 @@ export class AddBoilerComponent implements OnInit {
   @Input()
   currentUser: any;
 
+  myControl = new FormControl();
   public data: any;
   public templates: any[];
   public orgTypes: any[];
@@ -35,12 +37,14 @@ export class AddBoilerComponent implements OnInit {
     this.data = {
       name: '',
       templateId: 0,
-      info: [],
+      infos: [],
       links: []
     };
     this.getOrgs();
     this.imgUrl = 'assets/images/no_image.png';
+
   }
+
 
   //  获取锅炉型态列表
   getTemplates() {
@@ -63,7 +67,7 @@ export class AddBoilerComponent implements OnInit {
   getOrgs() {
     this.orgService.getOrgList()
       .subscribe(orgs => {
-        this.orgLists = orgs.params;
+        this.orgLists = orgs;
         this.getUser();
       });
   }
@@ -81,7 +85,7 @@ export class AddBoilerComponent implements OnInit {
       let orgs = [];
       for (let i in this.orgLists) {
         let og = this.orgLists[i];
-        if (og.Type.TypeId === this.links[0].type) {
+        if (og.Type__TypeId === this.links[0].type) {
           orgs.push(og);
         }
       }
@@ -116,7 +120,7 @@ export class AddBoilerComponent implements OnInit {
     let orgs = [];
     for (let i in this.orgLists) {
       let og = this.orgLists[i];
-      if (og.Type.TypeId === parseInt(link.type)) {
+      if (og.Type__TypeId === parseInt(link.type)) {
         orgs.push(og);
       }
     }
@@ -156,8 +160,13 @@ export class AddBoilerComponent implements OnInit {
 
 //  保存
   save() {
-    console.log(this.info);
-    console.log('links:', this.links);
+    // console.log(this.info);
+    // console.log('links:', this.links);
+
+    if (typeof(this.data.templateId) !== 'number') {
+      this.data.templateId = parseInt(this.data.templateId);
+    }
+
 
     // 其他信息
     if (this.info.length > 0) {
@@ -166,7 +175,7 @@ export class AddBoilerComponent implements OnInit {
         if (info.title === '') {
           continue;
         }
-        this.data.info.push(info);
+        this.data.infos.push(info);
       }
     }
 
@@ -176,7 +185,9 @@ export class AddBoilerComponent implements OnInit {
       if (link.uid === '') {
         continue;
       }
-      this.data.links.push({type: link.type, uid: link.uid });
+      this.data.links.push(
+        {type: parseInt(link.type), uid: link.uid }
+        );
     }
 
     if (this.data.links.length <= 0) {
@@ -195,6 +206,9 @@ export class AddBoilerComponent implements OnInit {
       .subscribe( val => {
         alert('保存成功');
         this.activeModal.close('ok');
+      }, err => {
+        this.data.links = [];
+        this.data.infos = [];
       });
 
   }

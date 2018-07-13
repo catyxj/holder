@@ -32,6 +32,9 @@ nav a{
   display: flex;
 }
 
+.table td{
+  background-color: #ffffff;
+}
 
 
 

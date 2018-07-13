@@ -34,10 +34,14 @@ export class BoilersComponent implements OnInit {
 
   // 获取锅炉列表
   getBoilers(): void {
-    console.log({page: this.page, pageSize: this.pageSize , search: this.search});
+    // console.log({page: this.page, pageSize: this.pageSize , search: this.search});
     this.boilerService.getBoilers(this.page, this.pageSize , this.search)
       .subscribe(boilers => {
+        this.totalItems = boilers.counts;
         this.boilers = boilers.params;
+        if (!this.boilers) {
+          return;
+        }
         for (let i = 0; i < this.boilers.length; i++) {
           let boiler = this.boilers[i];
           if (boiler.OrganizationsLinked) {
@@ -49,7 +53,6 @@ export class BoilersComponent implements OnInit {
           }
           boiler.checkDelete = false;
         }
-        this.totalItems = boilers.counts;
       });
   }
 
@@ -98,9 +101,9 @@ export class BoilersComponent implements OnInit {
     const cf = confirm(`确认删除选中锅炉 ？`);
     if (cf === true) {
       this.boilerService.deleteBoiler(this.deleteList)
-        .subscribe(
-          () => {this.getBoilers(); }
-        );
+        .subscribe(() => {
+          this.pageChange();
+        });
     } else {
 
     }
@@ -134,7 +137,7 @@ export class BoilersComponent implements OnInit {
     modalRef.result.then((result) => {
       // this.closeResult = `Closed with: ${result}`;
       if (result === 'ok') {
-        this.getBoilers();
+        this.pageChange();
       }
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

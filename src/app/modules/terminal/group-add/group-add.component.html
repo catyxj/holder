@@ -1,0 +1,65 @@
+<div class="modal-header">
+  <h3 class="modal-title">
+    批量添加终端
+  </h3>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('close')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body" >
+  <div class="input-group form-group">
+          <span class="input-group-prepend">
+            <span class="input-group-text">
+              从属企业
+            </span>
+          </span>
+    <input type="text" class="form-control"
+           [(ngModel)]="org" required>
+  </div>
+  <ul>
+    <li *ngFor="let item of terList; let i = index" class="flex form-group">
+        <div class="input-group">
+          <span class="input-group-prepend">
+            <span class="input-group-text">
+              起始终端编号
+            </span>
+          </span>
+          <input type="text" class="form-control" name="start"
+                 [(ngModel)]="item.start" placeholder="680001" maxlength="6" minlength="6" required>
+        </div>
+          <span> - </span>
+        <div class="input-group">
+          <span class="input-group-prepend">
+            <span class="input-group-text">
+              结束终端编号
+            </span>
+          </span>
+          <input type="text" class="form-control" name="end"
+                 [(ngModel)]="item.end" placeholder="680001" maxlength="6" minlength="6" required>
+        </div>
+        <button (click)="removeTer(i)" title="删除"
+           class="form-control btn btn-outline-danger" style="width: 40px;">
+          <i class="fa fa-minus" style="font-size: 12px;"></i>
+        </button>
+    </li>
+  </ul>
+
+  <button type="button" *ngIf="terList.length < 5"
+          (click)="addTer()"
+          class="btn btn-info btn-block">
+    <i class="fa fa-plus-circle"></i>
+    新增终端
+  </button>
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-info" (click)="save()" [disabled]="!org">
+    <span class="">保存</span>
+  </button>
+  <button class="btn btn-default" type="button" (click)="activeModal.dismiss('close')">取消</button>
+</div>
+
+
+

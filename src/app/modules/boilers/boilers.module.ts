@@ -7,7 +7,7 @@ import { BoilersComponent } from './boilers/boilers.component';
 import { BoilerInfoComponent } from './boiler-info/boiler-info.component';
 
 import {BoilersRouting} from './boilers-routing.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AddBoilerComponent } from './add-boiler/add-boiler.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {BaiduMapModule} from 'angular2-baidu-map';
@@ -15,6 +15,11 @@ import { EditBoilerComponent } from './edit-boiler/edit-boiler.component';
 import { EditAddressComponent } from './edit-address/edit-address.component';
 import { EditMaintainComponent } from './edit-maintain/edit-maintain.component';
 import { TerBindComponent } from './ter-bind/ter-bind.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material';
+
 
 
 @NgModule({
@@ -23,6 +28,11 @@ import { TerBindComponent } from './ter-bind/ter-bind.component';
     NgbModule,
     FormsModule,
     MatExpansionModule,
+    MatSelectModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
     RouterModule.forChild(BoilersRouting),
     BaiduMapModule.forRoot({ak: 'bDCh2N15YYodpt1wns4YPC7XFynjDx60'})
   ],
@@ -39,7 +49,8 @@ import { TerBindComponent } from './ter-bind/ter-bind.component';
     AddBoilerComponent,
     EditBoilerComponent,
     EditAddressComponent,
-    EditMaintainComponent
+    EditMaintainComponent,
+    TerBindComponent
   ]
 })
 export class BoilersModule { }

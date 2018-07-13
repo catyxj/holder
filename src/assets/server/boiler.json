@@ -605,7 +605,7 @@
       "IsDeleted": false,
       "Type": {
         "Uid": "7d9802b2-95b6-468e-891f-1b81762c4456",
-        "Name": "",
+        "Name": "锅炉使用企业",
         "NameEn": "",
         "Remark": "",
         "CreatedDate": "0001-01-01T00:00:00Z",
@@ -716,7 +716,7 @@
       "IsDeleted": false,
       "Type": {
         "Uid": "7d9802b2-95b6-468e-891f-1b81762c4456",
-        "Name": "",
+        "Name": "锅炉制造企业",
         "NameEn": "",
         "Remark": "",
         "CreatedDate": "0001-01-01T00:00:00Z",
@@ -757,6 +757,68 @@
       "Users": null,
       "Boilers": null,
       "BoilersLinked": null
+    }
+  ],
+  "EquipmentInfo": [
+    {
+      "Id": 31,
+      "Equipment": {
+        "Uid": "a6cdbb76-cfee-40d6-a895-120517fb58f0",
+        "Name": "",
+        "NameEn": "",
+        "Remark": "",
+        "CreatedDate": "0001-01-01T00:00:00Z",
+        "CreatedBy": null,
+        "UpdatedDate": "0001-01-01T00:00:00Z",
+        "UpdatedBy": null,
+        "IsDemo": false,
+        "IsDeleted": false,
+        "Template": null,
+        "EquipmentInfo": null,
+        "OrganizationsLinked": null,
+        "Address": null,
+        "Contact": null,
+        "Image": "",
+        "Clusters": null,
+        "TerminalsCombined": null,
+        "InspectInnerDateNext": "0001-01-01T00:00:00Z",
+        "InspectOuterDateNext": "0001-01-01T00:00:00Z",
+        "InspectValveDateNext": "0001-01-01T00:00:00Z",
+        "InspectGaugeDateNext": "0001-01-01T00:00:00Z",
+        "Calculate": null
+      },
+      "Name": "fd",
+      "Value": "dfd"
+    },
+    {
+      "Id": 32,
+      "Equipment": {
+        "Uid": "a6cdbb76-cfee-40d6-a895-120517fb58f0",
+        "Name": "",
+        "NameEn": "",
+        "Remark": "",
+        "CreatedDate": "0001-01-01T00:00:00Z",
+        "CreatedBy": null,
+        "UpdatedDate": "0001-01-01T00:00:00Z",
+        "UpdatedBy": null,
+        "IsDemo": false,
+        "IsDeleted": false,
+        "Template": null,
+        "EquipmentInfo": null,
+        "OrganizationsLinked": null,
+        "Address": null,
+        "Contact": null,
+        "Image": "",
+        "Clusters": null,
+        "TerminalsCombined": null,
+        "InspectInnerDateNext": "0001-01-01T00:00:00Z",
+        "InspectOuterDateNext": "0001-01-01T00:00:00Z",
+        "InspectValveDateNext": "0001-01-01T00:00:00Z",
+        "InspectGaugeDateNext": "0001-01-01T00:00:00Z",
+        "Calculate": null
+      },
+      "Name": "df",
+      "Value": "dfdf"
     }
   ],
   "Address": {
@@ -900,8 +962,8 @@
       "TerminalSetId": 1
     }
   ],
-  "InspectInnerDateNext": "2018-08-01T14:31:22+08:00",
-  "InspectOuterDateNext": "2018-08-01T14:31:22+08:00",
+  "InspectInnerDateNext": "2018-08-01T22:31:22+08:00",
+  "InspectOuterDateNext": "2018-08-01T00:31:22+08:00",
   "InspectValveDateNext": "2018-08-01T14:31:22+08:00",
   "InspectGaugeDateNext": "2018-08-01T14:31:22+08:00",
   "Status": {

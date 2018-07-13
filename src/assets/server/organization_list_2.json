@@ -1,0 +1,192 @@
+
+[
+  {
+    "Uid": "a87bce74-d40f-4f38-83b5-036a36122bd1",
+    "Name": "HSEI",
+    "Type": {
+      "Uid": "308634e3-137e-4e04-a301-ae486ad2d37f",
+      "Name": "锅炉使用企业",
+      "NameEn": "Energy Consumption Enterprise",
+      "Remark": "",
+      "CreatedDate": "2018-01-12T03:55:05+08:00",
+      "CreatedBy": null,
+      "UpdatedDate": "2018-03-14T16:32:12+08:00",
+      "UpdatedBy": null,
+      "IsDemo": false,
+      "IsDeleted": false,
+      "Type__TypeId": 2,
+      "Organizations": null
+    }
+  },
+  {
+    "Uid": "2dffe464-ea8d-466a-a387-c496fb2551a3",
+    "Name": "锅炉使用企业（测试）",
+    "Type__TypeId": 2,
+    "Type": {
+      "Uid": "308634e3-137e-4e04-a301-ae486ad2d37f",
+      "Name": "锅炉使用企业",
+      "NameEn": "Energy Consumption Enterprise",
+      "Remark": "",
+      "CreatedDate": "2018-01-12T03:55:05+08:00",
+      "CreatedBy": null,
+      "UpdatedDate": "2018-03-14T16:32:12+08:00",
+      "UpdatedBy": null,
+      "IsDemo": false,
+      "IsDeleted": false,
+      "TypeId": 2,
+      "Organizations": null
+    }
+  },
+  {
+    "Uid": "5f10caa5-206e-4687-b82c-f3aedd98d009",
+    "Name": "bvcbvbv",
+    "Type__TypeId": 2,
+    "Type": {
+      "Uid": "308634e3-137e-4e04-a301-ae486ad2d37f",
+      "Name": "锅炉使用企业",
+      "NameEn": "Energy Consumption Enterprise",
+      "Remark": "",
+      "CreatedDate": "2018-01-12T03:55:05+08:00",
+      "CreatedBy": null,
+      "UpdatedDate": "2018-03-14T16:32:12+08:00",
+      "UpdatedBy": null,
+      "IsDemo": false,
+      "IsDeleted": false,
+      "TypeId": 2,
+      "Organizations": null
+    }
+  },
+  {
+    "Uid": "da45fe77-fe3f-499f-9f3f-df4432ab2f9c",
+    "Name": "sdffs",
+    "Type__TypeId": 2,
+    "Type": {
+      "Uid": "308634e3-137e-4e04-a301-ae486ad2d37f",
+      "Name": "锅炉使用企业",
+      "NameEn": "Energy Consumption Enterprise",
+      "Remark": "",
+      "CreatedDate": "2018-01-12T03:55:05+08:00",
+      "CreatedBy": null,
+      "UpdatedDate": "2018-03-14T16:32:12+08:00",
+      "UpdatedBy": null,
+      "IsDemo": false,
+      "IsDeleted": false,
+      "TypeId": 2,
+      "Organizations": null
+    }
+  },
+  {
+    "Uid": "280679d7-1c42-46e3-aa87-8399083d8c17",
+    "Name": "aaaa",
+    "TypeId": 2,
+    "Type": {
+      "Uid": "308634e3-137e-4e04-a301-ae486ad2d37f",
+      "Name": "锅炉使用企业",
+      "NameEn": "Energy Consumption Enterprise",
+      "Remark": "",
+      "CreatedDate": "2018-01-12T03:55:05+08:00",
+      "CreatedBy": null,
+      "UpdatedDate": "2018-03-14T16:32:12+08:00",
+      "UpdatedBy": null,
+      "IsDemo": false,
+      "IsDeleted": false,
+      "TypeId": 2,
+      "Organizations": null
+    }
+  },
+  {
+    "Uid": "af54aea7-70e3-4f7d-b7e5-4f4fc6c63eba",
+    "Name": "vff",
+    "Type__TypeId": 3,
+    "Type": {
+      "Uid": "b0ba52a2-e7e4-48e4-852e-10a2390d8899",
+      "Name": "锅炉安装企业",
+      "NameEn": "Installation Enterprise",
+      "Remark": "",
+      "CreatedDate": "2018-01-12T03:55:05+08:00",
+      "CreatedBy": null,
+      "UpdatedDate": "2018-03-14T16:32:12+08:00",
+      "UpdatedBy": null,
+      "IsDemo": false,
+      "IsDeleted": false,
+      "TypeId": 3,
+      "Organizations": null
+    }
+  },
+  {
+    "Uid": "ab9120d0-8f9d-43af-8411-d5e653933551",
+    "Name": "ioioioio",
+    "Type__TypeId": 5,
+    "Type": {
+      "Uid": "3d5ac554-acf2-45ce-81a1-efcc644a390f",
+      "Name": "锅炉维保企业",
+      "NameEn": "Boiler Maintenance Enterprise",
+      "Remark": "",
+      "CreatedDate": "2018-01-12T03:55:06+08:00",
+      "CreatedBy": null,
+      "UpdatedDate": "2018-03-14T16:32:12+08:00",
+      "UpdatedBy": null,
+      "IsDemo": false,
+      "IsDeleted": false,
+      "TypeId": 5,
+      "Organizations": null
+    }
+  },
+  {
+    "Uid": "ab9120d0-8f9d-43af-8411-d5e653933551",
+    "Name": "ioioioio",
+    "Type__TypeId": 1,
+    "Type": {
+      "Uid": "3d5ac554-acf2-45ce-81a1-efcc644a390f",
+      "Name": "锅炉维保企业",
+      "NameEn": "Boiler Maintenance Enterprise",
+      "Remark": "",
+      "CreatedDate": "2018-01-12T03:55:06+08:00",
+      "CreatedBy": null,
+      "UpdatedDate": "2018-03-14T16:32:12+08:00",
+      "UpdatedBy": null,
+      "IsDemo": false,
+      "IsDeleted": false,
+      "TypeId": 5,
+      "Organizations": null
+    }
+  },
+  {
+    "Uid": "ab9120d0-8f9d-43af-8411-d5e653933551",
+    "Name": "iwoioio",
+    "Type__TypeId": 3,
+    "Type": {
+      "Uid": "3d5ac554-acf2-45ce-81a1-efcc644a390f",
+      "Name": "锅炉维保企业",
+      "NameEn": "Boiler Maintenance Enterprise",
+      "Remark": "",
+      "CreatedDate": "2018-01-12T03:55:06+08:00",
+      "CreatedBy": null,
+      "UpdatedDate": "2018-03-14T16:32:12+08:00",
+      "UpdatedBy": null,
+      "IsDemo": false,
+      "IsDeleted": false,
+      "TypeId": 5,
+      "Organizations": null
+    }
+  },
+  {
+    "Uid": "ab9120d0-8f9d-43af-8411-d5e653933551",
+    "Name": "iwoioio",
+    "Type__TypeId": 1,
+    "Type": {
+      "Uid": "3d5ac554-acf2-45ce-81a1-efcc644a390f",
+      "Name": "锅炉维保企业",
+      "NameEn": "Boiler Maintenance Enterprise",
+      "Remark": "",
+      "CreatedDate": "2018-01-12T03:55:06+08:00",
+      "CreatedBy": null,
+      "UpdatedDate": "2018-03-14T16:32:12+08:00",
+      "UpdatedBy": null,
+      "IsDemo": false,
+      "IsDeleted": false,
+      "TypeId": 5,
+      "Organizations": null
+    }
+  }
+]

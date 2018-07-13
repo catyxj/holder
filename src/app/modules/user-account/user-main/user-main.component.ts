@@ -79,17 +79,21 @@ export class UserMainComponent implements OnInit {
       });
   }
 
-  // 获取账号信息
+  // -------获取账号信息--------
   getUserAccount(): void {
     this.userAccountService.getAccounts(this.page, this.pageSize, this.search)
       .subscribe(account => {
+        this.totalItems = account.counts;
         this.accounts = account.params;
+        if (this.accounts.length <= 0) {
+          return;
+        }
         for (let i = 0; i < this.accounts.length; i++) {
           let acc = this.accounts[i];
           acc.stat = this.status[acc.Status];
           acc.checkDelete = false;
         }
-        this.totalItems = account.counts;
+
         // console.log(this.page, this.search);
       });
   }
@@ -126,8 +130,10 @@ export class UserMainComponent implements OnInit {
 
   // 批量删除
   deleteG() {
-    this.userAccountService.deleteAccount({uids: this.deleteList})
-      .subscribe(() => {this.getUserAccount(); });
+    this.userAccountService.deleteAccount( this.deleteList)
+      .subscribe( () => {
+        this.pageChange();
+      });
     // console.log(this.deleteList);
   }
 

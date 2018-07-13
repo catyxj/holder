@@ -19,11 +19,11 @@ export class AdressService {
   constructor(private http: HttpClient) { }
 
   getAddress() {
-    return this.http.get('assets/server/location_list.json');
-    // return this.http.get('/location_list')
-    //   .pipe(
-    //     catchError(this.handleError) // then handle the error
-    //   );
+    // return this.http.get('assets/server/location_list.json');
+    return this.http.get('/location_list')
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
   }
 
 

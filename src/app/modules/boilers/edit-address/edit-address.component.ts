@@ -19,6 +19,7 @@ export class EditAddressComponent implements OnInit {
   public address: any;
   public cities: any[];
   public regions: any[];
+  private map:any;
 
   constructor(public activeModal: NgbActiveModal,
               public boilerService: BoilerService) { }
@@ -39,12 +40,11 @@ export class EditAddressComponent implements OnInit {
     this.address = {
       lng: this.currentData.Address ? this.currentData.Address.Longitude : 0, // 经度
       lat: this.currentData.Address ? this.currentData.Address.Latitude : 0, // 纬度
-      location: this.currentData.Address ? this.currentData.Address.Location.LocationId : 0,
-      address: this.currentData.Address ? this.currentData.Address.Address : ''
+      location: this.currentData.Address ? this.currentData.Address.Location.LocationId : 0, //  位置id
+      address: this.currentData.Address ? this.currentData.Address.Address : ''  // 具体地址
     };
 
     if (this.address.location !== 0) {
-
       if (this.address.location < 100) {
         this.address.location = this.address.location * 10000;
       } else if ( this.address.location < 10000) {
@@ -84,10 +84,11 @@ export class EditAddressComponent implements OnInit {
       if ( parseInt(this.address.aProvince) === 0) {
         this.cities = [];
         this.regions = [];
-        return;
+        break;
       }
       if ( parseInt(this.address.aProvince) === this.locations[i].LocationId ) {
         this.cities = this.locations[i].cities;
+        this.address.locationName = this.locations[i].LocationName;
       }
     }
     this.address.aCity = 0;
@@ -98,13 +99,21 @@ export class EditAddressComponent implements OnInit {
     for (let i = 0; i < this.cities.length; i++) {
       if ( parseInt(this.address.aCity) === this.cities[i].LocationId ) {
         this.regions = this.cities[i].regions;
+        this.address.locationName = this.cities[i].LocationName;
       }
     }
     this.address.location = parseInt(this.address.aCity);
+    // console.log(this.address);
   }
 
   changeRegion() {
+    for (let i = 0; i < this.regions.length; i++) {
+      if ( parseInt(this.address.aRegion) === this.regions[i].LocationId ) {
+        this.address.locationName = this.regions[i].LocationName;
+      }
+    }
     this.address.location = parseInt(this.address.aRegion);
+    // console.log(this.address);
   }
 
 
@@ -114,6 +123,7 @@ export class EditAddressComponent implements OnInit {
 
   // 创建地图实例
     let map = new BMap.Map('container');
+    this.map = map;
 
   // 创建点坐标
 
@@ -174,6 +184,30 @@ export class EditAddressComponent implements OnInit {
 
   }
 
+  // 城市切换
+  changeCity() {
+    this.map.centerAndZoom(this.address.locationName, 11);
+  }
+
+  // 地图坐标
+  changeMap() {
+    // 创建地址解析器实例
+    let that = this;
+    let myGeo = new BMap.Geocoder();
+    // 将地址解析结果显示在地图上,并调整地图视野
+    myGeo.getPoint(that.address.address, function(point) {
+      if (point) {
+        that.address.lng = point.lng;
+        that.address.lat = point.lat;
+        that.map.centerAndZoom(point, 16);
+        that.map.addOverlay(new BMap.Marker(point));
+      } else {
+        alert('您选择地址没有解析到结果!');
+      }
+    }, this.address.location);
+    // console.log(this.address);
+  }
+
 
 
 
@@ -186,7 +220,10 @@ export class EditAddressComponent implements OnInit {
       latitude: this.address.lat
     };
     this.boilerService.updateAddress(addr)
-      .subscribe();
+      .subscribe(val => {
+        alert('保存成功');
+        this.activeModal.close('ok');
+      });
   }
 
 

@@ -22,7 +22,11 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 
 import {BaiduMapModule} from 'angular2-baidu-map';
-import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {HashLocationStrategy, LocationStrategy, registerLocaleData} from '@angular/common';
+import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
+import zh from '@angular/common/locales/zh';
+
+registerLocaleData(zh);
 
 
 
@@ -50,10 +54,12 @@ import {HashLocationStrategy, LocationStrategy} from '@angular/common';
     MatListModule,
     AngularFontAwesomeModule,
     FormsModule,
-    BaiduMapModule
+    BaiduMapModule,
+    NgZorroAntdModule
   ],
   providers: [
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    { provide: NZ_I18N, useValue: zh_CN }
   ],
   bootstrap: [AppComponent]
 })

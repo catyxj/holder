@@ -24,16 +24,17 @@
               "src/manifest.json"
             ],
             "styles": [
+              "node_modules/ng-zorro-antd/src/ng-zorro-antd.min.css",
               {
                 "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
               },
               "src/styles.css",
-              {
-                "input": "./node_modules/bootstrap/dist/css/bootstrap.css"
-              },
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/element-angular/theme/index.css",
               "node_modules/font-awesome/css/font-awesome.css"
             ],
             "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
               "node_modules/echarts/dist/echarts.js",
               "node_modules/echarts/map/js/china.js",
               "node_modules/echarts/dist/extension/bmap.js"
@@ -85,6 +86,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
+              "node_modules/ng-zorro-antd/src/ng-zorro-antd.min.css",
               {
                 "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
               },

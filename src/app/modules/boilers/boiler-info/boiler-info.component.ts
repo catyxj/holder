@@ -15,6 +15,7 @@ import {OrganizationService} from '../../../shared/organization.service';
 import {EditAddressComponent} from '../edit-address/edit-address.component';
 import {EditMaintainComponent} from '../edit-maintain/edit-maintain.component';
 import {AdressService} from '../../../shared/adress.service';
+import {TerBindComponent} from "../ter-bind/ter-bind.component";
 
 
 @Component({
@@ -81,6 +82,10 @@ export class BoilerInfoComponent implements OnInit {
           }
         }
       }
+      this.info.InspectInnerDateNext = new Date(this.info.InspectInnerDateNext);
+      this.info.InspectValveDateNext = new Date(this.info.InspectInnerDateNext);
+      this.info.InspectOuterDateNext = new Date(this.info.InspectInnerDateNext);
+      this.info.InspectGaugeDateNext = new Date(this.info.InspectInnerDateNext);
       console.log(this.info);
     });
   }
@@ -204,6 +209,21 @@ export class BoilerInfoComponent implements OnInit {
     });
   }
 
+  // 终端绑定模态框
+  terBind(event) {
+    event.stopPropagation();
+    const modalRef = this.modalService.open(TerBindComponent);
+    modalRef.componentInstance.currentData = this.info;
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+        this.getInfo();
+      }
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(reason);
+    });
+  }
+
   // 编辑地址信息模态框
   editAddress() {
     const modalRef = this.modalService.open(EditAddressComponent, { size: 'lg' });
@@ -231,6 +251,37 @@ export class BoilerInfoComponent implements OnInit {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       console.log(reason);
     });
+  }
+
+  // 终端解绑
+  unBind(ter) {
+    let data = {
+      equipment_id: this.info.Uid,
+      terminal_code: ter.TerminalCode
+    };
+    let cf = confirm('确定删除终端');
+    if (cf === true) {
+      this.boilerService.unBind(data)
+        .subscribe( val => {
+          alert('解绑成功');
+          this.getInfo();
+        }, err => {
+          alert('解绑失败');
+        });
+    }
+
+  }
+
+  // 删除
+  delete() {
+
+    let cf = confirm('确认删除当前设备？');
+    if (cf === true) {
+      this.boilerService.deleteBoiler([this.info.Uid])
+        .subscribe();
+      this.router.navigate(['/admin/equipments']);
+    }
+
   }
 
 }

@@ -37,10 +37,10 @@ export class EditBoilerComponent implements OnInit {
       uid: this.currentData.Uid,
       name: this.currentData.Name,
       templateId: this.currentData.Template.TemplateId,
-      info: [],
+      infos: [],
       links: []
     };
-
+    this.initInfos();
     this.imgUrl = 'assets/images/no_image.png';
   }
 
@@ -66,7 +66,7 @@ export class EditBoilerComponent implements OnInit {
   getOrgs() {
     this.orgService.getOrgList()
       .subscribe(orgs => {
-        this.orgLists = orgs.params;
+        this.orgLists = orgs;
         this.initOrg();
       });
   }
@@ -84,7 +84,7 @@ export class EditBoilerComponent implements OnInit {
         let orgs = [];
         for (let j in this.orgLists) {
           let og = this.orgLists[j];
-          if (og.Type.TypeId === this.links[i].type) {
+          if (og.Type__TypeId === this.links[i].type) {
             orgs.push(og);
           }
         }
@@ -93,6 +93,20 @@ export class EditBoilerComponent implements OnInit {
     }
 
     console.log(this.links);
+  }
+
+  initInfos() {
+    if (this.currentData.EquipmentInfo) {
+      for (let i = 0; i < this.currentData.EquipmentInfo.length; i++) {
+        let info = this.currentData.EquipmentInfo[i];
+        this.info.push(
+          {
+            title: info.Name,
+            value: info.Value
+          }
+        );
+      }
+    }
   }
 
 
@@ -122,7 +136,7 @@ export class EditBoilerComponent implements OnInit {
     let orgs = [];
     for (let i in this.orgLists) {
       let og = this.orgLists[i];
-      if (og.Type.TypeId === parseInt(link.type)) {
+      if (og.Type__TypeId === parseInt(link.type)) {
         orgs.push(og);
       }
     }
@@ -162,8 +176,12 @@ export class EditBoilerComponent implements OnInit {
 
 //  保存
   save() {
-    console.log(this.info);
-    console.log('links:', this.links);
+    // console.log(this.info);
+    // console.log('links:', this.links);
+
+    if (typeof(this.data.templateId) !== 'number') {
+      this.data.templateId = parseInt(this.data.templateId);
+    }
 
     // 其他信息
     if (this.info.length > 0) {
@@ -172,7 +190,7 @@ export class EditBoilerComponent implements OnInit {
         if (info.title === '') {
           continue;
         }
-        this.data.info.push(info);
+        this.data.infos.push(info);
       }
     }
 
@@ -181,6 +199,9 @@ export class EditBoilerComponent implements OnInit {
       let link = this.links[i];
       if (link.uid === '') {
         continue;
+      }
+      if (typeof(link.type) !== 'number') {
+        link.type = parseInt(link.type);
       }
       this.data.links.push({type: link.type, uid: link.uid });
     }
@@ -197,10 +218,13 @@ export class EditBoilerComponent implements OnInit {
 
     console.log(this.data);
 
-    this.boilerService.addBoiler(this.data)
+    this.boilerService.updateBoiler(this.data)
       .subscribe( val => {
         alert('保存成功');
         this.activeModal.close('ok');
+      }, err => {
+        this.data.links = [];
+        this.data.infos = [];
       });
 
   }

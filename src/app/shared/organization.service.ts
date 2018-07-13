@@ -15,11 +15,14 @@ const httpOptions = {
 })
 export class OrganizationService {
 
-  private orgUrl = 'assets/server/organization_list.json';
-  private orgTypeUrl = 'assets/server/organization_type_list.json';
+  // private orgUrl = 'assets/server/organization_list.json';
+  // private orgAllUrl = 'assets/server/organization_list_2.json';
+  // private orgTypeUrl = 'assets/server/organization_type_list.json';
 
-  // private orgUrl = '/organization_list';
-  // private orgTypeUrl = '/organization_type_list/';
+
+  private orgUrl = '/organization_list';
+  private orgAllUrl = '/organization_list_all';
+  private orgTypeUrl = '/organization_type_list/';
 
 
 
@@ -43,7 +46,7 @@ export class OrganizationService {
 
   // 获取企业列表（下拉）
   getOrgList(): Observable <any> {
-    const url = `${this.orgUrl}`;
+    const url = `${this.orgAllUrl}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error

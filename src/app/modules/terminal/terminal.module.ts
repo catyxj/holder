@@ -1,14 +1,61 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {RouterModule} from '@angular/router';
 
 import { TerminalRoutingModule } from './terminal-routing.module';
-import { TerminalMainComponent } from './terminal-main/terminal-main.component';
+import { MessagesComponent } from './messages/messages.component';
+import { TerConfigComponent } from './ter-config/ter-config.component';
+import { TerminalListComponent } from './terminal-list/terminal-list.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AddTerminalComponent } from './add-terminal/add-terminal.component';
+import { GroupConfigComponent } from './group-config/group-config.component';
+import { EditTerminalComponent } from './edit-terminal/edit-terminal.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSelectModule} from '@angular/material/select';
+import {
+  MatAutocompleteModule, MatButtonModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule,
+  MatMenuModule
+} from '@angular/material';
+import { GroupAddComponent } from './group-add/group-add.component';
+import {NgZorroAntdModule} from 'ng-zorro-antd';
+import { AlarmRuleComponent } from './alarm-rule/alarm-rule.component';
+
+
 
 @NgModule({
   imports: [
     CommonModule,
-    TerminalRoutingModule
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    MatGridListModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    NgZorroAntdModule,
+    RouterModule.forChild(TerminalRoutingModule)
   ],
-  declarations: [TerminalMainComponent]
+  declarations: [
+    MessagesComponent,
+    TerConfigComponent,
+    TerminalListComponent,
+    AddTerminalComponent,
+    GroupConfigComponent,
+    EditTerminalComponent,
+    GroupAddComponent,
+    AlarmRuleComponent],
+  entryComponents: [
+    AddTerminalComponent,
+    GroupConfigComponent,
+    EditTerminalComponent,
+    GroupAddComponent,
+    AlarmRuleComponent
+  ]
 })
 export class TerminalModule { }

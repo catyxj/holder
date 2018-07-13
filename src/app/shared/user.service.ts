@@ -59,7 +59,7 @@ export class UserService {
     //     tap((val) => {
     //       if (!val) {
     //         this.isLoggedIn = 'false';
-    //         sessionStorage.setItem('status', 'false');
+    //         sessionStorage.setItem('user', 'false');
     //       }
     //     }),
     //     catchError(this.handleError) // then handle the error

@@ -1,0 +1,150 @@
+<div class="modal-header">
+  <h3 class="modal-title">
+    终端关联
+    <span class="text-info">
+      [ {{ currentData.TerminalCode }} ]
+    </span>
+  </h3>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('close')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body" >
+  <div class="row">
+    <!--<div class="form-group col-md-6">
+      <div class="input-group">
+        <span class="input-group-prepend">
+          <span class="input-group-text">
+            终端名称
+          </span>
+        </span>
+        <input type="text" [(ngModel)]="data.name"
+               class="form-control" maxlength="16"
+               placeholder="输入终端名称" required>
+      </div>
+    </div>-->
+    <div class="form-group col-md-6">
+      <!--<input type="button" *ngIf="!editing || !editingCode"
+             class="btn btn-outline-info btn-block" (click)="resetCode()"
+             value="重新配置终端编码">-->
+      <div class="input-group">
+        <span class="input-group-prepend">
+          <span class="input-group-text">
+            终端编码
+          </span>
+        </span>
+        <input type="text" [(ngModel)]="data.code"
+               class="form-control" disabled
+               placeholder="输入六位终端编码" required>
+      </div>
+    </div>
+
+    <div class="form-group col-md-6">
+      <div class="input-group">
+        <span class="input-group-prepend">
+          <span class="input-group-text">
+            所属企业
+          </span>
+        </span>
+        <input type="text" [(ngModel)]="data.org"
+               class="form-control"
+               placeholder="" required>
+      </div>
+    </div>
+  </div>
+
+
+  <!--<div class="row">
+
+    <div class="form-group col-md-6">
+      <div class="input-group">
+        <span class="input-group-prepend">
+          <span class="input-group-text">
+            物联网卡号
+          </span>
+        </span>
+        <input type="text" [(ngModel)]="data.simNum"
+               class="form-control"
+               placeholder="请输入十一位卡号" required>
+
+      </div>
+    </div>
+  </div>-->
+
+  <div class="row">
+
+    <div class="form-group form-selector col-md-6">
+      <div class="input-group">
+        <span class="input-group-prepend">
+          <span class="input-group-text">
+            bin文件选择
+          </span>
+        </span>
+        <!--<mat-form-field>
+          <mat-select placeholder="Panel color" [formControl]="panelColor"
+                      panelClass="binLists">
+            <mat-option value="red">Red</mat-option>
+            <mat-option value="green">Green</mat-option>
+            <mat-option value="blue">Blue</mat-option>
+          </mat-select>
+        </mat-form-field>-->
+        <select [(ngModel)]="bin" class="form-control">
+          <option *ngFor="let x of bins" [value]="x.BinPath" >{{x.Name}}</option>
+        </select>
+        <div class="input-group-append">
+          <input (click)="upgrade()"
+                 type="button" class="btn btn-info"
+                 value="升级APP">
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="form-group col-md-6">
+      <div class="input-group">
+        <span class="input-group-prepend">
+          <span class="input-group-text">
+            关联设备
+          </span>
+        </span>
+
+        <input type="text" [(ngModel)]="currentData.Equipment[0].Name"
+               class="form-control" disabled
+               placeholder="">
+        <!--<button *ngIf="!currentData.Equipment[0]" class="btn btn-outline-info">
+          <i class="fa fa-plus"></i>
+        </button>
+        <button *ngIf="currentData.Equipment[0]" class="btn btn-outline-danger">
+          <i class="fa fa-minus"></i>
+        </button>-->
+      </div>
+    </div>
+
+
+
+    <!--<div class="form-group form-selector col-md-6">
+        <div class="input-group">
+            <input ng-click="$modal.down();"
+                   type="button" class="btn btn-primary"
+                    value="下发">
+        </div>
+    </div>-->
+
+
+  </div>
+
+
+
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-info" [disabled]="!data.code || !data.org">
+    <span class="">保存</span>
+  </button>
+  <button class="btn btn-default" type="button" (click)="activeModal.dismiss('close')">取消</button>
+</div>
+
+

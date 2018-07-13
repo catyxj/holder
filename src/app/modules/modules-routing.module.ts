@@ -18,6 +18,11 @@ import {InfoComponent} from './profile/info/info.component';
 import {PasswordComponent} from './profile/password/password.component';
 import {UserloginGuard} from '../shared/userlogin.guard';
 import {UserMainComponent} from './user-account/user-main/user-main.component';
+import {TerminalMainComponent} from './terminal/terminal-main/terminal-main.component';
+import {TerminalListComponent} from './terminal/terminal-list/terminal-list.component';
+import {TerConfigComponent} from './terminal/ter-config/ter-config.component';
+import {MessagesComponent} from './terminal/messages/messages.component';
+import {ClusterMainComponent} from './cluster/cluster-main/cluster-main.component';
 
 
 export const ModulesRoutingModule = [
@@ -92,6 +97,30 @@ export const ModulesRoutingModule = [
         path: 'user-account',
         component: UserMainComponent
       },
+      {
+        path: 'terminal',
+        component: TerminalMainComponent,
+        children: [
+          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+          {
+            path: 'dashboard',
+            component: TerminalListComponent
+          },
+          {
+            path: 'config/:code',
+            component: TerConfigComponent
+          },
+          {
+            path: 'messages/:code',
+            component: MessagesComponent
+          }
+        ]
+      },
+      {
+        path: 'cluster',
+        component: ClusterMainComponent
+      }
+
     ]
   }
 ];

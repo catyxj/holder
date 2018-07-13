@@ -19,6 +19,9 @@ import {UserAccountModule} from './user-account/user-account.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
 import {OrganizationModule} from './organization/organization.module';
+import {TerminalModule} from './terminal/terminal.module';
+import {TerminalMainComponent} from './terminal/terminal-main/terminal-main.component';
+import {ClusterMainComponent} from './cluster/cluster-main/cluster-main.component';
 
 
 
@@ -31,6 +34,7 @@ import {OrganizationModule} from './organization/organization.module';
     ProfileModule,
     UserAccountModule,
     OrganizationModule,
+    TerminalModule,
     RouterModule.forChild(ModulesRoutingModule),
     NgxEchartsModule,
     FormsModule,
@@ -42,7 +46,9 @@ import {OrganizationModule} from './organization/organization.module';
     RuntimeMainComponent,
     OrgMainComponent,
     ProfileMainComponent,
-    UserMainComponent
+    UserMainComponent,
+    TerminalMainComponent,
+    ClusterMainComponent
   ],
   exports: [
     // RouterModule

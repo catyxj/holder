@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h4 class="modal-title">
-    锅炉维护信息设置
+    设备维护信息设置
     <span class="text-info" style="font-size: 16px;"> [ {{currentData.Name}} ] </span>
   </h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('close')">
@@ -9,50 +9,65 @@
 </div>
 
 <div class="modal-body" >
-  <!--<h5 class="font-blue-hoki">联系信息</h5>
+  <h5 class="text-info mb-3 mt-lg-3">联系信息</h5>
   <div class="row">
     <div class="form-group col-md-6">
       <div class="input-group">
-        <span class="input-group-addon">联系人</span>
+        <span class="input-group-prepend">
+          <span class="input-group-text">
+            联系人
+          </span>
+        </span>
         <input type="text"
-               ng-model="$modal.data.contact"
+               [(ngModel)]="contact.contact"
                class="form-control ng-pristine ng-valid ng-touched has-success"
-               placeholder="输入锅炉联系人名字">
+               placeholder="输入设备联系人名字">
       </div>
     </div>
     <div class="form-group col-md-6">
       <div class="input-group">
-        <span class="input-group-addon">联系电话（座机）</span>
+        <span class="input-group-prepend">
+          <span class="input-group-text">
+            联系电话（座机）
+          </span>
+        </span>
         <input type="text"
-               ng-model="$modal.data.phoneNumber"
+               [(ngModel)]="contact.phoneNumber"
                class="form-control ng-pristine ng-valid ng-touched has-success"
-               placeholder="输入锅炉联系电话（座机）">
+               placeholder="输入设备联系电话（座机）">
       </div>
     </div>
   </div>
   <div class="row">
     <div class="form-group col-md-6">
       <div class="input-group">
-        <span class="input-group-addon">移动电话</span>
+        <span class="input-group-prepend">
+          <span class="input-group-text">
+            移动电话
+          </span>
+        </span>
         <input type="text"
-               ng-model="$modal.data.mobileNumber"
+               [(ngModel)]="contact.mobileNumber"
                class="form-control ng-pristine ng-valid ng-touched has-success"
-               placeholder="输入锅炉联系人移动电话号码">
+               placeholder="输入设备联系人移动电话号码">
       </div>
     </div>
     <div class="form-group col-md-6">
       <div class="input-group">
-        <span class="input-group-addon">邮箱地址</span>
+        <span class="input-group-prepend">
+          <span class="input-group-text">
+            邮箱地址
+          </span>
+        </span>
         <input type="text"
-               ng-model="$modal.data.email"
+               [(ngModel)]="contact.email"
                class="form-control ng-pristine ng-valid ng-touched has-success"
-               placeholder="输入锅炉联系人邮箱地址">
+               placeholder="输入设备联系人邮箱地址">
       </div>
     </div>
-  </div>-->
+  </div>
 
-
-  <h5 class="font-blue-hoki">维护信息</h5>
+  <h5 class="text-info mb-3 mt-lg-3">维护信息</h5>
   <div class="row">
     <div class="form-group col-md-6">
       <div class="input-group">

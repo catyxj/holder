@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h4 class="modal-title">
-    锅炉地址信息设置
+    设备地址信息设置
     <span class="text-info" style="font-size: 16px;"> [ {{currentData.Name}} ] </span>
   </h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('close')">
@@ -12,21 +12,21 @@
   <div class="row">
     <div class="form-location col-6 flex">
       <div class="form-group flex-grow-1">
-        <select [(ngModel)]="address.aProvince" (click)="changeProvince()"
+        <select [(ngModel)]="address.aProvince" (change)="changeProvince()"
                 class="form-control">
           <option *ngFor="let prov of locations" [value]="prov.LocationId" >{{prov.Name}}</option>
         </select>
       </div>
       <div class="form-group flex-grow-1">
-        <select [(ngModel)]="address.aCity" (click)=" changeCities()"
-                [disabled]="!address.aProvince || address.aProvince === 0"
+        <select [(ngModel)]="address.aCity" (change)=" changeCities(); changeCity();"
+                [disabled]="!address || !address.aProvince || address.aProvince === 0"
                 class="form-control">
           <option *ngFor="let city of cities" [value]="city.LocationId" >{{city.Name}}</option>
         </select>
       </div>
       <div class="form-group flex-grow-1">
-        <select [(ngModel)]="address.aRegion" (click)="changeRegion()"
-                [disabled]="!address.aCity || address.aCity === 0"
+        <select [(ngModel)]="address.aRegion" (change)="changeRegion(); changeCity();"
+                [disabled]="!address || !address.aCity || address.aCity === 0"
                 class="form-control">
           <option *ngFor="let region of regions" [value]="region.LocationId" >{{region.Name}}</option>
         </select>
@@ -40,7 +40,7 @@
           </span>
         </span>
         <input type="text"
-               [(ngModel)]="address.address"
+               [(ngModel)]="address.address" (change)="changeMap()"
                class="form-control"
                placeholder="输入详细地址">
       </div>

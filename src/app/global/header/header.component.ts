@@ -26,6 +26,10 @@ export class HeaderComponent implements OnInit {
     this.userService.getUser()
       .subscribe(user => {
         this.user = user;
+        if (!this.user) {
+          sessionStorage.user = false;
+          this.router.navigate(['/login']);
+        }
       });
     }
 

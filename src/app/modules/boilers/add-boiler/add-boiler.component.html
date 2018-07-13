@@ -56,6 +56,21 @@
                   class="form-control" style="width: 60%;">
             <option *ngFor="let org of link.orgs" [value]="org.Uid" >{{org.Name}}</option>
           </select>
+
+          <!--<mat-form-field>
+            <input type="text" placeholder="请输入企业名称" matInput [formControl]="myControl" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let org of link.orgs" [value]="org.Uid">
+                {{org.Name}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>-->
+
+          <!--<mat-form-field>
+            <mat-select [(ngModel)]="link.uid" style="width: 60%;">
+              <mat-option style="z-index: 10000;" *ngFor="let org of link.orgs" [value]="org.Uid">{{org.Name}}</mat-option>
+            </mat-select>
+          </mat-form-field>-->
         </div>
         <div>
           <button (click)="removeLink(i);"
@@ -65,6 +80,7 @@
         </div>
 
       </div>
+
 
       <button type="button"
               (click)="addNewLink();"
