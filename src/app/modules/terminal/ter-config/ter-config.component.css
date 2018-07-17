@@ -11,6 +11,10 @@
   height: 36px;
 }
 
+.table tr td.chanel_label{
+  padding:0.75rem;
+}
+
 .table select{
   border: none;
 }
@@ -24,4 +28,8 @@ mat-grid-tile {
 }
 mat-grid-tile:hover{
   background-color: #cce5ff;
+}
+
+h6.text-muted{
+  text-align: center;
 }

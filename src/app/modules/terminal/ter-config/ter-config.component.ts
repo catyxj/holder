@@ -5,6 +5,7 @@ import {TerminalService} from "../../../shared/terminal.service";
 import {AlarmRuleComponent} from "../alarm-rule/alarm-rule.component";
 import {NzModalService} from "ng-zorro-antd";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {RangeConfigComponent} from "../range-config/range-config.component";
 
 @Component({
   selector: 'app-ter-config',
@@ -16,10 +17,21 @@ export class TerConfigComponent implements OnInit {
   public code;
   public analogueList = [];
   public switchList = [];
+  public rangeList = [];
+  public infomation;
   public compares;
   public funcs;
+  public funcs1;
+  public funcs2;
   public bytes;
   public priorities = [];
+  public communiInterfaces;
+  public dataBits;
+  public heartbeats;
+  public checkDigits;
+  public subAdrs;
+  public stopBits;
+  public BaudRates;
 
 
   constructor(private route: ActivatedRoute,
@@ -74,6 +86,32 @@ export class TerConfigComponent implements OnInit {
       }
     ];
 
+    this.rangeList = [
+      {
+        ChannelNumber: 1,
+        Parameter: {
+          Name: '',
+        },
+        alarm: [],
+        Ranges: [],
+        Func: 0,
+        Byte: 0,
+        Modbus: null,
+        Status: -1,
+        SequenceNumber: 0
+      }
+    ];
+
+    this.infomation = {
+      BaudRate: 0,
+      dataBit: 0,
+      stopBit: 0,
+      checkDigit: 0,
+      communiInterface: 0,
+      subAdr: 0,
+      heartbeat: 0
+    };
+
   }
 
   // 初始化下拉列表
@@ -82,6 +120,17 @@ export class TerConfigComponent implements OnInit {
       this.terminalService.getFuncode()
         .subscribe( fun => {
           this.funcs = fun;
+          this.funcs2 = [
+            {Id: 1, Name: '01', Value: 1},
+            {Id: 2, Name: '02', Value: 2},
+            {Id: 3, Name: '03', Value: 3},
+            {Id: 99, Name: 'None', Value: 99}
+          ];
+          this.funcs1 = [
+            {Id: 3, Name: '03', Value: 3},
+            {Id: 4, Name: '04', Value: 4}
+
+          ];
         });
 
 
@@ -90,6 +139,50 @@ export class TerConfigComponent implements OnInit {
         .subscribe(byte => {
           this.bytes = byte;
         });
+
+
+    // 通信接口地址
+    this.terminalService.getCorrespond()
+      .subscribe(data => {
+        this.communiInterfaces = data;
+      });
+
+    // 数据位
+    this.terminalService.getDataBit()
+      .subscribe(data => {
+        this.dataBits = data;
+      });
+
+    // 心跳包频率
+    this.terminalService.getHeartbeat()
+      .subscribe(data => {
+        this.heartbeats = data;
+      });
+
+    // 校验位
+    this.terminalService.getParity()
+      .subscribe(data => {
+        this.checkDigits = data;
+      });
+
+    // 从机地址
+    this.terminalService.getSlave()
+      .subscribe(data => {
+        this.subAdrs = data;
+      });
+
+    // 停止位
+    this.terminalService.getStopBit()
+      .subscribe(data => {
+        this.stopBits = data;
+      });
+
+    // 波特率
+    this.terminalService.getBaudRate()
+      .subscribe(data => {
+        this.BaudRates = data;
+      });
+
 
   }
 
@@ -131,15 +224,39 @@ export class TerConfigComponent implements OnInit {
     });
   }
 
+  // 添加状态量
+  addRange() {
+    let n = this.rangeList.length;
+    this.rangeList.push({
+      ChannelNumber: n + 1,
+      Parameter: {
+        Name: '',
+      },
+      alarm: [],
+      Ranges: [],
+      Func: null,
+      Byte: null,
+      Modbus: null,
+      Status: -1,
+      SequenceNumber: 0
+    });
+  }
+
   // 移除模拟量
   removeAnalogue(index) {
     this.analogueList.splice(index, 1);
   }
 
-  // 移除模拟量
+  // 移除开关量
   removeSwitch(index) {
     this.switchList.splice(index, 1);
   }
+
+  // 移除状态量
+  removeRange(index) {
+    this.rangeList.splice(index, 1);
+  }
+
 
   // 参数名称改变
   dataChanged(data) {
@@ -186,18 +303,60 @@ export class TerConfigComponent implements OnInit {
     });
   }
 
+
   // 状态设置
   setSwitchStatus(outerIndex, status) {
     this.switchList[outerIndex].SwitchStatus = status;
-    console.log($scope.switchList);
   }
+
+  openRange(data) {
+    const modalRef = this.modalService.open(RangeConfigComponent, {size: 'lg'});
+    modalRef.componentInstance.currentData = data;
+    modalRef.result.then((result) => {
+      data.Ranges = result;
+      console.log(result, data);
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(reason);
+    });
+  }
+
+
 
   fCodeChange (data) {
     if (data.Func === '1' || data.Func === '2') {
       data.BitAddress = 1;
     }
-  };
+  }
 
+
+  save() {
+
+    let infomation = {
+      BaudRate: parseInt(this.infomation.BaudRate),
+      dataBit: parseInt(this.infomation.dataBit),
+      stopBit: parseInt(this.infomation.stopBit),
+      checkDigit: parseInt(this.infomation.checkDigit),
+      communiInterface: parseInt(this.infomation.communiInterface),
+      subAdr: parseInt(this.infomation.subAdr),
+      heartbeat: parseInt(this.infomation.heartbeat)
+    };
+
+    let data = {
+      Chan: {
+        Analogue: this.analogueList,
+        Switch: this.switchList,
+        Range: this.rangeList
+      },
+      Param: infomation,
+      Code: this.code
+    };
+    this.terminalService.save(data)
+      .subscribe(val => {
+        alert('保存成功');
+      });
+
+  }
 
 
 }

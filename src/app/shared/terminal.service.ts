@@ -17,17 +17,32 @@ const httpOptions = {
 })
 export class TerminalService {
 
-  private terminalsUrl = 'assets/server/terminal_list.json';
-  private messageUrl = 'assets/server/terminal_origin_message_list.json';
-  private funcUrl = 'assets/server/term_function_code_list.json';
-  private byteUrl = 'assets/server/term_byte_list.json';
-  private templateUrl = 'assets/server/template_list.json';
+  // private terminalsUrl = 'assets/server/terminal_list.json';
+  // private messageUrl = 'assets/server/terminal_origin_message_list.json';
+  // private funcUrl = 'assets/server/term_function_code_list.json';
+  // private byteUrl = 'assets/server/term_byte_list.json';
+  // private templateUrl = 'assets/server/template_list.json';
+  // private correspondUrl = 'assets/server/correspond_type_list.json';
+  // private dataBitUrl = 'assets/server/date_bit_list.json';
+  // private heartbeatUrl = 'assets/server/heartbeat_packet_list.json';
+  // private parityUrl = 'assets/server/parity_bit.json';
+  // private slaveUrl = 'assets/server/slave_address_list.json';
+  // private stopBitUrl = 'assets/server/stop_bit_list.json';
+  // private baudRateUrl = 'assets/server/baud_rate_list.json';
 
-  // private terminalsUrl = '/terminal_list';
-  // private messageUrl = '/terminal_origin_message_list';
-  // private funcUrl = '/term_function_code_list';
-  // private byteUrl = '/term_byte_list';
-  // private templateUrl = '/terminal_template';
+
+  private terminalsUrl = '/terminal_list';
+  private messageUrl = '/terminal_origin_message_list';
+  private funcUrl = '/term_function_code_list';
+  private byteUrl = '/term_byte_list';
+  private templateUrl = '/terminal_template';
+  private correspondUrl = '/correspond_type_list';
+  private dataBitUrl = '/date_bit_list';
+  private heartbeatUrl = '/heartbeat_packet_list';
+  private parityUrl = '/parity_bit';
+  private slaveUrl = '/slave_address_list';
+  private stopBitUrl = '/stop_bit_list';
+  private baudRateUrl = '/baud_rate_list';
 
   constructor(private http: HttpClient) { }
 
@@ -82,6 +97,14 @@ export class TerminalService {
       );
   }
 
+  // 提交
+  save(data): Observable<any> {
+    return this.http.post('/channel_config_update', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   // 获取bin文件
   getBin(): Observable<any> {
     return this.http.get<any>('/bin_list')
@@ -121,6 +144,61 @@ export class TerminalService {
       );
   }
 
+  // 通信接口地址
+  getCorrespond(): Observable<any> {
+    return this.http.get<any>(this.correspondUrl)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 数据位
+  getDataBit(): Observable<any> {
+    return this.http.get<any>(this.dataBitUrl)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 心跳包频率
+  getHeartbeat(): Observable<any> {
+    return this.http.get<any>(this.heartbeatUrl)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 校验位
+  getParity(): Observable<any> {
+    return this.http.get<any>(this.parityUrl)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 从机地址
+  getSlave(): Observable<any> {
+    return this.http.get<any>(this.slaveUrl)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 停止位
+  getStopBit(): Observable<any> {
+    return this.http.get<any>(this.stopBitUrl)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 波特率
+  getBaudRate(): Observable<any> {
+    return this.http.get<any>(this.baudRateUrl)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
 
   private handleError(error: HttpErrorResponse) {

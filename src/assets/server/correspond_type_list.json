@@ -1,0 +1,18 @@
+
+[
+    {
+        "Id": 1,
+        "Name": "RS485",
+        "Value": 1
+    },
+    {
+        "Id": 2,
+        "Name": "RS232",
+        "Value": 2
+    },
+    {
+        "Id": 3,
+        "Name": "TTL",
+        "Value": 3
+    }
+]

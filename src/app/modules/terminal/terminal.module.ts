@@ -20,6 +20,7 @@ import {
 import { GroupAddComponent } from './group-add/group-add.component';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
 import { AlarmRuleComponent } from './alarm-rule/alarm-rule.component';
+import { RangeConfigComponent } from './range-config/range-config.component';
 
 
 
@@ -49,13 +50,15 @@ import { AlarmRuleComponent } from './alarm-rule/alarm-rule.component';
     GroupConfigComponent,
     EditTerminalComponent,
     GroupAddComponent,
-    AlarmRuleComponent],
+    AlarmRuleComponent,
+    RangeConfigComponent],
   entryComponents: [
     AddTerminalComponent,
     GroupConfigComponent,
     EditTerminalComponent,
     GroupAddComponent,
-    AlarmRuleComponent
+    AlarmRuleComponent,
+    RangeConfigComponent
   ]
 })
 export class TerminalModule { }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BoilerService } from '../../../shared/boiler.service';
+import {Observable} from "rxjs/index";
+import {BoilerSocketService} from '../../../shared/boiler-socket.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,12 +16,26 @@ export class DashboardComponent implements OnInit {
   totalItems = 0;
   search: string;
 
-  constructor(private boilerService: BoilerService) { }
+  constructor(private boilerService: BoilerService,
+              private boilerWsService: BoilerSocketService) { }
 
   ngOnInit() {
-    this.getBoilers();
+    this.boilerWsService.creatSocket('ws://localhost:8000')
+      .subscribe(
+        data => console.log(data),
+        err => console.log(err),
+        () => console.log('ws结束')
+      );
+
+    this.sendMessage({page: this.page, search: this.search});
+    // this.getBoilers();
 
   }
+
+  sendMessage(message) {
+    this.boilerWsService.sendMessage(message);
+  }
+
 
   getBoilers(): void {
     /*this.boilerService.getBoilers(this.page, this.search)

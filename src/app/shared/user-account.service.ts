@@ -14,11 +14,11 @@ const httpOptions = {
 })
 export class UserAccountService {
 
-  // private userRoleUrl = '/user_roles/ ';
-  // private userAccountUrl = '/user_list';
+  private userRoleUrl = '/user_roles/ ';
+  private userAccountUrl = '/user_list';
 
-  private userRoleUrl = 'assets/server/user_roles.json';
-  private userAccountUrl = 'assets/server/user_list.json';
+  // private userRoleUrl = 'assets/server/user_roles.json';
+  // private userAccountUrl = 'assets/server/user_list.json';
 
   constructor(private http: HttpClient) { }
 
