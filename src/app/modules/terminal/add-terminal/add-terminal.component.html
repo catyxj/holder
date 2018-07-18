@@ -45,6 +45,9 @@
                 class="form-control">
           <option *ngFor="let temp of orgLists" [value]="temp.Uid" >{{temp.Name}}</option>
         </select>-->
+        <!--<nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a person" [(ngModel)]="data.org" style="width: 291px;">
+          <nz-option *ngFor="let option of orgLists" [nzLabel]="option.Name" [nzValue]="option.Uid"></nz-option>
+        </nz-select>-->
         <input type="text" [(ngModel)]="data.org"
                class="form-control"
                placeholder="请输入企业名称" required>

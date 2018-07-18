@@ -15,12 +15,7 @@ a {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-h3 {
-  text-align: center; margin-bottom: 0;
-}
-h4 {
-  position: relative;
-}
+
 .grid {
   margin: 0;
 }
@@ -29,11 +24,12 @@ h4 {
 }
 .module {
   padding: 20px;
-  text-align: center;
+  /*max-height: 120px;
+  min-width: 120px;*/
+  /*text-align: center;
   color: #eee;
-  max-height: 120px;
-  min-width: 120px;
-  background-color: #607D8B;
+  background-color: #607D8B;*/
+  border: 1px solid #eeeeee;
   border-radius: 2px;
 }
 .module:hover {
@@ -60,3 +56,16 @@ h4 {
     min-width: 60px;
   }
 }
+
+.module .status_content{
+  flex: 1;
+}
+.module .img_content{
+  flex: 2;
+}
+.module .img_content img{
+  width: 100%;
+  max-height: 150px;
+}
+
+

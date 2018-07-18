@@ -13,7 +13,7 @@ export class AlarmRuleComponent implements OnInit {
   @Input()
   currentData: any;
 
-  public alarm = [];
+  public alarm;
   public compares;
 
   constructor(public activeModal: NgbActiveModal,
@@ -21,22 +21,28 @@ export class AlarmRuleComponent implements OnInit {
 
   ngOnInit() {
     this.compares = [
-      '＜' , '＞'
+      {id: 0, name: '＜'}, {id: 1, name: '＞'}
     ];
-    this.alarm = [
-      {
-        compareValue: '＜',
-        warningValue: null,
-        description: null,
-        priority: false
-      }
-    ];
+
+    if (this.currentData.alarm.length <= 0) {
+      this.alarm = [
+        {
+          compareValue: 0,
+          warningValue: null,
+          description: null,
+          priority: false
+        }
+      ];
+    } else {
+      this.alarm = this.currentData.alarm;
+    }
+
   }
 
 
   addAlarm() {
     this.alarm.push(
-      {compareValue: '＞',
+      {compareValue: 1,
       warningValue: null,
       description: null,
       priority: false}
@@ -50,21 +56,25 @@ export class AlarmRuleComponent implements OnInit {
         continue;
       }
       switch (this.alarm[i].compareValue) {
-        case '＞':
+        case '1':
           this.alarm[i].normalValue = parseFloat(this.alarm[i].warningValue) - 1;
+          this.alarm[i].compareValue = 1;
           break;
-        case '＜':
+        case '0':
           this.alarm[i].normalValue = parseFloat(this.alarm[i].warningValue) + 1;
+          this.alarm[i].compareValue = 0;
           break;
       }
       data.push({
         warningValue: this.alarm[i].warningValue,
         description: this.alarm[i].description,
         priority: this.alarm[i].priority,
-        normalValue: this.alarm[i].normalValue
+        // normalValue: this.alarm[i].normalValue,
+        compareValue: this.alarm[i].compareValue
       });
     }
 
+    console.log(data);
     this.nzmodalService.success({
       nzTitle: '保存成功',
       nzContent: ''

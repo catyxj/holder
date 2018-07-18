@@ -13,7 +13,7 @@ import {GroupAddComponent} from '../group-add/group-add.component';
 })
 export class TerminalListComponent implements OnInit {
 
-  terminals: any;
+  terminals = [];
   page = 1;
   totalItems = 0;
   search: string;

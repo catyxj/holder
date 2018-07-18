@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {OrganizationService} from '../../../shared/organization.service';
 import {TerminalService} from '../../../shared/terminal.service';
@@ -6,7 +6,8 @@ import {TerminalService} from '../../../shared/terminal.service';
 @Component({
   selector: 'app-add-terminal',
   templateUrl: './add-terminal.component.html',
-  styleUrls: ['./add-terminal.component.css']
+  styleUrls: ['./add-terminal.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AddTerminalComponent implements OnInit {
 

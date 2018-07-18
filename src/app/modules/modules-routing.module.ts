@@ -23,6 +23,8 @@ import {TerminalListComponent} from './terminal/terminal-list/terminal-list.comp
 import {TerConfigComponent} from './terminal/ter-config/ter-config.component';
 import {MessagesComponent} from './terminal/messages/messages.component';
 import {ClusterMainComponent} from './cluster/cluster-main/cluster-main.component';
+import {ClusterListComponent} from "./cluster/cluster-list/cluster-list.component";
+import {ClusterDetailComponent} from "./cluster/cluster-detail/cluster-detail.component";
 
 
 export const ModulesRoutingModule = [
@@ -118,7 +120,18 @@ export const ModulesRoutingModule = [
       },
       {
         path: 'cluster',
-        component: ClusterMainComponent
+        component: ClusterMainComponent,
+        children: [
+          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+          {
+            path: 'dashboard',
+            component: ClusterListComponent
+          },
+          {
+            path: 'detail/:uid/:name',
+            component: ClusterDetailComponent
+          }
+        ]
       }
 
     ]

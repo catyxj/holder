@@ -19,7 +19,7 @@
         </span>
         <select [(ngModel)]="al.compareValue"
                 class="form-control" style="width: 20px;">
-          <option *ngFor="let x of compares" [value]="x" >{{x}}</option>
+          <option *ngFor="let x of compares" [value]="x.id" >{{x.name}}</option>
         </select>
         <input type="number" [(ngModel)]="al.warningValue"
                class="form-control"
@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <nz-switch [ngModel]="al.priority" nzCheckedChildren="推送" nzUnCheckedChildren="不推送" style="width: 80px; margin-left: 10px;"></nz-switch>
+    <nz-switch [(ngModel)]="al.priority" nzCheckedChildren="推送" nzUnCheckedChildren="不推送" style="width: 80px; margin-left: 10px;"></nz-switch>
 
   </div>
   <button type="button" (click)="addAlarm()"

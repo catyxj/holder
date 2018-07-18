@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
   boilers: any = [];
   boiler: any;
   page = 1;
+  pageSize = 10;
   totalItems = 0;
   search: string;
 
@@ -20,15 +21,15 @@ export class DashboardComponent implements OnInit {
               private boilerWsService: BoilerSocketService) { }
 
   ngOnInit() {
-    this.boilerWsService.creatSocket('ws://localhost:8000')
+    /*this.boilerWsService.creatSocket('ws://localhost:8000')
       .subscribe(
         data => console.log(data),
         err => console.log(err),
         () => console.log('ws结束')
       );
+    this.sendMessage({page: this.page, search: this.search});*/
 
-    this.sendMessage({page: this.page, search: this.search});
-    // this.getBoilers();
+    this.getBoilers();
 
   }
 
@@ -38,8 +39,11 @@ export class DashboardComponent implements OnInit {
 
 
   getBoilers(): void {
-    /*this.boilerService.getBoilers(this.page, this.search)
-      .subscribe(boilers => {this.boilers = boilers.params.slice(1, 5); this.totalItems = this.boilers.length; });*/
+    this.boilerService.getBoilers(this.page, this.pageSize, this.search)
+      .subscribe(data => {
+        this.boilers = data.params.slice(0, 4);
+        this.totalItems = data.counts;
+      });
   }
 
   /*getBoiler(id): void {

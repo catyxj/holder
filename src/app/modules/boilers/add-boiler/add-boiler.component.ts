@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {BoilerService} from '../../../shared/boiler.service';
 import {OrganizationService} from '../../../shared/organization.service';
@@ -8,7 +8,8 @@ import {FormControl} from '@angular/forms';
 @Component({
   selector: 'app-add-boiler',
   templateUrl: './add-boiler.component.html',
-  styleUrls: ['./add-boiler.component.css']
+  styleUrls: ['./add-boiler.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AddBoilerComponent implements OnInit {
 

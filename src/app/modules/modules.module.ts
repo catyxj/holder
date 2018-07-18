@@ -22,6 +22,7 @@ import {OrganizationModule} from './organization/organization.module';
 import {TerminalModule} from './terminal/terminal.module';
 import {TerminalMainComponent} from './terminal/terminal-main/terminal-main.component';
 import {ClusterMainComponent} from './cluster/cluster-main/cluster-main.component';
+import {ClusterModule} from "./cluster/cluster.module";
 
 
 
@@ -35,6 +36,7 @@ import {ClusterMainComponent} from './cluster/cluster-main/cluster-main.componen
     UserAccountModule,
     OrganizationModule,
     TerminalModule,
+    ClusterModule,
     RouterModule.forChild(ModulesRoutingModule),
     NgxEchartsModule,
     FormsModule,

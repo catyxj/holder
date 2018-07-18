@@ -110,8 +110,9 @@
           </span>
         </span>
 
+        <input type="text" placeholder="未关联设备" disabled *ngIf="!currentData.Equipment" class="form-control">
         <input type="text" [(ngModel)]="currentData.Equipment[0].Name"
-               class="form-control" disabled
+               class="form-control" disabled *ngIf="currentData.Equipment"
                placeholder="">
         <!--<button *ngIf="!currentData.Equipment[0]" class="btn btn-outline-info">
           <i class="fa fa-plus"></i>

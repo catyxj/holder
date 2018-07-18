@@ -19,6 +19,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material';
+import {NgZorroAntdModule} from "ng-zorro-antd";
 
 
 
@@ -33,6 +34,7 @@ import {MatInputModule} from '@angular/material';
     MatFormFieldModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
+    NgZorroAntdModule,
     RouterModule.forChild(BoilersRouting),
     BaiduMapModule.forRoot({ak: 'bDCh2N15YYodpt1wns4YPC7XFynjDx60'})
   ],

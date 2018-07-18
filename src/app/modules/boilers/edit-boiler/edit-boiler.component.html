@@ -52,10 +52,13 @@
                   class="form-control" style="width: 25%;">
             <option *ngFor="let type of orgTypes" [value]="type.TypeId" >{{type.Name}}</option>
           </select>
-          <select [(ngModel)]="link.uid"
+          <!--<select [(ngModel)]="link.uid"
                   class="form-control" style="width: 60%;">
             <option *ngFor="let org of link.orgs" [value]="org.Uid" >{{org.Name}}</option>
-          </select>
+          </select>-->
+          <nz-select nzShowSearch nzPlaceHolder="选择关联企业" [(ngModel)]="link.uid" style="width: 60%;">
+            <nz-option *ngFor="let option of link.orgs" [nzLabel]="option.Name" [nzValue]="option.Uid"></nz-option>
+          </nz-select>
         </div>
         <div>
           <button (click)="removeLink(i);"

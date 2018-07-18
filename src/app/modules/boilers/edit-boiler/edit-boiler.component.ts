@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {BoilerService} from "../../../shared/boiler.service";
 import {OrganizationService} from "../../../shared/organization.service";
@@ -7,7 +7,8 @@ import {UserService} from "../../../shared/user.service";
 @Component({
   selector: 'app-edit-boiler',
   templateUrl: './edit-boiler.component.html',
-  styleUrls: ['./edit-boiler.component.css']
+  styleUrls: ['./edit-boiler.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class EditBoilerComponent implements OnInit {
   @Input()

@@ -37,7 +37,7 @@ export class TerminalService {
   private byteUrl = '/term_byte_list';
   private templateUrl = '/terminal_template';
   private correspondUrl = '/correspond_type_list';
-  private dataBitUrl = '/date_bit_list';
+  private dataBitUrl = '/data_bit_list';
   private heartbeatUrl = '/heartbeat_packet_list';
   private parityUrl = '/parity_bit';
   private slaveUrl = '/slave_address_list';
