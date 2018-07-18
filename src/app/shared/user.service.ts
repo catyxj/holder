@@ -52,18 +52,18 @@ export class UserService {
 
   // 获取用户信息
   getUser(): Observable< any > {
-    // TODO: send the message _after_ fetching the heroes
-    // return this.http.get< any >('assets/server/user.json');
-    return this.http.get< any >('/user')  // assets/server/user.json
-      .pipe(
-        tap((val) => {
-          if (!val) {
-            this.isLoggedIn = 'false';
-            sessionStorage.setItem('user', 'false');
-          }
-        }),
-        catchError(this.handleError) // then handle the error
-      );
+
+    return this.http.get< any >('assets/server/user.json');
+    // return this.http.get< any >('/user')  // assets/server/user.json
+    //   .pipe(
+    //     tap((val) => {
+    //       if (!val) {
+    //         this.isLoggedIn = 'false';
+    //         sessionStorage.setItem('user', 'false');
+    //       }
+    //     }),
+    //     catchError(this.handleError) // then handle the error
+    //   );
   }
 
   private handleError(error: HttpErrorResponse) {

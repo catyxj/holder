@@ -27,8 +27,8 @@ export class UserloginGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     const url: string = state.url;
-    return this.GuardLogin(url);
-    // return true;
+    // return this.GuardLogin(url);
+    return true;
   }
 
   canLoad(route: Route): boolean {

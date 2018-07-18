@@ -548,6 +548,7 @@ export class TerConfigComponent implements OnInit {
           Byte: parseInt(this.rangeList[i].Byte),
           Modbus: this.rangeList[i].Modbus,
           Status: this.rangeList[i].Status,
+          Ranges: this.rangeList[i].Ranges,
           SequenceNumber: this.rangeList[i].SequenceNumber
         });
       }
@@ -585,11 +586,9 @@ export class TerConfigComponent implements OnInit {
     };
 
     let data = {
-      Chan: {
-        Analogue: analogueList,
-        Switch: switchList,
-        Range: rangeList
-      },
+      Analogue: analogueList,
+      Switch: switchList,
+      Range: rangeList,
       Param: infomation,
       Code: this.code
     };
