@@ -21,20 +21,23 @@ export class DashboardComponent implements OnInit {
               private boilerWsService: BoilerSocketService) { }
 
   ngOnInit() {
-    /*this.boilerWsService.creatSocket('ws://localhost:8000')
+    let message = {
+      uid: 'e9a7bd78-aad3-4950-b90c-da9561208622'
+    };
+    const wsUrl = `ws://${window.location.host}/equipment_instant`;
+    this.boilerWsService.creatSocket(wsUrl, JSON.stringify(message))
       .subscribe(
         data => console.log(data),
         err => console.log(err),
         () => console.log('ws结束')
       );
-    this.sendMessage({page: this.page, search: this.search});*/
-
-    this.getBoilers();
+    // this.boilerWsService.sendMessage('680001');
+    // this.getBoilers();
 
   }
 
   sendMessage(message) {
-    this.boilerWsService.sendMessage(message);
+    this.boilerWsService.sendMessage(JSON.stringify(message));
   }
 
 
@@ -50,5 +53,18 @@ export class DashboardComponent implements OnInit {
     this.boilerService.getBoiler(id)
       .subscribe(boiler => this.boiler = boiler);
   }*/
+
+  pageChange() {
+    this.sendMessage({page: this.page});
+  }
+
+
+  btn1() {
+    this.sendMessage({uid: 'e9a7bd78-aad3-4950-b90c-da9561208622'});
+  }
+
+  btn2() {
+    this.sendMessage({uid: '6d4112a4-fec8-4689-9888-94b8b0d1535b'});
+  }
 
 }

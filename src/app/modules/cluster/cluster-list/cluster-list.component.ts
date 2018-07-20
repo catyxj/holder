@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ClusterService} from '../../../shared/cluster.service';
+import {AddClusterComponent} from '../add-cluster/add-cluster.component';
 
 @Component({
   selector: 'app-cluster-list',
@@ -16,27 +18,29 @@ export class ClusterListComponent implements OnInit {
   public allDelete = false;
   public pageSize = 10;
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal,
+              private clusterService: ClusterService) { }
 
   ngOnInit() {
     this.getclusters();
   }
 
+  // 获取集群列表
   getclusters() {
-    this.clusters = [
-      {
-        Name: '11',
-        Number: 20,
-        Uid: '123344'
-      },
-      {
-        Name: '22',
-        Number: 20,
-        Uid: '123dasf344'
-      }
-    ];
+    this.clusterService.getClusters(this.page, this.pageSize, this.search)
+      .subscribe( data => {
+        this.clusters = data.params;
+        this.totalItems = data.counts;
+      });
   }
 
+  // 删除
+  delete(uid) {
+    this.clusterService.deleteCluster([uid])
+      .subscribe( () => {
+        this.pageChange();
+      });
+  }
 
   // 批量选择
   checkDel(cluster): void {
@@ -70,10 +74,10 @@ export class ClusterListComponent implements OnInit {
   }
 
   // 批量删除
-  /*deleteG() {
-    const cf = confirm(`确认删除选中锅炉 ？`);
+  deleteG() {
+    const cf = confirm(`确认删除选中集群 ？`);
     if (cf === true) {
-      this.clusterService.deletecluster(this.deleteList)
+      this.clusterService.deleteCluster(this.deleteList)
         .subscribe(() => {
           this.pageChange();
         });
@@ -82,7 +86,7 @@ export class ClusterListComponent implements OnInit {
     }
 
     // console.log(this.deleteList);
-  }*/
+  }
 
   // 每页数量
   pageSizeChange() {
@@ -103,6 +107,19 @@ export class ClusterListComponent implements OnInit {
     this.pageChange();
   }
 
+  // 添加集群模态框
+  newCluster() {
+    const modalRef = this.modalService.open(AddClusterComponent);
+    // modalRef.componentInstance.currentUser = this.user;
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+        this.pageChange();
+      }
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(reason);
+    });
+  }
 
 
 

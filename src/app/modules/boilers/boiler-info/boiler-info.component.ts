@@ -63,7 +63,6 @@ export class BoilerInfoComponent implements OnInit {
   }
 
 
-
   // 获取设备信息
   getInfo() {
     this.route.paramMap.pipe(
@@ -282,6 +281,11 @@ export class BoilerInfoComponent implements OnInit {
       this.router.navigate(['/admin/equipments']);
     }
 
+  }
+
+
+  goBack() {
+    window.history.go(-1);
   }
 
 }

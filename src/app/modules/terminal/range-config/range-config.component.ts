@@ -19,12 +19,19 @@ export class RangeConfigComponent implements OnInit {
 
   ngOnInit() {
     this.isValid = false;
-    this.comment = '请完善相关信息';
-    this.ranges = [];
-    if (this.ranges.length <= 0) {
+    this.comment = '';
+    this.ranges = this.currentData.Ranges;
+    let sortNumber = function (a, b) {
+      return a.Value - b.Value;
+    };
+    this.ranges.sort(sortNumber);
+    if (!this.ranges || this.ranges.length <= 0) {
+      this.ranges = [];
       this.addNewRange();
+      this.comment = '请完善相关信息';
     }
   }
+
 
 
   addNewRange() {

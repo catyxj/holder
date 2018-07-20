@@ -13,7 +13,7 @@ export class AlarmRuleComponent implements OnInit {
   @Input()
   currentData: any;
 
-  public alarm;
+  public alarm = [];
   public compares;
 
   constructor(public activeModal: NgbActiveModal,
@@ -34,7 +34,15 @@ export class AlarmRuleComponent implements OnInit {
         }
       ];
     } else {
-      this.alarm = this.currentData.alarm;
+      for (let i = 0; i < this.currentData.alarm.length; i++) {
+        let al = this.currentData.alarm[i];
+        this.alarm.push({
+          compareValue: al.Scope,
+          warningValue: al.AlarmValue,
+          description: al.Description,
+          priority: al.Priority
+        });
+      }
     }
 
   }

@@ -7,6 +7,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {FormsModule} from "@angular/forms";
 import {NgZorroAntdModule} from "ng-zorro-antd";
 import { ClusterDetailComponent } from './cluster-detail/cluster-detail.component';
+import { AddClusterComponent } from './add-cluster/add-cluster.component';
 
 
 @NgModule({
@@ -17,6 +18,13 @@ import { ClusterDetailComponent } from './cluster-detail/cluster-detail.componen
     NgZorroAntdModule,
     RouterModule.forChild(ClusterRoutingModule)
   ],
-  declarations: [ClusterListComponent, ClusterDetailComponent]
+  declarations: [
+    ClusterListComponent,
+    ClusterDetailComponent,
+    AddClusterComponent
+  ],
+  entryComponents: [
+    AddClusterComponent
+  ]
 })
 export class ClusterModule { }

@@ -29,6 +29,7 @@ export class TerminalService {
   // private slaveUrl = 'assets/server/slave_address_list.json';
   // private stopBitUrl = 'assets/server/stop_bit_list.json';
   // private baudRateUrl = 'assets/server/baud_rate_list.json';
+  // private channelUrl = 'assets/server/chan_config_list.json';
 
 
   private terminalsUrl = '/terminal_list';
@@ -43,6 +44,7 @@ export class TerminalService {
   private slaveUrl = '/slave_address_list';
   private stopBitUrl = '/stop_bit_list';
   private baudRateUrl = '/baud_rate_list';
+  private channelUrl = '/chan_config_list';
 
   constructor(private http: HttpClient) { }
 
@@ -50,6 +52,15 @@ export class TerminalService {
   getTerminals(n: number, pageSize: number, search?: string ): Observable<any> {
     // TODO: send the message _after_ fetching the heroes
     const url = `${this.terminalsUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+  // 获取通道配置数据
+  getChannel(code: string): Observable<any> {
+    const url = `${this.channelUrl}/?code=${code}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error

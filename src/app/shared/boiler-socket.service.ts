@@ -9,8 +9,11 @@ export class BoilerSocketService {
   ws: WebSocket;
   constructor() { }
 
-  creatSocket(url: string): Observable<any> {
+  creatSocket(url: string, data: any): Observable<any> {
     this.ws = new WebSocket(url);
+    /*this.ws.onopen = () => {
+      this.sendMessage(data);
+    };*/
     return new Observable(
       observer => {
         this.ws.onmessage = (event) => observer.next(event.data);
@@ -23,6 +26,7 @@ export class BoilerSocketService {
   sendMessage(message) {
     this.ws.send(message);
   }
+
 
 
 

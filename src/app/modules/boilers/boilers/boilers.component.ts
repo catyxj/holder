@@ -25,7 +25,9 @@ export class BoilersComponent implements OnInit {
   pageSize = 10;
   user: any;
 
-  constructor(private boilerService: BoilerService, private modalService: NgbModal, private userService: UserService ) { }
+  constructor(private boilerService: BoilerService,
+              private modalService: NgbModal,
+              private userService: UserService ) { }
 
   ngOnInit() {
     this.getBoilers();

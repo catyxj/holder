@@ -42,7 +42,15 @@ export class TerConfigComponent implements OnInit {
   ngOnInit() {
 
     this.code = this.route.snapshot.paramMap.get('code');
-
+    this.infomation = {
+      BaudRate: 0, // 波特率
+      dataBit: 0,  // 数据位
+      stopBit: 0,  // 停止位
+      checkDigit: 0, // 校验位
+      communiInterface: 0, // 通信接口地址
+      subAdr: 0,  // 从机地址
+      heartbeat: 0  // 心跳包频率
+    };
     this.getTerminal();
     this.initLists();
     this.initPriorities();
@@ -56,62 +64,134 @@ export class TerConfigComponent implements OnInit {
 
   // 获取终端信息
   getTerminal() {
-    this.analogueList = [
-      {
-        ChannelNumber: 1,
-        Parameter: {
-          Name: '',
-          Scale: null
-        },
-        alarm: [],
-        Func: 0,
-        Byte: 0,
-        Modbus: null,
-        Status: -1,
-        SequenceNumber: 0
-      }
-    ];
 
-    this.switchList = [
-      {
-        ChannelNumber: 1,
-        Parameter: {
-          Name: '',
-        },
-        alarm: [],
-        Func: 0,
-        Modbus: null,
-        BitAddress: null,
-        Status: -1,
-        SequenceNumber: 0
-      }
-    ];
+    this.terminalService.getChannel(this.code)
+      .subscribe( data => {
+          let channels = data.channelConfigs;
+          let information = data.communication;
 
-    this.rangeList = [
-      {
-        ChannelNumber: 1,
-        Parameter: {
-          Name: '',
-        },
-        alarm: [],
-        Ranges: [],
-        Func: 0,
-        Byte: 0,
-        Modbus: null,
-        Status: -1,
-        SequenceNumber: 0
-      }
-    ];
+          //
+          for (let i = 0; i < channels.length; i++) {
+            let chan = channels[i];
 
-    this.infomation = {
-      BaudRate: 0,
-      dataBit: 0,
-      stopBit: 0,
-      checkDigit: 0,
-      communiInterface: 0,
-      subAdr: 0,
-      heartbeat: 0
-    };
+            if (chan.ChannelType === 1) {
+              this.analogueList.push({
+                ChannelNumber: chan.ChannelNumber,
+                Parameter: {
+                  Name: chan.Name,
+                  Scale: chan.Scale,
+                  Unit: chan.Unit
+                },
+                alarm: chan.AlarmRule,
+                Func: chan.FunctionCode ? chan.FunctionCode.Id : 0,
+                Byte: chan.Byte ? chan.Byte.Id : 0,
+                Modbus: chan.Modbus,
+                Status: chan.Status,
+                SequenceNumber: chan.SequenceNumber
+              });
+            }
+
+            if (chan.ChannelType === 3) {
+              this.switchList.push({
+                ChannelNumber: chan.ChannelNumber,
+                Parameter: {
+                  Name: chan.Name,
+                },
+                alarm: chan.AlarmRule,
+                Func: chan.FunctionCode ? chan.FunctionCode.Id : 0,
+                Modbus: chan.Modbus,
+                BitAddress: chan.BitAddress,
+                Status: chan.Status,
+                SwitchStatus: chan.SwitchStatus,
+                SequenceNumber: chan.SequenceNumber
+              });
+            }
+
+            if (chan.ChannelType === 5) {
+              this.rangeList.push({
+                ChannelNumber: chan.ChannelNumber,
+                Parameter: {
+                  Name: chan.Name,
+                },
+                alarm: chan.AlarmRule,
+                Ranges: chan.Ranges,
+                Func: chan.FunctionCode ? chan.FunctionCode.Id : 0,
+                Byte: chan.Byte ? chan.Byte.Id : 0,
+                Modbus: chan.Modbus,
+                Status: chan.Status,
+                SequenceNumber: chan.SequenceNumber
+              });
+            }
+          }
+
+          if (this.analogueList.length <= 0) {
+            this.analogueList = [
+              {
+                ChannelNumber: 1,
+                Parameter: {
+                  Name: '',
+                  Scale: null,
+                  Unit: null
+                },
+                alarm: [],
+                Func: 0,
+                Byte: 0,
+                Modbus: null,
+                Status: -1,
+                SequenceNumber: -1
+              }
+            ];
+          }
+
+          if (this.switchList.length <= 0) {
+            this.switchList = [
+              {
+                ChannelNumber: 1,
+                Parameter: {
+                  Name: '',
+                },
+                alarm: [],
+                Func: 0,
+                Modbus: null,
+                BitAddress: null,
+                Status: -1,
+                SwitchStatus: null,
+                SequenceNumber: -1
+              }
+            ];
+          }
+
+          if (this.rangeList.length <= 0) {
+            this.rangeList = [
+              {
+                ChannelNumber: 1,
+                Parameter: {
+                  Name: '',
+                },
+                alarm: [],
+                Ranges: [],
+                Func: 0,
+                Byte: 0,
+                Modbus: null,
+                Status: -1,
+                SequenceNumber: -1
+              }
+            ];
+          }
+
+          // 通信参数
+          this.infomation = {
+            BaudRate: information.BaudRate ? information.BaudRate.Id : 0, // 波特率
+            dataBit: information.DataBit ? information.DataBit.Id : 0,  // 数据位
+            stopBit: information.StopBit ? information.StopBit.Id : 0,  // 停止位
+            checkDigit: information.ParityBit ? information.ParityBit.Id : 0, // 校验位
+            communiInterface: information.CorrespondType ? information.CorrespondType.Id : 0, // 通信接口地址
+            subAdr: information.SlaveAddress ? information.SlaveAddress.Id : 0,  // 从机地址
+            heartbeat: information.HeartBeat ? information.HeartBeat.Id : 0  // 心跳包频率
+          };
+
+
+      });
 
   }
 
@@ -205,7 +285,7 @@ export class TerConfigComponent implements OnInit {
       Byte: null,
       Modbus: null,
       Status: -1,
-      SequenceNumber: 0
+      SequenceNumber: -1
     });
   }
 
@@ -222,7 +302,7 @@ export class TerConfigComponent implements OnInit {
       Modbus: null,
       BitAddress: null,
       Status: -1,
-      SequenceNumber: 0
+      SequenceNumber: -1
     });
   }
 
@@ -240,7 +320,7 @@ export class TerConfigComponent implements OnInit {
       Byte: null,
       Modbus: null,
       Status: -1,
-      SequenceNumber: 0
+      SequenceNumber: -1
     });
   }
 
@@ -266,7 +346,7 @@ export class TerConfigComponent implements OnInit {
       data.Parameter = {};
       data.Status = -1;
       data.SwitchStatus = 0;
-      data.Ranges = null;
+      data.Ranges = [];
       data.Func = null;
       data.Byte = null;
       data.Modbus = null;
@@ -575,6 +655,7 @@ export class TerConfigComponent implements OnInit {
       return false;
     }
 
+    console.log(this.infomation);
     let infomation = {
       BaudRate: parseInt(this.infomation.BaudRate),
       dataBit: parseInt(this.infomation.dataBit),

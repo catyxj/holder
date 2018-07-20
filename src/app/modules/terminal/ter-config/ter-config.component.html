@@ -47,7 +47,7 @@
                    style="display: inline-block; width: 50%;" class="form-control">
           </td>
           <td>
-            <button [matMenuTriggerFor]="menu" class="btn" [disabled]="!data.Parameter||!data.Parameter.Name"
+            <button [matMenuTriggerFor]="menu" class="btn btn-block" [disabled]="!data.Parameter||!data.Parameter.Name"
                     [ngClass]="{'btn-info': data.Status === 1, 'btn-danger': data.Status === 2}">
               <i class="fa" [ngClass]="{'fa-ellipsis-h':data.Status === 0, 'fa-eye': data.Status === 1, 'fa-eye-slash': data.Status === 2}"></i>
               <span *ngIf="data.Status === 1">{{ data.SequenceNumber }}</span>
@@ -275,7 +275,7 @@
           <td>
             <button type="button" class="btn btn-block"
                     [disabled]="!data.Parameter || !data.Parameter.Name || data.Status === -1"
-                    [ngClass]="{'': data.Ranges.length <= 0, 'btn-info': data.Ranges.length > 0}"
+                    [class.btn-info] = "data.Ranges.length > 0"
                     (click)="openRange(data)">
               <i class="fa" [ngClass]="{'fa-calendar-plus-o': data.Ranges.length <= 0, 'fa-calendar-check-o': data.Ranges.length > 0}"></i>
             </button>
