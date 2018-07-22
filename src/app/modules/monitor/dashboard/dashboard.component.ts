@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { BoilerService } from '../../../shared/boiler.service';
 import {Observable} from "rxjs/index";
 import {BoilerSocketService} from '../../../shared/boiler-socket.service';
@@ -8,7 +8,7 @@ import {BoilerSocketService} from '../../../shared/boiler-socket.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   boilers: any = [];
   boiler: any;
@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
   }
 
   sendMessage(message) {
-    this.boilerWsService.sendMessage(JSON.stringify(message));
+    this.boilerWsService.sendMessage(message);
   }
 
 
@@ -66,5 +66,9 @@ export class DashboardComponent implements OnInit {
   btn2() {
     this.sendMessage({uid: '6d4112a4-fec8-4689-9888-94b8b0d1535b'});
   }
+
+
+  ngOnDestroy() { console.log(`onDestroy`); }
+
 
 }

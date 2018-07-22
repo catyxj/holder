@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs/index";
+import {Observable} from 'rxjs/index';
+import 'rxjs/Rx';
 
 @Injectable({
   providedIn: 'root'
@@ -11,20 +12,20 @@ export class BoilerSocketService {
 
   creatSocket(url: string, data: any): Observable<any> {
     this.ws = new WebSocket(url);
-    /*this.ws.onopen = () => {
-      this.sendMessage(data);
-    };*/
     return new Observable(
       observer => {
         this.ws.onmessage = (event) => observer.next(event.data);
         this.ws.onerror = (event) => observer.error(event);
         this.ws.onclose = (event) => observer.complete();
+        this.ws.onopen = (event) => {
+          this.sendMessage(data);
+        };
       }
-    );
+    ).map(message => JSON.parse(message));
   }
 
   sendMessage(message) {
-    this.ws.send(message);
+    this.ws.send(JSON.stringify(message));
   }
 
 
