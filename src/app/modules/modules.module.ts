@@ -23,6 +23,10 @@ import {TerminalModule} from './terminal/terminal.module';
 import {TerminalMainComponent} from './terminal/terminal-main/terminal-main.component';
 import {ClusterMainComponent} from './cluster/cluster-main/cluster-main.component';
 import {ClusterModule} from "./cluster/cluster.module";
+import {TemplateMainComponent} from "./template/template-main/template-main.component";
+import {TemplateModule} from "./template/template.module";
+import {AlarmMainComponent} from "./alarm/alarm-main/alarm-main.component";
+import {AlarmModule} from "./alarm/alarm.module";
 
 
 
@@ -37,6 +41,8 @@ import {ClusterModule} from "./cluster/cluster.module";
     OrganizationModule,
     TerminalModule,
     ClusterModule,
+    TemplateModule,
+    AlarmModule,
     RouterModule.forChild(ModulesRoutingModule),
     NgxEchartsModule,
     FormsModule,
@@ -50,7 +56,9 @@ import {ClusterModule} from "./cluster/cluster.module";
     ProfileMainComponent,
     UserMainComponent,
     TerminalMainComponent,
-    ClusterMainComponent
+    ClusterMainComponent,
+    TemplateMainComponent,
+    AlarmMainComponent
   ],
   exports: [
     // RouterModule

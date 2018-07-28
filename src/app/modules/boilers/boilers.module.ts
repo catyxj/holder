@@ -20,6 +20,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material';
 import {NgZorroAntdModule} from "ng-zorro-antd";
+import { JoinClusterComponent } from './join-cluster/join-cluster.component';
 
 
 
@@ -36,7 +37,7 @@ import {NgZorroAntdModule} from "ng-zorro-antd";
     ReactiveFormsModule,
     NgZorroAntdModule,
     RouterModule.forChild(BoilersRouting),
-    BaiduMapModule.forRoot({ak: 'bDCh2N15YYodpt1wns4YPC7XFynjDx60'})
+    BaiduMapModule
   ],
   declarations: [
     BoilersComponent,
@@ -45,14 +46,16 @@ import {NgZorroAntdModule} from "ng-zorro-antd";
     EditBoilerComponent,
     EditAddressComponent,
     EditMaintainComponent,
-    TerBindComponent
+    TerBindComponent,
+    JoinClusterComponent
   ],
   entryComponents: [
     AddBoilerComponent,
     EditBoilerComponent,
     EditAddressComponent,
     EditMaintainComponent,
-    TerBindComponent
+    TerBindComponent,
+    JoinClusterComponent
   ]
 })
 export class BoilersModule { }

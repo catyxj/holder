@@ -1,0 +1,50 @@
+
+<div class="pb-3 row" style="margin-left: 0; margin-right: 0;">
+  <!--地图-->
+  <div class="col-9" id="container" style="width: 100%; height: 480px;"></div>
+  <!--列表-->
+  <div class="col-3 map_lists">
+    <div class="map_search mt-2">
+      <div class="input-group">
+        <input type="text" class="form-control" [(ngModel)]="search">
+        <span class="input-group-append">
+          <button class="btn btn-info">
+            <i class="fa fa-search"></i>
+          </button>
+        </span>
+      </div>
+
+    </div>
+    <div class="map_list_box">
+      <ul class="map_list_in">
+        <li *ngFor="let data of markers">
+          <a>
+            {{ data.name }}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <!--<div class="pull-left mr-3" style="line-height: 33px;"> {{totalItems}} 项</div>-->
+      <!--<div class="pull-left mr-3">
+        <select [(ngModel)]="pageSize" class="form-control " (change)="pageSizeChange()">
+          <option value="10">10</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>-->
+      <!--<ngb-pagination class="pull-right" size="sm"
+                      [collectionSize]="totalItems"
+                      [pageSize]="pageSize" [(page)]="page"
+                      [maxSize]="5" [rotate]="true"
+                      (pageChange)="pageChange()">
+
+      </ngb-pagination>-->
+      <nz-pagination [(nzPageIndex)]="page" [nzTotal]="totalItems" nzSimple [nzPageSize]="10"
+                     (nzPageIndexChange)="pageChange()" (nzPageSizeChange)="pageSizeChange()"
+                     class="pull-right" [nzSize]="'small'"></nz-pagination>
+
+    </div>
+  </div>
+</div>

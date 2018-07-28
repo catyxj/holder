@@ -3,6 +3,7 @@ import {BoilerService} from '../../../shared/boiler.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AddBoilerComponent} from '../add-boiler/add-boiler.component';
 import {UserService} from '../../../shared/user.service';
+import {JoinClusterComponent} from "../join-cluster/join-cluster.component";
 
 
 @Component({
@@ -132,7 +133,7 @@ export class BoilersComponent implements OnInit {
     this.pageChange();
   }
 
-  // 添加锅炉模态框
+  // 添加设备模态框
   newBoiler() {
     const modalRef = this.modalService.open(AddBoilerComponent, { size: 'lg' });
     modalRef.componentInstance.currentUser = this.user;
@@ -147,8 +148,19 @@ export class BoilersComponent implements OnInit {
     });
   }
 
-
-
+  // 批量添加集群模态框
+  joinCluster() {
+    const modalRef = this.modalService.open(JoinClusterComponent);
+    modalRef.componentInstance.equipList = this.deleteList;
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+        this.pageChange();
+      }
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(reason);
+    });
+  }
 
 
 

@@ -119,7 +119,7 @@ export class AddBoilerComponent implements OnInit {
   // 企业关联下拉列表
   linkTypeChanged(link) {
     let orgs = [];
-    for (let i in this.orgLists) {
+    for (let i = 0; i < this.orgLists.length; i++) {
       let og = this.orgLists[i];
       if (og.Type__TypeId === parseInt(link.type)) {
         orgs.push(og);

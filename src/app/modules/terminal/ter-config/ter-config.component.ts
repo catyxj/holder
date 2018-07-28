@@ -6,6 +6,7 @@ import {AlarmRuleComponent} from "../alarm-rule/alarm-rule.component";
 import {NzModalService} from "ng-zorro-antd";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {RangeConfigComponent} from "../range-config/range-config.component";
+import {AddTemplateComponent} from "../add-template/add-template.component";
 
 @Component({
   selector: 'app-ter-config',
@@ -678,6 +679,278 @@ export class TerConfigComponent implements OnInit {
         alert('保存成功');
       });
 
+  }
+
+  addTemplate() {
+    // 模拟通道
+    let analogueList = [];
+    let aNumList = [];
+    for (let i = 0; i < this.analogueList.length; i++) {
+      if (this.analogueList[i].Parameter.Name) {
+        if (this.analogueList[i].ChannelNumber > 24) {
+          this.nzmodalService.error({
+            nzTitle: '通道配置更新失败',
+            nzContent: '模拟通道不能超过24'
+          });
+          return false;
+        }
+        aNumList.push(this.analogueList[i].ChannelNumber);
+        if (!this.analogueList[i].Func || !this.analogueList[i].Byte || !this.analogueList[i].Modbus || !this.analogueList[i].Parameter.Scale) {
+          this.nzmodalService.error({
+            nzTitle: '通道配置更新失败',
+            nzContent: `模拟通道配置信息不全 ，参数不能为0 [ ${i} ]`
+          });
+          return false;
+        }
+        if (parseInt(this.analogueList[i].Func) === 3) {
+          if (this.analogueList[i].Modbus <= 40000 || this.analogueList[i].Modbus >= 50000) {
+            this.nzmodalService.error({
+              nzTitle: 'MODBUS地址错误',
+              nzContent: '功能码为03，MODBUS地址范围40001-49999'
+            });
+            return false;
+          }
+        }
+        if (parseInt(this.analogueList[i].Func) === 4) {
+          if (this.analogueList[i].Modbus <= 30000 || this.analogueList[i].Modbus >= 40000) {
+            this.nzmodalService.error({
+              nzTitle: 'MODBUS地址错误',
+              nzContent: '功能码为04，MODBUS地址范围30001-39999'
+            });
+            return false;
+          }
+        }
+        analogueList.push({
+          ChannelNumber: this.analogueList[i].ChannelNumber,
+          Name: this.analogueList[i].Parameter.Name,
+          Scale: this.analogueList[i].Parameter.Scale,
+          Unit: this.analogueList[i].Parameter.Unit,
+          Alarm: this.analogueList[i].alarm,
+          Func: parseInt(this.analogueList[i].Func),
+          Byte: parseInt(this.analogueList[i].Byte),
+          Modbus: this.analogueList[i].Modbus,
+          Status: this.analogueList[i].Status,
+          SequenceNumber: this.analogueList[i].SequenceNumber
+        });
+      }
+    }
+
+    aNumList.sort();
+    for (let i = 0; i < aNumList.length; i++) {
+      if (aNumList[i] === aNumList[i + 1]) {
+        this.nzmodalService.error({
+          nzTitle: `模拟量通道[ ${aNumList[i]} ]重复配置`,
+          nzContent: '模拟量通道数不能相同'
+        });
+        return false;
+      }
+    }
+
+
+    // 开关通道
+    let switchList = [];
+    let sNumList = [];
+    for (let i = 0; i < this.switchList.length; i++) {
+      if (this.switchList[i].Parameter.Name) {
+        if (this.switchList[i].ChannelNumber > 48) {
+          this.nzmodalService.error({
+            nzTitle: '通道配置更新失败',
+            nzContent: '开关通道不能超过48'
+          });
+          return false;
+        }
+        sNumList.push(this.switchList[i].ChannelNumber);
+        if ( (parseInt(this.switchList[i].Func) !== 99) && (!this.switchList[i].Func || !this.switchList[i].BitAddress || !this.switchList[i].Modbus)) {
+
+          this.nzmodalService.error({
+            nzTitle: '通道配置更新失败',
+            nzContent: `开关通道配置信息不全 ，参数不能为0 [${i}]`
+          });
+          return false;
+        }
+        if ( parseInt(this.switchList[i].Func) === 1) {
+          if (this.switchList[i].Modbus < 1 || this.switchList[i].Modbus >= 10000) {
+            this.nzmodalService.error({
+              nzTitle: '开关通道MODBUS地址错误',
+              nzContent: `功能码为01，MODBUS地址范围00001-09999`
+            });
+            return false;
+          }
+          if (this.switchList[i].BitAddress !== 1) {
+            this.nzmodalService.error({
+              nzTitle: '开关通道位地址错误',
+              nzContent: '功能码为01，对应位地址为1'
+            });
+            return false;
+          }
+        }
+        if (parseInt(this.switchList[i].Func) === 2) {
+          if (this.switchList[i].Modbus <= 10000 || this.switchList[i].Modbus >= 20000) {
+            this.nzmodalService.error({
+              nzTitle: '开关通道MODBUS地址错误',
+              nzContent: '功能码为02，MODBUS地址范围10001-19999'
+            });
+            return false;
+          }
+          if (this.switchList[i].BitAddress !== 1) {
+            this.nzmodalService.error({
+              nzTitle: '开关通道位地址错误',
+              nzContent: '功能码为02，对应位地址为1'
+            });
+            return false;
+          }
+        }
+        if (parseInt(this.switchList[i].Func) === 3) {
+          if (this.switchList[i].Modbus <= 40000 || this.switchList[i].Modbus >= 50000) {
+            this.nzmodalService.error({
+              nzTitle: '开关通道MODBUS地址错，请修改',
+              nzContent: '功能码为03，MODBUS地址范围40001-49999'
+            });
+            return false;
+          }
+          if (this.switchList[i].BitAddress < 1 || this.switchList[i].BitAddress > 16) {
+            this.nzmodalService.error({
+              nzTitle: '位地址错误',
+              nzContent: '功能码为03，对应位地址范围为1-16'
+            });
+            return false;
+          }
+        }
+        switchList.push({
+          ChannelNumber: this.switchList[i].ChannelNumber,
+          Name: this.switchList[i].Parameter.Name,
+          Alarm: this.switchList[i].alarm,
+          Func: parseInt(this.switchList[i].Func),
+          Modbus: this.switchList[i].Modbus,
+          BitAddress: this.switchList[i].BitAddress,
+          Status: this.switchList[i].Status,
+          SwitchStatus: this.switchList[i].SwitchStatus,
+          SequenceNumber: this.switchList[i].SequenceNumber
+        });
+      }
+    }
+    sNumList.sort();
+    for (let i = 0; i < sNumList.length; i++) {
+      if (sNumList[i] === sNumList[i + 1]) {
+        this.nzmodalService.error({
+          nzTitle: `开关量通道[ ${sNumList[i]} ]重复配置`,
+          nzContent: '开关量通道数不能相同'
+        });
+        return false;
+      }
+    }
+
+
+    // 状态通道
+    let rangeList = [];
+    let rNumList = [];
+    for (let i = 0; i < this.rangeList.length; i++) {
+      if (this.rangeList[i].Parameter.Name) {
+        if (this.rangeList[i].ChannelNumber > 12) {
+          this.nzmodalService.error({
+            nzTitle: '通道配置更新失败',
+            nzContent: '状态通道不能超过12'
+          });
+          return false;
+        }
+        rNumList.push(this.rangeList[i].ChannelNumber);
+        if (!this.rangeList[i].Func || !this.rangeList[i].Byte || !this.rangeList[i].Modbus) {
+          this.nzmodalService.error({
+            nzTitle: '通道配置更新失败',
+            nzContent: `状态通道[${this.rangeList[i].ChannelNumber}]配置信息不全 ，参数不能为0 `
+          });
+          return false;
+        }
+        if ( parseInt(this.rangeList[i].Func) === 3) {
+          if (this.rangeList[i].Modbus <= 40000 || this.rangeList[i].Modbus >= 50000) {
+            this.nzmodalService.error({
+              nzTitle: 'MODBUS地址错误',
+              nzContent: '功能码为03，MODBUS地址范围40001-49999'
+            });
+            return false;
+          }
+        }
+        if (parseInt(this.rangeList[i].Func) === 4) {
+          if (this.rangeList[i].Modbus <= 30000 || this.rangeList[i].Modbus >= 40000) {
+            this.nzmodalService.error({
+              nzTitle: 'MODBUS地址错误',
+              nzContent: '功能码为04，MODBUS地址范围30001-39999'
+            });
+            return false;
+          }
+        }
+
+        if (this.rangeList[i].Ranges.length <= 0) {
+          this.nzmodalService.error({
+            nzTitle: '状态量通道配置错误',
+            nzContent: '已配置的状态量通道，需要完成其状态值的配置才可提交'
+          });
+          return;
+        }
+
+        rangeList.push({
+          ChannelNumber: this.rangeList[i].ChannelNumber,
+          Name: this.rangeList[i].Parameter.Name,
+          Alarm: this.rangeList[i].alarm,
+          Func: parseInt(this.rangeList[i].Func),
+          Byte: parseInt(this.rangeList[i].Byte),
+          Modbus: this.rangeList[i].Modbus,
+          Status: this.rangeList[i].Status,
+          Ranges: this.rangeList[i].Ranges,
+          SequenceNumber: this.rangeList[i].SequenceNumber
+        });
+      }
+    }
+    rNumList.sort();
+    for (let i = 0; i < rNumList.length; i++) {
+      if (rNumList[i] === rNumList[i + 1]) {
+        this.nzmodalService.error({
+          nzTitle: `状态量通道[${rNumList[i]}]重复配置`,
+          nzContent: '状态量通道数不能相同'
+        });
+        return false;
+      }
+    }
+
+
+
+    // 通信参数
+    if (!this.infomation.BaudRate || !this.infomation.dataBit || !this.infomation.stopBit || !this.infomation.checkDigit || !this.infomation.communiInterface || !this.infomation.subAdr || !this.infomation.heartbeat) {
+      this.nzmodalService.error({
+        nzTitle: '通道配置更新失败',
+        nzContent: '通信参数不能为空'
+      });
+      return false;
+    }
+
+    console.log(this.infomation);
+    let infomation = {
+      BaudRate: parseInt(this.infomation.BaudRate),
+      dataBit: parseInt(this.infomation.dataBit),
+      stopBit: parseInt(this.infomation.stopBit),
+      checkDigit: parseInt(this.infomation.checkDigit),
+      communiInterface: parseInt(this.infomation.communiInterface),
+      subAdr: parseInt(this.infomation.subAdr),
+      heartbeat: parseInt(this.infomation.heartbeat)
+    };
+
+    let data = {
+      Analogue: analogueList,
+      Switch: switchList,
+      Range: rangeList,
+      Param: infomation,
+    };
+
+    // 打开模态框
+    const modalRef = this.modalService.open(AddTemplateComponent);
+    modalRef.componentInstance.currentData = data;
+    modalRef.result.then((result) => {
+      console.log(result);
+
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(reason);
+    });
   }
 
 

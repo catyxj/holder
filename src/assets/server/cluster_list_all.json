@@ -1,0 +1,91 @@
+[
+  {
+    "Uid": "6b881f37-e540-41b9-b28d-a73facf53f82",
+    "Name": "测试锅炉681028",
+    "Terminal": {
+      "Uid": "32e6c06a-ec74-4bd0-bd11-1bc72ac8539a",
+      "Name": "测试终端681028",
+      "NameEn": "",
+      "Remark": "",
+      "CreatedDate": "2018-06-15T17:11:12+08:00",
+      "CreatedBy": null,
+      "UpdatedDate": "2018-06-25T12:12:28+08:00",
+      "UpdatedBy": null,
+      "IsDemo": false,
+      "IsDeleted": false,
+      "TerminalCode": 681028,
+      "Organization": {
+        "Uid": "49495ba9-7a17-46e3-9dd9-c8bc3c3d5c74",
+        "Name": "",
+        "NameEn": "",
+        "Remark": "",
+        "CreatedDate": "0001-01-01T00:00:00Z",
+        "CreatedBy": null,
+        "UpdatedDate": "0001-01-01T00:00:00Z",
+        "UpdatedBy": null,
+        "IsDemo": false,
+        "IsDeleted": false,
+        "Type": null,
+        "IsSupervisor": false,
+        "SuperOrganization": null,
+        "SubOrganizations": null,
+        "Address": null,
+        "Contact": null,
+        "ShowBrand": false,
+        "BrandName": "",
+        "BrandImageUrl": "",
+        "Users": null,
+        "Boilers": null,
+        "BoilersLinked": null
+      },
+      "Boilers": null,
+      "LocalIp": "",
+      "RemoteIp": "",
+      "RemotePort": 0,
+      "SimNumber": "",
+      "InstalledBy": "",
+      "InstalledDate": "0001-01-01T00:00:00Z",
+      "UploadFlag": false,
+      "UploadPeriod": 0,
+      "IsOnline": true,
+      "TerminalSetId": 0
+    },
+    "Status": {
+      "IsBurning": 1
+    },
+    "Runtime": null
+  },
+  {
+    "Uid": "f2f8ea60-b2cd-4490-9ffe-00e096b110f0",
+    "Name": "edagdg",
+    "NameEn": "",
+    "Remark": "",
+    "IsDeleted": false,
+    "Supervisor": null,
+    "TerminalsCombined": null,
+    "Status": {
+      "IsBurning": 0
+    },
+    "Runtime": null
+  },
+  {
+    "Uid": "f2f8ea60-b2cd-4490-9ffe-00e096bsdfaf",
+    "Name": "11334566",
+    "Count": 20,
+    "TerminalsCombined": null,
+    "Status": {
+      "IsBurning": 0
+    },
+    "Runtime": null
+  },
+  {
+    "Uid": "f2f8ea60-b2cd-4490-9ffe-00e0asdfa",
+    "Name": "sdfaads",
+    "Count": 20,
+    "TerminalsCombined": null,
+    "Status": {
+      "IsBurning": 0
+    },
+    "Runtime": null
+  }
+]

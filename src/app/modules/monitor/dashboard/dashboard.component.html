@@ -1,42 +1,67 @@
 
-<div class="grid grid-pad clearfix">
-  <a *ngFor="let boiler of boilers" class="col-1-4"
-     (click)="getBoiler(boiler.id)"
-     routerLink="/admin/runtime">
-    <div class="module flex">
-      <div class="status_content">
-        <h5>{{boiler.Name}}</h5>
-        <div>
-          <div> {{boiler.fuel}} </div>
-          <div class="badge badge-secondary" [class.badge-info]="boiler.terminal" style="margin-right: 5px;"> {{boiler.terminal}} </div>
-          <div class="badge badge-secondary" [class.badge-info]="boiler.terminal"> {{boiler.running}} </div>
+<div>
+  <div class="mat-card-title clearfix" style="padding: 20px 0;">
+    <div class="pull-right flex flex-row">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="请输入设备名称" [(ngModel)]="search" >
+        <div class="input-group-append" (click)="searchChange()">
+          <button class="btn btn-info" type="button"><i class="fa fa-search"></i></button>
         </div>
       </div>
-      <div class="img_content">
-        <img src="assets/images/bg0.jpg" alt="">
+      <div class="ml-3" >
+
       </div>
-
     </div>
-  </a>
+  </div>
+
+  <div class="grid grid-pad clearfix">
+    <div *ngFor="let data of boilers" class="col-1-4">
+      <div class="module flex">
+        <div class="status_content">
+          <a routerLink="/admin/runtime">
+            <h5 class="mb-4">
+              {{data.Name}}
+            </h5>
+          </a>
+
+          <div class="status_row ">
+            <div class="status_col " [ngClass]="{'bg-info':data.Online ,'bg_grey':!data.Online}">
+              <!--{{data.online}}--> 终端状态
+            </div>
+            <div class="status_col " [ngClass]="{'bg-info':data.IsBurning ,'bg_grey':!data.IsBurning}">
+              <!--{{data.isBurning}}--> 运行状态
+            </div>
+            <div class="status_col " [ngClass]="{'bg_grey':!data.Online, 'bg-warning':data.Online && data.warning , 'bg-info':data.Online && !data.warning}">
+              {{data.warning}}
+            </div>
+            <div class="status_col  bg_grey" style="margin-bottom: 0">
+              {{data.malfunction}}
+            </div>
+          </div>
+        </div>
+        <div class="img_content">
+          <a routerLink="/admin/runtime">
+            <img src="{{data.imgUrl}}" alt="">
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix">
+    <div class="pull-left"> 共 {{totalItems}} 项</div>
+    <ngb-pagination class="pull-right"
+                    [collectionSize]="totalItems"
+                    [pageSize]="4" [(page)]="page"
+                    [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                    (pageChange)="pageChange()">
+    </ngb-pagination>
+  </div>
+
 </div>
 
-<div class="clearfix">
-  <div class="pull-left"> 共 {{totalItems}} 项</div>
-  <ngb-pagination class="pull-right"
-                  [collectionSize]="totalItems"
-                  [pageSize]="4" [(page)]="page"
-                  [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
-                  (pageChange)="pageChange()">
-  </ngb-pagination>
-</div>
 
 
-<div class="row">
-  <button class="btn btn-primary" (click)="btn1()">
-    按钮1
-  </button>
-  <button class="btn btn-info" (click)="btn2()">
-    按钮2
-  </button>
-</div>
+
 

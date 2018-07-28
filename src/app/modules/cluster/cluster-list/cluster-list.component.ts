@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ClusterService} from '../../../shared/cluster.service';
 import {AddClusterComponent} from '../add-cluster/add-cluster.component';
+import {EditClusterComponent} from "../edit-cluster/edit-cluster.component";
 
 @Component({
   selector: 'app-cluster-list',
@@ -35,11 +36,14 @@ export class ClusterListComponent implements OnInit {
   }
 
   // 删除
-  delete(uid) {
-    this.clusterService.deleteCluster([uid])
-      .subscribe( () => {
-        this.pageChange();
-      });
+  delete(uid, name) {
+    let cf = confirm(`确定删除集群[${name}]？`);
+    if (cf === true) {
+      this.clusterService.deleteCluster([uid])
+        .subscribe( () => {
+          this.pageChange();
+        });
+    }
   }
 
   // 批量选择
@@ -47,7 +51,7 @@ export class ClusterListComponent implements OnInit {
     if ( cluster.checkDelete === true) {
       this.deleteList.push(cluster.Uid);
     } else {
-      for (let i = 0; i < this.deleteList.length; i++){
+      for (let i = 0; i < this.deleteList.length; i++) {
         let dl = this.deleteList[i];
         if (dl === cluster.Uid) {
           this.deleteList.splice(i, 1);
@@ -121,6 +125,19 @@ export class ClusterListComponent implements OnInit {
     });
   }
 
+  // 修改集群模态框
+  editCluster(clus) {
+    const modalRef = this.modalService.open(EditClusterComponent);
+    modalRef.componentInstance.currentData = clus;
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+        this.pageChange();
+      }
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(reason);
+    });
+  }
 
 
 }

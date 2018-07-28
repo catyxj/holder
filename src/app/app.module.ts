@@ -25,6 +25,9 @@ import {BaiduMapModule} from 'angular2-baidu-map';
 import {HashLocationStrategy, LocationStrategy, registerLocaleData} from '@angular/common';
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import zh from '@angular/common/locales/zh';
+import { TestPageComponent } from './test-page/test-page.component';
+import {NgxEchartsModule} from "ngx-echarts";
+
 
 registerLocaleData(zh);
 
@@ -35,7 +38,8 @@ registerLocaleData(zh);
     AppComponent,
     LoginComponent,
     MainComponent,
-    NotFound404Component
+    NotFound404Component,
+    TestPageComponent
   ],
   imports: [
     BrowserModule,
@@ -54,8 +58,9 @@ registerLocaleData(zh);
     MatListModule,
     AngularFontAwesomeModule,
     FormsModule,
-    BaiduMapModule,
-    NgZorroAntdModule
+    BaiduMapModule.forRoot({ak: 'bDCh2N15YYodpt1wns4YPC7XFynjDx60'}),
+    NgZorroAntdModule,
+    NgxEchartsModule
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},

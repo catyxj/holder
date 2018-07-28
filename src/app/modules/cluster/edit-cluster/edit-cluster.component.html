@@ -1,0 +1,24 @@
+<div class="modal-header">
+  <h4 class="modal-title">修改集群</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('close')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+
+  <div class="input-group">
+    <span class="input-group-prepend">
+      <span class="input-group-text">
+        集群名称
+      </span>
+    </span>
+    <input type="text" [(ngModel)]="name" class="form-control">
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-info" (click)="save()">保存</button>
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取消</button>
+</div>

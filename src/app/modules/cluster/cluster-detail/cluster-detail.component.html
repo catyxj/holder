@@ -54,7 +54,7 @@
             查看
           </a>
           <button class="btn btn-danger btn-sm ml-2" title="从集群中移除设备" (click)="delete(eq.Uid)">
-            删除
+            移除
           </button>
         </td>
       </tr>
@@ -65,13 +65,11 @@
 
   <div>
 
-
     <div class="pull-left">
       <button class="btn btn-info" (click)="deleteG()">
-        批量删除
+        批量移除
       </button>
     </div>
-
 
     <ngb-pagination class="pull-right"
                     [collectionSize]="totalItems"

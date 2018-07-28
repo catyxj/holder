@@ -13,27 +13,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
   boilers: any = [];
   boiler: any;
   page = 1;
-  pageSize = 10;
+  pageSize = 4;
   totalItems = 0;
   search: string;
+  socket: any;
+
 
   constructor(private boilerService: BoilerService,
               private boilerWsService: BoilerSocketService) { }
 
   ngOnInit() {
     let message = {
-      uid: 'e9a7bd78-aad3-4950-b90c-da9561208622'
+      page: this.page,
+      search: this.search
     };
-    const wsUrl = `ws://${window.location.host}/equipment_instant`;
-    this.boilerWsService.creatSocket(wsUrl, JSON.stringify(message))
-      .subscribe(
-        data => console.log(data),
-        err => console.log(err),
-        () => console.log('ws结束')
-      );
-    // this.boilerWsService.sendMessage('680001');
-    // this.getBoilers();
-
+    this.getBoilers(message);
   }
 
   sendMessage(message) {
@@ -41,34 +35,81 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
 
-  getBoilers(): void {
+  getBoilers(message): void {
+
+    const wsUrl = `ws://${window.location.host}/equipment_`;
+    /*this.socket = this.boilerWsService.creatSocket(wsUrl, message)
+      .subscribe(
+        data => {
+          console.log(data);
+          let boilers = JSON.parse(data);
+          console.log(boilers);
+        },
+        err => console.log(err),
+        () => console.log('ws结束')
+      );*/
+
     this.boilerService.getBoilers(this.page, this.pageSize, this.search)
       .subscribe(data => {
-        this.boilers = data.params.slice(0, 4);
+        this.boilers = data.params;
         this.totalItems = data.counts;
+        this.refreshData();
       });
   }
 
-  /*getBoiler(id): void {
-    this.boilerService.getBoiler(id)
-      .subscribe(boiler => this.boiler = boiler);
-  }*/
 
-  pageChange() {
+  refreshData() {
+    for (let i = 0; i < this.boilers.length; i++) {
+      let bo = this.boilers[i];
+      if (!bo.imageUrl) {
+        bo.imgUrl = 'assets/images/no_image.png';
+      }
+
+      if (bo.Online === true) {
+        bo.online = '终端在线';
+        if (bo.IsBurning === true) {
+          bo.isBurning = '设备运行中';
+        } else {
+          bo.isBurning = '设备未运行';
+        }
+        if (bo.Warning === true) {
+          bo.warning = '有告警';
+        } else {
+          bo.warning = '无告警';
+        }
+        if (bo.Malfunction === true) {
+          bo.malfunction = '有故障';
+        } else {
+          bo.malfunction = '无故障';
+        }
+      } else {
+        bo.online = '终端离线';
+        bo.isBurning = '设备未运行';
+        bo.warning = '无告警';
+        bo.malfunction = '无故障';
+      }
+    }
+  }
+
+
+  // 页码变化
+  pageChange(): void {
     this.sendMessage({page: this.page});
   }
 
-
-  btn1() {
-    this.sendMessage({uid: 'e9a7bd78-aad3-4950-b90c-da9561208622'});
+  // 搜索
+  searchChange() {
+    this.page = 1;
+    this.sendMessage({page: 1, search: this.search});
+    this.pageChange();
   }
 
-  btn2() {
-    this.sendMessage({uid: '6d4112a4-fec8-4689-9888-94b8b0d1535b'});
+
+  ngOnDestroy() {
+    console.log('closePage');
+    // this.socket.unsubscribe();
+    // this.boilerWsService.closeSocket();
   }
-
-
-  ngOnDestroy() { console.log(`onDestroy`); }
 
 
 }

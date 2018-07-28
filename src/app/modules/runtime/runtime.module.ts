@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { RuntimeDashboardComponent } from './dashboard/dashboard.component';
 import { NgxEchartsModule } from 'ngx-echarts';
+import {RuntimeRoutingModule} from "./runtime-routing.module";
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({
   imports: [
     CommonModule,
-    NgxEchartsModule
+    NgxEchartsModule,
+    RouterModule.forChild(RuntimeRoutingModule)
   ],
   declarations: [
-    DashboardComponent
+    RuntimeDashboardComponent
   ]
 })
 export class RuntimeModule { }

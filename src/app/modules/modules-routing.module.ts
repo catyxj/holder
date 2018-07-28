@@ -25,6 +25,15 @@ import {MessagesComponent} from './terminal/messages/messages.component';
 import {ClusterMainComponent} from './cluster/cluster-main/cluster-main.component';
 import {ClusterListComponent} from "./cluster/cluster-list/cluster-list.component";
 import {ClusterDetailComponent} from "./cluster/cluster-detail/cluster-detail.component";
+import {TemplateMainComponent} from "./template/template-main/template-main.component";
+import {TemplateListComponent} from "./template/template-list/template-list.component";
+import {EditTempComponent} from "./template/edit-temp/edit-temp.component";
+import {AlarmMainComponent} from "./alarm/alarm-main/alarm-main.component";
+import {CurrentComponent} from "./alarm/current/current.component";
+import {HistoryComponent} from "./alarm/history/history.component";
+import {MapGeneralComponent} from "./monitor/map-general/map-general.component";
+import {MapBatchComponent} from "./monitor/map-batch/map-batch.component";
+import {RuntimeDashboardComponent} from "./runtime/dashboard/dashboard.component";
 
 
 export const ModulesRoutingModule = [
@@ -49,7 +58,18 @@ export const ModulesRoutingModule = [
           },
           {
             path: 'map',
-            component: MapComponent
+            component: MapComponent,
+            children: [
+              { path: '', redirectTo: 'general', pathMatch: 'full' },
+              {
+                path: 'general',
+                component: MapGeneralComponent
+              },
+              {
+                path: 'batch',
+                component: MapBatchComponent
+              }
+            ]
           }
         ]
       },
@@ -70,7 +90,14 @@ export const ModulesRoutingModule = [
       },
       {
         path: 'runtime',
-        component: RuntimeMainComponent
+        component: RuntimeMainComponent,
+        children: [
+          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+          {
+            path: 'dashboard',
+            component: RuntimeDashboardComponent
+          }
+        ]
       },
       {
         path: 'organization',
@@ -132,8 +159,37 @@ export const ModulesRoutingModule = [
             component: ClusterDetailComponent
           }
         ]
+      },
+      {
+        path: 'template',
+        component: TemplateMainComponent,
+        children: [
+          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+          {
+            path: 'dashboard',
+            component: TemplateListComponent
+          },
+          {
+            path: 'edit/:uid/:name',
+            component: EditTempComponent
+          }
+        ]
+      },
+      {
+        path: 'alarm',
+        component: AlarmMainComponent,
+        children: [
+          { path: '', redirectTo: 'current', pathMatch: 'full' },
+          {
+            path: 'current',
+            component: CurrentComponent
+          },
+          {
+            path: 'history',
+            component: HistoryComponent
+          }
+        ]
       }
-
     ]
   }
 ];

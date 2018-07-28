@@ -9,19 +9,26 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MapComponent } from './map/map.component';
 import { MonitorRoutingModule } from './monitor-routing.module';
 import {BaiduMapModule} from 'angular2-baidu-map';
+import {FormsModule} from "@angular/forms";
+import { MapGeneralComponent } from './map-general/map-general.component';
+import { MapBatchComponent } from './map-batch/map-batch.component';
+import {NgZorroAntdModule} from "ng-zorro-antd";
 
 
 @NgModule({
   imports: [
     CommonModule,
     NgbModule,
-    RouterModule.forChild(MonitorRoutingModule),
-    BaiduMapModule.forRoot({ak: 'bDCh2N15YYodpt1wns4YPC7XFynjDx60'})
+    FormsModule,
+    NgZorroAntdModule,
+    RouterModule.forChild(MonitorRoutingModule)
   ],
   declarations: [
     ListComponent,
     DashboardComponent,
-    MapComponent
+    MapComponent,
+    MapGeneralComponent,
+    MapBatchComponent
   ],
   exports: [
     // RouterModule

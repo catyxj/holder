@@ -770,7 +770,11 @@
       "Runtime": null,
       "Calculate": null,
       "Maintenance": null,
-      "Subscribers": null
+      "Subscribers": null,
+      "Online": true,
+      "IsBurning" :false,
+      "Warning": true,
+      "Malfunction": false
     },
     {
       "Uid": "f2f8ea60-b2cd-4490-9ffe-00e096b110f0",
@@ -1179,7 +1183,11 @@
       "Runtime": null,
       "Calculate": null,
       "Maintenance": null,
-      "Subscribers": null
+      "Subscribers": null,
+      "Online": true,
+      "IsBurning" :false,
+      "Warning": true,
+      "Malfunction": false
     },
     {
       "Uid": "f2f8ea60-b2cd-4490-9ffe-00e096bsdfaf",
@@ -1588,7 +1596,11 @@
       "Runtime": null,
       "Calculate": null,
       "Maintenance": null,
-      "Subscribers": null
+      "Subscribers": null,
+      "Online": true,
+      "IsBurning" :true,
+      "Warning": true,
+      "Malfunction": false
     },
     {
       "Uid": "f2f8ea60-b2cd-4490-9ffe-00e0asdfa",
@@ -1997,7 +2009,11 @@
       "Runtime": null,
       "Calculate": null,
       "Maintenance": null,
-      "Subscribers": null
+      "Subscribers": null,
+      "Online": false,
+      "IsBurning" :false,
+      "Warning": false,
+      "Malfunction": false
     }
   ],
   "counts":65

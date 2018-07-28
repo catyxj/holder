@@ -72,7 +72,7 @@
     {
       "Uid": "f2f8ea60-b2cd-4490-9ffe-00e096bsdfaf",
       "Name": "11334566",
-      "Number": 20,
+      "Count": 20,
       "TerminalsCombined": null,
       "Status": {
         "IsBurning": 0
@@ -82,7 +82,7 @@
     {
       "Uid": "f2f8ea60-b2cd-4490-9ffe-00e0asdfa",
       "Name": "sdfaads",
-      "Number": 20,
+      "Count": 20,
       "TerminalsCombined": null,
       "Status": {
         "IsBurning": 0

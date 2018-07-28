@@ -29,24 +29,33 @@ export class ClusterDetailComponent implements OnInit {
   }
 
   getclusters() {
-    this.equipList = [
+
+    this.clusterService.getClusEquip(this.uid, this.page, this.pageSize, this.search)
+      .subscribe(data => {
+        this.equipList = data.params;
+        this.totalItems = data.counts;
+      });
+    /*this.equipList = [
       {
         Name: '123444',
         Uid: '123465677779997'
       }
-    ];
+    ];*/
   }
 
-
+  // 移除
   delete(uid) {
-    let data = {
-      cluster_uid: this.uid,
-      equipment: [uid]
-    };
-    this.clusterService.deleteEquip(data)
-      .subscribe( () => {
-        this.pageChange();
-      });
+    const cf = confirm(`确认从集群中移除设备（设备本身不会被删除）？`);
+    if (cf === true) {
+      let data = {
+        cluster_uid: this.uid,
+        equipment: [uid]
+      };
+      this.clusterService.deleteEquip(data)
+        .subscribe( () => {
+          this.pageChange();
+        });
+    }
   }
 
   // 批量选择
@@ -82,7 +91,7 @@ export class ClusterDetailComponent implements OnInit {
 
   // 批量删除
   deleteG() {
-    const cf = confirm(`确认删除选中设备 ？`);
+    const cf = confirm(`确认移除选中设备（设备本身不会被删除）？`);
     if (cf === true) {
       let data = {
         cluster_uid: this.uid,

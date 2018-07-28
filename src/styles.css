@@ -231,6 +231,10 @@ nav a{
 .c-radio.c-radio-rounded span {
   border-radius: 500px;
 }
+.c-checkbox label{
+  margin-bottom: 0;
+}
+
 /* override for radio */
 .c-radio span {
   border-radius: 500px;

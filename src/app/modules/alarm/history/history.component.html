@@ -1,0 +1,70 @@
+
+<div class="">
+  <div class="mat-card-title" style="padding-top:10px; ">
+
+    <div class="pull-right flex flex-row">
+      <div class="input-group mb-2">
+        <input type="text" class="form-control" placeholder="请输入参数名称" [(ngModel)]="search" >
+        <div class="input-group-append" (click)="searchChange()">
+          <button class="btn btn-info" type="button"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div>
+    <table class="table table-bordered">
+      <thead class="bg_light_primary">
+
+      <th> 序号 </th>
+      <th> 告警设备 </th>
+      <th> 监测参数 </th>
+      <th> 告警时间 </th>
+      <th> 告警信息 </th>
+
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of alarms; let i = index">
+
+        <td> {{ i+1 }}  </td>
+        <td> {{ data.Equipment?.Name }}  </td>
+        <td> {{ data.Parameter__Name }} </td>
+        <td>
+          {{ data.StartText }} - {{ data.EndText }}
+          <br>
+          {{ data.DueText }}
+        </td>
+        <td> {{ data.Description }} </td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div>
+
+    <div class="pull-left">
+
+    </div>
+
+    <ngb-pagination class="pull-right"
+                    [collectionSize]="totalItems"
+                    [pageSize]="pageSize" [(page)]="page"
+                    [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                    (pageChange)="pageChange()">
+
+    </ngb-pagination>
+    <div class="pull-right mr-3">
+      <select [(ngModel)]="pageSize" class="form-control" (change)="pageSizeChange()">
+        <option value="10">10</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
+    <div class="pull-right mr-3" style="line-height: 33px;"> 共 {{totalItems}} 项</div>
+  </div>
+
+</div>
+

@@ -1,24 +1,67 @@
-<div class="boiler_list">
-  <table class="table table-bordered table-striped">
-    <thead>
-      <th>编号</th>
-      <th>名称</th>
-      <th>燃料</th>
-      <th>22</th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let boiler of boilers">
-        <td> {{ boiler.id }} </td>
-        <td> {{ boiler.name }} </td>
-        <td> {{ boiler.fuel }} </td>
-        <td> {{ boiler.running }} </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="">
+  <div class="clearfix" style="padding: 20px 0; ">
+    <div class="pull-right flex flex-row">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="请输入设备名称" [(ngModel)]="search" >
+        <div class="input-group-append" (click)="searchChange()">
+          <button class="btn btn-info" type="button"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+      <div class="ml-3" >
+
+      </div>
+
+    </div>
+
+  </div>
 
   <div>
-    <div class="pull-left"> 共 {{totalItems}} 项</div>
-    <ngb-pagination class="pull-right" [collectionSize]="totalItems" [pageSize]="10" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+    <table class="table table-bordered">
+      <thead class="bg_light_primary">
+      <th> 序号 </th>
+      <th> 设备名称 </th>
+      <th> 终端状态 </th>
+      <th> 运行状态 </th>
+      <th> 告警状态 </th>
+      <th> 故障状态 </th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of boilers; let i = index">
+
+        <td> {{ i+1 }}  </td>
+        <td> {{ data.Name }}  </td>
+        <td [ngClass]="{'text-info':data.Online}"> {{ data.online }} </td>
+        <td [ngClass]="{'text-info':data.IsBurning}">
+            {{data.isBurning}}
+        </td>
+        <td [ngClass]="{'text-danger':data.Warning}">
+          {{data.warning}}
+        </td>
+        <td>
+          {{data.malfunction}}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+
+    <ngb-pagination class="pull-right"
+                    [collectionSize]="totalItems"
+                    [pageSize]="pageSize" [(page)]="page"
+                    [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                    (pageChange)="pageChange()">
+
+    </ngb-pagination>
+    <div class="pull-right mr-3">
+      <select [(ngModel)]="pageSize" class="form-control" (change)="pageSizeChange()">
+        <option value="10">10</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
+    <div class="pull-right mr-3" style="line-height: 33px;"> 共 {{totalItems}} 项</div>
   </div>
 
 </div>

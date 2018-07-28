@@ -1,0 +1,35 @@
+
+.table{
+  margin-bottom: 0;
+}
+
+.table input{
+  border: none;
+}
+.table tr td{
+  padding: 0;
+  height: 36px;
+}
+
+.table tr td.chanel_label{
+  padding:0.75rem;
+}
+
+.table select{
+  border: none;
+}
+
+.mat-button, .mat-flat-button, .mat-icon-button, .mat-stroked-button{
+  min-width: 50px;
+}
+
+mat-grid-tile {
+  cursor: pointer;
+}
+mat-grid-tile:hover{
+  background-color: #cce5ff;
+}
+
+h6.text-muted{
+  text-align: center;
+}

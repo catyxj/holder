@@ -1,0 +1,33 @@
+<div class="modal-header">
+  <h3 class="modal-title">设备基本信息设置</h3>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('close')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body" >
+
+  <div class="row">
+    <div class="col-12">
+      <div class="input-group">
+        <span class="input-group-prepend">
+          <span class="input-group-text">
+            选择集群
+          </span>
+        </span>
+        <nz-select nzShowSearch nzPlaceHolder="选择要加入的集群" [(ngModel)]="cluster" style="width: 390px;">
+          <nz-option *ngFor="let option of clusters" [nzLabel]="option.Name" [nzValue]="option.Uid"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-info" [disabled]="!cluster" (click)="save()">
+    <span class="">保存</span>
+  </button>
+  <button class="btn btn-default" type="button" (click)="activeModal.dismiss('close')">取消</button>
+</div>
+

@@ -60,11 +60,11 @@ export class TerminalListComponent implements OnInit {
   // 批量选择
   checkDel(terminal): void {
     if ( terminal.checkDelete === true) {
-      this.deleteList.push(terminal.Uid);
+      this.deleteList.push(terminal.TerminalCode.toString());
     } else {
       for (let i = 0; i < this.deleteList.length; i++){
         let dl = this.deleteList[i];
-        if (dl === terminal.Uid) {
+        if (dl === terminal.TerminalCode.toString()) {
           this.deleteList.splice(i, 1);
         }
       }
@@ -77,7 +77,7 @@ export class TerminalListComponent implements OnInit {
     if (this.allDelete === true) {
       for (let i = 0; i < this.terminals.length; i++) {
         this.terminals[i].checkDelete = true;
-        this.deleteList.push(this.terminals[i].Uid);
+        this.deleteList.push(this.terminals[i].TerminalCode.toString());
       }
     } else {
       for (let i = 0; i < this.terminals.length; i++) {
@@ -155,8 +155,12 @@ export class TerminalListComponent implements OnInit {
 
   // 批量配置模态框
   groupConfig() {
-    const modalRef = this.modalService.open(GroupConfigComponent, { size: 'lg' });
-    // modalRef.componentInstance.currentUser = this.user;
+    if (this.deleteList.length <= 0) {
+      alert('未选择任何终端,请先选择终端');
+      return;
+    }
+    const modalRef = this.modalService.open(GroupConfigComponent);
+    modalRef.componentInstance.checkList = this.deleteList;
     modalRef.result.then((result) => {
       // this.closeResult = `Closed with: ${result}`;
       if (result === 'ok') {

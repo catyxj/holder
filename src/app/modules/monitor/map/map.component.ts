@@ -19,6 +19,10 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+
+  initBMap() {
     // 百度地图
     // 配置地图, 参考百度地图api
     this.opts = {
@@ -83,13 +87,10 @@ export class MapComponent implements OnInit {
         }
       }
     ];
+  }
 
 
-
-
-
-
-
+  initAMap() {
     let addr: { lng: Number, lat: Number, content: string}[];
     addr = [
       {lng: 120.19,
@@ -170,12 +171,6 @@ export class MapComponent implements OnInit {
 
 
     });
-
-
-
   }
-
-
-
 
 }

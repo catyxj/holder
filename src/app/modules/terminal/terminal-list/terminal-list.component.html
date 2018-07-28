@@ -17,11 +17,6 @@
         </button>
       </div>
 
-      <div class="ml-3" >
-        <button class="btn btn-info" (click)="groupConfig()">
-          批量配置
-        </button>
-      </div>
 
       <div class="ml-3" >
         <button class="btn btn-info" (click)="groupAdd()">
@@ -70,12 +65,10 @@
         </td>
 
         <td>
-          <span *ngFor="let eq of ter.Equipment">
-            {{ eq.Name }}
-          </span>
+          {{ ter.Equipment }}
         </td>
         <td> {{ ter.TermVer }} / {{ ter.PlatVer }} <br/> {{ ter.confStatus }} </td>
-        <td> {{ ter.IssuedTermTempStatus?.Template?.Name || "默认配置" }} </td>
+        <td> {{ ter.Template?.Name || "默认配置" }} </td>
         <td>
           <a [routerLink]="['/admin/terminal/messages', ter.TerminalCode]" class="btn btn-info btn-sm" style="color: #ffffff;">调试</a>
           <button class="btn btn-info btn-sm ml-2" (click)="editTerminal(ter)"> 关联 </button>
@@ -93,6 +86,9 @@
     <div class="pull-left">
       <button class="btn btn-info" (click)="deleteG()">
         批量删除
+      </button>
+      <button class="btn btn-info ml-3" (click)="groupConfig()">
+        批量配置
       </button>
     </div>
 

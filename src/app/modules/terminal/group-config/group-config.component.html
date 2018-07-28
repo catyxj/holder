@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h3 class="modal-title">
-    批量添加终端
+    批量配置终端
   </h3>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('close')">
     <span aria-hidden="true">&times;</span>
@@ -9,7 +9,33 @@
 
 <div class="modal-body" >
 
-  <ul>
+  <div class="input-group">
+    <span class="input-group-prepend">
+      <span class="input-group-text">
+        选择模板
+      </span>
+    </span>
+    <nz-select nzShowSearch nzPlaceHolder="" [(ngModel)]="template" style="width: 390px;">
+      <nz-option *ngFor="let option of templates" [nzLabel]="option.Name" [nzValue]="option.Uid"></nz-option>
+    </nz-select>
+  </div>
+
+  <!--<select [(ngModel)]="template" class="form-control">
+    <option *ngFor="let tem of templates" [value]="tem.Uid">
+      {{ tem.Name }}
+    </option>
+  </select>-->
+
+  <div class="mt-lg-3">
+    <a class="text-muted" (click)="showData=!showData" style="font-size: 12px;"> 查看已选终端 </a>
+    <div *ngIf="showData" style="border: 1px solid #eeeeee; padding: 10px; margin-top: 10px;">
+    <span *ngFor="let data of checkList" class="mr-2 text-muted" style="font-size: 12px;">
+      {{data}}
+    </span>
+    </div>
+  </div>
+
+  <!--<ul>
     <li *ngFor="let item of terList; let i = index" class="flex form-group">
       <div class="input-group">
           <span class="input-group-prepend">
@@ -36,8 +62,8 @@
               选择模板
             </span>
           </span>
-        <!--<input type="text" class="form-control" name="end"-->
-               <!--[(ngModel)]="item.template"  required>-->
+        &lt;!&ndash;<input type="text" class="form-control" name="end"&ndash;&gt;
+               &lt;!&ndash;[(ngModel)]="item.template"  required>&ndash;&gt;
         <select [(ngModel)]="item.template" class="form-control">
           <option *ngFor="let tem of templates" [value]="tem.Uid">
             {{ tem.Name }}
@@ -56,12 +82,12 @@
           class="btn btn-info btn-block">
     <i class="fa fa-plus-circle"></i>
     新增终端
-  </button>
+  </button>-->
 
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn-info" (click)="save()">
+  <button type="button" class="btn btn-info" (click)="save()" [disabled]="!template">
     <span class="">保存</span>
   </button>
   <button class="btn btn-default" type="button" (click)="activeModal.dismiss('close')">取消</button>

@@ -1,9 +1,7 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {TerminalService} from '../../../shared/terminal.service';
-import {FormControl} from "@angular/forms";
-import {map, startWith} from "rxjs/internal/operators";
-import {Observable} from "rxjs/index";
+import {TemplateService} from "../../../shared/template.service";
 
 @Component({
   selector: 'app-group-config',
@@ -13,34 +11,41 @@ import {Observable} from "rxjs/index";
 })
 export class GroupConfigComponent implements OnInit {
 
-  public terList;
+  @Input()
+  checkList;
+
+  public template;
   public templates;
+  public showData = false;
 
   constructor(public activeModal: NgbActiveModal,
-              private terminalService: TerminalService) { }
+              private terminalService: TerminalService,
+              private templateService:  TemplateService) { }
 
   ngOnInit() {
-    this.terList = [
+    /*this.terList = [
       {
         start: null,
         end: null,
         template: ''
       }
-    ];
+    ];*/
+
+    this.template = '';
     this.getTemplates();
 
   }
 
-
+  // 获取模板列表--下拉
   getTemplates() {
-    this.terminalService.getTemplate()
+    this.templateService.getTemplateAll()
       .subscribe(tem => {
         this.templates = tem;
-        console.log(this.templates);
+        // console.log(this.templates);
       });
   }
 
-  addTer() {
+  /*addTer() {
     this.terList.push({
       start: null,
       end: null,
@@ -50,10 +55,10 @@ export class GroupConfigComponent implements OnInit {
 
   removeTer(index) {
     this.terList.splice(index, 1);
-  }
+  }*/
 
   save() {
-    let item = [];
+    /*let item = [];
     for (let i = 0; i < this.terList.length; i++) {
       if (!this.terList[i].start || !this.terList[i].end || !this.terList[i].template) {
         continue;
@@ -66,6 +71,17 @@ export class GroupConfigComponent implements OnInit {
     }
 
     this.terminalService.groupConfig(item)
+      .subscribe(val => {
+        alert('发送成功，正在配置');
+        this.activeModal.close('ok');
+      });*/
+
+    let data = {
+      terminals: this.checkList,
+      template: this.template
+    };
+
+    this.terminalService.groupConfig(data)
       .subscribe(val => {
         alert('发送成功，正在配置');
         this.activeModal.close('ok');

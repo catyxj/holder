@@ -18,13 +18,13 @@ const httpOptions = {
 })
 export class BoilerService {
 
-  // private boilersUrl = 'assets/server/boiler_list.json';
-  // private templatesUrl = 'assets/server/boiler_template_list.json';
-  // private boilerUrl = 'assets/server/boiler.json';
+  private boilersUrl = 'assets/server/boiler_list.json';
+  private templatesUrl = 'assets/server/boiler_template_list.json';
+  private boilerUrl = 'assets/server/boiler.json';
 
-  private boilersUrl = '/equipment_list';
-  private templatesUrl = '/equipment_template';
-  private boilerUrl = '/equipment_detail';
+  // private boilersUrl = '/equipment_list';
+  // private templatesUrl = '/equipment_template';
+  // private boilerUrl = '/equipment_detail';
 
   constructor(private http: HttpClient) { }
 
@@ -49,6 +49,14 @@ export class BoilerService {
   // 删除
   deleteBoiler(uid): Observable<any> {
     return this.http.post('/equipment_delete/', uid, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 批量添加集群
+  addCluster(boiler): Observable<any> {
+    return this.http.post('/equipment_batch_cluster', boiler, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

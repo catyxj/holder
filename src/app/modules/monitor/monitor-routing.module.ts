@@ -4,6 +4,8 @@ import { MonitorMainComponent } from './monitor-main/monitor-main.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {ListComponent} from './list/list.component';
 import {MapComponent} from './map/map.component';
+import {MapGeneralComponent} from "./map-general/map-general.component";
+import {MapBatchComponent} from "./map-batch/map-batch.component";
 
 
 export const MonitorRoutingModule = [
@@ -22,7 +24,18 @@ export const MonitorRoutingModule = [
       },
       {
         path: 'map',
-        component: MapComponent
+        component: MapComponent,
+        children: [
+          { path: '', redirectTo: 'general', pathMatch: 'full' },
+          {
+            path: 'general',
+            component: MapGeneralComponent
+          },
+          {
+            path: 'batch',
+            component: MapBatchComponent
+          }
+        ]
       }
     ]
   }

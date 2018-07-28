@@ -8,6 +8,7 @@ import {FormsModule} from "@angular/forms";
 import {NgZorroAntdModule} from "ng-zorro-antd";
 import { ClusterDetailComponent } from './cluster-detail/cluster-detail.component';
 import { AddClusterComponent } from './add-cluster/add-cluster.component';
+import { EditClusterComponent } from './edit-cluster/edit-cluster.component';
 
 
 @NgModule({
@@ -21,10 +22,12 @@ import { AddClusterComponent } from './add-cluster/add-cluster.component';
   declarations: [
     ClusterListComponent,
     ClusterDetailComponent,
-    AddClusterComponent
+    AddClusterComponent,
+    EditClusterComponent
   ],
   entryComponents: [
-    AddClusterComponent
+    AddClusterComponent,
+    EditClusterComponent
   ]
 })
 export class ClusterModule { }
