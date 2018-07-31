@@ -1,12 +1,5 @@
-/* DashboardComponent's private CSS styles */
-/*[class*='col-'] {
-  float: left;
-  padding-right: 20px;
-  padding-bottom: 20px;
-}
-[class*='col-']:last-of-type {
-  padding-right: 0;
-}*/
+
+
 a {
   text-decoration: none;
 }
@@ -16,12 +9,11 @@ a {
   box-sizing: border-box;
 }
 
-/*.grid {
-  margin: 0;
+.grid {
+
 }
-.col-1-4 {
-  width: 50%;
-}*/
+
+
 .module {
   padding: 15px;
   border: 1px solid #eeeeee;
@@ -31,29 +23,6 @@ a {
 .module a{
   color: #607d8b;
 }
-
-/*.grid-pad {
-  padding: 10px 0;
-}*/
-/*.grid-pad > [class*='col-']:last-of-type {
-  padding-right: 20px;
-}*/
-@media (max-width: 600px) {
-  .module {
-    font-size: 10px;
-    max-height: 75px; }
-}
-@media (max-width: 1024px) {
-  .grid {
-    margin: 0;
-  }
-  .module {
-    min-width: 60px;
-  }
-}
-
-
-
 
 
 .module .status_content{
@@ -110,7 +79,3 @@ a {
   -webkit-transform: scale(1.2);
   -webkit-transform: all 1s ease 0s;
 }
-
-
-
-

@@ -34,6 +34,10 @@ import {HistoryComponent} from "./alarm/history/history.component";
 import {MapGeneralComponent} from "./monitor/map-general/map-general.component";
 import {MapBatchComponent} from "./monitor/map-batch/map-batch.component";
 import {RuntimeDashboardComponent} from "./runtime/dashboard/dashboard.component";
+import {CluEquiplistComponent} from "./monitor/clu-equiplist/clu-equiplist.component";
+import {ClusterDashboardComponent} from "./monitor/cluster-dashboard/cluster-dashboard.component";
+import {OperateComponent} from "./runtime/operate/operate.component";
+import {RuntimeHistoryComponent} from "./runtime/history/history.component";
 
 
 export const ModulesRoutingModule = [
@@ -70,6 +74,14 @@ export const ModulesRoutingModule = [
                 component: MapBatchComponent
               }
             ]
+          },
+          {
+            path: 'clusters',
+            component: ClusterDashboardComponent
+          },
+          {
+            path: 'cluster/:uid',
+            component: CluEquiplistComponent
           }
         ]
       },
@@ -96,6 +108,14 @@ export const ModulesRoutingModule = [
           {
             path: 'dashboard',
             component: RuntimeDashboardComponent
+          },
+          {
+            path: 'operate',
+            component: OperateComponent
+          },
+          {
+            path: 'history',
+            component: RuntimeHistoryComponent
           }
         ]
       },

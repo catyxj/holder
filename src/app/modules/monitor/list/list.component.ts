@@ -10,8 +10,10 @@ import {BoilerService} from '../../../shared/boiler.service';
 export class ListComponent implements OnInit {
   boilers: any = [];
   page = 1;
+  pageSize = 10;
   totalItems = 0;
   search: string;
+  checkValue = 2;
 
   constructor(private boilerService: BoilerService) { }
 

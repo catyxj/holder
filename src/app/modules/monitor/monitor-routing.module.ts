@@ -6,11 +6,13 @@ import {ListComponent} from './list/list.component';
 import {MapComponent} from './map/map.component';
 import {MapGeneralComponent} from "./map-general/map-general.component";
 import {MapBatchComponent} from "./map-batch/map-batch.component";
+import {ClusterDashboardComponent} from "./cluster-dashboard/cluster-dashboard.component";
+import {CluEquiplistComponent} from "./clu-equiplist/clu-equiplist.component";
 
 
 export const MonitorRoutingModule = [
   {
-    path: 'monitor',
+    path: '',
     component: MonitorMainComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -36,6 +38,14 @@ export const MonitorRoutingModule = [
             component: MapBatchComponent
           }
         ]
+      },
+      {
+        path: 'clusters',
+        component: ClusterDashboardComponent
+      },
+      {
+        path: 'cluster/:uid',
+        component: CluEquiplistComponent
       }
     ]
   }

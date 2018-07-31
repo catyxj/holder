@@ -1,19 +1,6 @@
 <div class="">
   <div class="clearfix" style="padding: 15px 0; ">
     <div class="pull-right flex flex-row">
-
-      <div class="btn-group mr-2">
-        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 2, 'btn-info': checkValue === 2}" (click)="checkValue = 2">
-          全部
-        </button>
-        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 1, 'btn-info': checkValue === 1}" (click)="checkValue = 1">
-          运行
-        </button>
-        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 0, 'btn-info': checkValue === 0}" (click)="checkValue = 0">
-          未运行
-        </button>
-      </div>
-
       <div class="input-group">
         <input type="text" class="form-control" placeholder="请输入设备名称" [(ngModel)]="search" >
         <div class="input-group-append" (click)="searchChange()">
@@ -36,13 +23,12 @@
       <th> 故障状态 </th>
       </thead>
       <tbody>
-      <tr *ngFor="let data of boilers; let i = index">
-
+      <tr *ngFor="let data of equips; let i = index">
         <td> {{ i+1 }}  </td>
         <td> {{ data.Name }}  </td>
         <td [ngClass]="{'text-info':data.Online}"> {{ data.online }} </td>
         <td [ngClass]="{'text-info':data.IsBurning}">
-            {{data.isBurning}}
+          {{data.isBurning}}
         </td>
         <td [ngClass]="{'text-danger':data.Warning}">
           {{data.warning}}

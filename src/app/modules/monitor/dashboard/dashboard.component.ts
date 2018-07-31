@@ -12,17 +12,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   boilers: any = [];
   boiler: any;
-  page = 1;
+  page;
   pageSize = 4;
-  totalItems = 0;
+  totalItems;
   search: string;
   socket: any;
+  checkValue = 2;
 
 
   constructor(private boilerService: BoilerService,
               private boilerWsService: BoilerSocketService) { }
 
   ngOnInit() {
+    this.page = 1;
+    this.totalItems = 0;
     let message = {
       page: this.page,
       search: this.search
@@ -37,8 +40,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getBoilers(message): void {
 
-    const wsUrl = `ws://${window.location.host}/equipment_`;
-    /*this.socket = this.boilerWsService.creatSocket(wsUrl, message)
+    const wsUrl = `ws://${window.location.host}/equipment_show`;
+    this.socket = this.boilerWsService.creatSocket(wsUrl, message)
       .subscribe(
         data => {
           console.log(data);
@@ -47,14 +50,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
         },
         err => console.log(err),
         () => console.log('ws结束')
-      );*/
+      );
 
-    this.boilerService.getBoilers(this.page, this.pageSize, this.search)
+    /*this.boilerService.getBoilers(this.page, this.pageSize, this.search)
       .subscribe(data => {
         this.boilers = data.params;
         this.totalItems = data.counts;
         this.refreshData();
-      });
+      });*/
   }
 
 
@@ -65,7 +68,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         bo.imgUrl = 'assets/images/no_image.png';
       }
 
-      if (bo.Online === true) {
+      if (bo.TermStatus === 1) {
         bo.online = '终端在线';
         if (bo.IsBurning === true) {
           bo.isBurning = '设备运行中';
@@ -82,8 +85,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
         } else {
           bo.malfunction = '无故障';
         }
-      } else {
+      } else if (bo.TermStatus === 0) {
         bo.online = '终端离线';
+        bo.isBurning = '设备未运行';
+        bo.warning = '无告警';
+        bo.malfunction = '无故障';
+      } else {
+        bo.online = '终端未绑定';
         bo.isBurning = '设备未运行';
         bo.warning = '无告警';
         bo.malfunction = '无故障';
@@ -106,7 +114,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    console.log('closePage');
     // this.socket.unsubscribe();
     // this.boilerWsService.closeSocket();
   }

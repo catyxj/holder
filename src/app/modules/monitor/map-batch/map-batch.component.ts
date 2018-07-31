@@ -11,7 +11,7 @@ declare var BMAP_STATUS_SUCCESS: any;
 export class MapBatchComponent implements OnInit {
 
   private map;
-  private markers = [];
+  public markers = [];
   public search;
   public page = 1;
   public pageSize = 10;

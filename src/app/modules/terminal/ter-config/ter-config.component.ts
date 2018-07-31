@@ -379,7 +379,7 @@ export class TerConfigComponent implements OnInit {
     modalRef.componentInstance.currentData = data;
     modalRef.result.then((result) => {
       data.alarm = result;
-      console.log(result, data);
+      console.log(result, data, this.analogueList, this.switchList, this.rangeList);
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       console.log(reason);

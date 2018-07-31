@@ -24,7 +24,7 @@ export class AlarmRuleComponent implements OnInit {
       {id: 0, name: '＜'}, {id: 1, name: '＞'}
     ];
 
-    if (this.currentData.alarm.length <= 0) {
+    if (!this.currentData.alarm) {
       this.alarm = [
         {
           compareValue: 0,
@@ -60,7 +60,7 @@ export class AlarmRuleComponent implements OnInit {
   save() {
     let data = [];
     for (let i = 0; i < this.alarm.length; i++) {
-      if (!this.alarm[i].warningValue) {
+      if (!this.alarm[i].warningValue && this.alarm[i].warningValue !== 0 ) {
         continue;
       }
       switch (this.alarm[i].compareValue) {
@@ -74,11 +74,11 @@ export class AlarmRuleComponent implements OnInit {
           break;
       }
       data.push({
-        warningValue: this.alarm[i].warningValue,
-        description: this.alarm[i].description,
-        priority: this.alarm[i].priority,
+        AlarmValue: this.alarm[i].warningValue,
+        Description: this.alarm[i].description,
+        Priority: this.alarm[i].priority,
         // normalValue: this.alarm[i].normalValue,
-        compareValue: this.alarm[i].compareValue
+        Scope: this.alarm[i].compareValue
       });
     }
 

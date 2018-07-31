@@ -29,11 +29,9 @@
 
         <td> {{ i+1 }}  </td>
         <td> {{ data.Equipment?.Name }}  </td>
-        <td> {{ data.Parameter__Name }} </td>
+        <td> {{ data.ChannelConfig?.Name }} </td>
         <td>
-          {{ data.StartText }} - {{ data.EndText }}
-          <br>
-          {{ data.DueText }}
+          {{ data.StartDate | date: 'MM/dd HH:mm:ss' }} - {{ data.EndDate | date: 'MM/dd HH:mm:ss' }}
         </td>
         <td> {{ data.Description }} </td>
         <td>

@@ -13,6 +13,8 @@ import {FormsModule} from "@angular/forms";
 import { MapGeneralComponent } from './map-general/map-general.component';
 import { MapBatchComponent } from './map-batch/map-batch.component';
 import {NgZorroAntdModule} from "ng-zorro-antd";
+import { ClusterDashboardComponent } from './cluster-dashboard/cluster-dashboard.component';
+import { CluEquiplistComponent } from './clu-equiplist/clu-equiplist.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import {NgZorroAntdModule} from "ng-zorro-antd";
     DashboardComponent,
     MapComponent,
     MapGeneralComponent,
-    MapBatchComponent
+    MapBatchComponent,
+    ClusterDashboardComponent,
+    CluEquiplistComponent
   ],
   exports: [
     // RouterModule

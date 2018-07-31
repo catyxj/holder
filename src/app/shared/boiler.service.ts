@@ -18,13 +18,13 @@ const httpOptions = {
 })
 export class BoilerService {
 
-  private boilersUrl = 'assets/server/boiler_list.json';
-  private templatesUrl = 'assets/server/boiler_template_list.json';
-  private boilerUrl = 'assets/server/boiler.json';
+  // private boilersUrl = 'assets/server/boiler_list.json';
+  // private templatesUrl = 'assets/server/boiler_template_list.json';
+  // private boilerUrl = 'assets/server/boiler.json';
 
-  // private boilersUrl = '/equipment_list';
-  // private templatesUrl = '/equipment_template';
-  // private boilerUrl = '/equipment_detail';
+  private boilersUrl = '/equipment_list';
+  private templatesUrl = '/equipment_template';
+  private boilerUrl = '/equipment_detail';
 
   constructor(private http: HttpClient) { }
 

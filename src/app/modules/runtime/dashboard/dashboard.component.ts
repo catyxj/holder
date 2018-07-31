@@ -34,4 +34,9 @@ export class RuntimeDashboardComponent implements OnInit {
       );
   }
 
+
+  goBack() {
+    window.history.go(-1);
+  }
+
 }

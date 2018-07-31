@@ -15,13 +15,13 @@ const httpOptions = {
 })
 export class AlarmService {
 
-  private currentUrl = 'assets/server/boiler_alarm_list.json';
-  private historyUrl = 'assets/server/boiler_alarm_history_list.json';
-  private detailUrl = 'assets/server/boiler_alarm_detail.json';
+  // private currentUrl = 'assets/server/boiler_alarm_list.json';
+  // private historyUrl = 'assets/server/boiler_alarm_history_list.json';
+  // private detailUrl = 'assets/server/boiler_alarm_detail.json';
 
-  // private currentUrl = '/alarm_list';
-  // private historyUrl = '/alarm_history_list';
-  // private detailUrl = '/boiler_alarm_detail';
+  private currentUrl = '/alarm_list';
+  private historyUrl = '/alarm_history_list';
+  private detailUrl = '/boiler_alarm_detail';
 
   constructor(private http: HttpClient) { }
 

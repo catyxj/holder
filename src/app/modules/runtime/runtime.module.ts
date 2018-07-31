@@ -5,6 +5,8 @@ import { RuntimeDashboardComponent } from './dashboard/dashboard.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import {RuntimeRoutingModule} from "./runtime-routing.module";
 import {RouterModule} from "@angular/router";
+import { OperateComponent } from './operate/operate.component';
+import { RuntimeHistoryComponent } from './history/history.component';
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import {RouterModule} from "@angular/router";
     RouterModule.forChild(RuntimeRoutingModule)
   ],
   declarations: [
-    RuntimeDashboardComponent
+    RuntimeDashboardComponent,
+    OperateComponent,
+    RuntimeHistoryComponent
   ]
 })
 export class RuntimeModule { }

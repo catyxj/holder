@@ -3,8 +3,18 @@
 </div>
 
 <div class="content">
+  <div class="clearfix tab-content">
+    <nav class="pull-right">
+      <a routerLink="/admin/runtime/dashboard" routerLinkActive="active">动画监测</a>
+      <a routerLink="/admin/runtime/operate" routerLinkActive="active">运行参数</a>
+      <a routerLink="/admin/runtime/history" routerLinkActive="active">历史数据</a>
+      <a >维保记录</a>
+    </nav>
+  </div>
+
   <div>
     <router-outlet></router-outlet>
   </div>
 </div>
+
 

@@ -16,6 +16,28 @@
     <input type="text" [(ngModel)]="name" class="form-control">
   </div>
 
+  <div class="row mb-3 mt-lg-3">
+    <div class="col-12">
+      <div class="pull-left" style="width: 200px; height: 120px; overflow: hidden;  border-radius: 4px;">
+        <img src="{{imgUrl}}" title="点击上传图片" style="width: 200px; height: 120px;">
+        <input type="file"  (change)="imgChange($event)" style="position: absolute; left: 0; top: 0; opacity: 0; width: 210px; height: 120px;">
+      </div>
+
+      <div class="pull-left ml-3" style="width: 40%;">
+        <p class="text-muted">
+          请点击左侧图片选择要上传的集群图片，<br/>
+          文件格式请用jpg、png或gif，文件大小不超过200k
+        </p>
+        <p class="text-danger">
+          {{errMes}}
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
 
 <div class="modal-footer">
