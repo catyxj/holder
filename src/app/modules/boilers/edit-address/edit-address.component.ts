@@ -120,16 +120,12 @@ export class EditAddressComponent implements OnInit {
   // 地图
   initMap() {
 
-
   // 创建地图实例
-    let map = new BMap.Map('container');
+    let map = new BMap.Map('address');
     this.map = map;
+    let that = this;
 
   // 创建点坐标
-
-    let point = new BMap.Point(this.address.lng, this.address.lat);
-
-    map.centerAndZoom(point, 15);
 
     if ( this.address.lng === 0 || this.address.lat === 0 ) {
       let that = this;
@@ -137,20 +133,23 @@ export class EditAddressComponent implements OnInit {
       let geolocation = new BMap.Geolocation();
       geolocation.getCurrentPosition(function(r) {
         if (this.getStatus() === BMAP_STATUS_SUCCESS) {
-          let mk = new BMap.Marker(r.point);
+          // let mk = new BMap.Marker(r.point);
           // that.address.lng = r.point.lng;
           // that.address.lat = r.point.lat;
-          map.addOverlay(mk);
-          map.panTo(r.point);
-          // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
+          // map.addOverlay(mk);
+          // map.panTo(r.point);
+          map.centerAndZoom(r.point, 10);
         } else {
           // alert('failed' + this.getStatus());
         }
       }, {enableHighAccuracy: true});
+    } else {
+      let point = new BMap.Point(this.address.lng, this.address.lat);
+      map.centerAndZoom(point, 15);
     }
 
 
-    console.log(this.address.lng, this.address.lat);
+    // console.log(this.address.lng, this.address.lat);
 
 
     map.enableScrollWheelZoom(true);     // 开启鼠标滚轮缩放
@@ -162,17 +161,12 @@ export class EditAddressComponent implements OnInit {
     map.setCurrentCity('宁波'); // 仅当设置城市信息时，MapTypeControl的切换功能才能可用
     // 添加定位控件
     let geolocationControl = new BMap.GeolocationControl();
-    geolocationControl.addEventListener("locationSuccess", function(e){
+    geolocationControl.addEventListener('locationSuccess', function(e) {
       // 定位成功事件
-      let address = '';
-      address += e.addressComponent.province;
-      address += e.addressComponent.city;
-      address += e.addressComponent.district;
-      address += e.addressComponent.street;
-      address += e.addressComponent.streetNumber;
-      // alert("当前定位地址为：" + address);
+      that.address.lng = e.point.lng;
+      that.address.lat = e.point.lat;
     });
-    geolocationControl.addEventListener("locationError",function(e){
+    geolocationControl.addEventListener('locationError', function(e) {
       // 定位失败事件
       alert(e.message);
     });
@@ -186,21 +180,22 @@ export class EditAddressComponent implements OnInit {
 
   // 城市切换
   changeCity() {
-    this.map.centerAndZoom(this.address.locationName, 11);
+    // this.map.centerAndZoom(this.address.locationName, 11);
+    this.changeMap(this.address.locationName, 11);
   }
 
   // 地图坐标
-  changeMap() {
+  changeMap(address, zoom) {
     // 创建地址解析器实例
     let that = this;
     let myGeo = new BMap.Geocoder();
     // 将地址解析结果显示在地图上,并调整地图视野
-    myGeo.getPoint(that.address.address, function(point) {
+    myGeo.getPoint(address, function(point) {
       if (point) {
         that.address.lng = point.lng;
         that.address.lat = point.lat;
-        that.map.centerAndZoom(point, 16);
-        that.map.addOverlay(new BMap.Marker(point));
+        that.map.centerAndZoom(point, zoom);
+        // that.map.addOverlay(new BMap.Marker(point));
       } else {
         alert('您选择地址没有解析到结果!');
       }

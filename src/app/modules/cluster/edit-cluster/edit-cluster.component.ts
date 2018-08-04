@@ -56,7 +56,12 @@ export class EditClusterComponent implements OnInit {
   }
 
   save() {
-    this.clusterService.editCluster({uid: this.currentData.Uid, name: this.name, img: this.imgUrl})
+    let data = {
+      uid: this.currentData.Uid,
+      name: this.name,
+      img: this.img ? this.imgUrl : ''
+    };
+    this.clusterService.editCluster(data)
       .subscribe( val => {
         alert('保存成功');
         this.activeModal.close('ok');

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs/index";
+import {BoilerSocketService} from "../shared/boiler-socket.service";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,7 +17,7 @@ const httpOptions = {
 })
 export class TestPageComponent implements OnInit {
 
-  chartOption = {
+  /*chartOption = {
     title: {
       text: '堆叠区域图'
     },
@@ -323,13 +324,14 @@ export class TestPageComponent implements OnInit {
         zlevel: 1
       }
     ]
-  }
+  }*/
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private boilerWsService: BoilerSocketService) { }
 
   ngOnInit() {
-    this.http.post('/sa', '123', httpOptions)
-      .subscribe();
+    /*this.http.post('/sa', '123', httpOptions)
+      .subscribe();*/
   }
 
 

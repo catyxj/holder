@@ -42,7 +42,11 @@ export class EditBoilerComponent implements OnInit {
       links: []
     };
     this.initInfos();
-    this.imgUrl = 'assets/images/no_image.png';
+    this.imgUrl = this.currentData.Image;
+    if (!this.imgUrl) {
+      this.imgUrl = 'assets/images/no_image.png';
+    }
+
   }
 
 

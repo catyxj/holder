@@ -1,0 +1,15 @@
+
+.operate_params ul li{
+  padding: 6px 12px;
+  margin-right: 10px;
+  background-color: #efefef;
+  cursor: pointer;
+}
+.operate_params ul li:hover{
+  background-color: #34515e;
+  color: #ffffff;
+}
+.operate_params ul li.active{
+  background-color: #34515e;
+  color: #ffffff;
+}

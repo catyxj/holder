@@ -3,17 +3,17 @@
   <div class="mat-card-title clearfix" style="padding: 15px 0;">
     <div class="pull-right flex flex-row">
 
-      <div class="btn-group mr-2">
-        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 2, 'btn-info': checkValue === 2}" (click)="checkValue = 2">
+      <!--<div class="btn-group mr-2">
+        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 2, 'btn-info': checkValue === 2}" (click)="checkStatus(2)">
           全部
         </button>
-        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 1, 'btn-info': checkValue === 1}" (click)="checkValue = 1">
+        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 1, 'btn-info': checkValue === 1}" (click)="checkStatus(1)">
           运行
         </button>
-        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 0, 'btn-info': checkValue === 0}" (click)="checkValue = 0">
+        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 0, 'btn-info': checkValue === 0}" (click)="checkStatus(0)">
           未运行
         </button>
-      </div>
+      </div>-->
 
 
       <div class="input-group">
@@ -30,30 +30,31 @@
     <div *ngFor="let data of boilers" class="col-6">
       <div class="module flex">
         <div class="status_content">
-          <a routerLink="/admin/runtime">
+          <a [routerLink]="['/admin/runtime', data.uid, data.name]">
             <h5 class="mb-4">
-              {{data.Name}}
+              {{data.name}}
             </h5>
           </a>
 
           <div class="status_row ">
-            <div class="status_col " [ngClass]="{'bg-info':data.Online ,'bg_grey':!data.Online}">
-              <!--{{data.online}}--> 终端状态
+            <div class="status_col " [ngClass]="{'bg-info':data.termStatus ,'bg_grey':!data.termStatus}">
+              {{data.online}} <!--终端状态-->
             </div>
-            <div class="status_col " [ngClass]="{'bg-info':data.IsBurning ,'bg_grey':!data.IsBurning}">
-              <!--{{data.isBurning}}--> 运行状态
+            <div class="status_col " [ngClass]="{'bg-info':data.eptStatus ,'bg_grey':!data.eptStatus}">
+              {{data.isBurning}} <!--运行状态-->
             </div>
-            <div class="status_col " [ngClass]="{'bg_grey':!data.Online, 'bg-warning':data.Online && data.Warning , 'bg-info':data.Online && !data.Warning}">
+            <div class="status_col " [ngClass]="{'bg_grey':!data.termStatus, 'bg-warning':data.termStatus && data.alarmStatus , 'bg-info':data.termStatus && !data.alarmStatus}">
               {{data.warning}}
             </div>
-            <div class="status_col  bg_grey" style="margin-bottom: 0">
+            <div class="status_col bg_grey">
               {{data.malfunction}}
             </div>
           </div>
+
         </div>
         <div class="img_content">
-          <a routerLink="/admin/runtime">
-            <img src="{{data.imgUrl}}" alt="">
+          <a [routerLink]="['/admin/runtime', data.uid, data.name]">
+            <img src="{{data.img}}" alt="">
           </a>
         </div>
 
@@ -61,7 +62,7 @@
     </div>
   </div>
 
-  <div class="clearfix">
+  <div class="clearfix mt-2">
     <div class="pull-left"> 共 {{totalItems}} 项</div>
     <ngb-pagination class="pull-right"
                     [collectionSize]="totalItems"

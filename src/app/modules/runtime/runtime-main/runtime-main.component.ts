@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-runtime-main',
@@ -7,14 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RuntimeMainComponent implements OnInit {
 
+  public uid;
+  public name;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
+    this.uid = this.route.snapshot.paramMap.get('uid');
+    this.name = this.route.snapshot.paramMap.get('name');
+    sessionStorage.setItem('runtimeUid', this.uid);
   }
 
 
-
+  goBack() {
+    window.history.go(-1);
+  }
 
 
 

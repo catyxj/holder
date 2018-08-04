@@ -50,7 +50,11 @@ export class AddClusterComponent implements OnInit {
 
 
   save() {
-    this.clusterService.addCluster({name: this.name, img: this.imgUrl})
+    let data = {
+      name: this.name,
+      img: this.img ? this.imgUrl : ''
+    };
+    this.clusterService.addCluster(data)
       .subscribe( val => {
         alert('保存成功');
         this.activeModal.close('ok');

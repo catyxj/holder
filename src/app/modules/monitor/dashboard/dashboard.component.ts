@@ -28,7 +28,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.totalItems = 0;
     let message = {
       page: this.page,
-      search: this.search
+      search: this.search,
+      pageSize: this.pageSize
     };
     this.getBoilers(message);
   }
@@ -44,9 +45,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.socket = this.boilerWsService.creatSocket(wsUrl, message)
       .subscribe(
         data => {
-          console.log(data);
-          let boilers = JSON.parse(data);
-          console.log(boilers);
+          let equips = JSON.parse(data);
+          // console.log(equips);
+          this.totalItems = equips.counts;
+          this.boilers = equips.ept;
+          this.refreshData();
         },
         err => console.log(err),
         () => console.log('ws结束')
@@ -64,18 +67,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
   refreshData() {
     for (let i = 0; i < this.boilers.length; i++) {
       let bo = this.boilers[i];
-      if (!bo.imageUrl) {
-        bo.imgUrl = 'assets/images/no_image.png';
+      if (!bo.img) {
+        bo.img = 'assets/images/no_image.png';
       }
 
-      if (bo.TermStatus === 1) {
+      if (bo.termStatus === 1) {
         bo.online = '终端在线';
-        if (bo.IsBurning === true) {
-          bo.isBurning = '设备运行中';
+        if (bo.eptStatus === true) {
+          bo.isBurning = '运行中';
         } else {
-          bo.isBurning = '设备未运行';
+          bo.isBurning = '未运行';
         }
-        if (bo.Warning === true) {
+        if (bo.alarmStatus === true) {
           bo.warning = '有告警';
         } else {
           bo.warning = '无告警';
@@ -85,14 +88,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
         } else {
           bo.malfunction = '无故障';
         }
-      } else if (bo.TermStatus === 0) {
+      } else if (bo.termStatus === 0) {
         bo.online = '终端离线';
-        bo.isBurning = '设备未运行';
+        bo.isBurning = '未运行';
         bo.warning = '无告警';
         bo.malfunction = '无故障';
       } else {
-        bo.online = '终端未绑定';
-        bo.isBurning = '设备未运行';
+        bo.online = '未绑定';
+        bo.isBurning = '未运行';
         bo.warning = '无告警';
         bo.malfunction = '无故障';
       }
@@ -102,20 +105,33 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   // 页码变化
   pageChange(): void {
-    this.sendMessage({page: this.page});
+    this.socket.unsubscribe();
+    this.boilerWsService.closeSocket();
+    this.getBoilers({page: this.page, search: this.search, pageSize: this.pageSize});
   }
 
   // 搜索
   searchChange() {
     this.page = 1;
-    this.sendMessage({page: 1, search: this.search});
     this.pageChange();
   }
 
+  // 运行状态
+  checkStatus(value) {
+    this.checkValue = value;
+    this.searchChange();
+  }
+
+
+  /*goRuntime(data) {
+    sessionStorage.setItem('equipName', data.name);
+  }*/
+
 
   ngOnDestroy() {
-    // this.socket.unsubscribe();
-    // this.boilerWsService.closeSocket();
+    // console.log('page close');
+    this.socket.unsubscribe();
+    this.boilerWsService.closeSocket();
   }
 
 

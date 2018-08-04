@@ -15,7 +15,7 @@ export class AlarmDetailComponent implements OnInit {
 
   public chartOption;
   private runtimes;
-  private data;
+  private AlarmValue;
 
   constructor(public activeModal: NgbActiveModal,
               private alarmService: AlarmService,
@@ -29,11 +29,17 @@ export class AlarmDetailComponent implements OnInit {
     this.alarmService.getDetail(this.currentData.Uid)
       .subscribe(data => {
         this.runtimes = data.runtime;
-        this.data = data;
+        this.AlarmValue = data.alarmValue;
+        console.log(this.currentData, this.runtimes, this.AlarmValue);
+        let runtimeValue = {
+          min: 0,
+          max: 0
+        };
         for (let i = 0; i < this.runtimes.length; i++) {
           let rt = this.runtimes[i];
-          rt.CreatedDate = this.datePipe.transform(new Date(rt.CreatedDate), 'HH:mm');
-          rt.Value = rt.Value * this.data.Parameter__Scale;
+          rt.CreatedDate = this.datePipe.transform(new Date(rt.CreatedDate), 'HH:mm:ss');
+          // rt.Value = rt.Value;
+
         }
         this.chartOption = {
           title: {
@@ -62,6 +68,8 @@ export class AlarmDetailComponent implements OnInit {
             {
               type: 'value',
               min: function(value) {  // 'dataMin'
+                runtimeValue.min = value.min;
+                runtimeValue.max = value.max;
                 return value.min;
               }
             }
@@ -73,7 +81,7 @@ export class AlarmDetailComponent implements OnInit {
               markLine: { // 标线
                 silent: true,
                 data: [{
-                  yAxis: this.data.TriggerRule__Warning
+                  yAxis: this.AlarmValue
                 }]
               }
             }
@@ -85,7 +93,7 @@ export class AlarmDetailComponent implements OnInit {
 
         };
 
-        if (this.data.TriggerRule__Normal < this.data.TriggerRule__Warning) {
+        if (this.currentData.TriggerRule.Scope === 1) {
           this.chartOption.visualMap = {
             top: 10,
             right: 10,
@@ -93,12 +101,26 @@ export class AlarmDetailComponent implements OnInit {
             pieces: [{
               /*gt: 0,  // 大于
               lte: this.data.TriggerRule__Warning, // 小于等于*/
-              min: 0,
-              max: this.data.TriggerRule__Warning,
+              min: runtimeValue.min,
+              max: this.AlarmValue,
               color: '#00838f'
             }],
               outOfRange: {
               color: '#ff9933'
+            }
+          };
+        } else {
+          this.chartOption.visualMap = {
+            top: 10,
+            right: 10,
+            show: false,
+            pieces: [{
+              min: runtimeValue.min,
+              max: this.AlarmValue,
+              color: '#ff9933'
+            }],
+            outOfRange: {
+              color: '#00838f'
             }
           };
         }

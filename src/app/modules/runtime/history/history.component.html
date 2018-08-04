@@ -1,3 +1,65 @@
-<p>
-  history works!
-</p>
+<div>
+
+  <div class="flex justify-content-between mt-3">
+    <nz-range-picker [(ngModel)]="dateRange" (ngModelChange)="changeDate()"></nz-range-picker>
+
+    <div class="">
+      <nz-radio-group [(ngModel)]="rangeValue">
+        <label nz-radio-button nzValue="today" (click)="selectDate()">今天</label>
+        <label nz-radio-button nzValue="week" (click)="selectDate()">本周</label>
+        <label nz-radio-button nzValue="month" (click)="selectDate()">本月</label>
+      </nz-radio-group>
+    </div>
+
+    <div>
+      <button class="btn btn-info">
+        导出
+      </button>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <table class="table table-bordered">
+      <thead class="bg_light_primary">
+      <th> 序号 </th>
+      <th> 采样时间 </th>
+      <th *ngFor="let data of params">
+        {{data.Name}} {{data.Unit}}
+      </th>
+
+      </thead>
+      <tbody>
+      <tr *ngFor="let row of history; let i = index;">
+        <td> {{ i+1 }} </td>
+        <td>  {{ row.date | date:'yyyy-MM-dd HH:mm:ss' }} </td>
+        <td *ngFor="let data of params">
+          {{ row.data[data.id] }}
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div>
+
+    <ngb-pagination class="pull-right"
+                    [collectionSize]="totalItems"
+                    [pageSize]="pageSize" [(page)]="page"
+                    [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                    (pageChange)="pageChange()">
+
+    </ngb-pagination>
+    <div class="pull-right mr-3">
+      <select [(ngModel)]="pageSize" class="form-control" (change)="pageSizeChange()">
+        <option value="10">10</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
+    <div class="pull-right mr-3" style="line-height: 33px;"> 共 {{totalItems}} 项</div>
+
+  </div>
+
+</div>

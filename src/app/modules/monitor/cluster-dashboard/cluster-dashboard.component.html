@@ -17,29 +17,29 @@
         <div class="status_content">
           <a [routerLink]="['/admin/monitor/cluster', data.Uid]">
             <h5 class="mb-4">
-              {{data.Name}}
+              {{data.name}}
             </h5>
           </a>
 
           <div class="status_row ">
-            <div class="status_col " [ngClass]="{'bg-info':data.Online ,'bg_grey':!data.Online}">
-              <!--{{data.online}}--> 终端状态
+            <div class="status_col bg_grey">
+              终端 <br/> {{data.termOnline}}/{{data.termOffline}}
             </div>
-            <div class="status_col " [ngClass]="{'bg-info':data.Online && data.IsBurning ,'bg_grey':!data.Online || !data.IsBurning}">
-              <!--{{data.isBurning}}--> 运行状态
+            <div class="status_col bg_grey">
+              设备 <br/> {{data.eptOnline}}/{{data.eptCounts}}
             </div>
             <div class="status_col " [ngClass]="{'bg_grey':!data.Online, 'bg-warning':data.Online && data.Warning , 'bg-info':data.Online && !data.Warning}">
-              {{data.warning}}
+              告警 <br/> {{data.alarmCounts}}
             </div>
             <div class="status_col"
                  [ngClass]="{'bg_grey':!data.Online, 'bg-warning':data.Online && data.Malfunction , 'bg-info':data.Online && !data.Malfunction}" style="margin-bottom: 0">
-              {{data.malfunction}}
+              <!--{{data.malfunction}}--> 故障
             </div>
           </div>
         </div>
         <div class="img_content">
-          <a [routerLink]="['/admin/monitor/cluster', data.Uid]">
-            <img src="{{data.imgUrl}}" alt="">
+          <a [routerLink]="['/admin/monitor/cluster', data.uid]">
+            <img src="{{data.img}}" alt="">
           </a>
         </div>
 

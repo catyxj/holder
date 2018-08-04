@@ -7,7 +7,7 @@ import {RuntimeHistoryComponent} from "./history/history.component";
 
 export const RuntimeRoutingModule = [
   {
-    path: '',
+    path: 'runtime/:uid/:name',
     component: RuntimeMainComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

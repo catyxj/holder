@@ -1,26 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {BoilerSocketService} from "../../../shared/boiler-socket.service";
 
 @Component({
   selector: 'app-cluster-dashboard',
   templateUrl: './cluster-dashboard.component.html',
   styleUrls: ['./cluster-dashboard.component.css']
 })
-export class ClusterDashboardComponent implements OnInit {
+export class ClusterDashboardComponent implements OnInit, OnDestroy {
 
   clusters: any = [];
   page = 1;
   pageSize = 4;
   totalItems = 0;
   search: string;
+  socket: any;
 
-  constructor() { }
+  constructor(private boilerWsService: BoilerSocketService) { }
 
   ngOnInit() {
-    this.getClusters();
+    let data = {
+      page: this.page,
+      search: this.search,
+      pageSize: this.pageSize
+    };
+    this.getClusters(data);
   }
 
-  getClusters() {
-    this.clusters = [
+  getClusters(message) {
+
+    const wsUrl = `ws://${window.location.host}/clusters_show`;
+    this.socket = this.boilerWsService.creatSocket(wsUrl, message)
+      .subscribe(
+        data => {
+          let clusters = JSON.parse(data);
+          // console.log(equips);
+          this.totalItems = clusters.counts;
+          this.clusters = clusters.cst;
+          for (let i = 0; i < this.clusters.length; i++) {
+            let clu = this.clusters[i];
+            if (!clu.img) {
+              clu.img = 'assets/images/sidenav4.jpg';
+            }
+
+          }
+
+        },
+        err => console.log(err),
+        () => console.log('ws结束')
+      );
+
+    /*this.clusters = [
       {
         Uid: '54557765654445',
         Name: 'adfa',
@@ -28,7 +57,7 @@ export class ClusterDashboardComponent implements OnInit {
         IsBurning: true,
         Warning: false,
         Malfunction: false,
-        imgUrl: ''
+        img: ''
       },
       {
         Uid: '54557765654445',
@@ -37,7 +66,7 @@ export class ClusterDashboardComponent implements OnInit {
         IsBurning: true,
         Warning: true,
         Malfunction: false,
-        imgUrl: ''
+        img: ''
       },
       {
         Uid: '54557765654445',
@@ -46,7 +75,7 @@ export class ClusterDashboardComponent implements OnInit {
         IsBurning: false,
         Warning: false,
         Malfunction: true,
-        imgUrl: ''
+        img: ''
       },
       {
         Uid: '54557765654445',
@@ -55,41 +84,19 @@ export class ClusterDashboardComponent implements OnInit {
         IsBurning: true,
         Warning: false,
         Malfunction: false,
-        imgUrl: ''
+        img: ''
       }
     ];
     this.totalItems = 23;
+
     for (let i = 0; i < this.clusters.length; i++) {
       let clu = this.clusters[i];
-      if (!clu.imgUrl) {
-        clu.imgUrl = 'assets/images/sidenav4.jpg';
+      if (!clu.img) {
+        clu.img = 'assets/images/sidenav4.jpg';
       }
+    }*/
 
-      if (clu.Online === true) {
-        clu.online = '终端在线';
-        if (clu.IsBurning === true) {
-          clu.isBurning = '设备运行中';
-        } else {
-          clu.isBurning = '设备未运行';
-        }
-        if (clu.Warning === true) {
-          clu.warning = '有告警';
-        } else {
-          clu.warning = '无告警';
-        }
-        if (clu.Malfunction === true) {
-          clu.malfunction = '有故障';
-        } else {
-          clu.malfunction = '无故障';
-        }
-      } else {
-        clu.online = '终端离线';
-        clu.isBurning = '设备未运行';
-        clu.warning = '无告警';
-        clu.malfunction = '无故障';
-      }
 
-    }
 
 
   }
@@ -97,5 +104,11 @@ export class ClusterDashboardComponent implements OnInit {
   pageChange() {
 
   }
+
+  ngOnDestroy() {
+    this.socket.unsubscribe();
+    this.boilerWsService.closeSocket();
+  }
+
 
 }

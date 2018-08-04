@@ -101,7 +101,7 @@ export const ModulesRoutingModule = [
         ]
       },
       {
-        path: 'runtime',
+        path: 'runtime/:uid/:name',
         component: RuntimeMainComponent,
         children: [
           { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

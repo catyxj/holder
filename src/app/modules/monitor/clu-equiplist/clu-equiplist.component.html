@@ -15,26 +15,64 @@
   <div>
     <table class="table table-bordered">
       <thead class="bg_light_primary">
+      <th>
+        <div class="checkbox c-checkbox white">
+          <label>
+            <input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();">
+            <span class="fa fa-check"></span>
+            全选
+          </label>
+        </div>
+      </th>
       <th> 序号 </th>
       <th> 设备名称 </th>
       <th> 终端状态 </th>
       <th> 运行状态 </th>
       <th> 告警状态 </th>
       <th> 故障状态 </th>
+      <th> 操作 </th>
       </thead>
       <tbody>
       <tr *ngFor="let data of equips; let i = index">
+        <td>
+          <div class="checkbox c-checkbox">
+            <label>
+              <input type="checkbox" [(ngModel)]="data.checkDelete" (change)="checkDel(data);">
+              <span class="fa fa-check"></span></label>
+          </div>
+        </td>
         <td> {{ i+1 }}  </td>
-        <td> {{ data.Name }}  </td>
-        <td [ngClass]="{'text-info':data.Online}"> {{ data.online }} </td>
-        <td [ngClass]="{'text-info':data.IsBurning}">
+        <td>
+          <a [routerLink]="['/admin/runtime', data.uid, data.name]">
+            {{ data.name }}
+          </a>
+        </td>
+        <td [ngClass]="{'text-info':data.termStatus}"> {{ data.online }} </td>
+        <td [ngClass]="{'text-info':data.eptStatus}">
           {{data.isBurning}}
         </td>
-        <td [ngClass]="{'text-danger':data.Warning}">
+        <td [ngClass]="{'text-danger':data.alarmStatus}">
           {{data.warning}}
         </td>
         <td>
           {{data.malfunction}}
+        </td>
+        <td>
+
+          <nz-dropdown [nzPlacement]="'bottomRight'">
+            <button nz-dropdown class="btn btn-info btn-sm">控制</button>
+            <ul nz-menu>
+              <li nz-menu-item (click)="control(data,1)">
+                启动
+              </li>
+              <li nz-menu-item (click)="control(data,2)">
+                关闭
+              </li>
+              <li nz-menu-item (click)="control(data,3)">
+                重置
+              </li>
+            </ul>
+          </nz-dropdown>
         </td>
       </tr>
       </tbody>
@@ -42,6 +80,23 @@
   </div>
 
   <div>
+
+    <div class="pull-left">
+      <nz-dropdown [nzPlacement]="'topLeft'">
+        <button nz-dropdown class="btn btn-info">批量控制</button>
+        <ul nz-menu>
+          <li nz-menu-item (click)="groupControl(1)">
+            批量启动
+          </li>
+          <li nz-menu-item (click)="groupControl(2)">
+            批量关闭
+          </li>
+          <li nz-menu-item (click)="groupControl(3)">
+            批量重置
+          </li>
+        </ul>
+      </nz-dropdown>
+    </div>
 
     <ngb-pagination class="pull-right"
                     [collectionSize]="totalItems"

@@ -1,0 +1,12 @@
+
+*{
+  color: #666666;
+}
+
+ul li{
+  display: flex;
+  height: 32px;
+  padding-top: 6px;
+  font-size: 12px;
+  box-sizing: border-box;
+}

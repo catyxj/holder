@@ -17,6 +17,8 @@ import {EditMaintainComponent} from '../edit-maintain/edit-maintain.component';
 import {AdressService} from '../../../shared/adress.service';
 import {TerBindComponent} from "../ter-bind/ter-bind.component";
 
+declare var BMap: any;
+declare var BMAP_STATUS_SUCCESS: any;
 
 @Component({
   selector: 'app-boiler-info',
@@ -31,13 +33,9 @@ export class BoilerInfoComponent implements OnInit {
   public user;
   public orgTypes;
   public addrList;
-  public opts: MapOptions; // 百度地图参数
-  public markers: Array<{ point: Point; options?: MarkerOptions }>;
-  public controlOpts: NavigationControlOptions;
-  public overviewmapOpts: OverviewMapControlOptions;
-  public scaleOpts: ScaleControlOptions;
-  public mapTypeOpts: MapTypeControlOptions;
-  public geolocationOpts: GeolocationControlOptions;
+  private map: any;
+  private address: any;
+
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -51,14 +49,6 @@ export class BoilerInfoComponent implements OnInit {
   ngOnInit() {
     this.panel = [{open: true}, {open: true}, {open: true}, {open: true}];
     this.getOrgType();
-    this.getInfo();
-
-    this.lists = [
-      {title: 'dddd', value: 'dafdaf'},
-      {title: '2222', value: 'dasgewdaf'},
-      {title: 'rffg', value: 'vsxc'},
-    ];
-    this.initMap();
     this.getAddress();
   }
 
@@ -85,6 +75,9 @@ export class BoilerInfoComponent implements OnInit {
       this.info.InspectValveDateNext = new Date(this.info.InspectInnerDateNext);
       this.info.InspectOuterDateNext = new Date(this.info.InspectInnerDateNext);
       this.info.InspectGaugeDateNext = new Date(this.info.InspectInnerDateNext);
+
+      this.address = this.info.Address;
+      this.initMap();
       console.log(this.info);
     });
   }
@@ -102,92 +95,67 @@ export class BoilerInfoComponent implements OnInit {
     this.orgService.getOrgType()
       .subscribe(types => {
         this.orgTypes = types;
+        this.getInfo();
       });
   }
 
 // 百度地图
   initMap() {
-    this.opts = {
-      // 地图中心坐标
-      centerAndZoom: {     // 设置中心点和缩放级别
-        lng: 120.62,   // 经度
-        lat: 31.32,    // 纬度
-        zoom: 15           // 缩放级别
-      },
-      minZoom: 3,  // 最小缩放级别的地图
-      maxZoom: 19, // 最大缩放级别的地图
-      enableHighResolution: true,  // 是否用高分辨率的地图，default：true
-      enableAutoResize: true,  // 是否可以自动调整大小，default：true
-      enableMapClick: true,  // 地图是否可以点击，default：true
-      disableDragging: false, // 是否禁用地图拖动功能
-      enableScrollWheelZoom: true, // 是否启用滚轮进行缩放功能
-      disableDoubleClickZoom: false, // 是否禁用双击缩放功能
-      enableKeyboard: true,  // 是否启用键盘移动地图功能
-      enableInertialDragging: false,     // 是否启用惯性阻力函数
-      enableContinuousZoom: true,  // 是否启用连续缩放功能
-      disablePinchToZoom: false,   // 是否禁用缩放功能的缩放
-      cursor: '',         // 设置默认的光标样式,应该遵循CSS规范
-      draggingCursor: '', // 设置默认的拖动光标样式，应该遵循CSS规范
-      currentCity: '宁波市',   // 设置当前的城市
+    // 创建地图实例
+    let map = new BMap.Map('container');
+    this.map = map;
 
-    };
 
-    // 这是地图标记marker
-    this.markers = [
-      {
-        options: {
-          icon: {
-            imageUrl: '/assets/1.jpg',
-            size: {
-              height: 60,
-              width: 50
-            }
-          },
-          title: 'asdkjgaslfkjasd'
-        },
-        point: {
-          lng: 120.62,   // 经度
-          lat: 31.33,    // 纬度
+    if (!this.address || this.address.Longitude === 0 || this.address.Latitude === 0 ) {
+      let that = this;
+      // 获取当前定位
+      let geolocation = new BMap.Geolocation();
+      geolocation.getCurrentPosition(function(r) {
+        if (this.getStatus() === BMAP_STATUS_SUCCESS) {
+          // let mk = new BMap.Marker(r.point);
+          // that.address.lng = r.point.lng;
+          // that.address.lat = r.point.lat;
+          // map.addOverlay(mk);
+          map.centerAndZoom(r.point, 10);
+        } else {
+          // alert('failed' + this.getStatus());
         }
-      },
-      {
-        point: {
-          lng: 120.63,   // 经度
-          lat: 31.32,    // 纬度
-        }
-      },
-      {
-        point: {
-          lng: 120.63,   // 经度
-          lat: 31.31,    // 纬度
-        }
-      }
-    ];
+      }, {enableHighAccuracy: true});
+    } else {
+      // 创建点坐标
+      let point = new BMap.Point(this.address.Longitude, this.address.Latitude);
 
-    // 这是控件control
-    this.controlOpts = {         // 导航控件
-      anchor: ControlAnchor.BMAP_ANCHOR_TOP_LEFT,      // 显示的控件的位置
-      type: NavigationControlType.BMAP_NAVIGATION_CONTROL_LARGE,   // 用来描述它是什么样的导航
-      offset: {                                        // 控件的大小
-        width: 30,
-        height: 30
-      },
-      showZoomInfo: true,                             // 是否展示当前的信息
-      enableGeolocation: true                         // 是否启用地理定位功能
-    };
-    this.overviewmapOpts = {    // 地图全景控件
-      anchor: ControlAnchor.BMAP_ANCHOR_BOTTOM_RIGHT,  // 显示的控件的位置
-      isOpen: true                                    // whf 。。官网里没有说明？？
-    };
-    this.scaleOpts = {          // 比例尺控件
-      anchor: ControlAnchor.BMAP_ANCHOR_BOTTOM_LEFT
-    };
-    this.mapTypeOpts = {        // 地图类型
-      type: MapTypeControlType.BMAP_MAPTYPE_CONTROL_HORIZONTAL
-    };
-    // Geolocation 和Panorama 没有属性
+      map.centerAndZoom(point, 10);
+    }
 
 
+
+
+    map.enableScrollWheelZoom(true);     // 开启鼠标滚轮缩放
+
+    map.addControl(new BMap.NavigationControl());
+    map.addControl(new BMap.ScaleControl());
+    map.addControl(new BMap.OverviewMapControl());
+    map.addControl(new BMap.MapTypeControl());
+    map.setCurrentCity('宁波'); // 仅当设置城市信息时，MapTypeControl的切换功能才能可用
+
+    // 添加定位控件
+    let geolocationControl = new BMap.GeolocationControl();
+    geolocationControl.addEventListener("locationSuccess", function(e){
+      // 定位成功事件
+      let address = '';
+      address += e.addressComponent.province;
+      address += e.addressComponent.city;
+      address += e.addressComponent.district;
+      address += e.addressComponent.street;
+      address += e.addressComponent.streetNumber;
+      // alert("当前定位地址为：" + address);
+    });
+    geolocationControl.addEventListener("locationError",function(e){
+      // 定位失败事件
+      alert(e.message);
+    });
+    map.addControl(geolocationControl);
 
 
   }

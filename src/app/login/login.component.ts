@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    console.log(this.user);
+    // console.log(this.user);
     this.userService.login(this.user)
       .subscribe(
         user => {

@@ -1,23 +1,61 @@
 
-<div>
-  <div class="pull-right">
-    <button class="btn btn-info" (click)="goBack()">
-      <i class="fa fa-reply"></i>
-      返回
-    </button>
-  </div>
-</div>
 
-<div class="row">
 
+<div class="row mt-3">
   <div class="col-3">
-    1
+    状态量
+    <ul>
+      <li *ngFor="let data of ranges">
+        <diV style="width: 40%;">
+          {{ data.ChannelNumber }}
+          {{ data.ChannelName }}
+        </diV>
+        <div style="width: 60%;">
+          {{ data.Remark }}
+        </div>
+      </li>
+    </ul>
+
   </div>
   <div class="col-6">
-    2
+
+    <div>
+      <img src="assets/images/no_image.png" style="width: 100%;" alt="">
+    </div>
+
+    开关量
+    <ul>
+      <li *ngFor="let data of switchs">
+        <div [ngClass]="{'text-info':data.SwitchStatus === 1, 'text-warning':data.SwitchStatus === 2 }" style="width: 80px;">
+          {{ data.ChannelNumber }}
+          {{ data.ChannelName }}
+        </div>
+        <div style="width: 60px;">
+          {{ data.Value }}
+        </div>
+      </li>
+    </ul>
   </div>
   <div class="col-3">
-    3
+    模拟量
+    <ul>
+      <li *ngFor="let data of analogues">
+        <div style="width: 40%;">
+          {{ data.ChannelNumber }}
+          {{ data.ChannelName }}
+        </div>
+        <div style="width: 30%;">
+          {{ data.Value }}
+        </div>
+        <div style="width: 20%;">
+          {{ data.Unit }}
+        </div>
+        <div style="width: 10%;">
+          {{ data.Status }}
+        </div>
+
+      </li>
+    </ul>
   </div>
 
 </div>

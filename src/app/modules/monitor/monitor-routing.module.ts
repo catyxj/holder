@@ -12,7 +12,7 @@ import {CluEquiplistComponent} from "./clu-equiplist/clu-equiplist.component";
 
 export const MonitorRoutingModule = [
   {
-    path: '',
+    path: 'monitor',
     component: MonitorMainComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

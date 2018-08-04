@@ -6,7 +6,7 @@ import {HistoryComponent} from "./history/history.component";
 
 export const AlarmRoutingModule = [
   {
-    path: '',
+    path: 'alarm',
     component: AlarmMainComponent,
     children: [
       { path: '', redirectTo: 'current', pathMatch: 'full' },
