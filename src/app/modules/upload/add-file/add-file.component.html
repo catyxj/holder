@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h4 class="modal-title">上传文件</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('close')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+
+  <input type="text" [(ngModel)]="org">
+  <nz-upload
+    [(nzFileList)]="fileList"
+    [nzBeforeUpload]="beforeUpload">
+    <button nz-button>
+      <i class="anticon anticon-upload"></i><span>上传文件</span>
+    </button>
+  </nz-upload>
+
+</div>
+
+<div class="modal-footer">
+  <button nz-button [nzType]="'primary'" [nzLoading]="uploading" (click)="handleUpload()" [disabled]="fileList.length == 0" style="margin-top: 16px">
+    {{ uploading ? 'Uploading' : 'Start Upload' }}
+  </button>
+  <!--<button type="button" class="btn btn-info">保存</button>-->
+  <!--<button type="button" class="btn" (click)="activeModal.dismiss('close')">取消</button>-->
+</div>
+
+

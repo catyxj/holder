@@ -37,9 +37,11 @@
     <table class="table table-bordered">
       <thead class="bg_light_primary">
       <th>
-        <input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();">
-        <!--<label nz-checkbox [(ngModel)]="allDelete" (change)="allDel();"> </label>-->
-        <!--<mat-checkbox [(ngModel)]="allDelete" (change)="allDel();" color="primary"> </mat-checkbox>-->
+        <div class="checkbox c-checkbox white">
+          <label>
+            <input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();">
+            <span class="fa fa-check"></span></label>
+        </div>
       </th>
       <th>序号</th>
       <th>终端编码</th>
@@ -53,9 +55,11 @@
       <tbody>
       <tr *ngFor="let ter of terminals; let i = index">
         <td>
-          <!--<label nz-checkbox [(ngModel)]="ter.checkDelete" (change)="checkDel(ter);"> </label>-->
-          <!--<mat-checkbox [(ngModel)]="ter.checkDelete" (change)="checkDel(ter);" color="primary"> </mat-checkbox>-->
-          <input type="checkbox" [(ngModel)]="ter.checkDelete" (change)="checkDel(ter);">
+          <div class="checkbox c-checkbox">
+            <label>
+              <input type="checkbox" [(ngModel)]="ter.checkDelete" (change)="checkDel(ter);">
+              <span class="fa fa-check"></span></label>
+          </div>
         </td>
         <td> {{ i + 1 }} </td>
         <td> {{ ter.TerminalCode }} </td>
@@ -77,6 +81,9 @@
       </tr>
       </tbody>
     </table>
+    <p class="text-muted" *ngIf="!terminals||terminals.length===0">
+      无有效数据
+    </p>
   </div>
 
 

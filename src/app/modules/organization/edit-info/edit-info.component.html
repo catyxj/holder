@@ -5,7 +5,7 @@
   </button>
 </div>
 
-<div class="modal-body" id="modal-body">
+<div class="modal-body" id="modal-body" *ngIf="data">
   <div class="row">
     <div class="form-group col-md-6">
       <div class="input-group">
@@ -83,8 +83,13 @@
   <div class="row" *ngIf="editing && currentUser.Role.RoleId < 10">
     <div class="form-group col-lg-6 col-md-6 col-sm-6">
       <label class="control-label" style="font-size: 15px; margin-right: 6px;">显示企业标识</label>
-      <input [(ngModel)]="data.showBrand"
-             type="checkbox">
+      <!--<input [(ngModel)]="data.showBrand"
+             type="checkbox">-->
+      <div class="checkbox c-checkbox">
+        <label>
+          <input type="checkbox" [(ngModel)]="data.showBrand">
+          <span class="fa fa-check"></span></label>
+      </div>
     </div>
     <div class="form-group col-lg-6 col-md-6 col-sm-6">
       <div class="input-group">
@@ -109,8 +114,14 @@
   <div class="row" *ngIf="editing && currentUser.Role.RoleId < 10">
     <div class="form-group col-lg-6 col-md-6 col-sm-6">
       <label class="control-label" style="font-size: 15px; margin-right: 6px;">是否主管单位</label>
-      <input [(ngModel)]="data.isSuper"
-             type="checkbox">
+      <!--<input [(ngModel)]="data.isSuper"
+             type="checkbox">-->
+      <div class="checkbox c-checkbox">
+        <label>
+          <input type="checkbox" [(ngModel)]="data.isSuper">
+          <span class="fa fa-check"></span>
+        </label>
+      </div>
     </div>
   </div>
 

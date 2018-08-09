@@ -18,6 +18,7 @@ export class RuntimeMainComponent implements OnInit {
     this.uid = this.route.snapshot.paramMap.get('uid');
     this.name = this.route.snapshot.paramMap.get('name');
     sessionStorage.setItem('runtimeUid', this.uid);
+    sessionStorage.setItem('runtimeName', this.name);
   }
 
 

@@ -13,31 +13,6 @@ export const GlobalRoutingModule = [
     path: 'admin',
     component: MainComponent,
     loadChildren: '../modules/modules.module#ModulesModule'
-    /*children: [
-      { path: '', redirectTo: 'monitor', pathMatch: 'full' },
-      {
-        path: 'monitor',
-        component: MonitorMainComponent,
-        children: [
-          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-          {
-            path: 'dashboard',
-            component: DashboardComponent
-          }
-        ]
-      },
-      {
-        path: 'boilers',
-        component: BoilerMainComponent,
-        children: [
-          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-          {
-            path: 'dashboard',
-            component: BoilersComponent
-          }
-        ]
-      }
-    ]*/
   }
 ];
 

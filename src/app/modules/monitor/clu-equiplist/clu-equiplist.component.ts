@@ -16,7 +16,7 @@ export class CluEquiplistComponent implements OnInit, OnDestroy {
   public pageSize = 10;
   public search: string;
   public checkList = [];
-  public allDelete = false;
+  public allCheck = false;
   public uid;
   private socket;
 
@@ -160,7 +160,7 @@ export class CluEquiplistComponent implements OnInit, OnDestroy {
 
   // 全选
   allDel() {
-    if (this.allDelete === true) {
+    if (this.allCheck === true) {
 
       for (let i = 0; i < this.equips.length; i++) {
         this.equips[i].checkDelete = true;

@@ -1,47 +1,52 @@
 
 
 
-<div class="row mt-3">
-  <div class="col-3">
-    状态量
+<div class="row" style="margin-top: 30px;">
+  <div class="col-3 p-3" style="border-right: 1px solid #eeeeee;">
+    <!--状态量-->
     <ul>
-      <li *ngFor="let data of ranges">
+      <li *ngFor="let data of ranges" style="line-height: 26px;">
         <diV style="width: 40%;">
-          {{ data.ChannelNumber }}
+          <!--{{ data.ChannelNumber }}-->
           {{ data.ChannelName }}
         </diV>
         <div style="width: 60%;">
-          {{ data.Remark }}
+          <span class="badge" [ngClass]="{'badge-info':data.Value === 0, 'badge-warning':data.Value !== 0}">
+            {{ data.Remark }}
+          </span>
         </div>
       </li>
     </ul>
 
   </div>
-  <div class="col-6">
+  <div class="col-6 p-3">
 
-    <div>
-      <img src="assets/images/no_image.png" style="width: 100%;" alt="">
+    <div class="text-center">
+      <img src="{{img}}" style="width: 90%;" alt="">
     </div>
 
-    开关量
-    <ul>
-      <li *ngFor="let data of switchs">
-        <div [ngClass]="{'text-info':data.SwitchStatus === 1, 'text-warning':data.SwitchStatus === 2 }" style="width: 80px;">
-          {{ data.ChannelNumber }}
-          {{ data.ChannelName }}
-        </div>
-        <div style="width: 60px;">
-          {{ data.Value }}
-        </div>
-      </li>
-    </ul>
+    <div style="border-top: 1px solid #eeeeee;">
+      <!--开关量-->
+      <ul>
+        <li *ngFor="let data of switchs">
+          <div [ngClass]="{'text-info':data.SwitchStatus === 1, 'text-warning':data.SwitchStatus === 2 }" style="width: 80px;">
+            <!--{{ data.ChannelNumber }}-->
+            {{ data.ChannelName }}
+          </div>
+          <!--<div style="width: 60px;">
+            {{ data.Value }}
+          </div>-->
+        </li>
+      </ul>
+    </div>
+
   </div>
-  <div class="col-3">
-    模拟量
+  <div class="col-3 p-3" style="border-left: 1px solid #eeeeee;">
+    <!--模拟量-->
     <ul>
       <li *ngFor="let data of analogues">
-        <div style="width: 40%;">
-          {{ data.ChannelNumber }}
+        <div style="width: 30%;">
+          <!--{{ data.ChannelNumber }}-->
           {{ data.ChannelName }}
         </div>
         <div style="width: 30%;">
@@ -50,8 +55,13 @@
         <div style="width: 20%;">
           {{ data.Unit }}
         </div>
-        <div style="width: 10%;">
-          {{ data.Status }}
+        <div style="width: 20%;">
+          <span class="badge badge-info" *ngIf="data.Status === 0">
+            正常
+          </span>
+          <span class="badge badge-secondary" *ngIf="data.Status === 1">
+            异常
+          </span>
         </div>
 
       </li>

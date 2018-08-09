@@ -12,7 +12,7 @@
     </div>
 
     <div>
-      <button class="btn btn-info">
+      <button class="btn btn-info" (click)="export()">
         导出
       </button>
     </div>
@@ -39,6 +39,9 @@
       </tr>
       </tbody>
     </table>
+    <p class="text-muted" *ngIf="!history||history.length===0">
+      无有效数据
+    </p>
   </div>
 
 

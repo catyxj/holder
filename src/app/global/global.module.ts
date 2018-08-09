@@ -4,12 +4,12 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule, MatSortModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule } from '@angular/material';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {MatTreeModule} from '@angular/material/tree';
 import {GlobalRoutingModule} from './global-routing.module';
 import {ModulesModule} from '../modules/modules.module';
+import {NgZorroAntdModule} from "ng-zorro-antd";
 
 
 
@@ -24,10 +24,9 @@ import {ModulesModule} from '../modules/modules.module';
     MatIconModule,
     MatListModule,
     MatMenuModule,
-    MatSortModule,
-    MatTreeModule,
     ModulesModule,
     NgbModule,
+    NgZorroAntdModule,
   ],
   declarations: [
     HeaderComponent,

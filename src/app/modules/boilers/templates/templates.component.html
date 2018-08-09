@@ -1,0 +1,93 @@
+
+<div class="content">
+  <div class="mat-card-title" style="padding: 20px 0; ">
+    <h5 class="text-info pull-left">设备型态管理</h5>
+
+    <div class="pull-right flex flex-row">
+      <div class="input-group mb-4">
+        <input type="text" class="form-control" placeholder="请输入设备型态名称" [(ngModel)]="search" >
+        <div class="input-group-append" (click)="searchChange()">
+          <button class="btn btn-info" type="button"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+      <div class="ml-3" >
+        <a [routerLink]="['/admin/equipments/dashboard']" class="btn btn-info" style="color: #ffffff;">
+          <i class="fa fa-reply"></i>
+          返回
+        </a>
+      </div>
+      <div class="ml-3" >
+        <button class="btn btn-info" (click)="newTemplate()">
+          新增设备型态
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div>
+    <table class="table table-bordered">
+      <thead class="bg_light_primary">
+      <th>
+        <div class="checkbox c-checkbox white">
+          <label>
+            <input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();">
+            <span class="fa fa-check"></span></label>
+        </div>
+      </th>
+      <th>序号</th>
+      <th>设备型态名称</th>
+      <th>所属企业</th>
+      <th>操作</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of templates; let i = index">
+        <td>
+          <div class="checkbox c-checkbox">
+            <label>
+              <input type="checkbox" [(ngModel)]="data.checkDelete" (change)="checkDel(data);">
+              <span class="fa fa-check"></span></label>
+          </div>
+        </td>
+        <td> {{ i + 1 }} </td>
+        <td> {{ data.Name }} </td>
+        <td> {{ data.enterprise }} </td>
+        <td>
+          <button class="btn btn-sm btn-info" (click)="editTemplate(data)">
+            编辑
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div>
+
+
+    <div class="pull-left">
+      <button class="btn btn-info" (click)="deleteG()">
+        批量删除
+      </button>
+    </div>
+
+
+    <ngb-pagination class="pull-right"
+                    [collectionSize]="totalItems"
+                    [pageSize]="pageSize" [(page)]="page"
+                    [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                    (pageChange)="pageChange()">
+
+    </ngb-pagination>
+    <div class="pull-right mr-3">
+      <select [(ngModel)]="pageSize" class="form-control" (change)="pageSizeChange()">
+        <option value="10">10</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
+    <div class="pull-right mr-3" style="line-height: 33px;"> 共 {{totalItems}} 项</div>
+  </div>
+
+</div>

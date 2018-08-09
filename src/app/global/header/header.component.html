@@ -4,9 +4,10 @@
     <button mat-icon-button (click)="onClick()" style="min-width: 88px;">
       <mat-icon>menu</mat-icon>
     </button>
+
+    <!--企业标识-->
     <a class="navbar-brand" href="">
       <img src="assets/images/light.png"  height="30" alt="">
-      <!--炉管家-->
     </a>
 
     <!-- This fills the remaining space of the current row -->
@@ -15,11 +16,14 @@
     <mat-icon> email </mat-icon>
     <!--<i class="fa fa-envelope-o"></i>-->
 
-    <div ngbDropdown class="d-inline-block">
-      <button mat-button id="dropdownBasic1" ngbDropdownToggle> {{user.Name}} ( {{ user.Role.Name}} ) </button>
+    <div ngbDropdown class="d-inline-block ml-3">
+      <button mat-button id="dropdownBasic1" ngbDropdownToggle>
+        <!--<img [src]="user?.Picture" alt="" style="width: 25px; height: 25px; border-radius: 25px;">-->
+        <nz-avatar nzIcon="anticon anticon-user" nzSrc="{{user?.Picture}}"></nz-avatar>
+        {{user?.Name}} ( {{ user?.Role.Name}} )
+      </button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="animated fadeInDown">
         <a class="dropdown-item" routerLink="/admin/profile">用户信息</a>
-        <!--<button class="dropdown-item">设置</button>-->
         <button class="dropdown-item" (click)="logout()">退出</button>
       </div>
     </div>

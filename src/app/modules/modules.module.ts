@@ -27,6 +27,10 @@ import {TemplateMainComponent} from "./template/template-main/template-main.comp
 import {TemplateModule} from "./template/template.module";
 import {AlarmMainComponent} from "./alarm/alarm-main/alarm-main.component";
 import {AlarmModule} from "./alarm/alarm.module";
+import {MaintainMainComponent} from "./maintain/maintain-main/maintain-main.component";
+import {UploadMainComponent} from "./upload/upload-main/upload-main.component";
+import {NgZorroAntdModule} from "ng-zorro-antd";
+import {UploadModule} from "./upload/upload.module";
 
 
 
@@ -43,6 +47,7 @@ import {AlarmModule} from "./alarm/alarm.module";
     ClusterModule,
     TemplateModule,
     AlarmModule,
+    UploadModule,
     RouterModule.forChild(ModulesRoutingModule),
     NgxEchartsModule,
     FormsModule,
@@ -58,7 +63,9 @@ import {AlarmModule} from "./alarm/alarm.module";
     TerminalMainComponent,
     ClusterMainComponent,
     TemplateMainComponent,
-    AlarmMainComponent
+    AlarmMainComponent,
+    MaintainMainComponent,
+    UploadMainComponent
   ],
   exports: [
     // RouterModule

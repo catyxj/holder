@@ -38,6 +38,12 @@ import {CluEquiplistComponent} from "./monitor/clu-equiplist/clu-equiplist.compo
 import {ClusterDashboardComponent} from "./monitor/cluster-dashboard/cluster-dashboard.component";
 import {OperateComponent} from "./runtime/operate/operate.component";
 import {RuntimeHistoryComponent} from "./runtime/history/history.component";
+import {RuntimeAlarmComponent} from "./runtime/alarm/alarm.component";
+import {AlarmHistoryComponent} from "./runtime/alarm-history/alarm-history.component";
+import {AlarmCurrentComponent} from "./runtime/alarm-current/alarm-current.component";
+import {BoilerTemplatesComponent} from "./boilers/templates/templates.component";
+import {MaintainMainComponent} from "./maintain/maintain-main/maintain-main.component";
+import {UploadMainComponent} from "./upload/upload-main/upload-main.component";
 
 
 export const ModulesRoutingModule = [
@@ -97,6 +103,10 @@ export const ModulesRoutingModule = [
           {
             path: 'equipment-info/:uid',
             component: BoilerInfoComponent
+          },
+          {
+            path: 'templates',
+            component: BoilerTemplatesComponent
           }
         ]
       },
@@ -116,6 +126,21 @@ export const ModulesRoutingModule = [
           {
             path: 'history',
             component: RuntimeHistoryComponent
+          },
+          {
+            path: 'alarm',
+            component: RuntimeAlarmComponent,
+            children: [
+              { path: '', redirectTo: 'current', pathMatch: 'full' },
+              {
+                path: 'current',
+                component: AlarmCurrentComponent,
+              },
+              {
+                path: 'history',
+                component: AlarmHistoryComponent,
+              }
+            ]
           }
         ]
       },
@@ -209,6 +234,14 @@ export const ModulesRoutingModule = [
             component: HistoryComponent
           }
         ]
+      },
+      {
+        path: 'maintain',
+        component: MaintainMainComponent
+      },
+      {
+        path: 'upload',
+        component: UploadMainComponent
       }
     ]
   }

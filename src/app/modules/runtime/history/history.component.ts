@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {RuntimeService} from "../../../shared/runtime.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-history',
@@ -16,17 +17,20 @@ export class RuntimeHistoryComponent implements OnInit {
   private uid;
   public params = [];
   public history = [];
+  private name;
 
-  constructor(private runtimeService: RuntimeService) { }
+  constructor(private runtimeService: RuntimeService,
+              private datePipe: DatePipe) { }
 
   ngOnInit() {
     this.uid = sessionStorage.getItem('runtimeUid');
+    this.name = sessionStorage.getItem('runtimeName');
     this.selectDate();
   }
 
   // 选择时间区间
   changeDate() {
-    console.log(this.dateRange);
+    // console.log(this.dateRange);
     this.refreshData();
   }
 
@@ -53,6 +57,7 @@ export class RuntimeHistoryComponent implements OnInit {
   }
 
 
+  // 获取数据
   refreshData() {
     let postData = {
       uid: this.uid,
@@ -63,7 +68,7 @@ export class RuntimeHistoryComponent implements OnInit {
     };
     this.runtimeService.getHistory(postData)
       .subscribe( data => {
-        console.log(data);
+        // console.log(data);
         this.totalItems = data.counts;
         let runtimes = data.params;
 
@@ -105,17 +110,67 @@ export class RuntimeHistoryComponent implements OnInit {
         }
 
 
-        console.log(this.params, this.history);
+        // console.log(this.params, this.history);
 
       });
   }
 
   pageChange() {
-    console.log(this.page);
+    this.refreshData();
   }
 
   pageSizeChange() {
-    console.log(this.pageSize);
+    this.page = 1;
+    this.refreshData();
   }
+
+  // 导出
+  export() {
+
+    let start = this.datePipe.transform(this.dateRange[0], 'yyyy.MM.dd');
+    let end = this.datePipe.transform(this.dateRange[1], 'yyyy.MM.dd');
+
+    let table = '<table><tr><td>采样时间</td>';
+
+    // headers
+    for (let i = 0; i < this.params.length; i++) {
+      table += `<td>${this.params[i].Name} ${this.params[i].Unit}</td>`;
+    }
+    table += '</tr>';
+    this.history.forEach((record) => {
+      let date = this.datePipe.transform(record.date, 'yyyy-MM-dd HH:mm:ss');
+      table += `<tr><td>${date}</td>`;
+      for (let i = 0; i < this.params.length; i++) {
+        table += `<td>${record.data[this.params[i].id]}</td>`;
+      }
+      table += '</tr>';
+    });
+    table += '</table>';
+
+    // 使用outerHTML属性获取整个table元素的HTML代码（包括<table>标签），然后包装成一个完整的HTML文档，设置charset为urf-8以防止中文乱码
+    let html = "<html><head><meta charset='utf-8' /></head><body>" + table + "</body></html>";
+
+    const blob = new Blob([html], {type: 'application/vnd.ms-excel'});
+
+    const fileName = `${this.name}(${start}-${end}).xlsx`;
+
+    if (window.navigator.msSaveOrOpenBlob) { // IE浏览器
+      navigator.msSaveOrOpenBlob(blob,  fileName);
+    } else { //  其他浏览器
+      const objectUrl = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      document.body.appendChild(link);
+      link.setAttribute('style', 'display:none');
+      link.setAttribute('href', objectUrl);
+      link.setAttribute('download', fileName);
+      link.click();
+      document.body.removeChild(link);
+      // 释放URL地址
+      URL.revokeObjectURL(objectUrl);
+    }
+
+
+  }
+
 
 }

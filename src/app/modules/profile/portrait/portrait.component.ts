@@ -18,17 +18,26 @@ export class PortraitComponent implements OnInit {
   public img: any;
   public errMes: string;
 
-  constructor(private uerService: UserService, private profileService: ProfileService) { }
+  constructor(private userService: UserService, private profileService: ProfileService) { }
 
   ngOnInit() {
-    this.uerService.getUser()
+    let user = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.imgUrl = user.Picture;
+    if ( !this.imgUrl) {
+      this.imgUrl = 'assets/images/no_image.png';
+    }
+  }
+
+
+  /*getUser() {
+    this.userService.getUser()
       .subscribe(user => {
-        this.imgUrl = user.picture;
+        this.imgUrl = user.Picture;
         if ( !this.imgUrl) {
-         this.imgUrl = 'assets/images/no_image.png';
+          this.imgUrl = 'assets/images/no_image.png';
         }
       });
-  }
+  }*/
 
 
   imgChange(event) {
@@ -60,7 +69,10 @@ export class PortraitComponent implements OnInit {
 
   uploadImg(): void {
     this.profileService.updateImg(this.imgUrl)
-      .subscribe(res => {alert('上传成功'); });
+      .subscribe(res => {
+        alert('上传成功');
+        this.userService.ChangeMission('changed');
+      });
 
 
   }

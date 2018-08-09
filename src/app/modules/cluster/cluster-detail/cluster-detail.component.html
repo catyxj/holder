@@ -22,11 +22,7 @@
           返回
         </a>
       </div>
-      <!--<div class="ml-3" >
-        <button class="btn btn-info" (click)="newBoiler()">
-          新增集群
-        </button>
-      </div>-->
+
     </div>
 
   </div>
@@ -34,7 +30,13 @@
   <div>
     <table class="table table-bordered">
       <thead class="bg_light_primary">
-      <th> <input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();"> </th>
+      <th>
+        <div class="checkbox c-checkbox white">
+          <label>
+            <input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();">
+            <span class="fa fa-check"></span></label>
+        </div>
+      </th>
       <th> 序号 </th>
       <th> 设备名称 </th>
       <!--<th> 设备数量 </th>-->
@@ -43,7 +45,11 @@
       <tbody>
       <tr *ngFor="let eq of equipList; let i = index">
         <td>
-          <input type="checkbox" [(ngModel)]="eq.checkDelete" (change)="checkDel(eq);">
+          <div class="checkbox c-checkbox">
+            <label>
+              <input type="checkbox" [(ngModel)]="eq.checkDelete" (change)="checkDel(eq);">
+              <span class="fa fa-check"></span></label>
+          </div>
         </td>
         <td> {{ i+1 }}  </td>
         <td> {{ eq.Name }}  </td>
@@ -60,6 +66,9 @@
       </tr>
       </tbody>
     </table>
+    <p class="text-muted" *ngIf="!equipList||equipList.length===0">
+      无有效数据
+    </p>
   </div>
 
 

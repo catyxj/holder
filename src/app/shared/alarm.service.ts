@@ -27,7 +27,7 @@ export class AlarmService {
 
 
   // 获取当前告警列表
-  getCurrents(n: number, pageSize: number, search?: string): Observable<any> {
+  getCurrents(n: number, pageSize: number, search?: string, uid?: string): Observable<any> {
     const url = `${this.currentUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
     return this.http.get<any>(url)
       .pipe(

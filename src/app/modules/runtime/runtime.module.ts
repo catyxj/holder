@@ -10,6 +10,10 @@ import { RuntimeHistoryComponent } from './history/history.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {FormsModule} from "@angular/forms";
 import {NgZorroAntdModule} from "ng-zorro-antd";
+import { RuntimeAlarmComponent } from './alarm/alarm.component';
+import { AlarmCurrentComponent } from './alarm-current/alarm-current.component';
+import { AlarmHistoryComponent } from './alarm-history/alarm-history.component';
+import { AlarmDetailComponent } from './alarm-detail/alarm-detail.component';
 
 
 @NgModule({
@@ -24,7 +28,14 @@ import {NgZorroAntdModule} from "ng-zorro-antd";
   declarations: [
     RuntimeDashboardComponent,
     OperateComponent,
-    RuntimeHistoryComponent
+    RuntimeHistoryComponent,
+    RuntimeAlarmComponent,
+    AlarmCurrentComponent,
+    AlarmHistoryComponent,
+    AlarmDetailComponent,
+  ],
+  entryComponents: [
+    AlarmDetailComponent
   ]
 })
 export class RuntimeModule { }

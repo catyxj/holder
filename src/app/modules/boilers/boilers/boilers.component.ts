@@ -61,10 +61,12 @@ export class BoilersComponent implements OnInit {
 
   // 获取用户信息
   getUser() {
-    this.userService.getUser()
+    let user = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.user = user;
+    /*this.userService.getUser()
       .subscribe( user => {
         this.user = user;
-      });
+      });*/
   }
 
 

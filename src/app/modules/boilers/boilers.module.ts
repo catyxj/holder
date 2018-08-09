@@ -21,6 +21,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material';
 import {NgZorroAntdModule} from "ng-zorro-antd";
 import { JoinClusterComponent } from './join-cluster/join-cluster.component';
+import { BoilerTemplatesComponent } from './templates/templates.component';
+import { AddEquiptemplateComponent } from './add-equiptemplate/add-equiptemplate.component';
+import { EditEquiptemplateComponent } from './edit-equiptemplate/edit-equiptemplate.component';
 
 
 
@@ -47,7 +50,10 @@ import { JoinClusterComponent } from './join-cluster/join-cluster.component';
     EditAddressComponent,
     EditMaintainComponent,
     TerBindComponent,
-    JoinClusterComponent
+    JoinClusterComponent,
+    BoilerTemplatesComponent,
+    AddEquiptemplateComponent,
+    EditEquiptemplateComponent
   ],
   entryComponents: [
     AddBoilerComponent,
@@ -55,7 +61,9 @@ import { JoinClusterComponent } from './join-cluster/join-cluster.component';
     EditAddressComponent,
     EditMaintainComponent,
     TerBindComponent,
-    JoinClusterComponent
+    JoinClusterComponent,
+    AddEquiptemplateComponent,
+    EditEquiptemplateComponent
   ]
 })
 export class BoilersModule { }

@@ -1,8 +1,8 @@
-<div class="breadcrumb">
+<!--<div class="breadcrumb">
   信息维护 / 用户信息
-</div>
+</div>-->
 
-<div class="flex flex-row">
+<div class="flex flex-row mt-2">
   <div class="content" style="flex: 2;">
     <div class="clearfix tab-content">
       <h5 class="pull-left text-info">
@@ -23,7 +23,8 @@
 
   <div class="content text-center" style="flex: 1;">
     <div>
-      <img [src]="profile.Picture" alt="" style="width: 60%; height: 200px;">
+      <img [src]="profile.Picture" alt=""
+           style="width: 60%; height: 200px; border-radius: 100px;">
 
     </div>
     <h3 class="mt-lg-3">
@@ -34,8 +35,8 @@
         {{ profile.Role.Name }}
       </h5>
     </div>
-    <div *ngIf="profile.Organization">
-      {{ profile.Organization.Name }}
+    <div>
+      {{ profile?.Organization?.Name }}
     </div>
 
   </div>

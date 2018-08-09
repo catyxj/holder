@@ -11,6 +11,11 @@
         </div>
       </div>
       <div class="ml-3" >
+        <a [routerLink]="['/admin/equipments/templates']" class="btn btn-info" style="color: #ffffff;">
+          设备型态
+        </a>
+      </div>
+      <div class="ml-3" >
         <button class="btn btn-info" (click)="newBoiler()">
           新增设备
         </button>
@@ -22,7 +27,13 @@
   <div>
     <table class="table table-bordered">
       <thead class="bg_light_primary">
-        <th> <input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();"> </th>
+        <th>
+          <div class="checkbox c-checkbox white">
+            <label>
+              <input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();">
+              <span class="fa fa-check"></span></label>
+          </div>
+        </th>
         <th>序号</th>
         <th>设备名称</th>
         <th>使用企业</th>
@@ -34,7 +45,11 @@
       <tbody>
         <tr *ngFor="let boiler of boilers; let i = index">
           <td>
-            <input type="checkbox" [(ngModel)]="boiler.checkDelete" (change)="checkDel(boiler);">
+            <div class="checkbox c-checkbox">
+              <label>
+                <input type="checkbox" [(ngModel)]="boiler.checkDelete" (change)="checkDel(boiler);">
+                <span class="fa fa-check"></span></label>
+            </div>
           </td>
           <td> {{ i + 1 }} </td>
           <td> {{ boiler.Name }} </td>
@@ -50,6 +65,9 @@
         </tr>
       </tbody>
     </table>
+    <p class="text-muted" *ngIf="!boilers||boilers.length===0">
+      无有效数据
+    </p>
   </div>
 
 
@@ -63,7 +81,7 @@
     </div>
 
     <div class="pull-left ml-3">
-      <button class="btn btn-info" (click)="deleteG()">
+      <button class="btn btn-info">
         批量启动
       </button>
     </div>

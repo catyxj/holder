@@ -13,13 +13,14 @@ export class OperateComponent implements OnInit {
   public params;
   public runtimes;
   public chartOption;
+  public currentData;
 
   constructor(private runtimeService: RuntimeService,
               private datePipe: DatePipe) { }
 
   ngOnInit() {
     this.uid = sessionStorage.getItem('runtimeUid');
-    console.log(this.uid);
+    // console.log(this.uid);
     this.getRuntime(this.uid);
   }
 
@@ -27,10 +28,11 @@ export class OperateComponent implements OnInit {
   getRuntime(uid) {
     this.runtimeService.getRuntimeList(uid)
       .subscribe( data => {
-        console.log(data);
+        // console.log(data);
         this.params = data.channel;
         this.runtimes = data.param;
         this.params[0].checked = true;
+        this.currentData = this.params[0];
         this.initChart();
       });
   }
@@ -46,6 +48,14 @@ export class OperateComponent implements OnInit {
   }
 
   initChart() {
+    if (!this.runtimes) {
+      this.runtimes = [
+        {
+          CreatedDate: 0,
+          Value: 0
+        }
+      ];
+    }
     for (let i = 0; i < this.runtimes.length; i++) {
       let rt = this.runtimes[i];
       rt.CreatedDate = this.datePipe.transform(new Date(rt.CreatedDate), 'HH:mm:ss');
@@ -63,10 +73,14 @@ export class OperateComponent implements OnInit {
       },
       toolbox: {
         feature: {
-          saveAsImage: {}
-        }
+          saveAsImage: {},
+          dataView: {}
+        },
+        right: 50
       },
       grid: {
+        left: 60,
+        right: 50
       },
       xAxis: [
         {
@@ -101,6 +115,7 @@ export class OperateComponent implements OnInit {
     for (let i = 0; i < this.params.length; i++) {
       if (this.params[i].Uid === uid) {
         this.params[i].checked = true;
+        this.currentData = this.params[i];
       } else {
         this.params[i].checked = false;
       }

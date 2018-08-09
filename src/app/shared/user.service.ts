@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import {Observable, of, throwError} from 'rxjs';
+import {Observable, of, Subject, throwError} from 'rxjs';
 
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {catchError, retry, tap} from 'rxjs/internal/operators';
@@ -20,7 +20,21 @@ export class UserService {
   public userInfo;
   public redirectUrl: string;
 
+  private userSource = new Subject<any>();
+  private changeUserSource = new Subject<any>();
+  userStatus$ = this.userSource.asObservable();  // 子组件监测父组件user值
+  changeUserStatus$ = this.changeUserSource.asObservable();
+
   constructor(private http: HttpClient) { }
+
+  // 从父组件获取user值
+  StatusMission(message: any) {
+    this.userSource.next(message);
+  }
+  // 子组件修改user
+  ChangeMission(message: any) {
+    this.changeUserSource.next(message);
+  }
 
   // 登录
   login(user): Observable< any > {

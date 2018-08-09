@@ -1,6 +1,6 @@
-<div class="breadcrumb">
+<!--<div class="breadcrumb">
   信息维护 / 企业信息
-</div>
+</div>-->
 
 
 
@@ -28,8 +28,14 @@
   </div>
   <div>
     <table class="table table-bordered">
-      <thead>
-      <th> <input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();"> </th>
+      <thead class="bg_light_primary">
+      <th>
+        <div class="checkbox c-checkbox white">
+          <label>
+            <input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();">
+            <span class="fa fa-check"></span></label>
+        </div>
+      </th>
       <th>企业名称</th>
       <th>区域</th>
       <th>地址</th>
@@ -39,7 +45,11 @@
       <tbody>
       <tr *ngFor="let org of organizations">
         <td>
-          <input type="checkbox" [(ngModel)]="org.checkDelete" (change)="checkDel(org);" class="custom-check">
+          <div class="checkbox c-checkbox">
+            <label>
+              <input type="checkbox" [(ngModel)]="org.checkDelete" (change)="checkDel(org);">
+              <span class="fa fa-check"></span></label>
+          </div>
         </td>
         <td (click)="goAccount(org.Name)"> {{ org.Name }}  </td>
         <td> <span> {{ org.Address?.Location?.LocationName }} </span> </td>
@@ -71,7 +81,9 @@
       </tr>
       </tbody>
     </table>
-
+    <p class="text-muted" *ngIf="!organizations||organizations.length===0">
+      无有效数据
+    </p>
     <div>
       <div class="pull-left">
         <button class="btn btn-info" (click)="deleteG()">
@@ -99,9 +111,6 @@
 
 </div>
 
-<div>
-  <!--<router-outlet></router-outlet>-->
-</div>
 
 
 

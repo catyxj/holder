@@ -10,12 +10,20 @@ import {User} from '../../../user';
 })
 export class ProfileMainComponent implements OnInit {
 
-  public profile: User ;
+  public profile: any;
 
-  constructor(private userService: UserService, private profileService: ProfileService) { }
+  constructor(private userService: UserService, private profileService: ProfileService) {
+    this.userService.userStatus$ // 监测父组件user
+      .subscribe( data => {
+        this.profile = data;
+      }
+    );
+  }
 
   ngOnInit() {
-    this.getUser();
+    let user = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.profile = user;
+    // this.getUser();
   }
 
 

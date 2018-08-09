@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { UserService } from '../../shared/user.service';
 import {Router} from '@angular/router';
 
@@ -10,28 +10,35 @@ import {Router} from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  user = {Uid: '', Name: '', Role: { Name: '' } };
+  // user = {Uid: '', Name: '', Role: { Name: '' } };
   @Output() toggle = new EventEmitter<void>();
+
+  @Input()
+  user: any;
+
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    this.getUser();
+
+    // this.getUser();
   }
 
   onClick() {
     this.toggle.emit();
   }
 
-  getUser(): void {
+  /*getUser(): void {
     this.userService.getUser()
       .subscribe(user => {
         this.user = user;
+        sessionStorage.setItem('currentUser', JSON.stringify(this.user));
         if (!this.user) {
           sessionStorage.user = false;
+          sessionStorage.removeItem('currentUser');
           this.router.navigate(['/login']);
         }
       });
-    }
+    }*/
 
   logout() {
     this.userService.logout(this.user.Uid)

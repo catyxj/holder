@@ -37,7 +37,9 @@ export class OrgMainComponent implements OnInit {
               private addrService: AdressService) { }
 
   ngOnInit() {
-    this.getUser();
+    let user = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.user = user;
+    // this.getUser();
     this.getOrganization();
     this.getAddr();
   }

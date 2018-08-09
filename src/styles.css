@@ -14,13 +14,13 @@ ul,li{
   list-style: none;
 }
 .content{
-  padding: 0 20px;
+  padding: 10px 20px;
 }
 .tab-content{
   padding: 10px 0;
   border-bottom: 1px solid #eeeeee;
 }
-nav a{
+.tab-content nav a{
   padding: 10px;
   color: #545b62;
 }
@@ -36,7 +36,9 @@ nav a{
   background-color: #ffffff;
 }
 
-
+h5, .h5 {
+  font-size: 1.25rem;
+}
 
 .bg_default{
   background-color: #607D8B;

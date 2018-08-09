@@ -120,6 +120,23 @@ export class BoilerService {
   }
 
 
+  // 添加设备型态
+  addTemplate(temp): Observable<any> {
+    return this.http.post('/equipment_template_add', temp, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 修改设备型态
+  editTemplate(temp): Observable<any> {
+    return this.http.post('/equipment_template_update', temp, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);

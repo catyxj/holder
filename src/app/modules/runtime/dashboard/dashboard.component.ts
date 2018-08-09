@@ -17,6 +17,10 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
   public ranges = [];
   private socket;
   public uid;
+  public online;
+  public isBurning;
+  public hasWarning;
+  public img;
 
   constructor(private boilerWsService: BoilerSocketService,
               private route: ActivatedRoute,
@@ -25,33 +29,9 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.uid = sessionStorage.getItem('runtimeUid');
-    console.log(this.uid);
+    // console.log(this.uid);
 
-    /*this.runtimeService.getInstants()
-      .subscribe( data => {
-        this.equipment = data;
-        console.log(this.equipment);
-        for (let i = 0; i < this.equipment.length; i++) {
-          let eq = this.equipment[i];
-          if ( eq.SequenceNumber === -1) {
-              eq.SequenceNumber = eq.ChannelNumber;
-          }
-          if (eq.ChannelType === 1) {
-            this.analogues.push(eq);
-          }
-          if (eq.ChannelType === 3) {
-            this.switchs.push(eq);
-          }
-          if (eq.ChannelType === 5) {
-            this.ranges.push(eq);
-          }
-        }
-
-        this.order(this.analogues);
-        this.order(this.switchs);
-        this.order(this.ranges);
-
-      }, err => {});*/
+    // this.initTest();
 
     this.initData();
   }
@@ -97,12 +77,62 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
           }
 
 
+          this.isBurning = true;
+          if (this.isBurning) {
+            this.img = 'assets/images/boilerwater.gif';
+          } else {
+            this.img = 'assets/images/boilerwater.png';
+          }
+
         },
         err => console.log(err),
         () => console.log('ws结束')
       );
   }
 
+  initTest() {
+    this.runtimeService.getInstants()
+      .subscribe( data => {
+        this.equipment = data;
+        console.log(this.equipment);
+        let analogues = [];
+        let switchs = [];
+        let ranges = [];
+        if (this.equipment) {
+          for (let i = 0; i < this.equipment.length; i++) {
+            let eq = this.equipment[i];
+            if ( eq.SequenceNumber === -1) {
+              eq.SequenceNumber = eq.ChannelNumber;
+            }
+            if (eq.ChannelType === 1) {
+              analogues.push(eq);
+            }
+            if (eq.ChannelType === 3) {
+              switchs.push(eq);
+            }
+            if (eq.ChannelType === 5) {
+              ranges.push(eq);
+            }
+          }
+          this.order(analogues);
+          this.order(switchs);
+          this.order(ranges);
+
+          this.analogues = analogues;
+          this.switchs = switchs;
+          this.ranges = ranges;
+        }
+
+
+        this.isBurning = true;
+        if (this.isBurning) {
+          this.img = 'assets/images/boilerwater.gif';
+        } else {
+          this.img = 'assets/images/boilerwater.png';
+        }
+
+      }, err => {});
+  }
 
   order(arr) {
     arr.sort(function(a, b) {
@@ -116,8 +146,8 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    this.socket.unsubscribe();
-    this.boilerWsService.closeSocket();
+    // this.socket.unsubscribe();
+    // this.boilerWsService.closeSocket();
   }
 
 }

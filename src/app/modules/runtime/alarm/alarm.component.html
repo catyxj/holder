@@ -1,0 +1,22 @@
+<div class="content">
+  <div class="clearfix tab-content">
+    <div class="pull-left">
+      <span class="text-info">
+        订阅推送
+      </span>
+      <label class="switch switch-lg" style="margin-bottom: 0;">
+        <input type="checkbox" checked="checked" />
+        <span></span>
+      </label>
+    </div>
+
+    <nav class="pull-right">
+      <a routerLink="./current" routerLinkActive="active">当前告警列表</a>
+      <a routerLink="./history" routerLinkActive="active">历史告警列表</a>
+    </nav>
+  </div>
+
+  <div class="">
+    <router-outlet></router-outlet>
+  </div>
+</div>

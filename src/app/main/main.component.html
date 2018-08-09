@@ -1,21 +1,19 @@
 
 <div class="site">
   <header>
-    <app-header (toggle)="sidenav.toggle()"></app-header>
+    <app-header [user]="user" (toggle)="sidenav.toggle()"></app-header>
   </header>
 
   <main>
     <mat-sidenav-container class="sidenav-container">
       <mat-sidenav class="sidenav bg_light_default"  mode="side" opened #sidenav>
-        <app-sidebar ></app-sidebar>
+        <app-sidebar [user]="user"></app-sidebar>
       </mat-sidenav>
       <mat-sidenav-content>
         <router-outlet></router-outlet>
       </mat-sidenav-content>
     </mat-sidenav-container>
-    <!--<div class="display">
-      <router-outlet></router-outlet>
-    </div>-->
+
   </main>
 
 

@@ -10,10 +10,10 @@
 .login-form-container {
   position: absolute;
   width: 400px;
-  height: 450px;
+  height: 420px;
   left: 50%;
   top: 50%;
-  margin-left: -200px;
+  /*margin-left: -200px;*/
   margin-top: -225px;
   padding: 30px 60px;
   background: rgba(41,67,78,0.8);
@@ -25,7 +25,7 @@
   font-size: 38px;
   line-height: 100px;
   margin: 0px;
-  font-weight: bold;
+  /*font-weight: bold;*/
 }
 .login-form{
   margin-top: 20px;

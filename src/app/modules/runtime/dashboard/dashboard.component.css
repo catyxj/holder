@@ -1,6 +1,6 @@
 
 *{
-  color: #666666;
+  /*color: #666666;*/
 }
 
 ul li{
@@ -9,4 +9,5 @@ ul li{
   padding-top: 6px;
   font-size: 12px;
   box-sizing: border-box;
+  color: #888888;
 }

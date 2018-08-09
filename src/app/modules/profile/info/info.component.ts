@@ -19,17 +19,34 @@ export class InfoComponent implements OnInit {
   constructor(private userService: UserService, private profileService: ProfileService) { }
 
   ngOnInit() {
-    this.getUser();
+    let user = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.profile = user;
+    // this.getUser();
   }
 
-  getUser(): void {
+  /*getUser(): void {
     this.userService.getUser()
       .subscribe(user => { this.profile = user;  });
-  }
+  }*/
 
   updateUser() {
-    this.profileService.updateProfile({ fullname: this.profile.Name, mobile: this.profile.MobileNumber, email: this.profile.Email})
-      .subscribe(profile => {this.profile = profile; });
+    let postData = {
+      fullname: this.profile.Name,
+      mobile: this.profile.MobileNumber,
+      email: this.profile.Email
+    };
+    this.profileService.updateProfile(postData)
+      .subscribe(profile => {
+        alert('更新成功');
+        // this.profile = profile;
+        this.userService.getUser()
+          .subscribe( data => {
+            this.profile = data;
+            // sessionStorage.setItem('currentUser', JSON.stringify(this.profile));
+            this.userService.ChangeMission('changed');
+          });
+
+      });
   }
 
 }

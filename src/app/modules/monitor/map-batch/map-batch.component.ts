@@ -97,7 +97,7 @@ export class MapBatchComponent implements OnInit {
             }
           }
           let content = `<h6 class="text-info"> ${mark.name} </h6>
-                        <p>
+                        <p style="font-size: 12px; color: #666666;">
                          <b>地址: </b> ${mark.address} <br/>
                          <b>终端状态：</b> ${mark.online} <br/>
                          <b>运行状态：</b> ${mark.isrunning} <br/>
