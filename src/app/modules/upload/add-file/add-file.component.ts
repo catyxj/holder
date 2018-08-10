@@ -24,19 +24,20 @@ export class AddFileComponent implements OnInit {
 
 
   beforeUpload = (file: UploadFile): boolean => {
-    this.fileList.push(file);
+    this.fileList = [file];
     return false;
   }
 
   handleUpload(): void {
     const formData = new FormData();
+    formData.append('org', this.org);
 
     this.fileList.forEach((file: any) => {
-      formData.append('files[]', file);
+      formData.set('files', file);
     });
     this.uploading = true;
     // You can use any AJAX library you like
-    const req = new HttpRequest('POST', '/posts/', {file: formData, org: this.org}, {
+    const req = new HttpRequest('POST', '/posts/', formData, {
       reportProgress: true
     });
     this.http

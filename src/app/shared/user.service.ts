@@ -4,6 +4,7 @@ import {Observable, of, Subject, throwError} from 'rxjs';
 
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {catchError, retry, tap} from 'rxjs/internal/operators';
+import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from "@angular/router";
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
@@ -93,4 +94,13 @@ export class UserService {
       error.error);
   }
 
+}
+
+
+export class UserResolver implements Resolve<any> {
+  constructor(private us: UserService, private router: Router) {}
+
+  resolve(): Observable<any> {
+    return this.us.getUser();
+  }
 }

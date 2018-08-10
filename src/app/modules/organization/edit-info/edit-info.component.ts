@@ -19,6 +19,9 @@ export class EditInfoComponent implements OnInit {
   public data: any;
   public cities: any = [];
   public regions: any;
+  public brandImg;
+  public img;
+  public errMes;
 
 
 
@@ -37,6 +40,9 @@ export class EditInfoComponent implements OnInit {
       showBrand: this.currentData.ShowBrand,
       brandName: this.currentData.BrandName
     };
+
+    this.brandImg = this.currentData.BrandImageUrl;
+
     this.getOrgType();
 
 
@@ -135,6 +141,35 @@ export class EditInfoComponent implements OnInit {
   }
 
 
+  //  上传图片
+  imgChange(event) {
+    let that = this;
+    if (!event.target.files[0]) {
+      return;
+    }
+    let file = event.target.files[0];
+    that.img = file;
+    const isPNG = file.type;      // === 'image/png';
+    const isLt200k = file.size / 1024;
+    // console.log(isPNG, isLt200k);
+    if (!!file && (isPNG === 'image/jpeg' || isPNG === 'image/png' || isPNG === 'image/gif') && isLt200k < 200) {
+      let reader = new FileReader();
+      // 图片文件转换为base64
+      reader.readAsDataURL(file);
+
+      reader.onload = function() {
+        // 显示图片
+        that.brandImg = this.result;
+        that.errMes = ' ';
+
+      };
+    } else {
+      that.errMes = '图片格式或大小错误';
+    }
+
+  }
+
+
   // 保存
   save() {
     let postData = {
@@ -145,12 +180,15 @@ export class EditInfoComponent implements OnInit {
       location_id: this.data.location,
       show_brand: null,
       brand_name: null,
-      is_super: null
+      is_super: null,
+      brand_img: ''
     };
     if (this.currentUser.Role.RoleId <= 2) {
       postData.show_brand = this.data.showBrand;
       postData.brand_name = this.data.brandName;
-
+      if (this.img) {
+        postData.brand_img = this.brandImg;
+      }
       postData.is_super = this.data.isSuper;
       // postData.supervisor = $modal.supervisor;
     }

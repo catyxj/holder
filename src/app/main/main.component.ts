@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserService} from "../shared/user.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs/index";
 
 
@@ -19,6 +19,7 @@ export class MainComponent implements OnInit, OnDestroy {
   public subscription: Subscription;
 
   constructor(private userService: UserService,
+              private route: ActivatedRoute,
               private router: Router) {
     this.subscription = this.userService.changeUserStatus$
       .subscribe( data => {
@@ -31,6 +32,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   getUser(): void {
+
     this.userService.getUser()
       .subscribe(user => {
         this.user = user;

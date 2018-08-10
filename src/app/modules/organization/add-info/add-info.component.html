@@ -81,11 +81,18 @@
   </div>
   <hr style="margin-top: 6px;" *ngIf="editing && currentUser.Role.RoleId < 10">
   <div class="row" *ngIf="editing && currentUser.Role.RoleId < 10">
-    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+    <div class="form-group col-6 flex">
       <label class="control-label" style="font-size: 15px; margin-right: 6px;">显示企业标识</label>
-      <input [(ngModel)]="data.showBrand"
-             type="checkbox">
+      <!--<input [(ngModel)]="data.showBrand"
+             type="checkbox">-->
+      <div class="checkbox c-checkbox">
+        <label>
+          <input type="checkbox" [(ngModel)]="data.showBrand">
+          <span class="fa fa-check"></span>
+        </label>
+      </div>
     </div>
+
     <div class="form-group col-lg-6 col-md-6 col-sm-6">
       <div class="input-group">
         <span class="input-group-append">
@@ -97,6 +104,8 @@
                [disabled]="!editing || !data.showBrand"
                class="form-control ng-pristine ng-valid ng-touched has-success"
                placeholder="{{data.showBrand ? '输入首页显示的企业标识' : '不显示'}}">
+
+
       </div>
     </div>
     <div *ngIf="!editing"
@@ -107,11 +116,30 @@
   </div>
 
   <div class="row" *ngIf="editing && currentUser.Role.RoleId < 10">
-    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+
+    <div class="form-group col-6 flex">
       <label class="control-label" style="font-size: 15px; margin-right: 6px;">是否主管单位</label>
-      <input [(ngModel)]="data.isSuper"
-             type="checkbox">
+      <!--<input [(ngModel)]="data.isSuper"
+             type="checkbox">-->
+      <div class="checkbox c-checkbox">
+        <label>
+          <input type="checkbox" [(ngModel)]="data.isSuper">
+          <span class="fa fa-check"></span>
+        </label>
+      </div>
     </div>
+    <div class="col-6 flex" *ngIf="data.showBrand">
+      <div class="file_box" style=" width: 80px; height: 34px;">
+        <button class="btn btn-outline-info">
+          上传标识
+        </button>
+        <input type="file" class="file_input" (change)="imgChange($event)">
+      </div>
+      <div class="ml-2" style="border: 1px solid #eeeeee; width: 280px; height: 34px;">
+        <img src="{{brandImg}}" alt="" style="height: 30px; max-width: 280px;">
+      </div>
+    </div>
+
   </div>
 
 

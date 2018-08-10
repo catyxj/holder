@@ -27,6 +27,7 @@ import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import zh from '@angular/common/locales/zh';
 import { TestPageComponent } from './test-page/test-page.component';
 import {NgxEchartsModule} from "ngx-echarts";
+import {UserResolver} from "./shared/user.service";
 
 
 registerLocaleData(zh);
@@ -64,7 +65,7 @@ registerLocaleData(zh);
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},
-    { provide: NZ_I18N, useValue: zh_CN }
+    { provide: NZ_I18N, useValue: zh_CN },
   ],
   bootstrap: [AppComponent]
 })

@@ -5,6 +5,7 @@ import {MainComponent} from './main/main.component';
 import {NotFound404Component} from './global/not-found404/not-found404.component';
 import {UserloginGuard} from './shared/userlogin.guard';
 import {TestPageComponent} from "./test-page/test-page.component";
+import {UserResolver} from "./shared/user.service";
 
 
 const routes: Routes = [

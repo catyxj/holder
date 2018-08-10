@@ -4,6 +4,7 @@ import {MatButtonModule, MatIconModule} from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import { SetModalComponent } from './set-modal/set-modal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { ManagementComponent } from './management/management.component';
 
 
 @NgModule({
@@ -16,9 +17,11 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
   ],
   declarations: [
     SetModalComponent,
+    ManagementComponent,
   ],
   entryComponents: [
-    SetModalComponent
+    SetModalComponent,
+    ManagementComponent,
   ]
 })
 export class UserAccountModule { }

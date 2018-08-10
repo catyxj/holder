@@ -74,7 +74,7 @@ export class OperateComponent implements OnInit {
       toolbox: {
         feature: {
           saveAsImage: {},
-          dataView: {}
+          // dataView: {}
         },
         right: 50
       },

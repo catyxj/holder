@@ -6,9 +6,20 @@
     </button>
 
     <!--企业标识-->
-    <a class="navbar-brand" href="">
+    <a class="navbar-brand" href="" *ngIf="user && (!user.Organization || !user.Organization.ShowBrand)">
       <img src="assets/images/light.png"  height="30" alt="">
     </a>
+    <!--显示企业标识-->
+    <a class="navbar-brand" href="" *ngIf="user && (user.Organization && user.Organization.ShowBrand)">
+      <h3 *ngIf="!user.Organization.BrandImageUrl" style="color: #ffffff;">
+        {{user.Organization.BrandName}}
+      </h3>
+      <span *ngIf="user.Organization.BrandImageUrl" >
+        <img src="{{user.Organization.BrandImageUrl}}" alt="" height="30">
+      </span>
+    </a>
+
+
 
     <!-- This fills the remaining space of the current row -->
     <span class="example-spacer"></span>

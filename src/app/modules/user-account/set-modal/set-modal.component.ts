@@ -13,6 +13,7 @@ export class SetModalComponent implements OnInit {
   currentUser: any;
   aroles: any;
   status: any;
+
   currentDataCopy: any;
   deleteList: string[] = [];
 

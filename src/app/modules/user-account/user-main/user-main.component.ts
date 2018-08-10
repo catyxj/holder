@@ -7,6 +7,7 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import {ManagementComponent} from "../management/management.component";
 
 
 @Component({
@@ -175,6 +176,23 @@ export class UserMainComponent implements OnInit {
     });
   }
 
+
+  // 权限管理模态框
+  openManage(account) {
+    const modalRef = this.modalService.open(ManagementComponent, { size: 'lg' });
+    modalRef.componentInstance.currentData = account;
+    modalRef.componentInstance.currentUser = this.user;
+    // modalRef.componentInstance.aroles = this.aroles;
+    // modalRef.componentInstance.status = this.status;
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+        this.getUserAccount();
+      }
+    }, (reason) => {
+
+      console.log(reason);
+    });
+  }
 
   // 添加
   /*new() {

@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  // user = {Uid: '', Name: '', Role: { Name: '' } };
+
   @Output() toggle = new EventEmitter<void>();
 
   @Input()
@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-
+    console.log(this.user);
     // this.getUser();
   }
 

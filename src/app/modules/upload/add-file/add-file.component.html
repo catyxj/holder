@@ -7,9 +7,11 @@
 
 <div class="modal-body">
 
-  <input type="text" [(ngModel)]="org">
+  <input class="form-control mb-3" type="text" [(ngModel)]="org">
+
   <nz-upload
     [(nzFileList)]="fileList"
+    [nzDisabled]="fileList.length>=1"
     [nzBeforeUpload]="beforeUpload">
     <button nz-button>
       <i class="anticon anticon-upload"></i><span>上传文件</span>
@@ -20,7 +22,7 @@
 
 <div class="modal-footer">
   <button nz-button [nzType]="'primary'" [nzLoading]="uploading" (click)="handleUpload()" [disabled]="fileList.length == 0" style="margin-top: 16px">
-    {{ uploading ? 'Uploading' : 'Start Upload' }}
+    {{ uploading ? '上传中' : '开始上传' }}
   </button>
   <!--<button type="button" class="btn btn-info">保存</button>-->
   <!--<button type="button" class="btn" (click)="activeModal.dismiss('close')">取消</button>-->

@@ -55,7 +55,12 @@
         <td> {{ account.Name }} </td>
         <td> <span *ngIf="account.Organization"> {{ account.Organization.Name }} </span>  </td>
         <td> {{ account.stat.name }} </td>
-        <td> <button class="btn btn-sm btn-info" (click)="open(account)">设置</button> </td>
+        <td>
+          <button class="btn btn-sm btn-info" (click)="open(account)">设置</button>
+          <button class="btn btn-sm btn-info ml-2" *ngIf="user.Role.RoleId <= 1" (click)="openManage(account)">
+            权限管理
+          </button>
+        </td>
       </tr>
       </tbody>
     </table>

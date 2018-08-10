@@ -36,6 +36,7 @@ mat-nav-list a.sidebar_title{
   line-height: 36px;
 }
 .sub_menu{
+  /*background-color: #dbe1e7;*/
   transition: all .3s linear;
 }
 
