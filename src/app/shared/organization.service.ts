@@ -82,9 +82,19 @@ export class OrganizationService {
 
   // 添加账号
   addAccount(acc): Observable<any> {
-    return this.http.post('', acc, httpOptions);
+    return this.http.post('', acc, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
+
+  entryAccount(uid): Observable<any> {
+    return this.http.get(`/login_in_organization?uid=${uid}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
 
 

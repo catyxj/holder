@@ -3,13 +3,13 @@
     <div class="pull-right flex flex-row">
 
       <!--<div class="btn-group mr-2">
-        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 2, 'btn-info': checkValue === 2}" (click)="checkValue = 2">
+        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 2, 'btn_info': checkValue === 2}" (click)="checkValue = 2">
           全部
         </button>
-        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 1, 'btn-info': checkValue === 1}" (click)="checkValue = 1">
+        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 1, 'btn_info': checkValue === 1}" (click)="checkValue = 1">
           运行
         </button>
-        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 0, 'btn-info': checkValue === 0}" (click)="checkValue = 0">
+        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 0, 'btn_info': checkValue === 0}" (click)="checkValue = 0">
           未运行
         </button>
       </div>-->
@@ -17,7 +17,7 @@
       <div class="input-group">
         <input type="text" class="form-control" placeholder="请输入设备名称" [(ngModel)]="search" >
         <div class="input-group-append" (click)="searchChange()">
-          <button class="btn btn-info" type="button"><i class="fa fa-search"></i></button>
+          <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
         </div>
       </div>
 
@@ -44,11 +44,11 @@
             {{ data.name }}
           </a>
         </td>
-        <td [ngClass]="{'text-info':data.termStatus}"> {{ data.online }} </td>
-        <td [ngClass]="{'text-info':data.eptStatus}">
+        <td [ngClass]="{'text_info':data.termStatus > 0}"> {{ data.online }} </td>
+        <td [ngClass]="{'text_info':data.termStatus > 0 && data.eptStatus}">
             {{data.isBurning}}
         </td>
-        <td [ngClass]="{'text-danger':data.alarmStatus}">
+        <td [ngClass]="{'text-danger':data.termStatus > 0 && data.alarmStatus, 'text_info':data.termStatus > 0 && !data.alarmStatus}">
           {{data.warning}}
         </td>
         <td>

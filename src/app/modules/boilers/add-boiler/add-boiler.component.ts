@@ -3,6 +3,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {BoilerService} from '../../../shared/boiler.service';
 import {OrganizationService} from '../../../shared/organization.service';
 import {FormControl} from '@angular/forms';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class AddBoilerComponent implements OnInit {
     this.getOrgType();
     this.data = {
       name: '',
-      templateId: 0,
+      templateId: '',
       infos: [],
       links: []
     };
@@ -60,7 +61,7 @@ export class AddBoilerComponent implements OnInit {
     this.orgService.getOrgType()
       .subscribe(types => {
         this.orgTypes = types;
-        console.log(this.orgTypes);
+        // console.log(this.orgTypes);
       });
   }
 
@@ -91,7 +92,7 @@ export class AddBoilerComponent implements OnInit {
         }
       }
       this.links[0].orgs = orgs;
-      console.log( this.links);
+      // console.log( this.links);
     }
   }
 
@@ -108,7 +109,7 @@ export class AddBoilerComponent implements OnInit {
 
   //  添加企业关联
   addNewLink() {
-    this.links.push({type: 0, uid: ''});
+    this.links.push({type: 0, uid: '', eptCtlPlg: false});
   }
 
 //  删除企业关联
@@ -127,6 +128,7 @@ export class AddBoilerComponent implements OnInit {
     }
     link.orgs = orgs;
     link.uid = '';
+    link.eptCtlPlg = false;
   }
 
 //  上传图片
@@ -139,7 +141,7 @@ export class AddBoilerComponent implements OnInit {
     that.img = file;
     const isPNG = file.type;      // === 'image/png';
     const isLt200k = file.size / 1024;
-    console.log(isPNG, isLt200k);
+    // console.log(isPNG, isLt200k);
     if (!!file && (isPNG === 'image/jpeg' || isPNG === 'image/png' || isPNG === 'image/gif') && isLt200k < 200) {
       let reader = new FileReader();
       // 图片文件转换为base64
@@ -161,13 +163,6 @@ export class AddBoilerComponent implements OnInit {
 
 //  保存
   save() {
-    // console.log(this.info);
-    // console.log('links:', this.links);
-
-    if (typeof(this.data.templateId) !== 'number') {
-      this.data.templateId = parseInt(this.data.templateId);
-    }
-
 
     // 其他信息
     if (this.info.length > 0) {
@@ -186,8 +181,11 @@ export class AddBoilerComponent implements OnInit {
       if (link.uid === '') {
         continue;
       }
+      if (typeof(link.type) !== 'number') {
+        link.type = parseInt(link.type);
+      }
       this.data.links.push(
-        {type: parseInt(link.type), uid: link.uid }
+        {type: link.type, uid: link.uid, eptCtlPlg: link.eptCtlPlg }
         );
     }
 
@@ -201,13 +199,22 @@ export class AddBoilerComponent implements OnInit {
       this.data.imgUrl = this.imgUrl;
     }
 
-    console.log(this.data);
+    // console.log(this.data);
 
     this.boilerService.addBoiler(this.data)
       .subscribe( val => {
-        alert('保存成功');
+        Swal(
+          '保存成功！',
+          '',
+          'success'
+        );
         this.activeModal.close('ok');
       }, err => {
+        Swal(
+          '保存失败！',
+          err,
+          'error'
+        );
         this.data.links = [];
         this.data.infos = [];
       });

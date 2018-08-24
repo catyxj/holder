@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../../shared/user.service';
 import {ProfileService} from '../../../shared/profile.service';
+import {NzMessageService} from "ng-zorro-antd";
 
 
 
@@ -18,7 +19,9 @@ export class PortraitComponent implements OnInit {
   public img: any;
   public errMes: string;
 
-  constructor(private userService: UserService, private profileService: ProfileService) { }
+  constructor(private userService: UserService,
+              private profileService: ProfileService,
+              private message: NzMessageService) { }
 
   ngOnInit() {
     let user = JSON.parse(sessionStorage.getItem('currentUser'));
@@ -72,6 +75,8 @@ export class PortraitComponent implements OnInit {
       .subscribe(res => {
         alert('上传成功');
         this.userService.ChangeMission('changed');
+      }, err => {
+        this.message.error(err);
       });
 
 

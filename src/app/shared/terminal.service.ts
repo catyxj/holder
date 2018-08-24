@@ -32,7 +32,7 @@ export class TerminalService {
 
 
   private terminalsUrl = '/terminal_list';
-  private messageUrl = '/terminal_origin_message_list';
+  private messageUrl = '/terminal_message_list';
   private funcUrl = '/term_function_code_list';
   private byteUrl = '/term_byte_list';
   private correspondUrl = '/correspond_type_list';
@@ -67,7 +67,7 @@ export class TerminalService {
 
   // 获取调试消息
   getMessage(code: string): Observable<any> {
-    const url = `${this.messageUrl}/?dev=origin&terminal=${code}`;
+    const url = `${this.messageUrl}/?code=${code}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -77,6 +77,15 @@ export class TerminalService {
   // 添加终端
   addTerminal(ter): Observable<any> {
     return this.http.post('/terminal_add/', ter, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+  // 终端关联
+  editTerminal(ter): Observable<any> {
+    return this.http.post('/terminal_update/', ter, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -106,7 +115,7 @@ export class TerminalService {
       );
   }
 
-  // 提交
+  // 通道配置提交
   save(data): Observable<any> {
     return this.http.post('/channel_config_update', data, httpOptions)
       .pipe(
@@ -116,7 +125,7 @@ export class TerminalService {
 
   // 获取bin文件
   getBin(): Observable<any> {
-    return this.http.get<any>('/bin_list')
+    return this.http.get<any>('/bin_file_list')
       .pipe(
         catchError(this.handleError)
       );
@@ -124,11 +133,28 @@ export class TerminalService {
 
   // 升级配置
   upgrade(bin): Observable<any> {
-    return this.http.post('/upgrade_configuration', bin, httpOptions)
+    return this.http.post('/term_app_upgrade', bin, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
+
+  // 重启终端
+  restart(code): Observable<any> {
+    return this.http.post('/term_restart', code, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 下发
+  issued(data): Observable<any> {
+    return this.http.post('/term_config_issued', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
 
   // 获取功能码
   getFuncode(): Observable<any> {

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {TemplateService} from "../../../shared/template.service";
+import {NzMessageService} from "ng-zorro-antd";
 
 @Component({
   selector: 'app-add-template',
@@ -15,7 +16,8 @@ export class AddTemplateComponent implements OnInit {
   public name;
 
   constructor(public activeModal: NgbActiveModal,
-              private templateService: TemplateService) { }
+              private templateService: TemplateService,
+              private message: NzMessageService) { }
 
   ngOnInit() {
     this.name = '';
@@ -26,7 +28,11 @@ export class AddTemplateComponent implements OnInit {
     data.Name = this.name;
 
     this.templateService.add(data)
-      .subscribe();
+      .subscribe( val => {
+        alert('保存成功');
+      }, err => {
+        this.message.error(err);
+      });
   }
 
 }

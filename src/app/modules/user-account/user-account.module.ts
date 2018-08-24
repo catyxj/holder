@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 import { SetModalComponent } from './set-modal/set-modal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ManagementComponent } from './management/management.component';
+import {NgZorroAntdModule} from "ng-zorro-antd";
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { ManagementComponent } from './management/management.component';
     MatIconModule,
     FormsModule,
     NgbModule,
+    NgZorroAntdModule,
   ],
   declarations: [
     SetModalComponent,

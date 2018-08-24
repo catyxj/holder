@@ -19,6 +19,7 @@ import { HttpClient } from '@angular/common/http';
 export class LoginComponent implements OnInit {
   public user = { username: '', password: '' , ip: ''};
   public errMes: string ;
+  public checkRemember = false;
 
 
   constructor(public router: Router, public activatedRoute: ActivatedRoute, private userService: UserService, private http: HttpClient) { }
@@ -26,6 +27,15 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.getConfig()
       .subscribe(ipInfo => {this.user.ip = ipInfo.ip; });
+
+    let getLocal = localStorage.getItem('holderUser');
+    if (getLocal) {
+      this.user.username = getLocal;
+      this.checkRemember = true;
+    } else {
+
+    }
+
   }
 
   forgetPwd() {}
@@ -37,6 +47,12 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     // console.log(this.user);
+    if (this.checkRemember === true) {
+      localStorage.setItem('holderUser', this.user.username);
+    } else {
+      localStorage.removeItem('holderUser');
+    }
+
     this.userService.login(this.user)
       .subscribe(
         user => {
@@ -48,6 +64,10 @@ export class LoginComponent implements OnInit {
          );
   }
 
+  // 记住用户名
+  /*remember() {
+    console.log(this.checkRemember);
+  }*/
 
 
 }

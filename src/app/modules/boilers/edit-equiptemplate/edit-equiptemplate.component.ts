@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {BoilerService} from "../../../shared/boiler.service";
+import {NzMessageService} from "ng-zorro-antd";
 
 @Component({
   selector: 'app-edit-equiptemplate',
@@ -20,13 +21,15 @@ export class EditEquiptemplateComponent implements OnInit {
   public imgFile2;
 
   constructor(public activeModal: NgbActiveModal,
-              private boilerService: BoilerService) { }
+              private boilerService: BoilerService,
+              private message: NzMessageService) { }
 
   ngOnInit() {
     // console.log(this.currentData);
     this.name = this.currentData.Name;
-    this.img1 = 'assets/images/no_image.png';
-    this.img2 = 'assets/images/no_image.png';
+
+    this.img1 = this.currentData.ImageRun ? this.currentData.ImageRun : 'assets/images/no_image.png';
+    this.img2 = this.currentData.ImageStop ? this.currentData.ImageStop : 'assets/images/no_image.png';
   }
 
   //  上传图片
@@ -93,14 +96,17 @@ export class EditEquiptemplateComponent implements OnInit {
     let data = {
       uid: this.currentData.Uid,
       name: this.name,
-      img1: this.imgFile1 ? this.img1 : '',
-      img2: this.imgFile2 ? this.img2 : ''
+      imageRun: this.imgFile1 ? this.img1 : '',
+      imageStop: this.imgFile2 ? this.img2 : ''
     };
     // console.log(data);
     this.boilerService.editTemplate(data)
       .subscribe( val => {
         alert('保存成功');
         this.activeModal.close('ok');
+      }, err => {
+        // this.message.error(err);
+        alert(err);
       });
   }
 

@@ -69,8 +69,11 @@ export class MapBatchComponent implements OnInit {
       .subscribe( data => {
         this.markers = data.params;
         this.totalItems = data.counts;
-        console.log(this.totalItems);
+        this.map.clearOverlays();
         // this.map.panTo(this.markers[0].longitude, this.markers[0].latitude);
+        if (!this.markers) {
+          this.markers = [];
+        }
         for (let i = 0; i < this.markers.length; i++) {
           let mark = this.markers[i];
           let icon = null;

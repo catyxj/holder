@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { UserService } from '../../shared/user.service';
 import {Router} from '@angular/router';
+import {Subscription} from "rxjs/index";
+import {AlarmService} from "../../shared/alarm.service";
 
 
 
@@ -16,10 +18,27 @@ export class HeaderComponent implements OnInit {
   @Input()
   user: any;
 
-  constructor(private userService: UserService, private router: Router) { }
+  public alarmNum;
+  public subscription: Subscription;
+
+  constructor(private userService: UserService,
+              private alarmService: AlarmService,
+              private router: Router) {
+    this.subscription = this.alarmService.alarmStatus$
+      .subscribe( data => {
+        this.alarmService.getAlarmNum()
+          .subscribe( val => {
+            this.alarmNum = val;
+          });
+      });
+  }
 
   ngOnInit() {
-    console.log(this.user);
+    // console.log(this.user);
+    this.alarmService.getAlarmNum()
+      .subscribe( data => {
+        this.alarmNum = data;
+      });
     // this.getUser();
   }
 

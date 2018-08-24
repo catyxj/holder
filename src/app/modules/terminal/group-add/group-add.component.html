@@ -47,7 +47,7 @@
 
   <button type="button" *ngIf="terList.length < 5"
           (click)="addTer()"
-          class="btn btn-info btn-block">
+          class="btn btn_info btn-block">
     <i class="fa fa-plus-circle"></i>
     新增终端
   </button>
@@ -55,7 +55,7 @@
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn-info" (click)="save()" [disabled]="!org">
+  <button type="button" class="btn btn_info" (click)="save()" [disabled]="!org">
     <span class="">保存</span>
   </button>
   <button class="btn btn-default" type="button" (click)="activeModal.dismiss('close')">取消</button>

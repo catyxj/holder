@@ -162,6 +162,9 @@ export class MapGeneralComponent implements OnInit, OnDestroy {
   // 地图点集合
   mapCluster() {
     // 点聚合
+    if (!this.markers) {
+      return;
+    }
     for (let i = 0; i < this.markers.length; i++) {
       let pt = null;
       if (this.markers[i].longitude === 0 || this.markers[i].latitude === 0){

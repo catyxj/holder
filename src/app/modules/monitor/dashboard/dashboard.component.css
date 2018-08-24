@@ -27,6 +27,7 @@ a {
   border: 1px solid #eeeeee;
   border-radius: 2px;
   color: #607d8b;
+  background-color: #ffffff;
 }
 .module a{
   color: #607d8b;
@@ -92,12 +93,10 @@ a {
   margin-bottom: 10px;
   line-height: 55px;
   text-align: center;
-  color: #ffffff;
+  /*color: #ffffff;*/
 }
 
-.bg_grey{
-  background-color: #8eacbb;
-}
+
 
 .module:hover {
   color: #607d8b;

@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {BoilerService} from "../../../shared/boiler.service";
+import {NzMessageService} from "ng-zorro-antd";
 
 @Component({
   selector: 'app-add-equiptemplate',
   templateUrl: './add-equiptemplate.component.html',
-  styleUrls: ['./add-equiptemplate.component.css']
+  styleUrls: ['./add-equiptemplate.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AddEquiptemplateComponent implements OnInit {
 
@@ -17,7 +19,8 @@ export class AddEquiptemplateComponent implements OnInit {
   public imgFile2;
 
   constructor(public activeModal: NgbActiveModal,
-              private boilerService: BoilerService) { }
+              private boilerService: BoilerService,
+              private message: NzMessageService) { }
 
   ngOnInit() {
     this.img1 = 'assets/images/no_image.png';
@@ -27,7 +30,7 @@ export class AddEquiptemplateComponent implements OnInit {
 //  上传图片
   imgChange1(event) {
     let that = this;
-    console.log(event);
+    // console.log(event);
     if (!event.target.files[0]) {
       return;
     }
@@ -42,7 +45,7 @@ export class AddEquiptemplateComponent implements OnInit {
       reader.readAsDataURL(file);
 
       reader.onload = function() {
-        console.log(this);
+        // console.log(this);
         // 显示图片
         that.img1 = this.result;
         that.errMes = ' ';
@@ -56,7 +59,7 @@ export class AddEquiptemplateComponent implements OnInit {
 
   imgChange2(event) {
     let that = this;
-    console.log(event);
+    // console.log(event);
     if (!event.target.files[0]) {
       return;
     }
@@ -71,7 +74,7 @@ export class AddEquiptemplateComponent implements OnInit {
       reader.readAsDataURL(file);
 
       reader.onload = function() {
-        console.log(this);
+        // console.log(this);
         // 显示图片
         that.img2 = this.result;
         that.errMes = ' ';
@@ -87,14 +90,16 @@ export class AddEquiptemplateComponent implements OnInit {
   save() {
     let data = {
       name: this.name,
-      img1: this.imgFile1 ? this.img1 : '',
-      img2: this.imgFile2 ? this.img2 : ''
+      imageRun: this.imgFile1 ? this.img1 : '',
+      imageStop: this.imgFile2 ? this.img2 : ''
     };
     // console.log(data);
     this.boilerService.addTemplate(data)
       .subscribe( val => {
         alert('保存成功');
         this.activeModal.close('ok');
+      }, err => {
+        this.message.error(err);
       });
   }
 

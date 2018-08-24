@@ -1,23 +1,23 @@
 
 <div class="content">
   <div class="mat-card-title" style="padding: 20px 0; ">
-    <h5 class="text-info pull-left">设备型态管理</h5>
+    <h5 class="text_info pull-left">设备型态管理</h5>
 
     <div class="pull-right flex flex-row">
       <div class="input-group mb-4">
         <input type="text" class="form-control" placeholder="请输入设备型态名称" [(ngModel)]="search" >
         <div class="input-group-append" (click)="searchChange()">
-          <button class="btn btn-info" type="button"><i class="fa fa-search"></i></button>
+          <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
         </div>
       </div>
       <div class="ml-3" >
-        <a [routerLink]="['/admin/equipments/dashboard']" class="btn btn-info" style="color: #ffffff;">
+        <a [routerLink]="['/admin/equipments/dashboard']" class="btn btn_info" style="color: #ffffff;">
           <i class="fa fa-reply"></i>
           返回
         </a>
       </div>
       <div class="ml-3" >
-        <button class="btn btn-info" (click)="newTemplate()">
+        <button class="btn btn_info" (click)="newTemplate()">
           新增设备型态
         </button>
       </div>
@@ -51,9 +51,9 @@
         </td>
         <td> {{ i + 1 }} </td>
         <td> {{ data.Name }} </td>
-        <td> {{ data.enterprise }} </td>
+        <td> {{ data.Organization?.Name}} </td>
         <td>
-          <button class="btn btn-sm btn-info" (click)="editTemplate(data)">
+          <button class="btn btn-sm btn_info" (click)="editTemplate(data)">
             编辑
           </button>
         </td>
@@ -67,7 +67,7 @@
 
 
     <div class="pull-left">
-      <button class="btn btn-info" (click)="deleteG()">
+      <button class="btn btn_info" (click)="deleteG()">
         批量删除
       </button>
     </div>

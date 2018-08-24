@@ -26,6 +26,11 @@ import {NgxEchartsModule} from "ngx-echarts";
   ],
   entryComponents: [
     AlarmDetailComponent
+  ],
+  exports: [
+    CurrentComponent,
+    HistoryComponent,
+    AlarmDetailComponent
   ]
 })
 export class AlarmModule { }

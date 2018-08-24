@@ -1,0 +1,96 @@
+<div class="content">
+
+  <div class="mat-card-title" style="padding: 20px 0; overflow: hidden;">
+    <h5 class="text_info pull-left">维保记录</h5>
+
+    <div class="pull-right flex flex-row">
+      <!--<div class="input-group mb-4">
+        <input type="text" class="form-control" placeholder="请输入模板名称" [(ngModel)]="search" >
+        <div class="input-group-append" (click)="searchChange()">
+          <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
+        </div>
+      </div>-->
+      <div class="ml-3" >
+        <button class="btn btn_info">
+          新增维保记录
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div>
+    <table class="table table-bordered">
+      <thead class="bg_light_primary">
+      <th>
+        <div class="checkbox c-checkbox white">
+          <label>
+            <input type="checkbox">
+            <span class="fa fa-check"></span></label>
+        </div>
+      </th>
+      <th> 序号 </th>
+      <th> 维保时间 </th>
+      <th> 维保详情 </th>
+      <th> 操作 </th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of maintains; let i = index">
+        <td>
+          <div class="checkbox c-checkbox">
+            <label>
+              <input type="checkbox" [(ngModel)]="data.checkDelete" (change)="checkDel(data);">
+              <span class="fa fa-check"></span></label>
+          </div>
+        </td>
+        <td> {{ i+1 }}  </td>
+        <td> {{ data.Name }}  </td>
+        <td>  </td>
+        <td>
+          <!--<a [routerLink]="['/admin/template/edit', data.Uid, data.Name]"
+             class="btn btn_info btn-sm" style="color: #ffffff;" title="查看及修改模板">
+            编辑
+          </a>
+          <button class="btn btn-danger btn-sm ml-2" title="删除该模板" (click)="delete(data.Uid, data.Name)">
+            删除
+          </button>-->
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <p class="text-muted" *ngIf="!maintains||maintains.length===0">
+      无有效数据
+    </p>
+  </div>
+
+
+  <div>
+
+
+    <div class="pull-left">
+      <button class="btn btn_info">
+        批量删除
+      </button>
+    </div>
+
+
+    <ngb-pagination class="pull-right"
+                    [collectionSize]="totalItems"
+                    [pageSize]="pageSize" [(page)]="page"
+                    [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                    (pageChange)="pageChange()">
+
+    </ngb-pagination>
+    <div class="pull-right mr-3">
+      <select [(ngModel)]="pageSize" class="form-control" (change)="pageSizeChange()">
+        <option value="10">10</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
+    <div class="pull-right mr-3" style="line-height: 33px;"> 共 {{totalItems}} 项</div>
+  </div>
+
+</div>
+

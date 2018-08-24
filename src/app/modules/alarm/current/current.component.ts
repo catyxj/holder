@@ -15,17 +15,22 @@ export class CurrentComponent implements OnInit {
   public totalItems = 0;
   public search: string;
   public pageSize = 10;
+  private uid;
 
   constructor(private modalService: NgbModal,
               private alarmService: AlarmService) { }
 
   ngOnInit() {
+    let uid = sessionStorage.getItem('runtimeUid');
+    if (uid) {
+      this.uid = uid;
+    }
     this.getalarms();
   }
 
   // 获取告警列表
   getalarms() {
-    this.alarmService.getCurrents(this.page, this.pageSize, this.search)
+    this.alarmService.getCurrents(this.page, this.pageSize, this.search, this.uid)
       .subscribe( data => {
         this.alarms = data.params;
         this.totalItems = data.counts;
@@ -51,7 +56,8 @@ export class CurrentComponent implements OnInit {
   }
 
   view(data) {
-    console.log(data);
+    // console.log(data);
+
     const modalRef = this.modalService.open(AlarmDetailComponent, {size: 'lg'});
     modalRef.componentInstance.currentData = data;
     modalRef.result.then((result) => {

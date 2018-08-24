@@ -16,9 +16,12 @@ export class UserAccountService {
 
   private userRoleUrl = '/user_roles/ ';
   private userAccountUrl = '/user_list';
+  private authorityUrl = 'a';
 
   // private userRoleUrl = 'assets/server/user_roles.json';
   // private userAccountUrl = 'assets/server/user_list.json';
+  // private authorityUrl = 'a';
+
 
   constructor(private http: HttpClient) { }
 
@@ -65,6 +68,16 @@ export class UserAccountService {
         catchError(this.handleError) // then handle the error
       );
   }
+
+
+  // 获取管理权限
+  getAuthority(): Observable<any[]> {
+    return this.http.get<any>(this.authorityUrl)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
 
 
   private handleError(error: HttpErrorResponse) {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {TerminalService} from "../../../shared/terminal.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {NzModalService} from "ng-zorro-antd";
+import {NzMessageService, NzModalService} from "ng-zorro-antd";
 import {RangeConfigComponent} from "../../terminal/range-config/range-config.component";
 import {AlarmRuleComponent} from "../../terminal/alarm-rule/alarm-rule.component";
 import {TemplateService} from "../../../shared/template.service";
@@ -39,7 +39,8 @@ export class EditTempComponent implements OnInit {
               private terminalService: TerminalService,
               private templateService: TemplateService,
               private modalService: NgbModal,
-              private nzmodalService: NzModalService) { }
+              private nzmodalService: NzModalService,
+              private message: NzMessageService) { }
 
   ngOnInit() {
     this.editName = false;
@@ -680,6 +681,8 @@ export class EditTempComponent implements OnInit {
     this.templateService.save(data)
       .subscribe(val => {
         alert('保存成功');
+      }, err => {
+        this.message.error(err);
       });
 
   }

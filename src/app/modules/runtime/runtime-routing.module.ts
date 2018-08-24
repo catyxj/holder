@@ -5,8 +5,9 @@ import {RuntimeDashboardComponent} from "./dashboard/dashboard.component";
 import {OperateComponent} from "./operate/operate.component";
 import {RuntimeHistoryComponent} from "./history/history.component";
 import {RuntimeAlarmComponent} from "./alarm/alarm.component";
-import {AlarmCurrentComponent} from "./alarm-current/alarm-current.component";
-import {AlarmHistoryComponent} from "./alarm-history/alarm-history.component";
+import {MaintainListComponent} from "../maintain/maintain-list/maintain-list.component";
+import {CurrentComponent} from "../alarm/current/current.component";
+import {HistoryComponent} from "../alarm/history/history.component";
 
 export const RuntimeRoutingModule = [
   {
@@ -33,13 +34,17 @@ export const RuntimeRoutingModule = [
           { path: '', redirectTo: 'current', pathMatch: 'full' },
           {
             path: 'current',
-            component: AlarmCurrentComponent,
+            component: CurrentComponent,
           },
           {
             path: 'history',
-            component: AlarmHistoryComponent,
+            component: HistoryComponent,
           }
         ]
+      },
+      {
+        path: 'maintain',
+        component: MaintainListComponent
       }
     ]
   }

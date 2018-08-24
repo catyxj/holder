@@ -27,10 +27,10 @@ export class BoilerTemplatesComponent implements OnInit {
   }
 
   getTemplates() {
-    this.boilerService.getTemplates()
+    this.boilerService.getTemplateList(this.page, this.pageSize, this.search)
       .subscribe( data => {
-        this.templates = data;
-        this.totalItems = this.templates.length;
+        this.templates = data.params;
+        this.totalItems = data.counts;
       });
   }
 
@@ -68,11 +68,13 @@ export class BoilerTemplatesComponent implements OnInit {
   deleteG() {
     const cf = confirm(`确认删除选中设备型态 ？`);
     if (cf === true) {
-      console.log(this.deleteList);
-      /*this.boilerService.deleteBoiler(this.deleteList)
+      // console.log(this.deleteList);
+      this.boilerService.deleteTemplate(this.deleteList)
         .subscribe(() => {
           this.pageChange();
-        });*/
+        }, err => {
+          alert(err);
+        });
     } else {
 
     }

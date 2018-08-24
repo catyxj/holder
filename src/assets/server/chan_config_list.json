@@ -225,8 +225,8 @@
                         "Ranges": null,
                         "AlarmRule": null
                     },
-                    "Scope": 0,
-                    "AlarmValue": 3,
+                    "AlarmMin": 0,
+                    "AlarmMax": 3,
                     "Priority": true,
                     "Delay": 0,
                     "Description": "erg"
@@ -338,8 +338,8 @@
                         "Ranges": null,
                         "AlarmRule": null
                     },
-                    "Scope": 0,
-                    "AlarmValue": 2,
+                    "AlarmMin": 0,
+                    "AlarmMax": 2,
                     "Priority": true,
                     "Delay": 0,
                     "Description": "dfg"
@@ -447,8 +447,8 @@
                         "Ranges": null,
                         "AlarmRule": null
                     },
-                    "Scope": 0,
-                    "AlarmValue": 1,
+                    "AlarmMin": 0,
+                    "AlarmMax": 1,
                     "Priority": true,
                     "Delay": 0,
                     "Description": "werw"

@@ -1,22 +1,22 @@
 
 <div class="content">
   <div class="mat-card-title" style="padding: 20px 0; ">
-    <h5 class="text-info pull-left">设备信息</h5>
+    <h5 class="text_info pull-left">设备信息</h5>
 
     <div class="pull-right flex flex-row">
       <div class="input-group mb-4">
         <input type="text" class="form-control" placeholder="请输入设备名称" [(ngModel)]="search" >
         <div class="input-group-append" (click)="searchChange()">
-          <button class="btn btn-info" type="button"><i class="fa fa-search"></i></button>
+          <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
         </div>
       </div>
       <div class="ml-3" >
-        <a [routerLink]="['/admin/equipments/templates']" class="btn btn-info" style="color: #ffffff;">
+        <a [routerLink]="['/admin/equipments/templates']" class="btn btn_info" style="color: #ffffff;">
           设备型态
         </a>
       </div>
       <div class="ml-3" >
-        <button class="btn btn-info" (click)="newBoiler()">
+        <button class="btn btn_info" (click)="newBoiler()">
           新增设备
         </button>
       </div>
@@ -60,8 +60,8 @@
             </span>
           </td>
           <td> {{ boiler.Template?.Name }} </td>
-          <td> </td>
-          <td> <a [routerLink]="['/admin/equipments/equipment-info', boiler.Uid]" class="btn btn-info btn-sm" style="color: #ffffff;">查看</a> </td>
+          <td> {{ boiler.Clusters?.Name }} </td>
+          <td> <a [routerLink]="['/admin/equipments/equipment-info', boiler.Uid]" class="btn btn_info btn-sm" style="color: #ffffff;">查看</a> </td>
         </tr>
       </tbody>
     </table>
@@ -75,19 +75,19 @@
 
 
     <div class="pull-left">
-      <button class="btn btn-info" (click)="deleteG()">
+      <button class="btn btn_info" (click)="deleteG()">
         批量删除
       </button>
     </div>
 
     <div class="pull-left ml-3">
-      <button class="btn btn-info">
+      <button class="btn btn_info">
         批量启动
       </button>
     </div>
 
     <div class="pull-left ml-3">
-      <button class="btn btn-info" (click)="joinCluster()">
+      <button class="btn btn_info" (click)="joinCluster()">
         批量添加集群
       </button>
     </div>

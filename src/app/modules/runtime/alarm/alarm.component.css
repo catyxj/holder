@@ -1,0 +1,17 @@
+
+
+.tab_a{
+  display: flex;
+}
+.tab_a a{
+  display: block;
+  color: #34515e;
+  padding: 10px;
+  border-top: 3px solid transparent;
+  text-decoration: none;
+}
+
+.tab_a a.active{
+  border-top: 3px solid #17a2b8;
+  color: #17a2b8;
+}

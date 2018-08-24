@@ -2,6 +2,7 @@ import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {BoilerService} from "../../../shared/boiler.service";
 import {ClusterService} from "../../../shared/cluster.service";
+import {NzMessageService} from "ng-zorro-antd";
 
 @Component({
   selector: 'app-join-cluster',
@@ -19,7 +20,8 @@ export class JoinClusterComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal,
               private boilerService: BoilerService,
-              private clusterService: ClusterService) { }
+              private clusterService: ClusterService,
+              private message: NzMessageService) { }
 
   ngOnInit() {
     this.getClusters();
@@ -41,6 +43,8 @@ export class JoinClusterComponent implements OnInit {
       .subscribe(val => {
         alert('保存成功');
         this.activeModal.close('ok');
+      }, err => {
+        this.message.error(err);
       });
   }
 

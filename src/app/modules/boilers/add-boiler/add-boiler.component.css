@@ -1,13 +1,13 @@
 
 
-h5{
+.equip h5{
   font-size: 14px;
   font-weight: bold;
 }
 
-.cdk-overlay-container{
+/*.cdk-overlay-container{
   z-index: 910;
-}
+}*/
 .cdk-overlay-backdrop{
   z-index: 800;
 }

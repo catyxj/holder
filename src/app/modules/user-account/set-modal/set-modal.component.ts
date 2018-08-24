@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {UserAccountService} from '../../../shared/user-account.service';
+import {NzMessageService} from "ng-zorro-antd";
 
 @Component({
   selector: 'app-set-modal',
@@ -19,7 +20,9 @@ export class SetModalComponent implements OnInit {
 
   editing = false;
 
-  constructor(public activeModal: NgbActiveModal, private userAccountService: UserAccountService ) { }
+  constructor(public activeModal: NgbActiveModal,
+              private userAccountService: UserAccountService,
+              private message: NzMessageService) { }
 
   ngOnInit() {
     this.currentData.aPassword = '';
@@ -80,7 +83,11 @@ export class SetModalComponent implements OnInit {
     // this.deleteList.push(this.currentData.Uid);
     if (cf === true) {
       this.userAccountService.deleteAccount([this.currentData.Uid])
-        .subscribe(() => {this.activeModal.close('ok'); });
+        .subscribe(
+          () => {this.activeModal.close('ok'); },
+          err => {
+            this.message.error(err);
+        });
     } else {
       console.log('取消');
     }

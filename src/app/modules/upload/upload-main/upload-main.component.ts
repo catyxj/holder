@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {HttpClient} from "@angular/common/http";
 import {AddFileComponent} from "../add-file/add-file.component";
+import {UploadService} from "../../../shared/upload.service";
 
 @Component({
   selector: 'app-upload-main',
@@ -19,7 +20,7 @@ export class UploadMainComponent implements OnInit {
   public pageSize = 10;
 
   constructor(private modalService: NgbModal,
-              private http: HttpClient
+              private uploadService: UploadService
   ) { }
 
 
@@ -29,9 +30,10 @@ export class UploadMainComponent implements OnInit {
 
 
   getFiles() {
-    this.http.get('11')
+    this.uploadService.getFiles(this.page, this.pageSize, this.search)
       .subscribe( data => {
-
+        this.fileLists = data.parms;
+        this.totalItems = data.counts;
       });
   }
 

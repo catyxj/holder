@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 import {Observable, of, throwError} from 'rxjs';
 
-// import { Boiler } from '../boiler';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {catchError, retry} from 'rxjs/internal/operators';
 
@@ -25,6 +24,7 @@ export class BoilerService {
   private boilersUrl = '/equipment_list';
   private templatesUrl = '/equipment_template';
   private boilerUrl = '/equipment_detail';
+  private templateListUrl = '/equipment_template_list'; // 设备型态列表
 
   constructor(private http: HttpClient) { }
 
@@ -62,7 +62,7 @@ export class BoilerService {
       );
   }
 
-  // 获取炉型列表
+  // 获取炉型列表-下拉
   getTemplates(): Observable<any> {
     return this.http.get(this.templatesUrl)
       .pipe(
@@ -119,6 +119,15 @@ export class BoilerService {
       );
   }
 
+  // 获取设备型态列表
+  getTemplateList(n: number, pageSize: number, search?: string): Observable<any> {
+    const url = `${this.templateListUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
 
   // 添加设备型态
   addTemplate(temp): Observable<any> {
@@ -131,6 +140,14 @@ export class BoilerService {
   // 修改设备型态
   editTemplate(temp): Observable<any> {
     return this.http.post('/equipment_template_update', temp, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 删除设备型态
+  deleteTemplate(temp): Observable<any> {
+    return this.http.post('/equipment_template_delete', temp, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

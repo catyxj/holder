@@ -1,5 +1,5 @@
 
-mat-expansion-panel-header{
+/*mat-expansion-panel-header{
   background-color: #d1ecf1;
 }
 .mat-expansion-panel-header.mat-expanded:focus, .mat-expansion-panel-header.mat-expanded:hover{
@@ -10,67 +10,91 @@ mat-expansion-panel-header{
 }
 .mat-expansion-panel .mat-expansion-panel-body {
   padding: 0 !important;
+}*/
+
+
+
+.cdk-overlay-backdrop{
+  z-index: 800;
+}
+.modal-backdrop{
+  z-index: 880;
+}
+.modal{
+  z-index: 900;
+}
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+  opacity: 0;
+}
+
+.modal_backdrop{
+  z-index: 800;
+}
+.dark_modal{
+  z-index: 900;
 }
 
 
-.panel-group{
+
+
+.equip_info .panel-group{
   margin-bottom: 20px;
 }
-.panel-group .panel {
+.equip_info .panel-group .panel {
   margin-bottom: 10px;
   border-radius: 4px;
   box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 }
-.panel-info {
+.equip_info .panel-info {
   border-color: #d1ecf1;
 }
-.panel-info>.panel-heading {
+.equip_info .panel-info>.panel-heading {
   color: #17a2b8;
   background-color: #d1ecf1;
   border-color: #d1ecf1;
 }
-.panel-group .panel-heading {
+.equip_info .panel-group .panel-heading {
   border-bottom: 0;
 }
 
-.panel-heading {
+.equip_info .panel-heading {
   padding: 10px 15px;
   border-bottom: 1px solid transparent;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
 }
-.panel-title h6{
+.equip_info .panel-title h6{
   font-size: 15px;
 }
 
-.panel-body{
+.equip_info .panel-body{
 
 }
 
-.panel-body ul.row{
+.equip_info .panel-body ul.row{
   margin: 0;
 }
-.panel-body ul li{
+.equip_info .panel-body ul li{
   border-bottom: 1px solid #dddddd;
   border-right: 1px solid #dddddd;
   padding: 0;
 }
-.panel-body ul li .list_title{
+.equip_info .panel-body ul li .list_title{
   padding: 10px;
   font-weight: bold;
   width: 150px;
   background-color: #edf3f4;
   border-right: 1px solid #dddddd;
 }
-.panel-body ul li .list_value{
+.equip_info .panel-body ul li .list_value{
   padding: 10px;
 }
 
-.table th{
+.equip_info .table th{
   background-color: #edf3f4;
 }
 
-.panel-footer{
+.equip_info .panel-footer{
   padding: 20px;
   text-align: center;
 }

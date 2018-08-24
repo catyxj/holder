@@ -6,8 +6,47 @@
 ul li{
   display: flex;
   height: 32px;
-  padding-top: 6px;
+  /*padding-top: 6px;*/
   font-size: 12px;
   box-sizing: border-box;
   color: #888888;
+  margin-bottom: 10px;
+}
+
+
+.bg-info{
+  color: #ffffff;
+}
+
+
+
+.part{
+  background-color: #ffffff;
+  /*border: 1px solid #eaf3f4;*/
+  border-radius: 3px;
+  padding: 8px;
+}
+
+.status_row{
+
+}
+.status_row *{
+  font-size: 12px;
+}
+.status_col{
+  width: 31%;
+  text-align: center;
+  border-radius: 4px;
+}
+.status_t{
+  line-height: 2em;
+  opacity: 0.8;
+}
+
+.badge{
+  font-weight: normal;
+}
+.badge-warning {
+  color: #ffffff;
+  background-color: #ffc107;
 }

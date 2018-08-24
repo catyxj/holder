@@ -13,7 +13,9 @@ import {NgZorroAntdModule} from "ng-zorro-antd";
 import { RuntimeAlarmComponent } from './alarm/alarm.component';
 import { AlarmCurrentComponent } from './alarm-current/alarm-current.component';
 import { AlarmHistoryComponent } from './alarm-history/alarm-history.component';
-import { AlarmDetailComponent } from './alarm-detail/alarm-detail.component';
+import { MaintainComponent } from './maintain/maintain.component';
+import {ModulesModule} from "../modules.module";
+
 
 
 @NgModule({
@@ -32,10 +34,9 @@ import { AlarmDetailComponent } from './alarm-detail/alarm-detail.component';
     RuntimeAlarmComponent,
     AlarmCurrentComponent,
     AlarmHistoryComponent,
-    AlarmDetailComponent,
+    MaintainComponent
   ],
   entryComponents: [
-    AlarmDetailComponent
   ]
 })
 export class RuntimeModule { }

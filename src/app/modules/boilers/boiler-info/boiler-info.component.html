@@ -1,10 +1,10 @@
 
-<div class="content">
+<div class="content equip_info">
 
   <div class="mat-card-title clearfix" style="padding: 20px 0;">
-    <h5 class="text-info pull-left">设备信息</h5>
+    <h5 class="text_info pull-left">设备信息</h5>
     <div class="pull-right">
-      <a (click)="goBack()" class="text-info">
+      <a (click)="goBack()" class="text_info">
         <i class="fa fa-reply"></i>
         返回
       </a>
@@ -17,7 +17,7 @@
     <div class="panel panel-info">
       <div class="panel-heading" (click)="panel[0].open = !panel[0].open">
         <div class="panel-title" >
-          <h6 class="text-info">常规信息</h6>
+          <h6 class="text_info">常规信息</h6>
         </div>
       </div>
       <div class="panel-body collapse" [class.show]="panel[0].open">
@@ -36,7 +36,7 @@
               设备型态
             </div>
             <div class="list_value">
-              {{ info?.Template.Name }}
+              {{ info?.Template?.Name }}
             </div>
           </li>
 
@@ -82,7 +82,7 @@
     <div class="panel panel-info">
       <div class="panel-heading" (click)="panel[1].open = !panel[1].open">
           <div class="panel-title flex justify-content-between">
-            <h6 class="text-info">终端信息</h6>
+            <h6 class="text_info">终端信息</h6>
             <button class="btn btn-outline-info btn-sm" (click)="terBind($event)"
                     style="border-radius: 30px; padding: 0.2rem 0.45rem;">
               <i class="fa fa-plus"></i>
@@ -128,7 +128,7 @@
       <div class
              ="panel-heading" (click)="panel[2].open = !panel[2].open">
         <div class="panel-title">
-          <h6 class="text-info">地址信息</h6>
+          <h6 class="text_info">地址信息</h6>
         </div>
       </div>
 
@@ -173,7 +173,7 @@
     <div class="panel panel-info">
       <div class="panel-heading" (click)="panel[3].open = !panel[3].open">
         <div class="panel-title">
-          <h6 class="text-info">维护信息</h6>
+          <h6 class="text_info">维护信息</h6>
         </div>
       </div>
 
@@ -235,7 +235,7 @@
   </div>
 
   <div class="panel-footer">
-    <a [routerLink]="['/admin/equipments/dashboard']" class="btn btn-info mr-2" style="color: #ffffff;">
+    <a [routerLink]="['/admin/equipments/dashboard']" class="btn btn_info mr-2" style="color: #ffffff;">
       <i class="fa fa-reply"></i>
       返回
     </a>

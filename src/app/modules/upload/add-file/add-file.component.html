@@ -7,7 +7,11 @@
 
 <div class="modal-body">
 
-  <input class="form-control mb-3" type="text" [(ngModel)]="org">
+
+  <nz-select style="width: 100%; margin-bottom: 20px;" nzShowSearch nzAllowClear nzPlaceHolder="选择所属企业" [(ngModel)]="org">
+    <nz-option *ngFor="let data of orgList" [nzLabel]="data.Name" [nzValue]="data.Uid"></nz-option>
+  </nz-select>
+
 
   <nz-upload
     [(nzFileList)]="fileList"
@@ -24,7 +28,7 @@
   <button nz-button [nzType]="'primary'" [nzLoading]="uploading" (click)="handleUpload()" [disabled]="fileList.length == 0" style="margin-top: 16px">
     {{ uploading ? '上传中' : '开始上传' }}
   </button>
-  <!--<button type="button" class="btn btn-info">保存</button>-->
+  <!--<button type="button" class="btn btn_info">保存</button>-->
   <!--<button type="button" class="btn" (click)="activeModal.dismiss('close')">取消</button>-->
 </div>
 

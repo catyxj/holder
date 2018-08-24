@@ -1,7 +1,7 @@
 
 <div class="content">
   <div class="mat-card-title" style="padding-top: 20px; padding-bottom: 20px;  overflow: hidden;">
-    <h5 class="text-info pull-left">
+    <h5 class="text_info pull-left">
       终端消息调试
       <span class="">
        [ {{ code }} ]
@@ -14,14 +14,14 @@
       </div>
 
       <div class="ml-3" >
-        <button class="btn btn-info" (click)="getMessage()">
+        <button class="btn btn_info" (click)="getMessage()">
           <i class="fa fa-repeat"></i>
           刷新
         </button>
       </div>
 
       <div class="ml-3" >
-        <a (click)="goBack()" class="btn btn-info" style="color: #ffffff;">
+        <a (click)="goBack()" class="btn btn_info" style="color: #ffffff;">
           <i class="fa fa-reply"></i>
           返回
         </a>
@@ -68,7 +68,7 @@
         <tr *ngFor="let ter of messages; let i = index">
           <td> {{ i + 1 }} </td>
           <td style="white-space: nowrap;"> {{ ter.TS}} </td>
-          <td> {{ ter.Boiler_data_fmt_ver }} </td>
+          <td> {{ ter.Equipment_data_fmt_ver }} </td>
           <td *ngFor="let col of temperCols">
             {{ ter[col] }}
           </td>

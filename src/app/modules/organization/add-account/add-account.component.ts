@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {UserAccountService} from '../../../shared/user-account.service';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {OrganizationService} from '../../../shared/organization.service';
+import {NzMessageService} from "ng-zorro-antd";
 
 @Component({
   selector: 'app-add-account',
@@ -21,7 +22,8 @@ export class AddAccountComponent implements OnInit {
 
   constructor( private userAccountService: UserAccountService,
                public activeModal: NgbActiveModal,
-               private orgService: OrganizationService) { }
+               private orgService: OrganizationService,
+               private message: NzMessageService) { }
 
   ngOnInit() {
     this.getUserRoles();
@@ -76,7 +78,12 @@ export class AddAccountComponent implements OnInit {
     };
 
     this.userAccountService.addAccount(data)
-      .subscribe(account => {alert('保存成功'); this.activeModal.close('ok'); });
+      .subscribe(account => {
+        alert('保存成功'); this.activeModal.close('ok');
+      }, err => {
+        // this.message.error(err);
+        alert(err);
+      });
   }
 
 

@@ -21,6 +21,11 @@ export class RuntimeService {
     return this.http.get('assets/server/runtime.json');
   }
 
+  // 获取设备型态信息
+  getEquipTemp(uid): Observable<any>  {
+    return this.http.get(`/equipment_template_get?uid=${uid}`);
+  }
+
   // 获取运行参数
   getRuntimeList(uid): Observable<any> {
     return this.http.get(`/equipment_runtime_list?uid=${uid}`);
@@ -39,6 +44,14 @@ export class RuntimeService {
       );
   }
 
+
+  // 导出历史数据
+  getHistoryExport(data): Observable<any> {
+    return this.http.post('/equipment_runtime_history_export', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
 
   private handleError(error: HttpErrorResponse) {

@@ -35,17 +35,17 @@ export class TerminalListComponent implements OnInit {
       .subscribe(terminals => {
         this.totalItems = terminals.counts;
         this.terminals = terminals.params;
-        if (this.terminals.length <= 0) {
+        if (!this.terminals || this.terminals.length <= 0) {
           return;
         }
         for (let i = 0; i < this.terminals.length; i++) {
           let terminal = this.terminals[i];
-          if (terminal.TermVer === terminal.PlatVer) {
+          /*if (terminal.TermVer === terminal.PlatVer) {
             terminal.confStatus = '配置成功';
           } else {
             terminal.confStatus = '配置失败';
-          }
-          if ( terminal.IsOnline === true) {
+          }*/
+          if ( terminal.IsOnline === 1) {
             terminal.isOnline = '在线';
           } else {
             terminal.isOnline = '离线';
@@ -60,11 +60,11 @@ export class TerminalListComponent implements OnInit {
   // 批量选择
   checkDel(terminal): void {
     if ( terminal.checkDelete === true) {
-      this.deleteList.push(terminal.TerminalCode.toString());
+      this.deleteList.push(terminal.Sn.toString());
     } else {
       for (let i = 0; i < this.deleteList.length; i++){
         let dl = this.deleteList[i];
-        if (dl === terminal.TerminalCode.toString()) {
+        if (dl === terminal.Sn.toString()) {
           this.deleteList.splice(i, 1);
         }
       }
@@ -77,7 +77,7 @@ export class TerminalListComponent implements OnInit {
     if (this.allDelete === true) {
       for (let i = 0; i < this.terminals.length; i++) {
         this.terminals[i].checkDelete = true;
-        this.deleteList.push(this.terminals[i].TerminalCode.toString());
+        this.deleteList.push(this.terminals[i].Sn.toString());
       }
     } else {
       for (let i = 0; i < this.terminals.length; i++) {

@@ -1,7 +1,7 @@
 
 <div class="content pb-5">
   <div class="mat-card-title" style="padding-top: 20px; padding-bottom: 20px;  overflow: hidden;">
-    <h5 class="text-info pull-left">
+    <h5 class="text_info pull-left">
       通道自定义配置
       <span class="">
        [ {{ code }} ]
@@ -10,7 +10,7 @@
 
     <div class="pull-right flex flex-row">
       <div class="ml-3" >
-        <a [routerLink]="['/admin/terminal/dashboard']" class="btn btn-info" style="color: #ffffff;">
+        <a [routerLink]="['/admin/terminal/dashboard']" class="btn btn_info" style="color: #ffffff;">
           <i class="fa fa-reply"></i>
           返回
         </a>
@@ -48,7 +48,7 @@
           </td>
           <td>
             <button [matMenuTriggerFor]="menu" class="btn btn-block" [disabled]="!data.Parameter||!data.Parameter.Name"
-                    [ngClass]="{'btn-info': data.Status === 1, 'btn-danger': data.Status === 2}">
+                    [ngClass]="{'btn_info': data.Status === 1, 'btn-danger': data.Status === 2}">
               <i class="fa" [ngClass]="{'fa-ellipsis-h':data.Status === 0, 'fa-eye': data.Status === 1, 'fa-eye-slash': data.Status === 2}"></i>
               <span *ngIf="data.Status === 1">{{ data.SequenceNumber }}</span>
             </button>
@@ -100,14 +100,18 @@
 
           </td>
           <td class="flex" style="padding: 0 0.75rem;">
-            <button type="button" class="btn btn-sm btn-outline-info"
-                    title="编辑告警规则" (click)="addAlarmRule(data)">
-              <i class="fa fa-bell"></i>
-            </button>
-            <button type="button"  (click)="removeAnalogue(i)" title="删除"
-                    class="btn btn-sm btn-outline-danger ml-2 mr-2">
-              <i class="fa fa-minus" style="font-size: 12px;"></i>
-            </button>
+            <div class="btn-group">
+              <button type="button" class="btn btn-outline-info"
+                      [disabled]="!data.Parameter||!data.Parameter.Name"
+                      title="编辑告警规则" (click)="addAlarmRule(data)">
+                <i class="fa fa-bell" style="font-size: 14px;"></i>
+              </button>
+              <button type="button"  (click)="removeAnalogue(i)" title="删除"
+                      class="btn btn-outline-danger">
+                <i class="fa fa-trash" style="font-size: 14px;"></i>
+              </button>
+            </div>
+
           </td>
         </tr>
         </tbody>
@@ -115,7 +119,7 @@
       </table>
       <button type="button" (click)="addAnalogue()"
               *ngIf="analogueList.length < 24 "
-              class="btn btn-info"
+              class="btn btn_info"
               style="width: 100%;">
         <i class="fa fa-plus-circle"></i>
         添加模拟通道
@@ -147,7 +151,7 @@
           </td>
           <td>
             <button [matMenuTriggerFor]="menu1" class="btn btn-block" [disabled]="!data.Parameter||!data.Parameter.Name"
-                    [ngClass]="{'btn-info': data.Status === 1, 'btn-danger': data.Status === 2}">
+                    [ngClass]="{'btn_info': data.Status === 1, 'btn-danger': data.Status === 2}">
               <i class="fa" [ngClass]="{'fa-ellipsis-h':data.Status === 0, 'fa-eye': data.Status === 1, 'fa-eye-slash': data.Status === 2}"></i>
               <span *ngIf="data.Status === 1">{{ data.SequenceNumber }}</span>
             </button>
@@ -172,7 +176,7 @@
           </td>
           <td>
             <button [matMenuTriggerFor]="menu2" class="btn btn-block" [disabled]="!data.Parameter||!data.Parameter.Name"
-                    [ngClass]="{'btn-info': data.SwitchStatus === 1, 'btn-warning': data.SwitchStatus === 2}">
+                    [ngClass]="{'btn_info': data.SwitchStatus === 1, 'btn-warning': data.SwitchStatus === 2}">
               <i class="fa" [ngClass]="{ 'fa-bolt': data.SwitchStatus === 1, 'fa-warning': data.SwitchStatus === 2}"></i>
             </button>
             <mat-menu #menu2="matMenu" [overlapTrigger]="false">
@@ -186,7 +190,7 @@
           <td>
             <select [(ngModel)]="data.Func" [disabled]="!data.Parameter||!data.Parameter.Name"
                     class="form-control" (click)="fCodeChange(data)">
-              <option *ngFor="let fc of funcs2" [value]="fc.Id" >{{fc.Name}}</option>
+              <option *ngFor="let fc of funcs" [value]="fc.Id" >{{fc.Name}}</option>
             </select>
           </td>
           <td>
@@ -203,21 +207,25 @@
 
           </td>
           <td class="flex" style="padding: 0 0.75rem;">
-            <button type="button" class="btn btn-sm btn-outline-info"
-                    title="编辑告警规则" (click)="addAlarmRule(data)">
-              <i class="fa fa-bell"></i>
-            </button>
-            <button type="button"  (click)="removeSwitch(i)" title="删除"
-                    class="btn btn-sm btn-outline-danger ml-2 mr-2">
-              <i class="fa fa-minus" style="font-size: 12px;"></i>
-            </button>
+            <div class="btn-group">
+              <button type="button" class="btn btn-outline-info"
+                      [disabled]="!data.Parameter||!data.Parameter.Name"
+                      title="编辑告警规则" (click)="addAlarmRule(data)">
+                <i class="fa fa-bell" style="font-size: 14px;"></i>
+              </button>
+              <button type="button"  (click)="removeSwitch(i)" title="删除"
+                      class="btn btn-outline-danger">
+                <i class="fa fa-trash" style="font-size: 14px;"></i>
+              </button>
+            </div>
+
           </td>
         </tr>
         </tbody>
       </table>
       <button type="button" (click)="addSwitch()"
               *ngIf="switchList.length < 48 "
-              class="btn btn-info btn-block">
+              class="btn btn_info btn-block">
         <i class="fa fa-plus-circle"></i>
         添加开关通道
       </button>
@@ -248,7 +256,7 @@
           </td>
           <td>
             <button [matMenuTriggerFor]="menu" class="btn btn-block" [disabled]="!data.Parameter||!data.Parameter.Name"
-                    [ngClass]="{'btn-info': data.Status === 1, 'btn-danger': data.Status === 2}">
+                    [ngClass]="{'btn_info': data.Status === 1, 'btn-danger': data.Status === 2}">
               <i class="fa" [ngClass]="{'fa-ellipsis-h':data.Status === 0, 'fa-eye': data.Status === 1, 'fa-eye-slash': data.Status === 2}"></i>
               <span *ngIf="data.Status === 1">{{ data.SequenceNumber }}</span>
             </button>
@@ -275,7 +283,7 @@
           <td>
             <button type="button" class="btn btn-block"
                     [disabled]="!data.Parameter || !data.Parameter.Name || data.Status === -1"
-                    [class.btn-info] = "data.Ranges.length > 0"
+                    [class.btn_info] = "data.Ranges.length > 0"
                     (click)="openRange(data)">
               <i class="fa" [ngClass]="{'fa-calendar-plus-o': data.Ranges.length <= 0, 'fa-calendar-check-o': data.Ranges.length > 0}"></i>
             </button>
@@ -300,14 +308,18 @@
 
           </td>
           <td class="flex" style="padding: 0 0.75rem;">
-            <button type="button" class="btn btn-sm btn-outline-info"
-                    title="编辑告警规则" (click)="addAlarmRule(data)">
-              <i class="fa fa-bell"></i>
-            </button>
-            <button type="button"  (click)="removeRange(i)" title="删除"
-                    class="btn btn-sm btn-outline-danger ml-2 mr-2">
-              <i class="fa fa-minus" style="font-size: 12px;"></i>
-            </button>
+            <div class="btn-group">
+              <button type="button" class="btn btn-outline-info"
+                      [disabled]="!data.Parameter||!data.Parameter.Name"
+                      title="编辑告警规则" (click)="addAlarmRule(data)">
+                <i class="fa fa-bell" style="font-size: 14px;"></i>
+              </button>
+              <button type="button"  (click)="removeRange(i)" title="删除"
+                      class="btn btn-outline-danger">
+                <i class="fa fa-trash" style="font-size: 14px;"></i>
+              </button>
+            </div>
+
           </td>
         </tr>
         </tbody>
@@ -315,7 +327,7 @@
       </table>
       <button type="button" (click)="addRange()"
               *ngIf="analogueList.length < 12 "
-              class="btn btn-info"
+              class="btn btn_info"
               style="width: 100%;">
         <i class="fa fa-plus-circle"></i>
         添加状态通道
@@ -428,10 +440,10 @@
   <hr/>
 
   <div class="mt-2 mb-3">
-    <button class="btn btn-info pull-left" (click)="addTemplate()">
+    <button class="btn btn_info pull-left" (click)="addTemplate()">
       另存为模板
     </button>
-    <button class="btn btn-info pull-right" (click)="save()">
+    <button class="btn btn_info pull-right" (click)="save()">
       提交
     </button>
   </div>

@@ -86,8 +86,13 @@ export class OrgMainComponent implements OnInit {
     const cf = confirm(`确认删除企业 ${org.Name} ？`);
     if (cf === true) {
       this.orgService.deleteOrg([org.Uid])
-        .subscribe();
-      this.getOrganization();
+        .subscribe( val => {
+          // alert('删除成功');
+          this.getOrganization();
+        }, err => {
+          alert(err);
+        });
+
     } else {
 
     }
@@ -131,6 +136,8 @@ export class OrgMainComponent implements OnInit {
       this.orgService.deleteOrg(this.deleteList)
         .subscribe( () => {
           this.pageChange();
+        }, err => {
+          alert(err);
         });
     } else {
 
@@ -164,7 +171,7 @@ export class OrgMainComponent implements OnInit {
     modalRef.componentInstance.currentData = org;
     modalRef.componentInstance.currentUser = this.user;
     modalRef.componentInstance.editing = true;
-    modalRef.componentInstance.locations = this.locations;
+    // modalRef.componentInstance.locations = this.locations;
     modalRef.result.then((result) => {
       // this.closeResult = `Closed with: ${result}`;
       if (result === 'ok') {
@@ -182,14 +189,12 @@ export class OrgMainComponent implements OnInit {
     modalRef.componentInstance.currentData = org;
     modalRef.componentInstance.currentUser = this.user;
     modalRef.componentInstance.editing = false;
-    modalRef.componentInstance.locations = this.locations;
+    // modalRef.componentInstance.locations = this.locations;
     modalRef.result.then((result) => {
-      // this.closeResult = `Closed with: ${result}`;
       if (result === 'ok') {
         this.getOrganization();
       }
     }, (reason) => {
-      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       console.log(reason);
     });
   }
@@ -199,7 +204,7 @@ export class OrgMainComponent implements OnInit {
     const modalRef = this.modalService.open(AddInfoComponent, { size: 'lg' });
     modalRef.componentInstance.currentUser = this.user;
     modalRef.componentInstance.editing = true;
-    modalRef.componentInstance.locations = this.locations;
+    // modalRef.componentInstance.locations = this.locations;
     modalRef.result.then((result) => {
       // this.closeResult = `Closed with: ${result}`;
       if (result === 'ok') {
@@ -226,6 +231,16 @@ export class OrgMainComponent implements OnInit {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       console.log(reason);
     });
+  }
+
+  // 进入下级账号
+  entry(org) {
+    this.orgService.entryAccount(org.Uid)
+      .subscribe( data => {
+        window.location.reload();
+      }, err => {
+        alert(err);
+      });
   }
 
 

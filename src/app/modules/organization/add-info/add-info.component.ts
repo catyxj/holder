@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {OrganizationService} from '../../../shared/organization.service';
+import {AdressService} from "../../../shared/adress.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-info',
@@ -13,7 +15,7 @@ export class AddInfoComponent implements OnInit {
   currentData: any;
   currentUser: any;
   editing: boolean;
-  locations: any;
+  // locations: any;
 
   public orgTypes: any[];
   public data: any ;
@@ -22,14 +24,16 @@ export class AddInfoComponent implements OnInit {
   public brandImg;
   public img;
   public errMes;
+  public locations;
 
 
 
-  constructor(public activeModal: NgbActiveModal, private orgService: OrganizationService) { }
+  constructor(public activeModal: NgbActiveModal,
+              private orgService: OrganizationService,
+              private addrService: AdressService) { }
 
   ngOnInit() {
 
-    this.getOrgType();
     this.data = {
       name: '',
       typeId: null,
@@ -39,11 +43,24 @@ export class AddInfoComponent implements OnInit {
       address: '',
       isSuper: false,
       showBrand: false,
-      brandName: ''
+      brandName: '',
+      is_ept_ctl: false
     };
+
+    this.getAddr();
+    this.getOrgType();
+
 
   }
 
+
+  // 获取地址
+  getAddr() {
+    this.addrService.getAddress()
+      .subscribe(addr => {
+        this.locations = addr;
+      });
+  }
 
   // 地址
   changeProvince() {
@@ -119,11 +136,13 @@ export class AddInfoComponent implements OnInit {
       show_brand: null,
       brand_name: null,
       is_super: null,
-      brand_img: ''
+      brand_img: '',
+      is_ept_ctl: false
     };
     if (this.currentUser.Role.RoleId <= 2) {
       postData.show_brand = this.data.showBrand;
       postData.brand_name = this.data.brandName;
+      postData.is_ept_ctl = this.data.is_ept_ctl;
       if (this.img) {
         postData.brand_img = this.brandImg;
       }
@@ -134,8 +153,18 @@ export class AddInfoComponent implements OnInit {
     // console.log(postData);
     this.orgService.add(postData)
       .subscribe(val => {
-        alert('保存成功');
+        Swal(
+          '保存成功！',
+          '',
+          'success'
+        );
         this.activeModal.close('ok');
+      }, err => {
+        Swal(
+          '保存失败！',
+          err,
+          'error'
+        );
       });
 
 

@@ -5,7 +5,7 @@
       <div class="input-group">
         <input type="text" class="form-control" placeholder="请输入设备名称" [(ngModel)]="search" >
         <div class="input-group-append" >
-          <button class="btn btn-info" type="button"><i class="fa fa-search"></i></button>
+          <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
         </div>
       </div>
     </div>
@@ -15,7 +15,7 @@
     <div *ngFor="let data of clusters" class="col-6 mb-2">
       <div class="module flex">
         <div class="status_content">
-          <a [routerLink]="['/admin/monitor/cluster', data.Uid]">
+          <a [routerLink]="['/admin/monitor/cluster', data.uid]">
             <h5 class="mb-4">
               {{data.name}}
             </h5>
@@ -28,11 +28,11 @@
             <div class="status_col bg_grey">
               设备 <br/> {{data.eptOnline}}/{{data.eptCounts}}
             </div>
-            <div class="status_col " [ngClass]="{'bg_grey':!data.Online, 'bg-warning':data.Online && data.Warning , 'bg-info':data.Online && !data.Warning}">
+            <div class="status_col " [ngClass]="{'bg_grey':!data.Online, 'bg-warning':data.Online && data.Warning , 'bg_light_secondary':data.Online && !data.Warning}">
               告警 <br/> {{data.alarmCounts}}
             </div>
             <div class="status_col"
-                 [ngClass]="{'bg_grey':!data.Online, 'bg-warning':data.Online && data.Malfunction , 'bg-info':data.Online && !data.Malfunction}" style="margin-bottom: 0">
+                 [ngClass]="{'bg_grey':!data.Online, 'bg-warning':data.Online && data.Malfunction , 'bg_light_secondary':data.Online && !data.Malfunction}" style="margin-bottom: 0">
               <!--{{data.malfunction}}--> 故障
             </div>
           </div>

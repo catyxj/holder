@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {Observable, throwError} from "rxjs/index";
+import {Observable, Subject, throwError} from "rxjs/index";
 import {catchError} from "rxjs/internal/operators";
 
 const httpOptions = {
@@ -22,13 +22,29 @@ export class AlarmService {
   private currentUrl = '/alarm_list';
   private historyUrl = '/alarm_history_list';
   private detailUrl = '/equipment_alarm_detail';
+  private alarmNumUrl = '/alarm_new_count';
+
+  private alarmSource = new Subject<any>();
+  alarmStatus$ = this.alarmSource.asObservable(); // 父组件监测子组件alarm
 
   constructor(private http: HttpClient) { }
 
+  // 从子组件获取alarm
+  AlarmMission(message: any) {
+    this.alarmSource.next(message);
+  }
+
+  // 获取未查看告警数
+  getAlarmNum() {
+    return this.http.get<any>(this.alarmNumUrl)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
   // 获取当前告警列表
   getCurrents(n: number, pageSize: number, search?: string, uid?: string): Observable<any> {
-    const url = `${this.currentUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
+    const url = `${this.currentUrl}/?page=${n}&pageSize=${pageSize}&search=${search}&uid=${uid}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -36,8 +52,8 @@ export class AlarmService {
   }
 
   // 获取历史告警列表
-  getHistories(n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.historyUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
+  getHistories(n: number, pageSize: number, search?: string, uid?: string): Observable<any> {
+    const url = `${this.historyUrl}/?page=${n}&pageSize=${pageSize}&search=${search}&uid=${uid}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -52,6 +68,21 @@ export class AlarmService {
         catchError(this.handleError) // then handle the error
       );
   }
+
+  getSubscribe(uid): Observable<any> {
+    return this.http.get(`/alarm_subscribe?uid=${uid}`)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+  setsubscribe(uid): Observable<any> {
+    return this.http.post('/alarm_set_subscribe', uid, httpOptions)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

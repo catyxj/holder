@@ -49,6 +49,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
           // console.log(equips);
           this.totalItems = equips.counts;
           this.boilers = equips.ept;
+          if (!this.boilers) {
+            this.boilers = [];
+          }
           this.refreshData();
         },
         err => console.log(err),

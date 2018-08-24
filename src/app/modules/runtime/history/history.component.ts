@@ -126,48 +126,100 @@ export class RuntimeHistoryComponent implements OnInit {
 
   // 导出
   export() {
+    let postData = {
+      uid: this.uid,
+      startDate: this.dateRange[0],
+      endDate: this.dateRange[1]
+    };
+    this.runtimeService.getHistoryExport(postData)
+      .subscribe( data => {
+        let totalItems = data.counts;
+        let runtimes = data.params;
 
-    let start = this.datePipe.transform(this.dateRange[0], 'yyyy.MM.dd');
-    let end = this.datePipe.transform(this.dateRange[1], 'yyyy.MM.dd');
+        let params = [];
+        let history = [];
+        let param = runtimes.channel;
+        let lists = runtimes.history;
 
-    let table = '<table><tr><td>采样时间</td>';
 
-    // headers
-    for (let i = 0; i < this.params.length; i++) {
-      table += `<td>${this.params[i].Name} ${this.params[i].Unit}</td>`;
-    }
-    table += '</tr>';
-    this.history.forEach((record) => {
-      let date = this.datePipe.transform(record.date, 'yyyy-MM-dd HH:mm:ss');
-      table += `<tr><td>${date}</td>`;
-      for (let i = 0; i < this.params.length; i++) {
-        table += `<td>${record.data[this.params[i].id]}</td>`;
-      }
-      table += '</tr>';
-    });
-    table += '</table>';
 
-    // 使用outerHTML属性获取整个table元素的HTML代码（包括<table>标签），然后包装成一个完整的HTML文档，设置charset为urf-8以防止中文乱码
-    let html = "<html><head><meta charset='utf-8' /></head><body>" + table + "</body></html>";
+        // 通道列表
+        for ( let i = 0; i < param.length; i++) {
+          let pa = param[i];
+          let da = {
+            id: pa.ChannelType + '_' + pa.ChannelNumber,
+            Name: pa.Name,
+            Unit: pa.Unit
+          };
+          params.push(da);
+        }
 
-    const blob = new Blob([html], {type: 'application/vnd.ms-excel'});
+        // 历史数据列表
+        if (lists) {
+          for (let i = 0; i < lists.length; i++) {
+            let li = JSON.parse(lists[i].data);
+            let his = {
+              date: lists[i].date,
+              data: {}
+            };
+            for (let j = 0; j < li.length; j++) {
+              let dat = li[j];
+              let id = dat.type + '_' + dat.number;
+              his.data[id] = dat.value;
+            }
+            history.push(his);
+          }
+        }
 
-    const fileName = `${this.name}(${start}-${end}).xlsx`;
+        // console.log(history);
 
-    if (window.navigator.msSaveOrOpenBlob) { // IE浏览器
-      navigator.msSaveOrOpenBlob(blob,  fileName);
-    } else { //  其他浏览器
-      const objectUrl = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      document.body.appendChild(link);
-      link.setAttribute('style', 'display:none');
-      link.setAttribute('href', objectUrl);
-      link.setAttribute('download', fileName);
-      link.click();
-      document.body.removeChild(link);
-      // 释放URL地址
-      URL.revokeObjectURL(objectUrl);
-    }
+        // 导出表格
+        let start = this.datePipe.transform(this.dateRange[0], 'yyyy.MM.dd');
+        let end = this.datePipe.transform(this.dateRange[1], 'yyyy.MM.dd');
+
+        let table = '<table><tr><td>采样时间</td>';
+
+        // headers
+        for (let i = 0; i < params.length; i++) {
+          table += `<td>${params[i].Name} ${params[i].Unit}</td>`;
+        }
+        table += '</tr>';
+        history.forEach((record) => {
+          let date = this.datePipe.transform(record.date, 'yyyy-MM-dd HH:mm:ss');
+          table += `<tr><td>${date}</td>`;
+          for (let i = 0; i < params.length; i++) {
+            table += `<td>${record.data[params[i].id] || '' }</td>`;
+          }
+          table += '</tr>';
+        });
+        table += '</table>';
+
+        // 使用outerHTML属性获取整个table元素的HTML代码（包括<table>标签），然后包装成一个完整的HTML文档，设置charset为urf-8以防止中文乱码
+        let html = "<html><head><meta charset='utf-8' /></head><body>" + table + "</body></html>";
+
+        const blob = new Blob([html], {type: 'application/vnd.ms-excel'});
+
+        const fileName = `${this.name}(${start}-${end}).xlsx`;
+
+        if (window.navigator.msSaveOrOpenBlob) { // IE浏览器
+          navigator.msSaveOrOpenBlob(blob,  fileName);
+        } else { //  其他浏览器
+          const objectUrl = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          document.body.appendChild(link);
+          link.setAttribute('style', 'display:none');
+          link.setAttribute('href', objectUrl);
+          link.setAttribute('download', fileName);
+          link.click();
+          document.body.removeChild(link);
+          // 释放URL地址
+          URL.revokeObjectURL(objectUrl);
+        }
+
+      });
+
+
+
 
 
   }

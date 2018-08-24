@@ -15,6 +15,7 @@
   "TriggerRule__Normal": 0,
   "TriggerRule__Warning": 15,
   "Uid": "3ab45947-e53b-11e7-810f-7cd30ac4f6d2",
+  "alarmValue": 150,
   "runtime": [
     {
       "CreatedDate": "2017-12-20T12:07:36+08:00",

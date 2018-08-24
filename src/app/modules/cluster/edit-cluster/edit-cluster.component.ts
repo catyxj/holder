@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ClusterService} from "../../../shared/cluster.service";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-cluster',
@@ -22,7 +23,7 @@ export class EditClusterComponent implements OnInit {
 
   ngOnInit() {
     this.name = this.currentData.Name;
-    this.imgUrl = this.currentData.imgUrl;
+    this.imgUrl = this.currentData.Img;
     if ( !this.imgUrl) {
       this.imgUrl = 'assets/images/no_image.png';
     }
@@ -63,8 +64,19 @@ export class EditClusterComponent implements OnInit {
     };
     this.clusterService.editCluster(data)
       .subscribe( val => {
-        alert('保存成功');
+        Swal(
+          '保存成功！',
+          '',
+          'success'
+        );
         this.activeModal.close('ok');
+      }, err => {
+        alert(err);
+        Swal(
+          '保存失败！',
+          err,
+          'error'
+        );
       });
   }
 

@@ -100,6 +100,8 @@ export class ClusterDetailComponent implements OnInit {
       this.clusterService.deleteEquip(data)
         .subscribe(() => {
           this.pageChange();
+        }, err => {
+          alert(err);
         });
     } else {
 

@@ -4,3 +4,9 @@
 .modal{
   z-index: 900;
 }
+
+.alarm_rule input{
+  height: 33.5px;
+}
+
+

@@ -20,7 +20,13 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
   public online;
   public isBurning;
   public hasWarning;
+  private equip;
+  public termStatus;
+  public eptStatus;
+  public alarmStatus;
   public img;
+  public imgRun;
+  public imgStop;
 
   constructor(private boilerWsService: BoilerSocketService,
               private route: ActivatedRoute,
@@ -30,6 +36,12 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.uid = sessionStorage.getItem('runtimeUid');
     // console.log(this.uid);
+
+    this.runtimeService.getEquipTemp(this.uid)
+      .subscribe( data => {
+        this.imgRun = data.ImageRun;
+        this.imgStop = data.ImageStop;
+      });
 
     // this.initTest();
 
@@ -45,9 +57,33 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
       .subscribe(
         data => {
           // console.log(data);
-          let equipment = JSON.parse(data);
+          this.equip = JSON.parse(data);
           // console.log(equipment);
-          this.equipment = equipment;
+          this.equipment = this.equip.instants;
+          this.termStatus = this.equip.termStatus;
+          this.eptStatus = this.equip.eptStatus;
+          this.alarmStatus = this.equip.alarmStatus;
+
+          switch (this.termStatus) {
+            case 0:
+              this.online = '离线';
+              break;
+            case 1:
+              this.online = '在线';
+              break;
+            case -1:
+              this.online = '未绑定';
+              break;
+          }
+
+          this.isBurning = this.eptStatus ? '运行中' : '未运行';
+          this.hasWarning = this.alarmStatus ? '有告警' : '无告警';
+          if (this.termStatus && this.eptStatus) {
+            this.img = this.imgRun;
+          } else {
+            this.img = this.imgStop;
+          }
+
           let analogues = [];
           let switchs = [];
           let ranges = [];
@@ -77,12 +113,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
           }
 
 
-          this.isBurning = true;
-          if (this.isBurning) {
-            this.img = 'assets/images/boilerwater.gif';
-          } else {
-            this.img = 'assets/images/boilerwater.png';
-          }
+
 
         },
         err => console.log(err),
@@ -124,6 +155,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
         }
 
 
+        this.online = true;
         this.isBurning = true;
         if (this.isBurning) {
           this.img = 'assets/images/boilerwater.gif';
@@ -146,8 +178,8 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    // this.socket.unsubscribe();
-    // this.boilerWsService.closeSocket();
+    this.socket.unsubscribe();
+    this.boilerWsService.closeSocket();
   }
 
 }

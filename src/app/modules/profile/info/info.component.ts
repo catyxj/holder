@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../../shared/user.service';
 import {ProfileService} from '../../../shared/profile.service';
 import {User} from '../../../user';
+import {NzMessageService} from "ng-zorro-antd";
 
 @Component({
   selector: 'app-info',
@@ -16,7 +17,9 @@ export class InfoComponent implements OnInit {
     Email: '',
     Username: ''
   };
-  constructor(private userService: UserService, private profileService: ProfileService) { }
+  constructor(private userService: UserService,
+              private profileService: ProfileService,
+              private message: NzMessageService) { }
 
   ngOnInit() {
     let user = JSON.parse(sessionStorage.getItem('currentUser'));
@@ -44,6 +47,8 @@ export class InfoComponent implements OnInit {
             this.profile = data;
             // sessionStorage.setItem('currentUser', JSON.stringify(this.profile));
             this.userService.ChangeMission('changed');
+          }, err => {
+            this.message.error(err);
           });
 
       });

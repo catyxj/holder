@@ -1,7 +1,8 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {TerminalService} from '../../../shared/terminal.service';
-import {FormControl} from '@angular/forms';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-edit-terminal',
@@ -18,7 +19,6 @@ export class EditTerminalComponent implements OnInit {
   public editingCode;
   public bin;
   public bins;
-  panelColor = new FormControl('red');
 
   constructor(public activeModal: NgbActiveModal,
               private terminalService: TerminalService) { }
@@ -27,8 +27,8 @@ export class EditTerminalComponent implements OnInit {
     console.log(this.currentData);
     this.editing = true;
     this.data = {
-      code: this.currentData.TerminalCode,
-      org: this.currentData.Organization.Name,
+      code: this.currentData.Sn,
+      org: this.currentData.OrganizationName,
     };
     this.getBin();
   }
@@ -48,12 +48,65 @@ export class EditTerminalComponent implements OnInit {
       });
   }
 
+  // 升级
   upgrade() {
     this.terminalService.upgrade(this.bin)
       .subscribe( () => {
-        alert('升级成功');
+        Swal(
+          '升级成功！',
+          '',
+          'success'
+        );
+      }, err => {
+        Swal(
+          '升级失败！',
+          err,
+          'error'
+        );
       });
   }
 
+  // 重启
+  restart() {
+    this.terminalService.restart(this.data.code)
+      .subscribe( val => {
+        Swal(
+          '重启成功！',
+          '',
+          'success'
+        );
+      }, err => {
+        Swal(
+          '重启失败！',
+          err,
+          'error'
+        );
+      });
+  }
+
+  // 保存
+  save() {
+    let data = {
+      code: this.data.code,
+      org: this.data.org
+    };
+
+    this.terminalService.editTerminal(data)
+      .subscribe( val => {
+        Swal(
+          '保存成功！',
+          '',
+          'success'
+        );
+        this.activeModal.close('ok');
+      }, err => {
+        Swal(
+          '保存失败！',
+          err,
+          'error'
+        );
+      });
+
+  }
 
 }

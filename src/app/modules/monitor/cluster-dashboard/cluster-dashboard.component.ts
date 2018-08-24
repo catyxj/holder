@@ -36,6 +36,9 @@ export class ClusterDashboardComponent implements OnInit, OnDestroy {
           // console.log(equips);
           this.totalItems = clusters.counts;
           this.clusters = clusters.cst;
+          if (!this.clusters) {
+            this.clusters = [];
+          }
           for (let i = 0; i < this.clusters.length; i++) {
             let clu = this.clusters[i];
             if (!clu.img) {

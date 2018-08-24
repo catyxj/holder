@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {OrganizationService} from '../../../shared/organization.service';
+import {AdressService} from "../../../shared/adress.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-info',
@@ -13,7 +15,7 @@ export class EditInfoComponent implements OnInit {
   currentData: any;
   currentUser: any;
   editing: boolean;
-  locations: any;
+  // locations: any;
 
   public orgTypes: any[];
   public data: any;
@@ -22,10 +24,13 @@ export class EditInfoComponent implements OnInit {
   public brandImg;
   public img;
   public errMes;
+  public locations;
 
 
-
-  constructor(public activeModal: NgbActiveModal, private orgService: OrganizationService) { }
+  constructor(public activeModal: NgbActiveModal,
+              private orgService: OrganizationService,
+              private addrService: AdressService) {
+  }
 
   ngOnInit() {
 
@@ -38,44 +43,54 @@ export class EditInfoComponent implements OnInit {
       address: this.currentData.Address ? this.currentData.Address.Address : '',
       isSuper: this.currentData.IsSupervisor,
       showBrand: this.currentData.ShowBrand,
-      brandName: this.currentData.BrandName
+      brandName: this.currentData.BrandName,
+      is_ept_ctl: this.currentData.IsEptCtl
     };
 
     this.brandImg = this.currentData.BrandImageUrl;
 
     this.getOrgType();
+    this.getAddr();
+
+  }
 
 
-    let location;
-    if (this.currentData.Address) {
-      let locationId = this.currentData.Address.Location ? this.currentData.Address.Location.LocationId : 0;
-      if (locationId < 100) {
-        location = locationId * 10000;
-      } else if (locationId < 10000) {
-        location = locationId * 100;
-      } else {
-        location = locationId;
-      }
-    }
+  // 获取地址
+  getAddr() {
+    this.addrService.getAddress()
+      .subscribe(addr => {
+        this.locations = addr;
 
-    this.data.aProvince = this.currentData.Address ? Math.floor(location / 10000) : 0;
-    this.data.aCity = this.currentData.Address ? Math.floor(location / 100) : 0;
-    this.data.aRegion = this.currentData.Address ? location  : 0;
+        let location;
+        if (this.currentData.Address) {
+          let locationId = this.currentData.Address.Location ? this.currentData.Address.Location.LocationId : 0;
+          if (locationId < 100) {
+            location = locationId * 10000;
+          } else if (locationId < 10000) {
+            location = locationId * 100;
+          } else {
+            location = locationId;
+          }
+        }
 
-    // console.log(this.currentData, this.data);
+        this.data.aProvince = this.currentData.Address ? Math.floor(location / 10000) : 0;
+        this.data.aCity = this.currentData.Address ? Math.floor(location / 100) : 0;
+        this.data.aRegion = this.currentData.Address ? location : 0;
 
-    if (this.data.aProvince) {
-      this.initProvince();
-    }
-    if (this.data.aCity) {
-      this.changeCities();
-    }
-    if (this.data.aRegion) {
-      this.changeRegion();
-    }
+        // console.log(this.currentData, this.data);
+
+        if (this.data.aProvince) {
+          this.initProvince();
+        }
+        if (this.data.aCity) {
+          this.changeCities();
+        }
+        if (this.data.aRegion) {
+          this.changeRegion();
+        }
 
 
-
+      });
   }
 
 
@@ -85,12 +100,12 @@ export class EditInfoComponent implements OnInit {
       this.data.aProvince = parseInt(this.data.aProvince);
     }
     for (let i = 0; i < this.locations.length; i++) {
-      if ( this.data.aProvince === 0) {
+      if (this.data.aProvince === 0) {
         this.cities = [];
         this.regions = [];
         return;
       }
-      if ( this.data.aProvince === this.locations[i].LocationId ) {
+      if (this.data.aProvince === this.locations[i].LocationId) {
         this.cities = this.locations[i].cities;
       }
     }
@@ -101,12 +116,12 @@ export class EditInfoComponent implements OnInit {
     if (typeof(this.data.aProvince) !== 'number') {
       this.data.aProvince = parseInt(this.data.aProvince);
     }
-    if ( this.data.aProvince === 0) {
+    if (this.data.aProvince === 0) {
       this.cities = [];
       this.regions = [];
     } else {
       for (let i = 0; i < this.locations.length; i++) {
-        if ( this.data.aProvince === this.locations[i].LocationId ) {
+        if (this.data.aProvince === this.locations[i].LocationId) {
           this.cities = this.locations[i].cities;
         }
       }
@@ -115,12 +130,13 @@ export class EditInfoComponent implements OnInit {
     this.data.aRegion = 0;
     this.data.location = this.data.aProvince;
   }
+
   changeCities() {
     if (typeof(this.data.aCity) !== 'number') {
       this.data.aCity = parseInt(this.data.aCity);
     }
     for (let i = 0; i < this.cities.length; i++) {
-      if ( this.data.aCity === this.cities[i].LocationId ) {
+      if (this.data.aCity === this.cities[i].LocationId) {
         this.regions = this.cities[i].regions;
       }
     }
@@ -137,7 +153,9 @@ export class EditInfoComponent implements OnInit {
   // 获取企业类型
   getOrgType() {
     this.orgService.getOrgType()
-      .subscribe(types => {this.orgTypes = types; });
+      .subscribe(types => {
+        this.orgTypes = types;
+      });
   }
 
 
@@ -157,7 +175,7 @@ export class EditInfoComponent implements OnInit {
       // 图片文件转换为base64
       reader.readAsDataURL(file);
 
-      reader.onload = function() {
+      reader.onload = function () {
         // 显示图片
         that.brandImg = this.result;
         that.errMes = ' ';
@@ -181,22 +199,33 @@ export class EditInfoComponent implements OnInit {
       show_brand: null,
       brand_name: null,
       is_super: null,
-      brand_img: ''
+      brand_img: '',
+      is_ept_ctl: false
     };
     if (this.currentUser.Role.RoleId <= 2) {
       postData.show_brand = this.data.showBrand;
       postData.brand_name = this.data.brandName;
+      postData.is_ept_ctl = this.data.is_ept_ctl;
       if (this.img) {
         postData.brand_img = this.brandImg;
       }
       postData.is_super = this.data.isSuper;
-      // postData.supervisor = $modal.supervisor;
     }
 
     this.orgService.save(postData)
       .subscribe(val => {
-        alert('保存成功');
+        Swal(
+          '保存成功！',
+          '',
+          'success'
+        );
         this.activeModal.close('ok');
+      }, err => {
+        Swal(
+          '保存失败！',
+          err,
+          'error'
+        );
       });
 
 

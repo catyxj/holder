@@ -62,12 +62,9 @@ a {
   line-height: 25px;
   height: 55px;
   text-align: center;
-  color: #ffffff;
+  /*color: #ffffff;*/
 }
 
-.bg_grey{
-  background-color: #8eacbb;
-}
 
 .module:hover {
   color: #607d8b;

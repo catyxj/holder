@@ -84,6 +84,8 @@ export class ClusterListComponent implements OnInit {
       this.clusterService.deleteCluster(this.deleteList)
         .subscribe(() => {
           this.pageChange();
+        }, err => {
+        alert(err);
         });
     } else {
 

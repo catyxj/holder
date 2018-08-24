@@ -108,6 +108,8 @@ export class BoilersComponent implements OnInit {
       this.boilerService.deleteBoiler(this.deleteList)
         .subscribe(() => {
           this.pageChange();
+        }, err => {
+          alert(err);
         });
     } else {
 

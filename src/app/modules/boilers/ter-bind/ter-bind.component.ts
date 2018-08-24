@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {BoilerService} from '../../../shared/boiler.service';
+import {NzMessageService} from "ng-zorro-antd";
 
 
 @Component({
@@ -16,7 +17,8 @@ export class TerBindComponent implements OnInit {
   public terminal: string;
 
   constructor(public activeModal: NgbActiveModal,
-              private boilerService: BoilerService) { }
+              private boilerService: BoilerService,
+              private message: NzMessageService) { }
 
   ngOnInit() {
   }
@@ -31,6 +33,9 @@ export class TerBindComponent implements OnInit {
       .subscribe(val => {
         alert('保存成功');
         this.activeModal.close('ok');
+      }, err => {
+        // this.message.error(err);
+        alert(err);
       });
   }
 

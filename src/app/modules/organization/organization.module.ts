@@ -4,6 +4,7 @@ import { EditInfoComponent } from './edit-info/edit-info.component';
 import { AddAccountComponent } from './add-account/add-account.component';
 import {FormsModule} from '@angular/forms';
 import { AddInfoComponent } from './add-info/add-info.component';
+import {NgZorroAntdModule} from "ng-zorro-antd";
 
 
 
@@ -11,6 +12,7 @@ import { AddInfoComponent } from './add-info/add-info.component';
   imports: [
     CommonModule,
     FormsModule,
+    NgZorroAntdModule
   ],
   declarations: [
     EditInfoComponent,

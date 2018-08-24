@@ -7,6 +7,7 @@ import {NzModalService} from "ng-zorro-antd";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {RangeConfigComponent} from "../range-config/range-config.component";
 import {AddTemplateComponent} from "../add-template/add-template.component";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ter-config',
@@ -379,7 +380,7 @@ export class TerConfigComponent implements OnInit {
     modalRef.componentInstance.currentData = data;
     modalRef.result.then((result) => {
       data.alarm = result;
-      console.log(result, data, this.analogueList, this.switchList, this.rangeList);
+      console.log(data, this.analogueList);
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       console.log(reason);
@@ -676,8 +677,36 @@ export class TerConfigComponent implements OnInit {
     };
     this.terminalService.save(data)
       .subscribe(val => {
-        alert('保存成功');
-      });
+        Swal({
+          title: '通道配置更新成功，是否立刻下发？',
+          showCancelButton: true,
+          confirmButtonText: '确定下发',
+          cancelButtonText: '取消',
+          showLoaderOnConfirm: true
+        }).then(function() {
+          this.terminalService.issued(this.code)
+            .subscribe( val => {
+              Swal(
+                '下发成功！',
+                '',
+                'success'
+              );
+            }, err => {
+              Swal(
+                '下发失败！',
+                err,
+                'error'
+              );
+          });
+
+        });
+      }, err => {
+        Swal({
+          title: '通道配置更新失败',
+          text: err,
+          type: 'error'
+        });
+        });
 
   }
 

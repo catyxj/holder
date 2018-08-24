@@ -5,7 +5,7 @@
   </button>
 </div>
 
-<div class="modal-body" >
+<div class="modal-body equip" >
   <h5 class="text-danger mb-3">必填信息</h5>
   <div class="row">
     <div class="form-group col-md-6">
@@ -29,7 +29,7 @@
         </span>
         <select [(ngModel)]="data.templateId"
                 class="form-control">
-          <option *ngFor="let temp of templates" [value]="temp.TemplateId" >{{temp.Name}}</option>
+          <option *ngFor="let temp of templates" [value]="temp.Uid" >{{temp.Name}}</option>
         </select>
       </div>
     </div>
@@ -38,11 +38,11 @@
 
 
   <!--企业关联-->
-  <h5 class="text-info mb-3 mt-lg-3">企业关联</h5>
+  <h5 class="text_info mb-3 mt-lg-3">企业关联</h5>
   <div class="row">
     <div class="col-12">
       <div class="form-group flex" *ngFor="let link of links; let i = index">
-        <div class="input-group" style="width: 90%;">
+        <div class="input-group" style="width: 80%;">
           <span class="input-group-prepend">
             <span class="input-group-text">
               企业关联
@@ -61,6 +61,12 @@
           </nz-select>
         </div>
         <div>
+          <span class="ml-3"> 控制 </span>
+          <label class="switch switch-lg" style="margin-bottom: 0;">
+            <input type="checkbox" [(ngModel)]="link.eptCtlPlg"  />
+            <span></span>
+          </label>
+
           <button (click)="removeLink(i);"
                   class="btn btn-outline-danger btn-sm" style=" margin-left: 10px; border-radius: 25px;">
             <i class="fa fa-minus" style="font-size: 12px;"></i>
@@ -71,7 +77,7 @@
 
       <button type="button"
               (click)="addNewLink();"
-              class="btn btn-block btn-info">
+              class="btn btn-block btn_info">
         <i class="fa fa-plus-circle"></i>
         添加企业关联
       </button>
@@ -99,7 +105,7 @@
 
       <button type="button"
               (click)="addNewInfo();"
-              class="btn btn-block btn-info">
+              class="btn btn-block btn_info">
         <i class="fa fa-plus-circle"></i>
         添加其他信息
       </button>
@@ -135,7 +141,7 @@
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn-info" [disabled]="!data.name || !data.templateId" (click)="save()">
+  <button type="button" class="btn btn_info" [disabled]="!data.name || !data.templateId" (click)="save()">
     <span class="">保存</span>
   </button>
   <button class="btn btn-default" type="button" (click)="activeModal.dismiss('close')">取消</button>

@@ -2,7 +2,7 @@ import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {BoilerService} from "../../../shared/boiler.service";
 import {OrganizationService} from "../../../shared/organization.service";
-import {UserService} from "../../../shared/user.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-boiler',
@@ -30,14 +30,14 @@ export class EditBoilerComponent implements OnInit {
               private orgService: OrganizationService) { }
 
   ngOnInit() {
-    console.log(this.currentData);
+    // console.log(this.currentData);
     this.getTemplates();
     this.getOrgType();
     this.getOrgs();
     this.data = {
       uid: this.currentData.Uid,
       name: this.currentData.Name,
-      templateId: this.currentData.Template.TemplateId,
+      templateId: this.currentData.Template.Uid,
       infos: [],
       links: []
     };
@@ -84,7 +84,8 @@ export class EditBoilerComponent implements OnInit {
         const or = this.currentData.OrganizationsLinked[i];
         this.links.push({
           type: or.Type.TypeId,
-          uid: or.Uid
+          uid: or.Uid,
+          eptCtlPlg: or.EptCtlPlg
         });
         let orgs = [];
         for (let j in this.orgLists) {
@@ -97,7 +98,7 @@ export class EditBoilerComponent implements OnInit {
       }
     }
 
-    console.log(this.links);
+    // console.log(this.links);
   }
 
   initInfos() {
@@ -128,7 +129,7 @@ export class EditBoilerComponent implements OnInit {
 
   //  添加企业关联
   addNewLink() {
-    this.links.push({type: 0, uid: ''});
+    this.links.push({type: 0, uid: '', eptCtlPlg: false});
   }
 
 //  删除企业关联
@@ -147,6 +148,7 @@ export class EditBoilerComponent implements OnInit {
     }
     link.orgs = orgs;
     link.uid = '';
+    link.eptCtlPlg = false;
   }
 
 //  上传图片
@@ -159,7 +161,7 @@ export class EditBoilerComponent implements OnInit {
     that.img = file;
     const isPNG = file.type;      // === 'image/png';
     const isLt200k = file.size / 1024;
-    console.log(isPNG, isLt200k);
+    // console.log(isPNG, isLt200k);
     if (!!file && (isPNG === 'image/jpeg' || isPNG === 'image/png' || isPNG === 'image/gif') && isLt200k < 200) {
       let reader = new FileReader();
       // 图片文件转换为base64
@@ -181,12 +183,6 @@ export class EditBoilerComponent implements OnInit {
 
 //  保存
   save() {
-    // console.log(this.info);
-    // console.log('links:', this.links);
-
-    if (typeof(this.data.templateId) !== 'number') {
-      this.data.templateId = parseInt(this.data.templateId);
-    }
 
     // 其他信息
     if (this.info.length > 0) {
@@ -208,7 +204,7 @@ export class EditBoilerComponent implements OnInit {
       if (typeof(link.type) !== 'number') {
         link.type = parseInt(link.type);
       }
-      this.data.links.push({type: link.type, uid: link.uid });
+      this.data.links.push({type: link.type, uid: link.uid, eptCtlPlg: link.eptCtlPlg });
     }
 
     if (this.data.links.length <= 0) {
@@ -221,13 +217,22 @@ export class EditBoilerComponent implements OnInit {
       this.data.imgUrl = this.imgUrl;
     }
 
-    console.log(this.data);
+    // console.log(this.data);
 
     this.boilerService.updateBoiler(this.data)
       .subscribe( val => {
-        alert('保存成功');
+        Swal(
+          '保存成功！',
+          '',
+          'success'
+        );
         this.activeModal.close('ok');
       }, err => {
+        Swal(
+          '保存失败！',
+          err,
+          'error'
+        );
         this.data.links = [];
         this.data.infos = [];
       });

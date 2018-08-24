@@ -44,6 +44,8 @@ import {AlarmCurrentComponent} from "./runtime/alarm-current/alarm-current.compo
 import {BoilerTemplatesComponent} from "./boilers/templates/templates.component";
 import {MaintainMainComponent} from "./maintain/maintain-main/maintain-main.component";
 import {UploadMainComponent} from "./upload/upload-main/upload-main.component";
+import {MaintainComponent} from "./runtime/maintain/maintain.component";
+import {MaintainListComponent} from "./maintain/maintain-list/maintain-list.component";
 
 
 export const ModulesRoutingModule = [
@@ -134,13 +136,18 @@ export const ModulesRoutingModule = [
               { path: '', redirectTo: 'current', pathMatch: 'full' },
               {
                 path: 'current',
-                component: AlarmCurrentComponent,
+                component: CurrentComponent,
               },
               {
                 path: 'history',
-                component: AlarmHistoryComponent,
+                component: HistoryComponent,
               }
             ]
+          },
+          {
+            path: 'maintain',
+            component: MaintainListComponent
+
           }
         ]
       },

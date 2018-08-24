@@ -69,7 +69,7 @@ export class UserService {
   getUser(): Observable< any > {
 
     // return this.http.get< any >('assets/server/user.json');
-    return this.http.get< any >('/user')  // assets/server/user.json
+    return this.http.get< any >('/user')
       .pipe(
         tap((val) => {
           if (!val) {

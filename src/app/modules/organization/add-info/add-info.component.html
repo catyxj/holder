@@ -93,7 +93,15 @@
       </div>
     </div>
 
-    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+    <div *ngIf="!editing"
+         class="form-group col-6"
+         style="padding-top: 6px;">
+      如需更改企业标识，请与平台管理员联系。
+    </div>
+  </div>
+
+  <div class="row" *ngIf="editing && currentUser.Role.RoleId < 10 && data.showBrand">
+    <div class="form-group col-6 ">
       <div class="input-group">
         <span class="input-group-append">
           <span class="input-group-text">
@@ -102,16 +110,22 @@
         </span>
         <input type="text" [(ngModel)]="data.brandName"
                [disabled]="!editing || !data.showBrand"
-               class="form-control ng-pristine ng-valid ng-touched has-success"
+               class="form-control"
                placeholder="{{data.showBrand ? '输入首页显示的企业标识' : '不显示'}}">
 
 
       </div>
     </div>
-    <div *ngIf="!editing"
-         class="form-group col-lg-6 col-md-6 col-sm-6"
-         style="padding-top: 6px;">
-      如需更改企业标识，请与平台管理员联系。
+    <div class="form-group col-6 flex">
+      <div class="file_box" style=" width: 80px; height: 34px;">
+        <button class="btn btn-outline-info">
+          上传标识
+        </button>
+        <input type="file" class="file_input" (change)="imgChange($event)">
+      </div>
+      <div class="ml-2" style="border: 1px solid #eeeeee; width: 280px; height: 34px;">
+        <img src="{{brandImg}}" alt="" style="height: 30px; max-width: 280px;">
+      </div>
     </div>
   </div>
 
@@ -128,15 +142,14 @@
         </label>
       </div>
     </div>
-    <div class="col-6 flex" *ngIf="data.showBrand">
-      <div class="file_box" style=" width: 80px; height: 34px;">
-        <button class="btn btn-outline-info">
-          上传标识
-        </button>
-        <input type="file" class="file_input" (change)="imgChange($event)">
-      </div>
-      <div class="ml-2" style="border: 1px solid #eeeeee; width: 280px; height: 34px;">
-        <img src="{{brandImg}}" alt="" style="height: 30px; max-width: 280px;">
+
+    <div class="form-group col-6 flex">
+      <label class="control-label" style="font-size: 15px; margin-right: 6px;">是否显示控制按钮</label>
+      <div class="checkbox c-checkbox">
+        <label>
+          <input type="checkbox" [(ngModel)]="data.is_ept_ctl">
+          <span class="fa fa-check"></span>
+        </label>
       </div>
     </div>
 

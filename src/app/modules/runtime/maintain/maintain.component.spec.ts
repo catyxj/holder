@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AlarmDetailComponent } from './alarm-detail.component';
+import { MaintainComponent } from './maintain.component';
 
-describe('AlarmDetailComponent', () => {
-  let component: AlarmDetailComponent;
-  let fixture: ComponentFixture<AlarmDetailComponent>;
+describe('MaintainComponent', () => {
+  let component: MaintainComponent;
+  let fixture: ComponentFixture<MaintainComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlarmDetailComponent ]
+      declarations: [ MaintainComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AlarmDetailComponent);
+    fixture = TestBed.createComponent(MaintainComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -15,16 +15,21 @@ export class HistoryComponent implements OnInit {
   public deleteList = [];
   public allDelete = false;
   public pageSize = 10;
+  private uid;
 
   constructor(private alarmService: AlarmService) { }
 
   ngOnInit() {
+    let uid = sessionStorage.getItem('runtimeUid');
+    if (uid) {
+      this.uid = uid;
+    }
     this.getalarms();
   }
 
   // 获取告警列表
   getalarms() {
-    this.alarmService.getHistories(this.page, this.pageSize, this.search)
+    this.alarmService.getHistories(this.page, this.pageSize, this.search, this.uid)
       .subscribe( data => {
         this.alarms = data.params;
         this.totalItems = data.counts;

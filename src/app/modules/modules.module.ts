@@ -31,6 +31,7 @@ import {MaintainMainComponent} from "./maintain/maintain-main/maintain-main.comp
 import {UploadMainComponent} from "./upload/upload-main/upload-main.component";
 import {NgZorroAntdModule} from "ng-zorro-antd";
 import {UploadModule} from "./upload/upload.module";
+import {MaintainModule} from "./maintain/maintain.module";
 
 
 
@@ -48,6 +49,7 @@ import {UploadModule} from "./upload/upload.module";
     TemplateModule,
     AlarmModule,
     UploadModule,
+    MaintainModule,
     RouterModule.forChild(ModulesRoutingModule),
     NgxEchartsModule,
     FormsModule,

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {BoilerService} from '../../../shared/boiler.service';
+import {NzMessageService} from "ng-zorro-antd";
 
 declare var BMap: any;
 declare var BMAP_STATUS_SUCCESS: any;
@@ -22,7 +23,8 @@ export class EditAddressComponent implements OnInit {
   private map:any;
 
   constructor(public activeModal: NgbActiveModal,
-              public boilerService: BoilerService) { }
+              public boilerService: BoilerService,
+              private message: NzMessageService) { }
 
 
   ngOnInit() {
@@ -218,6 +220,9 @@ export class EditAddressComponent implements OnInit {
       .subscribe(val => {
         alert('保存成功');
         this.activeModal.close('ok');
+      }, err => {
+        // this.message.error(err);
+        alert(err);
       });
   }
 

@@ -55,35 +55,23 @@
       </tr>
 
     </table>
-    <!-- <form>
-       <div class="form-group">
-         <label for="dateOfBirth">Date of birth</label>
-         <div class="input-group">
-           <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
-           <div class="input-group-append">
-             <button class="btn btn-outline-secondary" (click)="dp.toggle()" type="button">
-               <i class="fa fa-calendar"></i>
-             </button>
-           </div>
-         </div>
-       </div>
-     </form>-->
+
   </div>
   <div class="modal-footer">
-    <button *ngIf="editing" type="button" class="btn btn-info" (click)="save()">
+    <button *ngIf="editing" type="button" class="btn btn_info" (click)="save()">
       <i class="fa fa-save"></i> 保存
     </button>
-    <button *ngIf="editing" type="button" class="btn btn-info" (click)="reset()">
+    <button *ngIf="editing" type="button" class="btn btn_info" (click)="reset()">
       <i class="fa fa-reply"></i> 取消
     </button>
-    <button *ngIf="!editing && currentData &&  currentUser.Role.RoleId < currentData.Role.RoleId && currentData.Status == 0" type="button" class="btn btn-info" (click)="active()">
+    <button *ngIf="!editing && currentData &&  currentUser.Role.RoleId < currentData.Role.RoleId && currentData.Status == 0" type="button" class="btn btn_info" (click)="active()">
       <i class="fa fa-check"></i> 激活
     </button>
 
-    <button *ngIf="!editing && currentData && currentUser.Role.RoleId < currentData.Role.RoleId" type="button" class="btn btn-info" (click)="edit()">
+    <button *ngIf="!editing && currentData && currentUser.Role.RoleId < currentData.Role.RoleId" type="button" class="btn btn_info" (click)="edit()">
       <i class="fa fa-edit"></i> 编辑
     </button>
-    <button type="button" class="btn btn-danger" (click)="deleteUser()">
+    <button type="button" class="btn btn-danger" (click)="deleteUser()" *ngIf="!editing && currentData && currentUser.Role.RoleId < currentData.Role.RoleId">
       <i class="fa fa-trash-o"></i>删除
     </button>
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss('close')">关闭</button>

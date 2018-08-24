@@ -38,6 +38,9 @@ export class ListComponent implements OnInit, OnDestroy {
           // console.log(equips);
           this.totalItems = equips.counts;
           this.boilers = equips.ept;
+          if (!this.boilers) {
+            this.boilers = [];
+          }
           for (let i = 0; i < this.boilers.length; i++) {
             let bo = this.boilers[i];
 
@@ -64,7 +67,7 @@ export class ListComponent implements OnInit, OnDestroy {
               bo.warning = '无告警';
               bo.malfunction = '无故障';
             } else {
-              bo.online = '终端未绑定';
+              bo.online = '未绑定';
               bo.isBurning = '未运行';
               bo.warning = '无告警';
               bo.malfunction = '无故障';

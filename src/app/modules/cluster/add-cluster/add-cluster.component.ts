@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {ClusterService} from "../../../shared/cluster.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-cluster',
@@ -56,8 +57,19 @@ export class AddClusterComponent implements OnInit {
     };
     this.clusterService.addCluster(data)
       .subscribe( val => {
-        alert('保存成功');
+        Swal(
+          '保存成功！',
+          '',
+          'success'
+        );
         this.activeModal.close('ok');
+      }, err => {
+        Swal(
+          '保存失败！',
+          err,
+          'error'
+        );
+
       });
   }
 

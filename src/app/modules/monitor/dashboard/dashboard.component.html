@@ -4,13 +4,13 @@
     <div class="pull-right flex flex-row">
 
       <!--<div class="btn-group mr-2">
-        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 2, 'btn-info': checkValue === 2}" (click)="checkStatus(2)">
+        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 2, 'btn_info': checkValue === 2}" (click)="checkStatus(2)">
           全部
         </button>
-        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 1, 'btn-info': checkValue === 1}" (click)="checkStatus(1)">
+        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 1, 'btn_info': checkValue === 1}" (click)="checkStatus(1)">
           运行
         </button>
-        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 0, 'btn-info': checkValue === 0}" (click)="checkStatus(0)">
+        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 0, 'btn_info': checkValue === 0}" (click)="checkStatus(0)">
           未运行
         </button>
       </div>-->
@@ -19,7 +19,7 @@
       <div class="input-group">
         <input type="text" class="form-control" placeholder="请输入设备名称" [(ngModel)]="search" >
         <div class="input-group-append" (click)="searchChange()">
-          <button class="btn btn-info" type="button"><i class="fa fa-search"></i></button>
+          <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
         </div>
       </div>
 
@@ -37,13 +37,13 @@
           </a>
 
           <div class="status_row ">
-            <div class="status_col " [ngClass]="{'bg-info':data.termStatus ,'bg_grey':!data.termStatus}">
+            <div class="status_col " [ngClass]="{'bg_light_secondary':data.termStatus > 0 ,'bg_grey':data.termStatus <= 0}">
               {{data.online}} <!--终端状态-->
             </div>
-            <div class="status_col " [ngClass]="{'bg-info':data.eptStatus ,'bg_grey':!data.eptStatus}">
+            <div class="status_col " [ngClass]="{'bg_light_secondary':data.termStatus > 0 && data.eptStatus ,'bg_grey':data.termStatus <= 0 || !data.eptStatus}">
               {{data.isBurning}} <!--运行状态-->
             </div>
-            <div class="status_col " [ngClass]="{'bg_grey':!data.termStatus, 'bg-warning':data.termStatus && data.alarmStatus , 'bg-info':data.termStatus && !data.alarmStatus}">
+            <div class="status_col " [ngClass]="{'bg_grey':data.termStatus <= 0, 'bg-warning':data.termStatus > 0 && data.alarmStatus , 'bg_light_secondary':data.termStatus > 0 && !data.alarmStatus}">
               {{data.warning}}
             </div>
             <div class="status_col bg_grey">

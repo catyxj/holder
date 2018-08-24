@@ -1,7 +1,7 @@
 <div class="modal-header">
   <h4 class="modal-title">
     设备终端绑定
-    <span class="text-info" style="font-size: 16px;"> [ {{currentData?.Name}} ] </span>
+    <span class="text_info" style="font-size: 16px;"> [ {{currentData?.Name}} ] </span>
   </h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('close')">
     <span aria-hidden="true">&times;</span>
@@ -16,7 +16,7 @@
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn-info" (click)="save()" [disabled]="!terminal || terminal.length<6">
+  <button type="button" class="btn btn_info" (click)="save()" [disabled]="!terminal || terminal.length<6">
     <span class="">绑定</span>
   </button>
   <button class="btn btn-default" type="button" (click)="activeModal.dismiss('close')">取消</button>

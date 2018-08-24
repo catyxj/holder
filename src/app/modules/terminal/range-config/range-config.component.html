@@ -9,7 +9,7 @@
 
 <div class="modal-body" >
 
-  <div class="note" [ngClass]="{'text-info': isValid, 'text-danger': !isValid}">
+  <div class="note" [ngClass]="{'text_info': isValid, 'text-danger': !isValid}">
     <p> {{ comment }} </p>
   </div>
 
@@ -40,7 +40,7 @@
 
   <div class="">
     <button type="button"
-            class="btn btn-info btn-block"
+            class="btn btn_info btn-block"
             (click)="addNewRange();rangeChanged();"
             style="width: 100%;">
       <i class="fa fa-plus-circle"></i>
@@ -54,7 +54,7 @@
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn-info" (click)="save()">
+  <button type="button" class="btn btn_info" (click)="save()">
     <span class="">保存</span>
   </button>
   <button class="btn btn-default" type="button" (click)="activeModal.dismiss('close')">取消</button>

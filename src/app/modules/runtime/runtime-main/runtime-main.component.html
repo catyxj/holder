@@ -5,11 +5,11 @@
 <div class="content">
   <div class="clearfix runtime_header">
     <div class="pull-left flex">
-      <a class="text-info" (click)="goBack()">
+      <a class="text_info" (click)="goBack()">
         <i class="fa fa-reply"></i>
       </a>
       &nbsp;
-      <h5 class="text-info">
+      <h5 class="text_info">
         {{name}}
       </h5>
 
@@ -19,7 +19,7 @@
       <a [routerLink]="['./operate']" routerLinkActive="active">运行参数</a>
       <a [routerLink]="['./history']" routerLinkActive="active">历史数据</a>
       <a [routerLink]="['./alarm']" routerLinkActive="active">设备告警</a>
-      <a >维保记录</a>
+      <!--<a [routerLink]="['./maintain']" routerLinkActive="active">维保记录</a>-->
     </nav>
   </div>
 

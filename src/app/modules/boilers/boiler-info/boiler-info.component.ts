@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import {BoilerService} from '../../../shared/boiler.service';
@@ -164,7 +164,7 @@ export class BoilerInfoComponent implements OnInit {
 
   // 编辑锅炉信息模态框
   editBoiler() {
-    const modalRef = this.modalService.open(EditBoilerComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(EditBoilerComponent, { size: 'lg', backdropClass: 'modal_backdrop', windowClass: 'dark_modal' });
     modalRef.componentInstance.currentData = this.info;
     modalRef.result.then((result) => {
       if (result === 'ok') {
@@ -224,7 +224,7 @@ export class BoilerInfoComponent implements OnInit {
   unBind(ter) {
     let data = {
       equipment_id: this.info.Uid,
-      terminal_code: ter.TerminalCode
+      terminal_code: ter.TerminalCode.toString()
     };
     let cf = confirm('确定删除终端');
     if (cf === true) {
@@ -233,7 +233,7 @@ export class BoilerInfoComponent implements OnInit {
           alert('解绑成功');
           this.getInfo();
         }, err => {
-          alert('解绑失败');
+          alert(err);
         });
     }
 
@@ -241,12 +241,13 @@ export class BoilerInfoComponent implements OnInit {
 
   // 删除
   delete() {
-
     let cf = confirm('确认删除当前设备？');
     if (cf === true) {
       this.boilerService.deleteBoiler([this.info.Uid])
-        .subscribe();
-      this.router.navigate(['/admin/equipments']);
+        .subscribe(() => {
+          this.router.navigate(['/admin/equipments']);
+        }, err => {alert(err); });
+
     }
 
   }

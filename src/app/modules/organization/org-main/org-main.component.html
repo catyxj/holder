@@ -6,20 +6,20 @@
 
 <div class="content">
   <div class="mat-card-title" style="padding: 20px 0; ">
-    <h5 class="text-info pull-left">企业列表</h5>
+    <h5 class="text_info pull-left">企业列表</h5>
     <div class="pull-right flex flex-row">
 
       <div class="input-group mb-4">
         <input type="text" class="form-control" placeholder="请输入企业名称" [(ngModel)]="search" >
         <div class="input-group-append" (click)="searchChange()">
-          <button class="btn btn-info" type="button"><i class="fa fa-search"></i></button>
+          <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
         </div>
       </div>
 
 
 
       <div class="ml-3" *ngIf="user && user.Role && user.Role.RoleId <= 10">
-        <button class="btn btn-info" (click)="newOrg()">
+        <button class="btn btn_info" (click)="newOrg()">
           新增企业
         </button>
       </div>
@@ -77,6 +77,12 @@
             <i class="fa fa-plus"></i>
             账号
           </button>
+          <button class="btn btn-sm btn-outline-info ml-2" (click)="entry(org)"
+                  *ngIf="user.Role.RoleId <= 10">
+            <i class="fa fa-repeat"></i>
+            进入
+          </button>
+
         </td>
       </tr>
       </tbody>
@@ -86,7 +92,7 @@
     </p>
     <div>
       <div class="pull-left">
-        <button class="btn btn-info" (click)="deleteG()">
+        <button class="btn btn_info" (click)="deleteG()">
           批量删除
         </button>
       </div>

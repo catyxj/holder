@@ -6,11 +6,12 @@
     </button>
 
     <!--企业标识-->
-    <a class="navbar-brand" href="" *ngIf="user && (!user.Organization || !user.Organization.ShowBrand)">
-      <img src="assets/images/light.png"  height="30" alt="">
+    <a class="navbar-brand" routerLink="/admin" *ngIf="user && (!user.Organization || !user.Organization.ShowBrand)">
+      <!--<img src="assets/images/light.png"  height="30" alt="">-->
+      <h2 style="color: #ffffff;"> LUKEEP</h2>
     </a>
     <!--显示企业标识-->
-    <a class="navbar-brand" href="" *ngIf="user && (user.Organization && user.Organization.ShowBrand)">
+    <a class="navbar-brand" routerLink="/admin" *ngIf="user && (user.Organization && user.Organization.ShowBrand)">
       <h3 *ngIf="!user.Organization.BrandImageUrl" style="color: #ffffff;">
         {{user.Organization.BrandName}}
       </h3>
@@ -24,7 +25,18 @@
     <!-- This fills the remaining space of the current row -->
     <span class="example-spacer"></span>
 
-    <mat-icon> email </mat-icon>
+
+    <!--<mat-icon> email </mat-icon>-->
+    <a routerLink="/admin/alarm" style="color: #ffffff;">
+      <div style="position: relative;">
+        <i class="fa fa-bell-o"></i>
+        <span class="badge badge-pill badge-danger" *ngIf="alarmNum && alarmNum !== 0"
+              style="position: absolute; top: -5px; right: -12px;">
+        {{alarmNum}}
+      </span>
+      </div>
+    </a>
+
     <!--<i class="fa fa-envelope-o"></i>-->
 
     <div ngbDropdown class="d-inline-block ml-3">

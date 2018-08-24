@@ -18,6 +18,7 @@ mat-nav-list a{
 }
 
 mat-nav-list a.active{
+  /*background-color: #3C8DBC;*/
   background-color: #607D8B;
   color: #ffffff;
 }
@@ -43,6 +44,7 @@ mat-nav-list a.sidebar_title{
 .sub_menu li a:hover{
   /*background-color: rgba(72,198,255,.8);*/
   color: #fff;
+
   background-color: #8eacbb;
   /*color: #1976d2;*/
   transition: all .3s linear;

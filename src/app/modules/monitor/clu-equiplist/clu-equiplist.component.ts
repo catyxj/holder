@@ -70,7 +70,7 @@ export class CluEquiplistComponent implements OnInit, OnDestroy {
               bo.warning = '无告警';
               bo.malfunction = '无故障';
             } else {
-              bo.online = '终端未绑定';
+              bo.online = '未绑定';
               bo.isBurning = '未运行';
               bo.warning = '无告警';
               bo.malfunction = '无故障';

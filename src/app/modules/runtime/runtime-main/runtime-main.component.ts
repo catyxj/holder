@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -6,7 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   templateUrl: './runtime-main.component.html',
   styleUrls: ['./runtime-main.component.css']
 })
-export class RuntimeMainComponent implements OnInit {
+export class RuntimeMainComponent implements OnInit, OnDestroy {
 
   public uid;
   public name;
@@ -27,6 +27,10 @@ export class RuntimeMainComponent implements OnInit {
   }
 
 
+  ngOnDestroy() {
+    sessionStorage.removeItem('runtimeUid');
+    sessionStorage.removeItem('runtimeName');
+  }
 
 
 }
