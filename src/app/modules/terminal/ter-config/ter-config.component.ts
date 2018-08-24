@@ -685,7 +685,7 @@ export class TerConfigComponent implements OnInit {
           showLoaderOnConfirm: true
         }).then(function() {
           this.terminalService.issued(this.code)
-            .subscribe( val => {
+            .subscribe( res => {
               Swal(
                 '下发成功！',
                 '',
