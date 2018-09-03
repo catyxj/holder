@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+
 
 import { MainComponent } from '../main/main.component';
 
@@ -39,12 +38,9 @@ import {ClusterDashboardComponent} from "./monitor/cluster-dashboard/cluster-das
 import {OperateComponent} from "./runtime/operate/operate.component";
 import {RuntimeHistoryComponent} from "./runtime/history/history.component";
 import {RuntimeAlarmComponent} from "./runtime/alarm/alarm.component";
-import {AlarmHistoryComponent} from "./runtime/alarm-history/alarm-history.component";
-import {AlarmCurrentComponent} from "./runtime/alarm-current/alarm-current.component";
 import {BoilerTemplatesComponent} from "./boilers/templates/templates.component";
 import {MaintainMainComponent} from "./maintain/maintain-main/maintain-main.component";
 import {UploadMainComponent} from "./upload/upload-main/upload-main.component";
-import {MaintainComponent} from "./runtime/maintain/maintain.component";
 import {MaintainListComponent} from "./maintain/maintain-list/maintain-list.component";
 import {PlcAlarmComponent} from "./terminal/plc-alarm/plc-alarm.component";
 
