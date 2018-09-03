@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BoilerService} from "../../../shared/boiler.service";
 import {BoilerSocketService} from "../../../shared/boiler-socket.service";
 import {ActivatedRoute} from "@angular/router";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-clu-equiplist',
@@ -182,7 +183,11 @@ export class CluEquiplistComponent implements OnInit, OnDestroy {
 
   groupControl(n) {
     if (this.checkList.length <= 0) {
-      alert('没有选择设备');
+      Swal(
+        '没有选择设备',
+        '',
+        'warning'
+      );
       return;
     }
     console.log(this.checkList, n);

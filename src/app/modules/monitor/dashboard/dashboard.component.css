@@ -103,12 +103,12 @@ a {
   border: 1px solid #607d8b;
 }
 
-.module:hover .img_content img{
+/*.module:hover .img_content img{
   transform: scale(1.2);
   transition: all 1s ease 0s;
   -webkit-transform: scale(1.2);
   -webkit-transform: all 1s ease 0s;
-}
+}*/
 
 
 

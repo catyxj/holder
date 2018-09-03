@@ -3,6 +3,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {BoilerService} from "../../../shared/boiler.service";
 import {AddEquiptemplateComponent} from "../add-equiptemplate/add-equiptemplate.component";
 import {EditEquiptemplateComponent} from "../edit-equiptemplate/edit-equiptemplate.component";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-templates',
@@ -71,9 +72,18 @@ export class BoilerTemplatesComponent implements OnInit {
       // console.log(this.deleteList);
       this.boilerService.deleteTemplate(this.deleteList)
         .subscribe(() => {
+          Swal(
+            '删除成功！',
+            '',
+            'success'
+          );
           this.pageChange();
         }, err => {
-          alert(err);
+          Swal(
+            '删除失败！',
+            err,
+            'error'
+          );
         });
     } else {
 

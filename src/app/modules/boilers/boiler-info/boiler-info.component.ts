@@ -3,13 +3,6 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import {BoilerService} from '../../../shared/boiler.service';
 import {NgbAccordionConfig, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {
-  ControlAnchor,
-  GeolocationControlOptions,
-  MapOptions, MapTypeControlOptions, MapTypeControlType, MarkerOptions, NavigationControlOptions, NavigationControlType,
-  OverviewMapControlOptions,
-  Point, ScaleControlOptions
-} from 'angular2-baidu-map';
 import {EditBoilerComponent} from '../edit-boiler/edit-boiler.component';
 import {OrganizationService} from '../../../shared/organization.service';
 import {EditAddressComponent} from '../edit-address/edit-address.component';

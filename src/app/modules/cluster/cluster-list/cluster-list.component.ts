@@ -3,6 +3,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ClusterService} from '../../../shared/cluster.service';
 import {AddClusterComponent} from '../add-cluster/add-cluster.component';
 import {EditClusterComponent} from "../edit-cluster/edit-cluster.component";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cluster-list',
@@ -18,11 +19,13 @@ export class ClusterListComponent implements OnInit {
   public deleteList = [];
   public allDelete = false;
   public pageSize = 10;
+  public isSpinning = false;
 
   constructor(private modalService: NgbModal,
               private clusterService: ClusterService) { }
 
   ngOnInit() {
+    this.isSpinning = true;
     this.getclusters();
   }
 
@@ -32,6 +35,9 @@ export class ClusterListComponent implements OnInit {
       .subscribe( data => {
         this.clusters = data.params;
         this.totalItems = data.counts;
+        this.isSpinning = false;
+      }, err => {
+        this.isSpinning = false;
       });
   }
 
@@ -41,7 +47,18 @@ export class ClusterListComponent implements OnInit {
     if (cf === true) {
       this.clusterService.deleteCluster([uid])
         .subscribe( () => {
+          Swal(
+            '删除成功！',
+            '',
+            'success'
+          );
           this.pageChange();
+        }, err => {
+          Swal(
+            '删除失败！',
+            '',
+            'error'
+          );
         });
     }
   }
@@ -83,9 +100,18 @@ export class ClusterListComponent implements OnInit {
     if (cf === true) {
       this.clusterService.deleteCluster(this.deleteList)
         .subscribe(() => {
+          Swal(
+            '删除成功！',
+            '',
+            'success'
+          );
           this.pageChange();
         }, err => {
-        alert(err);
+          Swal(
+            '删除失败！',
+            '',
+            'error'
+          );
         });
     } else {
 

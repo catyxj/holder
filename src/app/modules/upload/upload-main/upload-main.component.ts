@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AddFileComponent} from "../add-file/add-file.component";
 import {UploadService} from "../../../shared/upload.service";
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-upload-main',
@@ -26,26 +28,54 @@ export class UploadMainComponent implements OnInit {
 
 
   ngOnInit() {
+    this.getFiles();
   }
 
 
   getFiles() {
     this.uploadService.getFiles(this.page, this.pageSize, this.search)
       .subscribe( data => {
-        this.fileLists = data.parms;
+        this.fileLists = data.params;
         this.totalItems = data.counts;
       });
   }
 
+  delete(data) {
+    let that = this;
+    Swal({
+      title: '确定删除吗？',
+      text: '',
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+      confirmButtonText: '确定删除！',
+    }).then(function() {
+      that.uploadService.deleteFile([data])
+        .subscribe( val => {
+          Swal(
+            '删除成功！',
+            '',
+            'success'
+          );
+          that.pageChange();
+        }, err => {
+          Swal(
+            '删除失败！',
+            err,
+            'error'
+          );
+        });
+    });
+  }
 
   // 批量选择
   checkDel(data): void {
     if ( data.checkDelete === true) {
-      this.deleteList.push(data.Uid);
+      this.deleteList.push(data.Name);
     } else {
       for (let i = 0; i < this.deleteList.length; i++) {
         let dl = this.deleteList[i];
-        if (dl === data.Uid) {
+        if (dl === data.Name) {
           this.deleteList.splice(i, 1);
         }
       }
@@ -58,7 +88,7 @@ export class UploadMainComponent implements OnInit {
     if (this.allDelete === true) {
       for (let i = 0; i < this.fileLists.length; i++) {
         this.fileLists[i].checkDelete = true;
-        this.deleteList.push(this.fileLists[i].Uid);
+        this.deleteList.push(this.fileLists[i].Name);
       }
     } else {
       for (let i = 0; i < this.fileLists.length; i++) {
@@ -72,14 +102,14 @@ export class UploadMainComponent implements OnInit {
   // 批量删除
   deleteG() {
     const cf = confirm(`确认删除选中文件 ？`);
-    /*if (cf === true) {
-      this.clusterService.deleteCluster(this.deleteList)
+    if (cf === true) {
+      this.uploadService.deleteFile(this.deleteList)
         .subscribe(() => {
           this.pageChange();
         });
     } else {
 
-    }*/
+    }
   }
 
   // 每页数量

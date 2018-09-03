@@ -1,5 +1,5 @@
 
-<div class="content">
+<div class="">
   <div class="mat-card-title" style="padding: 20px 0; ">
     <h5 class="text_info pull-left">模板列表</h5>
 
@@ -46,7 +46,7 @@
         </td>
         <td> {{ i+1 }}  </td>
         <td> {{ data.Name }}  </td>
-        <td> {{ data.Organization.Name }} </td>
+        <td> {{ data.Organization?.Name }} </td>
         <td>
           <a [routerLink]="['/admin/template/edit', data.Uid, data.Name]"
              class="btn btn_info btn-sm" style="color: #ffffff;" title="查看及修改模板">
@@ -64,10 +64,11 @@
     </p>
   </div>
 
+  <div class="text-center">
+    <nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning"></nz-spin>
+  </div>
 
   <div>
-
-
     <div class="pull-left">
       <button class="btn btn_info" (click)="deleteG()">
         批量删除

@@ -5,9 +5,9 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {SetModalComponent} from '../set-modal/set-modal.component';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import { Location } from '@angular/common';
-import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import {ManagementComponent} from "../management/management.component";
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -35,6 +35,7 @@ export class UserMainComponent implements OnInit {
   deleteList = [];
   allDelete = false;
   pageSize = 10;
+  public isSpinning = false;
 
   constructor(private userAccountService: UserAccountService,
               private userService: UserService,
@@ -51,6 +52,8 @@ export class UserMainComponent implements OnInit {
        return (params.get('name') || []);
       })
     ).subscribe( );
+
+    this.isSpinning = true;
     this.getUserAccount();
   }
 
@@ -86,6 +89,7 @@ export class UserMainComponent implements OnInit {
       .subscribe(account => {
         this.totalItems = account.counts;
         this.accounts = account.params;
+        this.isSpinning = false;
         if (this.accounts.length <= 0) {
           return;
         }
@@ -96,6 +100,8 @@ export class UserMainComponent implements OnInit {
         }
 
         // console.log(this.page, this.search);
+      }, err => {
+        this.isSpinning = false;
       });
   }
 
@@ -133,7 +139,18 @@ export class UserMainComponent implements OnInit {
   deleteG() {
     this.userAccountService.deleteAccount( this.deleteList)
       .subscribe( () => {
+        Swal(
+          '删除成功！',
+          '',
+          'success'
+        );
         this.pageChange();
+      }, err => {
+        Swal(
+          '删除失败！',
+          err,
+          'error'
+        );
       });
     // console.log(this.deleteList);
   }

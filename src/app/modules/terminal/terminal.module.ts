@@ -22,6 +22,7 @@ import {NgZorroAntdModule} from 'ng-zorro-antd';
 import { AlarmRuleComponent } from './alarm-rule/alarm-rule.component';
 import { RangeConfigComponent } from './range-config/range-config.component';
 import { AddTemplateComponent } from './add-template/add-template.component';
+import { PlcAlarmComponent } from './plc-alarm/plc-alarm.component';
 
 
 
@@ -53,7 +54,8 @@ import { AddTemplateComponent } from './add-template/add-template.component';
     GroupAddComponent,
     AlarmRuleComponent,
     RangeConfigComponent,
-    AddTemplateComponent],
+    AddTemplateComponent,
+    PlcAlarmComponent],
   entryComponents: [
     AddTerminalComponent,
     GroupConfigComponent,

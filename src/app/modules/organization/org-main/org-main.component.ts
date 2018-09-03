@@ -7,6 +7,7 @@ import {AddAccountComponent} from '../add-account/add-account.component';
 import {Router} from '@angular/router';
 import {AdressService} from '../../../shared/adress.service';
 import {AddInfoComponent} from '../add-info/add-info.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-org-main',
@@ -29,6 +30,7 @@ export class OrgMainComponent implements OnInit {
   allDelete = false;
   locations: any;
   pageSize = 10;
+  public isSpinning = false;
 
   constructor(private userService: UserService,
               private orgService: OrganizationService,
@@ -40,6 +42,7 @@ export class OrgMainComponent implements OnInit {
     let user = JSON.parse(sessionStorage.getItem('currentUser'));
     this.user = user;
     // this.getUser();
+    this.isSpinning = true;
     this.getOrganization();
     this.getAddr();
   }
@@ -55,10 +58,12 @@ export class OrgMainComponent implements OnInit {
 
   // 获取企业信息
   getOrganization(): void {
+
     this.orgService.getOrganization(this.page, this.pageSize, this.search)
       .subscribe(organization => {
         this.totalItems = organization.counts;
         this.organizations = organization.params;
+        this.isSpinning = false;
         if (this.organizations.length <= 0) {
           return;
         }
@@ -68,6 +73,8 @@ export class OrgMainComponent implements OnInit {
         }
 
         // console.log(this.organizations);
+      }, err => {
+        this.isSpinning = false;
       });
   }
 
@@ -87,10 +94,18 @@ export class OrgMainComponent implements OnInit {
     if (cf === true) {
       this.orgService.deleteOrg([org.Uid])
         .subscribe( val => {
-          // alert('删除成功');
+          Swal(
+            '删除成功！',
+            '',
+            'success'
+          );
           this.getOrganization();
         }, err => {
-          alert(err);
+          Swal(
+            '删除失败！',
+            err,
+            'error'
+          );
         });
 
     } else {

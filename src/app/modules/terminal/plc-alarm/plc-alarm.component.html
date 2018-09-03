@@ -1,0 +1,61 @@
+
+<div class="">
+  <div class="mat-card-title flex justify-content-between" style="padding: 20px 0; ">
+    <h5 class="text_info">PLC告警列表</h5>
+    <div>
+      <button class="btn btn-info" (click)="goBack()">
+        <i class="fa fa-reply"></i>
+        返回
+      </button>
+    </div>
+  </div>
+
+  <div>
+    <table class="table table-bordered">
+      <thead class="bg_light_primary">
+      <th> 序号 </th>
+      <th> 采样时间 </th>
+      <th> 通道 </th>
+      <th> 版本信息 </th>
+      <th> 错误信息 </th>
+
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of plcs; let i = index">
+
+        <td> {{ i+1 }}  </td>
+        <td> {{ data.Name }}  </td>
+        <td> {{ data.ChannelNumber }}  </td>
+        <td> {{ data.Ver }} </td>
+        <td> {{ data.Err }} </td>
+
+      </tr>
+      </tbody>
+    </table>
+    <p class="text-muted" *ngIf="!plcs||plcs.length===0">
+      无有效数据
+    </p>
+  </div>
+
+
+  <div>
+
+    <ngb-pagination class="pull-right"
+                    [collectionSize]="totalItems"
+                    [pageSize]="pageSize" [(page)]="page"
+                    [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                    (pageChange)="pageChange()">
+
+    </ngb-pagination>
+    <div class="pull-right mr-3">
+      <select [(ngModel)]="pageSize" class="form-control" (change)="pageSizeChange()">
+        <option value="10">10</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
+    <div class="pull-right mr-3" style="line-height: 33px;"> 共 {{totalItems}} 项</div>
+  </div>
+
+</div>
+

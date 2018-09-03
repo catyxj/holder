@@ -21,9 +21,18 @@ export class RuntimeService {
     return this.http.get('assets/server/runtime.json');
   }
 
+
   // 获取设备型态信息
   getEquipTemp(uid): Observable<any>  {
     return this.http.get(`/equipment_template_get?uid=${uid}`);
+  }
+
+  //  设备控制开关
+  equipControl(data): Observable<any> {
+    return this.http.post('/equipment_ctl', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   // 获取运行参数

@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpRequest, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpRequest, HttpResponse} from "@angular/common/http";
 import {catchError, filter} from "rxjs/internal/operators";
 import {Observable, throwError} from "rxjs/index";
+
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Authorization': 'Ida'
+  })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +17,7 @@ import {Observable, throwError} from "rxjs/index";
 export class UploadService {
 
   private filesUrl = '/bin_file_list';
+  private filesAllUrl = '/bin_file_list_all';
 
   constructor(private http: HttpClient) { }
 
@@ -21,6 +30,23 @@ export class UploadService {
       );
   }
 
+  // 获取文件列表-下拉
+  getFileList(): Observable<any> {
+    return this.http.get<any>(this.filesAllUrl)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 删除文件
+  deleteFile(data): Observable<any> {
+    return this.http.post('/bin_file_delete', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 上传文件
   uploadFile(formData): Observable<any> {
     const req = new HttpRequest('POST', '/bin_file_upload', formData, {
       reportProgress: true

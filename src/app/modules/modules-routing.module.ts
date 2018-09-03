@@ -46,6 +46,7 @@ import {MaintainMainComponent} from "./maintain/maintain-main/maintain-main.comp
 import {UploadMainComponent} from "./upload/upload-main/upload-main.component";
 import {MaintainComponent} from "./runtime/maintain/maintain.component";
 import {MaintainListComponent} from "./maintain/maintain-list/maintain-list.component";
+import {PlcAlarmComponent} from "./terminal/plc-alarm/plc-alarm.component";
 
 
 export const ModulesRoutingModule = [
@@ -194,6 +195,10 @@ export const ModulesRoutingModule = [
           {
             path: 'messages/:code',
             component: MessagesComponent
+          },
+          {
+            path: 'plc/:code',
+            component: PlcAlarmComponent
           }
         ]
       },

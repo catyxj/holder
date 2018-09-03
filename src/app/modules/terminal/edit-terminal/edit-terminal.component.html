@@ -45,7 +45,7 @@
 
   <div class="row">
 
-    <div class="form-group form-selector col-md-6">
+    <div class="form-group form-selector col-md-6" *ngIf="user.Role.RoleId <= 1">
       <div class="input-group">
         <span class="input-group-prepend">
           <span class="input-group-text">
@@ -54,10 +54,10 @@
         </span>
 
         <select [(ngModel)]="bin" class="form-control">
-          <option *ngFor="let x of bins" [value]="x.BinPath" >{{x.Name}}</option>
+          <option *ngFor="let x of bins" [value]="x.Name" >{{x.Name}}</option>
         </select>
         <div class="input-group-append">
-          <input (click)="upgrade()"
+          <input (click)="upgrade()" [disabled]="!bin"
                  type="button" class="btn btn_info"
                  value="升级APP">
         </div>

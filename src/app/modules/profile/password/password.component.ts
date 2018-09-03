@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ProfileService} from '../../../shared/profile.service';
-import {NzMessageService} from "ng-zorro-antd";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-password',
@@ -15,8 +15,7 @@ export class PasswordComponent implements OnInit {
     password_new_confirm: ''
   };
 
-  constructor(private profileService: ProfileService,
-              private message: NzMessageService) { }
+  constructor(private profileService: ProfileService) { }
 
   ngOnInit() {
   }
@@ -24,9 +23,17 @@ export class PasswordComponent implements OnInit {
   updateUserPassword(): void {
     this.profileService.changePassword({password: this.profile.password, password_new: this.profile.password_new})
       .subscribe(password => {
-        this.message.success('修改成功');
+        Swal(
+          '修改成功！',
+          '',
+          'success'
+        );
       }, err => {
-        this.message.error(err);
+        Swal(
+          '修改失败！',
+          err,
+          'error'
+        );
       });
   }
 

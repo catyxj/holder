@@ -1,7 +1,7 @@
 <mat-toolbar >
 
   <mat-toolbar-row>
-    <button mat-icon-button (click)="onClick()" style="min-width: 88px;">
+    <button mat-icon-button (click)="onClick()" style="min-width: 88px; height: 64px;">
       <mat-icon>menu</mat-icon>
     </button>
 
@@ -10,6 +10,7 @@
       <!--<img src="assets/images/light.png"  height="30" alt="">-->
       <h2 style="color: #ffffff;"> LUKEEP</h2>
     </a>
+
     <!--显示企业标识-->
     <a class="navbar-brand" routerLink="/admin" *ngIf="user && (user.Organization && user.Organization.ShowBrand)">
       <h3 *ngIf="!user.Organization.BrandImageUrl" style="color: #ffffff;">
@@ -40,7 +41,7 @@
     <!--<i class="fa fa-envelope-o"></i>-->
 
     <div ngbDropdown class="d-inline-block ml-3">
-      <button mat-button id="dropdownBasic1" ngbDropdownToggle>
+      <button mat-button id="dropdownBasic1" ngbDropdownToggle style="height: 64px;">
         <!--<img [src]="user?.Picture" alt="" style="width: 25px; height: 25px; border-radius: 25px;">-->
         <nz-avatar nzIcon="anticon anticon-user" nzSrc="{{user?.Picture}}"></nz-avatar>
         {{user?.Name}} ( {{ user?.Role.Name}} )

@@ -27,7 +27,7 @@
   </div>
 
   <div class="grid grid-pad row">
-    <div *ngFor="let data of boilers" class="col-6">
+    <div *ngFor="let data of boilers" class="col-6 mb-3">
       <div class="module flex">
         <div class="status_content">
           <a [routerLink]="['/admin/runtime', data.uid, data.name]">

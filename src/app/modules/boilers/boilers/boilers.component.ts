@@ -4,6 +4,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AddBoilerComponent} from '../add-boiler/add-boiler.component';
 import {UserService} from '../../../shared/user.service';
 import {JoinClusterComponent} from "../join-cluster/join-cluster.component";
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -16,15 +17,16 @@ import {JoinClusterComponent} from "../join-cluster/join-cluster.component";
 })
 export class BoilersComponent implements OnInit {
 
-  boilers: any;
-  boiler: any;
-  page = 1;
-  totalItems = 0;
-  search: string;
-  deleteList = [];
-  allDelete = false;
-  pageSize = 10;
-  user: any;
+  public boilers: any;
+  public boiler: any;
+  public page = 1;
+  public totalItems = 0;
+  public search: string;
+  public deleteList = [];
+  public allDelete = false;
+  public pageSize = 10;
+  public user: any;
+  public isSpinning = false;
 
   constructor(private boilerService: BoilerService,
               private modalService: NgbModal,
@@ -37,11 +39,13 @@ export class BoilersComponent implements OnInit {
 
   // 获取锅炉列表
   getBoilers(): void {
+    this.isSpinning = true;
     // console.log({page: this.page, pageSize: this.pageSize , search: this.search});
     this.boilerService.getBoilers(this.page, this.pageSize , this.search)
       .subscribe(boilers => {
         this.totalItems = boilers.counts;
         this.boilers = boilers.params;
+        this.isSpinning = false;
         if (!this.boilers) {
           return;
         }
@@ -56,6 +60,8 @@ export class BoilersComponent implements OnInit {
           }
           boiler.checkDelete = false;
         }
+      }, err => {
+        this.isSpinning = false;
       });
   }
 
@@ -107,9 +113,18 @@ export class BoilersComponent implements OnInit {
     if (cf === true) {
       this.boilerService.deleteBoiler(this.deleteList)
         .subscribe(() => {
+          Swal(
+            '删除成功！',
+            '',
+            'success'
+          );
           this.pageChange();
         }, err => {
-          alert(err);
+          Swal(
+            '删除失败！',
+            err,
+            'error'
+          );
         });
     } else {
 

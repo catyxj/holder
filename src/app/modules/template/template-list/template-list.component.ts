@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TemplateService} from "../../../shared/template.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-template-list',
@@ -16,11 +17,13 @@ export class TemplateListComponent implements OnInit {
   public deleteList = [];
   public allDelete = false;
   public pageSize = 10;
+  public isSpinning = false;
 
   constructor(private modalService: NgbModal,
               private templateService: TemplateService) { }
 
   ngOnInit() {
+    this.isSpinning = true;
     this.getTemplates();
   }
 
@@ -31,6 +34,9 @@ export class TemplateListComponent implements OnInit {
       .subscribe( data => {
         this.templates = data.params;
         this.totalItems = data.counts;
+        this.isSpinning = false;
+      }, err => {
+        this.isSpinning = false;
       });
   }
 
@@ -40,7 +46,18 @@ export class TemplateListComponent implements OnInit {
     if (cf === true) {
       this.templateService.deleteTemplate([uid])
         .subscribe( () => {
+          Swal(
+            '删除成功！',
+            '',
+            'success'
+          );
           this.pageChange();
+        }, err => {
+          Swal(
+            '删除失败！',
+            err,
+            'error'
+          );
         });
     }
   }
@@ -82,7 +99,18 @@ export class TemplateListComponent implements OnInit {
     if (cf === true) {
       this.templateService.deleteTemplate(this.deleteList)
         .subscribe(() => {
+          Swal(
+            '删除成功！',
+            '',
+            'success'
+          );
           this.pageChange();
+        }, err => {
+          Swal(
+            '删除失败！',
+            err,
+            'error'
+          );
         });
     } else {
 

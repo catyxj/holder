@@ -30,7 +30,8 @@ export class EditBoilerComponent implements OnInit {
               private orgService: OrganizationService) { }
 
   ngOnInit() {
-    // console.log(this.currentData);
+
+    this.getUser();
     this.getTemplates();
     this.getOrgType();
     this.getOrgs();
@@ -49,6 +50,12 @@ export class EditBoilerComponent implements OnInit {
 
   }
 
+
+  // 获取用户信息
+  getUser() {
+    let user = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.user = user;
+  }
 
   //  获取锅炉型态列表
   getTemplates() {
@@ -85,7 +92,7 @@ export class EditBoilerComponent implements OnInit {
         this.links.push({
           type: or.Type.TypeId,
           uid: or.Uid,
-          eptCtlPlg: or.EptCtlPlg
+          eptCtlPlg: or.IsEptCtl
         });
         let orgs = [];
         for (let j in this.orgLists) {

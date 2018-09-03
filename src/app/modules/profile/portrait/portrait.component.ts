@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../../shared/user.service';
 import {ProfileService} from '../../../shared/profile.service';
-import {NzMessageService} from "ng-zorro-antd";
-
-
-
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -20,8 +17,7 @@ export class PortraitComponent implements OnInit {
   public errMes: string;
 
   constructor(private userService: UserService,
-              private profileService: ProfileService,
-              private message: NzMessageService) { }
+              private profileService: ProfileService) { }
 
   ngOnInit() {
     let user = JSON.parse(sessionStorage.getItem('currentUser'));
@@ -73,10 +69,18 @@ export class PortraitComponent implements OnInit {
   uploadImg(): void {
     this.profileService.updateImg(this.imgUrl)
       .subscribe(res => {
-        alert('上传成功');
+        Swal(
+          '上传成功',
+          '',
+          'success'
+        );
         this.userService.ChangeMission('changed');
       }, err => {
-        this.message.error(err);
+        Swal(
+          '上传失败！',
+          err,
+          'error'
+        );
       });
 
 

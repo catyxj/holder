@@ -76,8 +76,8 @@ export class AddBoilerComponent implements OnInit {
 
   // 获取用户信息-企业信息
   getUser() {
-    console.log(this.currentUser);
-    if (this.currentUser.Organization) {
+    // console.log(this.currentUser);
+    if (this.currentUser.Role.RoleId > 1 && this.currentUser.Organization) {
       this.links = [
         {
           type: this.currentUser.Organization.Type.TypeId,
@@ -190,7 +190,11 @@ export class AddBoilerComponent implements OnInit {
     }
 
     if (this.data.links.length <= 0) {
-      alert('请添加关联企业');
+      Swal(
+        '请添加关联企业',
+        '',
+        'warning'
+      );
       return;
     }
 

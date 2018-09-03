@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ClusterService} from "../../../shared/cluster.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cluster-detail',
@@ -35,12 +36,6 @@ export class ClusterDetailComponent implements OnInit {
         this.equipList = data.params;
         this.totalItems = data.counts;
       });
-    /*this.equipList = [
-      {
-        Name: '123444',
-        Uid: '123465677779997'
-      }
-    ];*/
   }
 
   // 移除
@@ -53,7 +48,18 @@ export class ClusterDetailComponent implements OnInit {
       };
       this.clusterService.deleteEquip(data)
         .subscribe( () => {
+          Swal(
+            '移除成功！',
+            '',
+            'success'
+          );
           this.pageChange();
+        }, err => {
+          Swal(
+            '移除失败！',
+            '',
+            'error'
+          );
         });
     }
   }
@@ -99,9 +105,18 @@ export class ClusterDetailComponent implements OnInit {
       };
       this.clusterService.deleteEquip(data)
         .subscribe(() => {
+          Swal(
+            '移除成功！',
+            '',
+            'success'
+          );
           this.pageChange();
         }, err => {
-          alert(err);
+          Swal(
+            '移除失败！',
+            '',
+            'error'
+          );
         });
     } else {
 

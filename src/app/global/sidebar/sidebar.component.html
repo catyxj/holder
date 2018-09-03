@@ -61,7 +61,7 @@
       </ul>
     </li>
   </ul>
-  <ul>
+  <ul *ngIf="user && user.Role.RoleId <=1">
     <li [class.collapse1]="!submenuShow[3]" [class.expand]="submenuShow[3]">
       <a class="sidebar_title" (click)="submenuToggle(3)">
         其他

@@ -415,6 +415,7 @@ export class TerConfigComponent implements OnInit {
 
 
   save() {
+    let that = this;
 
     // 模拟通道
     let analogueList = [];
@@ -684,7 +685,7 @@ export class TerConfigComponent implements OnInit {
           cancelButtonText: '取消',
           showLoaderOnConfirm: true
         }).then(function() {
-          this.terminalService.issued(this.code)
+          that.terminalService.issued(that.code)
             .subscribe( res => {
               Swal(
                 '下发成功！',
@@ -710,6 +711,8 @@ export class TerConfigComponent implements OnInit {
 
   }
 
+
+  // 另存为模板
   addTemplate() {
     // 模拟通道
     let analogueList = [];
@@ -980,6 +983,12 @@ export class TerConfigComponent implements OnInit {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       console.log(reason);
     });
+  }
+
+
+
+  goBack() {
+    window.history.go(-1);
   }
 
 

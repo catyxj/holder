@@ -1,11 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {NzMessageService, UploadFile} from "ng-zorro-antd";
 import {HttpClient, HttpErrorResponse, HttpRequest, HttpResponse} from "@angular/common/http";
-import {catchError, filter} from "rxjs/internal/operators";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {OrganizationService} from "../../../shared/organization.service";
 import Swal from 'sweetalert2';
-import {throwError} from "rxjs/index";
 import {UploadService} from "../../../shared/upload.service";
 
 @Component({
@@ -62,6 +60,7 @@ export class AddFileComponent implements OnInit {
             '',
             'success'
           );
+          this.activeModal.close('ok');
         },
         err => {
           this.uploading = false;

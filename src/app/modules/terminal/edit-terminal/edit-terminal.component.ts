@@ -19,13 +19,16 @@ export class EditTerminalComponent implements OnInit {
   public editingCode;
   public bin;
   public bins;
+  public user;
 
   constructor(public activeModal: NgbActiveModal,
               private terminalService: TerminalService) { }
 
   ngOnInit() {
-    console.log(this.currentData);
+    // console.log(this.currentData);
     this.editing = true;
+    let user = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.user = user;
     this.data = {
       code: this.currentData.Sn,
       org: this.currentData.OrganizationName,
@@ -44,13 +47,13 @@ export class EditTerminalComponent implements OnInit {
   getBin() {
     this.terminalService.getBin()
       .subscribe( bin => {
-        this.bins = bin;
+        this.bins = bin.params;
       });
   }
 
   // 升级
   upgrade() {
-    this.terminalService.upgrade(this.bin)
+    this.terminalService.upgrade({code: this.data.code.toString(), binName: this.bin})
       .subscribe( () => {
         Swal(
           '升级成功！',
@@ -87,7 +90,7 @@ export class EditTerminalComponent implements OnInit {
   // 保存
   save() {
     let data = {
-      code: this.data.code,
+      code: this.data.code.toString(),
       org: this.data.org
     };
 

@@ -2,7 +2,7 @@ import {Component, Injectable, Input, OnInit} from '@angular/core';
 import {NgbActiveModal, NgbDatepickerI18n, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {DatePipe} from '@angular/common';
 import {BoilerService} from '../../../shared/boiler.service';
-import {NzMessageService} from "ng-zorro-antd";
+import Swal from 'sweetalert2';
 
 const I18N_VALUES = {
   'fr': {
@@ -57,8 +57,7 @@ export class EditMaintainComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal,
               private datePipe: DatePipe,
-              private boilerService: BoilerService,
-              private message: NzMessageService) { }
+              private boilerService: BoilerService) { }
 
   ngOnInit() {
     console.log(this.currentData);
@@ -134,11 +133,18 @@ export class EditMaintainComponent implements OnInit {
     };
     this.boilerService.updateMaintain(data)
       .subscribe( val => {
-        alert('保存成功');
+        Swal(
+          '保存成功！',
+          '',
+          'success'
+        );
         this.activeModal.close('ok');
       }, err => {
-        // this.message.error(err);
-        alert(err);
+        Swal(
+          '保存失败！',
+          err,
+          'error'
+        );
       });
   }
 

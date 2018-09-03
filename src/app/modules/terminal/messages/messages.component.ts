@@ -17,12 +17,14 @@ export class MessagesComponent implements OnInit {
   public analogCols = [];
   public switchCols = [];
   public calcCols = [];
+  public isSpinning = false;
 
   constructor(private terminalService: TerminalService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.initCol();
+    this.isSpinning = true;
     this.getMessage();
   }
 
@@ -41,14 +43,18 @@ export class MessagesComponent implements OnInit {
 
   // 获取消息调试信息
   getMessage() {
+
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         this.code = params.get('code');
         return this.terminalService.getMessage(params.get('code'));
       })
     ).subscribe( mess => {
+      this.isSpinning = false;
       this.messages = mess;
       this.updateDate = this.messages[0].TS;
+    }, err => {
+      this.isSpinning = false;
     });
   }
 

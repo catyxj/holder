@@ -42,7 +42,7 @@
   <div class="row">
     <div class="col-12">
       <div class="form-group flex" *ngFor="let link of links; let i = index">
-        <div class="input-group" style="width: 80%;">
+        <div class="input-group" style="flex: 9;">
           <span class="input-group-prepend">
             <span class="input-group-text">
               企业关联
@@ -60,13 +60,16 @@
             <nz-option *ngFor="let option of link.orgs" [nzLabel]="option.Name" [nzValue]="option.Uid"></nz-option>
           </nz-select>
         </div>
-        <div>
-          <span class="ml-3"> 控制 </span>
-          <label class="switch switch-lg" style="margin-bottom: 0;">
-            <input type="checkbox" [(ngModel)]="link.eptCtlPlg"  />
-            <span></span>
-          </label>
 
+        <div *ngIf="user.Role.RoleId <= 10 && user.Organization.EptCtlPlg" style="flex: 1.5">
+            <span class="ml-3"> 控制 </span>
+            <label class="switch switch-lg" style="margin-bottom: 0;">
+              <input type="checkbox" [(ngModel)]="link.eptCtlPlg"  />
+              <span></span>
+            </label>
+        </div>
+
+        <div style="flex: 1">
           <button (click)="removeLink(i);"
                   class="btn btn-outline-danger btn-sm" style=" margin-left: 10px; border-radius: 25px;">
             <i class="fa fa-minus" style="font-size: 12px;"></i>

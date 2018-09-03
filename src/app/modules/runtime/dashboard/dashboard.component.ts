@@ -3,6 +3,8 @@ import {BoilerSocketService} from "../../../shared/boiler-socket.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {RuntimeService} from "../../../shared/runtime.service";
 import {filter} from "rxjs/internal/operators";
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -27,6 +29,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
   public img;
   public imgRun;
   public imgStop;
+  public controlShow = false;
 
   constructor(private boilerWsService: BoilerSocketService,
               private route: ActivatedRoute,
@@ -35,17 +38,21 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.uid = sessionStorage.getItem('runtimeUid');
-    // console.log(this.uid);
 
-    this.runtimeService.getEquipTemp(this.uid)
-      .subscribe( data => {
-        this.imgRun = data.ImageRun;
-        this.imgStop = data.ImageStop;
-      });
+    this.initStatus();
 
     // this.initTest();
 
     this.initData();
+  }
+
+  initStatus() {
+    this.runtimeService.getEquipTemp(this.uid)
+      .subscribe( data => {
+        this.imgRun = data.ImageRun;
+        this.imgStop = data.ImageStop;
+        this.controlShow = data.EptCtlShow;
+      });
   }
 
   initData() {
@@ -171,6 +178,28 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
       return a.SequenceNumber - b.SequenceNumber;
     });
   }
+
+  equipControl(n) {
+    let ctrlData = {
+      uid: this.uid,
+      type: n
+    };
+    this.runtimeService.equipControl(ctrlData)
+      .subscribe( data => {
+        Swal(
+          '发送成功！',
+          '',
+          'success'
+        );
+      }, err => {
+        Swal(
+          '发送失败！',
+          err,
+          'error'
+        );
+      });
+  }
+
 
   goBack() {
     window.history.go(-1);

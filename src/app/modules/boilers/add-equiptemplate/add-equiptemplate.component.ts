@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {BoilerService} from "../../../shared/boiler.service";
-import {NzMessageService} from "ng-zorro-antd";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-equiptemplate',
@@ -19,8 +19,7 @@ export class AddEquiptemplateComponent implements OnInit {
   public imgFile2;
 
   constructor(public activeModal: NgbActiveModal,
-              private boilerService: BoilerService,
-              private message: NzMessageService) { }
+              private boilerService: BoilerService) { }
 
   ngOnInit() {
     this.img1 = 'assets/images/no_image.png';
@@ -96,10 +95,18 @@ export class AddEquiptemplateComponent implements OnInit {
     // console.log(data);
     this.boilerService.addTemplate(data)
       .subscribe( val => {
-        alert('保存成功');
+        Swal(
+          '保存成功！',
+          '',
+          'success'
+        );
         this.activeModal.close('ok');
       }, err => {
-        this.message.error(err);
+        Swal(
+          '保存失败！',
+          err,
+          'error'
+        );
       });
   }
 

@@ -1,4 +1,19 @@
-.mat-checkbox-frame {
-  border-color: #34515e;
-  border-width: 1px;
+.cdk-overlay-backdrop{
+  z-index: 800;
+}
+.modal-backdrop{
+  z-index: 880;
+}
+.modal{
+  z-index: 900;
+}
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+  opacity: 0;
+}
+
+.modal_backdrop{
+  z-index: 800;
+}
+.dark_modal{
+  z-index: 900;
 }

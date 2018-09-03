@@ -4,6 +4,7 @@ import {TerminalMainComponent} from './terminal-main/terminal-main.component';
 import {TerminalListComponent} from './terminal-list/terminal-list.component';
 import {TerConfigComponent} from './ter-config/ter-config.component';
 import {MessagesComponent} from './messages/messages.component';
+import {PlcAlarmComponent} from "./plc-alarm/plc-alarm.component";
 
 export const TerminalRoutingModule = [
   {
@@ -22,6 +23,10 @@ export const TerminalRoutingModule = [
       {
         path: 'messages/:code',
         component: MessagesComponent
+      },
+      {
+        path: 'plc/:code',
+        component: PlcAlarmComponent
       }
     ]
   }

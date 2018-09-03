@@ -5,6 +5,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {GroupConfigComponent} from '../group-config/group-config.component';
 import {EditTerminalComponent} from '../edit-terminal/edit-terminal.component';
 import {GroupAddComponent} from '../group-add/group-add.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-terminal-list',
@@ -13,28 +14,35 @@ import {GroupAddComponent} from '../group-add/group-add.component';
 })
 export class TerminalListComponent implements OnInit {
 
-  terminals = [];
-  page = 1;
-  totalItems = 0;
-  search: string;
-  deleteList = [];
-  allDelete = false;
-  pageSize = 10;
+  public terminals = [];
+  public page = 1;
+  public totalItems = 0;
+  public search: string;
+  public deleteList = [];
+  public allDelete = false;
+  public pageSize = 10;
+  public isSpinning = false;
+  public user;
 
   constructor(private terminalService: TerminalService,
               private modalService: NgbModal) { }
 
   ngOnInit() {
+    let user = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.user = user;
+    this.isSpinning = true;
     this.getTerminals();
   }
 
   // 获取终端列表
   getTerminals(): void {
+
     // console.log({page: this.page, pageSize: this.pageSize , search: this.search});
     this.terminalService.getTerminals(this.page, this.pageSize , this.search)
       .subscribe(terminals => {
         this.totalItems = terminals.counts;
         this.terminals = terminals.params;
+        this.isSpinning = false;
         if (!this.terminals || this.terminals.length <= 0) {
           return;
         }
@@ -53,6 +61,9 @@ export class TerminalListComponent implements OnInit {
 
           terminal.checkDelete = false;
         }
+
+      }, err => {
+        this.isSpinning = false;
       });
   }
 
@@ -94,7 +105,18 @@ export class TerminalListComponent implements OnInit {
     if (cf === true) {
       this.terminalService.deleteTerminal(this.deleteList)
         .subscribe(() => {
+          Swal(
+            '删除成功！',
+            '',
+            'success'
+          );
           this.pageChange();
+        }, err => {
+          Swal(
+            '删除失败！',
+            err,
+            'error'
+          );
         });
 
     } else {
@@ -156,7 +178,11 @@ export class TerminalListComponent implements OnInit {
   // 批量配置模态框
   groupConfig() {
     if (this.deleteList.length <= 0) {
-      alert('未选择任何终端,请先选择终端');
+      Swal(
+        '未选择任何终端,请先选择终端',
+        '',
+        'warning'
+      );
       return;
     }
     const modalRef = this.modalService.open(GroupConfigComponent);
@@ -174,7 +200,7 @@ export class TerminalListComponent implements OnInit {
 
   // 批量添加模态框
   groupAdd() {
-    const modalRef = this.modalService.open(GroupAddComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(GroupAddComponent, { size: 'lg' , backdropClass: 'modal_backdrop', windowClass: 'dark_modal'});
     // modalRef.componentInstance.currentUser = this.user;
     modalRef.result.then((result) => {
       // this.closeResult = `Closed with: ${result}`;

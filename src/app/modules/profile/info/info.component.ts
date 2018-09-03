@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../../shared/user.service';
 import {ProfileService} from '../../../shared/profile.service';
-import {User} from '../../../user';
-import {NzMessageService} from "ng-zorro-antd";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-info',
@@ -18,8 +17,7 @@ export class InfoComponent implements OnInit {
     Username: ''
   };
   constructor(private userService: UserService,
-              private profileService: ProfileService,
-              private message: NzMessageService) { }
+              private profileService: ProfileService) { }
 
   ngOnInit() {
     let user = JSON.parse(sessionStorage.getItem('currentUser'));
@@ -40,7 +38,11 @@ export class InfoComponent implements OnInit {
     };
     this.profileService.updateProfile(postData)
       .subscribe(profile => {
-        alert('更新成功');
+        Swal(
+          '更新成功！',
+          '',
+          'success'
+        );
         // this.profile = profile;
         this.userService.getUser()
           .subscribe( data => {
@@ -48,7 +50,11 @@ export class InfoComponent implements OnInit {
             // sessionStorage.setItem('currentUser', JSON.stringify(this.profile));
             this.userService.ChangeMission('changed');
           }, err => {
-            this.message.error(err);
+            Swal(
+              '更新失败！',
+              err,
+              'error'
+            );
           });
 
       });

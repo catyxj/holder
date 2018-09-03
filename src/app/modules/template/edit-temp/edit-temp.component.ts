@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {TerminalService} from "../../../shared/terminal.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {NzMessageService, NzModalService} from "ng-zorro-antd";
+import {NzModalService} from "ng-zorro-antd";
 import {RangeConfigComponent} from "../../terminal/range-config/range-config.component";
 import {AlarmRuleComponent} from "../../terminal/alarm-rule/alarm-rule.component";
 import {TemplateService} from "../../../shared/template.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-temp',
@@ -39,8 +40,7 @@ export class EditTempComponent implements OnInit {
               private terminalService: TerminalService,
               private templateService: TemplateService,
               private modalService: NgbModal,
-              private nzmodalService: NzModalService,
-              private message: NzMessageService) { }
+              private nzmodalService: NzModalService) { }
 
   ngOnInit() {
     this.editName = false;
@@ -382,7 +382,7 @@ export class EditTempComponent implements OnInit {
     modalRef.componentInstance.currentData = data;
     modalRef.result.then((result) => {
       data.alarm = result;
-      console.log(result, data);
+      // console.log(result, data);
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       console.log(reason);
@@ -400,7 +400,7 @@ export class EditTempComponent implements OnInit {
     modalRef.componentInstance.currentData = data;
     modalRef.result.then((result) => {
       data.Ranges = result;
-      console.log(result, data);
+      // console.log(result, data);
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       console.log(reason);
@@ -680,9 +680,17 @@ export class EditTempComponent implements OnInit {
     };
     this.templateService.save(data)
       .subscribe(val => {
-        alert('保存成功');
+        Swal(
+          '保存成功！',
+          '',
+          'success'
+        );
       }, err => {
-        this.message.error(err);
+        Swal(
+          '保存失败！',
+          err,
+          'error'
+        );
       });
 
   }

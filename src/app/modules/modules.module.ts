@@ -50,6 +50,7 @@ import {MaintainModule} from "./maintain/maintain.module";
     AlarmModule,
     UploadModule,
     MaintainModule,
+    NgZorroAntdModule,
     RouterModule.forChild(ModulesRoutingModule),
     NgxEchartsModule,
     FormsModule,

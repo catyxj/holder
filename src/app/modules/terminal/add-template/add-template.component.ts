@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {TemplateService} from "../../../shared/template.service";
 import {NzMessageService} from "ng-zorro-antd";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-template',
@@ -29,9 +30,18 @@ export class AddTemplateComponent implements OnInit {
 
     this.templateService.add(data)
       .subscribe( val => {
-        alert('保存成功');
+        Swal(
+          '保存成功！',
+          '',
+          'success'
+        );
+        this.activeModal.close('ok');
       }, err => {
-        this.message.error(err);
+        Swal(
+          '保存失败！',
+          err,
+          'error'
+        );
       });
   }
 

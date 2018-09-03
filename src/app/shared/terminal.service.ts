@@ -125,7 +125,7 @@ export class TerminalService {
 
   // 获取bin文件
   getBin(): Observable<any> {
-    return this.http.get<any>('/bin_file_list')
+    return this.http.get<any>('/bin_file_list_all')
       .pipe(
         catchError(this.handleError)
       );
@@ -155,6 +155,14 @@ export class TerminalService {
       );
   }
 
+  // 获取plc告警列表
+  getPlcAlarm(code: string, n: number, pageSize: number): Observable<any> {
+    const url = `/plc_alarm_list/?code=${code}&page=${n}&pageSize=${pageSize}`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
   // 获取功能码
   getFuncode(): Observable<any> {

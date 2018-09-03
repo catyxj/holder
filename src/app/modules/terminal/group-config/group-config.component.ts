@@ -2,6 +2,7 @@ import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {TerminalService} from '../../../shared/terminal.service';
 import {TemplateService} from "../../../shared/template.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-group-config',
@@ -83,8 +84,18 @@ export class GroupConfigComponent implements OnInit {
 
     this.terminalService.groupConfig(data)
       .subscribe(val => {
-        alert('发送成功，正在配置');
+        Swal(
+          '发送成功，正在配置',
+          '...',
+          'success'
+        );
         this.activeModal.close('ok');
+      }, err => {
+        Swal(
+          '配置失败！',
+          err,
+          'error'
+        );
       });
 
   }
