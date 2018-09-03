@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+
 import { MonitorMainComponent } from './monitor-main/monitor-main.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {ListComponent} from './list/list.component';
@@ -12,7 +11,7 @@ import {CluEquiplistComponent} from "./clu-equiplist/clu-equiplist.component";
 
 export const MonitorRoutingModule = [
   {
-    path: 'monitor',
+    path: '',
     component: MonitorMainComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

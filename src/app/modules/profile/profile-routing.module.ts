@@ -7,7 +7,7 @@ import {PasswordComponent} from './password/password.component';
 
 export const ProfileRouting = [
   {
-    path: 'profile',
+    path: '',
     component: ProfileMainComponent,
     children: [
       { path: '', redirectTo: 'portrait', pathMatch: 'full' },

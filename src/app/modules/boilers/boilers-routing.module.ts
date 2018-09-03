@@ -7,7 +7,7 @@ import {BoilerTemplatesComponent} from "./templates/templates.component";
 
 export const BoilersRouting = [
   {
-    path: 'equipments',
+    path: '',
     component: BoilerMainComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

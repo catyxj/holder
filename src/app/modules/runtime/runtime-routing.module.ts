@@ -11,7 +11,7 @@ import {HistoryComponent} from "../alarm/history/history.component";
 
 export const RuntimeRoutingModule = [
   {
-    path: 'runtime/:uid/:name',
+    path: '',
     component: RuntimeMainComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -42,10 +42,10 @@ export const RuntimeRoutingModule = [
           }
         ]
       },
-      {
+      /*{
         path: 'maintain',
         component: MaintainListComponent
-      }
+      }*/
     ]
   }
 ];

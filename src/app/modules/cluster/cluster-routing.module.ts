@@ -7,7 +7,7 @@ import {ClusterDetailComponent} from "./cluster-detail/cluster-detail.component"
 
 export const ClusterRoutingModule = [
   {
-    path: 'cluster',
+    path: '',
     component: ClusterMainComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

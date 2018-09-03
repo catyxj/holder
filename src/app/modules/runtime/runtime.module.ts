@@ -14,7 +14,9 @@ import { RuntimeAlarmComponent } from './alarm/alarm.component';
 import { AlarmCurrentComponent } from './alarm-current/alarm-current.component';
 import { AlarmHistoryComponent } from './alarm-history/alarm-history.component';
 import { MaintainComponent } from './maintain/maintain.component';
-import {ModulesModule} from "../modules.module";
+// import {ModulesModule} from "../modules.module";
+import {MaintainModule} from "../maintain/maintain.module";
+import {RuntimeMainComponent} from "./runtime-main/runtime-main.component";
 
 
 
@@ -25,9 +27,11 @@ import {ModulesModule} from "../modules.module";
     NgbModule,
     FormsModule,
     NgZorroAntdModule,
+    MaintainModule,
     RouterModule.forChild(RuntimeRoutingModule)
   ],
   declarations: [
+    RuntimeMainComponent,
     RuntimeDashboardComponent,
     OperateComponent,
     RuntimeHistoryComponent,

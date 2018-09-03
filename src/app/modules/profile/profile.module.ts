@@ -7,6 +7,7 @@ import {ProfileRouting} from './profile-routing.module';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {NgZorroAntdModule} from "ng-zorro-antd";
+import {ProfileMainComponent} from "./profile-main/profile-main.component";
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import {NgZorroAntdModule} from "ng-zorro-antd";
     RouterModule.forChild(ProfileRouting)
   ],
   declarations: [
+    ProfileMainComponent,
     InfoComponent,
     PortraitComponent,
     PasswordComponent]

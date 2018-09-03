@@ -9,6 +9,7 @@ import {NgZorroAntdModule} from "ng-zorro-antd";
 import { ClusterDetailComponent } from './cluster-detail/cluster-detail.component';
 import { AddClusterComponent } from './add-cluster/add-cluster.component';
 import { EditClusterComponent } from './edit-cluster/edit-cluster.component';
+import {ClusterMainComponent} from "./cluster-main/cluster-main.component";
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { EditClusterComponent } from './edit-cluster/edit-cluster.component';
     RouterModule.forChild(ClusterRoutingModule)
   ],
   declarations: [
+    ClusterMainComponent,
     ClusterListComponent,
     ClusterDetailComponent,
     AddClusterComponent,

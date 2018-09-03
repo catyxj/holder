@@ -8,6 +8,7 @@ import {FormsModule} from "@angular/forms";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {MatGridListModule, MatMenuModule} from "@angular/material";
 import {NgZorroAntdModule} from "ng-zorro-antd";
+import {TemplateMainComponent} from "./template-main/template-main.component";
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import {NgZorroAntdModule} from "ng-zorro-antd";
     RouterModule.forChild(TemplateRoutingModule)
   ],
   declarations: [
+    TemplateMainComponent,
     TemplateListComponent,
     EditTempComponent
   ]

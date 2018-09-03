@@ -15,6 +15,7 @@ import { MapBatchComponent } from './map-batch/map-batch.component';
 import {NgZorroAntdModule} from "ng-zorro-antd";
 import { ClusterDashboardComponent } from './cluster-dashboard/cluster-dashboard.component';
 import { CluEquiplistComponent } from './clu-equiplist/clu-equiplist.component';
+import {MonitorMainComponent} from "./monitor-main/monitor-main.component";
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { CluEquiplistComponent } from './clu-equiplist/clu-equiplist.component';
     RouterModule.forChild(MonitorRoutingModule)
   ],
   declarations: [
+    MonitorMainComponent,
     ListComponent,
     DashboardComponent,
     MapComponent,

@@ -8,7 +8,7 @@ import {PlcAlarmComponent} from "./plc-alarm/plc-alarm.component";
 
 export const TerminalRoutingModule = [
   {
-    path: 'terminal',
+    path: '',
     component: TerminalMainComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

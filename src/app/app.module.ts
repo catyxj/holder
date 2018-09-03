@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 
 import { GlobalModule } from './global/global.module';
-import { ModulesModule } from './modules/modules.module';
+
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import {NotFound404Component} from './global/not-found404/not-found404.component';
@@ -27,7 +27,14 @@ import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import zh from '@angular/common/locales/zh';
 import { TestPageComponent } from './test-page/test-page.component';
 import {NgxEchartsModule} from "ngx-echarts";
-import {UserResolver} from "./shared/user.service";
+import {OrgMainComponent} from "./modules/organization/org-main/org-main.component";
+
+import {UserMainComponent} from "./modules/user-account/user-main/user-main.component";
+
+import {AlarmMainComponent} from "./modules/alarm/alarm-main/alarm-main.component";
+import {MaintainMainComponent} from "./modules/maintain/maintain-main/maintain-main.component";
+import {UploadMainComponent} from "./modules/upload/upload-main/upload-main.component";
+
 
 
 registerLocaleData(zh);
@@ -39,6 +46,17 @@ registerLocaleData(zh);
     AppComponent,
     LoginComponent,
     MainComponent,
+    // BoilerMainComponent,
+    // RuntimeMainComponent,
+    OrgMainComponent,
+    // ProfileMainComponent,
+    UserMainComponent,
+    // TerminalMainComponent,
+    // ClusterMainComponent,
+    // TemplateMainComponent,
+    AlarmMainComponent,
+    MaintainMainComponent,
+    UploadMainComponent,
     NotFound404Component,
     TestPageComponent
   ],
@@ -46,7 +64,8 @@ registerLocaleData(zh);
     BrowserModule,
     HttpClientModule,
     GlobalModule,
-    ModulesModule,
+    // MonitorModule,
+    // ModulesModule,
     AppRoutingModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     NgbModule.forRoot(),

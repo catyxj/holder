@@ -8,8 +8,16 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
 import { SidebarComponent } from './sidebar/sidebar.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {GlobalRoutingModule} from './global-routing.module';
-import {ModulesModule} from '../modules/modules.module';
+
 import {NgZorroAntdModule} from "ng-zorro-antd";
+import {RuntimeModule} from "../modules/runtime/runtime.module";
+import {UserAccountModule} from "../modules/user-account/user-account.module";
+import {OrganizationModule} from "../modules/organization/organization.module";
+
+import {AlarmModule} from "../modules/alarm/alarm.module";
+import {UploadModule} from "../modules/upload/upload.module";
+import {MaintainModule} from "../modules/maintain/maintain.module";
+import {NgxEchartsModule} from "ngx-echarts";
 
 
 
@@ -17,6 +25,18 @@ import {NgZorroAntdModule} from "ng-zorro-antd";
   imports: [
     CommonModule,
     LayoutModule,
+    // MonitorModule,
+    // BoilersModule,
+    RuntimeModule,
+    // ProfileModule,
+    UserAccountModule,
+    OrganizationModule,
+    // TerminalModule,
+    // ClusterModule,
+    // TemplateModule,
+    AlarmModule,
+    UploadModule,
+    MaintainModule,
     RouterModule.forChild( GlobalRoutingModule ),
     MatToolbarModule,
     MatButtonModule,
@@ -24,7 +44,7 @@ import {NgZorroAntdModule} from "ng-zorro-antd";
     MatIconModule,
     MatListModule,
     MatMenuModule,
-    ModulesModule,
+    NgxEchartsModule,
     NgbModule,
     NgZorroAntdModule,
   ],

@@ -24,6 +24,7 @@ import { JoinClusterComponent } from './join-cluster/join-cluster.component';
 import { BoilerTemplatesComponent } from './templates/templates.component';
 import { AddEquiptemplateComponent } from './add-equiptemplate/add-equiptemplate.component';
 import { EditEquiptemplateComponent } from './edit-equiptemplate/edit-equiptemplate.component';
+import {BoilerMainComponent} from "./boiler-main/boiler-main.component";
 
 
 
@@ -43,6 +44,7 @@ import { EditEquiptemplateComponent } from './edit-equiptemplate/edit-equiptempl
     BaiduMapModule
   ],
   declarations: [
+    BoilerMainComponent,
     BoilersComponent,
     BoilerInfoComponent,
     AddBoilerComponent,

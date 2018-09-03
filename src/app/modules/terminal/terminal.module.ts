@@ -23,6 +23,7 @@ import { AlarmRuleComponent } from './alarm-rule/alarm-rule.component';
 import { RangeConfigComponent } from './range-config/range-config.component';
 import { AddTemplateComponent } from './add-template/add-template.component';
 import { PlcAlarmComponent } from './plc-alarm/plc-alarm.component';
+import {TerminalMainComponent} from "./terminal-main/terminal-main.component";
 
 
 
@@ -45,6 +46,7 @@ import { PlcAlarmComponent } from './plc-alarm/plc-alarm.component';
     RouterModule.forChild(TerminalRoutingModule)
   ],
   declarations: [
+    TerminalMainComponent,
     MessagesComponent,
     TerConfigComponent,
     TerminalListComponent,

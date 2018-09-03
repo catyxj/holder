@@ -6,7 +6,7 @@ import {EditTempComponent} from "./edit-temp/edit-temp.component";
 
 export const TemplateRoutingModule = [
   {
-    path: 'template',
+    path: '',
     component: TemplateMainComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
