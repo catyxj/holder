@@ -31,6 +31,7 @@ mat-nav-list a.active{
 mat-nav-list a.sidebar_title{
   color:#607D8B;
 }
+
 .sidebar_title i{
   float: right;
   margin-right: 10px;
@@ -40,11 +41,14 @@ mat-nav-list a.sidebar_title{
   /*background-color: #dbe1e7;*/
   transition: all .3s linear;
 }
-
+.sub_menu li a i{
+  width: 30px;
+  /*margin-right: 5px;*/
+}
 .sub_menu li a:hover{
   /*background-color: rgba(72,198,255,.8);*/
   color: #fff;
-
+  display: flex;
   background-color: #8eacbb;
   /*color: #1976d2;*/
   transition: all .3s linear;

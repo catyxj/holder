@@ -52,7 +52,7 @@ export class RuntimeHistoryComponent implements OnInit {
     }
 
     this.dateRange = [start, end];
-    console.log(this.dateRange);
+    // console.log(this.dateRange);
     this.refreshData();
   }
 
@@ -104,6 +104,9 @@ export class RuntimeHistoryComponent implements OnInit {
               let dat = li[j];
               let id = dat.type + '_' + dat.number;
               his.data[id] = dat.value;
+              if (dat.value == null) {
+                his.data[id] = '-';
+              }
             }
             this.history.push(his);
           }

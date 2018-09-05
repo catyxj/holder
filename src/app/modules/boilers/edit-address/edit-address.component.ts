@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {BoilerService} from '../../../shared/boiler.service';
 import Swal from 'sweetalert2';
+import {AdressService} from "../../../shared/adress.service";
 
 declare var BMap: any;
 declare var BMAP_STATUS_SUCCESS: any;
@@ -14,36 +15,43 @@ declare var BMAP_STATUS_SUCCESS: any;
 export class EditAddressComponent implements OnInit {
   @Input()
   currentData: any;
-  locations: any;
+  // locations: any;
 
-
+  public locations: any;
   public address: any;
   public cities: any[];
   public regions: any[];
-  private map:any;
+  private map: any;
 
   constructor(public activeModal: NgbActiveModal,
-              public boilerService: BoilerService) { }
+              public boilerService: BoilerService,
+              private addressService: AdressService) { }
 
 
   ngOnInit() {
     // console.log(this.currentData, this.locations);
-
-    this.initAddress();
-    this.initMap();
-  }
-
-
-
-  // 地址
-
-  initAddress() {
     this.address = {
       lng: this.currentData.Address ? this.currentData.Address.Longitude : 0, // 经度
       lat: this.currentData.Address ? this.currentData.Address.Latitude : 0, // 纬度
       location: this.currentData.Address ? this.currentData.Address.Location.LocationId : 0, //  位置id
       address: this.currentData.Address ? this.currentData.Address.Address : ''  // 具体地址
     };
+    this.getAddress();
+    this.initMap();
+  }
+
+// 获取地址列表
+  getAddress() {
+    this.addressService.getAddress()
+      .subscribe( addr => {
+        this.locations = addr;
+        this.initAddress();
+      });
+  }
+
+  // 地址
+
+  initAddress() {
 
     if (this.address.location !== 0) {
       if (this.address.location < 100) {

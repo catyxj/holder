@@ -42,7 +42,7 @@ export class BoilerInfoComponent implements OnInit {
   ngOnInit() {
     this.panel = [{open: true}, {open: true}, {open: true}, {open: true}];
     this.getOrgType();
-    this.getAddress();
+    // this.getAddress();
   }
 
 
@@ -188,7 +188,7 @@ export class BoilerInfoComponent implements OnInit {
   editAddress() {
     const modalRef = this.modalService.open(EditAddressComponent, { size: 'lg' });
     modalRef.componentInstance.currentData = this.info;
-    modalRef.componentInstance.locations = this.addrList;
+    // modalRef.componentInstance.locations = this.addrList;
     modalRef.result.then((result) => {
       if (result === 'ok') {
         this.getInfo();

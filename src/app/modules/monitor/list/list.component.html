@@ -48,8 +48,11 @@
         <td [ngClass]="{'text_info':data.termStatus > 0 && data.eptStatus}">
             {{data.isBurning}}
         </td>
-        <td [ngClass]="{'text-danger':data.termStatus > 0 && data.alarmStatus, 'text_info':data.termStatus > 0 && !data.alarmStatus}">
+        <td  [ngSwitch]="data.termStatus" [ngClass]="{'text-danger':data.termStatus > 0 && data.alarmStatus, 'text_info':data.termStatus > 0 && !data.alarmStatus}">
           {{data.warning}}
+          <span >
+
+          </span>
         </td>
         <td>
           {{data.malfunction}}
