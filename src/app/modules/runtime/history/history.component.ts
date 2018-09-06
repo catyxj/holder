@@ -31,6 +31,7 @@ export class RuntimeHistoryComponent implements OnInit {
   // 选择时间区间
   changeDate() {
     // console.log(this.dateRange);
+    this.page = 1;
     this.refreshData();
   }
 
@@ -53,6 +54,7 @@ export class RuntimeHistoryComponent implements OnInit {
 
     this.dateRange = [start, end];
     // console.log(this.dateRange);
+    this.page = 1;
     this.refreshData();
   }
 
@@ -103,10 +105,7 @@ export class RuntimeHistoryComponent implements OnInit {
             for (let j = 0; j < li.length; j++) {
               let dat = li[j];
               let id = dat.type + '_' + dat.number;
-              his.data[id] = dat.value;
-              if (dat.value == null) {
-                his.data[id] = '-';
-              }
+              his.data[id] = dat.value.toString();
             }
             this.history.push(his);
           }

@@ -191,6 +191,8 @@ export class EditBoilerComponent implements OnInit {
 //  保存
   save() {
 
+    let that = this;
+
     // 其他信息
     if (this.info.length > 0) {
       for (let i = 0; i < this.info.length; i++) {
@@ -232,8 +234,10 @@ export class EditBoilerComponent implements OnInit {
           '保存成功！',
           '',
           'success'
-        );
-        this.activeModal.close('ok');
+        ).then(function () {
+          that.activeModal.close('ok');
+        });
+
       }, err => {
         Swal(
           '保存失败！',

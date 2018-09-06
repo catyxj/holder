@@ -8,8 +8,6 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import {NotFound404Component} from './global/not-found404/not-found404.component';
 
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
@@ -21,11 +19,9 @@ import { AppRoutingModule } from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 
-import {BaiduMapModule} from 'angular2-baidu-map';
 import {HashLocationStrategy, LocationStrategy, registerLocaleData} from '@angular/common';
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import zh from '@angular/common/locales/zh';
-import { TestPageComponent } from './test-page/test-page.component';
 import {NgxEchartsModule} from "ngx-echarts";
 
 
@@ -39,8 +35,7 @@ registerLocaleData(zh);
     AppComponent,
     LoginComponent,
     MainComponent,
-    NotFound404Component,
-    TestPageComponent
+    NotFound404Component
   ],
   imports: [
     BrowserModule,
@@ -48,7 +43,6 @@ registerLocaleData(zh);
     GlobalModule,
     ModulesModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     NgbModule.forRoot(),
     BrowserAnimationsModule,
     LayoutModule,

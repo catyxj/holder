@@ -4,7 +4,6 @@ import {UserService} from '../../../shared/user.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {SetModalComponent} from '../set-modal/set-modal.component';
 import {ActivatedRoute, ParamMap} from '@angular/router';
-import { Location } from '@angular/common';
 import { switchMap } from 'rxjs/operators';
 import {ManagementComponent} from "../management/management.component";
 import Swal from 'sweetalert2';
@@ -40,8 +39,7 @@ export class UserMainComponent implements OnInit {
   constructor(private userAccountService: UserAccountService,
               private userService: UserService,
               private modalService: NgbModal,
-              private route: ActivatedRoute,
-              private location: Location) { }
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getUser();

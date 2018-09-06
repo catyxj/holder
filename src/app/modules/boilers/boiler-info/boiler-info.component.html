@@ -21,7 +21,9 @@
         </div>
       </div>
       <div class="panel-body collapse" [class.show]="panel[0].open">
-        <div class="text-center text-muted" style="border-bottom: 1px solid #dddddd; line-height: 32px;font-weight: bold;">必填信息</div>
+        <div class="text-center text-muted" style="border-bottom: 1px solid #dddddd; line-height: 32px;font-weight: bold; background-color: #edf3f4;">
+          必填信息
+        </div>
         <ul class="row">
           <li class="flex col-6">
             <div class="list_title">
@@ -43,7 +45,9 @@
 
         </ul>
 
-        <div class="text-center text-muted" style="border-bottom: 1px solid #dddddd; line-height: 32px;font-weight: bold;">关联企业</div>
+        <div class="text-center text-muted" style="border-bottom: 1px solid #dddddd; line-height: 32px;font-weight: bold; background-color: #edf3f4;">
+          关联企业
+        </div>
         <ul class="row" style="border-bottom: 1px solid #dddddd;">
           <li class="flex col-6" *ngFor="let or of info?.OrganizationsLinked">
             <div class="list_title">
@@ -56,7 +60,9 @@
 
         </ul>
 
-        <div class="text-center text-muted" style="border-bottom: 1px solid #dddddd; line-height: 32px;font-weight: bold;">其他信息</div>
+        <div class="text-center text-muted" style="border-bottom: 1px solid #dddddd; line-height: 32px;font-weight: bold; background-color: #edf3f4;">
+          其他信息
+        </div>
         <ul class="row" style="border-bottom: 1px solid #dddddd;">
           <li class="flex col-6" *ngFor="let li of info?.EquipmentInfo">
             <div class="list_title">
