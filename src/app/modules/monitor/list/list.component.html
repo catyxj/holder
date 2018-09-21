@@ -36,11 +36,11 @@
       <th> 故障状态 </th>
       </thead>
       <tbody>
-      <tr *ngFor="let data of boilers; let i = index">
+      <tr *ngFor="let data of boilers; trackBy : trackByUid; let i = index; ">
 
-        <td> {{ i+1 }}  </td>
+        <td> {{ i+1 }} </td>
         <td>
-          <a [routerLink]="['/admin/runtime', data.uid, data.name]">
+          <a [routerLink]="['/admin/runtime', data.uid, data.name]" target="_blank" style="color:#0e566c;">
             {{ data.name }}
           </a>
         </td>
@@ -48,7 +48,7 @@
         <td [ngClass]="{'text_info':data.termStatus > 0 && data.eptStatus}">
             {{data.isBurning}}
         </td>
-        <td  [ngSwitch]="data.termStatus" [ngClass]="{'text-danger':data.termStatus > 0 && data.alarmStatus, 'text_info':data.termStatus > 0 && !data.alarmStatus}">
+        <td [ngClass]="{'text-danger':data.termStatus > 0 && data.alarmStatus, 'text_info':data.termStatus > 0 && !data.alarmStatus}">
           {{data.warning}}
           <span >
 

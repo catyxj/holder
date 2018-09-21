@@ -62,5 +62,9 @@ export class MessagesComponent implements OnInit {
     window.history.go(-1);
   }
 
+  trackByUid(index, item) {
+    return item.Id;
+  }
+
 
 }

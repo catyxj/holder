@@ -150,7 +150,8 @@ export const ModulesRoutingModule = [
       },
       {
         path: 'organization',
-        component: OrgMainComponent
+        component: OrgMainComponent,
+        canActivate: [UserloginGuard]
       },
       {
         path: 'profile',
@@ -173,7 +174,8 @@ export const ModulesRoutingModule = [
       },
       {
         path: 'user-account',
-        component: UserMainComponent
+        component: UserMainComponent,
+        canActivate: [UserloginGuard]
       },
       {
         path: 'terminal',
@@ -245,11 +247,11 @@ export const ModulesRoutingModule = [
       },
       {
         path: 'maintain',
-        component: MaintainMainComponent
+        component: MaintainMainComponent,
       },
       {
         path: 'upload',
-        component: UploadMainComponent
+        component: UploadMainComponent,
       }
     ]
   }

@@ -246,6 +246,9 @@ export class TerminalService {
         `错误代码 ${error.status}, ` +
         `错误内容: ${error.error}`);
     }
+    if (error.status === 550) {
+      window.location.reload();
+    }
     return throwError(
       error.error);
   }

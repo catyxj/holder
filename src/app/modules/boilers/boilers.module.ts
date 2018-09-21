@@ -10,7 +10,6 @@ import {BoilersRouting} from './boilers-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AddBoilerComponent } from './add-boiler/add-boiler.component';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {BaiduMapModule} from 'angular2-baidu-map';
 import { EditBoilerComponent } from './edit-boiler/edit-boiler.component';
 import { EditAddressComponent } from './edit-address/edit-address.component';
 import { EditMaintainComponent } from './edit-maintain/edit-maintain.component';
@@ -24,6 +23,7 @@ import { JoinClusterComponent } from './join-cluster/join-cluster.component';
 import { BoilerTemplatesComponent } from './templates/templates.component';
 import { AddEquiptemplateComponent } from './add-equiptemplate/add-equiptemplate.component';
 import { EditEquiptemplateComponent } from './edit-equiptemplate/edit-equiptemplate.component';
+import {BsDatepickerModule} from "ngx-bootstrap";
 
 
 
@@ -39,8 +39,8 @@ import { EditEquiptemplateComponent } from './edit-equiptemplate/edit-equiptempl
     MatAutocompleteModule,
     ReactiveFormsModule,
     NgZorroAntdModule,
-    RouterModule.forChild(BoilersRouting),
-    BaiduMapModule
+    BsDatepickerModule,
+    RouterModule.forChild(BoilersRouting)
   ],
   declarations: [
     BoilersComponent,

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs/index';
+import {Observable, throwError} from 'rxjs/index';
 import { map } from 'rxjs/operators';
+import {HttpErrorResponse} from "@angular/common/http";
+import {catchError} from "rxjs/internal/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +26,7 @@ export class BoilerSocketService {
       }
     ).pipe(
       // map(message => JSON.parse(message))
+      catchError(this.handleError)
     );
   }
 
@@ -42,6 +45,22 @@ export class BoilerSocketService {
       }
     );
   }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      console.error('An error occurred:', error.error.message);
+    } else {
+      console.error(
+        `错误代码 ${error.status}, ` +
+        `错误内容: ${error.error}`);
+    }
+    if (error.status === 550) {
+      window.location.reload();
+    }
+    return throwError(
+      error.error);
+  }
+
 
 
 

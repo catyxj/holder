@@ -104,8 +104,21 @@ export class ClusterDashboardComponent implements OnInit, OnDestroy {
 
   }
 
+  // 页码变化
   pageChange() {
+    this.socket.unsubscribe();
+    this.boilerWsService.closeSocket();
+    this.getClusters({page: this.page, search: this.search, pageSize: this.pageSize});
+  }
 
+  // 搜索
+  searchChange() {
+    this.page = 1;
+    this.pageChange();
+  }
+
+  trackByUid(index, item) {
+    return item.uid;
   }
 
   ngOnDestroy() {

@@ -23,6 +23,7 @@ import {HashLocationStrategy, LocationStrategy, registerLocaleData} from '@angul
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import zh from '@angular/common/locales/zh';
 import {NgxEchartsModule} from "ngx-echarts";
+import {BsDatepickerModule} from "ngx-bootstrap";
 
 
 
@@ -44,6 +45,7 @@ registerLocaleData(zh);
     ModulesModule,
     AppRoutingModule,
     NgbModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     BrowserAnimationsModule,
     LayoutModule,
     MatToolbarModule,

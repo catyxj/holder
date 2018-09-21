@@ -3,6 +3,7 @@ import {BoilerService} from "../../../shared/boiler.service";
 import {BoilerSocketService} from "../../../shared/boiler-socket.service";
 import {ActivatedRoute} from "@angular/router";
 import Swal from 'sweetalert2';
+import {RuntimeService} from "../../../shared/runtime.service";
 
 @Component({
   selector: 'app-clu-equiplist',
@@ -23,7 +24,8 @@ export class CluEquiplistComponent implements OnInit, OnDestroy {
 
   constructor(private boilerService: BoilerService,
               private route: ActivatedRoute,
-              private boilerWsService: BoilerSocketService) { }
+              private boilerWsService: BoilerSocketService,
+              private runtimeService: RuntimeService) { }
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
@@ -129,6 +131,8 @@ export class CluEquiplistComponent implements OnInit, OnDestroy {
 
   // 页码变化
   pageChange(): void {
+    this.socket.unsubscribe();
+    this.boilerWsService.closeSocket();
     let message = {
       page: this.page,
       search: this.search,
@@ -179,7 +183,27 @@ export class CluEquiplistComponent implements OnInit, OnDestroy {
 
   control(data, n) {
     console.log(data, n);
+    let ctrlData = {
+      uid: data.uid,
+      ctl_type: n
+    };
+    this.runtimeService.equipControl(ctrlData)
+      .subscribe( data => {
+        Swal(
+          '发送成功！',
+          '',
+          'success'
+        );
+      }, err => {
+        Swal(
+          '发送失败！',
+          err,
+          'error'
+        );
+      });
   }
+
+
 
   groupControl(n) {
     if (this.checkList.length <= 0) {
@@ -191,6 +215,10 @@ export class CluEquiplistComponent implements OnInit, OnDestroy {
       return;
     }
     console.log(this.checkList, n);
+  }
+
+  trackByUid(index, item) {
+    return item.uid;
   }
 
 

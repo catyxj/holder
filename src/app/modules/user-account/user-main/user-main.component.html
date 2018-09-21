@@ -46,7 +46,7 @@
         <td>
           <div class="checkbox c-checkbox">
             <label>
-              <input type="checkbox" [(ngModel)]="account.checkDelete" (change)="checkDel(account);">
+              <input type="checkbox" [(ngModel)]="account.checkDelete" (change)="checkDel(account);" [disabled]="user.Uid === account.Uid">
               <span class="fa fa-check"></span></label>
           </div>
         </td>

@@ -42,24 +42,35 @@ export class TemplateListComponent implements OnInit {
 
   // 删除
   delete(uid, name) {
-    let cf = confirm(`确定删除模板[${name}]？`);
-    if (cf === true) {
-      this.templateService.deleteTemplate([uid])
-        .subscribe( () => {
-          Swal(
-            '删除成功！',
-            '',
-            'success'
-          );
-          this.pageChange();
-        }, err => {
-          Swal(
-            '删除失败！',
-            err,
-            'error'
-          );
-        });
-    }
+
+    let that = this;
+    Swal({
+      title: `确定删除模板[${name}]？`,
+      text: '',
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonText: '取消',
+      confirmButtonText: '确定删除！',
+    }).then((result) => {
+      if (result.value) {
+        that.templateService.deleteTemplate([uid])
+          .subscribe( () => {
+            Swal(
+              '删除成功！',
+              '',
+              'success'
+            );
+            that.pageChange();
+          }, err => {
+            Swal(
+              '删除失败！',
+              err,
+              'error'
+            );
+          });
+      }
+    });
+
   }
 
   // 批量选择

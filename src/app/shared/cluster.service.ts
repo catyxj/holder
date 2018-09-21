@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from "rxjs/index";
 import {catchError} from "rxjs/internal/operators";
+import {Router} from "@angular/router";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -23,7 +24,7 @@ export class ClusterService {
   private clustersUrl = '/cluster_list_all';
   private clusEquipUrl = '/cluster_detail';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   // 获取集群列表
   getClusters(n: number, pageSize: number, search?: string): Observable<any> {
@@ -93,6 +94,9 @@ export class ClusterService {
       console.error(
         `错误代码 ${error.status}, ` +
         `错误内容: ${error.error}`);
+    }
+    if (error.status === 550) {
+      window.location.reload();
     }
     return throwError(
       error.error);

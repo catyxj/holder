@@ -91,6 +91,9 @@ export class UserAccountService {
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
     }
+    if (error.status === 550) {
+      window.location.reload();
+    }
     // return an observable with a user-facing error message
     return throwError(
       error.error);

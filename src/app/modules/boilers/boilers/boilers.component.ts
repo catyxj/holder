@@ -152,6 +152,10 @@ export class BoilersComponent implements OnInit {
     this.pageChange();
   }
 
+  trackByUid(index, item) {
+    return item.Uid;
+  }
+
   // 添加设备模态框
   newBoiler() {
     const modalRef = this.modalService.open(AddBoilerComponent, { size: 'lg' });

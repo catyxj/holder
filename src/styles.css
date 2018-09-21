@@ -42,6 +42,9 @@ h5, .h5 {
   font-size: 1.25rem;
 }
 
+.modal-backdrop {
+  z-index: 880 !important;
+}
 
 .text_info {
   color: #17a2b8 !important;
@@ -80,7 +83,8 @@ h5, .h5 {
   color: #ffffff;
 }
 .bg_light_primary{
-  background-color: #819ca9;
+  /*background-color: #819ca9;*/
+  background-color: #6f94a6;
   color: #ffffff;
 }
 .bg_dark_primary{
@@ -111,21 +115,21 @@ h5, .h5 {
 
 
 /*滚动条*/
-.mat-sidenav-content::-webkit-scrollbar,.sidenav::-webkit-scrollbar{
+.mat-sidenav-content::-webkit-scrollbar,.sidenav::-webkit-scrollbar,.scroll_bar::-webkit-scrollbar{
   width: 6px;     /*高宽分别对应横竖滚动条的尺寸*/
   height: 6px;
   /*background-color: #51aded;*/
   /*display: none;*/
 }
 /*定义滚动条轨道*/
-.mat-sidenav-content::-webkit-scrollbar-track,.sidenav::-webkit-scrollbar-track
+.mat-sidenav-content::-webkit-scrollbar-track,.sidenav::-webkit-scrollbar-track,.scroll_bar::-webkit-scrollbar-track
 {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
   /*border-radius: 10px;*/
   /*background-color: #F5F5F5;*/
 }
 /*定义滑块 内阴影+圆角*/
-.mat-sidenav-content::-webkit-scrollbar-thumb,.sidenav::-webkit-scrollbar-thumb
+.mat-sidenav-content::-webkit-scrollbar-thumb,.sidenav::-webkit-scrollbar-thumb, .scroll_bar::-webkit-scrollbar-thumb
 {
   border-radius: 5px;
   /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);*/

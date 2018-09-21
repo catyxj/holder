@@ -49,19 +49,16 @@ a {
   -webkit-transform: all 1s ease 0s;
 }
 .status_row{
-
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 .module .status_content .status_col{
-  float: left;
-  width: 46%;
-  margin-right: 4%;
+
   box-sizing: border-box;
-  padding: 0 6px;
-  border-radius: 3px;
-  margin-bottom: 10px;
-  line-height: 25px;
-  height: 55px;
-  text-align: center;
+  line-height: 30px;
+  height: 30px;
+  /*text-align: center;*/
   /*color: #ffffff;*/
 }
 

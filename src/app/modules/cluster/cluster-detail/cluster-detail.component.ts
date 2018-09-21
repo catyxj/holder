@@ -43,8 +43,8 @@ export class ClusterDetailComponent implements OnInit {
     const cf = confirm(`确认从集群中移除设备（设备本身不会被删除）？`);
     if (cf === true) {
       let data = {
-        cluster_uid: this.uid,
-        equipment: [uid]
+        cluster: this.uid,
+        equipments: [uid]
       };
       this.clusterService.deleteEquip(data)
         .subscribe( () => {
@@ -100,8 +100,8 @@ export class ClusterDetailComponent implements OnInit {
     const cf = confirm(`确认移除选中设备（设备本身不会被删除）？`);
     if (cf === true) {
       let data = {
-        cluster_uid: this.uid,
-        equipment: this.deleteList
+        cluster: this.uid,
+        equipments: this.deleteList
       };
       this.clusterService.deleteEquip(data)
         .subscribe(() => {

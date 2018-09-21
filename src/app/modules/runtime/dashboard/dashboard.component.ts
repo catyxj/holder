@@ -182,7 +182,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
   equipControl(n) {
     let ctrlData = {
       uid: this.uid,
-      type: n
+      ctl_type: n
     };
     this.runtimeService.equipControl(ctrlData)
       .subscribe( data => {
@@ -205,6 +205,10 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
     window.history.go(-1);
   }
 
+
+  trackByUid(index, item) {
+    return item.Uid;
+  }
 
   ngOnDestroy() {
     this.socket.unsubscribe();

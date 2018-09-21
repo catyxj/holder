@@ -1,0 +1,21 @@
+
+.map_stat{
+  position: absolute;
+  bottom:0;
+  left: 0;
+  width:800px;
+  height: 60px;
+  background-color: #eaf1f4;
+  padding: 10px;
+  line-height: 36px;
+  box-shadow: 1px -2px 2px #7194a4;
+}
+
+.map_stat b{
+  color: #34515e;
+}
+.map_stat span{
+  margin-right: 20px;
+}
+
+

@@ -43,7 +43,7 @@
       <th>操作</th>
       </thead>
       <tbody>
-      <tr *ngFor="let org of organizations">
+      <tr *ngFor="let org of organizations; trackBy: trackByUid;">
         <td>
           <div class="checkbox c-checkbox">
             <label>

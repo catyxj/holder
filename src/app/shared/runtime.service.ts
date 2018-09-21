@@ -18,13 +18,19 @@ export class RuntimeService {
   constructor(private http: HttpClient) { }
 
   getInstants(): Observable<any> {
-    return this.http.get('assets/server/runtime.json');
+    return this.http.get('assets/server/runtime.json')
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
 
   // 获取设备型态信息
   getEquipTemp(uid): Observable<any>  {
-    return this.http.get(`/equipment_template_get?uid=${uid}`);
+    return this.http.get(`/equipment_template_get?uid=${uid}`)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   //  设备控制开关
@@ -37,12 +43,18 @@ export class RuntimeService {
 
   // 获取运行参数
   getRuntimeList(uid): Observable<any> {
-    return this.http.get(`/equipment_runtime_list?uid=${uid}`);
+    return this.http.get(`/equipment_runtime_list?uid=${uid}`)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   // 获取图表数据
   getRuntimeData(uid): Observable<any> {
-    return this.http.get(`/equipment_runtime_data_list?uid=${uid}`);
+    return this.http.get(`/equipment_runtime_data_list?uid=${uid}`)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   // 历史数据
@@ -70,6 +82,9 @@ export class RuntimeService {
       console.error(
         `错误代码 ${error.status}, ` +
         `错误内容: ${error.error}`);
+    }
+    if (error.status === 550) {
+      window.location.reload();
     }
     return throwError(
       error.error);

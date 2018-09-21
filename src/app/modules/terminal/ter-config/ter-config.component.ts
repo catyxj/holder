@@ -34,6 +34,7 @@ export class TerConfigComponent implements OnInit {
   public subAdrs;
   public stopBits;
   public BaudRates;
+  public isSpinning = false;
 
 
   constructor(private route: ActivatedRoute,
@@ -676,32 +677,39 @@ export class TerConfigComponent implements OnInit {
       Param: infomation,
       Code: this.code
     };
+
+    this.isSpinning = true;
     this.terminalService.save(data)
       .subscribe(val => {
+        this.isSpinning = false;
         Swal({
           title: '通道配置更新成功，是否立刻下发？',
           showCancelButton: true,
           confirmButtonText: '确定下发',
           cancelButtonText: '取消',
           showLoaderOnConfirm: true
-        }).then(function() {
-          that.terminalService.issued(that.code)
-            .subscribe( res => {
-              Swal(
-                '下发成功！',
-                '',
-                'success'
-              );
-            }, err => {
-              Swal(
-                '下发失败！',
-                err,
-                'error'
-              );
-          });
-
+        }).then((result) => {
+          if (result.value) {
+            that.terminalService.issued(that.code)
+              .subscribe( res => {
+                Swal(
+                  '下发成功！',
+                  '',
+                  'success'
+                );
+              }, err => {
+                Swal(
+                  '下发失败！',
+                  err,
+                  'error'
+                );
+              });
+          }
         });
+
+
       }, err => {
+        this.isSpinning = false;
         Swal({
           title: '通道配置更新失败',
           text: err,

@@ -145,6 +145,10 @@ export class TerminalListComponent implements OnInit {
     this.pageChange();
   }
 
+  trackByUid(index, item) {
+    return item.Uid;
+  }
+
 // 添加终端模态框
   newTerminal() {
     const modalRef = this.modalService.open(AddTerminalComponent, { size: 'lg' });

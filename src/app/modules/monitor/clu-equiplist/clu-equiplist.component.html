@@ -1,18 +1,20 @@
 <div class="">
   <div class="clearfix" style="padding: 15px 0; ">
     <div class="pull-right flex flex-row">
-      <div class="mr-3">
-        <a routerLink="/admin/monitor/clusters" class="btn btn-info" style="color: #ffffff;">
-          <i class="fa fa-reply"></i>
-          返回
-        </a>
-      </div>
+
       <div class="input-group">
         <input type="text" class="form-control" placeholder="请输入设备名称" [(ngModel)]="search" >
         <div class="input-group-append" (click)="searchChange()">
           <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
         </div>
       </div>
+
+      <!--<div class="ml-3">
+        <a routerLink="/admin/monitor/clusters" class="btn btn-info" style="color: #ffffff;">
+          <i class="fa fa-reply"></i>
+          返回
+        </a>
+      </div>-->
 
     </div>
 
@@ -39,7 +41,7 @@
       <th> 操作 </th>
       </thead>
       <tbody>
-      <tr *ngFor="let data of equips; let i = index">
+      <tr *ngFor="let data of equips; trackBy: trackByUid; let i = index">
         <td>
           <div class="checkbox c-checkbox">
             <label>
@@ -49,7 +51,7 @@
         </td>
         <td> {{ i+1 }}  </td>
         <td>
-          <a [routerLink]="['/admin/runtime', data.uid, data.name]">
+          <a [routerLink]="['/admin/runtime', data.uid, data.name]" style="color:#0e566c;" target="_blank">
             {{ data.name }}
           </a>
         </td>
@@ -68,10 +70,10 @@
           <nz-dropdown [nzPlacement]="'bottomRight'">
             <button nz-dropdown class="btn btn_info btn-sm">控制</button>
             <ul nz-menu>
-              <li nz-menu-item (click)="control(data,1)">
+              <li nz-menu-item (click)="control(data,2)">
                 启动
               </li>
-              <li nz-menu-item (click)="control(data,2)">
+              <li nz-menu-item (click)="control(data,1)">
                 关闭
               </li>
               <li nz-menu-item (click)="control(data,3)">
@@ -111,13 +113,13 @@
                     (pageChange)="pageChange()">
 
     </ngb-pagination>
-    <div class="pull-right mr-3">
-      <select [(ngModel)]="pageSize" class="form-control" (change)="pageSizeChange()">
-        <option value="10">10</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
-      </select>
-    </div>
+    <!--<div class="pull-right mr-3">-->
+      <!--<select [(ngModel)]="pageSize" class="form-control" (change)="pageSizeChange()">-->
+        <!--<option value="10">10</option>-->
+        <!--<option value="50">50</option>-->
+        <!--<option value="100">100</option>-->
+      <!--</select>-->
+    <!--</div>-->
     <div class="pull-right mr-3" style="line-height: 33px;"> 共 {{totalItems}} 项</div>
   </div>
 

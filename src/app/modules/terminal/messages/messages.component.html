@@ -20,18 +20,18 @@
         </button>
       </div>
 
-      <div class="ml-3" >
+      <!--<div class="ml-3" >
         <a (click)="goBack()" class="btn btn_info" style="color: #ffffff;">
           <i class="fa fa-reply"></i>
           返回
         </a>
-      </div>
+      </div>-->
     </div>
 
   </div>
 
 
-  <div class="" style="overflow:auto; width: 100%; height: 520px;">
+  <div class="" style="overflow:auto; width: 100%; height: 550px; border: 1px solid #eeeeee;">
     <div>
       <table class="table table-bordered">
         <thead class="bg_light_primary">
@@ -65,7 +65,7 @@
             {{ i + 1 }}
           </td>
         </tr>
-        <tr *ngFor="let ter of messages; let i = index">
+        <tr *ngFor="let ter of messages; trackBy: trackByUid; let i = index">
           <td> {{ i + 1 }} </td>
           <td style="white-space: nowrap;"> {{ ter.TS}} </td>
           <td> {{ ter.Equipment_data_fmt_ver }} </td>

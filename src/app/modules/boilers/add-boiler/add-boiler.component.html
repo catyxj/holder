@@ -64,7 +64,7 @@
 
         </div>
 
-        <div *ngIf="currentUser.Role.RoleId <= 10 && currentUser.Organization.EptCtlPlg" style="flex: 1.5">
+        <div *ngIf="currentUser.Role.RoleId <= 10 && currentUser.Organization && currentUser.Organization.EptCtlPlg" style="flex: 1.5">
             <span class="ml-3"> 控制 </span>
             <label class="switch switch-lg" style="margin-bottom: 0;">
               <input type="checkbox" [(ngModel)]="link.eptCtlPlg"  />

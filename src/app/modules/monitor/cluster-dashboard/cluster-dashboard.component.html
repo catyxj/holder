@@ -3,7 +3,7 @@
   <div class="mat-card-title clearfix" style="padding: 15px 0;">
     <div class="pull-right flex flex-row">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="请输入设备名称" [(ngModel)]="search" >
+        <input type="text" class="form-control" placeholder="请输入集群名称" [(ngModel)]="search" >
         <div class="input-group-append" >
           <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
         </div>
@@ -12,33 +12,40 @@
   </div>
 
   <div class="grid grid-pad row">
-    <div *ngFor="let data of clusters" class="col-6 mb-2">
+    <div *ngFor="let data of clusters; trackBy : trackByUid;" class="col-6 mb-2">
       <div class="module flex">
-        <div class="status_content">
-          <a [routerLink]="['/admin/monitor/cluster', data.uid]">
+        <div class="status_content mb-3">
+          <a [routerLink]="['/admin/monitor/cluster', data.uid]" target="_blank">
             <h5 class="mb-4">
               {{data.name}}
             </h5>
           </a>
 
           <div class="status_row ">
-            <div class="status_col bg_grey">
-              终端 <br/> {{data.termOnline}}/{{data.termOffline}}
+            <div class="status_col text-muted">
+              <b>终端: </b>  在线 <span class="text-info">{{data.termOnline}}</span> / 离线  <span class="">{{data.termOffline}}</span>
             </div>
-            <div class="status_col bg_grey">
-              设备 <br/> {{data.eptOnline}}/{{data.eptCounts}}
+            <div class="status_col text-muted">
+              <b>设备: </b>  在线 <span class="text-info">{{data.eptOnline}}</span> / 总共 <span>{{data.eptCounts}}</span>
             </div>
-            <div class="status_col " [ngClass]="{'bg_grey':!data.Online, 'bg-warning':data.Online && data.Warning , 'bg_light_secondary':data.Online && !data.Warning}">
-              告警 <br/> {{data.alarmCounts}}
+            <div class="status_col text-muted" >
+              <b>告警: </b>
+              <span [ngClass]="{'text-muted':!data.Online, 'text-danger':data.Online && data.Warning , 'text-info':data.Online && !data.Warning}">
+                {{data.alarmCounts}}
+              </span>
             </div>
-            <div class="status_col"
-                 [ngClass]="{'bg_grey':!data.Online, 'bg-warning':data.Online && data.Malfunction , 'bg_light_secondary':data.Online && !data.Malfunction}" style="margin-bottom: 0">
-              <!--{{data.malfunction}}--> 故障
+            <div class="status_col text-muted"
+                  style="margin-bottom: 0">
+              <!--{{data.malfunction}}-->
+              <b>故障: </b>
+              <span [ngClass]="{'text-muted':!data.Online, 'text-danger':data.Online && data.Malfunction , 'text-info':data.Online && !data.Malfunction}">
+
+              </span>
             </div>
           </div>
         </div>
         <div class="img_content">
-          <a [routerLink]="['/admin/monitor/cluster', data.uid]">
+          <a [routerLink]="['/admin/monitor/cluster', data.uid]" target="_blank">
             <img src="{{data.img}}" alt="">
           </a>
         </div>

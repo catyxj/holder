@@ -26,6 +26,9 @@ ul li{
   border-radius: 3px;
   padding: 8px;
 }
+.part *{
+  font-size: 12px;
+}
 
 .status_row{
 

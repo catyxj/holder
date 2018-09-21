@@ -9,6 +9,7 @@ import {EditAddressComponent} from '../edit-address/edit-address.component';
 import {EditMaintainComponent} from '../edit-maintain/edit-maintain.component';
 import {AdressService} from '../../../shared/adress.service';
 import {TerBindComponent} from "../ter-bind/ter-bind.component";
+import Swal from 'sweetalert2';
 
 declare var BMap: any;
 declare var BMAP_STATUS_SUCCESS: any;
@@ -219,29 +220,66 @@ export class BoilerInfoComponent implements OnInit {
       equipment_id: this.info.Uid,
       terminal_code: ter.TerminalCode.toString()
     };
-    let cf = confirm('确定删除终端');
-    if (cf === true) {
-      this.boilerService.unBind(data)
-        .subscribe( val => {
-          alert('解绑成功');
-          this.getInfo();
-        }, err => {
-          alert(err);
-        });
-    }
+
+    let that = this;
+    Swal({
+      title: '确定删除终端？',
+      text: '',
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonText: '取消',
+      confirmButtonText: '确定删除！',
+    }).then((result) => {
+      if (result.value) {
+        that.boilerService.unBind(data)
+          .subscribe( () => {
+            Swal(
+              '解绑成功！',
+              '',
+              'success'
+            );
+            that.getInfo();
+          }, err => {
+            Swal(
+              '解绑失败！',
+              err,
+              'error'
+            );
+          });
+      }
+    });
 
   }
 
   // 删除
   delete() {
-    let cf = confirm('确认删除当前设备？');
-    if (cf === true) {
-      this.boilerService.deleteBoiler([this.info.Uid])
-        .subscribe(() => {
-          this.router.navigate(['/admin/equipments']);
-        }, err => {alert(err); });
-
-    }
+    let that = this;
+    Swal({
+      title: '确认删除当前设备？',
+      text: '',
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonText: '取消',
+      confirmButtonText: '确定删除！',
+    }).then((result) => {
+      if (result.value) {
+        that.boilerService.deleteBoiler([this.info.Uid])
+          .subscribe( () => {
+            Swal(
+              '删除成功！',
+              '',
+              'success'
+            );
+            that.router.navigate(['/admin/equipments']);
+          }, err => {
+            Swal(
+              '删除失败！',
+              err,
+              'error'
+            );
+          });
+      }
+    });
 
   }
 

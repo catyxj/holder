@@ -17,7 +17,8 @@
   text-decoration: none;
 }
 .map_tab a.active{
-  background-color: #607D8B;
+  /*background-color: #607D8B;*/
+  background-color: #51859d;
   color: #ffffff;
 }
 

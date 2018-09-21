@@ -14,4 +14,26 @@
 .map_list_in{
 
 }
+.map_list_in li{
+  display: flex;
+}
 
+.map_stat_icon{
+  display: flex;
+}
+.stat_icon{
+  width: 10px;
+  height:10px;
+  border-radius: 10px;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+.icon_info{
+  background-color: #17a2b8;
+}
+.icon_default{
+  background-color: #eee;
+}
+.icon_danger{
+  background-color: #FF6666;
+}

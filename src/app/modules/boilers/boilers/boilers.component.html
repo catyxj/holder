@@ -43,7 +43,7 @@
         <th>操作</th>
       </thead>
       <tbody>
-        <tr *ngFor="let boiler of boilers; let i = index">
+        <tr *ngFor="let boiler of boilers; trackBy: trackByUid; let i = index">
           <td>
             <div class="checkbox c-checkbox">
               <label>

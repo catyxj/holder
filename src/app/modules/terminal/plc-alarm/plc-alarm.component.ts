@@ -28,6 +28,40 @@ export class PlcAlarmComponent implements OnInit {
       .subscribe( data => {
         this.plcs = data.params;
         this.totalItems = data.counts;
+        for (let i = 0; i < this.plcs.length; i++) {
+          let plc = this.plcs[i];
+          plc.num = i + 1;
+          if (plc.ChannelNumber > 0 && plc.ChannelNumber <= 24 ) {
+            plc.name = '模拟通道' + (plc.ChannelNumber);
+          }
+          if (plc.ChannelNumber > 24 && plc.ChannelNumber <= 72 ) {
+            plc.name = '开关通道' + (plc.ChannelNumber - 24);
+          }
+          if (plc.ChannelNumber > 72 && plc.ChannelNumber <= 84 ) {
+            plc.name = '状态通道' + (plc.ChannelNumber - 72);
+          }
+          if (plc.ChannelNumber === 85) {
+            plc.name = '波特率';
+          }
+          if (plc.ChannelNumber === 86) {
+            plc.name = '数据位';
+          }
+          if (plc.ChannelNumber === 87) {
+            plc.name = '停止位';
+          }
+          if (plc.ChannelNumber === 88) {
+            plc.name = '校验位';
+          }
+          if (plc.ChannelNumber === 89) {
+            plc.name = '通讯接口类型';
+          }
+          if (plc.ChannelNumber === 90) {
+            plc.name = '从机地址';
+          }
+          if (plc.ChannelNumber === 91 ) {
+            plc.name = '心跳包频率';
+          }
+        }
       });
   }
 

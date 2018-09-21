@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { BoilerService } from '../../../shared/boiler.service';
-import {Observable} from "rxjs/index";
 import {BoilerSocketService} from '../../../shared/boiler-socket.service';
 
 @Component({
@@ -12,7 +11,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   boilers: any = [];
   boiler: any;
-  page;
+  page = 1;
   pageSize = 4;
   totalItems;
   search: string;
@@ -24,7 +23,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
               private boilerWsService: BoilerSocketService) { }
 
   ngOnInit() {
-    this.page = 1;
+    if (sessionStorage.getItem('pageNum')) {
+      this.page = parseInt(sessionStorage.getItem('pageNum'));
+    }
     this.totalItems = 0;
     let message = {
       page: this.page,
@@ -40,7 +41,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
   getBoilers(message): void {
-
+    console.log(message);
     const wsUrl = `ws://${window.location.host}/equipment_show`;
     this.socket = this.boilerWsService.creatSocket(wsUrl, message)
       .subscribe(
@@ -126,6 +127,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
 
+  trackByUid(index, item) {
+    return item.uid;
+  }
+
   /*goRuntime(data) {
     sessionStorage.setItem('equipName', data.name);
   }*/
@@ -133,6 +138,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // console.log('page close');
+    sessionStorage.setItem('pageNum', this.page.toString());
     this.socket.unsubscribe();
     this.boilerWsService.closeSocket();
   }

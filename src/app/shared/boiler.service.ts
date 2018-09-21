@@ -4,6 +4,7 @@ import {Observable, of, throwError} from 'rxjs';
 
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {catchError, retry} from 'rxjs/internal/operators';
+import {Router} from "@angular/router";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -26,7 +27,7 @@ export class BoilerService {
   private boilerUrl = '/equipment_detail';
   private templateListUrl = '/equipment_template_list'; // 设备型态列表
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   getBoilers(n: number, pageSize: number, search?: string ): Observable<any> {
     // TODO: send the message _after_ fetching the heroes
@@ -161,6 +162,9 @@ export class BoilerService {
       console.error(
         `错误代码 ${error.status}, ` +
         `错误内容: ${error.error}`);
+    }
+    if (error.status === 550) {
+      window.location.reload();
     }
     return throwError(
       error.error);

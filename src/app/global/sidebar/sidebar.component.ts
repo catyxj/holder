@@ -26,6 +26,9 @@ export class SidebarComponent implements OnInit {
     this.submenuShow[n] = !this.submenuShow[n];
   }
 
+  setPage() {
+    sessionStorage.setItem('pageNum', '1');
+  }
 
   // 获取用户信息
   /*getUser(): void {

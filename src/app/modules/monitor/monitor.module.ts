@@ -8,7 +8,6 @@ import { ListComponent } from './list/list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MapComponent } from './map/map.component';
 import { MonitorRoutingModule } from './monitor-routing.module';
-import {BaiduMapModule} from 'angular2-baidu-map';
 import {FormsModule} from "@angular/forms";
 import { MapGeneralComponent } from './map-general/map-general.component';
 import { MapBatchComponent } from './map-batch/map-batch.component';

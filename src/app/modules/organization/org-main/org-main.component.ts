@@ -90,27 +90,35 @@ export class OrgMainComponent implements OnInit {
 
   // 删除
   deleteO(org) {
-    const cf = confirm(`确认删除企业 ${org.Name} ？`);
-    if (cf === true) {
-      this.orgService.deleteOrg([org.Uid])
-        .subscribe( val => {
-          Swal(
-            '删除成功！',
-            '',
-            'success'
-          );
-          this.getOrganization();
-        }, err => {
-          Swal(
-            '删除失败！',
-            err,
-            'error'
-          );
-        });
 
-    } else {
+    let that = this;
+    Swal({
+      title: `确认删除企业 ${org.Name} ？`,
+      text: '',
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonText: '取消',
+      confirmButtonText: '确定删除！',
+    }).then((result) => {
+      if (result.value) {
+        that.orgService.deleteOrg([org.Uid])
+          .subscribe( val => {
+            Swal(
+              '删除成功！',
+              '',
+              'success'
+            );
+            that.getOrganization();
+          }, err => {
+            Swal(
+              '删除失败！',
+              err,
+              'error'
+            );
+          });
 
-    }
+      }
+    });
 
   }
 
@@ -150,9 +158,18 @@ export class OrgMainComponent implements OnInit {
     if (cf === true) {
       this.orgService.deleteOrg(this.deleteList)
         .subscribe( () => {
+          Swal(
+            '删除成功！',
+            '',
+            'success'
+          );
           this.pageChange();
         }, err => {
-          alert(err);
+          Swal(
+            '删除失败！',
+            err,
+            'error'
+          );
         });
     } else {
 
@@ -178,6 +195,10 @@ export class OrgMainComponent implements OnInit {
   searchChange() {
     this.page = 1;
     this.pageChange();
+  }
+
+  trackByUid(index, item) {
+    return item.Uid;
   }
 
   // 编辑模态框

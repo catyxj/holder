@@ -43,6 +43,8 @@ export class MainComponent implements OnInit, OnDestroy {
           sessionStorage.removeItem('currentUser');
           this.router.navigate(['/login']);
         }
+      }, err => {
+        this.router.navigate(['/login']);
       });
   }
 

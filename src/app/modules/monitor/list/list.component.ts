@@ -135,6 +135,10 @@ export class ListComponent implements OnInit, OnDestroy {
     this.pageChange();
   }
 
+  trackByUid(index, item) {
+    return item.uid;
+  }
+
   ngOnDestroy() {
     console.log('page close');
     this.socket.unsubscribe();

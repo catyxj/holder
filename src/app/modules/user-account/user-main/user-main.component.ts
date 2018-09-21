@@ -51,6 +51,9 @@ export class UserMainComponent implements OnInit {
       })
     ).subscribe( );
 
+    let name = this.route.snapshot.params['name'];
+    console.log(name);
+
     this.isSpinning = true;
     this.getUserAccount();
   }
@@ -108,7 +111,7 @@ export class UserMainComponent implements OnInit {
     if ( account.checkDelete === true) {
       this.deleteList.push(account.Uid);
     } else {
-      for (let i = 0; i < this.deleteList.length; i++){
+      for (let i = 0; i < this.deleteList.length; i++) {
         let dl = this.deleteList[i];
         if (dl === account.Uid) {
           this.deleteList.splice(i, 1);
@@ -122,6 +125,9 @@ export class UserMainComponent implements OnInit {
   allDel() {
     if (this.allDelete === true) {
       for (let i = 0; i < this.accounts.length; i++) {
+        if (this.user.Uid === this.accounts[i].Uid) {
+          continue;
+        }
         this.accounts[i].checkDelete = true;
         this.deleteList.push(this.accounts[i].Uid);
       }
@@ -135,21 +141,25 @@ export class UserMainComponent implements OnInit {
 
   // 批量删除
   deleteG() {
-    this.userAccountService.deleteAccount( this.deleteList)
-      .subscribe( () => {
-        Swal(
-          '删除成功！',
-          '',
-          'success'
-        );
-        this.pageChange();
-      }, err => {
-        Swal(
-          '删除失败！',
-          err,
-          'error'
-        );
-      });
+    let that = this;
+    const cf = confirm(`确认删除选中账号 ？`);
+    if (cf === true) {
+      that.userAccountService.deleteAccount( that.deleteList)
+        .subscribe( () => {
+          Swal(
+            '删除成功！',
+            '',
+            'success'
+          );
+          that.pageChange();
+        }, err => {
+          Swal(
+            '删除失败！',
+            err,
+            'error'
+          );
+        });
+    }
     // console.log(this.deleteList);
   }
 
@@ -194,7 +204,7 @@ export class UserMainComponent implements OnInit {
 
   // 权限管理模态框
   openManage(account) {
-    const modalRef = this.modalService.open(ManagementComponent, { size: 'lg' });
+    /*const modalRef = this.modalService.open(ManagementComponent, { size: 'lg' });
     modalRef.componentInstance.currentData = account;
     modalRef.componentInstance.currentUser = this.user;
     // modalRef.componentInstance.aroles = this.aroles;
@@ -206,7 +216,7 @@ export class UserMainComponent implements OnInit {
     }, (reason) => {
 
       console.log(reason);
-    });
+    });*/
   }
 
   // 添加

@@ -43,29 +43,32 @@ export class UploadMainComponent implements OnInit {
   delete(data) {
     let that = this;
     Swal({
-      title: '确定删除吗？',
+      title: `确定删除 ${data} 吗？`,
       text: '',
       type: 'warning',
       showCancelButton: true,
-      cancelButtonColor: '#d33',
+      cancelButtonText: '取消',
       confirmButtonText: '确定删除！',
-    }).then(function() {
-      that.uploadService.deleteFile([data])
-        .subscribe( val => {
-          Swal(
-            '删除成功！',
-            '',
-            'success'
-          );
-          that.pageChange();
-        }, err => {
-          Swal(
-            '删除失败！',
-            err,
-            'error'
-          );
-        });
+    }).then((result) => {
+      if (result.value) {
+        that.uploadService.deleteFile([data])
+          .subscribe( val => {
+            Swal(
+              '删除成功！',
+              '',
+              'success'
+            );
+            that.pageChange();
+          }, err => {
+            Swal(
+              '删除失败！',
+              err,
+              'error'
+            );
+          });
+      }
     });
+
   }
 
   // 批量选择

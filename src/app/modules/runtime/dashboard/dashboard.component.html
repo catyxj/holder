@@ -39,10 +39,10 @@
       <!--控制-->
       <div *ngIf="controlShow" class="mb-3">
         <div class="btn-group" style="width: 100%;">
-          <button class="btn btn-outline-info" style="width: 33%;" (click)="equipControl(2)">
+          <button class="btn btn-outline-info" style="width: 33%;" (click)="equipControl(2)" [disabled]="termStatus === 1 && eptStatus === true">
             启动
           </button>
-          <button class="btn btn-outline-danger" style="width: 33%;" (click)="equipControl(1)">
+          <button class="btn btn-outline-danger" style="width: 33%;" (click)="equipControl(1)" [disabled]="termStatus !== 1 || eptStatus === false">
             关闭
           </button>
           <button class="btn btn-outline-success" style="width: 33%;" (click)="equipControl(3)">
@@ -54,7 +54,7 @@
 
       <!--状态量-->
       <ul class="part" style="">
-        <li *ngFor="let data of ranges" style="line-height: 26px;">
+        <li *ngFor="let data of ranges; trackBy: trackByUid;" style="line-height: 26px;">
           <diV style="width: 40%;">
             <!--{{ data.ChannelNumber }}-->
             {{ data.ChannelName }}
@@ -77,7 +77,7 @@
       <div class="mt-3 part" style="">
         <!--开关量-->
         <ul>
-          <li *ngFor="let data of switchs">
+          <li *ngFor="let data of switchs; trackBy: trackByUid;">
             <div class="badge"
                  [ngClass]="{'badge-info':data.SwitchStatus === 1, 'badge-warning':data.SwitchStatus === 2 }"
                  style="width: 80px; line-height: 26px;">
@@ -95,7 +95,7 @@
     <div class="col-3 p-2" style="">
       <!--模拟量-->
       <ul class="part">
-        <li *ngFor="let data of analogues">
+        <li *ngFor="let data of analogues; trackBy: trackByUid;">
           <div style="width: 40%;">
             <!--{{ data.ChannelNumber }}-->
             {{ data.ChannelName }}

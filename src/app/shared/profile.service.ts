@@ -61,6 +61,9 @@ export class ProfileService {
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
     }
+    if (error.status === 550) {
+      window.location.reload();
+    }
     return throwError(
       error.error);
   }
