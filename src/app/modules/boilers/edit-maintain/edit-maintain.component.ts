@@ -74,10 +74,10 @@ export class EditMaintainComponent implements OnInit {
 
 
   initDate() {
-    let gaugeStr: string = this.datePipe.transform(new Date(this.currentData.InspectGaugeDateNext), 'yyyy-MM-dd');
-    let outerStr: string = this.datePipe.transform(new Date(this.currentData.InspectOuterDateNext), 'yyyy-MM-dd');
-    let innerStr: string = this.datePipe.transform(new Date(this.currentData.InspectInnerDateNext), 'yyyy-MM-dd');
-    let valveStr: string = this.datePipe.transform(new Date(this.currentData.InspectValveDateNext), 'yyyy-MM-dd');
+    let gaugeStr: string = this.datePipe.transform(this.currentData.InspectGaugeDateNext, 'yyyy-MM-dd');
+    let outerStr: string = this.datePipe.transform(this.currentData.InspectOuterDateNext, 'yyyy-MM-dd');
+    let innerStr: string = this.datePipe.transform(this.currentData.InspectInnerDateNext, 'yyyy-MM-dd');
+    let valveStr: string = this.datePipe.transform(this.currentData.InspectValveDateNext, 'yyyy-MM-dd');
 
     this.date = {
       gauge: {

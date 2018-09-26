@@ -4,6 +4,7 @@ import {BoilerSocketService} from "../../../shared/boiler-socket.service";
 import {ActivatedRoute} from "@angular/router";
 import Swal from 'sweetalert2';
 import {RuntimeService} from "../../../shared/runtime.service";
+import {ClusterService} from "../../../shared/cluster.service";
 
 @Component({
   selector: 'app-clu-equiplist',
@@ -25,7 +26,8 @@ export class CluEquiplistComponent implements OnInit, OnDestroy {
   constructor(private boilerService: BoilerService,
               private route: ActivatedRoute,
               private boilerWsService: BoilerSocketService,
-              private runtimeService: RuntimeService) { }
+              private runtimeService: RuntimeService,
+              private clusterService: ClusterService) { }
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
@@ -40,6 +42,7 @@ export class CluEquiplistComponent implements OnInit, OnDestroy {
 
   // 获取列表数据
   getClusterEquip(message) {
+
     const wsUrl = `ws://${window.location.host}/clusters_detail_show`;
     this.socket = this.boilerWsService.creatSocket(wsUrl, message)
       .subscribe(
@@ -168,8 +171,10 @@ export class CluEquiplistComponent implements OnInit, OnDestroy {
     if (this.allCheck === true) {
 
       for (let i = 0; i < this.equips.length; i++) {
-        this.equips[i].checkDelete = true;
-        this.checkList.push(this.equips[i]);
+        if (this.equips[i].eptStatus) {
+          this.equips[i].checkDelete = true;
+          this.checkList.push(this.equips[i]);
+        }
       }
     } else {
       for (let i = 0; i < this.equips.length; i++) {
@@ -181,7 +186,7 @@ export class CluEquiplistComponent implements OnInit, OnDestroy {
   }
 
 
-  control(data, n) {
+  /*control(data, n) {
     console.log(data, n);
     let ctrlData = {
       uid: data.uid,
@@ -201,11 +206,11 @@ export class CluEquiplistComponent implements OnInit, OnDestroy {
           'error'
         );
       });
-  }
+  }*/
 
 
 
-  groupControl(n) {
+  /*groupControl(n) {
     if (this.checkList.length <= 0) {
       Swal(
         '没有选择设备',
@@ -215,7 +220,7 @@ export class CluEquiplistComponent implements OnInit, OnDestroy {
       return;
     }
     console.log(this.checkList, n);
-  }
+  }*/
 
   trackByUid(index, item) {
     return item.uid;

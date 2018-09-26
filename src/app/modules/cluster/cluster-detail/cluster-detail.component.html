@@ -39,7 +39,8 @@
       </th>
       <th> 序号 </th>
       <th> 设备名称 </th>
-      <!--<th> 设备数量 </th>-->
+      <th> 终端状态 </th>
+      <th> 设备状态 </th>
       <th> 操作 </th>
       </thead>
       <tbody>
@@ -52,16 +53,50 @@
           </div>
         </td>
         <td> {{ i+1 }}  </td>
-        <td> {{ eq.Name }}  </td>
-        <!--<td> {{ clus.Number }} </td>-->
+        <td> {{ eq.name}}  </td>
         <td>
-          <a [routerLink]="['/admin/equipments/equipment-info', eq.Uid]"
+          <span *ngIf="eq.termStatus === 1" class="text-info">
+            终端在线
+          </span>
+          <span *ngIf="eq.termStatus === 0" class="text-muted">
+            终端离线
+          </span>
+          <span *ngIf="eq.termStatus === -1" class="text-muted">
+            终端未绑定
+          </span>
+        </td>
+        <td>
+          <span *ngIf="eq.eptStatus" class="text-info">
+            设备在线
+          </span>
+          <span *ngIf="!eq.eptStatus" class="text-muted">
+            设备离线
+          </span>
+        </td>
+        <td>
+          <a [routerLink]="['/admin/equipments/equipment-info', eq.uid]"
              class="btn btn_info btn-sm" style="color: #ffffff;" title="查看设备信息">
             查看
           </a>
-          <button class="btn btn-danger btn-sm ml-2" title="从集群中移除设备" (click)="delete(eq.Uid)">
+          <button class="btn btn-danger btn-sm ml-2" title="从集群中移除设备" (click)="delete(eq.uid)">
             移除
           </button>
+
+          <nz-dropdown [nzPlacement]="'bottomRight'">
+            <button nz-dropdown class="btn btn_info btn-sm ml-2" >控制</button>
+            <ul nz-menu>
+              <li nz-menu-item (click)="control(eq,2)">
+                启动
+              </li>
+              <li nz-menu-item (click)="control(eq,1)">
+                关闭
+              </li>
+              <li nz-menu-item (click)="control(eq,3)">
+                重置
+              </li>
+            </ul>
+          </nz-dropdown>
+
         </td>
       </tr>
       </tbody>
@@ -78,6 +113,22 @@
       <button class="btn btn_info" (click)="deleteG()">
         批量移除
       </button>
+
+      <nz-dropdown class="ml-3" [nzPlacement]="'topLeft'">
+        <button nz-dropdown class="btn btn_info">批量控制</button>
+        <ul nz-menu>
+          <li nz-menu-item (click)="groupControl(1)">
+            批量启动
+          </li>
+          <li nz-menu-item (click)="groupControl(2)">
+            批量关闭
+          </li>
+          <li nz-menu-item (click)="groupControl(3)">
+            批量重置
+          </li>
+        </ul>
+      </nz-dropdown>
+
     </div>
 
     <ngb-pagination class="pull-right"

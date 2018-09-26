@@ -47,7 +47,7 @@
         <td>
           <div class="checkbox c-checkbox">
             <label>
-              <input type="checkbox" [(ngModel)]="org.checkDelete" (change)="checkDel(org);">
+              <input type="checkbox" [(ngModel)]="org.checkDelete" (change)="checkDel(org);" [disabled]="user.Organization && user.Organization.Uid === org.Uid">
               <span class="fa fa-check"></span></label>
           </div>
         </td>
@@ -68,6 +68,7 @@
             编辑
           </button>
           <button class="btn btn-sm btn-outline-danger ml-2" (click)="deleteO(org)"
+                  [disabled]="user.Organization && user.Organization.Uid === org.Uid"
                   *ngIf="user.Role.RoleId <= 10">
             <i class="fa fa-trash"></i>
             删除

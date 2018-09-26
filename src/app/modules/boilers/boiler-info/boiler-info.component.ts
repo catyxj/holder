@@ -66,9 +66,9 @@ export class BoilerInfoComponent implements OnInit {
         }
       }
       this.info.InspectInnerDateNext = new Date(this.info.InspectInnerDateNext);
-      this.info.InspectValveDateNext = new Date(this.info.InspectInnerDateNext);
-      this.info.InspectOuterDateNext = new Date(this.info.InspectInnerDateNext);
-      this.info.InspectGaugeDateNext = new Date(this.info.InspectInnerDateNext);
+      this.info.InspectValveDateNext = new Date(this.info.InspectValveDateNext);
+      this.info.InspectOuterDateNext = new Date(this.info.InspectOuterDateNext);
+      this.info.InspectGaugeDateNext = new Date(this.info.InspectGaugeDateNext);
 
       this.address = this.info.Address;
       this.initMap();

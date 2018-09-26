@@ -30,18 +30,19 @@ export class EditBoilerComponent implements OnInit {
               private orgService: OrganizationService) { }
 
   ngOnInit() {
-
+    console.log(this.currentData);
+    this.data = {
+      uid: this.currentData.Uid,
+      name: this.currentData.Name,
+      templateId: this.currentData.Template ? this.currentData.Template.Uid : '',
+      infos: [],
+      links: []
+    };
     this.getUser();
     this.getTemplates();
     this.getOrgType();
     this.getOrgs();
-    this.data = {
-      uid: this.currentData.Uid,
-      name: this.currentData.Name,
-      templateId: this.currentData.Template.Uid,
-      infos: [],
-      links: []
-    };
+
     this.initInfos();
     this.imgUrl = this.currentData.Image;
     if (!this.imgUrl) {
@@ -92,7 +93,7 @@ export class EditBoilerComponent implements OnInit {
         this.links.push({
           type: or.Type.TypeId,
           uid: or.Uid,
-          eptCtlPlg: or.IsEptCtl
+          eptCtlPlg: or.EptCtlPlg
         });
         let orgs = [];
         for (let j in this.orgLists) {

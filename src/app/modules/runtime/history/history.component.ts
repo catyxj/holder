@@ -123,6 +123,9 @@ export class RuntimeHistoryComponent implements OnInit {
 
   pageSizeChange() {
     this.page = 1;
+    if (typeof(this.pageSize) !== 'number') {
+      this.pageSize = parseInt(this.pageSize);
+    }
     this.refreshData();
   }
 
@@ -167,7 +170,7 @@ export class RuntimeHistoryComponent implements OnInit {
             for (let j = 0; j < li.length; j++) {
               let dat = li[j];
               let id = dat.type + '_' + dat.number;
-              his.data[id] = dat.value;
+              his.data[id] = dat.value.toString();
             }
             history.push(his);
           }

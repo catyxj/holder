@@ -23,32 +23,32 @@
   <div>
     <table class="table table-bordered">
       <thead class="bg_light_primary">
-      <th>
+      <!--<th>
         <div class="checkbox c-checkbox white">
           <label>
             <input type="checkbox" [(ngModel)]="allCheck" (change)="allDel();">
             <span class="fa fa-check"></span>
-            <!--全选-->
+
           </label>
         </div>
-      </th>
+      </th>-->
       <th> 序号 </th>
       <th> 设备名称 </th>
       <th> 终端状态 </th>
       <th> 运行状态 </th>
       <th> 告警状态 </th>
       <th> 故障状态 </th>
-      <th> 操作 </th>
+      <!--<th> 操作 </th>-->
       </thead>
       <tbody>
       <tr *ngFor="let data of equips; trackBy: trackByUid; let i = index">
-        <td>
-          <div class="checkbox c-checkbox">
+        <!--<td>
+          <div class="checkbox c-checkbox" *ngIf="data.eptStatus">
             <label>
               <input type="checkbox" [(ngModel)]="data.checkDelete" (change)="checkDel(data);">
               <span class="fa fa-check"></span></label>
           </div>
-        </td>
+        </td>-->
         <td> {{ i+1 }}  </td>
         <td>
           <a [routerLink]="['/admin/runtime', data.uid, data.name]" style="color:#0e566c;" target="_blank">
@@ -65,10 +65,10 @@
         <td>
           {{data.malfunction}}
         </td>
-        <td>
+        <!--<td>
 
-          <nz-dropdown [nzPlacement]="'bottomRight'">
-            <button nz-dropdown class="btn btn_info btn-sm">控制</button>
+          <nz-dropdown [nzPlacement]="'bottomRight'" *ngIf="data.eptStatus">
+            <button nz-dropdown class="btn btn_info btn-sm" >控制</button>
             <ul nz-menu>
               <li nz-menu-item (click)="control(data,2)">
                 启动
@@ -81,7 +81,7 @@
               </li>
             </ul>
           </nz-dropdown>
-        </td>
+        </td>-->
       </tr>
       </tbody>
     </table>
@@ -89,7 +89,7 @@
 
   <div>
 
-    <div class="pull-left">
+    <!--<div class="pull-left">
       <nz-dropdown [nzPlacement]="'topLeft'">
         <button nz-dropdown class="btn btn_info">批量控制</button>
         <ul nz-menu>
@@ -104,7 +104,7 @@
           </li>
         </ul>
       </nz-dropdown>
-    </div>
+    </div>-->
 
     <ngb-pagination class="pull-right"
                     [collectionSize]="totalItems"

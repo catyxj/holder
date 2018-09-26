@@ -40,7 +40,8 @@ export class TerConfigComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private terminalService: TerminalService,
               private modalService: NgbModal,
-              private nzmodalService: NzModalService) { }
+              private nzmodalService: NzModalService) {
+  }
 
   ngOnInit() {
 
@@ -60,7 +61,7 @@ export class TerConfigComponent implements OnInit {
   }
 
   initPriorities() {
-    for ( let i = 0; i < 24; i++) {
+    for (let i = 0; i < 24; i++) {
       this.priorities.push(i);
     }
   }
@@ -69,129 +70,129 @@ export class TerConfigComponent implements OnInit {
   getTerminal() {
 
     this.terminalService.getChannel(this.code)
-      .subscribe( data => {
-          let channels = data.channelConfigs;
-          let information = data.communication;
+      .subscribe(data => {
+        let channels = data.channelConfigs;
+        let information = data.communication;
 
-          //
-          for (let i = 0; i < channels.length; i++) {
-            let chan = channels[i];
+        //
+        for (let i = 0; i < channels.length; i++) {
+          let chan = channels[i];
 
-            if (chan.ChannelType === 1) {
-              this.analogueList.push({
-                ChannelNumber: chan.ChannelNumber,
-                Parameter: {
-                  Name: chan.Name,
-                  Scale: chan.Scale,
-                  Unit: chan.Unit
-                },
-                alarm: chan.AlarmRule,
-                Func: chan.FunctionCode ? chan.FunctionCode.Id : 0,
-                Byte: chan.Byte ? chan.Byte.Id : 0,
-                Modbus: chan.Modbus,
-                Status: chan.Status,
-                SequenceNumber: chan.SequenceNumber
-              });
+          if (chan.ChannelType === 1) {
+            this.analogueList.push({
+              ChannelNumber: chan.ChannelNumber,
+              Parameter: {
+                Name: chan.Name,
+                Scale: chan.Scale,
+                Unit: chan.Unit
+              },
+              alarm: chan.AlarmRule,
+              Func: chan.FunctionCode ? chan.FunctionCode.Id : 0,
+              Byte: chan.Byte ? chan.Byte.Id : 0,
+              Modbus: chan.Modbus,
+              Status: chan.Status,
+              SequenceNumber: chan.SequenceNumber
+            });
+          }
+
+          if (chan.ChannelType === 3) {
+            this.switchList.push({
+              ChannelNumber: chan.ChannelNumber,
+              Parameter: {
+                Name: chan.Name,
+              },
+              alarm: chan.AlarmRule,
+              Func: chan.FunctionCode ? chan.FunctionCode.Id : 0,
+              Modbus: chan.Modbus,
+              BitAddress: chan.BitAddress,
+              Status: chan.Status,
+              SwitchStatus: chan.SwitchStatus,
+              SequenceNumber: chan.SequenceNumber
+            });
+          }
+
+          if (chan.ChannelType === 5) {
+            this.rangeList.push({
+              ChannelNumber: chan.ChannelNumber,
+              Parameter: {
+                Name: chan.Name,
+              },
+              alarm: chan.AlarmRule,
+              Ranges: chan.Ranges,
+              Func: chan.FunctionCode ? chan.FunctionCode.Id : 0,
+              Byte: chan.Byte ? chan.Byte.Id : 0,
+              Modbus: chan.Modbus,
+              Status: chan.Status,
+              SequenceNumber: chan.SequenceNumber
+            });
+          }
+        }
+
+        if (this.analogueList.length <= 0) {
+          this.analogueList = [
+            {
+              ChannelNumber: 1,
+              Parameter: {
+                Name: '',
+                Scale: null,
+                Unit: null
+              },
+              alarm: [],
+              Func: 0,
+              Byte: 0,
+              Modbus: null,
+              Status: -1,
+              SequenceNumber: -1
             }
+          ];
+        }
 
-            if (chan.ChannelType === 3) {
-              this.switchList.push({
-                ChannelNumber: chan.ChannelNumber,
-                Parameter: {
-                  Name: chan.Name,
-                },
-                alarm: chan.AlarmRule,
-                Func: chan.FunctionCode ? chan.FunctionCode.Id : 0,
-                Modbus: chan.Modbus,
-                BitAddress: chan.BitAddress,
-                Status: chan.Status,
-                SwitchStatus: chan.SwitchStatus,
-                SequenceNumber: chan.SequenceNumber
-              });
+        if (this.switchList.length <= 0) {
+          this.switchList = [
+            {
+              ChannelNumber: 1,
+              Parameter: {
+                Name: '',
+              },
+              alarm: [],
+              Func: 0,
+              Modbus: null,
+              BitAddress: null,
+              Status: -1,
+              SwitchStatus: null,
+              SequenceNumber: -1
             }
+          ];
+        }
 
-            if (chan.ChannelType === 5) {
-              this.rangeList.push({
-                ChannelNumber: chan.ChannelNumber,
-                Parameter: {
-                  Name: chan.Name,
-                },
-                alarm: chan.AlarmRule,
-                Ranges: chan.Ranges,
-                Func: chan.FunctionCode ? chan.FunctionCode.Id : 0,
-                Byte: chan.Byte ? chan.Byte.Id : 0,
-                Modbus: chan.Modbus,
-                Status: chan.Status,
-                SequenceNumber: chan.SequenceNumber
-              });
+        if (this.rangeList.length <= 0) {
+          this.rangeList = [
+            {
+              ChannelNumber: 1,
+              Parameter: {
+                Name: '',
+              },
+              alarm: [],
+              Ranges: [],
+              Func: 0,
+              Byte: 0,
+              Modbus: null,
+              Status: -1,
+              SequenceNumber: -1
             }
-          }
+          ];
+        }
 
-          if (this.analogueList.length <= 0) {
-            this.analogueList = [
-              {
-                ChannelNumber: 1,
-                Parameter: {
-                  Name: '',
-                  Scale: null,
-                  Unit: null
-                },
-                alarm: [],
-                Func: 0,
-                Byte: 0,
-                Modbus: null,
-                Status: -1,
-                SequenceNumber: -1
-              }
-            ];
-          }
-
-          if (this.switchList.length <= 0) {
-            this.switchList = [
-              {
-                ChannelNumber: 1,
-                Parameter: {
-                  Name: '',
-                },
-                alarm: [],
-                Func: 0,
-                Modbus: null,
-                BitAddress: null,
-                Status: -1,
-                SwitchStatus: null,
-                SequenceNumber: -1
-              }
-            ];
-          }
-
-          if (this.rangeList.length <= 0) {
-            this.rangeList = [
-              {
-                ChannelNumber: 1,
-                Parameter: {
-                  Name: '',
-                },
-                alarm: [],
-                Ranges: [],
-                Func: 0,
-                Byte: 0,
-                Modbus: null,
-                Status: -1,
-                SequenceNumber: -1
-              }
-            ];
-          }
-
-          // 通信参数
-          this.infomation = {
-            BaudRate: information.BaudRate ? information.BaudRate.Id : 0, // 波特率
-            dataBit: information.DataBit ? information.DataBit.Id : 0,  // 数据位
-            stopBit: information.StopBit ? information.StopBit.Id : 0,  // 停止位
-            checkDigit: information.ParityBit ? information.ParityBit.Id : 0, // 校验位
-            communiInterface: information.CorrespondType ? information.CorrespondType.Id : 0, // 通信接口地址
-            subAdr: information.SlaveAddress ? information.SlaveAddress.Id : 0,  // 从机地址
-            heartbeat: information.HeartBeat ? information.HeartBeat.Id : 0  // 心跳包频率
-          };
+        // 通信参数
+        this.infomation = {
+          BaudRate: information.BaudRate ? information.BaudRate.Id : 0, // 波特率
+          dataBit: information.DataBit ? information.DataBit.Id : 0,  // 数据位
+          stopBit: information.StopBit ? information.StopBit.Id : 0,  // 停止位
+          checkDigit: information.ParityBit ? information.ParityBit.Id : 0, // 校验位
+          communiInterface: information.CorrespondType ? information.CorrespondType.Id : 0, // 通信接口地址
+          subAdr: information.SlaveAddress ? information.SlaveAddress.Id : 0,  // 从机地址
+          heartbeat: information.HeartBeat ? information.HeartBeat.Id : 0  // 心跳包频率
+        };
 
 
       });
@@ -201,28 +202,28 @@ export class TerConfigComponent implements OnInit {
   // 初始化下拉列表
   initLists() {
     // 功能码
-      this.terminalService.getFuncode()
-        .subscribe( fun => {
-          this.funcs = fun;
-          this.funcs2 = [
-            {Id: 1, Name: '01', Value: 1},
-            {Id: 2, Name: '02', Value: 2},
-            {Id: 3, Name: '03', Value: 3},
-            {Id: 99, Name: 'None', Value: 99}
-          ];
-          this.funcs1 = [
-            {Id: 3, Name: '03', Value: 3},
-            {Id: 4, Name: '04', Value: 4}
+    this.terminalService.getFuncode()
+      .subscribe(fun => {
+        this.funcs = fun;
+        this.funcs2 = [
+          {Id: 1, Name: '01', Value: 1},
+          {Id: 2, Name: '02', Value: 2},
+          {Id: 3, Name: '03', Value: 3},
+          {Id: 99, Name: 'None', Value: 99}
+        ];
+        this.funcs1 = [
+          {Id: 3, Name: '03', Value: 3},
+          {Id: 4, Name: '04', Value: 4}
 
-          ];
-        });
+        ];
+      });
 
 
     // 高低字节
-      this.terminalService.getByte()
-        .subscribe(byte => {
-          this.bytes = byte;
-        });
+    this.terminalService.getByte()
+      .subscribe(byte => {
+        this.bytes = byte;
+      });
 
 
     // 通信接口地址
@@ -269,8 +270,6 @@ export class TerConfigComponent implements OnInit {
 
 
   }
-
-
 
 
   // 添加模拟量
@@ -407,8 +406,7 @@ export class TerConfigComponent implements OnInit {
   }
 
 
-
-  fCodeChange (data) {
+  fCodeChange(data) {
     if (data.Func === '1' || data.Func === '2') {
       data.BitAddress = 1;
     }
@@ -496,7 +494,7 @@ export class TerConfigComponent implements OnInit {
           return false;
         }
         sNumList.push(this.switchList[i].ChannelNumber);
-        if ( (parseInt(this.switchList[i].Func) !== 99) && (!this.switchList[i].Func || !this.switchList[i].BitAddress || !this.switchList[i].Modbus)) {
+        if ((parseInt(this.switchList[i].Func) !== 99) && (!this.switchList[i].Func || !this.switchList[i].BitAddress || !this.switchList[i].Modbus)) {
 
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
@@ -504,7 +502,7 @@ export class TerConfigComponent implements OnInit {
           });
           return false;
         }
-        if ( parseInt(this.switchList[i].Func) === 1) {
+        if (parseInt(this.switchList[i].Func) === 1) {
           if (this.switchList[i].Modbus < 1 || this.switchList[i].Modbus >= 10000) {
             this.nzmodalService.error({
               nzTitle: '开关通道MODBUS地址错误',
@@ -597,7 +595,7 @@ export class TerConfigComponent implements OnInit {
           });
           return false;
         }
-        if ( parseInt(this.rangeList[i].Func) === 3) {
+        if (parseInt(this.rangeList[i].Func) === 3) {
           if (this.rangeList[i].Modbus <= 40000 || this.rangeList[i].Modbus >= 50000) {
             this.nzmodalService.error({
               nzTitle: 'MODBUS地址错误',
@@ -649,7 +647,6 @@ export class TerConfigComponent implements OnInit {
     }
 
 
-
     // 通信参数
     if (!this.infomation.BaudRate || !this.infomation.dataBit || !this.infomation.stopBit || !this.infomation.checkDigit || !this.infomation.communiInterface || !this.infomation.subAdr || !this.infomation.heartbeat) {
       this.nzmodalService.error({
@@ -691,7 +688,7 @@ export class TerConfigComponent implements OnInit {
         }).then((result) => {
           if (result.value) {
             that.terminalService.issued(that.code)
-              .subscribe( res => {
+              .subscribe(res => {
                 Swal(
                   '下发成功！',
                   '',
@@ -715,7 +712,7 @@ export class TerConfigComponent implements OnInit {
           text: err,
           type: 'error'
         });
-        });
+      });
 
   }
 
@@ -800,7 +797,7 @@ export class TerConfigComponent implements OnInit {
           return false;
         }
         sNumList.push(this.switchList[i].ChannelNumber);
-        if ( (parseInt(this.switchList[i].Func) !== 99) && (!this.switchList[i].Func || !this.switchList[i].BitAddress || !this.switchList[i].Modbus)) {
+        if ((parseInt(this.switchList[i].Func) !== 99) && (!this.switchList[i].Func || !this.switchList[i].BitAddress || !this.switchList[i].Modbus)) {
 
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
@@ -808,7 +805,7 @@ export class TerConfigComponent implements OnInit {
           });
           return false;
         }
-        if ( parseInt(this.switchList[i].Func) === 1) {
+        if (parseInt(this.switchList[i].Func) === 1) {
           if (this.switchList[i].Modbus < 1 || this.switchList[i].Modbus >= 10000) {
             this.nzmodalService.error({
               nzTitle: '开关通道MODBUS地址错误',
@@ -901,7 +898,7 @@ export class TerConfigComponent implements OnInit {
           });
           return false;
         }
-        if ( parseInt(this.rangeList[i].Func) === 3) {
+        if (parseInt(this.rangeList[i].Func) === 3) {
           if (this.rangeList[i].Modbus <= 40000 || this.rangeList[i].Modbus >= 50000) {
             this.nzmodalService.error({
               nzTitle: 'MODBUS地址错误',
@@ -953,7 +950,6 @@ export class TerConfigComponent implements OnInit {
     }
 
 
-
     // 通信参数
     if (!this.infomation.BaudRate || !this.infomation.dataBit || !this.infomation.stopBit || !this.infomation.checkDigit || !this.infomation.communiInterface || !this.infomation.subAdr || !this.infomation.heartbeat) {
       this.nzmodalService.error({
@@ -992,7 +988,6 @@ export class TerConfigComponent implements OnInit {
       console.log(reason);
     });
   }
-
 
 
   goBack() {

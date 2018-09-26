@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ClusterService} from "../../../shared/cluster.service";
 import Swal from 'sweetalert2';
+import {RuntimeService} from "../../../shared/runtime.service";
 
 @Component({
   selector: 'app-cluster-detail',
@@ -21,7 +22,8 @@ export class ClusterDetailComponent implements OnInit {
   public pageSize = 10;
 
   constructor(private route: ActivatedRoute,
-              private clusterService: ClusterService) { }
+              private clusterService: ClusterService,
+              private runtimeService: RuntimeService) { }
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
@@ -33,7 +35,7 @@ export class ClusterDetailComponent implements OnInit {
 
     this.clusterService.getClusEquip(this.uid, this.page, this.pageSize, this.search)
       .subscribe(data => {
-        this.equipList = data.params;
+        this.equipList = data.ept;
         this.totalItems = data.counts;
       });
   }
@@ -67,11 +69,11 @@ export class ClusterDetailComponent implements OnInit {
   // 批量选择
   checkDel(cluster): void {
     if ( cluster.checkDelete === true) {
-      this.deleteList.push(cluster.Uid);
+      this.deleteList.push(cluster.uid);
     } else {
       for (let i = 0; i < this.deleteList.length; i++){
         let dl = this.deleteList[i];
-        if (dl === cluster.Uid) {
+        if (dl === cluster.uid) {
           this.deleteList.splice(i, 1);
         }
       }
@@ -84,7 +86,7 @@ export class ClusterDetailComponent implements OnInit {
     if (this.allDelete === true) {
       for (let i = 0; i < this.equipList.length; i++) {
         this.equipList[i].checkDelete = true;
-        this.deleteList.push(this.equipList[i].Uid);
+        this.deleteList.push(this.equipList[i].uid);
       }
     } else {
       for (let i = 0; i < this.equipList.length; i++) {
@@ -144,5 +146,59 @@ export class ClusterDetailComponent implements OnInit {
   }
 
 
+  // 控制
+  control(data, n) {
+    console.log(data, n);
+    let ctrlData = {
+      uid: data.uid,
+      ctl_type: n
+    };
+    this.runtimeService.equipControl(ctrlData)
+      .subscribe( data => {
+        Swal(
+          '发送成功！',
+          '',
+          'success'
+        );
+      }, err => {
+        Swal(
+          '发送失败！',
+          err,
+          'error'
+        );
+      });
+  }
+
+  // 批量控制
+  groupControl(n) {
+    if (this.deleteList.length <= 0) {
+      Swal(
+        '没有选择设备',
+        '',
+        'warning'
+      );
+      return;
+    }
+    console.log(this.deleteList, n);
+    let post = {
+      uids: this.deleteList,
+      ctl_type: n
+    };
+    this.clusterService.groupControl(post)
+      .subscribe(val => {
+        Swal(
+          '发送成功！',
+          '',
+          'success'
+        );
+      }, err => {
+        Swal(
+          '发送失败！',
+          err,
+          'error'
+        );
+      });
+
+  }
 
 }

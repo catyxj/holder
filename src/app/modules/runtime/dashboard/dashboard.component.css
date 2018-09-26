@@ -29,7 +29,12 @@ ul li{
 .part *{
   font-size: 12px;
 }
-
+.part.table{
+  border: none;
+}
+.table td{
+  border: none;
+}
 .status_row{
 
 }

@@ -36,7 +36,13 @@ export class OrgMainComponent implements OnInit {
               private orgService: OrganizationService,
               private modalService: NgbModal,
               private router: Router,
-              private addrService: AdressService) { }
+              private addrService: AdressService) {
+    this.userService.userStatus$ // 监测父组件user
+      .subscribe( data => {
+        this.user = JSON.parse(sessionStorage.getItem('currentUser'));
+        }
+      );
+  }
 
   ngOnInit() {
     let user = JSON.parse(sessionStorage.getItem('currentUser'));
@@ -141,6 +147,9 @@ export class OrgMainComponent implements OnInit {
   allDel() {
     if (this.allDelete === true) {
       for (let i = 0; i < this.organizations.length; i++) {
+        if (this.user.Organization && this.user.Organization.Uid === this.organizations[i].Uid) {
+          continue;
+        }
         this.organizations[i].checkDelete = true;
         this.deleteList.push(this.organizations[i].Uid);
       }

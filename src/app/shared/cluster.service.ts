@@ -86,6 +86,14 @@ export class ClusterService {
   }
 
 
+  groupControl(data): Observable<any> {
+    return this.http.post('/equipment_ctl_batch', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
