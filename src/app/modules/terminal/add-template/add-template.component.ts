@@ -15,6 +15,7 @@ export class AddTemplateComponent implements OnInit {
   currentData;
 
   public name;
+  public isLoading = false;
 
   constructor(public activeModal: NgbActiveModal,
               private templateService: TemplateService,
@@ -28,8 +29,10 @@ export class AddTemplateComponent implements OnInit {
     let data = this.currentData;
     data.Name = this.name;
 
+    this.isLoading = true;
     this.templateService.add(data)
       .subscribe( val => {
+        this.isLoading = false;
         Swal(
           '保存成功！',
           '',
@@ -37,6 +40,7 @@ export class AddTemplateComponent implements OnInit {
         );
         this.activeModal.close('ok');
       }, err => {
+        this.isLoading = false;
         Swal(
           '保存失败！',
           err,

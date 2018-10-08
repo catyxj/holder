@@ -1,10 +1,10 @@
 
 <div class="">
-  <div class="mat-card-title" style="padding: 20px 0; ">
+  <div class="mat-card-title" style="padding: 20px 0; overflow: hidden;">
     <h5 class="text_info pull-left">模板列表</h5>
 
     <div class="pull-right flex flex-row">
-      <div class="input-group mb-4">
+      <div class="input-group">
         <input type="text" class="form-control" placeholder="请输入模板名称" [(ngModel)]="search" >
         <div class="input-group-append" (click)="searchChange()">
           <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
@@ -21,6 +21,7 @@
   </div>
 
   <div>
+    <nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning">
     <table class="table table-bordered">
       <thead class="bg_light_primary">
       <th>
@@ -59,14 +60,15 @@
       </tr>
       </tbody>
     </table>
+    </nz-spin>
     <p class="text-muted" *ngIf="!templates||templates.length===0">
       无有效数据
     </p>
   </div>
 
-  <div class="text-center">
+  <!--<div class="text-center">
     <nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning"></nz-spin>
-  </div>
+  </div>-->
 
   <div>
     <div class="pull-left">

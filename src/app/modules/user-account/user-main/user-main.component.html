@@ -5,11 +5,10 @@
 
 
 <div class="content">
-  <div class="mat-card-title" style="padding: 20px 0; ">
+  <div class="mat-card-title" style="padding: 20px 0; overflow: hidden;">
     <h5 class="text_info pull-left">账号列表</h5>
     <div class="pull-right flex flex-row">
-
-      <div class="input-group mb-4">
+      <div class="input-group">
         <input type="text" class="form-control" placeholder="请输入登录名或企业" [(ngModel)]="search" >
         <div class="input-group-append" (click)="searchChange()">
           <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
@@ -25,9 +24,10 @@
     </div>
   </div>
   <div>
+    <nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning">
     <table class="table table-bordered">
       <thead class="bg_light_primary">
-      <th>
+      <th *ngIf="user && user.Role.RoleId<=10">
         <div class="checkbox c-checkbox white">
           <label>
             <input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();">
@@ -43,7 +43,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let account of accounts">
-        <td>
+        <td *ngIf="user && user.Role.RoleId<=10">
           <div class="checkbox c-checkbox">
             <label>
               <input type="checkbox" [(ngModel)]="account.checkDelete" (change)="checkDel(account);" [disabled]="user.Uid === account.Uid">
@@ -53,10 +53,18 @@
         <td> {{ account.Username }} </td>
         <td> {{ account.Role.Name }} </td>
         <td> {{ account.Name }} </td>
-        <td> <span *ngIf="account.Organization"> {{ account.Organization.Name }} </span>  </td>
+        <td> {{ account.Organization?.Name }}  </td>
         <td> {{ account.stat.name }} </td>
         <td>
-          <button class="btn btn-sm btn_info" (click)="open(account)">设置</button>
+          <button class="btn btn-sm btn_info" (click)="open(account)"
+                  *ngIf="user && user.Role.RoleId<=10">
+            设置
+          </button>
+          <button class="btn btn-sm btn_info" (click)="open(account)"
+                  *ngIf="user && user.Role.RoleId>10">
+            查看
+          </button>
+
           <!--<button class="btn btn-sm btn_info ml-2" *ngIf="user.Role.RoleId <= 1" (click)="openManage(account)">
             权限管理
           </button>-->
@@ -64,17 +72,20 @@
       </tr>
       </tbody>
     </table>
+    </nz-spin>
     <p class="text-muted" *ngIf="!accounts||accounts.length===0">
       无有效数据
     </p>
 
-    <div class="text-center">
+    <!--<div class="text-center">
       <nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning"></nz-spin>
-    </div>
+    </div>-->
 
     <div>
       <div class="pull-left">
-        <button class="btn btn_info" (click)="deleteG()">
+        <button class="btn btn_info" (click)="deleteG()"
+                nz-button [nzLoading]="isLoading"
+                *ngIf="user && user.Role.RoleId<=10">
           批量删除
         </button>
       </div>

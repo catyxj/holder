@@ -21,7 +21,7 @@ import Swal from 'sweetalert2';
 })
 export class OrgMainComponent implements OnInit {
 
-  user: any = {};
+  user: any;
   page = 1;
   totalItems = 0;
   organizations: any[];
@@ -48,7 +48,7 @@ export class OrgMainComponent implements OnInit {
     let user = JSON.parse(sessionStorage.getItem('currentUser'));
     this.user = user;
     // this.getUser();
-    this.isSpinning = true;
+
     this.getOrganization();
     this.getAddr();
   }
@@ -64,12 +64,12 @@ export class OrgMainComponent implements OnInit {
 
   // 获取企业信息
   getOrganization(): void {
-
+    this.isSpinning = true;
     this.orgService.getOrganization(this.page, this.pageSize, this.search)
       .subscribe(organization => {
+        this.isSpinning = false;
         this.totalItems = organization.counts;
         this.organizations = organization.params;
-        this.isSpinning = false;
         if (this.organizations.length <= 0) {
           return;
         }

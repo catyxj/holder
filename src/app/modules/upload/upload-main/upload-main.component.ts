@@ -20,6 +20,7 @@ export class UploadMainComponent implements OnInit {
   public deleteList = [];
   public allDelete = false;
   public pageSize = 10;
+  public isLoading = false;
 
   constructor(private modalService: NgbModal,
               private uploadService: UploadService
@@ -106,9 +107,23 @@ export class UploadMainComponent implements OnInit {
   deleteG() {
     const cf = confirm(`确认删除选中文件 ？`);
     if (cf === true) {
+      this.isLoading = true;
       this.uploadService.deleteFile(this.deleteList)
         .subscribe(() => {
+          this.isLoading = false;
+          Swal(
+            '删除成功！',
+            '',
+            'success'
+          );
           this.pageChange();
+        }, err => {
+          this.isLoading = false;
+          Swal(
+            '删除失败！',
+            err,
+            'error'
+          );
         });
     } else {
 

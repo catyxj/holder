@@ -97,7 +97,10 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
           if (this.equipment) {
             for (let i = 0; i < this.equipment.length; i++) {
               let eq = this.equipment[i];
-              if ( eq.SequenceNumber === -1) {
+              if (eq.Status === 2) {
+                continue;
+              }
+              if ( eq.Status !== 1) {
                 eq.SequenceNumber = eq.ChannelNumber;
               }
               if (eq.ChannelType === 1) {

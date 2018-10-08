@@ -75,7 +75,7 @@
 
         </ul>
 
-        <div class="p-3 text-center">
+        <div class="p-3 text-center" *ngIf="user && user.Role.RoleId<=10">
           <button class="btn btn-outline-info btn-block" (click)="editBoiler()">
             <i class="fa fa-edit"></i> 编辑
           </button>
@@ -89,10 +89,11 @@
       <div class="panel-heading" (click)="panel[1].open = !panel[1].open">
           <div class="panel-title flex justify-content-between">
             <h6 class="text_info">终端信息</h6>
-            <button class="btn btn-outline-info btn-sm" (click)="terBind($event)"
+            <!--<button class="btn btn-outline-info btn-sm" (click)="terBind($event)"
+                    *ngIf="user && user.Role.RoleId<=10"
                     style="border-radius: 30px; padding: 0.2rem 0.45rem;">
               <i class="fa fa-plus"></i>
-            </button>
+            </button>-->
           </div>
       </div>
 
@@ -100,23 +101,37 @@
         <table class="table table-bordered">
           <tbody>
           <tr>
+            <th>
+            </th>
             <th>终端编码</th>
             <th>操作</th>
           </tr>
-          <tr *ngFor="let ter of info?.TerminalsCombined">
-            <td> {{ter.TerminalCode}} </td>
+          <tr *ngFor="let ter of terminals; let i = index;">
             <td>
-              <button class="btn btn-sm btn-outline-danger" (click)="unBind(ter)">
+              {{ter.TerminalSetId}}
+            </td>
+            <td> {{ter.TerminalCode || '未绑定'}} </td>
+            <td>
+
+              <button class="btn btn-sm btn-outline-danger" (click)="terBind($event,ter.TerminalSetId)"
+                      *ngIf="user && user.Role.RoleId<=10 && !ter.TerminalCode">
+                添加终端
+              </button>
+
+              <button class="btn btn-sm btn-outline-danger" (click)="unBind(ter)"
+                      *ngIf="user && user.Role.RoleId<=10 && ter.TerminalCode">
                 解绑
               </button>
 
-              <a [routerLink]="['/admin/terminal/messages', ter.TerminalCode]"
-                 class="btn btn-sm btn-outline-info ml-2">
+              <a [routerLink]="['/admin/terminal/messages', ter.TerminalCode]" target="_blank"
+                 class="btn btn-sm btn-outline-info ml-2"
+                 *ngIf="user && user.Role.RoleId<=10 && ter.TerminalCode">
                 调试
               </a>
 
-              <a [routerLink]="['/admin/terminal/config', ter.TerminalCode]"
-                 class="btn btn-sm btn-outline-info ml-2">
+              <a [routerLink]="['/admin/terminal/config', ter.TerminalCode]" target="_blank"
+                 class="btn btn-sm btn-outline-info ml-2"
+                 *ngIf="user && user.Role.RoleId<=10 && ter.TerminalCode">
                 配置
               </a>
 
@@ -161,7 +176,7 @@
               </div>
             </td>
           </tr>
-          <tr >
+          <tr *ngIf="user && user.Role.RoleId<=10">
             <td colspan="4" align="center">
               <button class="btn btn-outline-info btn-block" (click)="editAddress()">
                 <i class="fa fa-edit"></i> 编辑
@@ -222,7 +237,7 @@
           </tr>
 
 
-          <tr>
+          <tr *ngIf="user && user.Role.RoleId<=10">
             <td colspan="4" align="center">
               <button class="btn btn-outline-info btn-block" (click)="editMaintain()">
                 <i class="fa fa-edit"></i> 编辑
@@ -241,11 +256,11 @@
   </div>
 
   <div class="panel-footer">
-    <a [routerLink]="['/admin/equipments/dashboard']" class="btn btn_info mr-2" style="color: #ffffff;">
+    <a (click)="goBack()" class="btn btn_info mr-2" style="color: #ffffff;">
       <i class="fa fa-reply"></i>
       返回
     </a>
-    <button class="btn btn-danger" (click)="delete()">
+    <button class="btn btn-danger" (click)="delete()" *ngIf="user && user.Role.RoleId<=10">
       <i class="fa fa-trash"></i>
       删除
     </button>

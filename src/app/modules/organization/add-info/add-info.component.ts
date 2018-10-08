@@ -25,6 +25,7 @@ export class AddInfoComponent implements OnInit {
   public img;
   public errMes;
   public locations;
+  public isLoading = false;
 
 
 
@@ -151,8 +152,10 @@ export class AddInfoComponent implements OnInit {
     }
 
     // console.log(postData);
+    this.isLoading = true;
     this.orgService.add(postData)
       .subscribe(val => {
+        this.isLoading = false;
         Swal(
           '保存成功！',
           '',
@@ -160,6 +163,7 @@ export class AddInfoComponent implements OnInit {
         );
         this.activeModal.close('ok');
       }, err => {
+        this.isLoading = false;
         Swal(
           '保存失败！',
           err,

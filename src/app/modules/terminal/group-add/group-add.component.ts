@@ -12,6 +12,7 @@ export class GroupAddComponent implements OnInit {
 
   public terList;
   public org;
+  public isLoading = false;
 
   constructor(public activeModal: NgbActiveModal,
               private terminalService: TerminalService) { }
@@ -47,8 +48,10 @@ export class GroupAddComponent implements OnInit {
       }
       data.terminals.push(this.terList[i]);
     }
+    this.isLoading = true;
     this.terminalService.groupAdd(data)
       .subscribe(val => {
+        this.isLoading = false;
         Swal(
           '保存成功！',
           '',
@@ -56,6 +59,7 @@ export class GroupAddComponent implements OnInit {
         );
         this.activeModal.close('ok');
       }, err => {
+        this.isLoading = false;
         Swal(
           '保存失败！',
           err,

@@ -19,6 +19,9 @@
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn_info" (click)="save()" [disabled]="!name">保存</button>
+  <button type="button" class="btn btn_info" (click)="save()" [disabled]="!name"
+          nz-button [nzLoading]="isLoading">
+    保存
+  </button>
   <button type="button" class="btn" (click)="activeModal.dismiss('close')">取消</button>
 </div>

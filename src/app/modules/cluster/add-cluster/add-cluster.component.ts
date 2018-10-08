@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {ClusterService} from "../../../shared/cluster.service";
 import Swal from 'sweetalert2';
+import {OrganizationService} from "../../../shared/organization.service";
 
 @Component({
   selector: 'app-add-cluster',
@@ -14,12 +15,23 @@ export class AddClusterComponent implements OnInit {
   public imgUrl: any = '' ;
   public img: any;
   public errMes = '';
+  public org = '';
+  public orgList;
 
   constructor(public activeModal: NgbActiveModal,
-              private clusterService: ClusterService) { }
+              private clusterService: ClusterService,
+              private orgService: OrganizationService) { }
 
   ngOnInit() {
     this.imgUrl = 'assets/images/no_image.png';
+    this.getOrg();
+  }
+
+  getOrg() {
+    this.orgService.getOrgList()
+      .subscribe( data => {
+        this.orgList = data;
+      });
   }
 
   //  上传图片
@@ -53,7 +65,8 @@ export class AddClusterComponent implements OnInit {
   save() {
     let data = {
       name: this.name,
-      img: this.img ? this.imgUrl : ''
+      img: this.img ? this.imgUrl : '',
+      org: this.org
     };
     this.clusterService.addCluster(data)
       .subscribe( val => {

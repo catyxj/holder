@@ -7,6 +7,7 @@ import {RangeConfigComponent} from "../../terminal/range-config/range-config.com
 import {AlarmRuleComponent} from "../../terminal/alarm-rule/alarm-rule.component";
 import {TemplateService} from "../../../shared/template.service";
 import Swal from 'sweetalert2';
+import {AddTemplateComponent} from "../../terminal/add-template/add-template.component";
 
 @Component({
   selector: 'app-edit-temp',
@@ -26,7 +27,9 @@ export class EditTempComponent implements OnInit {
   public funcs1;
   public funcs2;
   public bytes;
-  public priorities = [];
+  public priorities1 = [];
+  public priorities2 = [];
+  public priorities3 = [];
   public communiInterfaces;
   public dataBits;
   public heartbeats;
@@ -35,6 +38,7 @@ export class EditTempComponent implements OnInit {
   public stopBits;
   public BaudRates;
   public editName;
+  public isSpinning = false;
 
   constructor(private route: ActivatedRoute,
               private terminalService: TerminalService,
@@ -62,7 +66,13 @@ export class EditTempComponent implements OnInit {
 
   initPriorities() {
     for ( let i = 0; i < 24; i++) {
-      this.priorities.push(i);
+      this.priorities1.push(i);
+    }
+    for ( let i = 0; i < 48; i++) {
+      this.priorities2.push(i);
+    }
+    for ( let i = 0; i < 12; i++) {
+      this.priorities3.push(i);
     }
   }
 
@@ -678,20 +688,35 @@ export class EditTempComponent implements OnInit {
       Name: this.name,
       Uid: this.uid
     };
-    this.templateService.save(data)
+    // this.isSpinning = true;
+
+    // 打开模态框
+    const modalRef = this.modalService.open(AddTemplateComponent);
+    modalRef.componentInstance.currentData = data;
+    modalRef.result.then((result) => {
+      console.log(result);
+
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(reason);
+    });
+
+    /*this.templateService.save(data)
       .subscribe(val => {
+        this.isSpinning = false;
         Swal(
           '保存成功！',
           '',
           'success'
         );
       }, err => {
+        this.isSpinning = false;
         Swal(
           '保存失败！',
           err,
           'error'
         );
-      });
+      });*/
 
   }
 

@@ -42,15 +42,32 @@ h5, .h5 {
   font-size: 1.25rem;
 }
 
+
+/*插件样式修改*/
 .modal-backdrop {
   z-index: 880 !important;
 }
+.modal{
+  z-index: 900 !important;
+}
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+  opacity: 0;
+}
+.cdk-overlay-backdrop{
+  z-index: 910;
+}
+
+
+
+
+
+
 
 .text_info {
   color: #17a2b8 !important;
 }
 
-.btn_info {
+.btn_info,.btn_info.ant-btn:focus, .btn_info.ant-btn:hover {
   color: #fff;
   background-color: #17a2b8;
   border-color: #17a2b8;
@@ -117,10 +134,14 @@ h5, .h5 {
 /*滚动条*/
 .mat-sidenav-content::-webkit-scrollbar,.sidenav::-webkit-scrollbar,.scroll_bar::-webkit-scrollbar{
   width: 6px;     /*高宽分别对应横竖滚动条的尺寸*/
-  height: 6px;
+  height: 7px;
   /*background-color: #51aded;*/
   /*display: none;*/
 }
+/*.scroll_bar::-webkit-scrollbar-button{
+  background-color:#819ca9;
+  background-size: 6px 6px;
+}*/
 /*定义滚动条轨道*/
 .mat-sidenav-content::-webkit-scrollbar-track,.sidenav::-webkit-scrollbar-track,.scroll_bar::-webkit-scrollbar-track
 {

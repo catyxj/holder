@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {ClusterService} from "../../../shared/cluster.service";
 import Swal from 'sweetalert2';
 import {RuntimeService} from "../../../shared/runtime.service";
+import {UserService} from "../../../shared/user.service";
 
 @Component({
   selector: 'app-cluster-detail',
@@ -11,6 +12,7 @@ import {RuntimeService} from "../../../shared/runtime.service";
 })
 export class ClusterDetailComponent implements OnInit {
 
+  public user;
   public uid;
   public name;
   public equipList;
@@ -20,23 +22,39 @@ export class ClusterDetailComponent implements OnInit {
   public deleteList = [];
   public allDelete = false;
   public pageSize = 10;
+  public isSpinning = false;
+  public isLoading = false;
+  public isLoading2 = false;
+  public isLoading3 = false;
 
   constructor(private route: ActivatedRoute,
               private clusterService: ClusterService,
-              private runtimeService: RuntimeService) { }
+              private runtimeService: RuntimeService,
+              private userService: UserService) {
+    this.userService.userStatus$ // 监测父组件user
+      .subscribe( data => {
+          this.user = data;
+        }
+      );
+  }
 
   ngOnInit() {
+    let user = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.user = user;
     this.uid = this.route.snapshot.paramMap.get('uid');
     this.name = this.route.snapshot.paramMap.get('name');
     this.getclusters();
   }
 
   getclusters() {
-
+    this.isSpinning = true;
     this.clusterService.getClusEquip(this.uid, this.page, this.pageSize, this.search)
       .subscribe(data => {
+        this.isSpinning = false;
         this.equipList = data.ept;
         this.totalItems = data.counts;
+      }, err => {
+        this.isSpinning = false;
       });
   }
 
@@ -98,6 +116,7 @@ export class ClusterDetailComponent implements OnInit {
   }
 
   // 批量删除
+
   deleteG() {
     const cf = confirm(`确认移除选中设备（设备本身不会被删除）？`);
     if (cf === true) {
@@ -105,8 +124,10 @@ export class ClusterDetailComponent implements OnInit {
         cluster: this.uid,
         equipments: this.deleteList
       };
+      this.isLoading = true;
       this.clusterService.deleteEquip(data)
         .subscribe(() => {
+          this.isLoading = false;
           Swal(
             '移除成功！',
             '',
@@ -114,9 +135,10 @@ export class ClusterDetailComponent implements OnInit {
           );
           this.pageChange();
         }, err => {
+          this.isLoading = false;
           Swal(
             '移除失败！',
-            '',
+            err,
             'error'
           );
         });
@@ -153,14 +175,17 @@ export class ClusterDetailComponent implements OnInit {
       uid: data.uid,
       ctl_type: n
     };
+    this.isLoading3 = true;
     this.runtimeService.equipControl(ctrlData)
       .subscribe( data => {
+        this.isLoading3 = false;
         Swal(
           '发送成功！',
           '',
           'success'
         );
       }, err => {
+        this.isLoading3 = false;
         Swal(
           '发送失败！',
           err,
@@ -184,14 +209,17 @@ export class ClusterDetailComponent implements OnInit {
       uids: this.deleteList,
       ctl_type: n
     };
+    this.isLoading2 = true;
     this.clusterService.groupControl(post)
       .subscribe(val => {
+        this.isLoading2 = false;
         Swal(
           '发送成功！',
           '',
           'success'
         );
       }, err => {
+        this.isLoading2 = false;
         Swal(
           '发送失败！',
           err,

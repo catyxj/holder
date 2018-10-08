@@ -7,8 +7,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-group-config',
   templateUrl: './group-config.component.html',
-  styleUrls: ['./group-config.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./group-config.component.css']
 })
 export class GroupConfigComponent implements OnInit {
 
@@ -18,6 +17,7 @@ export class GroupConfigComponent implements OnInit {
   public template;
   public templates;
   public showData = false;
+  public isLoading = false;
 
   constructor(public activeModal: NgbActiveModal,
               private terminalService: TerminalService,
@@ -81,9 +81,10 @@ export class GroupConfigComponent implements OnInit {
       terminals: this.checkList,
       template: this.template
     };
-
+    this.isLoading = true;
     this.terminalService.groupConfig(data)
       .subscribe(val => {
+        this.isLoading = false;
         Swal(
           '发送成功，正在配置',
           '...',
@@ -91,6 +92,7 @@ export class GroupConfigComponent implements OnInit {
         );
         this.activeModal.close('ok');
       }, err => {
+        this.isLoading = false;
         Swal(
           '配置失败！',
           err,

@@ -7,8 +7,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-join-cluster',
   templateUrl: './join-cluster.component.html',
-  styleUrls: ['./join-cluster.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./join-cluster.component.css']
 })
 export class JoinClusterComponent implements OnInit {
 
@@ -17,6 +16,7 @@ export class JoinClusterComponent implements OnInit {
 
   public cluster = '';
   public clusters = [];
+  public isLoading = false;
 
   constructor(public activeModal: NgbActiveModal,
               private boilerService: BoilerService,
@@ -38,8 +38,10 @@ export class JoinClusterComponent implements OnInit {
       equipments: this.equipList,
       cluster: this.cluster
     };
+    this.isLoading = true;
     this.boilerService.addCluster(data)
       .subscribe(val => {
+        this.isLoading = false;
         Swal(
           '保存成功！',
           '',
@@ -47,6 +49,7 @@ export class JoinClusterComponent implements OnInit {
         );
         this.activeModal.close('ok');
       }, err => {
+        this.isLoading = false;
         Swal(
           '保存失败！',
           err,

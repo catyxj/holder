@@ -7,8 +7,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-add-terminal',
   templateUrl: './add-terminal.component.html',
-  styleUrls: ['./add-terminal.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./add-terminal.component.css']
 })
 export class AddTerminalComponent implements OnInit {
 

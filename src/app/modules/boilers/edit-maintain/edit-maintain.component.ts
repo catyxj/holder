@@ -74,6 +74,10 @@ export class EditMaintainComponent implements OnInit {
 
 
   initDate() {
+    if (!this.currentData) {
+      this.date = {};
+      return;
+    }
     let gaugeStr: string = this.datePipe.transform(this.currentData.InspectGaugeDateNext, 'yyyy-MM-dd');
     let outerStr: string = this.datePipe.transform(this.currentData.InspectOuterDateNext, 'yyyy-MM-dd');
     let innerStr: string = this.datePipe.transform(this.currentData.InspectInnerDateNext, 'yyyy-MM-dd');
@@ -116,7 +120,7 @@ export class EditMaintainComponent implements OnInit {
     let inner = `${this.date.inner.year}-${this.date.inner.month}-${this.date.inner.day}`;
     let outer = `${this.date.outer.year}-${this.date.outer.month}-${this.date.outer.day}`;
     let valve = `${this.date.valve.year}-${this.date.valve.month}-${this.date.valve.day}`;
-    let gauge = `${this.date.valve.year}-${this.date.valve.month}-${this.date.valve.day}`;
+    let gauge = `${this.date.gauge.year}-${this.date.gauge.month}-${this.date.gauge.day}`;
 
     let data = {
       uid: this.currentData.Uid,

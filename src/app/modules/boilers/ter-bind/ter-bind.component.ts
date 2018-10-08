@@ -14,6 +14,7 @@ export class TerBindComponent implements OnInit {
 
   @Input()
   currentData: any;
+  id: any;
 
   public terminal: string;
 
@@ -27,7 +28,8 @@ export class TerBindComponent implements OnInit {
   save() {
     let data = {
       equipment_id: this.currentData.Uid,
-      terminal_code: this.terminal
+      terminal_code: this.terminal,
+      terminal_set_id: this.id
     };
     this.boilerService.terBind(data)
       .subscribe(val => {

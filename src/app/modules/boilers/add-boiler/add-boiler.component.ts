@@ -9,8 +9,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-add-boiler',
   templateUrl: './add-boiler.component.html',
-  styleUrls: ['./add-boiler.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./add-boiler.component.css']
 })
 export class AddBoilerComponent implements OnInit {
 
@@ -27,6 +26,7 @@ export class AddBoilerComponent implements OnInit {
   public imgUrl: any = '' ;
   public img: any;
   public errMes = '';
+  public isLoading = false;
 
   constructor(public activeModal: NgbActiveModal,
               private boilerService: BoilerService,
@@ -34,15 +34,15 @@ export class AddBoilerComponent implements OnInit {
               ) { }
 
   ngOnInit() {
-    this.getTemplates();
-    this.getOrgType();
     this.data = {
       name: '',
       templateId: '',
       infos: [],
       links: []
     };
-    this.getOrgs();
+    this.getTemplates();
+    this.getOrgType();
+
     this.imgUrl = 'assets/images/no_image.png';
 
   }
@@ -61,6 +61,8 @@ export class AddBoilerComponent implements OnInit {
     this.orgService.getOrgType()
       .subscribe(types => {
         this.orgTypes = types;
+
+        this.getOrgs();
         // console.log(this.orgTypes);
       });
   }
@@ -70,7 +72,8 @@ export class AddBoilerComponent implements OnInit {
     this.orgService.getOrgList()
       .subscribe(orgs => {
         this.orgLists = orgs;
-        this.getUser();
+        // this.getUser();
+        this.initOrg();
       });
   }
 
@@ -95,6 +98,32 @@ export class AddBoilerComponent implements OnInit {
       // console.log( this.links);
     }
   }
+
+  initOrg() {
+
+      for (let i = 0; i < this.orgTypes.length; i++) {
+        let ot = this.orgTypes[i];
+        this.links[i] = {};
+        this.links[i].type = ot.TypeId;
+        this.links[i].typeName = ot.Name;
+        let orgs = [{
+          Uid: '',
+          Name: '请选择关联企业'
+        }];
+        for (let j = 0; j < this.orgLists.length; j++) {
+          let og = this.orgLists[j];
+          if (og.Type__TypeId === ot.TypeId) {
+            orgs.push(og);
+          }
+        }
+        this.links[i].orgs = orgs;
+        this.links[i].uid = '';
+        this.links[i].eptCtlPlg = false;
+      }
+
+      console.log(this.links);
+  }
+
 
 
 //  添加其他信息
@@ -164,6 +193,9 @@ export class AddBoilerComponent implements OnInit {
 //  保存
   save() {
 
+    let that = this;
+    this.data.links = [];
+    this.data.infos = [];
     // 其他信息
     if (this.info.length > 0) {
       for (let i = 0; i < this.info.length; i++) {
@@ -204,23 +236,24 @@ export class AddBoilerComponent implements OnInit {
     }
 
     // console.log(this.data);
-
+    this.isLoading = true;
     this.boilerService.addBoiler(this.data)
       .subscribe( val => {
+        this.isLoading = false;
         Swal(
           '保存成功！',
           '',
           'success'
         );
-        this.activeModal.close('ok');
+        that.activeModal.close('ok');
       }, err => {
+        this.isLoading = false;
         Swal(
           '保存失败！',
           err,
           'error'
         );
-        this.data.links = [];
-        this.data.infos = [];
+
       });
 
   }

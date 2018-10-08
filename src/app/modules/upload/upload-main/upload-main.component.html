@@ -71,7 +71,8 @@
 
   <div>
     <div class="pull-left">
-      <button class="btn btn_info" (click)="deleteG()">
+      <button class="btn btn_info" (click)="deleteG()"
+              nz-button [nzLoading]="isLoading">
         批量删除
       </button>
     </div>

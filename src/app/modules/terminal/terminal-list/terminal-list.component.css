@@ -1,4 +1,4 @@
-.cdk-overlay-backdrop{
+/*.cdk-overlay-backdrop{
   z-index: 800;
 }
 .modal-backdrop{
@@ -11,9 +11,6 @@
   opacity: 0;
 }
 
-.modal_backdrop{
-  z-index: 800;
-}
 .dark_modal{
   z-index: 900;
-}
+}*/

@@ -3,23 +3,21 @@
   <div class="mat-card-title" style="padding-top: 20px; padding-bottom: 20px;  overflow: hidden;">
     <h5 class="text_info pull-left">
       通道模板配置
-      <span *ngIf="!editName" class="">
+      <span class="">
        [ {{ name }} ]
       </span>
-      <span *ngIf="editName" style="width: 200px; display: inline-block;">
+      <!--<span *ngIf="editName" style="width: 200px; display: inline-block;">
         <div class="input-group">
           <input [(ngModel)]="name" type="text" class="form-control">
           <span class="input-group-append">
-            <button class="btn btn_info" (click)="editName = false">确定</button>
+            <button class="btn btn_info" (click)="editName = false" [disabled]="!name">确定</button>
           </span>
         </div>
-
-
-      </span>
-      <a class="text-muted text-sm-left" *ngIf="!editName" (click)="editName = !editName"
-         style="cursor: pointer; text-decoration: underline; font-size: 12px;" title="修改模板名称">
-        修改名称
-      </a>
+      </span>-->
+      <!--<a class="text-muted text-sm-left" *ngIf="!editName" (click)="editName = !editName"-->
+         <!--style="cursor: pointer; text-decoration: underline; font-size: 12px;" title="修改模板名称">-->
+        <!--修改名称-->
+      <!--</a>-->
     </h5>
 
     <div class="pull-right flex flex-row">
@@ -74,7 +72,7 @@
             <mat-menu #subMenu="matMenu">
               <mat-grid-list cols="4" rowHeight="34px;">
                 <mat-grid-tile
-                  *ngFor="let priority of priorities" (click)="setStatus(data, 1, priority)">
+                  *ngFor="let priority of priorities1" (click)="setStatus(data, 1, priority)">
                   {{ priority }}
                 </mat-grid-tile>
               </mat-grid-list>
@@ -173,7 +171,7 @@
             <mat-menu #subMenu="matMenu">
               <mat-grid-list cols="4" rowHeight="34px;">
                 <mat-grid-tile
-                  *ngFor="let priority of priorities" (click)="setStatus(data, 1, priority)">
+                  *ngFor="let priority of priorities2" (click)="setStatus(data, 1, priority)">
                   {{ priority }}
                 </mat-grid-tile>
               </mat-grid-list>
@@ -222,6 +220,7 @@
               <i class="fa fa-bell"></i>
             </button>
             <button type="button"  (click)="removeSwitch(i)" title="删除"
+                    *ngIf="i !== 0"
                     class="btn btn-outline-danger">
               <i class="fa fa-trash" style="font-size: 14px;"></i>
             </button>
@@ -274,7 +273,7 @@
             <mat-menu #subMenu="matMenu">
               <mat-grid-list cols="4" rowHeight="34px;">
                 <mat-grid-tile
-                  *ngFor="let priority of priorities" (click)="setStatus(data, 1, priority)">
+                  *ngFor="let priority of priorities3" (click)="setStatus(data, 1, priority)">
                   {{ priority }}
                 </mat-grid-tile>
               </mat-grid-list>
@@ -328,7 +327,7 @@
 
       </table>
       <button type="button" (click)="addRange()"
-              *ngIf="analogueList.length < 12 "
+              *ngIf="rangeList.length < 12 "
               class="btn btn_info"
               style="width: 100%;">
         <i class="fa fa-plus-circle"></i>
@@ -443,14 +442,18 @@
 
   <div class="mt-2 mb-3">
     <button class="btn btn_info btn-block" (click)="save()">
-      提交
+      生成新模板
     </button>
   </div>
 
 
 </div>
 
-
+<div *ngIf="isSpinning"
+     style="position: fixed; height: 100%; width: 100%; left: 0; right: 0; top: 0; bottom: 0; z-index:20; background-color: rgba(255,255,255,0.3);">
+  <nz-spin nzTip='信息发送中...' [nzSpinning]="isSpinning" style="position: absolute; top:50%; left:50%;">
+  </nz-spin>
+</div>
 
 
 

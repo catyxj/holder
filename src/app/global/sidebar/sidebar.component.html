@@ -45,13 +45,13 @@
             设备信息
           </a>
         </li>
-        <li>
+        <li *ngIf="user&&user.Role.RoleId<=10">
           <a routerLink="/admin/terminal" routerLinkActive="active" mat-list-item>
             <i class="fa fa-sitemap"></i>
             终端管理
           </a>
         </li>
-        <li>
+        <li *ngIf="user&&user.Role.RoleId<=10">
           <a routerLink="/admin/template" routerLinkActive="active" mat-list-item>
             <i class="fa fa-newspaper-o"></i>
             模板管理

@@ -23,6 +23,8 @@ export class TerminalListComponent implements OnInit {
   public pageSize = 10;
   public isSpinning = false;
   public user;
+  public isLoading1 = false;
+  public isLoading2 = false;
 
   constructor(private terminalService: TerminalService,
               private modalService: NgbModal) { }
@@ -30,19 +32,18 @@ export class TerminalListComponent implements OnInit {
   ngOnInit() {
     let user = JSON.parse(sessionStorage.getItem('currentUser'));
     this.user = user;
-    this.isSpinning = true;
     this.getTerminals();
   }
 
   // 获取终端列表
   getTerminals(): void {
-
+    this.isSpinning = true;
     // console.log({page: this.page, pageSize: this.pageSize , search: this.search});
     this.terminalService.getTerminals(this.page, this.pageSize , this.search)
       .subscribe(terminals => {
+        this.isSpinning = false;
         this.totalItems = terminals.counts;
         this.terminals = terminals.params;
-        this.isSpinning = false;
         if (!this.terminals || this.terminals.length <= 0) {
           return;
         }
@@ -103,8 +104,10 @@ export class TerminalListComponent implements OnInit {
   deleteG() {
     const cf = confirm(`确认删除选中终端 ？`);
     if (cf === true) {
+      this.isLoading1 = true;
       this.terminalService.deleteTerminal(this.deleteList)
         .subscribe(() => {
+          this.isLoading1 = false;
           Swal(
             '删除成功！',
             '',
@@ -112,6 +115,7 @@ export class TerminalListComponent implements OnInit {
           );
           this.pageChange();
         }, err => {
+          this.isLoading1 = false;
           Swal(
             '删除失败！',
             err,
@@ -215,6 +219,34 @@ export class TerminalListComponent implements OnInit {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       console.log(reason);
     });
+  }
+
+  // 批量下发
+  groupIssued() {
+    const cf = confirm(`确认批量下发 ？`);
+    if (cf === true) {
+      this.isLoading2 = true;
+      this.terminalService.groupIssued(this.deleteList)
+        .subscribe(() => {
+          this.isLoading2 = false;
+          Swal(
+            '发送成功！',
+            '',
+            'success'
+          );
+          this.pageChange();
+        }, err => {
+          this.isLoading2 = false;
+          Swal(
+            '发送失败！',
+            err,
+            'error'
+          );
+        });
+
+    } else {
+
+    }
   }
 
 

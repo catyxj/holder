@@ -7,13 +7,24 @@
 
 <div class="modal-body">
 
-  <div class="input-group">
+  <div class="input-group form-group">
     <span class="input-group-prepend">
       <span class="input-group-text">
         集群名称
       </span>
     </span>
     <input type="text" [(ngModel)]="name" class="form-control">
+  </div>
+
+  <div class="input-group">
+    <span class="input-group-prepend">
+      <span class="input-group-text">
+        使用企业
+      </span>
+    </span>
+    <nz-select style="width: 83%;" nzShowSearch nzAllowClear nzPlaceHolder="选择使用企业" [(ngModel)]="org">
+      <nz-option *ngFor="let data of orgList" [nzLabel]="data.Name" [nzValue]="data.Uid"></nz-option>
+    </nz-select>
   </div>
 
   <div class="row mb-3 mt-lg-3">

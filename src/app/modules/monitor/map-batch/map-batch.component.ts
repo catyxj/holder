@@ -132,49 +132,9 @@ export class MapBatchComponent implements OnInit {
         lng: 119,
         lat: 29,
         name: 'dd2'
-      },
-      {
-        lng: 121,
-        lat: 32,
-        name: '1adf'
-      },
-      {
-        lng: 118,
-        lat: 30,
-        name: '1adf'
-      },
-      {
-        lng: 118,
-        lat: 31,
-        name: '1adf'
-      },
-      {
-        lng: 116,
-        lat: 33,
-        name: '1adf'
-      },
-      {
-        lng: 116,
-        lat: 31,
-        name: '1adf'
-      },
-      {
-        lng: 116,
-        lat: 38,
-        name: '1adf'
       }
     ];
     this.totalItems = 100;*/
-
-    // {"uid":"e9a7bd78-aad3-4950-b90c-da9561208622",
-    //   "name":"ee",
-    //   "longitude":0,
-    //   "latitude":0,
-    //   "address":"",
-    //   "termStatus":1,
-    //   "eptStatus":false,
-    //   "alarmStatus":false}
-
 
   }
 

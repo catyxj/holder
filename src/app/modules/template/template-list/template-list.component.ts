@@ -23,18 +23,19 @@ export class TemplateListComponent implements OnInit {
               private templateService: TemplateService) { }
 
   ngOnInit() {
-    this.isSpinning = true;
+
     this.getTemplates();
   }
 
 
   // 获取集群列表
   getTemplates() {
+    this.isSpinning = true;
     this.templateService.getTemplates(this.page, this.pageSize, this.search)
       .subscribe( data => {
+        this.isSpinning = false;
         this.templates = data.params;
         this.totalItems = data.counts;
-        this.isSpinning = false;
       }, err => {
         this.isSpinning = false;
       });

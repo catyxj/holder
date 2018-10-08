@@ -41,7 +41,7 @@
   <h5 class="text_info mb-3 mt-lg-3">企业关联</h5>
   <div class="row">
     <div class="col-12">
-      <div class="form-group flex" *ngFor="let link of links; let i = index">
+      <!--<div class="form-group flex" *ngFor="let link of links; let i = index">
         <div class="input-group" style="flex: 9;">
           <span class="input-group-prepend">
             <span class="input-group-text">
@@ -52,11 +52,11 @@
                   class="form-control" style="width: 25%;">
             <option *ngFor="let type of orgTypes" [value]="type.TypeId" >{{type.Name}}</option>
           </select>
-          <!--<select [(ngModel)]="link.uid"
+          &lt;!&ndash;<select [(ngModel)]="link.uid"
                   class="form-control" style="width: 60%;">
             <option *ngFor="let org of link.orgs" [value]="org.Uid" >{{org.Name}}</option>
-          </select>-->
-          <nz-select nzShowSearch nzPlaceHolder="选择关联企业" [(ngModel)]="link.uid" style="width: 60%;">
+          </select>&ndash;&gt;
+          <nz-select nzShowSearch nzPlaceHolder="选择关联企业" [(ngModel)]="link.uid" (ngModelChange)="selectOrg(link.uid)" style="width: 60%;">
             <nz-option *ngFor="let option of link.orgs" [nzLabel]="option.Name" [nzValue]="option.Uid"></nz-option>
           </nz-select>
         </div>
@@ -76,14 +76,44 @@
           </button>
         </div>
 
+      </div>-->
+
+      <div class="form-group flex" *ngFor="let link of links; let i = index">
+        <div class="input-group" style="flex: 9;">
+          <span class="input-group-prepend">
+            <span class="input-group-text">
+              {{link.typeName}}
+            </span>
+          </span>
+
+          <!--<select [(ngModel)]="link.uid"
+                  class="form-control" style="width: 60%;">
+            <option *ngFor="let org of link.orgs" [value]="org.Uid" >{{org.Name}}</option>
+          </select>-->
+
+          <nz-select nzShowSearch nzPlaceHolder="选择关联企业" [(ngModel)]="link.uid"
+                     style="width: 80%;">
+            <nz-option *ngFor="let option of link.orgs" [nzLabel]="option.Name" [nzValue]="option.Uid"></nz-option>
+          </nz-select>
+
+        </div>
+
+        <div *ngIf="user.Role.RoleId <= 10 && user.Organization && user.Organization.IsEptCtl" style="flex: 1.5">
+          <span class="ml-3"> 控制 </span>
+          <label class="switch switch-lg" style="margin-bottom: 0;">
+            <input type="checkbox" [(ngModel)]="link.eptCtlPlg"  />
+            <span></span>
+          </label>
+        </div>
+
       </div>
 
-      <button type="button"
+      <!--<button type="button"
               (click)="addNewLink();"
               class="btn btn-block btn_info">
         <i class="fa fa-plus-circle"></i>
         添加企业关联
-      </button>
+      </button>-->
     </div>
 
   </div>
@@ -144,7 +174,9 @@
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn_info" [disabled]="!data.name || !data.templateId" (click)="save()">
+  <button type="button" class="btn btn_info"
+          [disabled]="!data.name || !data.templateId"
+          nz-button [nzLoading]="isLoading" (click)="save()">
     <span class="">保存</span>
   </button>
   <button class="btn btn-default" type="button" (click)="activeModal.dismiss('close')">取消</button>

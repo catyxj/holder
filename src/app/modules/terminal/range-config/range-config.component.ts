@@ -84,7 +84,7 @@ export class RangeConfigComponent implements OnInit {
 
   save() {
     console.log(this.ranges);
-    for (let i = 0; i < this.ranges.length; i++){
+    for (let i = 0; i < this.ranges.length; i++) {
       this.ranges[i].Value = i;
     }
     this.activeModal.close(this.ranges);

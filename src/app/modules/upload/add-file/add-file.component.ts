@@ -9,8 +9,7 @@ import {UploadService} from "../../../shared/upload.service";
 @Component({
   selector: 'app-add-file',
   templateUrl: './add-file.component.html',
-  styleUrls: ['./add-file.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./add-file.component.css']
 })
 export class AddFileComponent implements OnInit {
 

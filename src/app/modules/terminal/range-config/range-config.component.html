@@ -54,10 +54,12 @@
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn_info" (click)="save()">
+  <button type="button" class="btn btn_info" (click)="save()" [disabled]="!isValid">
     <span class="">保存</span>
   </button>
   <button class="btn btn-default" type="button" (click)="activeModal.dismiss('close')">取消</button>
 </div>
+
+
 
 

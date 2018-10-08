@@ -4,6 +4,7 @@ import {ClusterService} from '../../../shared/cluster.service';
 import {AddClusterComponent} from '../add-cluster/add-cluster.component';
 import {EditClusterComponent} from "../edit-cluster/edit-cluster.component";
 import Swal from 'sweetalert2';
+import {UserService} from "../../../shared/user.service";
 
 @Component({
   selector: 'app-cluster-list',
@@ -12,6 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class ClusterListComponent implements OnInit {
 
+  public user;
   public clusters;
   public page = 1;
   public totalItems = 0;
@@ -20,22 +22,32 @@ export class ClusterListComponent implements OnInit {
   public allDelete = false;
   public pageSize = 10;
   public isSpinning = false;
+  public isLoading = false;
 
   constructor(private modalService: NgbModal,
-              private clusterService: ClusterService) { }
+              private clusterService: ClusterService,
+              private userService: UserService) {
+    this.userService.userStatus$ // 监测父组件user
+      .subscribe( data => {
+          this.user = data;
+        }
+      );
+  }
 
   ngOnInit() {
-    this.isSpinning = true;
+    let user = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.user = user;
     this.getclusters();
   }
 
   // 获取集群列表
   getclusters() {
+    this.isSpinning = true;
     this.clusterService.getClusters(this.page, this.pageSize, this.search)
       .subscribe( data => {
+        this.isSpinning = false;
         this.clusters = data.params;
         this.totalItems = data.counts;
-        this.isSpinning = false;
       }, err => {
         this.isSpinning = false;
       });
@@ -98,8 +110,10 @@ export class ClusterListComponent implements OnInit {
   deleteG() {
     const cf = confirm(`确认删除选中集群 ？`);
     if (cf === true) {
+      this.isLoading = true;
       this.clusterService.deleteCluster(this.deleteList)
         .subscribe(() => {
+          this.isLoading = false;
           Swal(
             '删除成功！',
             '',
@@ -107,6 +121,7 @@ export class ClusterListComponent implements OnInit {
           );
           this.pageChange();
         }, err => {
+          this.isLoading = false;
           Swal(
             '删除失败！',
             '',

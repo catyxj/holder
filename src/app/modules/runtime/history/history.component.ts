@@ -18,6 +18,8 @@ export class RuntimeHistoryComponent implements OnInit {
   public params = [];
   public history = [];
   private name;
+  public termCode;
+  public terminals;
 
   constructor(private runtimeService: RuntimeService,
               private datePipe: DatePipe) { }
@@ -66,13 +68,19 @@ export class RuntimeHistoryComponent implements OnInit {
       startDate: this.dateRange[0],
       endDate: this.dateRange[1],
       page: this.page,
-      pageSize: this.pageSize
+      pageSize: this.pageSize,
+      code: this.termCode
     };
     this.runtimeService.getHistory(postData)
       .subscribe( data => {
         // console.log(data);
         this.totalItems = data.counts;
         let runtimes = data.params;
+        this.terminals = runtimes.terminals; // 终端列表
+        if (!this.termCode) {
+          this.termCode = this.terminals[0].TerminalCode;
+        }
+
 
         this.params = [];
         this.history = [];
@@ -129,12 +137,24 @@ export class RuntimeHistoryComponent implements OnInit {
     this.refreshData();
   }
 
+
+  // 选择终端
+  changeTerm() {
+    this.page = 1;
+    if (typeof(this.termCode) !== 'number') {
+      console.log('string');
+      this.termCode = parseInt(this.termCode);
+    }
+    this.refreshData();
+  }
+
   // 导出
   export() {
     let postData = {
       uid: this.uid,
       startDate: this.dateRange[0],
-      endDate: this.dateRange[1]
+      endDate: this.dateRange[1],
+      code: this.termCode
     };
     this.runtimeService.getHistoryExport(postData)
       .subscribe( data => {
@@ -182,7 +202,7 @@ export class RuntimeHistoryComponent implements OnInit {
         let start = this.datePipe.transform(this.dateRange[0], 'yyyy.MM.dd');
         let end = this.datePipe.transform(this.dateRange[1], 'yyyy.MM.dd');
 
-        let table = '<table><tr><td>采样时间</td>';
+        let table = `<table><tr><td>设备：${this.name}</td><td>终端：${this.termCode}</td><td>时间： ${start}-${end}</td> </tr><tr><td>采样时间</td>`;
 
         // headers
         for (let i = 0; i < params.length; i++) {

@@ -25,6 +25,7 @@ export class EditInfoComponent implements OnInit {
   public img;
   public errMes;
   public locations;
+  public isLoading = false;
 
 
   constructor(public activeModal: NgbActiveModal,
@@ -212,8 +213,10 @@ export class EditInfoComponent implements OnInit {
       postData.is_super = this.data.isSuper;
     }
 
+    this.isLoading = true;
     this.orgService.save(postData)
       .subscribe(val => {
+        this.isLoading = false;
         Swal(
           '保存成功！',
           '',
@@ -221,6 +224,7 @@ export class EditInfoComponent implements OnInit {
         );
         this.activeModal.close('ok');
       }, err => {
+        this.isLoading = false;
         Swal(
           '保存失败！',
           err,

@@ -6,8 +6,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-add-equiptemplate',
   templateUrl: './add-equiptemplate.component.html',
-  styleUrls: ['./add-equiptemplate.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./add-equiptemplate.component.css']
 })
 export class AddEquiptemplateComponent implements OnInit {
 

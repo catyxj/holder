@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ClusterService} from "../../../shared/cluster.service";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import Swal from 'sweetalert2';
+import {OrganizationService} from "../../../shared/organization.service";
 
 @Component({
   selector: 'app-edit-cluster',
@@ -12,6 +13,8 @@ export class EditClusterComponent implements OnInit {
 
   @Input()
   currentData;
+  public org = '';
+  public orgList;
 
   public name;
   public imgUrl: any = '' ;
@@ -19,15 +22,27 @@ export class EditClusterComponent implements OnInit {
   public errMes = '';
 
   constructor(public activeModal: NgbActiveModal,
-              private clusterService: ClusterService) { }
+              private clusterService: ClusterService,
+              private orgService: OrganizationService) { }
 
   ngOnInit() {
     this.name = this.currentData.Name;
     this.imgUrl = this.currentData.Img;
+    this.org = this.currentData.UseOrganization.Uid;
     if ( !this.imgUrl) {
       this.imgUrl = 'assets/images/no_image.png';
     }
+    this.getOrg();
   }
+
+  getOrg() {
+    this.orgService.getOrgList()
+      .subscribe( data => {
+        this.orgList = data;
+      });
+  }
+
+
 
   //  上传图片
   imgChange(event) {
@@ -60,7 +75,8 @@ export class EditClusterComponent implements OnInit {
     let data = {
       uid: this.currentData.Uid,
       name: this.name,
-      img: this.img ? this.imgUrl : ''
+      img: this.img ? this.imgUrl : '',
+      org: this.org
     };
     this.clusterService.editCluster(data)
       .subscribe( val => {

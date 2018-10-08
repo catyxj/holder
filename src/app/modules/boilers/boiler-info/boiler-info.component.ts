@@ -10,6 +10,7 @@ import {EditMaintainComponent} from '../edit-maintain/edit-maintain.component';
 import {AdressService} from '../../../shared/adress.service';
 import {TerBindComponent} from "../ter-bind/ter-bind.component";
 import Swal from 'sweetalert2';
+import {UserService} from "../../../shared/user.service";
 
 declare var BMap: any;
 declare var BMAP_STATUS_SUCCESS: any;
@@ -29,6 +30,7 @@ export class BoilerInfoComponent implements OnInit {
   public addrList;
   private map: any;
   private address: any;
+  public terminals;
 
 
   constructor(private route: ActivatedRoute,
@@ -36,11 +38,18 @@ export class BoilerInfoComponent implements OnInit {
               private boilerService: BoilerService,
               private modalService: NgbModal,
               private orgService: OrganizationService,
-              public addressService: AdressService) {
-
+              public addressService: AdressService,
+              private userService: UserService) {
+    this.userService.userStatus$ // 监测父组件user
+      .subscribe( data => {
+          this.user = data;
+        }
+      );
   }
 
   ngOnInit() {
+    let user = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.user = user;
     this.panel = [{open: true}, {open: true}, {open: true}, {open: true}];
     this.getOrgType();
     // this.getAddress();
@@ -49,12 +58,22 @@ export class BoilerInfoComponent implements OnInit {
 
   // 获取设备信息
   getInfo() {
+    this.terminals = [];
+    for (let i = 0; i < 3; i++) {
+      this.terminals.push({
+        TerminalSetId: i + 1
+      });
+    }
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         return this.boilerService.getBoiler(params.get('uid'));
       })
     ).subscribe( boiler => {
       this.info = boiler;
+      if (!this.info) {
+        this.info = {};
+        return;
+      }
       if (this.info.OrganizationsLinked) {
         for (let i = 0; i < this.info.OrganizationsLinked.length; i++) {
           let or = this.info.OrganizationsLinked[i];
@@ -63,6 +82,12 @@ export class BoilerInfoComponent implements OnInit {
               or.type = this.orgTypes[j].Name;
             }
           }
+        }
+      }
+      if (this.info.TerminalsCombined) {
+        for (let i = 0; i < this.info.TerminalsCombined.length; i++) {
+          let ter = this.info.TerminalsCombined[i];
+          this.terminals[ter.TerminalSetId - 1] = ter;
         }
       }
       this.info.InspectInnerDateNext = new Date(this.info.InspectInnerDateNext);
@@ -137,12 +162,12 @@ export class BoilerInfoComponent implements OnInit {
     let geolocationControl = new BMap.GeolocationControl();
     geolocationControl.addEventListener("locationSuccess", function(e){
       // 定位成功事件
-      let address = '';
-      address += e.addressComponent.province;
-      address += e.addressComponent.city;
-      address += e.addressComponent.district;
-      address += e.addressComponent.street;
-      address += e.addressComponent.streetNumber;
+      // let address = '';
+      // address += e.addressComponent.province;
+      // address += e.addressComponent.city;
+      // address += e.addressComponent.district;
+      // address += e.addressComponent.street;
+      // address += e.addressComponent.streetNumber;
       // alert("当前定位地址为：" + address);
     });
     geolocationControl.addEventListener("locationError",function(e){
@@ -171,10 +196,11 @@ export class BoilerInfoComponent implements OnInit {
   }
 
   // 终端绑定模态框
-  terBind(event) {
+  terBind(event, id) {
     event.stopPropagation();
     const modalRef = this.modalService.open(TerBindComponent);
     modalRef.componentInstance.currentData = this.info;
+    modalRef.componentInstance.id = id;
     modalRef.result.then((result) => {
       if (result === 'ok') {
         this.getInfo();
@@ -223,7 +249,7 @@ export class BoilerInfoComponent implements OnInit {
 
     let that = this;
     Swal({
-      title: '确定删除终端？',
+      title: '确定解绑终端？',
       text: '',
       type: 'warning',
       showCancelButton: true,

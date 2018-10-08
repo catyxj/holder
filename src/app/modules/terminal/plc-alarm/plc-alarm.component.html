@@ -25,7 +25,10 @@
 
         <td> {{ i+1 }}  </td>
         <td> {{ data.CreatedDate | date:'yyyy-MM-dd HH:mm:ss'}}  </td>
-        <td> {{ data.ChannelNumber }}{{ data.name }}  </td>
+        <td>
+          {{ data.ChannelNumber }}
+          <!--{{ data.name }}  -->
+        </td>
         <td> {{ data.Ver }} </td>
         <td> {{ data.ErrCode.Value}} </td>
 

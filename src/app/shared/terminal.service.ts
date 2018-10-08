@@ -115,6 +115,14 @@ export class TerminalService {
       );
   }
 
+  // 批量下发
+  groupIssued(code): Observable<any> {
+    return this.http.post('/term_config_batch_issued', code, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   // 通道配置提交
   save(data): Observable<any> {
     return this.http.post('/channel_config_update', data, httpOptions)

@@ -26,7 +26,9 @@ export class TerConfigComponent implements OnInit {
   public funcs1;
   public funcs2;
   public bytes;
-  public priorities = [];
+  public priorities1 = [];
+  public priorities2 = [];
+  public priorities3 = [];
   public communiInterfaces;
   public dataBits;
   public heartbeats;
@@ -62,7 +64,13 @@ export class TerConfigComponent implements OnInit {
 
   initPriorities() {
     for (let i = 0; i < 24; i++) {
-      this.priorities.push(i);
+      this.priorities1.push(i);
+    }
+    for (let i = 0; i < 48; i++) {
+      this.priorities2.push(i);
+    }
+    for (let i = 0; i < 12; i++) {
+      this.priorities3.push(i);
     }
   }
 
@@ -432,14 +440,14 @@ export class TerConfigComponent implements OnInit {
         if (!this.analogueList[i].Func || !this.analogueList[i].Byte || !this.analogueList[i].Modbus || !this.analogueList[i].Parameter.Scale) {
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
-            nzContent: `模拟通道配置信息不全 ，参数不能为0 [ ${i} ]`
+            nzContent: `模拟通道[ ${i} ]配置信息不全 ，参数不能为0 `
           });
           return false;
         }
         if (parseInt(this.analogueList[i].Func) === 3) {
           if (this.analogueList[i].Modbus <= 40000 || this.analogueList[i].Modbus >= 50000) {
             this.nzmodalService.error({
-              nzTitle: 'MODBUS地址错误',
+              nzTitle: `模拟通道[ ${i} ]MODBUS地址错误`,
               nzContent: '功能码为03，MODBUS地址范围40001-49999'
             });
             return false;
@@ -448,7 +456,7 @@ export class TerConfigComponent implements OnInit {
         if (parseInt(this.analogueList[i].Func) === 4) {
           if (this.analogueList[i].Modbus <= 30000 || this.analogueList[i].Modbus >= 40000) {
             this.nzmodalService.error({
-              nzTitle: 'MODBUS地址错误',
+              nzTitle: `模拟通道[ ${i} ]MODBUS地址错误`,
               nzContent: '功能码为04，MODBUS地址范围30001-39999'
             });
             return false;
@@ -498,21 +506,21 @@ export class TerConfigComponent implements OnInit {
 
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
-            nzContent: `开关通道配置信息不全 ，参数不能为0 [${i}]`
+            nzContent: `开关通道[${i}]配置信息不全 ，参数不能为0 `
           });
           return false;
         }
         if (parseInt(this.switchList[i].Func) === 1) {
           if (this.switchList[i].Modbus < 1 || this.switchList[i].Modbus >= 10000) {
             this.nzmodalService.error({
-              nzTitle: '开关通道MODBUS地址错误',
+              nzTitle: `开关通道[${i}]MODBUS地址错误`,
               nzContent: `功能码为01，MODBUS地址范围00001-09999`
             });
             return false;
           }
           if (this.switchList[i].BitAddress !== 1) {
             this.nzmodalService.error({
-              nzTitle: '开关通道位地址错误',
+              nzTitle: `开关通道[${i}]位地址错误`,
               nzContent: '功能码为01，对应位地址为1'
             });
             return false;
@@ -521,14 +529,14 @@ export class TerConfigComponent implements OnInit {
         if (parseInt(this.switchList[i].Func) === 2) {
           if (this.switchList[i].Modbus <= 10000 || this.switchList[i].Modbus >= 20000) {
             this.nzmodalService.error({
-              nzTitle: '开关通道MODBUS地址错误',
+              nzTitle: `开关通道[${i}]MODBUS地址错误`,
               nzContent: '功能码为02，MODBUS地址范围10001-19999'
             });
             return false;
           }
           if (this.switchList[i].BitAddress !== 1) {
             this.nzmodalService.error({
-              nzTitle: '开关通道位地址错误',
+              nzTitle: `开关通道[${i}]位地址错误`,
               nzContent: '功能码为02，对应位地址为1'
             });
             return false;
@@ -537,14 +545,14 @@ export class TerConfigComponent implements OnInit {
         if (parseInt(this.switchList[i].Func) === 3) {
           if (this.switchList[i].Modbus <= 40000 || this.switchList[i].Modbus >= 50000) {
             this.nzmodalService.error({
-              nzTitle: '开关通道MODBUS地址错，请修改',
+              nzTitle: `开关通道[${i}]MODBUS地址错，请修改`,
               nzContent: '功能码为03，MODBUS地址范围40001-49999'
             });
             return false;
           }
           if (this.switchList[i].BitAddress < 1 || this.switchList[i].BitAddress > 16) {
             this.nzmodalService.error({
-              nzTitle: '位地址错误',
+              nzTitle: `开关通道[${i}]位地址错误`,
               nzContent: '功能码为03，对应位地址范围为1-16'
             });
             return false;
@@ -598,7 +606,7 @@ export class TerConfigComponent implements OnInit {
         if (parseInt(this.rangeList[i].Func) === 3) {
           if (this.rangeList[i].Modbus <= 40000 || this.rangeList[i].Modbus >= 50000) {
             this.nzmodalService.error({
-              nzTitle: 'MODBUS地址错误',
+              nzTitle: `状态通道[${this.rangeList[i].ChannelNumber}]MODBUS地址错误`,
               nzContent: '功能码为03，MODBUS地址范围40001-49999'
             });
             return false;
@@ -607,7 +615,7 @@ export class TerConfigComponent implements OnInit {
         if (parseInt(this.rangeList[i].Func) === 4) {
           if (this.rangeList[i].Modbus <= 30000 || this.rangeList[i].Modbus >= 40000) {
             this.nzmodalService.error({
-              nzTitle: 'MODBUS地址错误',
+              nzTitle: `状态通道[${this.rangeList[i].ChannelNumber}]MODBUS地址错误`,
               nzContent: '功能码为04，MODBUS地址范围30001-39999'
             });
             return false;
@@ -616,7 +624,7 @@ export class TerConfigComponent implements OnInit {
 
         if (this.rangeList[i].Ranges.length <= 0) {
           this.nzmodalService.error({
-            nzTitle: '状态量通道配置错误',
+            nzTitle: `状态量通道[${this.rangeList[i].ChannelNumber}]配置错误`,
             nzContent: '已配置的状态量通道，需要完成其状态值的配置才可提交'
           });
           return;

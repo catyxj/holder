@@ -5,6 +5,7 @@ import {AddBoilerComponent} from '../add-boiler/add-boiler.component';
 import {UserService} from '../../../shared/user.service';
 import {JoinClusterComponent} from "../join-cluster/join-cluster.component";
 import Swal from 'sweetalert2';
+import {ClusterService} from "../../../shared/cluster.service";
 
 
 @Component({
@@ -27,10 +28,18 @@ export class BoilersComponent implements OnInit {
   public pageSize = 10;
   public user: any;
   public isSpinning = false;
+  public isLoading = false;
 
   constructor(private boilerService: BoilerService,
               private modalService: NgbModal,
-              private userService: UserService ) { }
+              private userService: UserService,
+              private clusterService: ClusterService) {
+    this.userService.userStatus$ // 监测父组件user
+      .subscribe( data => {
+          this.user = data;
+        }
+      );
+  }
 
   ngOnInit() {
     this.getBoilers();
@@ -109,10 +118,12 @@ export class BoilersComponent implements OnInit {
 
   // 批量删除
   deleteG() {
-    const cf = confirm(`确认删除选中锅炉 ？`);
+    const cf = confirm(`确认删除选中设备 ？`);
     if (cf === true) {
+      this.isLoading = true;
       this.boilerService.deleteBoiler(this.deleteList)
         .subscribe(() => {
+          this.isLoading = false;
           Swal(
             '删除成功！',
             '',
@@ -120,6 +131,7 @@ export class BoilersComponent implements OnInit {
           );
           this.pageChange();
         }, err => {
+          this.isLoading = false;
           Swal(
             '删除失败！',
             err,
@@ -132,6 +144,40 @@ export class BoilersComponent implements OnInit {
 
     // console.log(this.deleteList);
   }
+
+
+  // 批量启动
+  groupControl(n) {
+    if (this.deleteList.length <= 0) {
+      Swal(
+        '没有选择设备',
+        '',
+        'warning'
+      );
+      return;
+    }
+    console.log(this.deleteList, n);
+    let post = {
+      uids: this.deleteList,
+      ctl_type: n
+    };
+    this.clusterService.groupControl(post)
+      .subscribe(val => {
+        Swal(
+          '发送成功！',
+          '',
+          'success'
+        );
+      }, err => {
+        Swal(
+          '发送失败！',
+          err,
+          'error'
+        );
+      });
+
+  }
+
 
   // 每页数量
   pageSizeChange() {

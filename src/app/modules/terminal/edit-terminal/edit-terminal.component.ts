@@ -7,8 +7,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-edit-terminal',
   templateUrl: './edit-terminal.component.html',
-  styleUrls: ['./edit-terminal.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./edit-terminal.component.css']
 })
 export class EditTerminalComponent implements OnInit {
   @Input()

@@ -20,7 +20,7 @@ import Swal from 'sweetalert2';
 export class UserMainComponent implements OnInit {
 
   roles: any[];
-  user: any = {};
+  user: any;
   aroles: any[] = [];
   accounts: any[];
   page = 1;
@@ -35,11 +35,18 @@ export class UserMainComponent implements OnInit {
   allDelete = false;
   pageSize = 10;
   public isSpinning = false;
+  public isLoading = false;
 
   constructor(private userAccountService: UserAccountService,
               private userService: UserService,
               private modalService: NgbModal,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+    this.userService.userStatus$ // 监测父组件user
+      .subscribe( data => {
+          this.user = data;
+        }
+      );
+  }
 
   ngOnInit() {
     this.getUser();
@@ -51,10 +58,10 @@ export class UserMainComponent implements OnInit {
       })
     ).subscribe( );
 
-    let name = this.route.snapshot.params['name'];
-    console.log(name);
+    // let name = this.route.snapshot.params['name'];
+    // console.log(name);
 
-    this.isSpinning = true;
+
     this.getUserAccount();
   }
 
@@ -86,6 +93,7 @@ export class UserMainComponent implements OnInit {
 
   // -------获取账号信息--------
   getUserAccount(): void {
+    this.isSpinning = true;
     this.userAccountService.getAccounts(this.page, this.pageSize, this.search)
       .subscribe(account => {
         this.totalItems = account.counts;
@@ -144,8 +152,10 @@ export class UserMainComponent implements OnInit {
     let that = this;
     const cf = confirm(`确认删除选中账号 ？`);
     if (cf === true) {
+      this.isLoading = true;
       that.userAccountService.deleteAccount( that.deleteList)
         .subscribe( () => {
+          this.isLoading = false;
           Swal(
             '删除成功！',
             '',
@@ -153,6 +163,7 @@ export class UserMainComponent implements OnInit {
           );
           that.pageChange();
         }, err => {
+          this.isLoading = false;
           Swal(
             '删除失败！',
             err,

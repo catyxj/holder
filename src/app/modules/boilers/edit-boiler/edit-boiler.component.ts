@@ -7,8 +7,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-edit-boiler',
   templateUrl: './edit-boiler.component.html',
-  styleUrls: ['./edit-boiler.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./edit-boiler.component.css']
 })
 export class EditBoilerComponent implements OnInit {
   @Input()
@@ -24,6 +23,7 @@ export class EditBoilerComponent implements OnInit {
   public img: any;
   public errMes = '';
   public user;
+  public isLoading = false;
 
   constructor(public activeModal: NgbActiveModal,
               private boilerService: BoilerService,
@@ -41,7 +41,7 @@ export class EditBoilerComponent implements OnInit {
     this.getUser();
     this.getTemplates();
     this.getOrgType();
-    this.getOrgs();
+
 
     this.initInfos();
     this.imgUrl = this.currentData.Image;
@@ -71,6 +71,7 @@ export class EditBoilerComponent implements OnInit {
     this.orgService.getOrgType()
       .subscribe(types => {
         this.orgTypes = types;
+        this.getOrgs();
         // console.log(this.orgTypes);
       });
   }
@@ -87,7 +88,44 @@ export class EditBoilerComponent implements OnInit {
 
 //  关联企业信息列表
   initOrg() {
-    if (this.currentData.OrganizationsLinked) {
+
+    for (let i = 0; i < this.orgTypes.length; i++) {
+      let ot = this.orgTypes[i];
+      let uid = '';
+      let eptCtlPlg = false;
+      this.links[i] = {};
+      this.links[i].type = ot.TypeId;
+      this.links[i].typeName = ot.Name;
+      let orgs = [{
+        Uid: '',
+        Name: '请选择关联企业'
+      }];
+      for (let j = 0; j < this.orgLists.length; j++) {
+        let og = this.orgLists[j];
+        if (og.Type__TypeId === ot.TypeId) {
+          orgs.push(og);
+        }
+      }
+
+      if (!this.currentData.OrganizationsLinked) {
+        this.currentData.OrganizationsLinked = [];
+      }
+      for (let n = 0; n < this.currentData.OrganizationsLinked.length; n++) {
+        const or = this.currentData.OrganizationsLinked[n];
+        if (or.Type.TypeId === ot.TypeId) {
+          uid = or.Uid;
+          eptCtlPlg = or.EptCtlPlg;
+        }
+      }
+
+
+      this.links[i].orgs = orgs;
+      this.links[i].uid = uid;
+      this.links[i].eptCtlPlg = eptCtlPlg;
+    }
+
+    console.log(this.links);
+    /*if (this.currentData.OrganizationsLinked) {
       for (let i = 0; i < this.currentData.OrganizationsLinked.length; i++) {
         const or = this.currentData.OrganizationsLinked[i];
         this.links.push({
@@ -104,7 +142,7 @@ export class EditBoilerComponent implements OnInit {
         }
         this.links[i].orgs = orgs;
       }
-    }
+    }*/
 
     // console.log(this.links);
   }
@@ -136,19 +174,19 @@ export class EditBoilerComponent implements OnInit {
   }
 
   //  添加企业关联
-  addNewLink() {
+  /*addNewLink() {
     this.links.push({type: 0, uid: '', eptCtlPlg: false});
-  }
+  }*/
 
 //  删除企业关联
-  removeLink(index) {
+  /*removeLink(index) {
     this.links.splice(index, 1);
-  }
+  }*/
 
   // 企业关联下拉列表
-  linkTypeChanged(link) {
+  /*linkTypeChanged(link) {
     let orgs = [];
-    for (let i in this.orgLists) {
+    for (let i = 0; i < this.orgLists.length; i++) {
       let og = this.orgLists[i];
       if (og.Type__TypeId === parseInt(link.type)) {
         orgs.push(og);
@@ -157,7 +195,9 @@ export class EditBoilerComponent implements OnInit {
     link.orgs = orgs;
     link.uid = '';
     link.eptCtlPlg = false;
-  }
+  }*/
+
+
 
 //  上传图片
   imgChange(event) {
@@ -193,6 +233,8 @@ export class EditBoilerComponent implements OnInit {
   save() {
 
     let that = this;
+    this.data.infos = [];
+    this.data.links = [];
 
     // 其他信息
     if (this.info.length > 0) {
@@ -228,9 +270,10 @@ export class EditBoilerComponent implements OnInit {
     }
 
     // console.log(this.data);
-
+    this.isLoading = true;
     this.boilerService.updateBoiler(this.data)
       .subscribe( val => {
+        this.isLoading = false;
         Swal(
           '保存成功！',
           '',
@@ -240,13 +283,14 @@ export class EditBoilerComponent implements OnInit {
         });
 
       }, err => {
+        this.isLoading = false;
         Swal(
           '保存失败！',
           err,
           'error'
         );
-        this.data.links = [];
-        this.data.infos = [];
+        // this.data.links = [];
+        // this.data.infos = [];
       });
 
   }

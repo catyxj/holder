@@ -1,6 +1,6 @@
 
 <div class="">
-  <div class="mat-card-title" style="padding: 20px 0; ">
+  <div class="mat-card-title" style="padding: 20px 0; overflow: hidden;">
     <h5 class="text_info pull-left">
       集群管理
       <span>
@@ -9,7 +9,7 @@
     </h5>
 
     <div class="pull-right flex flex-row">
-      <div class="input-group mb-4">
+      <div class="input-group">
         <input type="text" class="form-control" placeholder="请输入设备名称" [(ngModel)]="search" >
         <div class="input-group-append" (click)="searchChange()">
           <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
@@ -28,9 +28,10 @@
   </div>
 
   <div>
+    <nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning">
     <table class="table table-bordered">
       <thead class="bg_light_primary">
-      <th>
+      <th *ngIf="user && user.Role.RoleId === 10">
         <div class="checkbox c-checkbox white">
           <label>
             <input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();">
@@ -45,7 +46,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let eq of equipList; let i = index">
-        <td>
+        <td *ngIf="user && user.Role.RoleId === 10">
           <div class="checkbox c-checkbox">
             <label>
               <input type="checkbox" [(ngModel)]="eq.checkDelete" (change)="checkDel(eq);">
@@ -78,12 +79,14 @@
              class="btn btn_info btn-sm" style="color: #ffffff;" title="查看设备信息">
             查看
           </a>
-          <button class="btn btn-danger btn-sm ml-2" title="从集群中移除设备" (click)="delete(eq.uid)">
+          <button class="btn btn-danger btn-sm ml-2" title="从集群中移除设备"
+                  (click)="delete(eq.uid)"
+                  *ngIf="user && user.Role.RoleId === 10">
             移除
           </button>
 
-          <nz-dropdown [nzPlacement]="'bottomRight'">
-            <button nz-dropdown class="btn btn_info btn-sm ml-2" >控制</button>
+          <nz-dropdown [nzPlacement]="'bottomRight'" *ngIf="user && user.Role.RoleId >= 10">
+            <button nz-dropdown class="btn btn_info btn-sm ml-2" nz-button [nzLoading]="isLoading3">控制</button>
             <ul nz-menu>
               <li nz-menu-item (click)="control(eq,2)">
                 启动
@@ -101,6 +104,7 @@
       </tr>
       </tbody>
     </table>
+    </nz-spin>
     <p class="text-muted" *ngIf="!equipList||equipList.length===0">
       无有效数据
     </p>
@@ -110,12 +114,17 @@
   <div>
 
     <div class="pull-left">
-      <button class="btn btn_info" (click)="deleteG()">
+      <button class="btn btn_info" (click)="deleteG()"
+              *ngIf="user && user.Role.RoleId === 10"
+              nz-button [nzLoading]="isLoading">
         批量移除
       </button>
 
-      <nz-dropdown class="ml-3" [nzPlacement]="'topLeft'">
-        <button nz-dropdown class="btn btn_info">批量控制</button>
+      <nz-dropdown class="ml-3" [nzPlacement]="'topLeft'" *ngIf="user && user.Role.RoleId >= 10">
+        <button nz-dropdown class="btn btn_info"
+                nz-button [nzLoading]="isLoading2">
+          批量控制
+        </button>
         <ul nz-menu>
           <li nz-menu-item (click)="groupControl(1)">
             批量启动
