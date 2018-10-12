@@ -1,42 +1,46 @@
+<div class="mat-card-title" style="">
+  <h5 class="text_info pull-left">
+    <img src="assets/icons/equip.png" alt="">
+    设备信息
+  </h5>
 
-<div class="">
-  <div class="mat-card-title" style="padding: 20px 0; ">
-    <h5 class="text_info pull-left">设备信息</h5>
-
-    <div class="pull-right flex flex-row">
-      <div class="input-group mb-4">
-        <input type="text" class="form-control" placeholder="请输入设备名称" [(ngModel)]="search" >
-        <div class="input-group-append" (click)="searchChange()">
-          <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
-        </div>
-      </div>
-      <div class="ml-3" >
-        <a [routerLink]="['/admin/equipments/templates']"
-           *ngIf="user && user.Role.RoleId<=10"
-           class="btn btn_info" style="color: #ffffff;">
-          设备型态
-        </a>
-      </div>
-      <div class="ml-3" >
-        <button class="btn btn_info" (click)="newBoiler()"
-                *ngIf="user && user.Role.RoleId<=10">
-          新增设备
-        </button>
+  <div class="pull-right flex flex-row">
+    <div class="input-group mb-4">
+      <input type="text" class="form-control" placeholder="请输入设备名称" [(ngModel)]="search" >
+      <div class="input-group-append" (click)="searchChange()">
+        <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
       </div>
     </div>
-
+    <div class="ml-3" >
+      <a [routerLink]="['/admin/equipments/templates']"
+         *ngIf="user && user.Role.RoleId<=10"
+         class="btn btn_info">
+        设备型态
+      </a>
+    </div>
+    <div class="ml-3" >
+      <button class="btn btn_info" (click)="newBoiler()"
+              *ngIf="user && user.Role.RoleId<=10">
+        新增设备
+      </button>
+    </div>
   </div>
 
+</div>
+
+<div class="content">
+
   <div>
-    <table class="table table-bordered">
+    <table class="table">
       <thead class="bg_light_primary">
         <tr>
           <th *ngIf="user && user.Role.RoleId<=10">
-            <div class="checkbox c-checkbox white">
+            <!--<div class="checkbox c-checkbox white">
               <label>
                 <input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();">
                 <span class="fa fa-check"></span></label>
-            </div>
+            </div>-->
+            选中
           </th>
           <th>序号</th>
           <th>设备名称</th>
@@ -66,7 +70,7 @@
           </td>
           <td> {{ boiler.Template?.Name }} </td>
           <td> {{ boiler.Clusters?.Name }} </td>
-          <td> <a [routerLink]="['/admin/equipments/equipment-info', boiler.Uid]" class="btn btn_info btn-sm" style="color: #ffffff;">查看</a> </td>
+          <td> <a [routerLink]="['/admin/equipments/equipment-info', boiler.Uid]" class="btn btn_info btn-sm">查看</a> </td>
         </tr>
       </tbody>
     </table>
@@ -75,10 +79,7 @@
     </p>
   </div>
 
-
   <div>
-
-
     <div class="pull-left">
       <button class="btn btn_info" (click)="deleteG()"
               nz-button [nzLoading]="isLoading"
@@ -103,18 +104,18 @@
     <ngb-pagination class="pull-right"
                     [collectionSize]="totalItems"
                     [pageSize]="pageSize" [(page)]="page"
-                    [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                    [maxSize]="3" [rotate]="true"
                     (pageChange)="pageChange()">
 
     </ngb-pagination>
-    <div class="pull-right mr-3">
+    <!--<div class="pull-right mr-3">
       <select [(ngModel)]="pageSize" class="form-control" (change)="pageSizeChange()">
         <option value="10">10</option>
         <option value="50">50</option>
         <option value="100">100</option>
       </select>
     </div>
-    <div class="pull-right mr-3" style="line-height: 33px;"> 共 {{totalItems}} 项</div>
+    <div class="pull-right mr-3" style="line-height: 33px;"> 共 {{totalItems}} 项</div>-->
   </div>
 
 </div>

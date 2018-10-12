@@ -1,3 +1,20 @@
+<div class="side_user">
+  <div ngbDropdown class="">
+    <div class="mb-3">
+      <img [src]="user?.Picture" alt="" style="width: 125px; height: 125px; border-radius: 125px;">
+    </div>
+
+    <button mat-button id="dropdownBasic1" ngbDropdownToggle>
+      <!--{{user?.Name}} ( -->
+      {{ user?.Role.Name}}
+      <!--)-->
+    </button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="animated fadeInDown">
+      <a class="dropdown-item" routerLink="/admin/profile">用户信息</a>
+      <button class="dropdown-item" (click)="logout()">退出</button>
+    </div>
+  </div>
+</div>
 
 <mat-nav-list>
   <ul>

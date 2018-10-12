@@ -1,25 +1,24 @@
+<div class="mat-card-title">
+  <h5 class="text_info pull-left">文件列表</h5>
 
-
-<div class="content">
-  <div class="mat-card-title" style="padding: 20px 0; ">
-    <h5 class="text_info pull-left">文件列表</h5>
-
-    <div class="pull-right flex flex-row">
-      <div class="input-group mb-4">
-        <input type="text" class="form-control" placeholder="请输入文件名称" [(ngModel)]="search" >
-        <div class="input-group-append" (click)="searchChange()">
-          <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
-        </div>
+  <div class="pull-right flex flex-row">
+    <div class="input-group mb-4">
+      <input type="text" class="form-control" placeholder="请输入文件名称" [(ngModel)]="search" >
+      <div class="input-group-append" (click)="searchChange()">
+        <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
       </div>
-      <div class="ml-3" >
-        <button class="btn btn_info" (click)="addFile()">
-          添加文件
-        </button>
-      </div>
-
+    </div>
+    <div class="ml-3" >
+      <button class="btn btn_info" (click)="addFile()">
+        添加文件
+      </button>
     </div>
 
   </div>
+
+</div>
+
+<div class="content">
 
   <div>
     <table class="table table-bordered">
