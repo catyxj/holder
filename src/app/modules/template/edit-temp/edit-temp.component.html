@@ -46,7 +46,12 @@
 
           <th style="width: 12%;">功能码</th>
           <th style="width: 12%;">高低字节</th>
-          <th>MODBUS地址</th>
+          <th>
+            <span nz-popover
+                  [nzContent]="modbusTips1" nzTrigger="hover" nzTitle="范围说明">
+              MODBUS地址
+            </span>
+          </th>
           <th></th>
         </tr>
         </thead>
@@ -106,8 +111,7 @@
           </td>
           <td>
             <input type="number" [(ngModel)]="data.Modbus" placeholder="未配置"
-                   [disabled]="!data.Parameter||!data.Parameter.Name" nz-popover
-                   [nzContent]="modbusTips1" nzTrigger="hover" nzTitle="范围说明"
+                   [disabled]="!data.Parameter||!data.Parameter.Name"
                    class="form-control">
 
           </td>
@@ -144,8 +148,14 @@
           <th>通道</th>
           <th colspan="3">参数名称</th>
           <th style="width: 12%;">功能码</th>
-          <th style="width: 12%;">MODBUS地址</th>
-          <th>位地址</th>
+          <th style="width: 12%;">
+            <span nz-popover [nzContent]="modbusTips2" nzTrigger="hover" nzTitle="范围说明">MODBUS地址</span>
+          </th>
+          <th>
+             <span nz-popover [nzContent]="bitAddressTips" nzTrigger="hover" nzTitle="范围说明">
+              位地址
+            </span>
+          </th>
           <th></th>
         </tr>
         </thead>
@@ -203,14 +213,12 @@
           </td>
           <td>
             <input type="number" [(ngModel)]="data.Modbus" placeholder="未配置"
-                   [disabled]="!data.Parameter||!data.Parameter.Name" nz-popover
-                   [nzContent]="modbusTips2" nzTrigger="hover" nzTitle="范围说明"
+                   [disabled]="!data.Parameter||!data.Parameter.Name"
                    class="form-control">
           </td>
           <td>
             <input type="number" [(ngModel)]="data.BitAddress" placeholder="未配置"
-                   [disabled]="!data.Parameter||!data.Parameter.Name" nz-popover
-                   [nzContent]="bitAddressTips" nzTrigger="hover" nzTitle="范围说明"
+                   [disabled]="!data.Parameter||!data.Parameter.Name"
                    class="form-control">
 
           </td>
@@ -247,7 +255,11 @@
           <th colspan="3">参数名称</th>
           <th style="width: 12%;">功能码</th>
           <th style="width: 12%;">高低字节</th>
-          <th>MODBUS地址</th>
+          <th>
+            <span nz-popover [nzContent]="modbusTips1" nzTrigger="hover" nzTitle="范围说明">
+              MODBUS地址
+            </span>
+          </th>
           <th></th>
         </tr>
         </thead>
@@ -307,8 +319,7 @@
           </td>
           <td>
             <input type="number" [(ngModel)]="data.Modbus" placeholder="未配置"
-                   [disabled]="!data.Parameter||!data.Parameter.Name" nz-popover
-                   [nzContent]="modbusTips1" nzTrigger="hover" nzTitle="范围说明"
+                   [disabled]="!data.Parameter||!data.Parameter.Name"
                    class="form-control">
 
           </td>
