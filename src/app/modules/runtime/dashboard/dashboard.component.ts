@@ -30,6 +30,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
   public imgRun;
   public imgStop;
   public controlShow = false;
+  public averageList;
 
   constructor(private boilerWsService: BoilerSocketService,
               private route: ActivatedRoute,
@@ -120,8 +121,12 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
             this.analogues = analogues;
             this.switchs = switchs;
             this.ranges = ranges;
-          }
 
+
+          //  ---------平均值-------------
+            this.averageCal();
+
+          }
 
 
 
@@ -182,6 +187,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
     });
   }
 
+  // 控制
   equipControl(n) {
     let ctrlData = {
       uid: this.uid,
@@ -212,6 +218,43 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
   trackByUid(index, item) {
     return item.Uid;
   }
+
+  // 平均值
+  averageCal() {
+    let averageList = [];
+    let averages = [];
+    for (let i = 1; i <= 24; i++) {
+      averageList[i - 1] = [];
+      let aL = averageList[i - 1];
+      for (let j = 0; j < this.analogues.length; j++) {
+        let ana = this.analogues[j];
+        if (ana.ChannelNumber === i) {
+          averageList[i - 1].push(ana);
+        }
+      }
+      if (aL.length > 0) {
+        let sum = 0;
+        let alarm = false;
+        for (let n = 0; n < aL.length; n++) {
+          sum += aL[n].Value;
+          if (alarm === false && aL[n].AlarmStatus === true) {
+            alarm = true;
+          }
+        }
+        let mean  = Math.round((sum / aL.length) * 100) / 100;
+        averages.push({
+          chanNum: aL[0].ChannelNumber,
+          average: mean,
+          Unit: aL[0].Unit,
+          AlarmStatus: alarm
+        });
+      }
+    }
+
+    this.averageList = averages;
+    console.log(averages);
+  }
+
 
   ngOnDestroy() {
     this.socket.unsubscribe();
