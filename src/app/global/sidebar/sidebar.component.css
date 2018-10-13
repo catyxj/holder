@@ -2,7 +2,7 @@
   text-align: center;
   color:#ffffff;
   padding: 48px 0 30px;
-  border-bottom:1px solid #378fe7;
+  border-bottom:1px solid #ffd100;
 }
 
 
@@ -19,7 +19,7 @@ mat-nav-list a.active{
   /*background-color: #607D8B;*/
   /*background-color: #51859d;*/
   /*color: #ffffff;*/
-  background-color: #378fe7;
+  background-color: #ffd100;
   color: #333333;
 }
 .sidebar_title{
@@ -50,7 +50,7 @@ mat-nav-list a.sidebar_title{
 .sub_menu li a:hover{
   display: flex;
   /*background-color: #8eacbb;*/
-  background-color: #378fe7;
+  background-color: #ffd100;
   color: #333333;
   /*color: #1976d2;*/
   transition: all .3s linear;
