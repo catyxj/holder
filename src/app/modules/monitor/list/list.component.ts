@@ -16,6 +16,7 @@ export class ListComponent implements OnInit, OnDestroy {
   search: string;
   checkValue = 2;
   socket: any;
+  public isSpinning = false;
 
   constructor(private boilerService: BoilerService,
               private boilerWsService: BoilerSocketService) { }
@@ -34,6 +35,7 @@ export class ListComponent implements OnInit, OnDestroy {
     this.socket = this.boilerWsService.creatSocket(wsUrl, message)
       .subscribe(
         data => {
+          this.isSpinning = false;
           let equips = JSON.parse(data);
           // console.log(equips);
           this.totalItems = equips.counts;
@@ -74,8 +76,11 @@ export class ListComponent implements OnInit, OnDestroy {
             }
           }
         },
-        err => console.log(err),
-        () => console.log('ws结束')
+        err => {console.log(err); },
+        () => {
+          console.log('ws结束');
+          this.isSpinning = true;
+        }
       );
     /*this.boilerService.getBoilers()
       .subscribe( data => {
@@ -119,6 +124,9 @@ export class ListComponent implements OnInit, OnDestroy {
   // 每页数量
   pageSizeChange() {
     this.page = 1;
+    if (typeof(this.pageSize) !== 'number') {
+      this.pageSize = parseInt(this.pageSize);
+    }
     this.pageChange();
   }
 
@@ -126,6 +134,7 @@ export class ListComponent implements OnInit, OnDestroy {
   pageChange(): void {
     this.socket.unsubscribe();
     this.boilerWsService.closeSocket();
+    this.isSpinning = true;
     this.getBoilers({page: this.page, search: this.search, pageSize: this.pageSize});
   }
 

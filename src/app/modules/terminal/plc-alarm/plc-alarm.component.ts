@@ -68,6 +68,9 @@ export class PlcAlarmComponent implements OnInit {
   // 每页数量
   pageSizeChange() {
     this.page = 1;
+    if (typeof(this.pageSize) !== 'number') {
+      this.pageSize = parseInt(this.pageSize);
+    }
     this.pageChange();
   }
 

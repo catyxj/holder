@@ -43,7 +43,8 @@ h5, .h5 {
 }
 
 
-/*插件样式修改*/
+/*---------插件样式修改-----------*/
+/*模态框*/
 .modal-backdrop {
   z-index: 880 !important;
 }
@@ -57,7 +58,14 @@ h5, .h5 {
   z-index: 910;
 }
 
-
+/*下拉列表*/
+.ant-select-selection--single {
+  height: 100%;
+}
+.input-group .ant-select-selection{
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
 
 
 
@@ -138,10 +146,10 @@ h5, .h5 {
   /*background-color: #51aded;*/
   /*display: none;*/
 }
-/*.scroll_bar::-webkit-scrollbar-button{
+.scroll_bar::-webkit-scrollbar-button{
   background-color:#819ca9;
   background-size: 6px 6px;
-}*/
+}
 /*定义滚动条轨道*/
 .mat-sidenav-content::-webkit-scrollbar-track,.sidenav::-webkit-scrollbar-track,.scroll_bar::-webkit-scrollbar-track
 {
