@@ -1,7 +1,10 @@
 
 <div class="">
-  <div class="mat-card-title" style="padding: 20px 0; ">
-    <h5 class="text_info pull-left">设备信息</h5>
+  <div class="mat-card-title">
+    <h5 class="text_info pull-left">
+      <img src="assets/icons/equip.png" alt="">
+      设备信息
+    </h5>
 
     <div class="pull-right flex flex-row">
       <div class="input-group mb-4">
@@ -27,8 +30,8 @@
 
   </div>
 
-  <div>
-    <table class="table table-bordered">
+  <div class="t_content">
+    <table class="table">
       <thead class="bg_light_primary">
         <tr>
           <th *ngIf="user && user.Role.RoleId<=10">
@@ -76,8 +79,7 @@
   </div>
 
 
-  <div>
-
+  <div class="t_bottom">
 
     <div class="pull-left">
       <button class="btn btn_info" (click)="deleteG()"
@@ -103,7 +105,7 @@
     <ngb-pagination class="pull-right"
                     [collectionSize]="totalItems"
                     [pageSize]="pageSize" [(page)]="page"
-                    [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                    [maxSize]="3" [rotate]="true" [boundaryLinks]="false"
                     (pageChange)="pageChange()">
 
     </ngb-pagination>

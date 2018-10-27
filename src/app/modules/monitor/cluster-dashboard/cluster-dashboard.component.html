@@ -1,6 +1,14 @@
 
-<div>
-  <div class="mat-card-title clearfix" style="padding: 15px 0;">
+<div class="content">
+  <div class="mat-card-title">
+    <h5 class="text_info pull-left"> 设备概览 </h5>
+    <nav class="pull-left">
+      <a routerLink="/admin/monitor/clusters" routerLinkActive="btn_info" class="btn">集群模式</a>
+      <a routerLink="/admin/monitor/dashboard" routerLinkActive="btn_info" class="btn">图文模式</a>
+      <a routerLink="/admin/monitor/list" routerLinkActive="btn_info" class="btn">列表模式</a>
+      <a routerLink="/admin/monitor/map" routerLinkActive="btn_info" class="btn mr-3">地图模式</a>
+    </nav>
+
     <div class="pull-right flex flex-row">
       <div class="input-group">
         <input type="text" class="form-control" placeholder="请输入集群名称" [(ngModel)]="search" >
@@ -11,33 +19,40 @@
     </div>
   </div>
 
+  <div class="clearfix" style="color: #666666; padding-bottom: 20px; font-size: 18px;">
+    <h5 class="pull-left"> 集群模式 </h5>
+  </div>
+
   <div class="grid grid-pad row">
     <div *ngFor="let data of clusters; trackBy : trackByUid;" class="col-6 mb-2">
       <div class="module flex">
-        <div class="status_content mb-3">
+        <div class="status_content">
           <a [routerLink]="['/admin/monitor/cluster', data.uid]" target="_blank">
-            <h5 class="mb-4">
+            <h5 class="mb-3 status_name">
               {{data.name}}
             </h5>
           </a>
 
           <div class="status_row ">
-            <div class="status_col text-muted">
-              <b>终端: </b>  在线 <span class="text-info">{{data.termOnline}}</span> / 离线  <span class="">{{data.termOffline}}</span>
+            <div class="status_col">
+              <b>终端 : </b>  在线 <span class="">{{data.termOnline}}</span> / 离线  <span class="">{{data.termOffline}}</span>
             </div>
-            <div class="status_col text-muted">
-              <b>设备: </b>  在线 <span class="text-info">{{data.eptOnline}}</span> / 总共 <span>{{data.eptCounts}}</span>
+            <div class="status_col">
+              <b>设备 : </b>  在线 <span class="">{{data.eptOnline}}</span> / 总共 <span>{{data.eptCounts}}</span>
             </div>
-            <div class="status_col text-muted" >
-              <b>告警: </b>
-              <span [ngClass]="{'text-muted':!data.Online, 'text-danger':data.Online && data.Warning , 'text-info':data.Online && !data.Warning}">
+            <div class="status_col" >
+              <b>告警 : </b>
+              <!--<span [ngClass]="{'text-muted':!data.Online, 'text-danger':data.Online && data.Warning , 'text-info':data.Online && !data.Warning}">
+                {{data.alarmCounts}}
+              </span>-->
+              <span>
                 {{data.alarmCounts}}
               </span>
             </div>
-            <div class="status_col text-muted"
+            <div class="status_col"
                   style="margin-bottom: 0">
               <!--{{data.malfunction}}-->
-              <b>故障: </b>
+              <b>故障 : </b>
               <span [ngClass]="{'text-muted':!data.Online, 'text-danger':data.Online && data.Malfunction , 'text-info':data.Online && !data.Malfunction}">
 
               </span>
@@ -55,11 +70,11 @@
   </div>
 
   <div class="clearfix mt-2">
-    <div class="pull-left"> 共 {{totalItems}} 项</div>
+    <!--<div class="pull-left"> 共 {{totalItems}} 项</div>-->
     <ngb-pagination class="pull-right"
                     [collectionSize]="totalItems"
-                    [pageSize]="4" [(page)]="page"
-                    [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                    [pageSize]="pageSize" [(page)]="page"
+                    [maxSize]="3" [rotate]="true" [boundaryLinks]="false"
                     (pageChange)="pageChange()">
     </ngb-pagination>
   </div>

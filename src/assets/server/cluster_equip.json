@@ -1,0 +1,45 @@
+{
+  "ept":[
+    {
+      "uid": "6b881f37-e540-41b9-b28d-a73facf53f82",
+      "name": "测试锅炉681028",
+      "Status": {
+        "IsBurning": 1
+      },
+      "termStatus":1,
+      "Runtime": null,
+      "eptStatus":false
+    },
+    {
+      "uid": "f2f8ea60-b2cd-4490-9ffe-00e096b110f0",
+      "name": "edagdg",
+      "Status": {
+        "IsBurning": 0
+      },
+      "termStatus":1,
+      "Runtime": null,
+      "eptStatus":true
+    },
+    {
+      "uid": "f2f8ea60-b2cd-4490-9ffe-00e096bsdfaf",
+      "name": "11334566",
+      "Status": {
+        "IsBurning": 0
+      },
+      "termStatus":0,
+      "Runtime": null,
+      "eptStatus":false
+    },
+    {
+      "uid": "f2f8ea60-b2cd-4490-9ffe-00e0asdfa",
+      "name": "sdfaads",
+      "Status": {
+        "IsBurning": 0
+      },
+      "termStatus":0,
+      "Runtime": null,
+      "eptStatus":false
+    }
+  ],
+  "counts":65
+}

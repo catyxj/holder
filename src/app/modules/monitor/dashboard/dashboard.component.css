@@ -16,21 +16,31 @@ a {
   box-sizing: border-box;
 }
 
-/*.grid {
+.grid {
   margin: 0;
+  display: flex;
+  justify-content: space-between;
 }
-.col-1-4 {
+/*.col-1-4 {
   width: 50%;
 }*/
 .module {
-  padding: 15px;
+  /*padding: 15px;*/
   border: 1px solid #eeeeee;
   border-radius: 2px;
-  color: #607d8b;
+  /*color: #607d8b;*/
   background-color: #ffffff;
+  flex-direction: column;
+  width: 32%;
+  box-shadow: 1px 1px 5px #aaaaaa;
+}
+.flex_c{
+  display: flex;
+  flex-direction: column;
 }
 .module a h5{
-  color: #607d8b;
+  /*color: #607d8b;*/
+  color: #666666;
 }
 
 /*.grid-pad {
@@ -39,7 +49,7 @@ a {
 /*.grid-pad > [class*='col-']:last-of-type {
   padding-right: 20px;
 }*/
-@media (max-width: 600px) {
+/*@media (max-width: 600px) {
   .module {
     font-size: 10px;
     max-height: 75px; }
@@ -51,43 +61,55 @@ a {
   .module {
     min-width: 60px;
   }
+}*/
+
+
+
+.module .status_name{
+  height: 68px;
+  width: 100%;
+  border-bottom: 1px solid #dddddd;
+  padding:0 20px;
+  box-sizing: border-box;
+  /*background-color: #ffffff;*/
 }
 
-
-
-
-
 .module .status_content{
-  flex: 1;
+  /*flex: 1;
   width: 0;
-  margin-right: 15px;
+  margin-right: 15px;*/
+  padding: 10px;
+  background-color: #dddddd;
 }
 .module h5{
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 68px;
 }
 .module .img_content{
-  flex: 2;
+  /*flex: 2;*/
   overflow: hidden;
+  height: 500px;
+  /*line-height: 500px;*/
 }
 .module .img_content img{
   width: 100%;
-  max-height: 168px;
-  transform: scale(1);
+  height: 500px;
+  /*transform: scale(1);
   transition: all 1s ease 0s;
   -webkit-transform: scale(1);
-  -webkit-transform: all 1s ease 0s;
+  -webkit-transform: all 1s ease 0s;*/
 }
 .status_row{
-
+  display: flex;
+  justify-content: space-between;
 }
+
 .module .status_content a.status_col{
-  float: left;
-  display: block;
-  width: 46%;
-  margin-right: 4%;
+  width: 24%;
+  /*margin-right: 3%;*/
   box-sizing: border-box;
   padding: 0 6px;
   border-radius: 3px;
@@ -100,14 +122,14 @@ a {
 
 
 .module:hover {
-  color: #607d8b;
+  /*color: #607d8b;*/
   border: 1px solid #607d8b;
 }
 .module a:hover{
   color: #ffffff;
 }
 .module a.bg_grey:hover{
-  color: #888888;
+  color: #333333;
 }
 
 /*.module:hover .img_content img{*/

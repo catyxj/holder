@@ -31,13 +31,14 @@ main{
 }
 
 .sidenav {
-  width: 230px;
+  width: 260px;
   /*width: 100%;*/
-  box-shadow: 3px 0 6px rgba(0,0,0,.24);
-  background-color: #e9ecef;
+  /*box-shadow: 3px 0 6px rgba(0,0,0,.24);*/
+  /*background-color: #e9ecef;*/
+  background-color: #2b303b;
   overflow-x: hidden;
 
   /*background-color: #224562;*/
-  /*color: #fff;*/
+  color: #fff;
 }
 

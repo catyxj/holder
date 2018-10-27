@@ -12,7 +12,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   boilers: any = [];
   boiler: any;
   page = 1;
-  pageSize = 4;
+  pageSize = 3;
   totalItems;
   search: string;
   socket: any;
@@ -138,7 +138,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // console.log('page close');
-    sessionStorage.setItem('pageNum', this.page.toString());
+    // sessionStorage.setItem('pageNum', this.page.toString());
     this.socket.unsubscribe();
     this.boilerWsService.closeSocket();
   }

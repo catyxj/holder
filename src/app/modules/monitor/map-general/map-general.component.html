@@ -1,15 +1,45 @@
 
+<div class="mat-card-title">
+  <h5 class="text_info pull-left"> 设备概览 </h5>
+  <nav class="pull-left flex">
+    <a routerLink="/admin/monitor/clusters" routerLinkActive="btn_info" class="btn">集群模式</a>
+    <a routerLink="/admin/monitor/dashboard" routerLinkActive="btn_info" class="btn">图文模式</a>
+    <a routerLink="/admin/monitor/list" routerLinkActive="btn_info" class="btn">列表模式</a>
+    <div class="tab_map">
+      <a routerLink="/admin/monitor/map/general" class="btn btn_info mr-3 tab_btn_1">地图模式1</a>
+      <a routerLink="/admin/monitor/map/batch" class="btn btn_info mr-3 tab_btn_2">地图模式2</a>
+    </div>
+
+  </nav>
+
+</div>
+
+
+
 <div class="mb-3" style="position: relative;">
-  <div id="container" style="width: 100%; height: 480px;">
+  <div id="container" style=" width: 100%; height: 750px;">
 
   </div>
 
   <div class="map_stat" >
-    <b> 设备数量 </b>： <span>{{ statusData?.eptCount }}</span>
-    <b> 运行设备 </b>： <span>{{ statusData?.eptOnline }}</span>
-    <b> 在线终端 </b>： <span>{{ statusData?.termOnline }}</span>
-    <b> 离线终端 </b>： <span>{{ statusData?.termOffline }}</span>
-    <b> 告警数量 </b>： <span>{{ statusData?.alarmCount }}</span>
+    <div class="flex" style="justify-content: space-between;">
+      <div>
+        <b> 设备数量 </b>： <span>{{ statusData?.eptCount }}</span>
+      </div>
+      <div>
+        <b> 运行设备 </b>： <span>{{ statusData?.eptOnline }}</span>
+      </div>
+      <div>
+        <b> 在线终端 </b>： <span>{{ statusData?.termOnline }}</span>
+      </div>
+      <div>
+        <b> 离线终端 </b>： <span>{{ statusData?.termOffline }}</span>
+      </div>
+      <div>
+        <b> 告警数量 </b>： <span>{{ statusData?.alarmCount }}</span>
+      </div>
+    </div>
+
   </div>
 </div>
 

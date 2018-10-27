@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AlarmService} from "../../../shared/alarm.service";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {AlarmDetailComponent} from "../alarm-detail/alarm-detail.component";
+import {AlarmService} from '../../../shared/alarm.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AlarmDetailComponent} from '../alarm-detail/alarm-detail.component';
 
 @Component({
   selector: 'app-current',

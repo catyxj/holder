@@ -10,7 +10,7 @@ export class ClusterDashboardComponent implements OnInit, OnDestroy {
 
   clusters: any = [];
   page = 1;
-  pageSize = 4;
+  pageSize = 2;
   totalItems = 0;
   search: string;
   socket: any;
@@ -55,38 +55,20 @@ export class ClusterDashboardComponent implements OnInit, OnDestroy {
     /*this.clusters = [
       {
         Uid: '54557765654445',
-        Name: 'adfa',
-        Online: true,
-        IsBurning: true,
-        Warning: false,
-        Malfunction: false,
+        name: 'adfa',
+        termOnline: 11,
+        termOffline: 22,
+        alarmCounts: 2,
+        eptOnline: 11,
         img: ''
       },
       {
         Uid: '54557765654445',
-        Name: 'adsfadfw',
-        Online: true,
-        IsBurning: true,
-        Warning: true,
-        Malfunction: false,
-        img: ''
-      },
-      {
-        Uid: '54557765654445',
-        Name: 'adfa',
-        Online: true,
-        IsBurning: false,
-        Warning: false,
-        Malfunction: true,
-        img: ''
-      },
-      {
-        Uid: '54557765654445',
-        Name: 'adsfadfw',
-        Online: false,
-        IsBurning: true,
-        Warning: false,
-        Malfunction: false,
+        name: 'adsfadfw',
+        termOnline: 22,
+        termOffline: 33,
+        alarmCounts: 2,
+        eptOnline: 3,
         img: ''
       }
     ];

@@ -14,7 +14,7 @@ ul,li{
   list-style: none;
 }
 .content{
-  padding: 10px 30px;
+  padding: 30px;
 }
 .tab-content{
   padding: 10px 0;
@@ -72,27 +72,34 @@ h5, .h5 {
 
 
 .text_info {
-  color: #17a2b8 !important;
+  color: #17a2b8;
 }
 
 .btn_info,.btn_info.ant-btn:focus, .btn_info.ant-btn:hover {
   color: #fff;
-  background-color: #17a2b8;
-  border-color: #17a2b8;
+  /*background-color: #17a2b8;*/
+  /*border-color: #17a2b8;*/
+  background-color: #00a4ff;
+  border-color: #00a4ff;
 }
 .btn_info:hover {
   color: #fff;
-  background-color: #138496;
-  border-color: #117a8b;
+  /*background-color: #138496;*/
+  /*border-color: #117a8b;*/
+  background-color: #00a4ff;
+  border-color: #00a4ff;
 }
 
 .bg_grey{
-  background-color: #dfe4ed;
-  color: #888888;
+  /*background-color: #dfe4ed;*/
+  background-color: #bfbfbf;
+  /*color: #888888;*/
+  color: #333333;
 }
 
 .bg_info{
-
+  background-color: #00a4ff;
+  color: #ffffff;
 }
 .bg_default{
   background-color: #607D8B;
@@ -110,6 +117,9 @@ h5, .h5 {
 .bg_light_primary{
   /*background-color: #819ca9;*/
   background-color: #6f94a6;
+  background-image: url("./assets/images/table_header.jpg");
+  background-position: center;
+  background-size: 100% 100%;
   color: #ffffff;
 }
 .bg_dark_primary{
@@ -139,31 +149,130 @@ h5, .h5 {
 
 
 
+.sidenav .mat-nav-list .mat-list-item .mat-list-item-content {
+  padding: 0 46px;
+}
+.mat-card-title{
+  position: fixed;
+  top: 0;
+  left: 290px;
+  z-index: 9;
+  padding: 15px 0;
+  box-sizing: border-box;
+}
+.mat-card-title .text_info{
+  color: #ffffff;
+  line-height: 33px;
+  margin-bottom: 0;
+}
+.mat-card-title h5{
+  padding-right: 30px;
+}
+.mat-card-title h5 img{
+  width: 22px;
+  /*height: 22px;*/
+  margin-right: 5px;
+}
+.mat-card-title .input-group input{
+  width: 230px;
+}
+.mat-card-title nav a{
+  color: #ffffff;
+}
+.tab_map{
+  display: flex;
+  flex-direction: column;
+}
+/*背景色*/
+.mat-drawer-container{
+  background-color: #e5e5e5;
+}
+
+/*表格样式*/
+.content .table{
+  border-bottom: 1px solid #dee2e6;
+  margin-bottom: 0;
+  color: #666666;
+}
+.content .table td{
+  background-color: #ffffff;
+  text-align: center;
+}
+.content .table thead th{
+  font-weight: normal;
+  height: 70px;
+  border: none;
+  vertical-align: middle;
+  text-align: center;
+}
+.t_content{
+  background-color: #ffffff;
+}
+.t_content p{
+  margin-bottom: 0;
+  padding: 20px;
+}
+.t_bottom{
+  background-color: #ffffff;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 20px;
+}
+.t_bottom .pull-right.mr-3{
+  display: none;
+}
+
+.content .page-link {
+  position: relative;
+  display: block;
+  padding: 0.75rem 1rem;
+  line-height: 1.25;
+  color: #333333;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 3px;
+  margin: 0 3px;
+}
+.content .page-item.active .page-link {
+  z-index: 1;
+  background-color: #00a4ff;
+  border-color: #00a4ff;
+}
+.content .page-link:hover {
+  z-index: 2;
+  color: #333333;
+  text-decoration: none;
+  background-color: #e9ecef;
+  border-color: #dee2e6;
+}
+
+
+
 /*滚动条*/
 .mat-sidenav-content::-webkit-scrollbar,.sidenav::-webkit-scrollbar,.scroll_bar::-webkit-scrollbar{
-  width: 6px;     /*高宽分别对应横竖滚动条的尺寸*/
-  height: 7px;
+  /*width: 6px;     !*高宽分别对应横竖滚动条的尺寸*!*/
+  /*height: 7px;*/
   /*background-color: #51aded;*/
-  /*display: none;*/
+  display: none;
 }
-.scroll_bar::-webkit-scrollbar-button{
+/*.scroll_bar::-webkit-scrollbar-button{
   background-color:#819ca9;
   background-size: 6px 6px;
 }
-/*定义滚动条轨道*/
+!*定义滚动条轨道*!
 .mat-sidenav-content::-webkit-scrollbar-track,.sidenav::-webkit-scrollbar-track,.scroll_bar::-webkit-scrollbar-track
 {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  /*border-radius: 10px;*/
-  /*background-color: #F5F5F5;*/
+  !*border-radius: 10px;*!
+  !*background-color: #F5F5F5;*!
 }
-/*定义滑块 内阴影+圆角*/
+!*定义滑块 内阴影+圆角*!
 .mat-sidenav-content::-webkit-scrollbar-thumb,.sidenav::-webkit-scrollbar-thumb, .scroll_bar::-webkit-scrollbar-thumb
 {
   border-radius: 5px;
-  /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);*/
+  !*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);*!
   background-color: #819ca9;
-}
+}*/
 
 
 

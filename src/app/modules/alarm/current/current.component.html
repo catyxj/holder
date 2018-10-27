@@ -1,6 +1,12 @@
 
 <div class="">
-  <div class="mat-card-title" style="padding-top:10px; ">
+  <div class="mat-card-title">
+    <h5 class="text_info pull-left"> 告警列表 </h5>
+
+    <nav class="pull-left">
+      <a routerLink="/admin/alarm/current" routerLinkActive="active" class="btn btn_info">当前告警</a>
+      <a routerLink="/admin/alarm/history" routerLinkActive="active" class="btn ml-2 mr-3">历史告警</a>
+    </nav>
 
     <div class="pull-right flex flex-row">
       <div class="input-group mb-2">
@@ -13,7 +19,7 @@
 
   </div>
 
-  <div>
+  <div class="t_content">
     <table class="table table-bordered alarm_current">
       <thead class="bg_light_primary">
 
@@ -50,7 +56,7 @@
   </div>
 
 
-  <div>
+  <div class="t_bottom">
 
 
     <div class="pull-left">
@@ -63,7 +69,7 @@
     <ngb-pagination class="pull-right"
                     [collectionSize]="totalItems"
                     [pageSize]="pageSize" [(page)]="page"
-                    [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                    [maxSize]="3" [rotate]="true" [boundaryLinks]="false"
                     (pageChange)="pageChange()">
 
     </ngb-pagination>

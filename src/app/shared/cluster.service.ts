@@ -18,7 +18,7 @@ export class ClusterService {
 
   // private clusterUrl = 'assets/server/cluster_list.json';
   // private clustersUrl = 'assets/server/cluster_list_all.json';
-  // private clusEquipUrl = 'assets/server/cluster_list.json';
+  // private clusEquipUrl = 'assets/server/cluster_equip.json';
 
   private clusterUrl = '/cluster_list';
   private clustersUrl = '/cluster_list_all';

@@ -1,6 +1,6 @@
 
 <div class="">
-  <div class="mat-card-title" style="padding: 20px 0; overflow: hidden;">
+  <div class="mat-card-title">
     <h5 class="text_info pull-left">模板列表</h5>
 
     <div class="pull-right flex flex-row">
@@ -20,9 +20,9 @@
 
   </div>
 
-  <div>
+  <div class="t_content">
     <nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning">
-    <table class="table table-bordered">
+    <table class="table">
       <thead class="bg_light_primary">
       <th>
         <div class="checkbox c-checkbox white">
@@ -70,7 +70,7 @@
     <nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning"></nz-spin>
   </div>-->
 
-  <div>
+  <div class="t_bottom">
     <div class="pull-left">
       <button class="btn btn_info" (click)="deleteG()">
         批量删除
@@ -81,7 +81,7 @@
     <ngb-pagination class="pull-right"
                     [collectionSize]="totalItems"
                     [pageSize]="pageSize" [(page)]="page"
-                    [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                    [maxSize]="3" [rotate]="true" [boundaryLinks]="false"
                     (pageChange)="pageChange()">
 
     </ngb-pagination>

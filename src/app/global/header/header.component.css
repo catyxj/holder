@@ -2,8 +2,13 @@
 mat-toolbar{
   /*background-color: #3C8DBC;*/
   /*background-color: #607D8B;*/
-  background-color: #51859d;
+  /*background-color: #51859d;*/
+  background-image: url("../../../assets/images/header.jpg");
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   color: #fff;
+  border-bottom: 1px solid #ffffff;
 }
 .example-icon {
   padding: 0 14px;

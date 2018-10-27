@@ -22,27 +22,29 @@ import {TerminalListComponent} from './terminal/terminal-list/terminal-list.comp
 import {TerConfigComponent} from './terminal/ter-config/ter-config.component';
 import {MessagesComponent} from './terminal/messages/messages.component';
 import {ClusterMainComponent} from './cluster/cluster-main/cluster-main.component';
-import {ClusterListComponent} from "./cluster/cluster-list/cluster-list.component";
-import {ClusterDetailComponent} from "./cluster/cluster-detail/cluster-detail.component";
-import {TemplateMainComponent} from "./template/template-main/template-main.component";
-import {TemplateListComponent} from "./template/template-list/template-list.component";
-import {EditTempComponent} from "./template/edit-temp/edit-temp.component";
-import {AlarmMainComponent} from "./alarm/alarm-main/alarm-main.component";
-import {CurrentComponent} from "./alarm/current/current.component";
-import {HistoryComponent} from "./alarm/history/history.component";
-import {MapGeneralComponent} from "./monitor/map-general/map-general.component";
-import {MapBatchComponent} from "./monitor/map-batch/map-batch.component";
-import {RuntimeDashboardComponent} from "./runtime/dashboard/dashboard.component";
-import {CluEquiplistComponent} from "./monitor/clu-equiplist/clu-equiplist.component";
-import {ClusterDashboardComponent} from "./monitor/cluster-dashboard/cluster-dashboard.component";
-import {OperateComponent} from "./runtime/operate/operate.component";
-import {RuntimeHistoryComponent} from "./runtime/history/history.component";
-import {RuntimeAlarmComponent} from "./runtime/alarm/alarm.component";
-import {BoilerTemplatesComponent} from "./boilers/templates/templates.component";
-import {MaintainMainComponent} from "./maintain/maintain-main/maintain-main.component";
-import {UploadMainComponent} from "./upload/upload-main/upload-main.component";
-import {MaintainListComponent} from "./maintain/maintain-list/maintain-list.component";
-import {PlcAlarmComponent} from "./terminal/plc-alarm/plc-alarm.component";
+import {ClusterListComponent} from './cluster/cluster-list/cluster-list.component';
+import {ClusterDetailComponent} from './cluster/cluster-detail/cluster-detail.component';
+import {TemplateMainComponent} from './template/template-main/template-main.component';
+import {TemplateListComponent} from './template/template-list/template-list.component';
+import {EditTempComponent} from './template/edit-temp/edit-temp.component';
+import {AlarmMainComponent} from './alarm/alarm-main/alarm-main.component';
+import {CurrentComponent} from './alarm/current/current.component';
+import {HistoryComponent} from './alarm/history/history.component';
+import {MapGeneralComponent} from './monitor/map-general/map-general.component';
+import {MapBatchComponent} from './monitor/map-batch/map-batch.component';
+import {RuntimeDashboardComponent} from './runtime/dashboard/dashboard.component';
+import {CluEquiplistComponent} from './monitor/clu-equiplist/clu-equiplist.component';
+import {ClusterDashboardComponent} from './monitor/cluster-dashboard/cluster-dashboard.component';
+import {OperateComponent} from './runtime/operate/operate.component';
+import {RuntimeHistoryComponent} from './runtime/history/history.component';
+import {AlarmCurrentComponent} from './runtime/alarm-current/alarm-current.component';
+import {RuntimeAlarmComponent} from './runtime/alarm/alarm.component';
+import {BoilerTemplatesComponent} from './boilers/templates/templates.component';
+import {MaintainMainComponent} from './maintain/maintain-main/maintain-main.component';
+import {UploadMainComponent} from './upload/upload-main/upload-main.component';
+import {MaintainListComponent} from './maintain/maintain-list/maintain-list.component';
+import {PlcAlarmComponent} from './terminal/plc-alarm/plc-alarm.component';
+
 
 
 export const ModulesRoutingModule = [
@@ -133,7 +135,7 @@ export const ModulesRoutingModule = [
               { path: '', redirectTo: 'current', pathMatch: 'full' },
               {
                 path: 'current',
-                component: CurrentComponent,
+                component: AlarmCurrentComponent,
               },
               {
                 path: 'history',

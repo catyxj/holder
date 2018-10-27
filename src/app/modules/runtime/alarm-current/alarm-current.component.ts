@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {AlarmService} from "../../../shared/alarm.service";
-import {AlarmDetailComponent} from "../../alarm/alarm-detail/alarm-detail.component";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AlarmService} from '../../../shared/alarm.service';
+import {AlarmDetailComponent} from '../../alarm/alarm-detail/alarm-detail.component';
 
 
 @Component({
@@ -22,7 +22,10 @@ export class AlarmCurrentComponent implements OnInit {
               private alarmService: AlarmService) { }
 
   ngOnInit() {
-    this.uid = sessionStorage.getItem('runtimeUid');
+    let uid = sessionStorage.getItem('runtimeUid');
+    if (uid) {
+      this.uid = uid;
+    }
     this.getalarms();
   }
 
@@ -39,6 +42,9 @@ export class AlarmCurrentComponent implements OnInit {
   // 每页数量
   pageSizeChange() {
     this.page = 1;
+    if (typeof(this.pageSize) !== 'number') {
+      this.pageSize = parseInt(this.pageSize);
+    }
     this.pageChange();
   }
 
@@ -54,7 +60,7 @@ export class AlarmCurrentComponent implements OnInit {
   }
 
   view(data) {
-    console.log(data);
+    // console.log(data);
     const modalRef = this.modalService.open(AlarmDetailComponent, {size: 'lg'});
     modalRef.componentInstance.currentData = data;
     modalRef.result.then((result) => {
