@@ -161,10 +161,10 @@ export class MapGeneralComponent implements OnInit, OnDestroy {
       // type: BMAP_NAVIGATION_CONTROL_ZOOM,
       // 启用显示定位
       enableGeolocation: true,
-      offset: {
-        width: 50,
-        height: 100
-      }
+      // offset: {
+      //   width: 50,
+      //   height: 100
+      // }
     });
     map.addControl(navigationControl);
 
