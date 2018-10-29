@@ -44,7 +44,7 @@ export class AlarmDetailComponent implements OnInit {
         let runtimeList = [];
         for (let i = 0; i < this.runtimes.length; i++) {
           let rt = this.runtimes[i];
-          rt.CreatedDate = this.datePipe.transform(new Date(rt.CreatedDate), 'HH:mm:ss');
+          rt.CreatedDate = this.datePipe.transform(new Date(rt.CreatedDate), 'MM/dd HH:mm:ss');
           // rt.Value = rt.Value;
           runtimeList.push(rt.Value);
         }
