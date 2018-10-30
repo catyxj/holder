@@ -39,13 +39,16 @@
       <!--控制-->
       <div *ngIf="controlShow && termStatus === 1" class="mb-3">
         <div class="btn-group" style="width: 100%;">
-          <button class="btn btn-outline-info" style="width: 33%;" (click)="equipControl(2)" [disabled]="termStatus === 1 && eptStatus === true">
+          <button class="btn btn-outline-info" style="width: 33%;" (click)="equipControl(2)"
+                  [disabled]="termStatus === 1 && eptStatus === true || isLoading === true">
             启动
           </button>
-          <button class="btn btn-outline-danger" style="width: 33%;" (click)="equipControl(1)" [disabled]="termStatus !== 1 || eptStatus === false">
+          <button class="btn btn-outline-danger" style="width: 33%;" (click)="equipControl(1)"
+                  [disabled]="termStatus !== 1 || eptStatus === false || isLoading === true">
             关闭
           </button>
-          <button class="btn btn-outline-success" style="width: 33%;" (click)="equipControl(3)">
+          <button class="btn btn-outline-success" style="width: 33%;" (click)="equipControl(3)"
+                  [disabled]="isLoading === true">
             重置
           </button>
         </div>
@@ -129,7 +132,7 @@
         </table>
 
         <!--平均值-->
-        <table class="table" style="color:#888888;">
+        <!--<table class="table" style="color:#888888;">
           <tr *ngFor="let data of averageList; trackBy: trackByUid;">
             <td>
               通道
@@ -151,7 +154,7 @@
             </td>
 
           </tr>
-        </table>
+        </table>-->
 
       </div>
     </div>

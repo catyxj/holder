@@ -19,6 +19,7 @@ export class EditTerminalComponent implements OnInit {
   public bin;
   public bins;
   public user;
+  public isLoading = false;
 
   constructor(public activeModal: NgbActiveModal,
               private terminalService: TerminalService) { }
@@ -70,14 +71,18 @@ export class EditTerminalComponent implements OnInit {
 
   // 重启
   restart() {
+    let that = this;
+    this.isLoading = true;
     this.terminalService.restart(this.data.code)
       .subscribe( val => {
+        that.isLoading = false;
         Swal(
           '重启成功！',
           '',
           'success'
         );
       }, err => {
+        that.isLoading = false;
         Swal(
           '重启失败！',
           err,

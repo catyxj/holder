@@ -105,7 +105,8 @@
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn_info align-self-start mr-auto" (click)="restart()">
+  <button type="button" class="btn btn_info align-self-start mr-auto" (click)="restart()"
+          nz-button [nzLoading]="isLoading">
     重启
   </button>
 
