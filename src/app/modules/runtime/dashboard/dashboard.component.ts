@@ -31,6 +31,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
   public imgStop;
   public controlShow = false;
   public averageList;
+  public isLoading = false;
 
   constructor(private boilerWsService: BoilerSocketService,
               private route: ActivatedRoute,
@@ -189,18 +190,22 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
 
   // 控制
   equipControl(n) {
+    let that = this;
     let ctrlData = {
       uid: this.uid,
       ctl_type: n
     };
+    this.isLoading = true;
     this.runtimeService.equipControl(ctrlData)
       .subscribe( data => {
+        that.isLoading = false;
         Swal(
           '发送成功！',
           '',
           'success'
         );
       }, err => {
+        that.isLoading = false;
         Swal(
           '发送失败！',
           err,
@@ -216,7 +221,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
 
 
   trackByUid(index, item) {
-    return item.Uid;
+    return item.ChannelNumber;
   }
 
   // 平均值
@@ -252,7 +257,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
     }
 
     this.averageList = averages;
-    console.log(averages);
+    // console.log(averages);
   }
 
 

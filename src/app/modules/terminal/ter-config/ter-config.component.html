@@ -1,4 +1,4 @@
-<div class="pb-5">
+<div class="pb-5 ter_config">
   <div class="mat-card-title" style="padding-top: 20px; padding-bottom: 20px;  overflow: hidden;">
     <h5 class="text_info pull-left">
       通道自定义配置
@@ -428,6 +428,10 @@
                     class="form-control">
               <option *ngFor="let x of subAdrs" [value]="x.Id">{{x.Name}}</option>
             </select>
+
+            <!--<nz-select nzShowSearch nzPlaceHolder="" [(ngModel)]="infomation.subAdr" style="width: 100%;">
+              <nz-option *ngFor="let x of subAdrs" [nzLabel]="x.Name" [nzValue]="x.Id"></nz-option>
+            </nz-select>-->
 
           </td>
         </tr>
