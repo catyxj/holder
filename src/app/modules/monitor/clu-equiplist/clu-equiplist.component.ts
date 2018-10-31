@@ -21,6 +21,7 @@ export class CluEquiplistComponent implements OnInit, OnDestroy {
   public checkList = [];
   public allCheck = false;
   public uid;
+  public name;
   private socket;
 
   constructor(private boilerService: BoilerService,
@@ -31,6 +32,7 @@ export class CluEquiplistComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
+    this.name = this.route.snapshot.paramMap.get('name');
     let message = {
       page: this.page,
       search: this.search,

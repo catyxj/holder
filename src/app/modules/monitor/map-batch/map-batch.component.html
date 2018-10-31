@@ -1,6 +1,9 @@
 
 <div class="mat-card-title">
-  <h5 class="text_info pull-left"> 设备概览 </h5>
+  <h5 class="text_info pull-left">
+    <img src="assets/icons/monitor.png" alt="">
+    设备概览
+  </h5>
   <nav class="pull-left flex">
     <a routerLink="/admin/monitor/clusters" routerLinkActive="btn_info" class="btn">集群模式</a>
     <a routerLink="/admin/monitor/dashboard" routerLinkActive="btn_info" class="btn">图文模式</a>
@@ -47,6 +50,17 @@
     </div>-->
 
     <div class="map_list_box">
+      <div class="flex mb-3" style="width: 100%;">
+        <div style="width:68%; font-size: 16px;">
+          <img src="assets/icons/map201.png" alt="">
+          名称
+        </div>
+        <div style=" font-size: 16px;">
+          <img src="assets/icons/map202.png" alt="">
+          状态
+        </div>
+      </div>
+
       <ul class="map_list_in">
         <li *ngFor="let data of markers">
           <a [routerLink]="['/admin/runtime', data.uid, data.name]" target="_blank"

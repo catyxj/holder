@@ -1,7 +1,10 @@
 
 <div class="content">
   <div class="mat-card-title">
-    <h5 class="text_info pull-left"> 设备概览 </h5>
+    <h5 class="text_info pull-left">
+      <img src="assets/icons/monitor.png" alt="">
+      设备概览
+    </h5>
     <nav class="pull-left">
       <a routerLink="/admin/monitor/clusters" routerLinkActive="btn_info" class="btn">集群模式</a>
       <a routerLink="/admin/monitor/dashboard" routerLinkActive="btn_info" class="btn">图文模式</a>
@@ -27,7 +30,7 @@
     <div *ngFor="let data of clusters; trackBy : trackByUid;" class="col-6 mb-2">
       <div class="module flex">
         <div class="status_content">
-          <a [routerLink]="['/admin/monitor/cluster', data.uid]" target="_blank">
+          <a [routerLink]="['/admin/monitor/cluster', data.uid ,data.name]" target="_blank">
             <h5 class="mb-3 status_name">
               {{data.name}}
             </h5>
@@ -60,7 +63,7 @@
           </div>
         </div>
         <div class="img_content">
-          <a [routerLink]="['/admin/monitor/cluster', data.uid]" target="_blank">
+          <a [routerLink]="['/admin/monitor/cluster', data.uid, data.name]" target="_blank">
             <img src="{{data.img}}" alt="">
           </a>
         </div>

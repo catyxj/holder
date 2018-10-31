@@ -23,16 +23,16 @@
   right: 0;
   width: 260px;
   background-color: #ffffff;
-  padding: 20px 0;
+  padding:30px 20px;
   box-sizing: border-box;
   /*border: 1px solid #eeeeee;*/
 }
 .map_lists ul li{
-  padding: 10px 10px;
+  padding: 10px 0px;
 }
 .map_list_box{
   margin-bottom: 10px;
-  height: 396px;
+  height: 468px;
   overflow: auto;
 }
 .map_list_in{
@@ -49,11 +49,12 @@
   width: 10px;
   height:10px;
   border-radius: 10px;
-  margin-right: 5px;
+  margin-right: 10px;
   margin-top: 5px;
 }
 .icon_info{
-  background-color: #17a2b8;
+  /*background-color: #17a2b8;*/
+  background-color: #00a4ff;
 }
 .icon_default{
   background-color: #eee;

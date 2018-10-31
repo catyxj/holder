@@ -1,5 +1,15 @@
-<div class="">
-  <div class="clearfix" style="padding: 15px 0; ">
+<div class="content">
+  <div class="mat-card-title">
+
+    <h5 class="text_info pull-left"> 设备概览 </h5>
+    <nav class="pull-left">
+      <a routerLink="/admin/monitor/clusters" routerLinkActive="btn_info" class="btn">集群模式</a>
+      <a routerLink="/admin/monitor/dashboard" routerLinkActive="btn_info" class="btn">图文模式</a>
+      <a routerLink="/admin/monitor/list" routerLinkActive="btn_info" class="btn">列表模式</a>
+      <a routerLink="/admin/monitor/map" routerLinkActive="btn_info" class="btn mr-3">地图模式</a>
+    </nav>
+
+
     <div class="pull-right flex flex-row">
 
       <div class="input-group">
@@ -20,8 +30,8 @@
 
   </div>
 
-  <div>
-    <table class="table table-bordered">
+  <div class="t_content">
+    <table class="table">
       <thead class="bg_light_primary">
       <!--<th>
         <div class="checkbox c-checkbox white">
@@ -87,7 +97,7 @@
     </table>
   </div>
 
-  <div>
+  <div  class="t_bottom">
 
     <!--<div class="pull-left">
       <nz-dropdown [nzPlacement]="'topLeft'">
@@ -109,7 +119,7 @@
     <ngb-pagination class="pull-right"
                     [collectionSize]="totalItems"
                     [pageSize]="pageSize" [(page)]="page"
-                    [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                    [maxSize]="3" [rotate]="true" [boundaryLinks]="false"
                     (pageChange)="pageChange()">
 
     </ngb-pagination>

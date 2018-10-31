@@ -44,7 +44,7 @@ export const MonitorRoutingModule = [
         component: ClusterDashboardComponent
       },
       {
-        path: 'cluster/:uid',
+        path: 'cluster/:uid/:name',
         component: CluEquiplistComponent
       }
     ]

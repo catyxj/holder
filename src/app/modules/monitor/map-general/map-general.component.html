@@ -1,6 +1,9 @@
 
 <div class="mat-card-title">
-  <h5 class="text_info pull-left"> 设备概览 </h5>
+  <h5 class="text_info pull-left">
+    <img src="assets/icons/monitor.png" alt="">
+    设备概览
+  </h5>
   <nav class="pull-left flex">
     <a routerLink="/admin/monitor/clusters" routerLinkActive="btn_info" class="btn">集群模式</a>
     <a routerLink="/admin/monitor/dashboard" routerLinkActive="btn_info" class="btn">图文模式</a>
@@ -24,18 +27,23 @@
   <div class="map_stat" >
     <div class="flex" style="justify-content: space-between;">
       <div>
+        <img src="assets/icons/map01.png" alt="">
         <b> 设备数量 </b>： <span>{{ statusData?.eptCount }}</span>
       </div>
       <div>
+        <img src="assets/icons/map02.png" alt="">
         <b> 运行设备 </b>： <span>{{ statusData?.eptOnline }}</span>
       </div>
       <div>
+        <img src="assets/icons/map03.png" alt="">
         <b> 在线终端 </b>： <span>{{ statusData?.termOnline }}</span>
       </div>
       <div>
+        <img src="assets/icons/map04.png" alt="">
         <b> 离线终端 </b>： <span>{{ statusData?.termOffline }}</span>
       </div>
       <div>
+        <img src="assets/icons/map05.png" alt="">
         <b> 告警数量 </b>： <span>{{ statusData?.alarmCount }}</span>
       </div>
     </div>

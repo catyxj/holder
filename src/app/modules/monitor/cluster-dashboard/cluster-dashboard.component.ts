@@ -54,7 +54,7 @@ export class ClusterDashboardComponent implements OnInit, OnDestroy {
 
     /*this.clusters = [
       {
-        Uid: '54557765654445',
+        uid: '54557765654445',
         name: 'adfa',
         termOnline: 11,
         termOffline: 22,
@@ -63,7 +63,7 @@ export class ClusterDashboardComponent implements OnInit, OnDestroy {
         img: ''
       },
       {
-        Uid: '54557765654445',
+        uid: '54557765654445',
         name: 'adsfadfw',
         termOnline: 22,
         termOffline: 33,

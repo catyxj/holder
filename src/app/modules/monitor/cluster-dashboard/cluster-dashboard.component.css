@@ -57,6 +57,7 @@ a {
 .module .img_content{
   flex: 2;
   overflow: hidden;
+  height: 550px;
 }
 .module .img_content img{
   width: 100%;

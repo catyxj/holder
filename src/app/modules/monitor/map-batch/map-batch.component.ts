@@ -116,22 +116,82 @@ export class MapBatchComponent implements OnInit {
       {
         lng: 121,
         lat: 29,
-        name: '122'
+        name: '122',
+        termStatus: 1,
+        eptStatus: true,
+        alarmStatus: true
       },
       {
         lng: 121,
         lat: 28,
-        name: 'daf'
+        name: 'daf',
+        termStatus: 1,
+        eptStatus: true,
+        alarmStatus: false
       },
       {
         lng: 119,
         lat: 32,
-        name: '11fer'
+        name: '11fer',
+        termStatus: 1,
+        eptStatus: false,
+        alarmStatus: false
       },
       {
         lng: 119,
         lat: 29,
-        name: 'dd2'
+        name: 'dd2',
+        termStatus: 0,
+        eptStatus: true,
+        alarmStatus: false
+      },
+      {
+        lng: 121,
+        lat: 29,
+        name: '122',
+        termStatus: 1,
+        eptStatus: true,
+        alarmStatus: true
+      },
+      {
+        lng: 121,
+        lat: 28,
+        name: 'daf',
+        termStatus: 1,
+        eptStatus: true,
+        alarmStatus: false
+      },
+      {
+        lng: 119,
+        lat: 32,
+        name: '11fer',
+        termStatus: 1,
+        eptStatus: false,
+        alarmStatus: false
+      },
+      {
+        lng: 119,
+        lat: 29,
+        name: 'dd2',
+        termStatus: 0,
+        eptStatus: true,
+        alarmStatus: false
+      },
+      {
+        lng: 119,
+        lat: 32,
+        name: '11fer',
+        termStatus: 1,
+        eptStatus: false,
+        alarmStatus: false
+      },
+      {
+        lng: 119,
+        lat: 29,
+        name: 'dd2',
+        termStatus: 0,
+        eptStatus: true,
+        alarmStatus: false
       }
     ];
     this.totalItems = 100;*/
