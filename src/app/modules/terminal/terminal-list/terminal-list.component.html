@@ -65,7 +65,7 @@
           <td>
             {{ ter.EquipmentName }}
           </td>
-          <td> {{ ter.TermVer }}  </td>
+          <td> 终端 {{ ter.TermVer }} / 平台 {{ter.PlatVer}}  </td>
           <td> {{ ter.TemplateName || "默认配置" }} </td>
           <td>
             <a [routerLink]="['/admin/terminal/messages', ter.Sn]" class="btn btn_info btn-sm" target="_blank" style="color: #ffffff;">调试</a>
