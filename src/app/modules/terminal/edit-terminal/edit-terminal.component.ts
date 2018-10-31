@@ -54,13 +54,15 @@ export class EditTerminalComponent implements OnInit {
   // 升级
   upgrade() {
     this.terminalService.upgrade({code: this.data.code.toString(), binName: this.bin})
-      .subscribe( () => {
+      .subscribe( (res) => {
+        console.log('upgrade success', res);
         Swal(
-          '升级成功！',
+          res.data,
           '',
           'success'
         );
       }, err => {
+        // console.log('upgrade error', err);
         Swal(
           '升级失败！',
           err,
