@@ -61,7 +61,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
     let message = {
       uid: this.uid
     };
-    const wsUrl = `ws://${window.location.host}/equipment_instant`;
+    const wsUrl = `wss://${window.location.host}/equipment_instant`;
     this.socket = this.boilerWsService.creatSocket(wsUrl, message)
       .subscribe(
         data => {

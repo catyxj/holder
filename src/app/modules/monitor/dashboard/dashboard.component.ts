@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getBoilers(message): void {
     console.log(message);
-    const wsUrl = `ws://${window.location.host}/equipment_show`;
+    const wsUrl = `wss://${window.location.host}/equipment_show`;
     this.socket = this.boilerWsService.creatSocket(wsUrl, message)
       .subscribe(
         data => {

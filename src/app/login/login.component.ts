@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
   forgetPwd() {}
 
   getConfig(): any {
-    const IP_JSON_URL = 'http://ipv4.myexternalip.com/json';
+    const IP_JSON_URL = 'https://ipv4.myexternalip.com/json';
     return this.http.get(IP_JSON_URL);
   }
 
