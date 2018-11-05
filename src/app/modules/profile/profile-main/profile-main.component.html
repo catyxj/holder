@@ -4,7 +4,22 @@
 
 <div class="flex flex-row mt-2">
   <div class="content" style="flex: 2;">
-    <div class="clearfix tab-content">
+
+    <div class="mat-card-title">
+      <h5 class="text_info pull-left">
+        <img src="assets/icons/user.png" alt="">
+        用户信息
+      </h5>
+
+      <nav class="pull-right">
+        <a routerLink="/admin/profile/info" routerLinkActive="btn_info" class="btn">个人信息</a>
+        <a routerLink="/admin/profile/portrait" routerLinkActive="btn_info" class="btn">修改头像</a>
+        <a routerLink="/admin/profile/password" routerLinkActive="btn_info" class="btn">修改密码</a>
+      </nav>
+
+    </div>
+
+    <!--<div class="clearfix tab-content">
       <h5 class="pull-left text_info">
         账户设置
       </h5>
@@ -13,7 +28,7 @@
         <a routerLink="/admin/profile/portrait" routerLinkActive="active">修改头像</a>
         <a routerLink="/admin/profile/password" routerLinkActive="active">修改密码</a>
       </nav>
-    </div>
+    </div>-->
 
     <div>
       <router-outlet></router-outlet>
@@ -21,7 +36,7 @@
   </div>
 
 
-  <div class="content text-center" style="flex: 1; max-width: 440px; ">
+  <!--<div class="content text-center" style="flex: 1; max-width: 440px;">
     <div>
       <img [src]="profile.Picture" alt=""
            style="width: 60%; height: 200px; border-radius: 100px;">
@@ -39,7 +54,8 @@
       {{ profile?.Organization?.Name }}
     </div>
 
-  </div>
+  </div>-->
+
 </div>
 
 

@@ -45,7 +45,7 @@ export class CluEquiplistComponent implements OnInit, OnDestroy {
   // 获取列表数据
   getClusterEquip(message) {
 
-    const wsUrl = `ws://${window.location.host}/clusters_detail_show`;
+    const wsUrl = `wss://${window.location.host}/clusters_detail_show`;
     this.socket = this.boilerWsService.creatSocket(wsUrl, message)
       .subscribe(
         data => {

@@ -6,7 +6,10 @@
 
 <div class="content">
   <div class="mat-card-title">
-    <h5 class="text_info pull-left">企业列表</h5>
+    <h5 class="text_info pull-left">
+      <img src="assets/icons/org.png" alt="">
+      企业列表
+    </h5>
     <div class="pull-right flex flex-row">
 
       <div class="input-group">
@@ -18,11 +21,11 @@
 
 
 
-      <div class="ml-3" *ngIf="user && user.Role && user.Role.RoleId <= 10">
+      <!--<div class="ml-3" *ngIf="user && user.Role && user.Role.RoleId <= 10">
         <button class="btn btn_info" (click)="newOrg()">
           新增企业
         </button>
-      </div>
+      </div>-->
 
     </div>
   </div>
@@ -59,31 +62,33 @@
         <td> <span> {{ org.Type?.Name }} </span>  </td>
 
         <td>
-          <button class="btn btn-sm btn-outline-info" (click)="view(org)"
+          <button class="btn btn-sm btn_info" (click)="view(org)"
                   *ngIf="user && user.Role.RoleId > 10">
-            <i class="fa fa-eye"></i>
+            <!--<i class="fa fa-eye"></i>-->
             查看
           </button>
-          <button class="btn btn-sm btn-outline-info" (click)="edit(org)"
+          <button class="btn btn-sm btn_info" (click)="edit(org)"
                   *ngIf="user && user.Role.RoleId <= 10">
-            <i class="fa fa-edit"></i>
+            <!--<i class="fa fa-edit"></i>-->
             编辑
           </button>
-          <button class="btn btn-sm btn-outline-danger ml-2" (click)="deleteO(org)"
-                  [disabled]="user.Organization && user.Organization.Uid === org.Uid"
+
+          <button class="btn btn-sm btn_info ml-2" (click)="addAccount(org)"
                   *ngIf="user && user.Role.RoleId <= 10">
-            <i class="fa fa-trash"></i>
-            删除
-          </button>
-          <button class="btn btn-sm btn-outline-info ml-2" (click)="addAccount(org)"
-                  *ngIf="user && user.Role.RoleId <= 10">
-            <i class="fa fa-plus"></i>
+            <!--<i class="fa fa-plus"></i>-->
             账号
           </button>
-          <button class="btn btn-sm btn-outline-info ml-2" (click)="entry(org)"
+          <button class="btn btn-sm btn_info ml-2" (click)="entry(org)"
                   *ngIf="user && user.Role.RoleId <= 10">
-            <i class="fa fa-repeat"></i>
+            <!--<i class="fa fa-repeat"></i>-->
             进入
+          </button>
+
+          <button class="btn btn-sm btn-danger ml-2" (click)="deleteO(org)"
+                  [disabled]="user.Organization && user.Organization.Uid === org.Uid"
+                  *ngIf="user && user.Role.RoleId <= 10">
+            <!--<i class="fa fa-trash"></i>-->
+            删除
           </button>
 
         </td>
@@ -104,6 +109,12 @@
         <button class="btn btn_info" (click)="deleteG()"
                 *ngIf="user.Role.RoleId<=10">
           批量删除
+        </button>
+      </div>
+
+      <div class="pull-left ml-3" *ngIf="user && user.Role && user.Role.RoleId <= 10">
+        <button class="btn btn_info" (click)="newOrg()">
+          新增企业
         </button>
       </div>
 

@@ -13,7 +13,7 @@
           <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
         </div>
       </div>
-      <div class="ml-3" >
+      <!--<div class="ml-3" >
         <a [routerLink]="['/admin/equipments/templates']"
            *ngIf="user && user.Role.RoleId<=10"
            class="btn btn_info" style="color: #ffffff;">
@@ -25,7 +25,7 @@
                 *ngIf="user && user.Role.RoleId<=10">
           新增设备
         </button>
-      </div>
+      </div>-->
     </div>
 
   </div>
@@ -99,6 +99,20 @@
       <button class="btn btn_info" (click)="joinCluster()"
               *ngIf="user && user.Role.RoleId===10">
         批量添加集群
+      </button>
+    </div>
+
+    <div class="pull-left ml-3" >
+      <a [routerLink]="['/admin/equipments/templates']"
+         *ngIf="user && user.Role.RoleId<=10"
+         class="btn btn_info" style="color: #ffffff;">
+        设备型态
+      </a>
+    </div>
+    <div class="pull-left ml-3" >
+      <button class="btn btn_info" (click)="newBoiler()"
+              *ngIf="user && user.Role.RoleId<=10">
+        新增设备
       </button>
     </div>
 

@@ -28,7 +28,7 @@ export class ClusterDashboardComponent implements OnInit, OnDestroy {
 
   getClusters(message) {
 
-    const wsUrl = `ws://${window.location.host}/clusters_show`;
+    const wsUrl = `wss://${window.location.host}/clusters_show`;
     this.socket = this.boilerWsService.creatSocket(wsUrl, message)
       .subscribe(
         data => {

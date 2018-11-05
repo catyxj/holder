@@ -1,7 +1,11 @@
 
 <div class="">
   <div class="mat-card-title flex justify-content-between" style="padding: 20px 0; ">
-    <h5 class="text_info">PLC告警列表  <span class="text-info">[ {{code}} ]</span></h5>
+    <h5 class="text_info pull-left">
+      <img src="assets/icons/icon_term.png" alt="">
+      终端管理
+    </h5>
+    <!--<h5 class="text_info">PLC告警列表  <span class="text-info">[ {{code}} ]</span></h5>-->
     <!--<div>
       <button class="btn btn-info" (click)="goBack()">
         <i class="fa fa-reply"></i>
@@ -10,8 +14,8 @@
     </div>-->
   </div>
 
-  <div>
-    <table class="table table-bordered">
+  <div class="t_content">
+    <table class="table">
       <thead class="bg_light_primary">
       <th> 序号 </th>
       <th> 采样时间 </th>
@@ -41,12 +45,11 @@
   </div>
 
 
-  <div>
-
+  <div class="t_bottom">
     <ngb-pagination class="pull-right"
                     [collectionSize]="totalItems"
                     [pageSize]="pageSize" [(page)]="page"
-                    [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                    [maxSize]="3" [rotate]="true" [boundaryLinks]="false"
                     (pageChange)="pageChange()">
 
     </ngb-pagination>

@@ -9,6 +9,7 @@ import {MaintainListComponent} from '../maintain/maintain-list/maintain-list.com
 import {CurrentComponent} from '../alarm/current/current.component';
 import {HistoryComponent} from '../alarm/history/history.component';
 import {AlarmCurrentComponent} from './alarm-current/alarm-current.component';
+import {AlarmHistoryComponent} from './alarm-history/alarm-history.component';
 
 export const RuntimeRoutingModule = [
   {
@@ -39,7 +40,7 @@ export const RuntimeRoutingModule = [
           },
           {
             path: 'history',
-            component: HistoryComponent,
+            component: AlarmHistoryComponent,
           }
         ]
       },

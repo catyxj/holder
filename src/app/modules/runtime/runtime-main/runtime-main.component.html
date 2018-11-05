@@ -3,24 +3,26 @@
 </div>-->
 
 <div class="content">
-  <div class="clearfix runtime_header">
+  <div class="mat-card-title runtime_header">
     <div class="pull-left flex">
-      <!--<a class="text_info" (click)="goBack()">
-        <i class="fa fa-reply"></i>
-      </a>
-      &nbsp;-->
       <h5 class="text_info">
-        {{name}}
+        <!--{{name}}-->
+        <img src="assets/icons/monitor.png" alt="">
+        设备概览
       </h5>
 
     </div>
     <nav class="pull-right">
-      <a [routerLink]="['./dashboard']" routerLinkActive="active">动画监测</a>
-      <a [routerLink]="['./operate']" routerLinkActive="active">运行参数</a>
-      <a [routerLink]="['./history']" routerLinkActive="active">历史数据</a>
-      <a [routerLink]="['./alarm']" routerLinkActive="active">设备告警</a>
+      <a [routerLink]="['./dashboard']" routerLinkActive="btn_info" class="btn">动画监测</a>
+      <a [routerLink]="['./operate']" routerLinkActive="btn_info" class="btn">运行参数</a>
+      <a [routerLink]="['./history']" routerLinkActive="btn_info" class="btn">历史数据</a>
+      <a [routerLink]="['./alarm']" routerLinkActive="btn_info" class="btn">设备告警</a>
       <!--<a [routerLink]="['./maintain']" routerLinkActive="active">维保记录</a>-->
     </nav>
+  </div>
+
+  <div class="clearfix" style="padding-bottom: 10px; font-size: 18px; color: #333333; margin-top: -10px;">
+    <h5 class="pull-left"> {{name}} </h5>
   </div>
 
   <div>

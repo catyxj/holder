@@ -44,6 +44,7 @@ import {MaintainMainComponent} from './maintain/maintain-main/maintain-main.comp
 import {UploadMainComponent} from './upload/upload-main/upload-main.component';
 import {MaintainListComponent} from './maintain/maintain-list/maintain-list.component';
 import {PlcAlarmComponent} from './terminal/plc-alarm/plc-alarm.component';
+import {AlarmHistoryComponent} from './runtime/alarm-history/alarm-history.component';
 
 
 
@@ -139,7 +140,7 @@ export const ModulesRoutingModule = [
               },
               {
                 path: 'history',
-                component: HistoryComponent,
+                component: AlarmHistoryComponent,
               }
             ]
           },

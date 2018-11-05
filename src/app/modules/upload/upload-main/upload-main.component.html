@@ -2,7 +2,10 @@
 
 <div class="content">
   <div class="mat-card-title" >
-    <h5 class="text_info pull-left">文件列表</h5>
+    <h5 class="text_info pull-left">
+      <img src="assets/icons/upload.png" alt="">
+      文件列表
+    </h5>
 
     <div class="pull-right flex flex-row">
       <div class="input-group mb-4">
@@ -11,11 +14,11 @@
           <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
         </div>
       </div>
-      <div class="ml-3" >
+      <!--<div class="ml-3" >
         <button class="btn btn_info" (click)="addFile()">
           添加文件
         </button>
-      </div>
+      </div>-->
 
     </div>
 
@@ -74,6 +77,11 @@
       <button class="btn btn_info" (click)="deleteG()"
               nz-button [nzLoading]="isLoading">
         批量删除
+      </button>
+    </div>
+    <div class="pull-left ml-3" >
+      <button class="btn btn_info" (click)="addFile()">
+        添加文件
       </button>
     </div>
 

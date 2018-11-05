@@ -212,7 +212,8 @@ export class BoilerInfoComponent implements OnInit {
   }
 
   // 编辑地址信息模态框
-  editAddress() {
+  editAddress(event) {
+    event.stopPropagation();
     const modalRef = this.modalService.open(EditAddressComponent, { size: 'lg' });
     modalRef.componentInstance.currentData = this.info;
     // modalRef.componentInstance.locations = this.addrList;
@@ -227,7 +228,8 @@ export class BoilerInfoComponent implements OnInit {
   }
 
   // 编辑维护信息模态框
-  editMaintain() {
+  editMaintain(event) {
+    event.stopPropagation();
     const modalRef = this.modalService.open(EditMaintainComponent, { size: 'lg' });
     modalRef.componentInstance.currentData = this.info;
     modalRef.result.then((result) => {

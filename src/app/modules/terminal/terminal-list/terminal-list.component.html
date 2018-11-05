@@ -14,7 +14,7 @@
         </div>
       </div>
 
-      <div class="ml-3" *ngIf="user.Role.RoleId <= 1">
+      <!--<div class="ml-3" *ngIf="user.Role.RoleId <= 1">
         <button class="btn btn_info" (click)="groupAdd()">
           批量添加
         </button>
@@ -24,7 +24,7 @@
         <button class="btn btn_info" (click)="newTerminal()">
           新增终端
         </button>
-      </div>
+      </div>-->
     </div>
 
   </div>
@@ -106,6 +106,15 @@
               nz-button [nzLoading]="isLoading2">
         批量下发
       </button>
+
+      <button class="btn btn_info ml-3" (click)="groupAdd()" *ngIf="user.Role.RoleId <= 1">
+        批量添加
+      </button>
+
+      <button class="btn btn_info ml-3" (click)="newTerminal()" *ngIf="user.Role.RoleId <= 1">
+        新增终端
+      </button>
+
     </div>
 
 

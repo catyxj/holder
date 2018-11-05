@@ -58,6 +58,12 @@ h5, .h5 {
   z-index: 910;
 }
 
+.modal-header .modal-title{
+  font-size: 16px;
+}
+
+
+
 /*下拉列表*/
 .ant-select-selection--single {
   height: 100%;
@@ -90,6 +96,11 @@ h5, .h5 {
   /*border-color: #117a8b;*/
   background-color: #00a4ff;
   border-color: #00a4ff;
+}
+
+.table .btn-danger {
+  background-color: #f4523b;
+  border-color: #f4523b;
 }
 
 .bg_grey{
@@ -150,7 +161,6 @@ h5, .h5 {
 }
 
 
-
 .sidenav .mat-nav-list .mat-list-item .mat-list-item-content {
   padding: 0 46px;
 }
@@ -185,6 +195,12 @@ h5, .h5 {
   display: flex;
   flex-direction: column;
 }
+.con_w{
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+
 /*背景色*/
 .mat-drawer-container{
   background-color: #e5e5e5;

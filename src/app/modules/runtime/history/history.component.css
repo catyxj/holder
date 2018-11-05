@@ -6,3 +6,4 @@ a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {
 .table td{
   font-size: 12px;
 }
+

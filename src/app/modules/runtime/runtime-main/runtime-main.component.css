@@ -1,13 +1,13 @@
 
-.runtime_header{
+/*.runtime_header{
   border-bottom: 1px solid #eeeeee ;
   padding: 10px 0;
-}
+}*/
 
 .runtime_header nav{
   display: flex;
 }
-.runtime_header nav a{
+/*.runtime_header nav a{
   display: block;
   width: 80px;
   height: 30px;
@@ -23,6 +23,6 @@
 .runtime_header nav a:hover,.runtime_header nav a.active{
   background-color: #17a2b8;
   color: #ffffff;
-}
+}*/
 
 
