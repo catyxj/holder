@@ -1,4 +1,4 @@
-<div>
+<!--<div>
   <div class="mt-3 operate_params">
     <ul class="flex" style="flex-wrap: wrap; color: #666666;">
       <li *ngFor="let data of params" (click)="changeData(data.Uid)"
@@ -17,4 +17,59 @@
     </div>
 
   </div>
+</div>-->
+
+<div class="op_header">
+  <h6>
+    {{name}}
+  </h6>
+  <div class="flex">
+    <button class="btn ml-3" [class.btn_info]="current" (click)="showCurrent()" style="height: 32px;">
+      实时数据
+    </button>
+    <button class="btn ml-3" [class.btn_info]="!current" (click)="showHistory()" style="height: 32px;">
+      历史数据
+    </button>
+
+    <nz-range-picker [(ngModel)]="dateRange" nzShowTime nzFormat="yyyy-MM-dd HH:mm"
+                     (ngModelChange)="changeDate()" class="ml-3" [disabled]="current">
+
+    </nz-range-picker>
+
+    <div class="ml-3">
+      <nz-radio-group [(ngModel)]="rangeValue" [nzButtonStyle]="'solid'">
+        <label nz-radio-button nzValue="today" (click)="selectDate()" [nzDisabled]="current">今天</label>
+        <label nz-radio-button nzValue="week" (click)="selectDate()" [nzDisabled]="current">本周</label>
+        <label nz-radio-button nzValue="month" (click)="selectDate()" [nzDisabled]="current">本月</label>
+      </nz-radio-group>
+    </div>
+
+  </div>
 </div>
+
+<div class="op_content">
+  <div class="op_cell">
+    <div class="cell_header">
+      <nz-select style="width: 120px;" [(ngModel)]="currentParams[0]">
+        <nz-option *ngFor="let option of params" [nzValue]="option" [nzLabel]="option.label"></nz-option>
+      </nz-select>
+    </div>
+    <div>
+      <div echarts [options] = "chartOption" class="" style="width: 100%; height:268px;"></div>
+    </div>
+  </div>
+
+  <div class="op_cell">
+1
+  </div>
+
+  <div class="op_cell">
+1
+  </div>
+
+  <div class="op_cell">
+1
+  </div>
+
+</div>
+

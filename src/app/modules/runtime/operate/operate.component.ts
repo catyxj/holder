@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {RuntimeService} from "../../../shared/runtime.service";
-import {DatePipe} from "@angular/common";
+import {RuntimeService} from '../../../shared/runtime.service';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-operate',
@@ -10,7 +10,12 @@ import {DatePipe} from "@angular/common";
 export class OperateComponent implements OnInit {
 
   public uid;
+  public name;
+  public current = true;
+  public rangeValue = 'today';
+  public dateRange = [];
   public params;
+  public currentParams = [];
   public runtimes;
   public chartOption;
   public currentData;
@@ -20,19 +25,23 @@ export class OperateComponent implements OnInit {
 
   ngOnInit() {
     this.uid = sessionStorage.getItem('runtimeUid');
-    // console.log(this.uid);
-    this.getRuntime(this.uid);
+    this.name = sessionStorage.getItem('runtimeName');
+    this.getRuntime();
   }
 
   // 获取通道参数
-  getRuntime(uid) {
-    this.runtimeService.getRuntimeList(uid)
+  getRuntime() {
+    let postData = {
+      uid: this.uid,
+      beginDate: this.dateRange[0],
+      endDate: this.dateRange[1],
+      channels: this.currentParams
+    };
+    this.runtimeService.getRuntimeList(postData)
       .subscribe( data => {
         // console.log(data);
         this.params = data.channel;
         this.runtimes = data.param;
-        this.params[0].checked = true;
-        this.currentData = this.params[0];
         this.initChart();
       });
   }
@@ -110,6 +119,32 @@ export class OperateComponent implements OnInit {
   }
 
 
+  // 选择时间区间
+  changeDate() {
+
+  }
+
+  selectDate() {
+    let start = new Date();
+    let end = new Date();
+    switch (this.rangeValue) {
+      case 'today':
+        start.setHours(0, 0, 0, 0);
+        break;
+      case 'week':
+        let d1 = start.getDate() - 7;
+        start.setDate(d1);
+        start.setHours(0, 0, 0, 0);
+        break;
+      case 'month':
+        start.setDate(1);
+        start.setHours(0, 0, 0, 0);
+    }
+
+    this.dateRange = [start, end];
+
+  }
+
   // 选择参数
   changeData(uid) {
     for (let i = 0; i < this.params.length; i++) {
@@ -123,5 +158,20 @@ export class OperateComponent implements OnInit {
     this.getChartData(uid);
   }
 
+
+  // 实时数据
+  showCurrent() {
+    this.current = true;
+    this.dateRange = [];
+    this.getRuntime();
+  }
+
+
+  // 历史数据
+  showHistory() {
+    this.current = false;
+    this.selectDate();
+    this.getRuntime();
+  }
 
 }

@@ -1,8 +1,30 @@
 <!--头像-->
 
 <div class="mt-lg-3 row">
-  <div class="col-6">
+  <div class="col-6" style="padding-left: 20px;">
+    <div class="form-group" style="margin-bottom: 40px;">
+      <div class="fileinput fileinput-new" data-provides="fileinput">
 
+        <div class="thumbnail" style="width: 212px; height: 162px; padding: 5px;">
+          <img src="{{imgUrl}}" style="max-width: 200px; max-height: 150px;">
+        </div>
+
+        <div>
+          <button class="btn btn-primary mr-3" style="position: relative; overflow: hidden;">
+            选择头像图片...
+            <input type="file"  (change)="imgChange($event)" style="position: absolute; left: 0; top: 0; opacity: 0;">
+          </button>
+
+          <button class="btn btn-primary" (click)="uploadImg()" [disabled]="!img"> 上传头像 </button>
+        </div>
+      </div>
+
+      <div>
+        {{errMes}}
+      </div>
+    </div>
+
+    <!--说明文字-->
     <p> 说明：
       <br/>请选择您要添加的头像文件，文件格式请用jpg、png或gif，文件大小不超过200k。
       <br/>最佳适配 128*128到256*256 方形图片作为头像。</p>
@@ -13,27 +35,7 @@
   </div>
   <div class="col-6" style="padding-left: 80px">
 
-      <div class="form-group">
-        <div class="fileinput fileinput-new" data-provides="fileinput">
 
-          <div class="thumbnail" style="width: 212px; height: 162px; padding: 5px;">
-            <img src="{{imgUrl}}" style="max-width: 200px; max-height: 150px;">
-          </div>
-
-          <div>
-            <button class="btn btn-primary mr-3" style="position: relative; overflow: hidden;">
-              选择头像图片...
-              <input type="file"  (change)="imgChange($event)" style="position: absolute; left: 0; top: 0; opacity: 0;">
-            </button>
-
-            <button class="btn btn_info" (click)="uploadImg()" [disabled]="!img"> 上传头像 </button>
-          </div>
-        </div>
-
-        <div>
-          {{errMes}}
-        </div>
-      </div>
 
   </div>
 </div>

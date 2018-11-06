@@ -181,7 +181,7 @@ h5, .h5 {
   padding-right: 30px;
 }
 .mat-card-title h5 img{
-  width: 22px;
+  /*width: 22px;*/
   /*height: 22px;*/
   margin-right: 5px;
 }

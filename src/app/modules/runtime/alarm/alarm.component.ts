@@ -11,11 +11,13 @@ export class RuntimeAlarmComponent implements OnInit {
 
   public alarmSubscribe = false;
   public uid;
+  public name;
 
   constructor(private alarmService: AlarmService) { }
 
   ngOnInit() {
     this.uid = sessionStorage.getItem('runtimeUid');
+    this.name = sessionStorage.getItem('runtimeName');
     this.getSubscribe();
 
   }

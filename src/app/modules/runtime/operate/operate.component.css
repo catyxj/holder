@@ -1,5 +1,37 @@
 
-.operate_params{
+
+.op_header{
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: 1px 1px 5px #cccccc;
+  display: flex;
+  justify-content: space-between;
+}
+.op_header h6{
+  color: #00a4ff;
+  font-size: 18px;
+  line-height: 33px;
+}
+.op_content{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.op_cell{
+  width: 49%;
+  background-color: #ffffff;
+  margin-top: 10px;
+  height: 320px;
+}
+.cell_header{
+  height: 50px;
+}
+
+
+
+
+
+/*.operate_params{
   box-sizing: border-box;
   padding: 10px;
   background-color: #ffffff;
@@ -25,11 +57,8 @@
   background-color: #17a2b8;
   color: #ffffff;
 }
-
 .operate_chart{
-  /*padding: 10px;*/
   border: 1px solid #efefef;
-  /*border-radius: 4px;*/
   background-color: #ffffff;
 }
 .operate_chart .chart_title{
@@ -39,4 +68,12 @@
   padding: 0 20px;
   background-color: #eaf2fa;
   border-bottom: 1px solid #e3edf8;
-}
+}*/
+
+
+
+
+
+
+
+

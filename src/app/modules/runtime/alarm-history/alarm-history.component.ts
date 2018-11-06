@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AlarmService} from "../../../shared/alarm.service";
+import {AlarmService} from '../../../shared/alarm.service';
 
 @Component({
   selector: 'app-alarm-history',

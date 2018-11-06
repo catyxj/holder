@@ -160,7 +160,7 @@ export const ModulesRoutingModule = [
         path: 'profile',
         component: ProfileMainComponent,
         children: [
-          { path: '', redirectTo: 'portrait', pathMatch: 'full' },
+          { path: '', redirectTo: 'info', pathMatch: 'full' },
           {
             path: 'portrait',
             component: PortraitComponent

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {Observable, throwError} from "rxjs/index";
-import {catchError} from "rxjs/internal/operators";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs/index';
+import {catchError} from 'rxjs/internal/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -42,8 +42,8 @@ export class RuntimeService {
   }
 
   // 获取运行参数
-  getRuntimeList(uid): Observable<any> {
-    return this.http.get(`/equipment_runtime_list?uid=${uid}`)
+  getRuntimeList(data): Observable<any> {
+    return this.http.post(`/equipment_runtime_list`, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
