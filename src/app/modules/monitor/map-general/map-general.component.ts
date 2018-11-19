@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {MapService} from "../../../shared/map.service";
+import {MapService} from '../../../shared/map.service';
+import {Router} from '@angular/router';
 
 
 declare var BMap: any;
@@ -14,19 +15,24 @@ declare var BMapLib: any;
 export class MapGeneralComponent implements OnInit, OnDestroy {
 
   private map;
-  private markers = [];
+  private markList = []; // 坐标
+  private markers = []; // 显示的坐标
   private markCluster = [];
   public statusData;
   private status;
+  public search;
+  private markerClusterer;
 
 
-  constructor(private mapService: MapService) { }
+  constructor(private mapService: MapService,
+              private router: Router) { }
 
   ngOnInit() {
-    this.getStatus();
-    this.status = setInterval(() => {this.getStatus(); }, 60000);
+
+    // this.status = setInterval(() => { this.getStatus(); }, 60000);
     this.initMap();
-    this.getLocation();
+    this.getStatus();
+    // this.getLocation();
 
     /*this.markers = [
       {
@@ -120,9 +126,19 @@ export class MapGeneralComponent implements OnInit, OnDestroy {
 
   // 获取状态信息
   getStatus() {
+    this.markers = [];
     this.mapService.getMapCount()
       .subscribe( data => {
-      this.statusData = data;
+      this.statusData = data.count;
+      this.markers = data.locInfo;
+      for (let n = 0; n < this.markers.length; n++) {
+        this.markList.push(this.markers[n]);
+      }
+      /*if (this.search) {
+        this.markers = this.markers.filter(mark => mark.name === this.search);
+      }*/
+
+      this.mapCluster();
     });
 
   }
@@ -173,22 +189,97 @@ export class MapGeneralComponent implements OnInit, OnDestroy {
   // 地图点集合
   mapCluster() {
     // 点聚合
+    this.markCluster = [];
     if (!this.markers) {
       return;
     }
+
     for (let i = 0; i < this.markers.length; i++) {
       let pt = null;
-      if (this.markers[i].longitude === 0 || this.markers[i].latitude === 0){
+      let mark = this.markers[i];
+      let icon = null;
+      if (mark.longitude === 0 || mark.latitude === 0) {
         continue;
       }
-      pt = new BMap.Point(this.markers[i].longitude, this.markers[i].latitude);
-      this.markCluster.push(new BMap.Marker(pt));
+
+      switch (mark.status) {
+        case 99:
+          mark.text = '终端不在线';
+          icon = new BMap.Icon('assets/icons/mapicon_gr.png', new BMap.Size(35, 35)); // 离线
+          break;
+        case 4:
+          mark.text = '设备故障';
+          icon = new BMap.Icon('assets/icons/mapicon_y.png', new BMap.Size(35, 35)); // 有故障
+          break;
+        case 3:
+          mark.text = '设备告警';
+          icon = new BMap.Icon('assets/icons/mapicon_o.png', new BMap.Size(35, 35)); // 有告警
+          break;
+        case 1:
+          mark.text = '设备运行';
+          icon = new BMap.Icon('assets/icons/mapicon_g.png', new BMap.Size(35, 35)); // 正常
+          break;
+        case 2:
+          mark.text = '设备未运行';
+          icon = new BMap.Icon('assets/icons/mapicon_r.png', new BMap.Size(35, 35)); // 未运行
+          break;
+      }
+
+      let content = `<h6 class="text-info" style="font-size: 24px;"> ${mark.name} </h6>`;
+
+      pt = new BMap.Point(mark.longitude, mark.latitude);
+      let marker = new BMap.Marker(pt, {icon: icon});
+      marker.setTitle(mark.name);
+      this.addClickHandler(content, marker, mark);
+      this.markCluster.push(marker);
     }
-    let markerClusterer = new BMapLib.MarkerClusterer(this.map, {markers: this.markCluster});
+    this.markerClusterer = new BMapLib.MarkerClusterer(this.map, {markers: this.markCluster});
+  }
+
+
+  // 添加信息窗口
+  addClickHandler(content, marker, mark) {
+    let that = this;
+    /*marker.addEventListener('mouseover', function(e) {
+      let p = e.target;
+      let point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+      let infoWindow = new BMap.InfoWindow(content, {
+        width  : 0,             // 宽度
+        height : 0,              // 高度
+      });  // 创建信息窗口对象
+      that.map.openInfoWindow(infoWindow, point); // 开启信息窗口
+    });
+    marker.addEventListener('mouseout', function(e) {
+      that.map.closeInfoWindow(); // 关闭信息窗口
+    });*/
+    marker.addEventListener('click', function(e) {
+      // console.log(mark);
+      that.router.navigate(['/admin/runtime', mark.uid, mark.name]);
+    });
+  }
+
+  // 搜索
+  searchChange() {
+    if (!this.search) {
+      this.markers = this.markList;
+    } else {
+      this.markers = this.markList.filter(data => data.name.indexOf(this.search) !== -1 );
+    }
+    this.map.clearOverlays();
+    this.markerClusterer.clearMarkers();
+    this.mapCluster();
+    // this.getStatus();
+    /*for (let i = 0; i < this.markers.length; i++) {
+      let mk = this.markers[i];
+      if (this.search === mk.name ) {
+        this.map.panTo(new BMap.Point(mk.longitude, mk.latitude));
+      }
+    }*/
+
   }
 
   ngOnDestroy() {
-    clearInterval(this.status);
+    // clearInterval(this.status);
   }
 
 

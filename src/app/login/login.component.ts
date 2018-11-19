@@ -22,9 +22,22 @@ export class LoginComponent implements OnInit {
   public checkRemember = false;
 
 
+  public imgArr = [];
+
   constructor(public router: Router, public activatedRoute: ActivatedRoute, private userService: UserService, private http: HttpClient) { }
 
   ngOnInit() {
+    this.imgArr = [
+      {
+        id: 1,
+        img: 'assets/images/banner1.jpg'
+      },
+      {
+        id: 2,
+        img: 'assets/images/banner2.jpg'
+      }
+    ];
+
     this.getConfig()
       .subscribe(ipInfo => {this.user.ip = ipInfo.ip; });
 

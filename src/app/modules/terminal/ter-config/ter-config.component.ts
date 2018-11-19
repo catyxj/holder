@@ -1,12 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {switchMap} from 'rxjs/internal/operators';
 import {ActivatedRoute, ParamMap} from '@angular/router';
-import {TerminalService} from "../../../shared/terminal.service";
-import {AlarmRuleComponent} from "../alarm-rule/alarm-rule.component";
-import {NzModalService} from "ng-zorro-antd";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {RangeConfigComponent} from "../range-config/range-config.component";
-import {AddTemplateComponent} from "../add-template/add-template.component";
+import {TerminalService} from '../../../shared/terminal.service';
+import {AlarmRuleComponent} from '../alarm-rule/alarm-rule.component';
+import {NzModalService} from 'ng-zorro-antd';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {RangeConfigComponent} from '../range-config/range-config.component';
+import {AddTemplateComponent} from '../add-template/add-template.component';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -79,12 +79,12 @@ export class TerConfigComponent implements OnInit {
 
     this.terminalService.getChannel(this.code)
       .subscribe(data => {
-        let channels = data.channelConfigs;
-        let information = data.communication;
+        const channels = data.channelConfigs;
+        const information = data.communication;
 
         //
         for (let i = 0; i < channels.length; i++) {
-          let chan = channels[i];
+          const chan = channels[i];
 
           if (chan.ChannelType === 1) {
             this.analogueList.push({
@@ -282,7 +282,7 @@ export class TerConfigComponent implements OnInit {
 
   // 添加模拟量
   addAnalogue() {
-    let n = this.analogueList.length;
+    const n = this.analogueList.length;
     this.analogueList.push({
       ChannelNumber: n + 1,
       Parameter: {
@@ -301,7 +301,7 @@ export class TerConfigComponent implements OnInit {
 
   // 添加开关量
   addSwitch() {
-    let n = this.switchList.length;
+    const n = this.switchList.length;
     this.switchList.push({
       ChannelNumber: n + 1,
       Parameter: {
@@ -318,7 +318,7 @@ export class TerConfigComponent implements OnInit {
 
   // 添加状态量
   addRange() {
-    let n = this.rangeList.length;
+    const n = this.rangeList.length;
     this.rangeList.push({
       ChannelNumber: n + 1,
       Parameter: {
@@ -422,11 +422,11 @@ export class TerConfigComponent implements OnInit {
 
 
   save() {
-    let that = this;
+    const that = this;
 
     // 模拟通道
-    let analogueList = [];
-    let aNumList = [];
+    const analogueList = [];
+    const aNumList = [];
     for (let i = 0; i < this.analogueList.length; i++) {
       if (this.analogueList[i].Parameter.Name) {
         if (this.analogueList[i].ChannelNumber > 24) {
@@ -490,8 +490,8 @@ export class TerConfigComponent implements OnInit {
 
 
     // 开关通道
-    let switchList = [];
-    let sNumList = [];
+    const switchList = [];
+    const sNumList = [];
     for (let i = 0; i < this.switchList.length; i++) {
       if (this.switchList[i].Parameter.Name) {
         if (this.switchList[i].ChannelNumber > 48) {
@@ -584,8 +584,8 @@ export class TerConfigComponent implements OnInit {
 
 
     // 状态通道
-    let rangeList = [];
-    let rNumList = [];
+    const rangeList = [];
+    const rNumList = [];
     for (let i = 0; i < this.rangeList.length; i++) {
       if (this.rangeList[i].Parameter.Name) {
         if (this.rangeList[i].ChannelNumber > 12) {
@@ -665,7 +665,7 @@ export class TerConfigComponent implements OnInit {
     }
 
     console.log(this.infomation);
-    let infomation = {
+    const infomation = {
       BaudRate: parseInt(this.infomation.BaudRate),
       dataBit: parseInt(this.infomation.dataBit),
       stopBit: parseInt(this.infomation.stopBit),
@@ -675,7 +675,7 @@ export class TerConfigComponent implements OnInit {
       heartbeat: parseInt(this.infomation.heartbeat)
     };
 
-    let data = {
+    const data = {
       Analogue: analogueList,
       Switch: switchList,
       Range: rangeList,
@@ -728,8 +728,8 @@ export class TerConfigComponent implements OnInit {
   // 另存为模板
   addTemplate() {
     // 模拟通道
-    let analogueList = [];
-    let aNumList = [];
+    const analogueList = [];
+    const aNumList = [];
     for (let i = 0; i < this.analogueList.length; i++) {
       if (this.analogueList[i].Parameter.Name) {
         if (this.analogueList[i].ChannelNumber > 24) {
@@ -793,8 +793,8 @@ export class TerConfigComponent implements OnInit {
 
 
     // 开关通道
-    let switchList = [];
-    let sNumList = [];
+    const switchList = [];
+    const sNumList = [];
     for (let i = 0; i < this.switchList.length; i++) {
       if (this.switchList[i].Parameter.Name) {
         if (this.switchList[i].ChannelNumber > 48) {
@@ -887,8 +887,8 @@ export class TerConfigComponent implements OnInit {
 
 
     // 状态通道
-    let rangeList = [];
-    let rNumList = [];
+    const rangeList = [];
+    const rNumList = [];
     for (let i = 0; i < this.rangeList.length; i++) {
       if (this.rangeList[i].Parameter.Name) {
         if (this.rangeList[i].ChannelNumber > 12) {
@@ -968,7 +968,7 @@ export class TerConfigComponent implements OnInit {
     }
 
     console.log(this.infomation);
-    let infomation = {
+    const infomation = {
       BaudRate: parseInt(this.infomation.BaudRate),
       dataBit: parseInt(this.infomation.dataBit),
       stopBit: parseInt(this.infomation.stopBit),
@@ -978,7 +978,7 @@ export class TerConfigComponent implements OnInit {
       heartbeat: parseInt(this.infomation.heartbeat)
     };
 
-    let data = {
+    const data = {
       Analogue: analogueList,
       Switch: switchList,
       Range: rangeList,

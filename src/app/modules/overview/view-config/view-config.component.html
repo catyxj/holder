@@ -1,0 +1,82 @@
+
+<div class="view_file">
+  <div style="font-size: 18px;">
+    档案详情
+  </div>
+
+  <div class="file_head">
+    <h6 *ngIf="!editName">
+      {{ name }}
+      <a class="text-muted text-sm-left" (click)="editName = !editName"
+         style="cursor: pointer; text-decoration: underline; font-size: 12px;" title="">
+        <img src="assets/icons/edit.png" alt="">
+      </a>
+    </h6>
+    <div *ngIf="editName" style="width: 200px; margin: auto;">
+      <div class="input-group">
+        <input [(ngModel)]="name" type="text" class="form-control">
+        <span class="input-group-append">
+            <button class="btn btn_info" (click)="editName = false" [disabled]="!name">确定</button>
+          </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="vter_body">
+    <!--设备名称-->
+    <div>
+      <input type="text" [(ngModel)]="equipName" disabled class="form-control">
+    </div>
+
+    <!--终端编码-->
+    <div>
+      <input type="number" [(ngModel)]="termCode" class="form-control" placeholder="请输入终端编码">
+    </div>
+
+    <div class="flex">
+      <!--模式选择-->
+      <!--<nz-dropdown [nzPlacement]="'bottomLeft'" *ngIf="tempSelect !== 1">
+        <button nz-button nz-dropdown>模板选择</button>
+        <ul nz-menu>
+          <li nz-menu-item (click)="selTemp()">
+            <a>选择已有模板</a>
+          </li>
+          <li nz-menu-item (click)="addTemp()">
+            <a>新建模板</a>
+          </li>
+        </ul>
+      </nz-dropdown>-->
+
+      <!--选择模板-->
+      <select class="form-control" [(ngModel)]="template">
+        <option *ngFor="let data of templates" [value]="data.Uid" [disabled]="!data.Uid">{{data.Name}}</option>
+      </select>
+      <!--<i class="fa fa-reply text-muted" *ngIf="tempSelect === 1" (click)="tempSelect=0"
+         style="margin-top:10px; cursor:pointer;"></i>-->
+
+
+    </div>
+  </div>
+
+  <div class="vter_bottom">
+    <button class="btn btn_info" (click)="update()"
+            style="width: 50%" [disabled]="!termCode || !template">
+      完成
+    </button>
+  </div>
+
+  <div>
+    <button class="btn btn_info" (click)="addTemp()">
+      <!--<img src="assets/icons/add.png" alt="">-->
+      新建模板
+    </button>
+  </div>
+
+
+
+</div>
+
+
+
+
+

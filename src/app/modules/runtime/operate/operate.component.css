@@ -1,11 +1,13 @@
 
-
-.op_header{
-  background-color: #ffffff;
-  padding: 20px;
+.op_top{
   box-shadow: 1px 1px 5px #cccccc;
+}
+.op_header{
+  padding: 20px;
   display: flex;
   justify-content: space-between;
+  background-color: #ffffff;
+  border-bottom: 1px solid #eeeeee;
 }
 .op_header h6{
   color: #00a4ff;
@@ -25,8 +27,60 @@
 }
 .cell_header{
   height: 50px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #dddddd;
+  padding: 8px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.cell_t{
+  padding: 3px 15px;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid #00a4ff;
+  color: #00a4ff;
 }
 
+
+.operate_params{
+  box-sizing: border-box;
+  display: flex;
+  background-color: #f3f3f3;
+}
+.operate_params ul{
+  box-sizing: border-box;
+  padding: 10px 15px;
+  margin-bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  color: #666666;
+  background-color: #ffffff;
+  width: 80%;
+}
+.operate_params ul li{
+  padding: 5px 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  /*background-color: #efefef;*/
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid #cccccc;
+  color: #666666;
+}
+.operate_params ul li:hover{
+  /*background-color: #17a2b8;
+  color: #ffffff;*/
+  border: 1px solid #00a4ff;
+  color: #00a4ff;
+}
+.operate_params ul li.active{
+  /*background-color: #17a2b8;
+  color: #ffffff;*/
+  border: 1px solid #00a4ff;
+  color: #00a4ff;
+}
 
 
 

@@ -19,6 +19,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
   public ranges = [];
   private socket;
   public uid;
+  public name;
   public online;
   public isBurning;
   public hasWarning;
@@ -32,6 +33,22 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
   public controlShow = false;
   public averageList;
   public isLoading = false;
+  public page1 = 1;
+  public page2 = 1;
+  public page3 = 1;
+  public analogues2 = [];
+  public switchs2 = [];
+  public ranges2 = [];
+  public total1 = 0;
+  public total2 = 0;
+  public total3 = 0;
+  public tpage1 = 0;
+  public tpage2 = 0;
+  public tpage3 = 0;
+  public expand1 = false;
+  public expand2 = false;
+  public expand3 = false;
+
 
   constructor(private boilerWsService: BoilerSocketService,
               private route: ActivatedRoute,
@@ -40,6 +57,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.uid = sessionStorage.getItem('runtimeUid');
+    this.name = sessionStorage.getItem('runtimeName');
 
     this.initStatus();
 
@@ -78,7 +96,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
               this.online = '离线';
               break;
             case 1:
-              this.online = '在线';
+              this.online = '已连接';
               break;
             case -1:
               this.online = '未绑定';
@@ -109,6 +127,9 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
                 analogues.push(eq);
               }
               if (eq.ChannelType === 3) {
+                if (eq.SwitchStatus !== 1 && eq.SwitchStatus !== 2) {
+                  continue;
+                }
                 switchs.push(eq);
               }
               if (eq.ChannelType === 5) {
@@ -123,9 +144,20 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
             this.switchs = switchs;
             this.ranges = ranges;
 
+            this.total1 = this.analogues.length;
+            this.total2 = this.switchs.length;
+            this.total3 = this.ranges.length;
+
+            this.tpage1 = Math.ceil(this.total1 / 10);
+            this.tpage2 = Math.ceil(this.total2 / 6);
+            this.tpage3 = Math.ceil(this.total3 / 5);
+
+            this.analogues2 = this.analogues.slice((this.page1 - 1) * 10, (this.page1 - 1) * 10 + 10);
+            this.switchs2 = this.switchs.slice((this.page2 - 1) * 6, (this.page2 - 1) * 6 + 6);
+            this.ranges2 = this.ranges.slice((this.page3 - 1) * 5, (this.page3 - 1) * 5 + 5);
 
           //  ---------平均值-------------
-            this.averageCal();
+          //   this.averageCal();
 
           }
 
@@ -148,13 +180,19 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
         if (this.equipment) {
           for (let i = 0; i < this.equipment.length; i++) {
             let eq = this.equipment[i];
-            if ( eq.SequenceNumber === -1) {
+            if (eq.Status === 2) {
+              continue;
+            }
+            if ( eq.Status !== 1) {
               eq.SequenceNumber = eq.ChannelNumber;
             }
             if (eq.ChannelType === 1) {
               analogues.push(eq);
             }
             if (eq.ChannelType === 3) {
+              if (eq.SwitchStatus !== 1 && eq.SwitchStatus !== 2) {
+                continue;
+              }
               switchs.push(eq);
             }
             if (eq.ChannelType === 5) {
@@ -168,11 +206,27 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
           this.analogues = analogues;
           this.switchs = switchs;
           this.ranges = ranges;
+
+          this.total1 = this.analogues.length;
+          this.total2 = this.switchs.length;
+          this.total3 = this.ranges.length;
+
+          this.tpage1 = Math.ceil(this.total1 / 10);
+          this.tpage2 = Math.ceil(this.total2 / 6);
+          this.tpage3 = Math.ceil(this.total3 / 5);
+
+          this.analogues2 = this.analogues.slice((this.page1 - 1) * 10, (this.page1 - 1) * 10 + 10);
+          this.switchs2 = this.switchs.slice((this.page2 - 1) * 6, (this.page2 - 1) * 6 + 6);
+          this.ranges2 = this.ranges.slice((this.page3 - 1) * 5, (this.page3 - 1) * 5 + 5);
         }
 
 
-        this.online = true;
-        this.isBurning = true;
+        this.termStatus = 1;
+        this.eptStatus = false;
+        this.alarmStatus = true;
+        this.online = '在线';
+        this.isBurning = '未运行';
+        this.hasWarning = '无告警';
         if (this.isBurning) {
           this.img = 'assets/images/boilerwater.gif';
         } else {
@@ -181,6 +235,25 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
 
       }, err => {});
   }
+
+  pageChange1() {
+    this.analogues2 = this.analogues.slice((this.page1 - 1) * 10, (this.page1 - 1) * 10 + 10);
+  }
+
+  pageChange3() {
+    this.ranges2 = this.ranges.slice((this.page3 - 1) * 5, (this.page3 - 1) * 5 + 5);
+  }
+
+  preP() {
+    this.page2 = this.page2 - 1;
+    this.switchs2 = this.switchs.slice((this.page2 - 1) * 6, (this.page2 - 1) * 6 + 6);
+  }
+
+  nextP() {
+    this.page2 = this.page2 + 1;
+    this.switchs2 = this.switchs.slice((this.page2 - 1) * 6, (this.page2 - 1) * 6 + 6);
+  }
+
 
   order(arr) {
     arr.sort(function(a, b) {

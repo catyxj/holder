@@ -1,0 +1,125 @@
+
+.view_temp{
+  padding: 30px;
+}
+.view_temp h5{
+  font-size: 14px;
+}
+
+.vter_head{
+  border-bottom: 1px solid #eeeeee;
+}
+.vter_head h6{
+  font-size: 18px;
+  color: #333333;
+}
+
+
+
+a.btn_info{
+  color: #ffffff;
+}
+a.btn_info:hover{
+  color: #ffffff;
+}
+.view_step{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+.view_step .btn{
+  border-radius: 30px;
+}
+.view_step .step_c{
+  width: 100%;
+  height: 8px;
+  background-color: #00a4ff;
+}
+
+.vtem_body{
+  margin-top: 20px;
+}
+.vt_h{
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eeeeee;
+}
+.vt_h .vt_ht{
+  color: #00a4ff;
+  font-size: 16px;
+  line-height: 32px;
+}
+.view_tab{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.conf_title{
+  width: 25%;
+  line-height: 30px;
+  text-align: center;
+  border-top: 4px solid transparent;
+  cursor: pointer;
+}
+.conf_title.active{
+  border-top: 4px solid #00a4ff;
+  color: #00a4ff;
+}
+
+
+
+.table tr td{
+  padding: 0;
+  vertical-align: middle;
+}
+.table tr td .form-control{
+  padding: 0 5px;
+}
+.table input{
+  border: none;
+  height: 40px;
+}
+.table td:not(.t_btn) button{
+  height: 100%;
+}
+.table tr td.chanel_label{
+  padding:0.75rem;
+}
+
+.table select{
+  border: none;
+  height: 40px;
+}
+.table tr td.t_btn{
+  padding: 0 10px;
+}
+.conf_confirm .table tr th{
+  background-color: #e9ecef;
+}
+
+
+
+.mat-button, .mat-flat-button, .mat-icon-button, .mat-stroked-button{
+  min-width: 50px;
+}
+
+mat-grid-tile {
+  cursor: pointer;
+}
+mat-grid-tile:hover{
+  background-color: #cce5ff;
+}
+
+
+
+.conf_add{
+  color: #00a4ff;
+}
+
+
+.vtem_bottom{
+  padding: 20px 0;
+}
+

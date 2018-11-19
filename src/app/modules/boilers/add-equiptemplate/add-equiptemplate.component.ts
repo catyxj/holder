@@ -11,8 +11,8 @@ import Swal from 'sweetalert2';
 export class AddEquiptemplateComponent implements OnInit {
 
   public name = '';
-  public img1 = '';
-  public img2 = '';
+  public img1;
+  public img2;
   public errMes = '';
   public imgFile1;
   public imgFile2;

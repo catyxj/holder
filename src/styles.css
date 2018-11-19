@@ -34,7 +34,7 @@ ul,li{
   display: flex;
 }
 
-.table td{
+.content .table td{
   background-color: #ffffff;
 }
 
@@ -74,6 +74,27 @@ h5, .h5 {
 }
 .ter_config .ant-select-selection{
   border: none;
+}
+
+
+/*档案分页*/
+.view_list .page-item.active .page-link {
+  background-color: #00a4ff;
+  border-color: #00a4ff;
+}
+
+.view_list .page-link {
+  padding: 0.4rem 0.6rem;
+  margin-left: 3px;
+  line-height: 1;
+  color: #666666;
+  border-radius: 30px;
+  background-color: transparent;
+  border: none;
+}
+.view_list .page-item.disabled .page-link {
+  color: #6c757d;
+  background-color: transparent;
 }
 
 
@@ -264,6 +285,15 @@ h5, .h5 {
   border-color: #dee2e6;
 }
 
+
+/*动画监测*/
+.an_page .ant-pagination-item-active{
+  background-color: #00a4ff;
+  color: #ffffff;
+}
+.an_page .ant-pagination-item{
+  border-radius: 20px;
+}
 
 
 /*滚动条*/

@@ -8,12 +8,23 @@
     <a routerLink="/admin/monitor/clusters" routerLinkActive="btn_info" class="btn">集群模式</a>
     <a routerLink="/admin/monitor/dashboard" routerLinkActive="btn_info" class="btn">图文模式</a>
     <a routerLink="/admin/monitor/list" routerLinkActive="btn_info" class="btn">列表模式</a>
-    <div class="tab_map">
+    <a routerLink="/admin/monitor/map" routerLinkActive="btn_info" class="btn mr-3">地图模式</a>
+    <!--<div class="tab_map">
       <a routerLink="/admin/monitor/map/general" class="btn btn_info mr-3 tab_btn_1">地图模式1</a>
       <a routerLink="/admin/monitor/map/batch" class="btn btn_info mr-3 tab_btn_2">地图模式2</a>
+    </div>-->
+  </nav>
+
+  <div class="pull-right flex flex-row">
+
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="请输入设备名称" [(ngModel)]="search">
+      <div class="input-group-append" (click)="searchChange()">
+        <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
+      </div>
     </div>
 
-  </nav>
+  </div>
 
 </div>
 
@@ -27,24 +38,28 @@
   <div class="map_stat" >
     <div class="flex" style="justify-content: space-between;">
       <div>
-        <img src="assets/icons/map01.png" alt="">
-        <b> 设备数量 </b>： <span>{{ statusData?.eptCount }}</span>
+        <img src="assets/icons/mapicon_1.png" alt="">
+        <b> 运行设备 </b>： <span>{{ statusData?.eptOnline}}</span>
       </div>
       <div>
-        <img src="assets/icons/map02.png" alt="">
-        <b> 运行设备 </b>： <span>{{ statusData?.eptOnline }}</span>
+        <img src="assets/icons/mapicon_2.png" alt="">
+        <b> 停止设备 </b>： <span>{{ statusData?.eptOffline }}</span>
       </div>
-      <div>
+      <!--<div>
         <img src="assets/icons/map03.png" alt="">
         <b> 在线终端 </b>： <span>{{ statusData?.termOnline }}</span>
+      </div>-->
+      <div>
+        <img src="assets/icons/mapicon_3.png" alt="">
+        <b> 故障设备 </b>： <span><!--{{ statusData?.eptOffline }}-->  0 </span>
       </div>
       <div>
-        <img src="assets/icons/map04.png" alt="">
+        <img src="assets/icons/mapicon_4.png" alt="">
+        <b> 告警设备 </b>： <span>{{ statusData?.alarmCount }}</span>
+      </div>
+      <div>
+        <img src="assets/icons/mapicon_5.png" alt="">
         <b> 离线终端 </b>： <span>{{ statusData?.termOffline }}</span>
-      </div>
-      <div>
-        <img src="assets/icons/map05.png" alt="">
-        <b> 告警数量 </b>： <span>{{ statusData?.alarmCount }}</span>
       </div>
     </div>
 

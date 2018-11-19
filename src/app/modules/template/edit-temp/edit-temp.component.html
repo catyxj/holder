@@ -6,18 +6,18 @@
       <span class="">
        [ {{ name }} ]
       </span>
-      &lt;!&ndash;<span *ngIf="editName" style="width: 200px; display: inline-block;">
+      <span *ngIf="editName" style="width: 200px; display: inline-block;">
         <div class="input-group">
           <input [(ngModel)]="name" type="text" class="form-control">
           <span class="input-group-append">
             <button class="btn btn_info" (click)="editName = false" [disabled]="!name">确定</button>
           </span>
         </div>
-      </span>&ndash;&gt;
-      &lt;!&ndash;<a class="text-muted text-sm-left" *ngIf="!editName" (click)="editName = !editName"&ndash;&gt;
-         &lt;!&ndash;style="cursor: pointer; text-decoration: underline; font-size: 12px;" title="修改模板名称">&ndash;&gt;
-        &lt;!&ndash;修改名称&ndash;&gt;
-      &lt;!&ndash;</a>&ndash;&gt;
+      </span>
+      <a class="text-muted text-sm-left" *ngIf="!editName" (click)="editName = !editName"
+         style="cursor: pointer; text-decoration: underline; font-size: 12px;" title="修改模板名称">
+        修改名称
+      </a>
     </h5>-->
 
     <h5 class="text_info pull-left">
@@ -419,18 +419,18 @@
         <tr>
           <!--<th width="30%">参数类型</th>
           <th>参数配置</th>-->
-          <td class="chanel_label">
+          <th class="chanel_label">
             波特率
-          </td>
-          <td class="chanel_label">
+          </th>
+          <th class="chanel_label">
             数据位
-          </td>
+          </th>
           <td class="chanel_label">
             停止位
           </td>
-          <td class="chanel_label">
+          <th class="chanel_label">
             校验位
-          </td>
+          </th>
           <td class="chanel_label">
             通信接口地址
           </td>

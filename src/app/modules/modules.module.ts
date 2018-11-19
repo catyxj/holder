@@ -22,16 +22,23 @@ import {OrganizationModule} from './organization/organization.module';
 import {TerminalModule} from './terminal/terminal.module';
 import {TerminalMainComponent} from './terminal/terminal-main/terminal-main.component';
 import {ClusterMainComponent} from './cluster/cluster-main/cluster-main.component';
-import {ClusterModule} from "./cluster/cluster.module";
-import {TemplateMainComponent} from "./template/template-main/template-main.component";
-import {TemplateModule} from "./template/template.module";
-import {AlarmMainComponent} from "./alarm/alarm-main/alarm-main.component";
-import {AlarmModule} from "./alarm/alarm.module";
-import {MaintainMainComponent} from "./maintain/maintain-main/maintain-main.component";
-import {UploadMainComponent} from "./upload/upload-main/upload-main.component";
-import {NgZorroAntdModule} from "ng-zorro-antd";
-import {UploadModule} from "./upload/upload.module";
-import {MaintainModule} from "./maintain/maintain.module";
+import {ClusterModule} from './cluster/cluster.module';
+import {TemplateMainComponent} from './template/template-main/template-main.component';
+import {TemplateModule} from './template/template.module';
+import {AlarmMainComponent} from './alarm/alarm-main/alarm-main.component';
+import {AlarmModule} from './alarm/alarm.module';
+import {MaintainMainComponent} from './maintain/maintain-main/maintain-main.component';
+import {UploadMainComponent} from './upload/upload-main/upload-main.component';
+import {NgZorroAntdModule} from 'ng-zorro-antd';
+import {UploadModule} from './upload/upload.module';
+import {MaintainModule} from './maintain/maintain.module';
+import { OverviewMainComponent } from './overview/overview-main/overview-main.component';
+import { ViewListComponent } from './overview/view-list/view-list.component';
+import { ViewConfigComponent } from './overview/view-config/view-config.component';
+import {AddEquipComponent} from './overview/add-equip/add-equip.component';
+import {AddTermComponent} from './overview/add-term/add-term.component';
+import {AddTemplateComponent} from './overview/add-template/add-template.component';
+import {MatGridListModule, MatMenuModule} from '@angular/material';
 
 
 
@@ -54,7 +61,9 @@ import {MaintainModule} from "./maintain/maintain.module";
     RouterModule.forChild(ModulesRoutingModule),
     NgxEchartsModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    MatMenuModule,
+    MatGridListModule,
   ],
   declarations: [
     MonitorMainComponent,
@@ -68,7 +77,13 @@ import {MaintainModule} from "./maintain/maintain.module";
     TemplateMainComponent,
     AlarmMainComponent,
     MaintainMainComponent,
-    UploadMainComponent
+    UploadMainComponent,
+    OverviewMainComponent,
+    ViewListComponent,
+    ViewConfigComponent,
+    AddEquipComponent,
+    AddTermComponent,
+    AddTemplateComponent
   ],
   exports: [
     // RouterModule

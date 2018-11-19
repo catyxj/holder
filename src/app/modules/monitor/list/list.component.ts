@@ -31,7 +31,7 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   getBoilers(message): void {
-    /*const wsUrl = `wss://${window.location.host}/equipment_show`;
+    const wsUrl = `wss://${window.location.host}/equipment_show`;
     this.socket = this.boilerWsService.creatSocket(wsUrl, message)
       .subscribe(
         data => {
@@ -81,8 +81,10 @@ export class ListComponent implements OnInit, OnDestroy {
           console.log('ws结束');
           this.isSpinning = true;
         }
-      );*/
-    this.boilerService.getBoilers(1, 1)
+      );
+
+
+    /*this.boilerService.getBoilers(1, 1)
       .subscribe( data => {
         this.boilers = data.params;
         this.totalItems = data.counts;
@@ -118,7 +120,8 @@ export class ListComponent implements OnInit, OnDestroy {
             bo.malfunction = '无故障';
           }
         }
-      });
+      });*/
+
   }
 
   // 每页数量
@@ -150,8 +153,8 @@ export class ListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // console.log('page close');
-    // this.socket.unsubscribe();
-    // this.boilerWsService.closeSocket();
+    this.socket.unsubscribe();
+    this.boilerWsService.closeSocket();
   }
 
 }

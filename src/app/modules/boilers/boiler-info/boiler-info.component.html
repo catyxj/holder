@@ -23,7 +23,7 @@
           <h6 class="">常规信息</h6>
         </div>
         <div class="ph_btn" *ngIf="user && user.Role.RoleId<=10">
-          <a class="" (click)="editBoiler()">
+          <a class="" (click)="editBoiler($event)">
             <i class="fa fa-edit"></i> 编辑
           </a>
         </div>

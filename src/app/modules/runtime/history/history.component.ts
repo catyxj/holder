@@ -17,7 +17,7 @@ export class RuntimeHistoryComponent implements OnInit {
   private uid;
   public params = [];
   public history = [];
-  private name;
+  public name;
   public termCode;
   public terminals;
 

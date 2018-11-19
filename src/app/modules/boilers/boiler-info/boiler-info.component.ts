@@ -182,7 +182,8 @@ export class BoilerInfoComponent implements OnInit {
 
 
   // 编辑锅炉信息模态框
-  editBoiler() {
+  editBoiler(event) {
+    event.stopPropagation();
     const modalRef = this.modalService.open(EditBoilerComponent, { size: 'lg', backdropClass: 'modal_backdrop', windowClass: 'dark_modal' });
     modalRef.componentInstance.currentData = this.info;
     modalRef.result.then((result) => {

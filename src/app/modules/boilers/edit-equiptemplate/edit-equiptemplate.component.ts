@@ -49,7 +49,7 @@ export class EditEquiptemplateComponent implements OnInit {
       reader.readAsDataURL(file);
 
       reader.onload = function() {
-        console.log(this);
+        // console.log(this);
         // 显示图片
         that.img1 = this.result;
         that.errMes = ' ';

@@ -32,7 +32,7 @@ export class AlarmDetailComponent implements OnInit {
 
     this.alarmService.getDetail(this.currentData.Uid)
       .subscribe(data => {
-        this.runtimes = data.runtime;
+        this.runtimes = data.runtime[0].data;
         this.AlarmMax = data.alarmMax;
         this.AlarmMin = data.alarmMin;
 
@@ -44,9 +44,9 @@ export class AlarmDetailComponent implements OnInit {
         let runtimeList = [];
         for (let i = 0; i < this.runtimes.length; i++) {
           let rt = this.runtimes[i];
-          rt.CreatedDate = this.datePipe.transform(new Date(rt.CreatedDate), 'MM/dd HH:mm:ss');
+          rt.created_date = this.datePipe.transform(new Date(rt.created_date), 'MM/dd HH:mm:ss');
           // rt.Value = rt.Value;
-          runtimeList.push(rt.Value);
+          runtimeList.push(rt.value);
         }
         runtimeValue.max = Math.max.apply(null, runtimeList);
         runtimeValue.min = Math.min.apply(null, runtimeList);
@@ -104,7 +104,7 @@ export class AlarmDetailComponent implements OnInit {
             }
           ],
           dataset: {
-            dimensions: ['CreatedDate', 'Value'],
+            dimensions: ['created_date', 'value'],
             source: this.runtimes
           },
 

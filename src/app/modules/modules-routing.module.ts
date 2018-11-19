@@ -45,6 +45,11 @@ import {UploadMainComponent} from './upload/upload-main/upload-main.component';
 import {MaintainListComponent} from './maintain/maintain-list/maintain-list.component';
 import {PlcAlarmComponent} from './terminal/plc-alarm/plc-alarm.component';
 import {AlarmHistoryComponent} from './runtime/alarm-history/alarm-history.component';
+import {ViewConfigComponent} from './overview/view-config/view-config.component';
+import {OverviewMainComponent} from './overview/overview-main/overview-main.component';
+import {AddEquipComponent} from "./overview/add-equip/add-equip.component";
+import {AddTermComponent} from "./overview/add-term/add-term.component";
+import {AddTemplateComponent} from "./overview/add-template/add-template.component";
 
 
 
@@ -255,6 +260,29 @@ export const ModulesRoutingModule = [
       {
         path: 'upload',
         component: UploadMainComponent,
+      },
+      {
+        path: 'overview',
+        component: OverviewMainComponent,
+        children: [
+          { path: '', redirectTo: 'equip', pathMatch: 'full' },
+          {
+            path: 'equip',
+            component: AddEquipComponent
+          },
+          {
+            path: 'term/:uid',
+            component: AddTermComponent
+          },
+          {
+            path: 'template/:uid',
+            component: AddTemplateComponent
+          },
+          {
+            path: 'config/:uid',
+            component: ViewConfigComponent
+          }
+        ]
       }
     ]
   }

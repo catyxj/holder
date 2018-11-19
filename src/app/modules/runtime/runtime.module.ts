@@ -15,6 +15,7 @@ import { AlarmCurrentComponent } from './alarm-current/alarm-current.component';
 import { AlarmHistoryComponent } from './alarm-history/alarm-history.component';
 import { MaintainComponent } from './maintain/maintain.component';
 import {ModulesModule} from "../modules.module";
+import { ChartExpandComponent } from './chart-expand/chart-expand.component';
 
 
 
@@ -34,9 +35,11 @@ import {ModulesModule} from "../modules.module";
     RuntimeAlarmComponent,
     AlarmCurrentComponent,
     AlarmHistoryComponent,
-    MaintainComponent
+    MaintainComponent,
+    ChartExpandComponent
   ],
   entryComponents: [
+    ChartExpandComponent
   ]
 })
 export class RuntimeModule { }

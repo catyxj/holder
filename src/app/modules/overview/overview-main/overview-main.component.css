@@ -1,0 +1,14 @@
+
+.over_main{
+  display: flex;
+  padding: 30px;
+  background-color: #dcdcdc;
+}
+.over_l{
+  flex: 3;
+  background-color: #ffffff;
+}
+.over_r{
+  flex: 2;
+  background-color: #eeeeee;
+}

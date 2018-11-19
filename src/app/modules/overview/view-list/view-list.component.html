@@ -1,0 +1,66 @@
+<div class="view_list">
+  <div class="list_head">
+    <h6>档案列表</h6>
+  </div>
+
+  <div class="list_body">
+    <table class="table table-striped">
+      <thead>
+        <tr class="" style="background-color: #e5e5e5; color: #333333;">
+          <th>序号</th>
+          <th>档案名称</th>
+          <th>设备名称</th>
+          <th>终端名称</th>
+          <th>模板</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr></tr>
+        <tr *ngFor="let data of list; let i = index;"  routerLinkActive="active">
+          <td>
+            {{i + 1}}
+          </td>
+          <td>
+            <a [routerLink]="['/admin/overview/config', data.Uid]" >{{data.Name}}</a>
+          </td>
+          <td>
+            {{data.FileEquipment?.Name}}
+          </td>
+          <td>
+            {{data.Terminal?.TerminalCode }}
+            <span *ngIf="!data.Terminal">未配置</span>
+          </td>
+          <td>
+            {{data.Template?.Name }}
+            <span *ngIf="!data.Template">未配置</span>
+          </td>
+
+        </tr>
+      </tbody>
+
+    </table>
+
+    <div class="">
+      <ngb-pagination class="d-flex justify-content-end" style="margin-right: 10px;"
+                      [collectionSize]="totalItems"
+                      [pageSize]="pageSize" [(page)]="pageNum"
+                      [maxSize]="3" [rotate]="true" [boundaryLinks]="false"
+                      (pageChange)="pageChange()">
+
+      </ngb-pagination>
+    </div>
+
+
+  </div>
+
+  <div class="list_bottom">
+      <a routerLink="/admin/overview/equip" class="btn btn_info">
+        <img src="assets/icons/add.png" alt="">
+        新建档案
+      </a>
+
+  </div>
+
+
+</div>

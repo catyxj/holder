@@ -22,7 +22,7 @@
         "UpdatedBy": null,
         "IsDemo": false,
         "IsDeleted": false,
-        "RoleId": 1
+        "RoleId": 10
     },
     "Organization": {
       "Uid": "a87bce74-d40f-4f38-83b5-036a36122bd1",
@@ -30,7 +30,7 @@
       "Remark": "",
       "Type": {
         "Uid": "308634e3-137e-4e04-a301-ae486ad2d37f",
-        "Name": "",
+        "Name": "锅炉使用企业",
         "NameEn": "",
         "Remark": "",
         "CreatedDate": "0001-01-01T00:00:00Z",
@@ -71,12 +71,13 @@
       "Users": null,
       "Boilers": null,
       "BoilersLinked": null,
-      "EptCtlPlg": true
+      "EptCtlPlg": true,
+      "IsEptCtl": false
     },
     "Username": "admin",
     "Password": "$2a$10$duNIqKt4kjFzroli0xiYgeL8NHBjsz/lQQifFLVvCuXEBSoakLXRO",
     "Gender": 0,
-    "Picture": "assets/icons/icon-72x72.png",
+    "Picture": "",
     "Status": 1,
     "Address": null,
     "PhoneNumber": "",
@@ -84,25 +85,6 @@
     "Email": "",
     "RegisterIp": "",
     "Thirds": null,
-    "Sessions": [
-        {
-            "Uid": "",
-            "Name": "",
-            "NameEn": "",
-            "Remark": "",
-            "CreatedDate": "0001-01-01T00:00:00Z",
-            "CreatedBy": null,
-            "UpdatedDate": "0001-01-01T00:00:00Z",
-            "UpdatedBy": null,
-            "IsDemo": false,
-            "IsDeleted": false,
-            "User": null,
-            "Login": null,
-            "Application": null,
-            "IsActived": false,
-            "Token": ""
-        }
-    ],
     "Logins": [
         {
             "Uid": "082b2385-8731-4cf4-8d0e-d7a0976b0947",
