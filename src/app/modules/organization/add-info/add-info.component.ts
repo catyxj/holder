@@ -126,6 +126,11 @@ export class AddInfoComponent implements OnInit {
 
   }
 
+  // 删除图片
+  removeImg() {
+    let that = this;
+    that.brandImg = '';
+  }
 
   // 保存
   save() {

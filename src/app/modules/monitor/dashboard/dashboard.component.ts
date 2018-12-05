@@ -12,7 +12,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   boilers: any = [];
   boiler: any;
   page = 1;
-  pageSize = 3;
+  pageSize = 4;
   totalItems;
   search: string;
   socket: any;
@@ -72,7 +72,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     for (let i = 0; i < this.boilers.length; i++) {
       let bo = this.boilers[i];
       if (!bo.img) {
-        bo.img = 'assets/images/no_image.png';
+        bo.img = 'assets/images/equip0.jpg';
       }
 
       if (bo.termStatus === 1) {
@@ -87,7 +87,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         } else {
           bo.warning = '无告警';
         }
-        if (bo.Malfunction === true) {
+        if (bo.mtStatus === true) {
           bo.malfunction = '有故障';
         } else {
           bo.malfunction = '无故障';

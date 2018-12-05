@@ -71,7 +71,7 @@
           </span>
         </td>
         <td>
-          <a [routerLink]="['/admin/equipments/equipment-info', eq.uid]"
+          <a [routerLink]="['/admin/runtime/'+ eq.uid + '/' + eq.name + '/dashboard']"
              class="btn btn_info btn-sm" style="color: #ffffff;" title="查看设备信息">
             查看
           </a>
@@ -82,7 +82,7 @@
           </button>
 
           <nz-dropdown [nzPlacement]="'bottomRight'" *ngIf="user && user.Role.RoleId >= 10">
-            <button nz-dropdown class="btn btn_info btn-sm ml-2" nz-button [nzLoading]="isLoading3">控制</button>
+            <button nz-dropdown class="btn btn_info btn-sm ml-2" nz-button [nzLoading]="eq.isLoading">控制</button>
             <ul nz-menu>
               <li nz-menu-item (click)="control(eq,2)">
                 启动

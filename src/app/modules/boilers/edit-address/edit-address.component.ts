@@ -111,6 +111,7 @@ export class EditAddressComponent implements OnInit {
         this.address.locationName = this.cities[i].LocationName;
       }
     }
+    this.address.aRegion = 0;
     this.address.location = parseInt(this.address.aCity);
     // console.log(this.address);
   }

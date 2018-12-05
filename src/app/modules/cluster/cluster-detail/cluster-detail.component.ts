@@ -53,6 +53,9 @@ export class ClusterDetailComponent implements OnInit {
         this.isSpinning = false;
         this.equipList = data.ept;
         this.totalItems = data.counts;
+        for (let i = 0; i < this.equipList.length; i++) {
+          this.equipList[i].isLoading = false;
+        }
       }, err => {
         this.isSpinning = false;
       });
@@ -178,17 +181,17 @@ export class ClusterDetailComponent implements OnInit {
       uid: data.uid,
       ctl_type: n
     };
-    this.isLoading3 = true;
+    data.isLoading = true;
     this.runtimeService.equipControl(ctrlData)
       .subscribe( data => {
-        this.isLoading3 = false;
+        data.isLoading = false;
         Swal(
           '发送成功！',
           '',
           'success'
         );
       }, err => {
-        this.isLoading3 = false;
+        data.isLoading = false;
         Swal(
           '发送失败！',
           err,

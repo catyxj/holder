@@ -1,2 +1,23 @@
 
 
+.oval{
+  display: inline-block;
+  width: 24px;
+  height: 16px;
+  border-radius: 20px;
+  margin-right: 3px;
+  background-color: #888888;
+}
+.text_warning{
+  color: #ff7513;
+}
+.text_info .oval{
+  background-color: #00a4ff;
+}
+.text-danger .oval{
+  background-color: #ff3000;
+}
+.text_warning .oval{
+  background-color: #ff7513;
+}
+

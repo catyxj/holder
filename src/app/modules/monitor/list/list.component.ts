@@ -31,7 +31,7 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   getBoilers(message): void {
-    const wsUrl = `wss://${window.location.host}/equipment_show`;
+    /*const wsUrl = `wss://${window.location.host}/equipment_show`;
     this.socket = this.boilerWsService.creatSocket(wsUrl, message)
       .subscribe(
         data => {
@@ -81,46 +81,40 @@ export class ListComponent implements OnInit, OnDestroy {
           console.log('ws结束');
           this.isSpinning = true;
         }
-      );
+      );*/
 
 
-    /*this.boilerService.getBoilers(1, 1)
+    this.boilerService.getBoilers(1, 1)
       .subscribe( data => {
         this.boilers = data.params;
         this.totalItems = data.counts;
         for (let i = 0; i < this.boilers.length; i++) {
           let bo = this.boilers[i];
+          bo.isBurning = '未运行';
+          bo.warning = '无告警';
+          bo.malfunction = '无故障';
 
           if (bo.termStatus === 1) {
             bo.online = '终端在线';
             if (bo.eptStatus === true) {
               bo.isBurning = '运行中';
-            } else {
-              bo.isBurning = '未运行';
             }
             if (bo.alarmStatus === true) {
-              bo.warning = '有告警';
-            } else {
-              bo.warning = '无告警';
+              bo.warning = '告警';
             }
-            if (bo.Malfunction === true) {
-              bo.malfunction = '有故障';
-            } else {
-              bo.malfunction = '无故障';
+            if (bo.mtStatus === true) {
+              bo.malfunction = '故障';
             }
           } else if (bo.termStatus === 0) {
             bo.online = '终端离线';
-            bo.isBurning = '未运行';
-            bo.warning = '无告警';
-            bo.malfunction = '无故障';
           } else {
-            bo.online = '终端未绑定';
-            bo.isBurning = '未运行';
-            bo.warning = '无告警';
-            bo.malfunction = '无故障';
+            bo.online = '未绑定';
+            bo.isBurning = '未测定';
+            bo.warning = '未测定';
+            bo.malfunction = '未测定';
           }
         }
-      });*/
+      });
 
   }
 
@@ -152,9 +146,9 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // console.log('page close');
-    this.socket.unsubscribe();
-    this.boilerWsService.closeSocket();
+
+    // this.socket.unsubscribe();
+    // this.boilerWsService.closeSocket();
   }
 
 }

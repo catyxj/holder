@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {AddMaintainComponent} from '../add-maintain/add-maintain.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {MaintainService} from '../../../shared/maintain.service';
 
 @Component({
   selector: 'app-maintain-list',
@@ -15,7 +18,8 @@ export class MaintainListComponent implements OnInit {
   public allDelete = false;
   public pageSize = 10;
 
-  constructor() { }
+  constructor(private modalService: NgbModal,
+              private maintainService: MaintainService) { }
 
   ngOnInit() {
   }
@@ -38,6 +42,32 @@ export class MaintainListComponent implements OnInit {
   searchChange() {
     this.page = 1;
     this.pageChange();
+  }
+
+  add() {
+    // console.log(data);
+    const modalRef = this.modalService.open(AddMaintainComponent, {size: 'lg'});
+    // modalRef.componentInstance.currentData = data;
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+        this.pageChange();
+      }
+    }, (reason) => {
+      console.log(reason);
+    });
+  }
+
+  view(data) {
+    // console.log(data);
+    const modalRef = this.modalService.open(AddMaintainComponent, {size: 'lg'});
+    modalRef.componentInstance.currentData = data;
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+        this.pageChange();
+      }
+    }, (reason) => {
+      console.log(reason);
+    });
   }
 
 }

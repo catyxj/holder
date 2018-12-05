@@ -5,11 +5,12 @@ import {RuntimeDashboardComponent} from './dashboard/dashboard.component';
 import {OperateComponent} from './operate/operate.component';
 import {RuntimeHistoryComponent} from './history/history.component';
 import {RuntimeAlarmComponent} from './alarm/alarm.component';
-import {MaintainListComponent} from '../maintain/maintain-list/maintain-list.component';
-import {CurrentComponent} from '../alarm/current/current.component';
-import {HistoryComponent} from '../alarm/history/history.component';
 import {AlarmCurrentComponent} from './alarm-current/alarm-current.component';
 import {AlarmHistoryComponent} from './alarm-history/alarm-history.component';
+import {MaintainComponent} from './maintain/maintain.component';
+import {MaintainDashboardComponent} from './maintain-dashboard/maintain-dashboard.component';
+import {MaintainViewComponent} from './maintain-view/maintain-view.component';
+import {MaintainAddComponent} from './maintain-add/maintain-add.component';
 
 export const RuntimeRoutingModule = [
   {
@@ -46,7 +47,22 @@ export const RuntimeRoutingModule = [
       },
       {
         path: 'maintain',
-        component: MaintainListComponent
+        component: MaintainComponent,
+        children: [
+          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+          {
+            path: 'dashboard',
+            component: MaintainDashboardComponent,
+          },
+          {
+            path: 'view/:uid/:date/:create',
+            component: MaintainViewComponent,
+          },
+          {
+            path: 'add',
+            component: MaintainAddComponent,
+          }
+        ]
       }
     ]
   }

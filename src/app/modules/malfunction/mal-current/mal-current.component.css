@@ -1,0 +1,15 @@
+.oval{
+  width: 40px;
+  height: 24px;
+  border-radius: 12px;
+  margin-right: 10px;
+}
+.oval_green{
+  background-color: #22cc46;
+}
+.oval_yellow{
+  background-color: #fdca21;
+}
+
+
+

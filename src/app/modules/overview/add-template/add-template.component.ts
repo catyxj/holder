@@ -63,6 +63,20 @@ export class AddTemplateComponent implements OnInit {
       subAdr: 0,  // 从机地址
       heartbeat: 0  // 心跳包频率
     };
+    this.switchList = [
+      {
+        ChannelNumber: 1,
+        Parameter: {
+          Name: '点火信号',
+        },
+        alarm: [],
+        Func: 99,
+        Modbus: null,
+        BitAddress: null,
+        Status: -1,
+        SequenceNumber: -1
+      }
+    ];
     this.getFileInfo();
     this.initLists();
     this.initPriorities();

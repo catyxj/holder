@@ -17,32 +17,32 @@ const httpOptions = {
 })
 export class TerminalService {
 
-  // private terminalsUrl = 'assets/server/terminal_list.json';
-  // private messageUrl = 'assets/server/terminal_origin_message_list.json';
-  // private funcUrl = 'assets/server/term_function_code_list.json';
-  // private byteUrl = 'assets/server/term_byte_list.json';
-  // private correspondUrl = 'assets/server/correspond_type_list.json';
-  // private dataBitUrl = 'assets/server/date_bit_list.json';
-  // private heartbeatUrl = 'assets/server/heartbeat_packet_list.json';
-  // private parityUrl = 'assets/server/parity_bit.json';
-  // private slaveUrl = 'assets/server/slave_address_list.json';
-  // private stopBitUrl = 'assets/server/stop_bit_list.json';
-  // private baudRateUrl = 'assets/server/baud_rate_list.json';
-  // private channelUrl = 'assets/server/chan_config_list.json';
+  private terminalsUrl = 'assets/server/terminal_list.json';
+  private messageUrl = 'assets/server/terminal_origin_message_list.json';
+  private funcUrl = 'assets/server/term_function_code_list.json';
+  private byteUrl = 'assets/server/term_byte_list.json';
+  private correspondUrl = 'assets/server/correspond_type_list.json';
+  private dataBitUrl = 'assets/server/date_bit_list.json';
+  private heartbeatUrl = 'assets/server/heartbeat_packet_list.json';
+  private parityUrl = 'assets/server/parity_bit.json';
+  private slaveUrl = 'assets/server/slave_address_list.json';
+  private stopBitUrl = 'assets/server/stop_bit_list.json';
+  private baudRateUrl = 'assets/server/baud_rate_list.json';
+  private channelUrl = 'assets/server/chan_config_list.json';
 
 
-  private terminalsUrl = '/terminal_list';
-  private messageUrl = '/terminal_message_list';
-  private funcUrl = '/term_function_code_list';
-  private byteUrl = '/term_byte_list';
-  private correspondUrl = '/correspond_type_list';
-  private dataBitUrl = '/data_bit_list';
-  private heartbeatUrl = '/heartbeat_packet_list';
-  private parityUrl = '/parity_bit';
-  private slaveUrl = '/slave_address_list';
-  private stopBitUrl = '/stop_bit_list';
-  private baudRateUrl = '/baud_rate_list';
-  private channelUrl = '/chan_config_list';
+  // private terminalsUrl = '/terminal_list';
+  // private messageUrl = '/terminal_message_list';
+  // private funcUrl = '/term_function_code_list';
+  // private byteUrl = '/term_byte_list';
+  // private correspondUrl = '/correspond_type_list';
+  // private dataBitUrl = '/data_bit_list';
+  // private heartbeatUrl = '/heartbeat_packet_list';
+  // private parityUrl = '/parity_bit';
+  // private slaveUrl = '/slave_address_list';
+  // private stopBitUrl = '/stop_bit_list';
+  // private baudRateUrl = '/baud_rate_list';
+  // private channelUrl = '/chan_config_list';
 
   constructor(private http: HttpClient) { }
 

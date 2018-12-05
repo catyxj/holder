@@ -1,16 +1,20 @@
-/*.cdk-overlay-backdrop{
-  z-index: 800;
+
+.label{
+  padding: 3px 6px;
+  border-radius: 4px;
 }
-.modal-backdrop{
-  z-index: 880;
+.label_info{
+  background-color: #00a4ff;
+  color: #ffffff;
 }
-.modal{
-  z-index: 900;
-}
-.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
-  opacity: 0;
+.label_fail{
+   background-color: #e99563;
+   color: #ffffff;
+ }
+.label_grey{
+  background-color: #aaaaaa;
+  color: #ffffff;
 }
 
-.dark_modal{
-  z-index: 900;
-}*/
+
+

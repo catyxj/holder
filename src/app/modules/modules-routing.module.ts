@@ -42,14 +42,21 @@ import {RuntimeAlarmComponent} from './runtime/alarm/alarm.component';
 import {BoilerTemplatesComponent} from './boilers/templates/templates.component';
 import {MaintainMainComponent} from './maintain/maintain-main/maintain-main.component';
 import {UploadMainComponent} from './upload/upload-main/upload-main.component';
-import {MaintainListComponent} from './maintain/maintain-list/maintain-list.component';
 import {PlcAlarmComponent} from './terminal/plc-alarm/plc-alarm.component';
 import {AlarmHistoryComponent} from './runtime/alarm-history/alarm-history.component';
 import {ViewConfigComponent} from './overview/view-config/view-config.component';
 import {OverviewMainComponent} from './overview/overview-main/overview-main.component';
-import {AddEquipComponent} from "./overview/add-equip/add-equip.component";
-import {AddTermComponent} from "./overview/add-term/add-term.component";
-import {AddTemplateComponent} from "./overview/add-template/add-template.component";
+import {AddEquipComponent} from './overview/add-equip/add-equip.component';
+import {AddTermComponent} from './overview/add-term/add-term.component';
+import {AddTemplateComponent} from './overview/add-template/add-template.component';
+import {MalfunctionMainComponent} from './malfunction/malfunction-main/malfunction-main.component';
+import {MalCurrentComponent} from './malfunction/mal-current/mal-current.component';
+import {MalHistoryComponent} from './malfunction/mal-history/mal-history.component';
+import {MaintainComponent} from './runtime/maintain/maintain.component';
+import {MaintainDashboardComponent} from './runtime/maintain-dashboard/maintain-dashboard.component';
+import {MaintainViewComponent} from './runtime/maintain-view/maintain-view.component';
+import {MaintainAddComponent} from './runtime/maintain-add/maintain-add.component';
+import {MalDetailComponent} from './malfunction/mal-detail/mal-detail.component';
 
 
 
@@ -151,8 +158,22 @@ export const ModulesRoutingModule = [
           },
           {
             path: 'maintain',
-            component: MaintainListComponent
-
+            component: MaintainComponent,
+            children: [
+              { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+              {
+                path: 'dashboard',
+                component: MaintainDashboardComponent,
+              },
+              {
+                path: 'view/:uid/:date/:create',
+                component: MaintainViewComponent,
+              },
+              {
+                path: 'add',
+                component: MaintainAddComponent,
+              }
+            ]
           }
         ]
       },
@@ -281,6 +302,25 @@ export const ModulesRoutingModule = [
           {
             path: 'config/:uid',
             component: ViewConfigComponent
+          }
+        ]
+      },
+      {
+        path: 'malfunction',
+        component: MalfunctionMainComponent,
+        children: [
+          { path: '', redirectTo: 'current', pathMatch: 'full' },
+          {
+            path: 'current',
+            component: MalCurrentComponent
+          },
+          {
+            path: 'history',
+            component: MalHistoryComponent
+          },
+          {
+            path: 'detail/:uid/:date/:create',
+            component: MalDetailComponent
           }
         ]
       }

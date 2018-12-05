@@ -3,19 +3,21 @@ import { CommonModule } from '@angular/common';
 
 import { RuntimeDashboardComponent } from './dashboard/dashboard.component';
 import { NgxEchartsModule } from 'ngx-echarts';
-import {RuntimeRoutingModule} from "./runtime-routing.module";
-import {RouterModule} from "@angular/router";
+import {RuntimeRoutingModule} from './runtime-routing.module';
+import {RouterModule} from '@angular/router';
 import { OperateComponent } from './operate/operate.component';
 import { RuntimeHistoryComponent } from './history/history.component';
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {FormsModule} from "@angular/forms";
-import {NgZorroAntdModule} from "ng-zorro-antd";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FormsModule} from '@angular/forms';
+import {NgZorroAntdModule} from 'ng-zorro-antd';
 import { RuntimeAlarmComponent } from './alarm/alarm.component';
 import { AlarmCurrentComponent } from './alarm-current/alarm-current.component';
 import { AlarmHistoryComponent } from './alarm-history/alarm-history.component';
 import { MaintainComponent } from './maintain/maintain.component';
-import {ModulesModule} from "../modules.module";
 import { ChartExpandComponent } from './chart-expand/chart-expand.component';
+import { MaintainDashboardComponent } from './maintain-dashboard/maintain-dashboard.component';
+import { MaintainAddComponent } from './maintain-add/maintain-add.component';
+import { MaintainViewComponent } from './maintain-view/maintain-view.component';
 
 
 
@@ -36,7 +38,10 @@ import { ChartExpandComponent } from './chart-expand/chart-expand.component';
     AlarmCurrentComponent,
     AlarmHistoryComponent,
     MaintainComponent,
-    ChartExpandComponent
+    ChartExpandComponent,
+    MaintainDashboardComponent,
+    MaintainAddComponent,
+    MaintainViewComponent
   ],
   entryComponents: [
     ChartExpandComponent

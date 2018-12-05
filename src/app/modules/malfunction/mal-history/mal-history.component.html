@@ -1,0 +1,88 @@
+
+<div class="">
+  <div class="mat-card-title">
+    <h5 class="text_info pull-left">
+      <img src="assets/icons/malfunction.png" alt="">
+      故障记录
+    </h5>
+
+    <nav class="pull-left">
+      <a routerLink="/admin/malfunction/current" routerLinkActive="btn_info" class="btn">当前故障</a>
+      <a routerLink="/admin/malfunction/history" routerLinkActive="btn_info" class="btn  ml-2 mr-3">历史故障</a>
+    </nav>
+
+    <div class="pull-right flex flex-row">
+      <div class="input-group mb-2">
+        <input type="text" class="form-control" placeholder="请输入设备名称" [(ngModel)]="search" >
+        <div class="input-group-append" (click)="searchChange()">
+          <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="t_content">
+    <table class="table alarm_current">
+      <thead class="bg_light_primary">
+
+      <th> 序号 </th>
+      <th> 设备名称 </th>
+      <th> 上传时间 </th>
+      <th> 创建者 </th>
+      <th> 维保状态 </th>
+      <th> 操作 </th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of malfunctions; let i = index">
+
+        <td> {{ i+1 }}  </td>
+        <td> {{ data.Equipment.Name }}  </td>
+        <td> {{ data.CreatedDate | date: 'yyyy-MM-dd HH:mm:ss' }} </td>
+        <td>
+          {{data.Create}}
+        </td>
+        <td>
+          <span *ngIf="data.Result" class="flex" style="justify-content: center;">
+            <div class="oval oval_green"></div>
+            正常
+          </span>
+          <span *ngIf="!data.Result" class="flex" style="justify-content: center;">
+            <div class="oval oval_yellow"></div>
+            异常
+          </span>
+        </td>
+        <td>
+          <a [routerLink]="['/admin/malfunction/detail', data.Uid, data.CreatedDate, data.CreatedBy.Name]" class="btn btn_info btn-sm" style="color: #ffffff;">
+            查看
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <p class="text-muted" *ngIf="!malfunctions||malfunctions.length===0">
+      无有效数据
+    </p>
+  </div>
+
+
+  <div class="t_bottom">
+    <ngb-pagination class="pull-right"
+                    [collectionSize]="totalItems"
+                    [pageSize]="pageSize" [(page)]="page"
+                    [maxSize]="3" [rotate]="true" [boundaryLinks]="false"
+                    (pageChange)="pageChange()">
+
+    </ngb-pagination>
+    <div class="pull-right mr-3">
+      <select [(ngModel)]="pageSize" class="form-control" (change)="pageSizeChange()">
+        <option value="10">10</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
+    <div class="pull-right mr-3" style="line-height: 33px;"> 共 {{totalItems}} 项</div>
+  </div>
+
+</div>
+

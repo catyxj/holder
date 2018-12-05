@@ -13,7 +13,7 @@
     </a>
 
     <!--显示企业标识-->
-    <a class="navbar-brand" routerLink="/admin" *ngIf="user && (user.Organization && user.Organization.ShowBrand)">
+    <a class="navbar-brand" routerLink="/admin" *ngIf="user && user.Role.RoleId===10 && (user.Organization && user.Organization.ShowBrand)">
       <h3 *ngIf="!user.Organization.BrandImageUrl" style="color: #ffffff;">
         {{user.Organization.BrandName}}
       </h3>
@@ -22,22 +22,64 @@
       </span>
     </a>
 
+    <a class="navbar-brand" routerLink="/admin"
+       *ngIf="user && user.Role.RoleId===11 && (user.Organization.SuperOrganization && user.Organization.SuperOrganization.ShowBrand)">
+      <h3 *ngIf="!user.Organization.SuperOrganization.BrandImageUrl" style="color: #ffffff;">
+        {{user.Organization.SuperOrganization.BrandName}}
+      </h3>
+      <span *ngIf="user.Organization.SuperOrganization.BrandImageUrl" >
+        <img src="{{user.Organization.SuperOrganization.BrandImageUrl}}" alt="" height="30">
+      </span>
+    </a>
+
 
 
     <!-- This fills the remaining space of the current row -->
     <span class="example-spacer"></span>
 
+    <div class="we_box">
+      <span>
+        <img src="assets/images/wechat.png" style="width: 18px; height: 18px;" alt="">
+      </span>
+      <div class="we_show">
+        <img src="assets/images/wechat.jpg" alt="">
+      </div>
+    </div>
+
 
     <!--<mat-icon> email </mat-icon>-->
-    <a routerLink="/admin/alarm" style="color: #ffffff;">
-      <div style="position: relative;">
+    <div class="alarm_tip_box">
+      <div class="alarm_tip_btn" style="position: relative;">
         <i class="fa fa-bell-o"></i>
-        <span class="badge badge-pill badge-danger" *ngIf="alarmNum && alarmNum !== 0"
+        <span class="badge badge-pill badge-danger" *ngIf="totalNum && totalNum !== 0"
               style="position: absolute; top: -5px; right: -12px;">
-        {{alarmNum}}
-      </span>
+        {{totalNum}}
+        </span>
       </div>
-    </a>
+
+      <div class="alarm_tip">
+        <a routerLink="/admin/alarm">
+          <div class="tip_item" style="background-color: #f4959c;">
+            告警信息 &nbsp;
+            {{alarmNum}} 条
+          </div>
+        </a>
+
+        <a routerLink="/admin/malfunction">
+          <div class="tip_item" style="background-color: #f6bd95;">
+            故障信息 &nbsp;
+            {{malNum}} 条
+          </div>
+        </a>
+        <a routerLink="/admin/alarm">
+          <div class="tip_item" style="background-color: #dcedd3;">
+            提醒信息 &nbsp;
+            {{noticeNum}} 条
+          </div>
+        </a>
+      </div>
+
+    </div>
 
     <!--<i class="fa fa-envelope-o"></i>-->
 

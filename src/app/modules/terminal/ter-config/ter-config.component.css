@@ -80,4 +80,15 @@ h6.text-muted{
   text-align: center;
 }
 
+.btn_green{
+  border-color: #5b95b2;
+  color: #5b95b2;
+}
+.btn_green:hover{
+  background-color: #5b95b2;
+  color: #ffffff;
+}
+
+
+
 

@@ -27,7 +27,7 @@ export class AlarmHistoryComponent implements OnInit {
 
   // 获取告警列表
   getalarms() {
-    this.alarmService.getHistories(this.page, this.pageSize, this.search)
+    this.alarmService.getHistories(this.page, this.pageSize, this.search, this.uid)
       .subscribe( data => {
         this.alarms = data.params;
         this.totalItems = data.counts;

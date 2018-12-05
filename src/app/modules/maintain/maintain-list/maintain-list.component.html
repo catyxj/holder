@@ -1,7 +1,12 @@
-<div class="content">
+<div class="">
 
-  <div class="mat-card-title" style="padding: 20px 0; overflow: hidden;">
-    <h5 class="text_info pull-left">维保记录</h5>
+  <div class="mat-card-title">
+    <h5 class="text_info pull-left">
+      <i class="fa fa-recycle" style="font-size: 20px;"></i>
+      &nbsp;
+      维保记录
+    </h5>
+
 
     <div class="pull-right flex flex-row">
       <!--<div class="input-group mb-4">
@@ -10,18 +15,18 @@
           <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
         </div>
       </div>-->
-      <div class="ml-3" >
-        <button class="btn btn_info">
+      <!--<div class="ml-3" >
+        <button class="btn btn_info" (click)="add()">
           新增维保记录
         </button>
-      </div>
+      </div>-->
 
     </div>
 
   </div>
 
-  <div>
-    <table class="table table-bordered">
+  <div class="t_content">
+    <table class="table">
       <thead class="bg_light_primary">
       <th>
         <div class="checkbox c-checkbox white">
@@ -65,20 +70,22 @@
   </div>
 
 
-  <div>
-
-
-    <div class="pull-left">
+  <div class="t_bottom">
+    <!--<div class="pull-left">
       <button class="btn btn_info">
         批量删除
       </button>
+    </div>-->
+    <div class="pull-left" >
+      <button class="btn btn_info" (click)="add()">
+        新增维保记录
+      </button>
     </div>
-
 
     <ngb-pagination class="pull-right"
                     [collectionSize]="totalItems"
                     [pageSize]="pageSize" [(page)]="page"
-                    [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                    [maxSize]="3" [rotate]="true" [boundaryLinks]="false"
                     (pageChange)="pageChange()">
 
     </ngb-pagination>

@@ -1,3 +1,46 @@
-<p>
-  add-maintain works!
-</p>
+<div class="modal-header">
+  <h4 class="modal-title">维保信息</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('close')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+
+  <div>
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+      <span class="input-group-text">
+        维保设备
+      </span>
+      </div>
+      <nz-select nzShowSearch nzAllowClear [(ngModel)]="selectedValue" style="flex: 1 1 auto; width: 1%;">
+        <nz-option *ngFor="let data of equips" [nzLabel]="data.Name" [nzValue]="data.Uid"></nz-option>
+      </nz-select>
+
+      <!--<input type="text" class="form-control" nz-input [(ngModel)]="selectedValue" (input)="onInput($event.target?.value)" [nzAutocomplete]="auto">-->
+    </div>
+    <!--<nz-autocomplete nzBackfill #auto>
+      <nz-auto-option *ngFor="let option of equips" [nzValue]="option.Uid" [nzLabel]="option.Name">
+        {{option.Name}}
+      </nz-auto-option>
+    </nz-autocomplete>-->
+  </div>
+
+  <div class="form-group input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text">
+        维保信息
+      </span>
+    </div>
+    <input type="text" class="form-control" [(ngModel)]="info">
+  </div>
+
+
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn_info" >保存</button>
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取消</button>
+</div>

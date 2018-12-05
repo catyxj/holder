@@ -66,8 +66,14 @@ export class AlarmRuleComponent implements OnInit {
   save() {
     let data = [];
     for (let i = 0; i < this.alarm.length; i++) {
-      if ((!this.alarm[i].minValue && this.alarm[i].minValue !== 0) || (!this.alarm[i].maxValue && this.alarm[i].maxValue !== 0) ) {
+      if ((!this.alarm[i].minValue && this.alarm[i].minValue !== 0) && (!this.alarm[i].maxValue && this.alarm[i].maxValue !== 0) ) {
         continue;
+      }
+      if (!this.alarm[i].minValue && this.alarm[i].minValue !== 0 && this.alarm[i].maxValue) {
+        this.alarm[i].minValue = -32768;
+      }
+      if (!this.alarm[i].maxValue && this.alarm[i].maxValue !== 0 && this.alarm[i].minValue) {
+        this.alarm[i].maxValue = 32768;
       }
       /*switch (this.alarm[i].compareValue) {
         case '1':

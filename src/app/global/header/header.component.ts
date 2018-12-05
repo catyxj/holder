@@ -18,7 +18,10 @@ export class HeaderComponent implements OnInit {
   @Input()
   user: any;
 
-  public alarmNum;
+  public alarmNum = 0;
+  public malNum = 0;
+  public noticeNum = 0;
+  public totalNum = 0;
   public subscription: Subscription;
 
   constructor(private userService: UserService,
@@ -26,21 +29,26 @@ export class HeaderComponent implements OnInit {
               private router: Router) {
     this.subscription = this.alarmService.alarmStatus$
       .subscribe( data => {
-        this.alarmService.getAlarmNum()
-          .subscribe( val => {
-            this.alarmNum = val;
-          });
+        this.getAlarm();
       });
   }
 
   ngOnInit() {
     // console.log(this.user);
-    this.alarmService.getAlarmNum()
-      .subscribe( data => {
-        this.alarmNum = data;
-      });
+    this.getAlarm();
     // this.getUser();
   }
+
+  getAlarm() {
+    this.alarmService.getAlarmNum()
+      .subscribe( data => {
+        this.alarmNum = data.alarmCount;
+        this.malNum = data.mtCount;
+        this.noticeNum = data.ntCount;
+        this.totalNum = this.alarmNum + this.malNum + this.noticeNum;
+      });
+  }
+
 
   onClick() {
     this.toggle.emit();

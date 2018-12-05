@@ -22,7 +22,7 @@
   font-size: 18px;
   color: #00a4ff;
   margin-bottom: 0;
-  line-height: 44px;
+  padding-top: 10px;
 }
 .status_row{
   display: flex;
@@ -34,6 +34,11 @@
   width: 129px;
   text-align: center;
   line-height: 22px;
+}
+@media (max-width: 1024px) {
+  .status_col{
+    width: 100px;
+  }
 }
 .status_col .status_t{
   color: #ffffff;
@@ -65,6 +70,16 @@
 .s_red .status_text{
   color: #dd483d;
 }
+.s_yellow.status_col{
+  border: 1px solid #fdca21;
+}
+.s_yellow .status_t{
+  background-color: #fdca21;
+  color: #333333;
+}
+.s_yellow .status_text{
+  color: #000000;
+}
 
 .flash_left .fl_img{
   height: 630px;
@@ -92,6 +107,9 @@
   margin: auto;
   /*display: flex;*/
   /*justify-content: space-between;*/
+}
+.sw_cell{
+  text-align: center;
 }
 .sw_circle{
   width: 26px;

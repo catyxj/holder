@@ -39,6 +39,8 @@ import {AddEquipComponent} from './overview/add-equip/add-equip.component';
 import {AddTermComponent} from './overview/add-term/add-term.component';
 import {AddTemplateComponent} from './overview/add-template/add-template.component';
 import {MatGridListModule, MatMenuModule} from '@angular/material';
+import {MalfunctionMainComponent} from './malfunction/malfunction-main/malfunction-main.component';
+import {MalfunctionModule} from './malfunction/malfunction.module';
 
 
 
@@ -57,6 +59,7 @@ import {MatGridListModule, MatMenuModule} from '@angular/material';
     AlarmModule,
     UploadModule,
     MaintainModule,
+    MalfunctionModule,
     NgZorroAntdModule,
     RouterModule.forChild(ModulesRoutingModule),
     NgxEchartsModule,
@@ -83,7 +86,8 @@ import {MatGridListModule, MatMenuModule} from '@angular/material';
     ViewConfigComponent,
     AddEquipComponent,
     AddTermComponent,
-    AddTemplateComponent
+    AddTemplateComponent,
+    MalfunctionMainComponent,
   ],
   exports: [
     // RouterModule

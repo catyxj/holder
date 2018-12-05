@@ -129,6 +129,10 @@
           <img src="{{brandImg}}" alt="" style="height: 32px; max-width: 288px;">
         </div>
         <input type="file" class="file_input" (change)="imgChange($event)">
+        <button type="button" class="close" aria-label="Close" (click)="removeImg()" *ngIf="brandImg"
+                style="position:absolute; right: 5px; top:0; z-index: 99; ">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
 
     </div>

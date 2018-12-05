@@ -31,7 +31,7 @@ import { CluEquiplistComponent } from './clu-equiplist/clu-equiplist.component';
     MapGeneralComponent,
     MapBatchComponent,
     ClusterDashboardComponent,
-    CluEquiplistComponent
+    CluEquiplistComponent,
   ],
   exports: [
     // RouterModule

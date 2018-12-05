@@ -200,6 +200,16 @@
           </div>
         </div>
 
+        <div class="status_col"
+             [ngClass]="{'s_yellow': termStatus === 1 && malfunction === true, 's_blue': termStatus === 1 && malfunction === false, 's_grey': termStatus !== 1}">
+          <div class="status_t">
+            故障状态
+          </div>
+          <div class="status_text">
+            {{hasMalfunction}}
+          </div>
+        </div>
+
       </div>
     </div>
     <div class="fl_img">
@@ -211,13 +221,12 @@
         <i class="fa fa-angle-left"></i>
       </div>
 
-      <!--开关-->
+      <!--开关量-->
       <div class="sw_content row">
         <div class="sw_cell col-2" *ngFor="let data of switchs2; trackBy: trackByUid;">
           <div class="sw_circle" [ngClass]="{'c_info':data.SwitchStatus === 1, 'c_warning':data.SwitchStatus === 2 }">
-
           </div>
-          <div>
+          <div class="">
             {{ data.ChannelName }}
           </div>
         </div>

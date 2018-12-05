@@ -43,7 +43,22 @@
         <th>序号</th>
         <th>终端编码</th>
         <th>从属企业</th>
-        <th>在线状态</th>
+        <th>
+          在线状态
+          <!--<nz-dropdown [nzTrigger]="'click'" [nzPlacement]="'bottomCenter'">
+            <a nz-dropdown>
+              <i class="fa fa-caret-down"></i>
+            </a>
+            <ul nz-menu nzSelectable>
+              <li nz-menu-item>
+                <a>在线</a>
+              </li>
+              <li nz-menu-item>
+                <a>离线</a>
+              </li>
+            </ul>
+          </nz-dropdown>-->
+        </th>
         <th>关联设备</th>
         <th>配置状态</th>
         <th>模板状态</th>
@@ -62,13 +77,29 @@
           <td> {{ ter.Sn }} </td>
           <td> {{ ter.OrganizationName }} </td>
           <td>
-            {{ ter.isOnline }}
+            <span class="label" [ngClass]="{'label_info': ter.IsOnline===1, 'label_grey': ter.IsOnline!==1}">
+              {{ ter.isOnline }}
+            </span>
           </td>
 
           <td>
             {{ ter.EquipmentName }}
           </td>
-          <td> 终端 {{ ter.TermVer }} / 平台 {{ter.PlatVer}}  </td>
+          <td>
+            <span class="label label_grey" *ngIf="!ter.PlatVer">
+              未配置
+            </span>
+            <span class="label label_info" *ngIf=" ter.PlatVer && ter.PlatVer === ter.TermVer">
+              配置成功
+            </span>
+            <span class="label label_fail" *ngIf="ter.PlatVer && ter.PlatVer !== ter.TermVer">
+              配置失败
+            </span>
+            <span class="">
+              &nbsp;
+              {{ ter.TermVer }}/{{ter.PlatVer}}
+            </span>
+          </td>
           <td> {{ ter.TemplateName || "默认配置" }} </td>
           <td>
             <a [routerLink]="['/admin/terminal/messages', ter.Sn]" class="btn btn_info btn-sm" target="_blank" style="color: #ffffff;">调试</a>

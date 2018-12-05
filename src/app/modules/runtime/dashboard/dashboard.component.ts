@@ -23,10 +23,12 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
   public online;
   public isBurning;
   public hasWarning;
+  public hasMalfunction;
   private equip;
   public termStatus;
   public eptStatus;
   public alarmStatus;
+  public malfunction;
   public img;
   public imgRun;
   public imgStop;
@@ -90,6 +92,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
           this.termStatus = this.equip.termStatus;
           this.eptStatus = this.equip.eptStatus;
           this.alarmStatus = this.equip.alarmStatus;
+          this.malfunction = this.equip.mtStatus;
 
           switch (this.termStatus) {
             case 0:
@@ -105,6 +108,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
 
           this.isBurning = this.eptStatus ? '运行中' : '未运行';
           this.hasWarning = this.alarmStatus ? '有告警' : '无告警';
+          this.hasMalfunction = this.malfunction ? '设备故障' : '无故障';
           if (this.termStatus && this.eptStatus) {
             this.img = this.imgRun;
           } else {
@@ -127,6 +131,9 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
                 analogues.push(eq);
               }
               if (eq.ChannelType === 3) {
+                if (!eq.Value) {
+                  continue;
+                }
                 if (eq.SwitchStatus !== 1 && eq.SwitchStatus !== 2) {
                   continue;
                 }
@@ -224,9 +231,21 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
         this.termStatus = 1;
         this.eptStatus = false;
         this.alarmStatus = true;
-        this.online = '在线';
-        this.isBurning = '未运行';
-        this.hasWarning = '无告警';
+        this.malfunction = true;
+        switch (this.termStatus) {
+          case 0:
+            this.online = '离线';
+            break;
+          case 1:
+            this.online = '已连接';
+            break;
+          case -1:
+            this.online = '未绑定';
+            break;
+        }
+        this.isBurning = this.eptStatus ? '运行中' : '未运行';
+        this.hasWarning = this.alarmStatus ? '有告警' : '无告警';
+        this.hasMalfunction = this.malfunction ? '设备故障' : '无故障';
         if (this.isBurning) {
           this.img = 'assets/images/boilerwater.gif';
         } else {

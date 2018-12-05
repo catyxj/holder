@@ -4,10 +4,10 @@ import { MonitorMainComponent } from './monitor-main/monitor-main.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {ListComponent} from './list/list.component';
 import {MapComponent} from './map/map.component';
-import {MapGeneralComponent} from "./map-general/map-general.component";
-import {MapBatchComponent} from "./map-batch/map-batch.component";
-import {ClusterDashboardComponent} from "./cluster-dashboard/cluster-dashboard.component";
-import {CluEquiplistComponent} from "./clu-equiplist/clu-equiplist.component";
+import {MapGeneralComponent} from './map-general/map-general.component';
+import {MapBatchComponent} from './map-batch/map-batch.component';
+import {ClusterDashboardComponent} from './cluster-dashboard/cluster-dashboard.component';
+import {CluEquiplistComponent} from './clu-equiplist/clu-equiplist.component';
 
 
 export const MonitorRoutingModule = [
@@ -46,7 +46,8 @@ export const MonitorRoutingModule = [
       {
         path: 'cluster/:uid/:name',
         component: CluEquiplistComponent
-      }
+      },
+
     ]
   }
 ];
