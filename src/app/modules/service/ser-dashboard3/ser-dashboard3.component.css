@@ -1,0 +1,13 @@
+
+.answer ul li{
+  margin-top: 6px;
+}
+.answer ul li p{
+  width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+

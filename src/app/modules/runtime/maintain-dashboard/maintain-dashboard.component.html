@@ -3,7 +3,7 @@
   <div class="t_content">
     <table class="table">
       <thead class="bg_light_primary">
-      <th> 序号 </th>
+      <!--<th> 序号 </th>-->
       <th> 上传时间 </th>
       <th> 创建者 </th>
       <th style="width: 110px;"> 维保状态 </th>
@@ -11,7 +11,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let data of maintains; let i = index">
-        <td> {{ i+1 }}  </td>
+        <!--<td> {{ i+1 }}  </td>-->
         <td> {{ data.CreatedDate | date: 'yyyy-MM-dd hh:mm:ss' }}  </td>
         <td> {{ data.CreatedBy?.Name}} </td>
         <td>

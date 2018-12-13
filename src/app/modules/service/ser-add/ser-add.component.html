@@ -1,0 +1,36 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">新增表单 <span class="text_info"> [ {{typeName}} ] </span></h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('close')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+
+  <div class="form-group">
+    <div class="" style="margin-bottom: 10px; color: #666666;">
+      表单主题
+    </div>
+    <!--<input type="text" [(ngModel)]="title" placeholder="限定60字符" class="form-control" maxlength="60">-->
+
+    <textarea [(ngModel)]="title" style="width: 100%; height: 100px; padding: 5px;" placeholder="限定60字符" maxlength="60">
+    </textarea>
+
+  </div>
+
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn_info" (click)="save()" [disabled]="!title">保存</button>
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取消</button>
+</div>
+
+
+
+
+
+
+
+

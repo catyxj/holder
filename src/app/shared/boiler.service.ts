@@ -18,15 +18,17 @@ const httpOptions = {
 })
 export class BoilerService {
 
-  private boilersUrl = 'assets/server/boiler_list.json';
-  private templatesUrl = 'assets/server/boiler_template_list.json';
-  private boilerUrl = 'assets/server/boiler.json';
-  private templateListUrl = 'assets/server/boiler_template_list.json';
+  // private boilersUrl = 'assets/server/boiler_list.json';
+  // private templatesUrl = 'assets/server/boiler_template_list.json';
+  // private boilerUrl = 'assets/server/boiler.json';
+  // private templateListUrl = 'assets/server/boiler_template_list.json';
+  // private boilerList = 'assets/server/boiler_list.json';
 
-  // private boilersUrl = '/equipment_list';
-  // private templatesUrl = '/equipment_template';
-  // private boilerUrl = '/equipment_detail';
-  // private templateListUrl = '/equipment_template_list'; // 设备型态列表
+  private boilersUrl = '/equipment_list';
+  private templatesUrl = '/equipment_template';
+  private boilerUrl = '/equipment_detail';
+  private templateListUrl = '/equipment_template_list'; // 设备型态列表
+  private boilerList = '/equipment_show_list'; // 列表模式
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -38,6 +40,22 @@ export class BoilerService {
         catchError(this.handleError) // then handle the error
       );
   }
+
+  getBoilerLists(n: number, pageSize: number, search?: string, online?: number ): Observable<any> {
+    // TODO: send the message _after_ fetching the heroes
+    // const url = `${this.boilerList}/?pageNum=${n}&pageSize=${pageSize}&search=${search}&status=${online}`;
+    let data = {
+      page: n,
+      pageSize: pageSize,
+      search: search,
+      status: online
+    };
+    return this.http.post<any>(this.boilerList, data, httpOptions)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
 
   // 添加
   addBoiler(boiler): Observable<any> {

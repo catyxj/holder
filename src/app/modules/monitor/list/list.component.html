@@ -16,13 +16,13 @@
     <div class="pull-right flex flex-row">
 
       <!--<div class="btn-group mr-2">
-        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 2, 'btn_info': checkValue === 2}" (click)="checkValue = 2">
+        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 0, 'btn_info': checkValue === 0}" (click)="onlineChoose(0)">
           全部
         </button>
-        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 1, 'btn_info': checkValue === 1}" (click)="checkValue = 1">
+        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 1, 'btn_info': checkValue === 1}" (click)="onlineChoose(1)">
           运行
         </button>
-        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 0, 'btn_info': checkValue === 0}" (click)="checkValue = 0">
+        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== -1, 'btn_info': checkValue === -1}" (click)="onlineChoose(-1)">
           未运行
         </button>
       </div>-->
@@ -46,7 +46,7 @@
     <nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning">
     <table class="table">
       <thead class="bg_light_primary">
-      <th> 序号 </th>
+      <!--<th> 序号 </th>-->
       <th> 设备名称 </th>
       <th> 终端状态 </th>
       <th>
@@ -57,10 +57,10 @@
           </a>
           <ul nz-menu nzSelectable>
             <li nz-menu-item>
-              <a>运行中</a>
+              <a (click)="onlineChoose(true)">运行中</a>
             </li>
             <li nz-menu-item>
-              <a>未运行</a>
+              <a (click)="onlineChoose(false)">未运行</a>
             </li>
           </ul>
         </nz-dropdown>-->
@@ -72,7 +72,7 @@
       <tbody>
       <tr *ngFor="let data of boilers; trackBy : trackByUid; let i = index; ">
 
-        <td> {{ i+1 }} </td>
+        <!--<td> {{ i+1 }} </td>-->
         <td>
           <a style="color:#0e566c;">
             {{ data.name }}
@@ -106,6 +106,20 @@
   </div>
 
   <div class="t_bottom">
+
+    <div class="pull-left">
+      <div class="btn-group">
+        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 0, 'btn_info': checkValue === 0}" (click)="onlineChoose(0)">
+          全部
+        </button>
+        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 1, 'btn_info': checkValue === 1}" (click)="onlineChoose(1)">
+          运行
+        </button>
+        <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== -1, 'btn_info': checkValue === -1}" (click)="onlineChoose(-1)">
+          未运行
+        </button>
+      </div>
+    </div>
 
     <ngb-pagination class="pull-right"
                     [collectionSize]="totalItems"

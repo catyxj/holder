@@ -267,12 +267,15 @@
               {{ data.Unit }}
             </td>
             <td>
-            <span class="label label_info" *ngIf="data.AlarmStatus === false">
-              正常
-            </span>
-              <span class="label label_warning" *ngIf="data.AlarmStatus === true">
-              异常
-            </span>
+              <span class="label label_info" *ngIf="termStatus === 1 && data.AlarmStatus === false">
+                正常
+              </span>
+              <span class="label label_warning" *ngIf="termStatus === 1 && data.AlarmStatus === true">
+                异常
+              </span>
+              <span class="label label_grey" *ngIf="termStatus !== 1">
+                未测定
+              </span>
             </td>
 
           </tr>
@@ -307,7 +310,7 @@
               <!--<br/>
               <span style="font-size: 10px; opacity: 0.8;">{{data.TerminalCode}}</span>-->
             </td>
-            <td style="white-space: nowrap;">
+            <td style="white-space: nowrap;" *ngIf="termStatus === 1">
               <span class="label" [ngClass]="{'label_info':data.AlarmStatus === false, 'label_warning':data.AlarmStatus === true}">
                 {{ data.Remark }}
               </span>
@@ -356,12 +359,15 @@
             {{ data.Unit }}
           </td>
           <td>
-            <span class="label label_info" *ngIf="data.AlarmStatus === false">
-              正常
-            </span>
-            <span class="label label_warning" *ngIf="data.AlarmStatus === true">
-              异常
-            </span>
+             <span class="label label_info" *ngIf="termStatus === 1 && data.AlarmStatus === false">
+                正常
+              </span>
+            <span class="label label_warning" *ngIf="termStatus === 1 && data.AlarmStatus === true">
+                异常
+              </span>
+            <span class="label label_grey" *ngIf="termStatus !== 1">
+                未测定
+              </span>
           </td>
 
         </tr>
@@ -380,12 +386,15 @@
             {{ data.Unit }}
           </td>
           <td>
-            <span class="label label_info" *ngIf="data.AlarmStatus === false">
-              正常
-            </span>
-            <span class="label label_warning" *ngIf="data.AlarmStatus === true">
-              异常
-            </span>
+             <span class="label label_info" *ngIf="termStatus === 1 && data.AlarmStatus === false">
+                正常
+              </span>
+              <span class="label label_warning" *ngIf="termStatus === 1 && data.AlarmStatus === true">
+                异常
+              </span>
+              <span class="label label_grey" *ngIf="termStatus !== 1">
+                未测定
+              </span>
           </td>
 
         </tr>
@@ -435,7 +444,7 @@
             <br/>
             <span style="font-size: 10px; opacity: 0.8;">{{data.TerminalCode}}</span>
           </td>
-          <td style="white-space: nowrap;">
+          <td style="white-space: nowrap;" *ngIf="termStatus === 1">
               <span class="label" [ngClass]="{'label_info':data.AlarmStatus === false, 'label_warning':data.AlarmStatus === true}">
                 {{ data.Remark }}
               </span>

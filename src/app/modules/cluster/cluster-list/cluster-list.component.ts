@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ClusterService} from '../../../shared/cluster.service';
 import {AddClusterComponent} from '../add-cluster/add-cluster.component';
-import {EditClusterComponent} from "../edit-cluster/edit-cluster.component";
+import {EditClusterComponent} from '../edit-cluster/edit-cluster.component';
 import Swal from 'sweetalert2';
-import {UserService} from "../../../shared/user.service";
+import {UserService} from '../../../shared/user.service';
 
 @Component({
   selector: 'app-cluster-list',
@@ -35,7 +35,7 @@ export class ClusterListComponent implements OnInit {
   }
 
   ngOnInit() {
-    let user = JSON.parse(sessionStorage.getItem('currentUser'));
+    const user = JSON.parse(sessionStorage.getItem('currentUser'));
     this.user = user;
     this.getclusters();
   }
@@ -55,7 +55,7 @@ export class ClusterListComponent implements OnInit {
 
   // 删除
   delete(uid, name) {
-    let cf = confirm(`确定删除集群[${name}]？`);
+    const cf = confirm(`确定删除集群[${name}]？`);
     if (cf === true) {
       this.clusterService.deleteCluster([uid])
         .subscribe( () => {
@@ -81,7 +81,7 @@ export class ClusterListComponent implements OnInit {
       this.deleteList.push(cluster.Uid);
     } else {
       for (let i = 0; i < this.deleteList.length; i++) {
-        let dl = this.deleteList[i];
+        const dl = this.deleteList[i];
         if (dl === cluster.Uid) {
           this.deleteList.splice(i, 1);
         }

@@ -152,6 +152,10 @@
   background-color: #dd483d;
   color: #ffffff;
 }
+.label_grey{
+  background-color: #a0a0a0;
+  color: #ffffff;
+}
 
 .fr_1{
   height: 500px;

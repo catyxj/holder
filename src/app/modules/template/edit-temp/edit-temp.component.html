@@ -43,7 +43,7 @@
       <div class="conf_title">
         模拟通道
         <i class="fa fa-question-circle-o" nz-popover nzPlacement="bottom"
-           [nzContent]="modbusTips1" nzTrigger="hover" nzTitle="说明">
+           [nzContent]="analoguetip" nzTrigger="hover" nzTitle="说明">
         </i>
 
         <div class="conf_add">
@@ -136,7 +136,7 @@
           </td>
           <td class="t_btn">
             <div class="btn-group">
-              <button type="button" class="btn btn-outline-info"
+              <button type="button" class="btn" [ngClass]="{'btn-outline-info': !data.alarm || data.alarm.length<=0, 'btn-outline-warning':data.alarm && data.alarm.length>0}"
                       title="编辑告警规则" (click)="addAlarmRule(data)">
                 <i class="fa fa-bell" style="font-size: 14px;"></i>
               </button>
@@ -165,7 +165,7 @@
       <div class="conf_title">
         开关通道
         <i class="fa fa-question-circle-o" nz-popover nzPlacement="bottom"
-           [nzContent]="modbusTips1" nzTrigger="hover" nzTitle="说明">
+           [nzContent]="switchtip" nzTrigger="hover" nzTitle="说明">
         </i>
 
         <div class="conf_add">
@@ -260,7 +260,7 @@
           </td>
           <td class="t_btn">
             <div class="btn-group">
-              <button type="button" class="btn btn-outline-info"
+              <button type="button" class="btn" [ngClass]="{'btn-outline-info': !data.alarm || data.alarm.length<=0, 'btn-outline-warning':data.alarm && data.alarm.length>0}"
                       title="编辑告警规则" (click)="addAlarmRule(data)">
                 <i class="fa fa-bell"></i>
               </button>
@@ -288,7 +288,7 @@
       <div class="conf_title">
         状态通道
         <i class="fa fa-question-circle-o" nz-popover nzPlacement="bottom"
-           [nzContent]="modbusTips1" nzTrigger="hover" nzTitle="说明">
+           [nzContent]="rangetip" nzTrigger="hover" nzTitle="说明">
         </i>
 
         <div class="conf_add">
@@ -379,7 +379,7 @@
           </td>
           <td class="t_btn">
             <div class="btn-group">
-              <button type="button" class="btn btn-outline-info"
+              <button type="button" class="btn" [ngClass]="{'btn-outline-info': !data.alarm || data.alarm.length<=0, 'btn-outline-warning':data.alarm && data.alarm.length>0}"
                       title="编辑告警规则" (click)="addAlarmRule(data)">
                 <i class="fa fa-bell" style="font-size: 14px;"></i>
               </button>
@@ -410,7 +410,7 @@
       <div class="conf_title">
         通信参数
         <i class="fa fa-question-circle-o" nz-popover nzPlacement="bottom"
-           [nzContent]="modbusTips1" nzTrigger="hover" nzTitle="说明">
+           [nzContent]="infomtip" nzTrigger="hover" nzTitle="说明">
         </i>
       </div>
 
@@ -536,3 +536,20 @@
   <br/>
   功能码03对应位地址 <b>1-16</b>
 </ng-template>
+
+<ng-template #analoguetip>
+  模拟通道
+</ng-template>
+
+<ng-template #switchtip>
+  开关通道
+</ng-template>
+
+<ng-template #rangetip>
+  状态通道
+</ng-template>
+
+<ng-template #infomtip>
+  通信参数
+</ng-template>
+

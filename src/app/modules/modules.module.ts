@@ -41,6 +41,13 @@ import {AddTemplateComponent} from './overview/add-template/add-template.compone
 import {MatGridListModule, MatMenuModule} from '@angular/material';
 import {MalfunctionMainComponent} from './malfunction/malfunction-main/malfunction-main.component';
 import {MalfunctionModule} from './malfunction/malfunction.module';
+import { ServiceMainComponent } from './service/service-main/service-main.component';
+import { ServiceListComponent } from './service/service-list/service-list.component';
+import { ServiceDashboardComponent } from './service/service-dashboard/service-dashboard.component';
+import { SerDashboard2Component } from './service/ser-dashboard2/ser-dashboard2.component';
+import { SerDashboard3Component } from './service/ser-dashboard3/ser-dashboard3.component';
+import { SerAddComponent } from './service/ser-add/ser-add.component';
+import { SerViewComponent } from './service/ser-view/ser-view.component';
 
 
 
@@ -88,9 +95,19 @@ import {MalfunctionModule} from './malfunction/malfunction.module';
     AddTermComponent,
     AddTemplateComponent,
     MalfunctionMainComponent,
+    ServiceMainComponent,
+    ServiceListComponent,
+    ServiceDashboardComponent,
+    SerDashboard2Component,
+    SerDashboard3Component,
+    SerAddComponent,
+    SerViewComponent,
   ],
   exports: [
     // RouterModule
+  ],
+  entryComponents: [
+    SerAddComponent
   ]
 })
 export class ModulesModule { }

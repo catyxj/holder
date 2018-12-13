@@ -112,7 +112,7 @@
             企业标识
           </span>
         </span>
-        <input type="text" [(ngModel)]="data.brandName"
+        <input type="text" [(ngModel)]="data.brandName" maxlength="10"
                [disabled]="!editing || !data.showBrand"
                class="form-control"
                placeholder="{{data.showBrand ? '输入首页显示的企业标识' : '不显示'}}">

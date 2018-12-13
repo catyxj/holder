@@ -26,7 +26,7 @@
     <table class="table alarm_current">
       <thead class="bg_light_primary">
 
-      <th> 序号 </th>
+      <!--<th> 序号 </th>-->
       <th> 设备名称 </th>
       <th> 上传时间 </th>
       <th> 创建者 </th>
@@ -36,7 +36,7 @@
       <tbody>
       <tr *ngFor="let data of malfunctions; let i = index">
 
-        <td> {{ i+1 }}  </td>
+        <!--<td> {{ i+1 }}  </td>-->
         <td> {{ data.Equipment.Name }}  </td>
         <td> {{ data.CreatedDate | date: 'yyyy-MM-dd HH:mm:ss' }} </td>
         <td>

@@ -2,8 +2,8 @@
 
 .oval{
   display: inline-block;
-  width: 24px;
-  height: 16px;
+  width: 10px;
+  height: 10px;
   border-radius: 20px;
   margin-right: 3px;
   background-color: #888888;
@@ -20,4 +20,16 @@
 .text_warning .oval{
   background-color: #ff7513;
 }
+
+.btn-outline-info {
+  color: #00a4ff;
+  border-color: #00a4ff;
+}
+.btn-outline-info:hover {
+  color: #ffffff;
+  background-color: #00a4ff;
+  border-color: #00a4ff;
+}
+
+
 

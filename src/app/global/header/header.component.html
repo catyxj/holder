@@ -1,13 +1,10 @@
 <mat-toolbar >
 
   <mat-toolbar-row>
-    <button mat-icon-button (click)="onClick()" style="min-width: 60px; height: 64px; margin-left: 8px;">
-      <!--<mat-icon>menu</mat-icon>-->
-      <img src="assets/icons/show_side.png" height="20" alt="">
-    </button>
 
     <!--企业标识-->
-    <a class="navbar-brand" routerLink="/admin" *ngIf="user && (!user.Organization || !user.Organization.ShowBrand)">
+    <a class="navbar-brand" routerLink="/admin" style="margin-left:20px;"
+       *ngIf="user && (!user.Organization || ((!user.Organization.ShowBrand) && (!user.Organization.SuperOrganization || !user.Organization.SuperOrganization.ShowBrand)))">
       <!--<img src="assets/images/light.png"  height="30" alt="">-->
       <h2 style="color: #ffffff;"> LUKEEP</h2>
     </a>
@@ -28,7 +25,7 @@
         {{user.Organization.SuperOrganization.BrandName}}
       </h3>
       <span *ngIf="user.Organization.SuperOrganization.BrandImageUrl" >
-        <img src="{{user.Organization.SuperOrganization.BrandImageUrl}}" alt="" height="30">
+        <img src="{{user.Organization.SuperOrganization.BrandImageUrl}}" alt="" height="30" style="max-width: 180px;">
       </span>
     </a>
 
@@ -36,6 +33,12 @@
 
     <!-- This fills the remaining space of the current row -->
     <span class="example-spacer"></span>
+
+    <button mat-icon-button (click)="onClick()" style=" height: 64px; margin-left: 8px;">
+      <!--<mat-icon>menu</mat-icon>-->
+      <!--<img src="assets/icons/show_side.png" height="20" alt="">-->
+      <img src="assets/icons/menu_unfold.svg" height="18" alt="">
+    </button>
 
     <div class="we_box">
       <span>

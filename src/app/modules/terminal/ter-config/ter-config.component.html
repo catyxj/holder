@@ -124,7 +124,8 @@
           </td>
           <td class="t_btn">
             <div class="btn-group">
-              <button type="button" class="btn btn-outline-info" [ngClass]="{'btn_green': !data.alarm || data.alarm.length<=0}"
+              <button type="button" class="btn"
+                      [ngClass]="{'btn-outline-info': !data.alarm || data.alarm.length<=0, 'btn-outline-warning':data.alarm && data.alarm.length>0}"
                       [disabled]="!data.Parameter||!data.Parameter.Name"
                       title="编辑告警规则" (click)="addAlarmRule(data)">
                 <i class="fa fa-bell" style="font-size: 14px;"></i>
@@ -246,7 +247,7 @@
           </td>
           <td class="t_btn">
             <div class="btn-group">
-              <button type="button" class="btn btn-outline-info" [ngClass]="{'btn_green': !data.alarm || data.alarm.length<=0}"
+              <button type="button" class="btn" [ngClass]="{'btn-outline-info': !data.alarm || data.alarm.length<=0, 'btn-outline-warning':data.alarm && data.alarm.length>0}"
                       [disabled]="!data.Parameter||!data.Parameter.Name"
                       title="编辑告警规则" (click)="addAlarmRule(data)">
                 <i class="fa fa-bell" style="font-size: 14px;"></i>
@@ -370,7 +371,7 @@
           </td>
           <td>
             <div class="btn-group">
-              <button type="button" class="btn btn-outline-info" [ngClass]="{'btn_green': !data.alarm || data.alarm.length<=0}"
+              <button type="button" class="btn" [ngClass]="{'btn-outline-info': !data.alarm || data.alarm.length<=0, 'btn-outline-warning':data.alarm && data.alarm.length>0}"
                       [disabled]="!data.Parameter||!data.Parameter.Name"
                       title="编辑告警规则" (click)="addAlarmRule(data)">
                 <i class="fa fa-bell" style="font-size: 14px;"></i>

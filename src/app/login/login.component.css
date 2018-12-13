@@ -4,27 +4,29 @@
   height: 100%;
   width: 100%;
   /*background-color: #29434e;*/
-  background-image: url("../../assets/images/bg0.jpg");
+  /*background-image: url("../../assets/images/bg0.jpg");*/
+  background-image: url("../../assets/images/denglu.gif");
+  background-size: cover;
   overflow: hidden;
 }
 .login-form-container {
   position: absolute;
-  width: 400px;
-  height: 420px;
+  width: 380px;
+  height: 350px;
   left: 50%;
   top: 50%;
   /*margin-left: -200px;*/
-  margin-top: -225px;
+  margin-top: -175px;
   padding: 30px 60px;
-  background: rgba(41,67,78,0.8);
-
-  color: #fff;
+  /*background: rgba(41,67,78,0.8);*/
+  background: rgba(255,255,255,0.8);
+  color: #666666;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);}
 .sys-title {
-  text-align: center;
-  font-size: 38px;
-  line-height: 100px;
-  margin: 0px;
+  /*text-align: center;*/
+  font-size: 18px;
+  line-height: 50px;
+  margin: 0;
   /*font-weight: bold;*/
 }
 .login-form{
@@ -35,11 +37,25 @@ a{
   color: #fff;
 }
 
+.footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 12px;
+}
 
 
 
 
-.login_content{
+
+
+/*.login_content{
   position: absolute;
   height: 100%;
   width: 100%;
@@ -70,7 +86,7 @@ a{
 
 h3 {
   color: #fff;
-}
+}*/
 
 
 

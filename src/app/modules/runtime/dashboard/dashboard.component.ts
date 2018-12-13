@@ -94,21 +94,26 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
           this.alarmStatus = this.equip.alarmStatus;
           this.malfunction = this.equip.mtStatus;
 
+          this.isBurning = '未测定';
+          this.hasWarning = '未测定';
+          this.hasMalfunction = '未测定';
+
           switch (this.termStatus) {
             case 0:
               this.online = '离线';
               break;
             case 1:
               this.online = '已连接';
+              this.isBurning = this.eptStatus ? '运行中' : '未运行';
+              this.hasWarning = this.alarmStatus ? '有告警' : '无告警';
+              this.hasMalfunction = this.malfunction ? '设备故障' : '无故障';
               break;
             case -1:
               this.online = '未绑定';
               break;
           }
 
-          this.isBurning = this.eptStatus ? '运行中' : '未运行';
-          this.hasWarning = this.alarmStatus ? '有告警' : '无告警';
-          this.hasMalfunction = this.malfunction ? '设备故障' : '无故障';
+
           if (this.termStatus && this.eptStatus) {
             this.img = this.imgRun;
           } else {
@@ -228,24 +233,31 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
         }
 
 
-        this.termStatus = 1;
-        this.eptStatus = false;
+        this.termStatus = -1;
+        this.eptStatus = true;
         this.alarmStatus = true;
         this.malfunction = true;
+
+        this.isBurning = '未测定';
+        this.hasWarning = '未测定';
+        this.hasMalfunction = '未测定';
+
         switch (this.termStatus) {
           case 0:
             this.online = '离线';
             break;
           case 1:
             this.online = '已连接';
+            this.isBurning = this.eptStatus ? '运行中' : '未运行';
+            this.hasWarning = this.alarmStatus ? '有告警' : '无告警';
+            this.hasMalfunction = this.malfunction ? '设备故障' : '无故障';
             break;
           case -1:
             this.online = '未绑定';
             break;
         }
-        this.isBurning = this.eptStatus ? '运行中' : '未运行';
-        this.hasWarning = this.alarmStatus ? '有告警' : '无告警';
-        this.hasMalfunction = this.malfunction ? '设备故障' : '无故障';
+
+
         if (this.isBurning) {
           this.img = 'assets/images/boilerwater.gif';
         } else {

@@ -262,7 +262,7 @@ h5, .h5 {
   box-sizing: border-box;
   padding: 20px;
 }
-.t_bottom .pull-right.mr-3{
+.t_bottom .pull-right.mr-3 select{
   display: none;
 }
 
@@ -304,7 +304,7 @@ h5, .h5 {
 /*滚动条*/
 .mat-sidenav-content::-webkit-scrollbar,.sidenav::-webkit-scrollbar,.scroll_bar::-webkit-scrollbar{
   width: 0;     /*高宽分别对应横竖滚动条的尺寸*/
-  height: 8px;
+  height: 12px;
   /*background-color: #51aded;*/
   background-color: #eeeeee;
   /*display: none;*/

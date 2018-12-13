@@ -14,9 +14,10 @@ export class ListComponent implements OnInit, OnDestroy {
   pageSize = 10;
   totalItems = 0;
   search: string;
-  checkValue = 2;
+  checkValue = 0;
   socket: any;
   public isSpinning = false;
+  public checkOnline: boolean;
 
   constructor(private boilerService: BoilerService,
               private boilerWsService: BoilerSocketService) { }
@@ -27,10 +28,11 @@ export class ListComponent implements OnInit, OnDestroy {
       search: this.search,
       pageSize: this.pageSize
     };
-    this.getBoilers(message);
+    // this.getBoilers(message);
+    this.getBoilers();
   }
 
-  getBoilers(message): void {
+  getBoilers(): void {
     /*const wsUrl = `wss://${window.location.host}/equipment_show`;
     this.socket = this.boilerWsService.creatSocket(wsUrl, message)
       .subscribe(
@@ -83,11 +85,14 @@ export class ListComponent implements OnInit, OnDestroy {
         }
       );*/
 
-
-    this.boilerService.getBoilers(1, 1)
+    this.boilerService.getBoilerLists(this.page, this.pageSize, this.search, this.checkValue)
       .subscribe( data => {
-        this.boilers = data.params;
+        this.isSpinning = false;
+        this.boilers = data.ept;
         this.totalItems = data.counts;
+        if (!this.boilers) {
+          this.boilers = [];
+        }
         for (let i = 0; i < this.boilers.length; i++) {
           let bo = this.boilers[i];
           bo.isBurning = '未运行';
@@ -114,6 +119,10 @@ export class ListComponent implements OnInit, OnDestroy {
             bo.malfunction = '未测定';
           }
         }
+
+        // this.filList = this.boilers.filter(item => item.eptStatus.indexOf(this.search) !== -1);
+
+
       });
 
   }
@@ -129,10 +138,11 @@ export class ListComponent implements OnInit, OnDestroy {
 
   // 页码变化
   pageChange(): void {
-    this.socket.unsubscribe();
-    this.boilerWsService.closeSocket();
+    // this.socket.unsubscribe();
+    // this.boilerWsService.closeSocket();
     this.isSpinning = true;
-    this.getBoilers({page: this.page, search: this.search, pageSize: this.pageSize});
+    // this.getBoilers({page: this.page, pageSize: this.pageSize, search: this.search});
+    this.getBoilers();
   }
 
   // 搜索
@@ -141,14 +151,21 @@ export class ListComponent implements OnInit, OnDestroy {
     this.pageChange();
   }
 
+  // 状态筛选
+  onlineChoose(online) {
+    this.checkValue = online;
+    this.page = 1;
+    this.getBoilers();
+  }
+
   trackByUid(index, item) {
     return item.uid;
   }
 
   ngOnDestroy() {
 
-    // this.socket.unsubscribe();
-    // this.boilerWsService.closeSocket();
+    /*this.socket.unsubscribe();
+    this.boilerWsService.closeSocket();*/
   }
 
 }

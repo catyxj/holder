@@ -57,6 +57,12 @@ import {MaintainDashboardComponent} from './runtime/maintain-dashboard/maintain-
 import {MaintainViewComponent} from './runtime/maintain-view/maintain-view.component';
 import {MaintainAddComponent} from './runtime/maintain-add/maintain-add.component';
 import {MalDetailComponent} from './malfunction/mal-detail/mal-detail.component';
+import {ServiceMainComponent} from "./service/service-main/service-main.component";
+import {ServiceListComponent} from "./service/service-list/service-list.component";
+import {ServiceDashboardComponent} from "./service/service-dashboard/service-dashboard.component";
+import {SerDashboard2Component} from "./service/ser-dashboard2/ser-dashboard2.component";
+import {SerViewComponent} from "./service/ser-view/ser-view.component";
+import {SerAddComponent} from "./service/ser-add/ser-add.component";
 
 
 
@@ -322,6 +328,37 @@ export const ModulesRoutingModule = [
             path: 'detail/:uid/:date/:create',
             component: MalDetailComponent
           }
+        ]
+      },
+      {
+        path: 'service',
+        component: ServiceMainComponent,
+        children: [
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
+          {
+            path: 'list',
+            component: ServiceListComponent
+          },
+          {
+            path: 'dashboard',
+            component: ServiceDashboardComponent,
+            children: [
+              { path: '', redirectTo: 'question/1/A类问题', pathMatch: 'full' },
+              {
+                path: 'question/:id/:name',
+                component: SerDashboard2Component
+              }
+            ]
+          },
+          {
+            path: 'view',
+            component: SerViewComponent
+          },
+          {
+            path: 'add',
+            component: SerAddComponent
+          },
+
         ]
       }
     ]
