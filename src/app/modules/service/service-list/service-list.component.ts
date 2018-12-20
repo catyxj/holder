@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../../shared/user.service';
 import {ServiceService} from '../../../shared/service.service';
 import Swal from 'sweetalert2';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-service-list',
@@ -21,7 +22,8 @@ export class ServiceListComponent implements OnInit {
   public isLoading = false;
 
   constructor(private userService: UserService,
-              private serviceService: ServiceService) {
+              private serviceService: ServiceService,
+              private router: Router) {
     this.userService.userStatus$ // 监测父组件user
       .subscribe( data => {
           this.user = data;
@@ -40,19 +42,35 @@ export class ServiceListComponent implements OnInit {
       .subscribe(data => {
         this.serviceList = data.params;
         this.totalItems = data.counts;
+        for (let i = 0; i < this.serviceList.length; i++) {
+          let sl = this.serviceList[i];
+          sl.username = this.hidden(sl.CreatedBy.Username, 1, 1);
+        }
       });
+
     /*this.serviceList = [
       {
-        id: 111,
-        content: 'asfdsaf',
+        Uid: 111,
+        Name: 'asfdsafxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx惺惺惜惺惺想寻寻寻寻',
         classify: 'asdf',
         submitor: 'asdfsaf',
         date: '2018-11-1',
         status: true
       }
     ];*/
+
   }
 
+
+  // 隐藏字符
+  hidden(str, frontLen, endLen) {
+    let len = str.length - frontLen - endLen;
+    let xing = '';
+    for (let i = 0; i < len; i++) {
+      xing += '*';
+    }
+    return str.substring(0, frontLen) + xing + str.substring(str.length - endLen);
+  }
 
 
   // 批量选择
@@ -87,7 +105,7 @@ export class ServiceListComponent implements OnInit {
 
   // 批量删除
   deleteG() {
-    const cf = confirm(`确认删除选中集群 ？`);
+    const cf = confirm(`确认删除选中项？`);
     if (cf === true) {
       this.isLoading = true;
       this.serviceService.delete(this.deleteList)
@@ -136,6 +154,9 @@ export class ServiceListComponent implements OnInit {
     this.pageChange();
   }
 
-
+  goView(data) {
+    let da = JSON.stringify(data);
+    this.router.navigate(['/admin/service/view', data.Uid]);
+  }
 
 }

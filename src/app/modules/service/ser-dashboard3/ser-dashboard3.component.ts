@@ -19,7 +19,7 @@ export class SerDashboard3Component implements OnInit, OnChanges {
 
 
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    console.log('current', this.currentData);
+    // console.log('current', this.currentData);
     const arr = [];
     this.serviceService.getQDetail(this.currentData)
       // .pipe(

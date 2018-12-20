@@ -19,6 +19,13 @@ export class ServiceDashboardComponent implements OnInit {
   constructor(private serviceService: ServiceService) { }
 
   ngOnInit() {
+
+    // this.getTypeTest();
+
+    this.getType();
+  }
+
+  getTypeTest() {
     this.dataList = [
       {
         TypeId: 1,
@@ -49,10 +56,9 @@ export class ServiceDashboardComponent implements OnInit {
     this.cTotalPage = Math.ceil(this.cTotalItems / this.cPageSize);
     // this.currentType = this.dataList[0];
     this.refreshType();
-
-    // this.getType();
   }
 
+  // 获取问题类型
   getType() {
     this.serviceService.getType()
       .subscribe(data => {

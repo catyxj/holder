@@ -3,6 +3,7 @@ import {ServiceService} from '../../../shared/service.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {SerAddComponent} from '../ser-add/ser-add.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {UserService} from "../../../shared/user.service";
 
 @Component({
   selector: 'app-ser-dashboard2',
@@ -13,6 +14,7 @@ export class SerDashboard2Component implements OnInit {
   /*@Input()
   currentType1;*/
 
+  public user;
 
   public id;
   public typeName;
@@ -26,9 +28,18 @@ export class SerDashboard2Component implements OnInit {
   constructor(private serviceService: ServiceService,
               private router: Router,
               private modalService: NgbModal,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private userService: UserService) {
+    this.userService.userStatus$ // 监测父组件user
+      .subscribe( data => {
+          this.user = data;
+        }
+      );
+  }
 
   ngOnInit() {
+    const user = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.user = user;
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = parseInt(params.get('id'));
       this.typeName = params.get('name');
@@ -45,7 +56,7 @@ export class SerDashboard2Component implements OnInit {
       .subscribe(data => {
         this.questionList = data.params;
         this.totalItems = data.counts;
-        this.currentData = this.questionList[0].uid;
+        this.currentData = this.questionList[0].Uid;
       });
 
     /*this.questionList = [
@@ -92,12 +103,17 @@ export class SerDashboard2Component implements OnInit {
 
   add() {
     // this.router.navigate(['/admin/service/add']);
+    if (this.user.Role.RoleId <= 10) {
+      return;
+    }
+
     const modalRef = this.modalService.open(SerAddComponent);
     modalRef.componentInstance.id = this.id;
     modalRef.componentInstance.typeName = this.typeName;
     modalRef.result.then((result) => {
       if (result === 'ok') {
-        this.pageChange();
+        // this.pageChange();
+        this.router.navigate(['/admin/service/list']);
       }
     }, (reason) => {
       console.log(reason);

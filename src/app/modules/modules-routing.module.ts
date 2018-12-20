@@ -351,7 +351,7 @@ export const ModulesRoutingModule = [
             ]
           },
           {
-            path: 'view',
+            path: 'view/:uid',
             component: SerViewComponent
           },
           {

@@ -58,8 +58,8 @@ export class ServiceService {
   }
 
   // 获取留言列表
-  getComment(uid) {
-    const url = `${this.commentUrl}/?uid=${uid}`;
+  getComment(uid, page, pageSize) {
+    const url = `${this.commentUrl}/?uid=${uid}&pageNum=${page}&pageSize=${pageSize}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError)
@@ -76,10 +76,18 @@ export class ServiceService {
   }
 
 
+  // 回复表单
+  updateComment(data) {
+    return this.http.post('/dialogue_update', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
 
 
-  // 上传文件
+
+  // 上传文件-(废)
   uploadReply(formData): Observable<any> {
     const req = new HttpRequest('POST', '/dialogue_update', formData, {
       reportProgress: true

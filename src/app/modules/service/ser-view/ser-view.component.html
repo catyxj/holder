@@ -5,50 +5,64 @@
 <div class="ser_view">
   <div class="mat-card-title">
     <h5 class="text_info pull-left">
-      <!--<img src="assets/icons/alarm.png" alt="">-->
-      <i class="fa fa-credit-card"></i>
+      <!--<i class="fa fa-credit-card"></i>-->
+      <img src="assets/icons/service.svg" alt="" style="width: 20px;">
+      <!--<i nz-icon type="customer-service" theme="outline"></i>-->
       服务支持
     </h5>
 
     <nav class="pull-left">
-      <a routerLink="/admin/service/list" class="btn">我的表单</a>
-      <a routerLink="/admin/service/dashboard" class="btn btn_info ml-2 mr-3">提交表单</a>
+      <a routerLink="/admin/service/list" class="btn btn_info">我的表单</a>
+      <a routerLink="/admin/service/dashboard" class="btn ml-2 mr-3">提交表单</a>
     </nav>
-
   </div>
 
 
   <div class="sv_head">
+    <div class="row">
+      <div class="col-12">
+        表单编号：
+        {{currentData?.Uid}}
+      </div>
+    </div>
     <div class="flex">
-      <div style="flex: 1">表单主题：</div>
-      <div style="flex: 9">
-        {{ data.content }}
+      <div>表单主题：</div>
+      <div>
+        {{ currentData?.Name }}
       </div>
     </div>
     <div class="row">
-      <div class="col">
-        表单编号：
-        {{data.num}}
+      <div class="col-8">
+        所属企业：
+        {{currentData?.Organization?.Name}}
       </div>
-      <div class="col">
+      <div class="col-4">
         表单分类：
-        {{data.classify}}
+        {{currentData?.DialogueType?.Name}}
       </div>
-      <div class="col">
+      <div class="col-4">
         提交人：
-        {{data.submitor}}
+        {{currentData?.CreatedBy?.Username}}
+        <span *ngIf="currentData && currentData.CreatedBy && currentData.CreatedBy.Name">
+          ({{currentData?.CreatedBy?.Name}})
+        </span>
+
       </div>
-      <div class="col">
+      <div class="col-4">
         提交时间：
-        {{data.num}}
+        {{currentData?.CreatedDate | date: 'yyyy-MM-dd HH:mm:ss'}}
       </div>
-      <div class="col">
+      <div class="col-4">
         状态：
-        {{data.date}}
+        <span class="text_blue" *ngIf="currentData && currentData.Status">
+              已回复
+            </span>
+
+        <span class="text-muted" *ngIf="currentData && !currentData.Status">
+              未回复
+            </span>
       </div>
-
     </div>
-
   </div>
 
   <div class="sv_body">
@@ -58,20 +72,35 @@
       </div>
       <div class="svb1_l">
         <ul>
-          <li *ngFor="let data of replyList">
+          <li *ngFor="let cm of replyList">
             <div class="avatar">
-              <img src="assets/images/no_image.png" alt="">
+              <img src="{{cm.CreatedBy?.Picture}}" alt="">
             </div>
-            <div >
+            <div class="s_text">
               <p>
-                {{data.user}}： {{data.content}}
+                <b>
+                  {{cm.CreatedBy?.Organization?.Name || "超级管理员"}}
+                  ({{cm.CreatedBy?.Name}})：
+                </b>
+                {{cm.Content}}
               </p>
               <div class="text-muted" style="font-size: 12px;">
-                {{data.date}}
+                {{cm.CreatedDate | date: 'yyyy-MM-dd HH:mm:ss'}}
+              </div>
+            </div>
+            <div class="s_down">
+              <div *ngFor="let f of cm.Attachment; let n = index;" style="margin-right: 5px;">
+                <a href="{{f.Path}}" title="{{f.Name}}" target="_blank">
+                  附件{{n + 1}}
+                </a>
               </div>
             </div>
           </li>
         </ul>
+      </div>
+
+      <div class="flex justify-content-end" style="padding-right: 20px;">
+        <nz-pagination [(nzPageIndex)]="page" [nzTotal]="totalItems" (nzPageIndexChange)="pageChange()" [nzSize]="'small'"></nz-pagination>
       </div>
 
     </div>
@@ -83,7 +112,8 @@
       <div class="svb2_2">
         <div>
           <div>留言</div>
-          <textarea placeholder="此处限定500字符" [(ngModel)]="replyContent" style="width: 100%; height: 80px;">
+          <textarea placeholder="此处限定600字符" [(ngModel)]="replyContent" maxlength="600"
+                    style="width: 100%; height: 80px;">
 
           </textarea>
         </div>
@@ -92,30 +122,29 @@
           <p>
             最多可上传5个附件 <br/>
             <span class="text-muted">
-              每个附件大小不超过2M。
+              每个附件大小不超过  <span class="text-danger">2M</span>。
             </span>
           </p>
           <nz-upload
+            nzAction="/dialogue_file_upload"
             [(nzFileList)]="fileList"
             [nzShowButton]="fileList.length<5"
-            [nzBeforeUpload]="beforeUpload">
+            (nzChange)="fileChange($event)"
+            [nzSize]="2048">
+
             <button nz-button>
-              <i class="anticon anticon-upload"></i><span>上传文件</span>
+              <i nz-icon type="upload" theme="outline"></i><span>上传文件</span>
             </button>
           </nz-upload>
         </div>
-
       </div>
-
     </div>
-
-
 
   </div>
 
 
   <div class="sv_bottom">
-    <button class="btn btn_info" (click)="submit()">
+    <button class="btn btn_info" (click)="submit()" [disabled]="!replyContent">
       提交
     </button>
   </div>

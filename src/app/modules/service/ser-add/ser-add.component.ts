@@ -28,7 +28,7 @@ export class SerAddComponent implements OnInit {
   save() {
     const post = {
       typeId: this.id,
-      topic: this.title
+      title: this.title
     };
     this.serviceService.addComment(post)
       .subscribe( () => {
@@ -37,6 +37,7 @@ export class SerAddComponent implements OnInit {
           '',
           'success'
         );
+        this.activeModal.close('ok');
       }, err => {
         Swal(
           '保存失败！',

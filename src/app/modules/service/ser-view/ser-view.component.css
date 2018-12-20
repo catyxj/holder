@@ -27,18 +27,30 @@
 }
 .svb1_l ul li {
   display: flex;
+  justify-content: space-between;
   padding: 10px 0;
   border-bottom: 1px dotted #eeeeee;
 }
 .avatar{
-  margin-right: 20px;
+  /*margin-right: 20px;*/
+  flex: 1;
 }
 .avatar img{
   width: 40px;
   height: 40px;
   border-radius: 30px;
 }
-
+.s_text{
+  flex: 10;
+}
+.s_down{
+  flex: 2;
+  display: flex;
+  flex-wrap: wrap;
+}
+.s_down a{
+  font-size: 12px;
+}
 .svb2_2{
   padding: 20px;
 }
@@ -47,5 +59,7 @@
   padding: 20px;
 }
 
-
+.text_blue{
+  color: #00a4ff;
+}
 

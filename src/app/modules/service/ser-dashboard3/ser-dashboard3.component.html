@@ -2,8 +2,8 @@
 <div class="answer">
   <ul class="row">
     <li *ngFor="let data of answerList; let i = index;" class="col-6">
-      <a href="https://www.baidu.com" target="_blank">
-        <p> {{i + 1}}. {{ data.title }}</p>
+      <a href="{{data.RelHtml}}" target="_blank">
+        <p> {{i + 1}}. {{ data.Name }}</p>
       </a>
     </li>
   </ul>

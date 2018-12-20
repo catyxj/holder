@@ -47,7 +47,8 @@ mat-nav-list a.sidebar_title{
   transition: all .3s linear;
 }
 .sub_menu li a i{
-  width: 30px;
+  /*width: 30px;*/
+  margin-right: 12px;
   /*margin-right: 5px;*/
 }
 .sub_menu li a img{

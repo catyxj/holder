@@ -1,8 +1,9 @@
 <div class="service">
   <div class="mat-card-title">
     <h5 class="text_info pull-left">
-      <!--<img src="assets/icons/alarm.png" alt="">-->
-      <i class="fa fa-credit-card"></i>
+      <!--<i nz-icon type="customer-service" theme="outline"></i>-->
+      <img src="assets/icons/service.svg" alt="" style="width: 20px;">
+      <!--<i class="fa fa-credit-card"></i>-->
       服务支持
     </h5>
 
@@ -37,6 +38,7 @@
       <th> 主题分类 </th>
       <th> 提交人 </th>
       <th> 提交时间 </th>
+      <th> 所属企业 </th>
       <th> 当前状态 </th>
       <th> 操作 </th>
       </thead>
@@ -50,12 +52,19 @@
             </div>
           </td>
           <td> {{ data.Uid }}  </td>
-          <td> {{ data.Name }}  </td>
-          <td> {{ data.DialogueType }} </td>
-          <td> {{ data.CreatedBy.Name }} </td>
+          <td style="width: 180px;">
+            <div style="width: 160px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;" title="{{data.Name}}">
+              {{ data.Name }}
+            </div>
+          </td>
+          <td> {{ data.DialogueType?.Name }} </td>
+          <td>
+            {{ data.CreatedBy?.Name }}
+          </td>
           <td>
             {{ data.CreatedDate | date: 'yyyy-MM-dd' }}
           </td>
+          <td> {{ data.Organization?.Name }} </td>
           <td>
             <span class="text_blue" *ngIf="data.Status">
               已回复
@@ -66,7 +75,8 @@
             </span>
           </td>
           <td>
-            <a routerLink="/admin/service/view"
+            <!--[routerLink]="['/admin/service/view', data.Uid]" -->
+            <a (click)="goView(data)"
                class="btn btn_info btn-sm" style="color: #ffffff;">
               查看
             </a>
@@ -84,7 +94,7 @@
   <div class="t_bottom">
 
 
-    <div class="pull-left">
+    <div class="pull-left" *ngIf="user.Role.RoleId>10">
        <button class="btn btn_info" (click)="deleteG()">
          批量删除
        </button>

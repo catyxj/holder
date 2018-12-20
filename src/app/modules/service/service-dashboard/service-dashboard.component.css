@@ -4,21 +4,23 @@
   /*padding: 10px;*/
 }
 .ser_tab{
-  display: flex;
-  justify-content: flex-start;
+  /*display: flex;
+  justify-content: flex-start;*/
   padding: 10px;
   position: relative;
+}
+.ser_tab a{
+  text-decoration: none;
 }
 .tab_1{
   border-radius: 5px;
   padding: 10px 5px;
   /*flex: 1;*/
-  width: 24%;
-  margin-right: 1%;
+  /*width: 24%;
+  margin-right: 1%;*/
   box-sizing: border-box;
   border:2px solid #efefef;
   color: #666666;
-  text-decoration: none;
 }
 .tab_1:last-of-type{
   margin-right: 0;
@@ -35,10 +37,10 @@
   border-radius: 4px;
 }
 
-.tab_1.activate{
+.activate .tab_1{
   border: 2px solid #00a4ff;
 }
-.tab_1:not(.activate):hover{
+.ser_tab a:not(.activate) .tab_1:hover{
   border: 2px solid #a3deff;
 }
 

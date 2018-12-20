@@ -5,7 +5,7 @@
       <li *ngFor="let data of questionList; let i = index;" class="q_list">
         <a (click)="question(data)">
           <div class="flex justify-content-between">
-            <p>{{(page-1)*10 + i + 1}}.  {{data.title}}</p>
+            <p>{{(page-1)*10 + i + 1}}.  {{data.Name}}</p>
             <i class="fa fa-caret-right" [class.text_blue]="data.Uid === currentData"></i>
           </div>
         </a>
