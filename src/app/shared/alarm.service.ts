@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {Observable, Subject, throwError} from "rxjs/index";
-import {catchError} from "rxjs/internal/operators";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {Observable, Subject, throwError} from 'rxjs/index';
+import {catchError} from 'rxjs/internal/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({

@@ -27,7 +27,7 @@
     <nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning">
     <table class="table table-bordered">
       <thead class="bg_light_primary">
-      <th *ngIf="user && user.Role.RoleId === 10">
+      <th *ngIf="user && user.Role.RoleId >= 10">
         <div class="checkbox c-checkbox white">
           <label>
             <input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();">
@@ -42,7 +42,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let eq of equipList; let i = index">
-        <td *ngIf="user && user.Role.RoleId === 10">
+        <td *ngIf="user && user.Role.RoleId >= 10">
           <div class="checkbox c-checkbox">
             <label>
               <input type="checkbox" [(ngModel)]="eq.checkDelete" (change)="checkDel(eq);">

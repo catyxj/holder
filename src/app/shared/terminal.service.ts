@@ -43,6 +43,7 @@ export class TerminalService {
   private stopBitUrl = '/stop_bit_list';
   private baudRateUrl = '/baud_rate_list';
   private channelUrl = '/chan_config_list';
+  private dataTypeUrl = '/channel_data_type_list';
 
   constructor(private http: HttpClient) { }
 
@@ -240,6 +241,14 @@ export class TerminalService {
   // 波特率
   getBaudRate(): Observable<any> {
     return this.http.get<any>(this.baudRateUrl)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 包类型
+  getDataType(): Observable<any> {
+    return this.http.get<any>(this.dataTypeUrl)
       .pipe(
         catchError(this.handleError)
       );

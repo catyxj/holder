@@ -46,15 +46,20 @@
       </div>
       <div class="form-group col-md-6">
         <div class="input-group">
-        <span class="input-group-prepend">
-          <span class="input-group-text">
-            设备型态
+          <span class="input-group-prepend">
+            <span class="input-group-text">
+              设备型态
+            </span>
           </span>
-        </span>
           <select [(ngModel)]="data.templateId"
                   class="form-control">
             <option *ngFor="let temp of templates" [value]="temp.Uid" >{{temp.Name}}</option>
           </select>
+          <span class="input-group-append">
+            <a class="btn btn_info" (click)="addForm()">
+              <i class="fa fa-plus" title="新增设备型态"></i>
+            </a>
+          </span>
         </div>
       </div>
     </div>

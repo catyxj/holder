@@ -1,0 +1,87 @@
+<div class="">
+
+  <div class="t_content">
+    <table class="table">
+      <thead class="bg_light_primary">
+      <th>
+        <div class="checkbox c-checkbox white">
+          <label>
+            <input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();">
+            <span class="fa fa-check"></span></label>
+        </div>
+      </th>
+      <th> 组件名称 </th>
+      <th> 安装日期 </th>
+      <th> 质保时间 </th>
+      <th> 当前状态 </th>
+      <th> 操作 </th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of lifeList; let i = index">
+        <td>
+          <div class="checkbox c-checkbox">
+            <label>
+              <input type="checkbox" [(ngModel)]="data.checkDelete" (change)="checkDel(data);">
+              <span class="fa fa-check"></span></label>
+          </div>
+        </td>
+        <td> {{ data.CreatedDate | date: 'yyyy-MM-dd hh:mm:ss' }}  </td>
+        <td> {{ data.CreatedBy?.Name}} </td>
+        <td>
+          <span *ngIf="!data.Status" class="flex">
+            <div class="oval oval_green"> </div>
+            正常
+          </span>
+          <span *ngIf="data.Status" class="flex">
+            <div class="oval oval_yellow"> </div>
+            异常
+          </span>
+        </td>
+        <td>
+
+        </td>
+        <td>
+          <!--<a [routerLink]="['/admin/runtime/'+ uid + '/' + name + '/maintain/view', data.Uid, data.CreatedDate, data.CreatedBy.Name]" target="malfunction"
+             class="btn btn_info btn-sm" style="color: #ffffff;">
+            查看
+          </a>-->
+
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <p class="text-muted" *ngIf="!lifeList||lifeList.length===0">
+      无有效数据
+    </p>
+  </div>
+
+
+  <div class="t_bottom">
+
+    <div class="pull-left" >
+      <a class="btn btn_info" [routerLink]="['/admin/runtime/'+ uid + '/' + name + '/maintain/add']">
+        新增信息
+      </a>
+
+    </div>
+
+    <ngb-pagination class="pull-right"
+                    [collectionSize]="totalItems"
+                    [pageSize]="pageSize" [(page)]="page"
+                    [maxSize]="3" [rotate]="true" [boundaryLinks]="false"
+                    (pageChange)="pageChange()">
+
+    </ngb-pagination>
+    <div class="pull-right mr-3">
+      <select [(ngModel)]="pageSize" class="form-control" (change)="pageSizeChange()">
+        <option value="10">10</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
+    <div class="pull-right mr-3" style="line-height: 33px;"> 共 {{totalItems}} 项</div>
+  </div>
+
+</div>
+
+

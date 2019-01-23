@@ -302,7 +302,7 @@ h5, .h5 {
 
 
 /*滚动条*/
-.mat-sidenav-content::-webkit-scrollbar,.sidenav::-webkit-scrollbar,.scroll_bar::-webkit-scrollbar{
+.mat-sidenav-content::-webkit-scrollbar,.mat-drawer-inner-container::-webkit-scrollbar, .sidenav::-webkit-scrollbar,.scroll_bar::-webkit-scrollbar{
   width: 0;     /*高宽分别对应横竖滚动条的尺寸*/
   height: 12px;
   /*background-color: #51aded;*/

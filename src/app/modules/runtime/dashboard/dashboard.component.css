@@ -83,11 +83,21 @@
 
 .flash_left .fl_img{
   height: 630px;
+  position: relative;
 }
 .flash_left .fl_img img{
   width: 100%;
   height: 630px;
 }
+
+.control_box{
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 200px;
+
+}
+
 .flash_left .fl_sw{
   padding: 20px 10px;
   height: 106px;
@@ -260,6 +270,7 @@
 .ex_body .table tr:last-of-type{
   border: none;
 }
+
 
 
 

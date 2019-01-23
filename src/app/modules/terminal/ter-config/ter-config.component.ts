@@ -36,6 +36,7 @@ export class TerConfigComponent implements OnInit {
   public subAdrs;
   public stopBits;
   public BaudRates;
+  public dataTypes;
   public isSpinning = false;
 
 
@@ -199,7 +200,8 @@ export class TerConfigComponent implements OnInit {
           checkDigit: information.ParityBit ? information.ParityBit.Id : 0, // 校验位
           communiInterface: information.CorrespondType ? information.CorrespondType.Id : 0, // 通信接口地址
           subAdr: information.SlaveAddress ? information.SlaveAddress.Id : 0,  // 从机地址
-          heartbeat: information.HeartBeat ? information.HeartBeat.Id : 0  // 心跳包频率
+          heartbeat: information.HeartBeat ? information.HeartBeat.Id : 0,  // 心跳包频率
+          dataType: information.DataType ? information.DataType.Id : 0
         };
 
 
@@ -274,6 +276,12 @@ export class TerConfigComponent implements OnInit {
     this.terminalService.getBaudRate()
       .subscribe(data => {
         this.BaudRates = data;
+      });
+
+    // 包类型
+    this.terminalService.getDataType()
+      .subscribe(data => {
+        this.dataTypes = data;
       });
 
 
@@ -656,7 +664,7 @@ export class TerConfigComponent implements OnInit {
 
 
     // 通信参数
-    if (!this.infomation.BaudRate || !this.infomation.dataBit || !this.infomation.stopBit || !this.infomation.checkDigit || !this.infomation.communiInterface || !this.infomation.subAdr || !this.infomation.heartbeat) {
+    if (!this.infomation.BaudRate || !this.infomation.dataBit || !this.infomation.stopBit || !this.infomation.checkDigit || !this.infomation.communiInterface || !this.infomation.subAdr || !this.infomation.heartbeat || !this.infomation.dataType) {
       this.nzmodalService.error({
         nzTitle: '通道配置更新失败',
         nzContent: '通信参数不能为空'
@@ -672,7 +680,8 @@ export class TerConfigComponent implements OnInit {
       checkDigit: parseInt(this.infomation.checkDigit),
       communiInterface: parseInt(this.infomation.communiInterface),
       subAdr: parseInt(this.infomation.subAdr),
-      heartbeat: parseInt(this.infomation.heartbeat)
+      heartbeat: parseInt(this.infomation.heartbeat),
+      dataType: parseInt(this.infomation.dataType)
     };
 
     const data = {
@@ -959,7 +968,7 @@ export class TerConfigComponent implements OnInit {
 
 
     // 通信参数
-    if (!this.infomation.BaudRate || !this.infomation.dataBit || !this.infomation.stopBit || !this.infomation.checkDigit || !this.infomation.communiInterface || !this.infomation.subAdr || !this.infomation.heartbeat) {
+    if (!this.infomation.BaudRate || !this.infomation.dataBit || !this.infomation.stopBit || !this.infomation.checkDigit || !this.infomation.communiInterface || !this.infomation.subAdr || !this.infomation.heartbeat || !this.infomation.dataType) {
       this.nzmodalService.error({
         nzTitle: '通道配置更新失败',
         nzContent: '通信参数不能为空'
@@ -975,7 +984,8 @@ export class TerConfigComponent implements OnInit {
       checkDigit: parseInt(this.infomation.checkDigit),
       communiInterface: parseInt(this.infomation.communiInterface),
       subAdr: parseInt(this.infomation.subAdr),
-      heartbeat: parseInt(this.infomation.heartbeat)
+      heartbeat: parseInt(this.infomation.heartbeat),
+      dataType: parseInt(this.infomation.dataType)
     };
 
     const data = {

@@ -36,6 +36,14 @@ export class OverviewService {
       );
   }
 
+  // 删除档案
+  deleteFile(data): Observable<any> {
+    return this.http.post('/file_manage_delete', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   // 获取档案信息
   getFileInfo(uid: string ): Observable<any> {
     const url = `${this.fileInfoUrl}?uid=${uid}`;

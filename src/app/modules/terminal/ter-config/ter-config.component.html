@@ -82,7 +82,7 @@
               <button mat-menu-item (click)="setStatus(data, 0)"><i class="fa fa-ellipsis-h"></i> 默认</button>
             </mat-menu>
             <mat-menu #subMenu="matMenu">
-              <mat-grid-list cols="4" rowHeight="34px;">
+              <mat-grid-list cols="4" rowHeight="34">
                 <mat-grid-tile
                   *ngFor="let priority of priorities1" (click)="setStatus(data, 1, priority)">
                   {{ priority }}
@@ -202,7 +202,7 @@
               <button mat-menu-item (click)="setStatus(data, 0)"><i class="fa fa-ellipsis-h"></i> 默认</button>
             </mat-menu>
             <mat-menu #subMenu="matMenu">
-              <mat-grid-list cols="4" rowHeight="34px;">
+              <mat-grid-list cols="4" rowHeight="34">
                 <mat-grid-tile
                   *ngFor="let priority of priorities2" (click)="setStatus(data, 1, priority)">
                   {{ priority }}
@@ -328,7 +328,7 @@
               <button mat-menu-item (click)="setStatus(data, 0)"><i class="fa fa-ellipsis-h"></i> 默认</button>
             </mat-menu>
             <mat-menu #subMenu="matMenu">
-              <mat-grid-list cols="4" rowHeight="34px;">
+              <mat-grid-list cols="4" rowHeight="34">
                 <mat-grid-tile
                   *ngFor="let priority of priorities3" (click)="setStatus(data, 1, priority)">
                   {{ priority }}
@@ -434,6 +434,9 @@
           <th class="chanel_label">
             心跳包频率
           </th>
+          <th class="chanel_label">
+            数据包类型
+          </th>
         </tr>
         </thead>
 
@@ -492,6 +495,14 @@
               <option *ngFor="let x of heartbeats" [value]="x.Id">{{x.Name}}</option>
             </select>
           </td>
+
+          <td>
+            <select [(ngModel)]="infomation.dataType"
+                    class="form-control">
+              <option *ngFor="let x of dataTypes" [value]="x.Id">{{x.Name}}</option>
+            </select>
+          </td>
+
         </tr>
 
         </tbody>

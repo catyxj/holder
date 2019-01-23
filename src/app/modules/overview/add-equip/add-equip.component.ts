@@ -4,6 +4,8 @@ import {OrganizationService} from '../../../shared/organization.service';
 import Swal from 'sweetalert2';
 import {Router} from "@angular/router";
 import {OverviewService} from "../../../shared/overview.service";
+import {AddEquiptemplateComponent} from "../../boilers/add-equiptemplate/add-equiptemplate.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-add-equip',
@@ -29,7 +31,8 @@ export class AddEquipComponent implements OnInit {
   constructor(private boilerService: BoilerService,
               private overviewService: OverviewService,
               private orgService: OrganizationService,
-              private router: Router) { }
+              private router: Router,
+              private modalService: NgbModal) { }
 
   ngOnInit() {
     this.name = `档案${new Date().getTime()}`;
@@ -214,6 +217,17 @@ export class AddEquipComponent implements OnInit {
 
   }
 
+  addForm() {
+    const modalRef = this.modalService.open(AddEquiptemplateComponent, { size: 'lg' });
+    // modalRef.componentInstance.currentUser = this.user;
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+        this.getTemplates();
+      }
+    }, (reason) => {
+      console.log(reason);
+    });
+  }
 
 
 //  保存

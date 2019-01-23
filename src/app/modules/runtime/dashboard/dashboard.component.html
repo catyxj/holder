@@ -214,6 +214,25 @@
     </div>
     <div class="fl_img">
       <img src="{{img}}" alt="">
+
+
+      <!--控制-->
+      <div *ngIf="controlShow && termStatus === 1"  class="control_box">
+        <div class="btn-group" style="width: 100%;">
+          <button class="btn btn-outline-info" style="width: 33%;" (click)="equipControl(2)"
+                  [disabled]="termStatus === 1 && eptStatus === true || isLoading === true">
+            启动
+          </button>
+          <button class="btn btn-outline-danger" style="width: 33%;" (click)="equipControl(1)"
+                  [disabled]="termStatus !== 1 || eptStatus === false || isLoading === true">
+            关闭
+          </button>
+          <button class="btn btn-outline-success" style="width: 33%;" (click)="equipControl(3)"
+                  [disabled]="isLoading === true">
+            重置
+          </button>
+        </div>
+      </div>
     </div>
     <div class="fl_sw">
       <!--左箭头-->

@@ -18,6 +18,10 @@ import { ChartExpandComponent } from './chart-expand/chart-expand.component';
 import { MaintainDashboardComponent } from './maintain-dashboard/maintain-dashboard.component';
 import { MaintainAddComponent } from './maintain-add/maintain-add.component';
 import { MaintainViewComponent } from './maintain-view/maintain-view.component';
+import { LifeMainComponent } from './life/life-main/life-main.component';
+import { LifeListComponent } from './life/life-list/life-list.component';
+import { LifeAddComponent } from './life/life-add/life-add.component';
+import { LifeEditComponent } from './life/life-edit/life-edit.component';
 
 
 
@@ -41,7 +45,11 @@ import { MaintainViewComponent } from './maintain-view/maintain-view.component';
     ChartExpandComponent,
     MaintainDashboardComponent,
     MaintainAddComponent,
-    MaintainViewComponent
+    MaintainViewComponent,
+    LifeMainComponent,
+    LifeListComponent,
+    LifeAddComponent,
+    LifeEditComponent
   ],
   entryComponents: [
     ChartExpandComponent

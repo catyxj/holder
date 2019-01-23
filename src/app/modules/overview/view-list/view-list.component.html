@@ -12,6 +12,7 @@
           <th>设备名称</th>
           <th>终端名称</th>
           <th>模板</th>
+          <th></th>
         </tr>
       </thead>
 
@@ -34,6 +35,11 @@
           <td>
             {{data.Template?.Name }}
             <span *ngIf="!data.Template">未配置</span>
+          </td>
+          <td>
+            <a (click)="delete(data.Uid)">
+              <i class="fa fa-trash text-danger"></i>
+            </a>
           </td>
 
         </tr>

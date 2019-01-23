@@ -485,6 +485,17 @@
               </select>
             </td>
           </tr>
+          <tr>
+            <th class="chanel_label">
+              数据包类型
+            </th>
+            <td>
+              <select [(ngModel)]="infomation.dataType"
+                      class="form-control">
+                <option *ngFor="let x of dataTypes" [value]="x.Id">{{x.Name}}</option>
+              </select>
+            </td>
+          </tr>
 
           </tbody>
         </table>

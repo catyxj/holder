@@ -1,31 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-  ActivatedRouteSnapshot,
-  RouterState,
-  RouterStateSnapshot
-} from '@angular/router';
-import {UserService} from '../shared/user.service';
-import { HttpClient } from '@angular/common/http';
-
+import {ActivatedRoute, Router} from "@angular/router";
+import {UserService} from "../../shared/user.service";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-qiantian',
+  templateUrl: './qiantian.component.html',
+  styleUrls: ['./qiantian.component.css']
 })
-export class LoginComponent implements OnInit {
+export class QiantianComponent implements OnInit {
+  public imgArr = [];
   public user = { username: '', password: '' , ip: ''};
   public errMes: string ;
   public checkRemember = false;
+  public hideLogin = true;
 
-
-  public imgArr = [];
 
   constructor(public router: Router,
-              public activatedRoute: ActivatedRoute,
               private userService: UserService,
               private http: HttpClient) { }
 
@@ -33,11 +24,15 @@ export class LoginComponent implements OnInit {
     this.imgArr = [
       {
         id: 1,
-        img: 'assets/images/banner1.jpg'
+        img: 'assets/images/qiantian/banner0.jpg'
       },
       {
         id: 2,
-        img: 'assets/images/banner2.jpg'
+        img: 'assets/images/qiantian/banner1.jpg'
+      },
+      {
+        id: 3,
+        img: 'assets/images/qiantian/banner2.jpg'
       }
     ];
 
@@ -52,9 +47,15 @@ export class LoginComponent implements OnInit {
 
     }
 
+
   }
 
-  forgetPwd() {}
+
+  loginBtn() {
+    this.hideLogin = false;
+  }
+
+
 
   getConfig(): any {
     const IP_JSON_URL = 'https://ipv4.myexternalip.com/json';
@@ -75,15 +76,10 @@ export class LoginComponent implements OnInit {
           this.user = user;
           sessionStorage.user = true;
           this.router.navigate(['/admin']);
-          }, // success path
+        }, // success path
         error => this.errMes = error // error path
-         );
+      );
   }
-
-  // 记住用户名
-  /*remember() {
-    console.log(this.checkRemember);
-  }*/
 
 
 }

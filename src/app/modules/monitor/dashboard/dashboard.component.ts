@@ -72,7 +72,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     for (let i = 0; i < this.boilers.length; i++) {
       let bo = this.boilers[i];
       if (!bo.img) {
-        bo.img = 'assets/images/equip0.jpg';
+        bo.img = 'assets/images/no_image.png';
       }
 
       if (bo.termStatus === 1) {

@@ -24,6 +24,7 @@ import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import zh from '@angular/common/locales/zh';
 import {NgxEchartsModule} from "ngx-echarts";
 import {BsDatepickerModule} from "ngx-bootstrap";
+import { QiantianComponent } from './homepage/qiantian/qiantian.component';
 
 
 
@@ -36,7 +37,8 @@ registerLocaleData(zh);
     AppComponent,
     LoginComponent,
     MainComponent,
-    NotFound404Component
+    NotFound404Component,
+    QiantianComponent
   ],
   imports: [
     BrowserModule,

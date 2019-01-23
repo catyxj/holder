@@ -11,6 +11,8 @@ import {MaintainComponent} from './maintain/maintain.component';
 import {MaintainDashboardComponent} from './maintain-dashboard/maintain-dashboard.component';
 import {MaintainViewComponent} from './maintain-view/maintain-view.component';
 import {MaintainAddComponent} from './maintain-add/maintain-add.component';
+import {LifeListComponent} from "./life/life-list/life-list.component";
+import {LifeMainComponent} from "./life/life-main/life-main.component";
 
 export const RuntimeRoutingModule = [
   {
@@ -61,6 +63,17 @@ export const RuntimeRoutingModule = [
           {
             path: 'add',
             component: MaintainAddComponent,
+          }
+        ]
+      },
+      {
+        path: 'life',
+        component: LifeMainComponent,
+        children: [
+          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+          {
+            path: 'dashboard',
+            component: LifeListComponent,
           }
         ]
       }

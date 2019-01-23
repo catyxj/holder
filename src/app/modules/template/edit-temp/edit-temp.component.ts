@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {TerminalService} from "../../../shared/terminal.service";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {NzModalService} from "ng-zorro-antd";
-import {RangeConfigComponent} from "../../terminal/range-config/range-config.component";
-import {AlarmRuleComponent} from "../../terminal/alarm-rule/alarm-rule.component";
-import {TemplateService} from "../../../shared/template.service";
+import {ActivatedRoute} from '@angular/router';
+import {TerminalService} from '../../../shared/terminal.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NzModalService} from 'ng-zorro-antd';
+import {RangeConfigComponent} from '../../terminal/range-config/range-config.component';
+import {AlarmRuleComponent} from '../../terminal/alarm-rule/alarm-rule.component';
+import {TemplateService} from '../../../shared/template.service';
 import Swal from 'sweetalert2';
-import {AddTemplateComponent} from "../../terminal/add-template/add-template.component";
+import {AddTemplateComponent} from '../../terminal/add-template/add-template.component';
 
 @Component({
   selector: 'app-edit-temp',
@@ -37,6 +37,7 @@ export class EditTempComponent implements OnInit {
   public subAdrs;
   public stopBits;
   public BaudRates;
+  public dataTypes;
   public editName;
   public isSpinning = false;
 
@@ -81,12 +82,12 @@ export class EditTempComponent implements OnInit {
 
     this.templateService.getChannel(this.uid)
       .subscribe( data => {
-        let channels = data.channelConfigs;
-        let information = data.communication;
+        const channels = data.channelConfigs;
+        const information = data.communication;
 
         //
         for (let i = 0; i < channels.length; i++) {
-          let chan = channels[i];
+          const chan = channels[i];
 
           if (chan.ChannelType === 1) {
             this.analogueList.push({
@@ -201,7 +202,8 @@ export class EditTempComponent implements OnInit {
           checkDigit: information.ParityBit ? information.ParityBit.Id : 0, // 校验位
           communiInterface: information.CorrespondType ? information.CorrespondType.Id : 0, // 通信接口地址
           subAdr: information.SlaveAddress ? information.SlaveAddress.Id : 0,  // 从机地址
-          heartbeat: information.HeartBeat ? information.HeartBeat.Id : 0  // 心跳包频率
+          heartbeat: information.HeartBeat ? information.HeartBeat.Id : 0,  // 心跳包频率
+          dataType: information.DataType ? information.DataType.Id : 0
         };
 
 
@@ -278,7 +280,11 @@ export class EditTempComponent implements OnInit {
         this.BaudRates = data;
       });
 
-
+    // 包类型
+    this.terminalService.getDataType()
+      .subscribe(data => {
+        this.dataTypes = data;
+      });
   }
 
 
@@ -286,7 +292,7 @@ export class EditTempComponent implements OnInit {
 
   // 添加模拟量
   addAnalogue() {
-    let n = this.analogueList.length;
+    const n = this.analogueList.length;
     this.analogueList.push({
       ChannelNumber: n + 1,
       Parameter: {
@@ -305,7 +311,7 @@ export class EditTempComponent implements OnInit {
 
   // 添加开关量
   addSwitch() {
-    let n = this.switchList.length;
+    const n = this.switchList.length;
     this.switchList.push({
       ChannelNumber: n + 1,
       Parameter: {
@@ -322,7 +328,7 @@ export class EditTempComponent implements OnInit {
 
   // 添加状态量
   addRange() {
-    let n = this.rangeList.length;
+    const n = this.rangeList.length;
     this.rangeList.push({
       ChannelNumber: n + 1,
       Parameter: {
@@ -429,8 +435,8 @@ export class EditTempComponent implements OnInit {
   save() {
 
     // 模拟通道
-    let analogueList = [];
-    let aNumList = [];
+    const analogueList = [];
+    const aNumList = [];
     for (let i = 0; i < this.analogueList.length; i++) {
       if (this.analogueList[i].Parameter.Name) {
         if (this.analogueList[i].ChannelNumber > 24) {
@@ -494,8 +500,8 @@ export class EditTempComponent implements OnInit {
 
 
     // 开关通道
-    let switchList = [];
-    let sNumList = [];
+    const switchList = [];
+    const sNumList = [];
     for (let i = 0; i < this.switchList.length; i++) {
       if (this.switchList[i].Parameter.Name) {
         if (this.switchList[i].ChannelNumber > 48) {
@@ -588,8 +594,8 @@ export class EditTempComponent implements OnInit {
 
 
     // 状态通道
-    let rangeList = [];
-    let rNumList = [];
+    const rangeList = [];
+    const rNumList = [];
     for (let i = 0; i < this.rangeList.length; i++) {
       if (this.rangeList[i].Parameter.Name) {
         if (this.rangeList[i].ChannelNumber > 12) {
@@ -661,7 +667,7 @@ export class EditTempComponent implements OnInit {
 
 
     // 通信参数
-    if (!this.infomation.BaudRate || !this.infomation.dataBit || !this.infomation.stopBit || !this.infomation.checkDigit || !this.infomation.communiInterface || !this.infomation.subAdr || !this.infomation.heartbeat) {
+    if (!this.infomation.BaudRate || !this.infomation.dataBit || !this.infomation.stopBit || !this.infomation.checkDigit || !this.infomation.communiInterface || !this.infomation.subAdr || !this.infomation.heartbeat || !this.infomation.dataType) {
       this.nzmodalService.error({
         nzTitle: '通道配置更新失败',
         nzContent: '通信参数不能为空'
@@ -670,17 +676,18 @@ export class EditTempComponent implements OnInit {
     }
 
     console.log(this.infomation);
-    let infomation = {
+    const infomation = {
       BaudRate: parseInt(this.infomation.BaudRate),
       dataBit: parseInt(this.infomation.dataBit),
       stopBit: parseInt(this.infomation.stopBit),
       checkDigit: parseInt(this.infomation.checkDigit),
       communiInterface: parseInt(this.infomation.communiInterface),
       subAdr: parseInt(this.infomation.subAdr),
-      heartbeat: parseInt(this.infomation.heartbeat)
+      heartbeat: parseInt(this.infomation.heartbeat),
+      dataType: parseInt(this.infomation.dataType)
     };
 
-    let data = {
+    const data = {
       Analogue: analogueList,
       Switch: switchList,
       Range: rangeList,

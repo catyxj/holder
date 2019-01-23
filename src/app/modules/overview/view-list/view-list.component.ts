@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {OverviewService} from '../../../shared/overview.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-view-list',
@@ -69,5 +70,33 @@ export class ViewListComponent implements OnInit {
   pageChange() {
     this.getList();
   }
+
+  // 删除
+  delete(data) {
+    let post = {
+      fileUid: data
+    };
+    const cf = confirm(`确定删除？`);
+    if (cf === true) {
+      this.overviewService.deleteFile(post)
+        .subscribe( () => {
+          Swal(
+            '删除成功！',
+            '',
+            'success'
+          );
+          this.pageChange();
+        }, err => {
+          Swal(
+            '删除失败！',
+            err,
+            'error'
+          );
+        });
+    }
+
+  }
+
+
 
 }

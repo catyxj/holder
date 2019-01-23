@@ -38,6 +38,7 @@ export class AddTemplateComponent implements OnInit {
   public subAdrs;
   public stopBits;
   public BaudRates;
+  public dataTypes;
   public isSpinning = false;
   public tabStatus = 1;
 
@@ -61,7 +62,8 @@ export class AddTemplateComponent implements OnInit {
       checkDigit: 0, // 校验位
       communiInterface: 0, // 通信接口地址
       subAdr: 0,  // 从机地址
-      heartbeat: 0  // 心跳包频率
+      heartbeat: 0, // 心跳包频率
+      dataType:  0
     };
     this.switchList = [
       {
@@ -174,6 +176,11 @@ export class AddTemplateComponent implements OnInit {
         this.BaudRates = data;
       });
 
+    // 包类型
+    this.terminalService.getDataType()
+      .subscribe(data => {
+        this.dataTypes = data;
+      });
 
   }
 
@@ -579,7 +586,8 @@ export class AddTemplateComponent implements OnInit {
       checkDigit: parseInt(this.infomation.checkDigit),
       communiInterface: parseInt(this.infomation.communiInterface),
       subAdr: parseInt(this.infomation.subAdr),
-      heartbeat: parseInt(this.infomation.heartbeat)
+      heartbeat: parseInt(this.infomation.heartbeat),
+      dataType: parseInt(this.infomation.dataType)
     };
 
     const data = {
