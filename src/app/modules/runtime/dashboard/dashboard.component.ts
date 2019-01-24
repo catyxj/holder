@@ -50,6 +50,8 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
   public expand1 = false;
   public expand2 = false;
   public expand3 = false;
+  public exTotal1 = 0;
+  public exTotal3 = 0;
 
 
   constructor(private boilerWsService: BoilerSocketService,
@@ -63,9 +65,9 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
 
     this.initStatus();
 
-    // this.initTest();
+    this.initTest();
 
-    this.initData();
+    // this.initData();
   }
 
   initStatus() {
@@ -223,6 +225,10 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
           this.total2 = this.switchs.length;
           this.total3 = this.ranges.length;
 
+
+          this.exTotal1 = Math.ceil(this.total1 / 2);
+          this.exTotal3 = Math.ceil(this.total3 / 2);
+
           this.tpage1 = Math.ceil(this.total1 / 10);
           this.tpage2 = Math.ceil(this.total2 / 6);
           this.tpage3 = Math.ceil(this.total3 / 5);
@@ -366,8 +372,8 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    this.socket.unsubscribe();
-    this.boilerWsService.closeSocket();
+    /*this.socket.unsubscribe();
+    this.boilerWsService.closeSocket();*/
   }
 
 }

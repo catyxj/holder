@@ -52,7 +52,9 @@ import { LifeEditComponent } from './life/life-edit/life-edit.component';
     LifeEditComponent
   ],
   entryComponents: [
-    ChartExpandComponent
+    ChartExpandComponent,
+    LifeAddComponent,
+    LifeEditComponent
   ]
 })
 export class RuntimeModule { }

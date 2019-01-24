@@ -57,12 +57,14 @@ import {MaintainDashboardComponent} from './runtime/maintain-dashboard/maintain-
 import {MaintainViewComponent} from './runtime/maintain-view/maintain-view.component';
 import {MaintainAddComponent} from './runtime/maintain-add/maintain-add.component';
 import {MalDetailComponent} from './malfunction/mal-detail/mal-detail.component';
-import {ServiceMainComponent} from "./service/service-main/service-main.component";
-import {ServiceListComponent} from "./service/service-list/service-list.component";
-import {ServiceDashboardComponent} from "./service/service-dashboard/service-dashboard.component";
-import {SerDashboard2Component} from "./service/ser-dashboard2/ser-dashboard2.component";
-import {SerViewComponent} from "./service/ser-view/ser-view.component";
-import {SerAddComponent} from "./service/ser-add/ser-add.component";
+import {ServiceMainComponent} from './service/service-main/service-main.component';
+import {ServiceListComponent} from './service/service-list/service-list.component';
+import {ServiceDashboardComponent} from './service/service-dashboard/service-dashboard.component';
+import {SerDashboard2Component} from './service/ser-dashboard2/ser-dashboard2.component';
+import {SerViewComponent} from './service/ser-view/ser-view.component';
+import {SerAddComponent} from './service/ser-add/ser-add.component';
+import {LifeMainComponent} from './runtime/life/life-main/life-main.component';
+import {LifeListComponent} from './runtime/life/life-list/life-list.component';
 
 
 
@@ -178,6 +180,17 @@ export const ModulesRoutingModule = [
               {
                 path: 'add',
                 component: MaintainAddComponent,
+              }
+            ]
+          },
+          {
+            path: 'life',
+            component: LifeMainComponent,
+            children: [
+              { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+              {
+                path: 'dashboard',
+                component: LifeListComponent,
               }
             ]
           }

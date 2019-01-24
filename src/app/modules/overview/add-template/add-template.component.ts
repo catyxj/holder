@@ -358,7 +358,7 @@ export class AddTemplateComponent implements OnInit {
           });
           return false;
         }
-        if (parseInt(this.analogueList[i].Func) === 3) {
+        /*if (parseInt(this.analogueList[i].Func) === 3) {
           if (this.analogueList[i].Modbus <= 40000 || this.analogueList[i].Modbus >= 50000) {
             this.nzmodalService.error({
               nzTitle: `模拟通道[ ${i} ]MODBUS地址错误`,
@@ -375,7 +375,7 @@ export class AddTemplateComponent implements OnInit {
             });
             return false;
           }
-        }
+        }*/
         analogueList.push({
           ChannelNumber: this.analogueList[i].ChannelNumber,
           Name: this.analogueList[i].Parameter.Name,
@@ -425,13 +425,13 @@ export class AddTemplateComponent implements OnInit {
           return false;
         }
         if (parseInt(this.switchList[i].Func) === 1) {
-          if (this.switchList[i].Modbus < 1 || this.switchList[i].Modbus >= 10000) {
+          /*if (this.switchList[i].Modbus < 1 || this.switchList[i].Modbus >= 10000) {
             this.nzmodalService.error({
               nzTitle: `开关通道[${i}]MODBUS地址错误`,
               nzContent: `功能码为01，MODBUS地址范围00001-09999`
             });
             return false;
-          }
+          }*/
           if (this.switchList[i].BitAddress !== 1) {
             this.nzmodalService.error({
               nzTitle: `开关通道[${i}]位地址错误`,
@@ -441,13 +441,13 @@ export class AddTemplateComponent implements OnInit {
           }
         }
         if (parseInt(this.switchList[i].Func) === 2) {
-          if (this.switchList[i].Modbus <= 10000 || this.switchList[i].Modbus >= 20000) {
+          /*if (this.switchList[i].Modbus <= 10000 || this.switchList[i].Modbus >= 20000) {
             this.nzmodalService.error({
               nzTitle: `开关通道[${i}]MODBUS地址错误`,
               nzContent: '功能码为02，MODBUS地址范围10001-19999'
             });
             return false;
-          }
+          }*/
           if (this.switchList[i].BitAddress !== 1) {
             this.nzmodalService.error({
               nzTitle: `开关通道[${i}]位地址错误`,
@@ -457,13 +457,13 @@ export class AddTemplateComponent implements OnInit {
           }
         }
         if (parseInt(this.switchList[i].Func) === 3) {
-          if (this.switchList[i].Modbus <= 40000 || this.switchList[i].Modbus >= 50000) {
+          /*if (this.switchList[i].Modbus <= 40000 || this.switchList[i].Modbus >= 50000) {
             this.nzmodalService.error({
               nzTitle: `开关通道[${i}]MODBUS地址错，请修改`,
               nzContent: '功能码为03，MODBUS地址范围40001-49999'
             });
             return false;
-          }
+          }*/
           if (this.switchList[i].BitAddress < 1 || this.switchList[i].BitAddress > 16) {
             this.nzmodalService.error({
               nzTitle: `开关通道[${i}]位地址错误`,
@@ -517,7 +517,7 @@ export class AddTemplateComponent implements OnInit {
           });
           return false;
         }
-        if (parseInt(this.rangeList[i].Func) === 3) {
+        /*if (parseInt(this.rangeList[i].Func) === 3) {
           if (this.rangeList[i].Modbus <= 40000 || this.rangeList[i].Modbus >= 50000) {
             this.nzmodalService.error({
               nzTitle: `状态通道[${this.rangeList[i].ChannelNumber}]MODBUS地址错误`,
@@ -534,7 +534,7 @@ export class AddTemplateComponent implements OnInit {
             });
             return false;
           }
-        }
+        }*/
 
         if (this.rangeList[i].Ranges.length <= 0) {
           this.nzmodalService.error({

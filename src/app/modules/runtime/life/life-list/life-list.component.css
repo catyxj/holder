@@ -1,0 +1,17 @@
+
+.status_bar{
+  width: 120px;
+  height: 12px;
+  background-color: #efefef;
+  border-radius: 20px;
+  margin: 0 10px;
+}
+.status_bar_in{
+  height: 12px;
+  border-radius: 20px;
+}
+
+
+
+
+

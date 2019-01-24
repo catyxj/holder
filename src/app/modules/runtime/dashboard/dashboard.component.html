@@ -367,7 +367,7 @@
   <div class="ex_body">
     <div class="ex_l">
       <table class="table" style="color: #888888;">
-        <tr *ngFor="let data of analogues | slice: 0 : 12; trackBy: trackByUid;">
+        <tr *ngFor="let data of analogues | slice: 0 : exTotal1; trackBy: trackByUid;">
           <td>
             {{ data.ChannelName }}
           </td>
@@ -394,7 +394,7 @@
     </div>
     <div class="ex_r">
       <table class="table" style="color: #888888;">
-        <tr *ngFor="let data of analogues | slice: 12 : 24; trackBy: trackByUid;">
+        <tr *ngFor="let data of analogues | slice: exTotal1 : total1; trackBy: trackByUid;">
           <td>
             {{ data.ChannelName }}
           </td>
@@ -439,14 +439,14 @@
   <div class="ex_body">
     <div class="ex_l">
       <table class="table" style="color: #888888;">
-        <tr *ngFor="let data of ranges | slice: 0 : 6; trackBy: trackByUid;" style="">
+        <tr *ngFor="let data of ranges | slice: 0 : exTotal3; trackBy: trackByUid;" style="">
           <td style="">
             <!--{{ data.ChannelNumber }}-->
             {{ data.ChannelName }}
             <br/>
             <span style="font-size: 10px; opacity: 0.8;">{{data.TerminalCode}}</span>
           </td>
-          <td style="white-space: nowrap;">
+          <td style="white-space: nowrap;" *ngIf="termStatus === 1">
               <span class="label" [ngClass]="{'label_info':data.AlarmStatus === false, 'label_warning':data.AlarmStatus === true}">
                 {{ data.Remark }}
               </span>
@@ -456,7 +456,7 @@
     </div>
     <div class="ex_r">
       <table class="table" style="color: #888888;">
-        <tr *ngFor="let data of ranges | slice: 6 : 12; trackBy: trackByUid;" style="">
+        <tr *ngFor="let data of ranges | slice: exTotal3 : total3; trackBy: trackByUid;" style="">
           <td style="">
             <!--{{ data.ChannelNumber }}-->
             {{ data.ChannelName }}

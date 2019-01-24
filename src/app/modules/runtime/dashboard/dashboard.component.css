@@ -233,7 +233,7 @@
 /*模拟量全屏*/
 .an_expand{
   background-color: #ffffff;
-  height: 820px;
+  min-height: 820px;
   box-shadow: 1px 1px 5px #cccccc;
   padding: 30px;
 }

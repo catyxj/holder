@@ -1,4 +1,4 @@
-<div class="">
+<div class="lifeList">
 
   <div class="t_content">
     <table class="table">
@@ -25,19 +25,32 @@
               <span class="fa fa-check"></span></label>
           </div>
         </td>
-        <td> {{ data.CreatedDate | date: 'yyyy-MM-dd hh:mm:ss' }}  </td>
-        <td> {{ data.CreatedBy?.Name}} </td>
+        <td> {{ data.name }}  </td>
+        <td> {{ data.CreatedDate | date: 'yyyy-MM-dd hh:mm:ss' }} </td>
         <td>
-          <span *ngIf="!data.Status" class="flex">
-            <div class="oval oval_green"> </div>
+          {{ data. period }}
+          月
+        </td>
+        <td style="display: flex; justify-content:center; align-items:center;">
+          <span>
+            {{ data.percent*100 }} %
+          </span>
+
+          <div class="status_bar">
+            <div class="status_bar_in" [ngStyle]="{'background-color': data.percent>0.05 ? '#52c41a' : 'red', 'width': data.percent*100+'%' }"></div>
+          </div>
+          <span style="color: #52c41a" *ngIf="data.percent>0.05">
             正常
           </span>
-          <span *ngIf="data.Status" class="flex">
-            <div class="oval oval_yellow"> </div>
-            异常
+          <span style="color: darkorange" *ngIf="data.percent<=0.05 && data.percent>0">
+            即将过期
           </span>
-        </td>
-        <td>
+          <span style="color: red" *ngIf="data.percent<=0">
+            过期
+          </span>
+          <a style="color: #00a4ff; margin-left: 10px;" *ngIf="data.percent<=0" (click)="contact()">
+            联系厂家
+          </a>
 
         </td>
         <td>
@@ -45,6 +58,10 @@
              class="btn btn_info btn-sm" style="color: #ffffff;">
             查看
           </a>-->
+
+          <button class="btn btn_info btn-sm" (click)="edit(data)">
+            修改
+          </button>
 
         </td>
       </tr>
@@ -59,9 +76,14 @@
   <div class="t_bottom">
 
     <div class="pull-left" >
-      <a class="btn btn_info" [routerLink]="['/admin/runtime/'+ uid + '/' + name + '/maintain/add']">
-        新增信息
-      </a>
+      <button class="btn btn_info" (click)="deleteG()"
+              nz-button [nzLoading]="isLoading">
+        批量删除
+      </button>
+
+      <button class="btn btn_info ml-3" (click)="add()">
+        新增组件
+      </button>
 
     </div>
 
