@@ -65,9 +65,9 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
 
     this.initStatus();
 
-    this.initTest();
+    // this.initTest();
 
-    // this.initData();
+    this.initData();
   }
 
   initStatus() {
@@ -161,6 +161,9 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
             this.total1 = this.analogues.length;
             this.total2 = this.switchs.length;
             this.total3 = this.ranges.length;
+
+            this.exTotal1 = Math.ceil(this.total1 / 2);
+            this.exTotal3 = Math.ceil(this.total3 / 2);
 
             this.tpage1 = Math.ceil(this.total1 / 10);
             this.tpage2 = Math.ceil(this.total2 / 6);
@@ -372,8 +375,8 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    /*this.socket.unsubscribe();
-    this.boilerWsService.closeSocket();*/
+    this.socket.unsubscribe();
+    this.boilerWsService.closeSocket();
   }
 
 }

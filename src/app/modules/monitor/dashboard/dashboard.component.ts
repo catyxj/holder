@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
   getBoilers(message): void {
-    /*console.log(message);
+    console.log(message);
     const wsUrl = `wss://${window.location.host}/equipment_show`;
     this.socket = this.boilerWsService.creatSocket(wsUrl, message)
       .subscribe(
@@ -57,14 +57,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
         },
         err => console.log(err),
         () => console.log('ws结束')
-      );*/
+      );
 
-    this.boilerService.getBoilers(this.page, this.pageSize, this.search)
+    /*this.boilerService.getBoilers(this.page, this.pageSize, this.search)
       .subscribe(data => {
         this.boilers = data.params;
         this.totalItems = data.counts;
         this.refreshData();
-      });
+      });*/
   }
 
 
@@ -139,8 +139,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     // console.log('page close');
     // sessionStorage.setItem('pageNum', this.page.toString());
-    /*this.socket.unsubscribe();
-    this.boilerWsService.closeSocket();*/
+    this.socket.unsubscribe();
+    this.boilerWsService.closeSocket();
   }
 
 
