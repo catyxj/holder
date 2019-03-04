@@ -65,6 +65,18 @@ import {SerViewComponent} from './service/ser-view/ser-view.component';
 import {SerAddComponent} from './service/ser-add/ser-add.component';
 import {LifeMainComponent} from './runtime/life/life-main/life-main.component';
 import {LifeListComponent} from './runtime/life/life-list/life-list.component';
+import {AttendanceMainComponent} from './attendance/attendance-main/attendance-main.component';
+import {AttendanceListComponent} from './attendance/attendance-list/attendance-list.component';
+import {BlueMainComponent} from './bluetooth/blue-main/blue-main.component';
+import {BlueListComponent} from './bluetooth/blue-list/blue-list.component';
+import {VideoMainComponent} from './video/video-main/video-main.component';
+import {VideoListComponent} from './video/video-list/video-list.component';
+import {FaceMainComponent} from './face-rec/face-main/face-main.component';
+import {FaceListComponent} from './face-rec/face-list/face-list.component';
+import {VMainComponent} from './runtime/video/v-main/v-main.component';
+import {VDashboardComponent} from './runtime/video/v-dashboard/v-dashboard.component';
+import {FaceRecListComponent} from './face-rec/face-rec-list/face-rec-list.component';
+
 
 
 
@@ -191,6 +203,17 @@ export const ModulesRoutingModule = [
               {
                 path: 'dashboard',
                 component: LifeListComponent,
+              }
+            ]
+          },
+          {
+            path: 'video',
+            component: VMainComponent,
+            children: [
+              { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+              {
+                path: 'dashboard',
+                component: VDashboardComponent,
               }
             ]
           }
@@ -373,7 +396,59 @@ export const ModulesRoutingModule = [
           },
 
         ]
-      }
+      },
+      {
+        path: 'attendance',
+        component: AttendanceMainComponent,
+        children: [
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
+          {
+            path: 'list',
+            component: AttendanceListComponent
+          }
+
+        ]
+      },
+      {
+        path: 'bluetooth',
+        component: BlueMainComponent,
+        children: [
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
+          {
+            path: 'list',
+            component: BlueListComponent
+          }
+
+        ]
+      },
+      {
+        path: 'video',
+        component: VideoMainComponent,
+        children: [
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
+          {
+            path: 'list',
+            component: VideoListComponent
+          }
+
+        ]
+      },
+      {
+        path: 'face-recognize',
+        component: FaceMainComponent,
+        children: [
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
+          {
+            path: 'list',
+            component: FaceListComponent
+          },
+          {
+            path: 'recognization',
+            component: FaceRecListComponent
+          }
+
+        ]
+      },
     ]
   }
 ];

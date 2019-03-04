@@ -23,9 +23,16 @@ export class LifeEditComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.currentData);
-    this.name = this.currentData.name;
-    this.date = this.currentData.CreatedDate;
-    this.period = this.currentData.period;
+    this.name = this.currentData.Name;
+    this.date = this.currentData.InstallationDate;
+    this.period = this.currentData.SaveTime;
+  }
+
+
+  numberVal() {
+    if (! /^\d+$/.test(this.period)) {
+      this.period = 0;
+    }
   }
 
   onChange(result: Date): void {
@@ -34,11 +41,12 @@ export class LifeEditComponent implements OnInit {
 
 
   save() {
+    this.date.setHours(0, 0, 0, 0);
     const post = {
-      uid: this.uid,
+      uid: this.currentData.Uid,
       name: this.name,
-      date: this.date,
-      period: this.period
+      installDate: this.date,
+      expireTime: this.period
     };
     console.log(post);
     this.lifeService.edit(post)
@@ -52,7 +60,7 @@ export class LifeEditComponent implements OnInit {
       }, err => {
         Swal(
           '更新失败！',
-          '',
+          err,
           'error'
         );
       });

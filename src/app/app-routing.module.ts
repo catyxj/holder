@@ -3,7 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {MainComponent} from './main/main.component';
 import {NotFound404Component} from './global/not-found404/not-found404.component';
-import {QiantianComponent} from "./homepage/qiantian/qiantian.component";
+import {QiantianComponent} from './homepage/qiantian/qiantian.component';
+import {VViewComponent} from "./v-view/v-view.component";
+
 
 
 const routes: Routes = [
@@ -17,12 +19,16 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'qiantian',
-    component: QiantianComponent
-  },
-  {
     path: 'admin',
     component: MainComponent
+  },
+  {
+    path: 'video-view/:url/:name',
+    component: VViewComponent,
+  },
+  {
+    path: 'qiantian',
+    component: QiantianComponent
   },
   {
     path: '404',

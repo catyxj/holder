@@ -25,30 +25,30 @@
               <span class="fa fa-check"></span></label>
           </div>
         </td>
-        <td> {{ data.name }}  </td>
-        <td> {{ data.CreatedDate | date: 'yyyy-MM-dd hh:mm:ss' }} </td>
+        <td> {{ data.Name }}  </td>
+        <td> {{ data.InstallationDate | date: 'yyyy-MM-dd HH:mm:ss' }} </td>
         <td>
-          {{ data. period }}
+          {{ data.SaveTime }}
           月
         </td>
         <td style="display: flex; justify-content:center; align-items:center;">
           <span>
-            {{ data.percent*100 }} %
+            {{ data.Status*100 | number:'1.0-2' }} %
           </span>
 
           <div class="status_bar">
-            <div class="status_bar_in" [ngStyle]="{'background-color': data.percent>0.05 ? '#52c41a' : 'red', 'width': data.percent*100+'%' }"></div>
+            <div class="status_bar_in" [ngStyle]="{'background-color': data.Status>0.05 ? '#52c41a' : 'red', 'width': data.Status*100+'%' }"></div>
           </div>
-          <span style="color: #52c41a" *ngIf="data.percent>0.05">
+          <span style="color: #52c41a" *ngIf="data.Status>0.05">
             正常
           </span>
-          <span style="color: darkorange" *ngIf="data.percent<=0.05 && data.percent>0">
+          <span style="color: darkorange" *ngIf="data.Status<=0.05 && data.Status>0">
             即将过期
           </span>
-          <span style="color: red" *ngIf="data.percent<=0">
+          <span style="color: red" *ngIf="data.Status<=0">
             过期
           </span>
-          <a style="color: #00a4ff; margin-left: 10px;" *ngIf="data.percent<=0" (click)="contact()">
+          <a style="color: #00a4ff; margin-left: 10px;" *ngIf="data.Status<=0" (click)="contact()">
             联系厂家
           </a>
 

@@ -56,6 +56,14 @@ export class BoilerService {
       );
   }
 
+  getBoilerAll(): Observable<any> {
+    const url = '/equipment_list_all';
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
 
   // 添加
   addBoiler(boiler): Observable<any> {

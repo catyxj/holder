@@ -1,0 +1,28 @@
+<div class="content">
+  <div class="mat-card-title">
+    <h5 class="text_info pull-left">
+      <i class="fa fa-user-circle-o"></i>
+      人脸识别
+    </h5>
+
+    <nav class="pull-right">
+      <a routerLink="/admin/face-recognize/list" routerLinkActive="btn_info" class="btn">匹配记录</a>
+      <a routerLink="/admin/face-recognize/recognization" routerLinkActive="btn_info" class="btn">识别设置</a>
+    </nav>
+
+    <!--<div class="pull-right flex flex-row">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="请输入视频名称" [(ngModel)]="search" >
+        <div class="input-group-append" (click)="searchChange()">
+          <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+
+    </div>-->
+
+  </div>
+
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</div>

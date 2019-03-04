@@ -22,6 +22,8 @@ import { LifeMainComponent } from './life/life-main/life-main.component';
 import { LifeListComponent } from './life/life-list/life-list.component';
 import { LifeAddComponent } from './life/life-add/life-add.component';
 import { LifeEditComponent } from './life/life-edit/life-edit.component';
+import { VDashboardComponent } from './video/v-dashboard/v-dashboard.component';
+import { VMainComponent } from './video/v-main/v-main.component';
 
 
 
@@ -49,7 +51,9 @@ import { LifeEditComponent } from './life/life-edit/life-edit.component';
     LifeMainComponent,
     LifeListComponent,
     LifeAddComponent,
-    LifeEditComponent
+    LifeEditComponent,
+    VDashboardComponent,
+    VMainComponent
   ],
   entryComponents: [
     ChartExpandComponent,

@@ -8,9 +8,12 @@ import {OrganizationService} from '../../../shared/organization.service';
 import {EditAddressComponent} from '../edit-address/edit-address.component';
 import {EditMaintainComponent} from '../edit-maintain/edit-maintain.component';
 import {AdressService} from '../../../shared/adress.service';
-import {TerBindComponent} from "../ter-bind/ter-bind.component";
+import {TerBindComponent} from '../ter-bind/ter-bind.component';
 import Swal from 'sweetalert2';
-import {UserService} from "../../../shared/user.service";
+import {UserService} from '../../../shared/user.service';
+import {BlueBindComponent} from '../blue-bind/blue-bind.component';
+import {BluetoothService} from '../../../shared/bluetooth.service';
+import {VideoBindComponent} from "../video-bind/video-bind.component";
 
 declare var BMap: any;
 declare var BMAP_STATUS_SUCCESS: any;
@@ -39,7 +42,8 @@ export class BoilerInfoComponent implements OnInit {
               private modalService: NgbModal,
               private orgService: OrganizationService,
               public addressService: AdressService,
-              private userService: UserService) {
+              private userService: UserService,
+              private bluetoothService: BluetoothService) {
     this.userService.userStatus$ // 监测父组件user
       .subscribe( data => {
           this.user = data;
@@ -48,9 +52,9 @@ export class BoilerInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    let user = JSON.parse(sessionStorage.getItem('currentUser'));
+    const user = JSON.parse(sessionStorage.getItem('currentUser'));
     this.user = user;
-    this.panel = [{open: true}, {open: true}, {open: true}, {open: true}];
+    this.panel = [{open: true}, {open: true}, {open: true}, {open: true}, {open: true}, {open: true}, {open: true}];
     this.getOrgType();
     // this.getAddress();
   }
@@ -76,7 +80,7 @@ export class BoilerInfoComponent implements OnInit {
       }
       if (this.info.OrganizationsLinked) {
         for (let i = 0; i < this.info.OrganizationsLinked.length; i++) {
-          let or = this.info.OrganizationsLinked[i];
+          const or = this.info.OrganizationsLinked[i];
           for (let j = 0; j < this.orgTypes.length; j++) {
             if (or.Type.TypeId === this.orgTypes[j].TypeId) {
               or.type = this.orgTypes[j].Name;
@@ -86,7 +90,7 @@ export class BoilerInfoComponent implements OnInit {
       }
       if (this.info.TerminalsCombined) {
         for (let i = 0; i < this.info.TerminalsCombined.length; i++) {
-          let ter = this.info.TerminalsCombined[i];
+          const ter = this.info.TerminalsCombined[i];
           this.terminals[ter.TerminalSetId - 1] = ter;
         }
       }
@@ -121,14 +125,14 @@ export class BoilerInfoComponent implements OnInit {
 // 百度地图
   initMap() {
     // 创建地图实例
-    let map = new BMap.Map('container');
+    const map = new BMap.Map('container');
     this.map = map;
 
 
     if (!this.address || this.address.Longitude === 0 || this.address.Latitude === 0 ) {
-      let that = this;
+      const that = this;
       // 获取当前定位
-      let geolocation = new BMap.Geolocation();
+      const geolocation = new BMap.Geolocation();
       geolocation.getCurrentPosition(function(r) {
         if (this.getStatus() === BMAP_STATUS_SUCCESS) {
           // let mk = new BMap.Marker(r.point);
@@ -142,7 +146,7 @@ export class BoilerInfoComponent implements OnInit {
       }, {enableHighAccuracy: true});
     } else {
       // 创建点坐标
-      let point = new BMap.Point(this.address.Longitude, this.address.Latitude);
+      const point = new BMap.Point(this.address.Longitude, this.address.Latitude);
 
       map.centerAndZoom(point, 10);
     }
@@ -159,8 +163,8 @@ export class BoilerInfoComponent implements OnInit {
     map.setCurrentCity('宁波'); // 仅当设置城市信息时，MapTypeControl的切换功能才能可用
 
     // 添加定位控件
-    let geolocationControl = new BMap.GeolocationControl();
-    geolocationControl.addEventListener("locationSuccess", function(e){
+    const geolocationControl = new BMap.GeolocationControl();
+    geolocationControl.addEventListener('locationSuccess', function(e) {
       // 定位成功事件
       // let address = '';
       // address += e.addressComponent.province;
@@ -170,7 +174,7 @@ export class BoilerInfoComponent implements OnInit {
       // address += e.addressComponent.streetNumber;
       // alert("当前定位地址为：" + address);
     });
-    geolocationControl.addEventListener("locationError",function(e){
+    geolocationControl.addEventListener('locationError', function(e) {
       // 定位失败事件
       alert(e.message);
     });
@@ -212,6 +216,108 @@ export class BoilerInfoComponent implements OnInit {
     });
   }
 
+
+  // 蓝牙绑定模态框
+  blueBind() {
+    const modalRef = this.modalService.open(BlueBindComponent);
+    modalRef.componentInstance.currentData = this.info;
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+        this.getInfo();
+      }
+    }, (reason) => {
+
+      console.log(reason);
+    });
+  }
+
+  // 蓝牙解绑
+  unBindBlue() {
+    const data = {
+      equipment_id: this.info.Uid,
+
+    };
+
+    const that = this;
+    Swal({
+      title: '确定解绑？',
+      text: '',
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonText: '取消',
+      confirmButtonText: '确定删除！',
+    }).then((result) => {
+      if (result.value) {
+        that.bluetoothService.unBind(data)
+          .subscribe( () => {
+            Swal(
+              '解绑成功！',
+              '',
+              'success'
+            );
+            that.getInfo();
+          }, err => {
+            Swal(
+              '解绑失败！',
+              err,
+              'error'
+            );
+          });
+      }
+    });
+  }
+
+  // 视频绑定
+  videoBind() {
+    const modalRef = this.modalService.open(VideoBindComponent);
+    modalRef.componentInstance.currentData = this.info;
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+        this.getInfo();
+      }
+    }, (reason) => {
+
+      console.log(reason);
+    });
+  }
+
+  // 视频解绑
+  unBindVideo() {
+    const data = {
+      equipment_id: this.info.Uid,
+    };
+
+    const that = this;
+    Swal({
+      title: '确定解绑？',
+      text: '',
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonText: '取消',
+      confirmButtonText: '确定删除！',
+    }).then((result) => {
+      if (result.value) {
+        that.bluetoothService.unBind(data)
+          .subscribe( () => {
+            Swal(
+              '解绑成功！',
+              '',
+              'success'
+            );
+            that.getInfo();
+          }, err => {
+            Swal(
+              '解绑失败！',
+              err,
+              'error'
+            );
+          });
+      }
+    });
+  }
+
+
+
   // 编辑地址信息模态框
   editAddress(event) {
     event.stopPropagation();
@@ -245,12 +351,12 @@ export class BoilerInfoComponent implements OnInit {
 
   // 终端解绑
   unBind(ter) {
-    let data = {
+    const data = {
       equipment_id: this.info.Uid,
       terminal_code: ter.TerminalCode.toString()
     };
 
-    let that = this;
+    const that = this;
     Swal({
       title: '确定解绑终端？',
       text: '',
@@ -282,7 +388,7 @@ export class BoilerInfoComponent implements OnInit {
 
   // 删除
   delete() {
-    let that = this;
+    const that = this;
     Swal({
       title: '确认删除当前设备？',
       text: '',

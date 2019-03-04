@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import {UserService} from './user.service';
+import { environment } from './../../environments/environment';
+
 import {
   CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanActivateChild,
   Route
 } from '@angular/router';
-import { Observable } from 'rxjs';
-import {UserService} from './user.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +30,13 @@ export class UserloginGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     const url: string = state.url;
-    return this.GuardLogin(url);
-    // return true;
+
+    if (environment.production) {
+      return this.GuardLogin(url);
+    } else {
+      return true;
+    }
+
   }
 
   canLoad(route: Route): boolean {

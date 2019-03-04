@@ -1,0 +1,69 @@
+<div class="modal-header">
+  <h4 class="modal-title">修改蓝牙信息</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('close')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+
+  <div class="input-group form-group">
+    <span class="input-group-prepend">
+      <span class="input-group-text">
+        蓝牙名称
+      </span>
+    </span>
+    <input type="text" [(ngModel)]="name" class="form-control">
+  </div>
+
+  <div class="input-group form-group">
+    <span class="input-group-prepend">
+      <span class="input-group-text">
+        设备地址
+      </span>
+    </span>
+    <input type="text" [(ngModel)]="mac" class="form-control">
+  </div>
+
+
+  <div class="input-group">
+    <span class="input-group-prepend">
+      <span class="input-group-text">
+        所属企业
+      </span>
+    </span>
+    <nz-select style="width: 83%;" nzShowSearch nzAllowClear nzPlaceHolder="选择所属企业" [(ngModel)]="org">
+      <nz-option *ngFor="let data of orgList" [nzLabel]="data.Name" [nzValue]="data.Uid"></nz-option>
+    </nz-select>
+  </div>
+
+
+  <!--关联设备-->
+  <!--<div class="input-group">
+    <span class="input-group-prepend">
+      <span class="input-group-text">
+        关联设备
+      </span>
+    </span>
+    &lt;!&ndash;<nz-select style="flex:auto;" nzShowSearch nzAllowClear nzPlaceHolder="选择关联设备" [(ngModel)]="equip">
+      <nz-option *ngFor="let data of orgList" [nzLabel]="data.Name" [nzValue]="data.Uid"></nz-option>
+    </nz-select>&ndash;&gt;
+    <input type="text" class="form-control" [(ngModel)]="equip" disabled>
+    <span class="input-group-append">
+      <button class="btn btn_info" *ngIf="!equip" (click)="bind()">
+        <i class="fa fa-plus"></i>
+      </button>
+      <button class="btn btn_info" *ngIf="equip">
+        <i class="fa fa-minus"></i>
+      </button>
+    </span>
+  </div>-->
+
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn_info" (click)="save()" [disabled]="!name">保存</button>
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取消</button>
+</div>
+

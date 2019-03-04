@@ -35,7 +35,7 @@
         质保时间
       </span>
     </span>
-    <input type="number" [(ngModel)]="period" class="form-control">
+    <input type="number" [(ngModel)]="period" class="form-control" min="0" (change)="numberVal()">
     <span class="input-group-append">
       <span class="input-group-text">
         月
@@ -47,6 +47,6 @@
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn_info" (click)="save()" [disabled]="!name">保存</button>
+  <button type="button" class="btn btn_info" (click)="save()" [disabled]="!name || !date || !period">保存</button>
   <button type="button" class="btn" (click)="activeModal.dismiss('close')">取消</button>
 </div>

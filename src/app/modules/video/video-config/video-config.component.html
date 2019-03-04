@@ -1,0 +1,107 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    视频信息设置
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('close')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body" >
+
+  <h6 class="text_info mb-3">视频信息填写</h6>
+  <div class="input-group form-group">
+    <span class="input-group-prepend">
+      <span class="input-group-text" style="width: 107px;">
+        视频名称
+      </span>
+    </span>
+    <input type="text" [(ngModel)]="name" class="form-control">
+  </div>
+
+  <div class="input-group form-group">
+    <span class="input-group-prepend">
+      <span class="input-group-text" style="width: 107px;">
+        关联设备
+      </span>
+    </span>
+    <nz-select style="flex: auto;" nzShowSearch nzAllowClear [(ngModel)]="equipment">
+      <nz-option *ngFor="let data of eptList" [nzLabel]="data.Name" [nzValue]="data.Uid"></nz-option>
+    </nz-select>
+  </div>
+
+
+  <div class="form-group flex">
+    <label class="control-label" style="font-size: 15px; margin-right: 6px;">是否开启身份识别</label>
+    <div class="checkbox c-checkbox">
+      <label>
+        <input type="checkbox" [(ngModel)]="isIdentify">
+        <span class="fa fa-check"></span>
+      </label>
+    </div>
+  </div>
+
+  <div class="" *ngIf="currentUser.Role.RoleId === 1">
+    <div class="input-group form-group">
+    <span class="input-group-prepend">
+      <span class="input-group-text" style="width: 107px;">
+        所属企业
+      </span>
+    </span>
+      <nz-select style="flex: auto;" nzShowSearch nzAllowClear [(ngModel)]="org">
+        <nz-option *ngFor="let data of orgList" [nzLabel]="data.Name" [nzValue]="data.Uid"></nz-option>
+      </nz-select>
+    </div>
+
+    <div class="input-group form-group">
+    <span class="input-group-prepend">
+      <span class="input-group-text" style="width: 107px;">
+        摄像头编号
+      </span>
+    </span>
+      <input type="text" [(ngModel)]="cameraId" class="form-control">
+    </div>
+
+    <div class="input-group form-group">
+    <span class="input-group-prepend">
+      <span class="input-group-text" style="width: 107px;">
+        摄像头序列号
+      </span>
+    </span>
+      <input type="text" [(ngModel)]="cameraNum" class="form-control">
+    </div>
+
+    <div class="input-group form-group">
+    <span class="input-group-prepend">
+      <span class="input-group-text" style="width: 107px;">
+        摄像头通道号
+      </span>
+    </span>
+      <input type="number" [(ngModel)]="cameraWay" class="form-control">
+    </div>
+
+    <div class="input-group form-group">
+    <span class="input-group-prepend">
+      <span class="input-group-text">
+        视频直播地址
+      </span>
+    </span>
+      <input type="text" [(ngModel)]="videoAdress" class="form-control">
+    </div>
+  </div>
+
+
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn_info" (click)="save()" [disabled]="!name">
+    <span class="">保存</span>
+  </button>
+  <button class="btn btn-default" type="button" (click)="activeModal.dismiss('close')">取消</button>
+</div>
+
+
+
+
+

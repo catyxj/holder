@@ -1,0 +1,112 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    人脸匹配信息设置
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('close')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body" >
+
+  <h6 class="text_info mb-3 mt-lg-3">选择关联账号</h6>
+
+  <div class="input-group form-group">
+    <span class="input-group-prepend">
+      <span class="input-group-text" style="width: 79px;">
+        登录账号
+      </span>
+    </span>
+    <nz-select style="flex: auto;" nzShowSearch nzAllowClear [(ngModel)]="account">
+      <nz-option *ngFor="let data of accountList" [nzLabel]="data.Username" [nzValue]="data.Uid"></nz-option>
+    </nz-select>
+  </div>
+
+
+  <h6 class="text_info mb-3 mt-lg-3">匹配信息填写</h6>
+
+  <div class="input-group form-group">
+    <span class="input-group-prepend">
+      <span class="input-group-text" style="width: 79px;">
+        姓名
+      </span>
+    </span>
+    <input type="text" [(ngModel)]="name" class="form-control">
+  </div>
+
+  <div class="input-group form-group">
+    <span class="input-group-prepend">
+      <span class="input-group-text" style="width: 79px;">
+        性别
+      </span>
+    </span>
+    <select [(ngModel)]="sex"
+            class="form-control">
+      <option *ngFor="let data of sexList" [value]="data.id" >{{data.name}}</option>
+    </select>
+  </div>
+
+  <div class="input-group form-group">
+    <span class="input-group-prepend">
+      <span class="input-group-text" style="width: 79px;">
+        类型
+      </span>
+    </span>
+    <select [(ngModel)]="type"
+            class="form-control">
+      <option *ngFor="let data of typeList" [value]="data.id" >{{data.name}}</option>
+    </select>
+  </div>
+
+  <div class="input-group form-group">
+    <span class="input-group-prepend">
+      <span class="input-group-text">
+        手机号码
+      </span>
+    </span>
+    <input type="text" [(ngModel)]="phone" class="form-control">
+  </div>
+
+
+  <h6 class="text_info mb-3 mt-lg-3">上传预匹配头像信息</h6>
+  <div class="row mb-3 mt-lg-3">
+    <div class="col-12">
+      <div class="pull-left" style="width: 180px; height: 150px; overflow: hidden;  border-radius: 4px;">
+        <img src="{{imgUrl}}" title="点击上传图片" style="width: 180px; height: 150px;">
+        <input type="file"  (change)="imgChange($event)" style="position: absolute; left: 0; top: 0; opacity: 0; width: 190px; height: 150px;">
+      </div>
+
+      <div class="pull-right ml-3" style="width: 55%;">
+        <p class="text-muted" style="font-size: 12px;">
+          请点击左侧图片选择要上传匹配信息的个人头像图片<br/>
+          文件格式请用jpg、png，文件大小不超过1M
+        </p>
+        <p class="text-danger">
+          {{errMes}}
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn_info" (click)="save()" [disabled]="!account ||!name || !sex || !img">
+    <span class="">绑定</span>
+  </button>
+  <button class="btn btn-default" type="button" (click)="activeModal.dismiss('close')">取消</button>
+</div>
+
+
+
+
+
+
+
+

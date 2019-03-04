@@ -23,7 +23,7 @@
         使用企业
       </span>
     </span>
-    <nz-select style="width: 83%;" nzShowSearch nzAllowClear nzPlaceHolder="选择使用企业" [(ngModel)]="org">
+    <nz-select style="flex:auto;" nzShowSearch nzAllowClear nzPlaceHolder="选择使用企业" [(ngModel)]="org">
       <nz-option *ngFor="let data of orgList" [nzLabel]="data.Name" [nzValue]="data.Uid"></nz-option>
     </nz-select>
   </div>

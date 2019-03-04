@@ -18,11 +18,11 @@ export class LifeListComponent implements OnInit {
   public name;
   public lifeList = [];
   public page = 1;
-  public totalItems = 0;
+  public pageSize = 10;
   public search: string;
+  public totalItems = 0;
   public deleteList = [];
   public allDelete = false;
-  public pageSize = 10;
   public isLoading;
 
   constructor(private modalService: NgbModal,
@@ -38,10 +38,10 @@ export class LifeListComponent implements OnInit {
 
   // 获取列表数据
   getList() {
-    this.lifeList = [
+    /*this.lifeList = [
       {
         Uid: 'asdfasdf',
-        name: 'asdf',
+        Name: 'asdf',
         CreatedDate: new Date(),
         period: 12,
         percent: 0.2
@@ -67,14 +67,27 @@ export class LifeListComponent implements OnInit {
         period: 10,
         percent: 0.04
       }
-    ];
+    ];*/
 
-    for (let i = 0; i < this.lifeList.length; i++) {
-      let lf = this.lifeList[i];
-      if (lf.percent < 0) {
-        lf.percent = 0;
-      }
-    }
+    this.lifeService.getLifeLists(this.page, this.pageSize, this.uid)
+      .subscribe( data => {
+        this.lifeList = data.params;
+        this.totalItems = data.counts;
+
+        for (let i = 0; i < this.lifeList.length; i++) {
+          let lf = this.lifeList[i];
+          lf.InstallationDate = new Date(lf.InstallationDate);
+          if (lf.Status < 0) {
+            lf.Status = 0;
+          }
+        }
+
+        console.log(this.lifeList);
+      });
+
+
+
+
 
   }
 
@@ -196,7 +209,7 @@ export class LifeListComponent implements OnInit {
 
     const modalRef = this.modalService.open(SerAddComponent);
     modalRef.componentInstance.id = 4;
-    modalRef.componentInstance.typeName = 'D类问题';
+    modalRef.componentInstance.typeName = '售后服务';
     modalRef.result.then((result) => {
       if (result === 'ok') {
         // this.pageChange();

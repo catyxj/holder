@@ -1,0 +1,34 @@
+
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    蓝牙设备绑定
+    <!--<span class="text_info" style="font-size: 16px;"> [ {{currentData?.Name}} ] </span>-->
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('close')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body" >
+  <!--<div class="">
+    <nz-select nzShowSearch nzPlaceHolder="选择关联设备" [(ngModel)]="bluetooth"
+               style="width: 100%;">
+      <nz-option *ngFor="let option of blueteethList" [nzLabel]="option.Name" [nzValue]="option.Uid"></nz-option>
+    </nz-select>
+  </div>-->
+
+
+  <input type="text" class="form-control" [(ngModel)]="bluetooth">
+
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn_info" (click)="save()" [disabled]="!bluetooth">
+    <span class="">绑定</span>
+  </button>
+  <button class="btn btn-default" type="button" (click)="activeModal.dismiss('close')">取消</button>
+</div>
+
+

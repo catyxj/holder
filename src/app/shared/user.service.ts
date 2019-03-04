@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-
 import {Observable, of, Subject, throwError} from 'rxjs';
-
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {catchError, retry, tap} from 'rxjs/internal/operators';
-import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from "@angular/router";
+import {catchError,  tap} from 'rxjs/internal/operators';
+import { Resolve, Router} from '@angular/router';
+import { environment } from './../../environments/environment';
+
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
@@ -18,8 +18,7 @@ const httpOptions = {
 export class UserService {
 
   public isLoggedIn: any = false;
-  public userInfo;
-  public redirectUrl: string;
+  public userInfo = [];
 
   private userSource = new Subject<any>();
   private changeUserSource = new Subject<any>();
@@ -45,7 +44,7 @@ export class UserService {
       .pipe(
         // retry(3), // retry a failed request up to 3 times
         tap((val) => {
-          this.isLoggedIn = 'true';
+          // this.isLoggedIn = 'true';
           sessionStorage.setItem('status', this.isLoggedIn);
         }),
         catchError(this.handleError) // then handle the error
@@ -67,23 +66,28 @@ export class UserService {
 
   // 获取用户信息
   getUser(): Observable< any > {
+    console.log('environment:', environment.production);
 
-    // return this.http.get< any >('assets/server/user.json');
-    return this.http.get< any >('/user')
-      .pipe(
-        tap((val) => {
-          if (!val) {
-            this.isLoggedIn = 'false';
-            sessionStorage.setItem('user', 'false');
-          }
-        }),
-        catchError(this.handleError) // then handle the error
-      );
+    if (!environment.production) {
+      return this.http.get< any >('assets/server/user.json');
+    } else {
+      return this.http.get< any >('/user')
+        .pipe(
+          tap((val) => {
+            if (!val) {
+              this.isLoggedIn = 'false';
+              sessionStorage.setItem('user', 'false');
+            }
+          }),
+          catchError(this.handleError)
+        );
+    }
+
+
   }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
     } else {
       console.error(

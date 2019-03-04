@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {ClusterService} from "../../../shared/cluster.service";
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {ClusterService} from '../../../shared/cluster.service';
 import Swal from 'sweetalert2';
-import {OrganizationService} from "../../../shared/organization.service";
+import {OrganizationService} from '../../../shared/organization.service';
 
 @Component({
   selector: 'app-add-cluster',
@@ -36,17 +36,17 @@ export class AddClusterComponent implements OnInit {
 
   //  上传图片
   imgChange(event) {
-    let that = this;
+    const that = this;
     if (!event.target.files[0]) {
       return;
     }
-    let file = event.target.files[0];
+    const file = event.target.files[0];
     that.img = file;
     const isPNG = file.type;      // === 'image/png';
     const isLt200k = file.size / 1024;
     // console.log(isPNG, isLt200k);
     if (!!file && (isPNG === 'image/jpeg' || isPNG === 'image/png' || isPNG === 'image/gif') && isLt200k < 200) {
-      let reader = new FileReader();
+      const reader = new FileReader();
       // 图片文件转换为base64
       reader.readAsDataURL(file);
 
@@ -63,7 +63,7 @@ export class AddClusterComponent implements OnInit {
 
 
   save() {
-    let data = {
+    const data = {
       name: this.name,
       img: this.img ? this.imgUrl : '',
       org: this.org

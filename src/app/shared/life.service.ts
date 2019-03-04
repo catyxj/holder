@@ -14,13 +14,13 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class LifeService {
-  private lifelistUrl = '/asdf'; // 生命周期列表
+  private lifelistUrl = '/equipment_life_list'; // 生命周期列表
 
   constructor(private http: HttpClient) { }
 
   // 获取列表
-  getLifeLists(n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.lifelistUrl}/?pageNum=${n}&pageSize=${pageSize}&search=${search}`;
+  getLifeLists(n: number, pageSize: number, uid: string): Observable<any> {
+    const url = `${this.lifelistUrl}/?pageNum=${n}&pageSize=${pageSize}&uid=${uid}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError)
@@ -29,7 +29,7 @@ export class LifeService {
 
   // 添加
   add(data): Observable<any> {
-    return this.http.post('/add', data, httpOptions)
+    return this.http.post('/equipment_life_add', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -37,7 +37,7 @@ export class LifeService {
 
   // 修改
   edit(data): Observable<any> {
-    return this.http.post('/edit', data, httpOptions)
+    return this.http.post('/equipment_life_update', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -45,7 +45,7 @@ export class LifeService {
 
   // 删除
   deleteLife(data) {
-    return this.http.post('/delete', data, httpOptions)
+    return this.http.post('/equipment_life_delete', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

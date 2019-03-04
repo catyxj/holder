@@ -25,6 +25,7 @@ import zh from '@angular/common/locales/zh';
 import {NgxEchartsModule} from "ngx-echarts";
 import {BsDatepickerModule} from "ngx-bootstrap";
 import { QiantianComponent } from './homepage/qiantian/qiantian.component';
+import {VViewComponent} from "./v-view/v-view.component";
 
 
 
@@ -38,7 +39,8 @@ registerLocaleData(zh);
     LoginComponent,
     MainComponent,
     NotFound404Component,
-    QiantianComponent
+    QiantianComponent,
+    VViewComponent
   ],
   imports: [
     BrowserModule,

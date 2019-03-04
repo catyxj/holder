@@ -18,12 +18,14 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material';
-import {NgZorroAntdModule} from "ng-zorro-antd";
+import {NgZorroAntdModule} from 'ng-zorro-antd';
 import { JoinClusterComponent } from './join-cluster/join-cluster.component';
 import { BoilerTemplatesComponent } from './templates/templates.component';
 import { AddEquiptemplateComponent } from './add-equiptemplate/add-equiptemplate.component';
 import { EditEquiptemplateComponent } from './edit-equiptemplate/edit-equiptemplate.component';
-import {BsDatepickerModule} from "ngx-bootstrap";
+import {BsDatepickerModule} from 'ngx-bootstrap';
+import { BlueBindComponent } from './blue-bind/blue-bind.component';
+import { VideoBindComponent } from './video-bind/video-bind.component';
 
 
 
@@ -53,7 +55,9 @@ import {BsDatepickerModule} from "ngx-bootstrap";
     JoinClusterComponent,
     BoilerTemplatesComponent,
     AddEquiptemplateComponent,
-    EditEquiptemplateComponent
+    EditEquiptemplateComponent,
+    BlueBindComponent,
+    VideoBindComponent
   ],
   entryComponents: [
     AddBoilerComponent,
@@ -63,7 +67,9 @@ import {BsDatepickerModule} from "ngx-bootstrap";
     TerBindComponent,
     JoinClusterComponent,
     AddEquiptemplateComponent,
-    EditEquiptemplateComponent
+    EditEquiptemplateComponent,
+    BlueBindComponent,
+    VideoBindComponent
   ]
 })
 export class BoilersModule { }

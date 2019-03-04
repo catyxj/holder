@@ -11,8 +11,11 @@ import {MaintainComponent} from './maintain/maintain.component';
 import {MaintainDashboardComponent} from './maintain-dashboard/maintain-dashboard.component';
 import {MaintainViewComponent} from './maintain-view/maintain-view.component';
 import {MaintainAddComponent} from './maintain-add/maintain-add.component';
-import {LifeListComponent} from "./life/life-list/life-list.component";
-import {LifeMainComponent} from "./life/life-main/life-main.component";
+import {LifeListComponent} from './life/life-list/life-list.component';
+import {LifeMainComponent} from './life/life-main/life-main.component';
+import {VMainComponent} from './video/v-main/v-main.component';
+import {VDashboardComponent} from './video/v-dashboard/v-dashboard.component';
+
 
 export const RuntimeRoutingModule = [
   {
@@ -74,6 +77,17 @@ export const RuntimeRoutingModule = [
           {
             path: 'dashboard',
             component: LifeListComponent,
+          }
+        ]
+      },
+      {
+        path: 'video',
+        component: VMainComponent,
+        children: [
+          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+          {
+            path: 'dashboard',
+            component: VDashboardComponent,
           }
         ]
       }

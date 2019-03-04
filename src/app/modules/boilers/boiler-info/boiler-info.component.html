@@ -153,6 +153,83 @@
     </div>
 
 
+    <!--蓝牙信息-->
+    <div class="panel panel-info">
+      <div class="panel-heading" (click)="panel[4].open = !panel[4].open">
+        <div class="panel-title flex justify-content-between">
+          <h6 class="">蓝牙信息</h6>
+          <!--<button class="btn btn-outline-info btn-sm" (click)="terBind($event)"
+                  *ngIf="user && user.Role.RoleId<=10"
+                  style="border-radius: 30px; padding: 0.2rem 0.45rem;">
+            <i class="fa fa-plus"></i>
+          </button>-->
+        </div>
+      </div>
+
+      <div class="panel-body collapse" [class.show]="panel[4].open">
+        <table class="table table-bordered">
+          <tbody>
+          <tr>
+            <th>蓝牙名称</th>
+            <td>
+              {{info?.Bluetooth?.Name || '未绑定'}}
+            </td>
+
+            <th>操作</th>
+            <td>
+              <button class="btn btn-sm btn-outline-danger" (click)="unBindBlue()"
+                      *ngIf="user && user.Role.RoleId<=10 && info && info.Bluetooth">
+                解绑
+              </button>
+              <button class="btn btn-sm btn-outline-danger" (click)="blueBind()"
+                      *ngIf="user && user.Role.RoleId<=10 && (!info || !info.Bluetooth)">
+                绑定
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <!--视频信息-->
+    <!--<div class="panel panel-info">
+      <div class="panel-heading" (click)="panel[5].open = !panel[5].open">
+        <div class="panel-title flex justify-content-between">
+          <h6 class="">视频信息</h6>
+
+        </div>
+      </div>
+
+      <div class="panel-body collapse" [class.show]="panel[5].open">
+        <table class="table table-bordered">
+          <tbody>
+          <tr>
+            <th>视频名称</th>
+            <td>
+              {{info?.Video?.Name || '未绑定'}}
+            </td>
+
+            <th>操作</th>
+            <td>
+              <button class="btn btn-sm btn-outline-danger" (click)="unBindVideo()"
+                      *ngIf="user && user.Role.RoleId<=10 && info && info.Video">
+                解绑
+              </button>
+              <button class="btn btn-sm btn-outline-danger" (click)="videoBind()"
+                      *ngIf="user && user.Role.RoleId<=10 && (!info || !info.Video)">
+                绑定
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>-->
+
+
     <!--地址信息-->
     <div class="panel panel-info">
       <div class="panel-heading" (click)="panel[2].open = !panel[2].open">

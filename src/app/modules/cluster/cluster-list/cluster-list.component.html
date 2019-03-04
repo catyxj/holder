@@ -13,12 +13,6 @@
           <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
         </div>
       </div>
-      <div class="ml-3" >
-        <button class="btn btn_info" (click)="newCluster()"
-                *ngIf="user && user.Role.RoleId === 10">
-          新增集群
-        </button>
-      </div>
 
     </div>
 
@@ -91,7 +85,14 @@
               nz-button [nzLoading]="isLoading">
         批量删除
       </button>
+
+      <button class="btn btn_info ml-3" (click)="newCluster()"
+              *ngIf="user && user.Role.RoleId === 10">
+        新增集群
+      </button>
+
     </div>
+
 
 
     <ngb-pagination class="pull-right"

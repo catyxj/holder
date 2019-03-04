@@ -1,7 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Boiler} from '../../../boiler';
 import {BoilerService} from '../../../shared/boiler.service';
-import {BoilerSocketService} from "../../../shared/boiler-socket.service";
+import {BoilerSocketService} from '../../../shared/boiler-socket.service';
+
+import { environment } from './../../../../environments/environment';
 
 @Component({
   selector: 'app-list',
@@ -23,13 +24,18 @@ export class ListComponent implements OnInit, OnDestroy {
               private boilerWsService: BoilerSocketService) { }
 
   ngOnInit() {
-    let message = {
+    /*const message = {
       page: this.page,
       search: this.search,
       pageSize: this.pageSize
     };
-    // this.getBoilers(message);
+    this.getBoilers(message);*/
+
+
     this.getBoilers();
+
+    // this.getTest();
+
   }
 
   getBoilers(): void {
@@ -94,7 +100,7 @@ export class ListComponent implements OnInit, OnDestroy {
           this.boilers = [];
         }
         for (let i = 0; i < this.boilers.length; i++) {
-          let bo = this.boilers[i];
+          const bo = this.boilers[i];
           bo.isBurning = '未运行';
           bo.warning = '无告警';
           bo.malfunction = '无故障';
@@ -126,6 +132,15 @@ export class ListComponent implements OnInit, OnDestroy {
       });
 
   }
+
+  getTest() {
+    this.boilerService.getBoilers(this.page, this.pageSize, this.search)
+      .subscribe(data => {
+        this.boilers = data.params;
+        this.totalItems = data.counts;
+      });
+  }
+
 
   // 每页数量
   pageSizeChange() {

@@ -48,6 +48,26 @@ import { SerDashboard2Component } from './service/ser-dashboard2/ser-dashboard2.
 import { SerDashboard3Component } from './service/ser-dashboard3/ser-dashboard3.component';
 import { SerAddComponent } from './service/ser-add/ser-add.component';
 import { SerViewComponent } from './service/ser-view/ser-view.component';
+import { AttendanceMainComponent } from './attendance/attendance-main/attendance-main.component';
+import { AttendanceListComponent } from './attendance/attendance-list/attendance-list.component';
+import { BlueMainComponent } from './bluetooth/blue-main/blue-main.component';
+import { BlueListComponent } from './bluetooth/blue-list/blue-list.component';
+import { BlueEditComponent } from './bluetooth/blue-edit/blue-edit.component';
+import { BlueBindEqComponent } from './bluetooth/blue-bind-eq/blue-bind-eq.component';
+import { BlueAddComponent } from './bluetooth/blue-add/blue-add.component';
+import { VideoMainComponent } from './video/video-main/video-main.component';
+import { VideoListComponent } from './video/video-list/video-list.component';
+import { VideoAddComponent } from './video/video-add/video-add.component';
+import { VideoConfigComponent } from './video/video-config/video-config.component';
+import { FaceMainComponent } from './face-rec/face-main/face-main.component';
+import { FaceListComponent } from './face-rec/face-list/face-list.component';
+import { FaceAddComponent } from './face-rec/face-add/face-add.component';
+import { FaceRecListComponent } from './face-rec/face-rec-list/face-rec-list.component';
+import { RecEditComponent } from './face-rec/rec-edit/rec-edit.component';
+import { FaceViewComponent } from './face-rec/face-view/face-view.component';
+import { VideoViewComponent } from './video/video-view/video-view.component';
+
+
 
 
 
@@ -102,12 +122,40 @@ import { SerViewComponent } from './service/ser-view/ser-view.component';
     SerDashboard3Component,
     SerAddComponent,
     SerViewComponent,
+    AttendanceMainComponent,
+    AttendanceListComponent,
+    BlueMainComponent,
+    BlueListComponent,
+    BlueEditComponent,
+    BlueBindEqComponent,
+    BlueAddComponent,
+    VideoMainComponent,
+    VideoListComponent,
+    VideoAddComponent,
+    VideoConfigComponent,
+    FaceMainComponent,
+    FaceListComponent,
+    FaceAddComponent,
+    FaceRecListComponent,
+    RecEditComponent,
+    FaceViewComponent,
+    VideoViewComponent,
+
   ],
   exports: [
     // RouterModule
   ],
   entryComponents: [
-    SerAddComponent
+    SerAddComponent,
+    BlueEditComponent,
+    BlueBindEqComponent,
+    BlueAddComponent,
+    VideoAddComponent,
+    VideoConfigComponent,
+    FaceAddComponent,
+    RecEditComponent,
+    FaceViewComponent,
+    VideoViewComponent
   ]
 })
 export class ModulesModule { }

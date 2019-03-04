@@ -1,0 +1,27 @@
+
+.v_item{
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.v_item_head{
+  background-color: #90dcff;
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border-radius: 5px;
+}
+
+.v_item_body{
+  margin-top: 1px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.v_bottom{
+  padding: 20px;
+}
+
+
+

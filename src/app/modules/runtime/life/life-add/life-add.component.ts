@@ -24,6 +24,11 @@ export class LifeAddComponent implements OnInit {
   }
 
 
+  numberVal() {
+    if (! /^\d+$/.test(this.period)) {
+      this.period = 0;
+    }
+  }
 
   onChange(result: Date): void {
     console.log('onChange: ', result);
@@ -31,11 +36,12 @@ export class LifeAddComponent implements OnInit {
 
 
   save() {
+    this.date.setHours(0, 0, 0, 0);
     const post = {
       uid: this.uid,
       name: this.name,
-      date: this.date,
-      period: this.period
+      installDate: this.date,
+      expireTime: this.period
     };
     console.log(post);
     this.lifeService.add(post)
@@ -49,7 +55,7 @@ export class LifeAddComponent implements OnInit {
       }, err => {
         Swal(
           '添加失败！',
-          '',
+          err,
           'error'
         );
       });

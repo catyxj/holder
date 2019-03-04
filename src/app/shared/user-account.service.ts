@@ -17,6 +17,7 @@ export class UserAccountService {
   private userRoleUrl = '/user_roles/ ';
   private userAccountUrl = '/user_list';
   private authorityUrl = 'a';
+  public userAllUrl = '/user_list_all';
 
   // private userRoleUrl = 'assets/server/user_roles.json';
   // private userAccountUrl = 'assets/server/user_list.json';
@@ -66,6 +67,13 @@ export class UserAccountService {
     return this.http.post('/user_add/', data, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
+      );
+  }
+
+  getAccountAll(): Observable<any> {
+    return this.http.get<any>(this.userAllUrl)
+      .pipe(
+        catchError(this.handleError)
       );
   }
 

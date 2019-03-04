@@ -1,0 +1,118 @@
+
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    人脸匹配信息
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('close')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body" >
+
+  <div class="row">
+    <div class="col-12">
+      <div class="mb-3" style="width: 100%; height: 300px; overflow: hidden;  border-radius: 4px;">
+        <img src="{{imgUrl}}" title="" style="width: 100%; height: 300px;">
+        <!--<input type="file"  (change)="imgChange($event)" style="position: absolute; left: 0; top: 0; opacity: 0; width: 370px; height: 320px;">-->
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="input-group form-group">
+        <span class="input-group-prepend">
+          <span class="input-group-text" style="width: 84px;">
+            关联摄像头
+          </span>
+        </span>
+        <input type="text" [(ngModel)]="currentData.Camera.Name" class="form-control" disabled>
+      </div>
+
+      <div class="input-group form-group">
+        <span class="input-group-prepend">
+          <span class="input-group-text" style="width: 84px;">
+            关联账号
+          </span>
+        </span>
+        <input type="text" [(ngModel)]="currentData.User.Username" class="form-control" disabled>
+      </div>
+
+      <div class="input-group form-group">
+        <span class="input-group-prepend">
+          <span class="input-group-text" style="width: 86px;">
+            关联微信
+          </span>
+        </span>
+        <input type="text" [(ngModel)]="currentData.WechatName" class="form-control" disabled>
+      </div>
+
+      <div class="input-group form-group">
+        <span class="input-group-prepend">
+          <span class="input-group-text" style="width: 86px;">
+            用户
+          </span>
+        </span>
+        <input type="text" [(ngModel)]="currentData.User.Name" class="form-control" disabled>
+      </div>
+
+      <div class="input-group form-group">
+        <span class="input-group-prepend">
+          <span class="input-group-text" style="width: 86px;">
+            性别
+          </span>
+        </span>
+        <input type="text" [(ngModel)]="currentData.sex" class="form-control" disabled>
+      </div>
+
+      <div class="input-group form-group">
+        <span class="input-group-prepend">
+          <span class="input-group-text" style="width: 86px;">
+            认证时间
+          </span>
+        </span>
+        <input type="text" [(ngModel)]="currentData.date" class="form-control" disabled>
+      </div>
+
+      <div class="input-group form-group">
+        <span class="input-group-prepend">
+          <span class="input-group-text" style="width: 86px;">
+            认证结果
+          </span>
+        </span>
+        <input type="text" [(ngModel)]="currentData.result" class="form-control" disabled>
+      </div>
+
+      <div class="input-group form-group">
+        <span class="input-group-prepend">
+          <span class="input-group-text" style="width: 86px;">
+            匹配人员
+          </span>
+        </span>
+        <input type="text" [(ngModel)]="currentData.User.Name" class="form-control" disabled>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <!--<button type="button" class="btn btn_info" (click)="save()">
+    <span class="">编辑</span>
+  </button>-->
+  <button class="btn btn-default" type="button" (click)="activeModal.dismiss('close')">关闭</button>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
