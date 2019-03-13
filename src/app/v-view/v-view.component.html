@@ -1,15 +1,50 @@
-<div class="container">
-  <div class="content">
-    <div class="pb-3">
-      <h5 class="text_info">
-        {{name}}
-      </h5>
-    </div>
+<div class="site">
+  <header>
+    <app-header [user]="user" (toggle)="sidenav.toggle()"></app-header>
+  </header>
 
-    <video id="myPlayer" poster="" controls playsInline webkit-playsinline style="width: 100%;">
-      <source [src]="url" type="application/x-mpegURL" />
-    </video>
-  </div>
+  <main>
+    <mat-sidenav-container class="sidenav-container">
+      <!--<mat-sidenav class="sidenav bg_light_default"  mode="side" #sidenav>
+        <app-sidebar [user]="user"></app-sidebar>
+      </mat-sidenav>-->
 
+      <mat-sidenav-content>
+        <div class="content">
+          <div class="mat-card-title">
+            <h5 class="text_info">
+              {{name}} <span style="font-weight: normal;">[ {{num}} ]</span>
+            </h5>
+          </div>
+
+          <video id="myPlayer" poster="" controls playsInline webkit-playsinline style="width: 100%;">
+            <source [src]="url" type="application/x-mpegURL" />
+          </video>
+
+          <div (click)="sidenav.toggle()" class="sideBtn">
+            <i class="fa fa-angle-right" *ngIf="sideshow"></i>
+            <i class="fa fa-angle-left" *ngIf="!sideshow"></i>
+          </div>
+
+        </div>
+      </mat-sidenav-content>
+
+
+
+      <mat-sidenav class="sidenav" mode="side" position="end" #sidenav
+                   (opened)="sideshow = true" (closed)="sideshow = false">
+        <div class="p-3">
+          <h6 style="font-size: 16px; padding: 10px 0;">云控制台</h6>
+          <div>
+            功能正在开发中......
+          </div>
+        </div>
+      </mat-sidenav>
+
+    </mat-sidenav-container>
+
+  </main>
 
 </div>
+
+

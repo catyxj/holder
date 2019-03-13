@@ -16,7 +16,7 @@
             <!--<video [id]="'myPlayer'+i" poster="" controls playsInline webkit-playsinline style="width: 100%;">
               <source [src]="data.url" type="application/x-mpegURL" />
             </video>-->
-            <a [routerLink]="['/video-view', data.LiveAddress, data.Name]" target="_blank">
+            <a [routerLink]="['/video-view', data.LiveAddress, data.Name, data.Remark]" target="_blank">
               <img src="assets/images/video.jpg" alt="" style="width: 100%; ">
             </a>
 
