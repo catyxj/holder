@@ -2,7 +2,20 @@
 <div class="">
   <div class="mat-card-title" style="margin-left: 540px;">
 
-    <div class="pull-right flex flex-row">
+    <!--<div class="pull-right flex flex-row">
+      <div class="input-group mb-2">
+        <input type="text" class="form-control" placeholder="请输入参数名称" [(ngModel)]="search" >
+        <div class="input-group-append" (click)="searchChange()">
+          <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+    </div>-->
+
+  </div>
+
+  <div class="t_content" style="position: relative;">
+
+    <div class="search_con">
       <div class="input-group mb-2">
         <input type="text" class="form-control" placeholder="请输入参数名称" [(ngModel)]="search" >
         <div class="input-group-append" (click)="searchChange()">
@@ -11,9 +24,6 @@
       </div>
     </div>
 
-  </div>
-
-  <div class="t_content">
     <table class="table" style="border: 1px solid #eeeeee;">
       <thead class="bg_light_primary">
 

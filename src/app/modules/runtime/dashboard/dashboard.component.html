@@ -167,7 +167,9 @@
   <div class="flash_left">
     <div class="fl_head">
       <h6>
-        {{name}}
+        <a [routerLink]="['/admin/equipments/equipment-info', uid]">
+          {{name}}
+        </a>
       </h6>
       <div class="status_row">
         <div class="status_col"

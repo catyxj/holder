@@ -108,7 +108,8 @@ export class AddTermComponent implements OnInit {
           'success'
         );
         this.overviewService.fileMission('ok'); // 传递刷新档案列表
-        this.router.navigate(['/admin/overview/config', this.uid]);
+        // this.router.navigate(['/admin/overview/config', this.uid]);
+        this.router.navigate(['/admin/monitor']);
       }, err => {
         Swal(
           '保存失败！',

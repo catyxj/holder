@@ -79,7 +79,8 @@ export class ViewConfigComponent implements OnInit {
     this.overviewService.addTerm(data)
       .subscribe( res => {
         this.overviewService.fileMission('ok'); // 传递刷新档案列表
-        this.router.navigate(['/admin/overview/template', this.uid]);
+        // this.router.navigate(['/admin/overview/template', this.uid]);
+        this.router.navigate(['/admin/monitor']);
       }, err => {
         Swal(
           '保存失败！',

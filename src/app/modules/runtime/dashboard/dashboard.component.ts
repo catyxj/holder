@@ -328,6 +328,9 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
   }
 
 
+
+
+
   goBack() {
     window.history.go(-1);
   }

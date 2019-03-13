@@ -69,7 +69,11 @@
           </td>
           <td> {{ boiler.Template?.Name }} </td>
           <td> {{ boiler.Clusters?.Name }} </td>
-          <td> <a [routerLink]="['/admin/equipments/equipment-info', boiler.Uid]" class="btn btn_info btn-sm" style="color: #ffffff;">查看</a> </td>
+          <td>
+            <a [routerLink]="['/admin/equipments/equipment-info', boiler.Uid]" class="btn btn_info btn-sm" style="color: #ffffff;">
+              查看
+            </a>
+          </td>
         </tr>
       </tbody>
     </table>
