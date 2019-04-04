@@ -32,9 +32,9 @@ export class ListComponent implements OnInit, OnDestroy {
     this.getBoilers(message);*/
 
 
-    this.getBoilers();
+    // this.getBoilers();
 
-    // this.getTest();
+    this.getTest();
 
   }
 

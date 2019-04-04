@@ -24,6 +24,7 @@ export class VideoAddComponent implements OnInit {
   public equipment;
   public eptList;
   public isIdentify;
+  public isCtrl;
   public org = '';
   public orgList;
 
@@ -61,7 +62,8 @@ export class VideoAddComponent implements OnInit {
       serialNumber: this.cameraWay,
       checkOn: this.isIdentify,
       liveAddress: this.videoAdress,
-      orgUid: this.org
+      orgUid: this.org,
+      consoleOn: this.isCtrl
     };
     console.log(data);
     this.videoService.addData(data)

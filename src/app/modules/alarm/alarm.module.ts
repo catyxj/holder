@@ -28,8 +28,8 @@ import {NgxEchartsModule} from "ngx-echarts";
     AlarmDetailComponent
   ],
   exports: [
-    CurrentComponent,
-    HistoryComponent,
+    // CurrentComponent,
+    // HistoryComponent,
     AlarmDetailComponent
   ]
 })

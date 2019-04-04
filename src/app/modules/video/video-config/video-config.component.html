@@ -31,15 +31,28 @@
   </div>
 
 
-  <div class="form-group flex">
-    <label class="control-label" style="font-size: 15px; margin-right: 6px;">是否开启身份识别</label>
-    <div class="checkbox c-checkbox">
-      <label>
-        <input type="checkbox" [(ngModel)]="isIdentify">
-        <span class="fa fa-check"></span>
-      </label>
+  <div class="flex">
+    <div class="form-group flex" style="flex: 1;">
+      <label class="control-label" style="font-size: 15px; margin-right: 6px;">是否开启身份识别</label>
+      <div class="checkbox c-checkbox">
+        <label>
+          <input type="checkbox" [(ngModel)]="isIdentify">
+          <span class="fa fa-check"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group flex" style="flex: 1;">
+      <label class="control-label" style="font-size: 15px; margin-right: 6px;">是否开启云台控制</label>
+      <div class="checkbox c-checkbox">
+        <label>
+          <input type="checkbox" [(ngModel)]="isCtrl">
+          <span class="fa fa-check"></span>
+        </label>
+      </div>
     </div>
   </div>
+
 
   <div class="" *ngIf="currentUser.Role.RoleId === 1">
     <div class="input-group form-group">

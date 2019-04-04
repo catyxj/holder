@@ -23,7 +23,7 @@ main{
 }
 
 .sidenav {
-  width: 260px;
+  width: 200px;
   background-color: #2b303b;
   overflow-x: hidden;
   color: #fff;
@@ -38,4 +38,28 @@ main{
   color:#fff;
   cursor: pointer;
 }
+
+.v_side{
+  padding: 10px 20px;
+}
+
+.v_cr{
+  display: flex;
+}
+.v_item{
+  width: 44px;
+  height: 44px;
+  padding: 2px;
+  cursor: pointer;
+}
+.v_item img{
+  width: 40px;
+  height: 40px;
+}
+.v_item img:active{
+  opacity: 0.6;
+}
+
+
+
 

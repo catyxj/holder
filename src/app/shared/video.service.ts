@@ -52,6 +52,23 @@ export class VideoService {
   }
 
 
+  // 云台控制（按下）
+  startCtrl(data): Observable<any> {
+    return this.http.post('/camera_console_begin', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 云台控制（放开）
+  endCtrl(data): Observable<any> {
+    return this.http.post('/camera_console_stop', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

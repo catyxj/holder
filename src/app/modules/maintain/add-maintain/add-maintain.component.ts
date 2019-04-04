@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {MaintainService} from '../../../shared/maintain.service';
-import {Boiler} from "../../../boiler";
 import {BoilerService} from "../../../shared/boiler.service";
 
 @Component({

@@ -23,7 +23,7 @@ const routes: Routes = [
     component: MainComponent
   },
   {
-    path: 'video-view/:url/:name/:num',
+    path: 'video-view/:url/:name/:num/:serialName/:serialNumber/:consoleOn',
     component: VViewComponent,
   },
   {

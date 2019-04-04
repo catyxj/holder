@@ -24,6 +24,7 @@ export class VideoConfigComponent implements OnInit {
   public equipment;
   public eptList;
   public isIdentify;
+  public isCtrl;
   public org = '';
   public orgList;
 
@@ -43,6 +44,7 @@ export class VideoConfigComponent implements OnInit {
     this.org = this.currentData.Organization ? this.currentData.Organization.Uid : '';
     this.equipment = this.currentData.Equipment ? this.currentData.Equipment.Uid : '';
     this.isIdentify = this.currentData.CheckOn;
+    this.isCtrl = this.currentData.ConsoleOn;
   }
 
   getOrg() {
@@ -69,7 +71,8 @@ export class VideoConfigComponent implements OnInit {
       serialNumber: this.cameraWay,
       checkOn: this.isIdentify,
       liveAddress: this.videoAdress,
-      orgUid: this.org
+      orgUid: this.org,
+      consoleOn: this.isCtrl,
     };
     console.log(data);
     this.videoService.editData(data)
