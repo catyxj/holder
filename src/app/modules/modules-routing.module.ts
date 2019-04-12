@@ -52,10 +52,6 @@ import {AddTemplateComponent} from './overview/add-template/add-template.compone
 import {MalfunctionMainComponent} from './malfunction/malfunction-main/malfunction-main.component';
 import {MalCurrentComponent} from './malfunction/mal-current/mal-current.component';
 import {MalHistoryComponent} from './malfunction/mal-history/mal-history.component';
-import {MaintainComponent} from './runtime/maintain/maintain.component';
-import {MaintainDashboardComponent} from './runtime/maintain-dashboard/maintain-dashboard.component';
-import {MaintainViewComponent} from './runtime/maintain-view/maintain-view.component';
-import {MaintainAddComponent} from './runtime/maintain-add/maintain-add.component';
 import {MalDetailComponent} from './malfunction/mal-detail/mal-detail.component';
 import {ServiceMainComponent} from './service/service-main/service-main.component';
 import {ServiceListComponent} from './service/service-list/service-list.component';
@@ -76,6 +72,10 @@ import {FaceListComponent} from './face-rec/face-list/face-list.component';
 import {VMainComponent} from './runtime/video/v-main/v-main.component';
 import {VDashboardComponent} from './runtime/video/v-dashboard/v-dashboard.component';
 import {FaceRecListComponent} from './face-rec/face-rec-list/face-rec-list.component';
+import {MaintainComponent} from './runtime/maintain/maintain-main/maintain.component';
+import {MaintainDashboardComponent} from './runtime/maintain/maintain-dashboard/maintain-dashboard.component';
+import {MaintainViewComponent} from './runtime/maintain/maintain-view/maintain-view.component';
+import {MaintainAddComponent} from './runtime/maintain/maintain-add/maintain-add.component';
 
 
 

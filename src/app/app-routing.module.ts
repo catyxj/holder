@@ -20,7 +20,8 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: MainComponent
+    component: MainComponent,
+    loadChildren: './modules/modules.module#ModulesModule'
   },
   {
     path: 'video-view/:url/:name/:num/:serialName/:serialNumber/:consoleOn',

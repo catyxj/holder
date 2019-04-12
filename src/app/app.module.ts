@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 
-import { GlobalModule } from './global/global.module';
+// import { GlobalModule } from './global/global.module';
 import { ModulesModule } from './modules/modules.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
@@ -22,10 +22,13 @@ import {FormsModule} from '@angular/forms';
 import {HashLocationStrategy, LocationStrategy, registerLocaleData} from '@angular/common';
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import zh from '@angular/common/locales/zh';
-import {NgxEchartsModule} from "ngx-echarts";
-import {BsDatepickerModule} from "ngx-bootstrap";
+import {NgxEchartsModule} from 'ngx-echarts';
+import {BsDatepickerModule} from 'ngx-bootstrap';
 import { QiantianComponent } from './homepage/qiantian/qiantian.component';
-import {VViewComponent} from "./v-view/v-view.component";
+import {VViewComponent} from './v-view/v-view.component';
+import {HeaderComponent} from './global/header/header.component';
+import {FooterComponent} from './global/footer/footer.component';
+import {SidebarComponent} from './global/sidebar/sidebar.component';
 
 
 
@@ -39,13 +42,16 @@ registerLocaleData(zh);
     LoginComponent,
     MainComponent,
     NotFound404Component,
+    HeaderComponent,
+    FooterComponent,
+    SidebarComponent,
     QiantianComponent,
     VViewComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    GlobalModule,
+    // GlobalModule,
     ModulesModule,
     AppRoutingModule,
     NgbModule.forRoot(),

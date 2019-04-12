@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MaintainService} from "../../../shared/maintain.service";
-import {ActivatedRoute} from "@angular/router";
-import {DatePipe} from "@angular/common";
+
+import {DatePipe} from '@angular/common';
+import {MaintainService} from '../../../../shared/maintain.service';
 
 
 @Component({
@@ -19,7 +19,6 @@ export class MaintainDashboardComponent implements OnInit {
   public pageSize = 10;
 
   constructor(private maintainService: MaintainService,
-              private route: ActivatedRoute,
               private datePipe: DatePipe) { }
 
   ngOnInit() {
@@ -88,25 +87,25 @@ export class MaintainDashboardComponent implements OnInit {
 
   // 导出
   export() {
-    let that = this;
+    const that = this;
     this.maintainService.exports(this.uid)
       .subscribe( data => {
-        let exportData = data.params;
-        let count = data.counts;
+        const exportData = data.params;
+        const count = data.counts;
 
         // 导出表格
         let table = `<table><tr>${that.name}</tr><tr><td>上传时间</td><td>创建者</td><td>维保状态</td></tr>`;
 
         exportData.forEach((record) => {
-          let date = this.datePipe.transform(record.CreatedDate, 'yyyy-MM-dd HH:mm:ss');
-          let status = record.Status ? '异常' : '正常';
+          const date = this.datePipe.transform(record.CreatedDate, 'yyyy-MM-dd HH:mm:ss');
+          const status = record.Status ? '异常' : '正常';
           table += `<tr><td>${date}</td><td>${record.CreatedBy.Name}</td><td>${status}</td>`;
           table += '</tr>';
         });
         table += '</table>';
 
         // 使用outerHTML属性获取整个table元素的HTML代码（包括<table>标签），然后包装成一个完整的HTML文档，设置charset为urf-8以防止中文乱码
-        let html = "<html><head><meta charset='utf-8' /></head><body>" + table + "</body></html>";
+        const html = '<html><head><meta charset=\'utf-8\' /></head><body>' + table + '</body></html>';
 
         const blob = new Blob([html], {type: 'application/vnd.ms-excel'});
 

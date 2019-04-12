@@ -13,17 +13,17 @@ import {NgZorroAntdModule} from 'ng-zorro-antd';
 import { RuntimeAlarmComponent } from './alarm/alarm.component';
 import { AlarmCurrentComponent } from './alarm-current/alarm-current.component';
 import { AlarmHistoryComponent } from './alarm-history/alarm-history.component';
-import { MaintainComponent } from './maintain/maintain.component';
 import { ChartExpandComponent } from './chart-expand/chart-expand.component';
-import { MaintainDashboardComponent } from './maintain-dashboard/maintain-dashboard.component';
-import { MaintainAddComponent } from './maintain-add/maintain-add.component';
-import { MaintainViewComponent } from './maintain-view/maintain-view.component';
 import { LifeMainComponent } from './life/life-main/life-main.component';
 import { LifeListComponent } from './life/life-list/life-list.component';
 import { LifeAddComponent } from './life/life-add/life-add.component';
 import { LifeEditComponent } from './life/life-edit/life-edit.component';
 import { VDashboardComponent } from './video/v-dashboard/v-dashboard.component';
 import { VMainComponent } from './video/v-main/v-main.component';
+import {MaintainComponent} from './maintain/maintain-main/maintain.component';
+import {MaintainDashboardComponent} from './maintain/maintain-dashboard/maintain-dashboard.component';
+import {MaintainAddComponent} from './maintain/maintain-add/maintain-add.component';
+import {MaintainViewComponent} from './maintain/maintain-view/maintain-view.component';
 
 
 

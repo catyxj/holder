@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MaintainService} from "../../../shared/maintain.service";
-import {ActivatedRoute, ParamMap, Router} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {MaintainService} from '../../../../shared/maintain.service';
 
 @Component({
   selector: 'app-maintain-view',

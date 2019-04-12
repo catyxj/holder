@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {MaintainService} from '../../../shared/maintain.service';
-import Swal from 'sweetalert2';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AlarmService} from "../../../shared/alarm.service";
+import {MaintainService} from '../../../../shared/maintain.service';
+import {AlarmService} from '../../../../shared/alarm.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-maintain-add',

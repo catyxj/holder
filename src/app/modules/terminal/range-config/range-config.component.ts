@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-range-config',
@@ -20,7 +21,7 @@ export class RangeConfigComponent implements OnInit {
   ngOnInit() {
     this.isValid = false;
     this.comment = '';
-    this.ranges = this.currentData.Ranges;
+    this.ranges = this.currentData.Ranges.slice();
     let sortNumber = function (a, b) {
       return a.Value - b.Value;
     };
@@ -88,6 +89,22 @@ export class RangeConfigComponent implements OnInit {
       this.ranges[i].Value = i;
     }
     this.activeModal.close(this.ranges);
+  }
+
+  dismiss() {
+    Swal({
+      title: '是否保存？',
+      showCancelButton: true,
+      confirmButtonText: '是',
+      cancelButtonText: '否',
+      showLoaderOnConfirm: true
+    }).then((result) => {
+      if (result.value) {
+        this.save();
+      } else {
+        this.activeModal.dismiss('close');
+      }
+    });
   }
 
 }
