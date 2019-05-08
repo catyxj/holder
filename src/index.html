@@ -17,6 +17,30 @@
   <script type="text/javascript" src="https://open.ys7.com/sdk/js/1.4/ezuikit.js"></script>
 </head>
 <body>
-  <app-root></app-root>
+  <div id="iebox" style="display: none;">
+    <div style="width: 620px; margin: auto; padding-top: 200px; line-height: 30px; color:dodgerblue; font-family:'Microsoft Yahei';">
+      当前浏览器版本不支持 <br/>
+      为了您获得更好的浏览体验，推荐使用谷歌Chrome、360安全浏览器、360极速浏览器
+    </div>
+  </div>
+
+  <app-root id="app"></app-root>
+
+  <script>
+    console.log('ifie1');
+    var userAgent = navigator.userAgent;
+    var isOpera = userAgent.indexOf('Opera') > -1;
+    var iebox = document.getElementById("iebox");
+    var app = document.getElementById("app");
+    // 判断是否IE浏览器
+    if ((userAgent.indexOf('compatible') > -1 && userAgent.indexOf('MSIE') > -1 && !isOpera) || userAgent.indexOf("Edge") > -1 ) {
+//      console.log('IE');
+      iebox.style.display = "block";
+      app.style.display = "none";
+    } else {
+      console.log('not IE');
+    }
+  </script>
+
 </body>
 </html>

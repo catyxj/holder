@@ -18,6 +18,7 @@ export class TerminalListComponent implements OnInit {
   public page = 1;
   public totalItems = 0;
   public search: string;
+  public status = 0;
   public deleteList = [];
   public allDelete = false;
   public pageSize = 10;
@@ -39,7 +40,7 @@ export class TerminalListComponent implements OnInit {
   getTerminals(): void {
     this.isSpinning = true;
     // console.log({page: this.page, pageSize: this.pageSize , search: this.search});
-    this.terminalService.getTerminals(this.page, this.pageSize , this.search)
+    this.terminalService.getTerminals(this.page, this.pageSize, this.status, this.search)
       .subscribe(terminals => {
         this.isSpinning = false;
         this.totalItems = terminals.counts;
@@ -149,6 +150,12 @@ export class TerminalListComponent implements OnInit {
   // 搜索
   searchChange() {
     this.page = 1;
+    this.pageChange();
+  }
+
+  // 状态筛选
+  filterData(n) {
+    this.status = n;
     this.pageChange();
   }
 

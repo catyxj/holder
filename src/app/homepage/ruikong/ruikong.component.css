@@ -1,0 +1,79 @@
+
+.login-screen {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: url("../../../assets/images/denglu.gif");
+  background-size: cover;
+  overflow: hidden;
+}
+.login-form-container {
+  position: absolute;
+  width: 410px;
+  /*height: 350px;*/
+  left: 50%;
+  top: 50%;
+  margin-left: -205px;
+  margin-top: -230px;
+  padding: 20px 90px;
+  box-sizing: border-box;
+  /*background: rgba(41,67,78,0.8);*/
+  background: rgba(255,255,255,0.8);
+  color: #666666;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.sys-title {
+  text-align: center;
+  font-size: 24px;
+  line-height: 50px;
+  margin: 0;
+  color:#333;
+  /*font-weight: bold;*/
+}
+.login-form{
+  /*margin-top: 20px;*/
+}
+.login-form input.form-control{
+
+}
+.c-checkbox span{
+  border: 1px solid #999;
+}
+.login-form-container a{
+  text-align: center;
+  color: #fff;
+}
+
+.footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+  color: #666;
+  font-size: 12px;
+}
+.f_inner{
+  width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

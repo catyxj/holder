@@ -1,13 +1,13 @@
 <div class="container-flud login-screen ">
 
   <!--logo-->
-  <div style="position: absolute; top: 20px; left: 50px;">
+  <!--<div style="position: absolute; top: 20px; left: 50px;">
     <img src="assets/images/index_logo.png" alt="" style="">
-  </div>
+  </div>-->
 
   <!--图片-->
-  <div style="position: absolute; top: 50%; left: 10%; margin-top: -181px;">
-    <img src="assets/images/index_left.png" alt="" style="">
+  <div style="position: absolute; bottom: 12%; left: 50%; margin-left: -142px;">
+    <img src="assets/images/ruikong/index_left_b.png" alt="" style="">
     <!--<img src="assets/images/normal-lu1.png" alt="" style="width: 150px;">
     <br/>
     <img src="assets/images/normal-lu2.png" alt="" style="width: 250px;">-->
@@ -15,18 +15,21 @@
 
   <!--登录-->
   <div class="login-form-container">
-    <h5 class="center-block sys-title">用户登录</h5>
+    <div style="text-align: center;">
+      <img src="assets/images/ruikong/ruikong_logo.png" style="width: 120px; " alt="">
+    </div>
+    <h5 class="center-block sys-title">睿控物联网管理系统</h5>
     <form novalidate class="form-horizontal login-form" role="form" name="login">
-      <div class="form-group" style="padding-bottom: 10px;">
+      <div class="form-group">
         <div class="col-xs-12">
-          <input required [(ngModel)]="user.username" name="userName" type="text" class="form-control" #userName="ngModel" placeholder="用户名">
+          <input required [(ngModel)]="user.username" name="userName" type="text" class="form-control" #userName="ngModel" placeholder="请输入登录账号">
           <div *ngIf="userName.invalid && (userName.dirty || userName.touched) && userName.errors.required" class="text-danger">用户名不能为空</div>
         </div>
       </div>
-      <div class="form-group" style="padding-bottom: 10px;">
+      <div class="form-group">
         <div class="col-xs-12">
           <input required [(ngModel)]="user.password" name="password"  type="password" class="form-control"
-                  #password="ngModel" placeholder="密码">
+                 #password="ngModel" placeholder="请输入密码">
           <div *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.required" class="text-danger">请输入密码</div>
         </div>
       </div>
@@ -35,7 +38,7 @@
           <label>
             <input type="checkbox" [(ngModel)]="checkRemember" name="checkR">
             <span class="fa fa-check"></span>
-            记住用户名
+            记住账号
           </label>
         </div>
       </div>
@@ -45,8 +48,7 @@
         </div>
       </div>
 
-      <div class="form-group row">
-
+      <div class="">
         <span>
           {{errMes}}
         </span>
@@ -69,9 +71,12 @@
 
   <!--底部-->
   <div class="footer">
-    <!--炉管家 -->
-    Lukeeper物联网云平台v1.0 Copyright ©2019  Inohas. All Rights Reserved. 备案号（浙ICP备16036066号-6）建议分辨率：1920*1080 推荐浏览器：Chrome
+    南京睿控自动化有限公司管理云平台v1.0 Copyright ©2019  Inohas. All Rights Reserved. 备案号（浙ICP备16036066号-6）建议分辨率：1920*1080 推荐浏览器：Chrome
     <a href="http://www.mydown.com/soft/421/472030921.shtml" style="margin-left: 38px;" target="_blank">点击下载Chrome</a>
+    <!--<div class="f_inner">
+
+    </div>-->
+
   </div>
 
 </div>

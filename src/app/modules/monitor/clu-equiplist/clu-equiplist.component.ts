@@ -67,7 +67,7 @@ export class CluEquiplistComponent implements OnInit, OnDestroy {
               } else {
                 bo.warning = '无告警';
               }
-              if (bo.Malfunction === true) {
+              if (bo.mtStatus === true) {
                 bo.malfunction = '有故障';
               } else {
                 bo.malfunction = '无故障';

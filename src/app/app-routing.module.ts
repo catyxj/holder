@@ -5,6 +5,7 @@ import {MainComponent} from './main/main.component';
 import {NotFound404Component} from './global/not-found404/not-found404.component';
 import {QiantianComponent} from './homepage/qiantian/qiantian.component';
 import {VViewComponent} from "./v-view/v-view.component";
+import {RuikongComponent} from "./homepage/ruikong/ruikong.component";
 
 
 
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'qiantian',
     component: QiantianComponent
+  },
+  {
+    path: 'ruikong',
+    component: RuikongComponent
   },
   {
     path: '404',

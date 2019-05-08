@@ -6,10 +6,10 @@
       设备概览
     </h5>
     <nav class="pull-left">
-      <a routerLink="/admin/monitor/clusters" routerLinkActive="btn_info" class="btn">集群模式</a>
       <a routerLink="/admin/monitor/dashboard" routerLinkActive="btn_info" class="btn">图文模式</a>
       <a routerLink="/admin/monitor/list" routerLinkActive="btn_info" class="btn">列表模式</a>
-      <a routerLink="/admin/monitor/map" routerLinkActive="btn_info" class="btn mr-3">地图模式</a>
+      <a routerLink="/admin/monitor/map" routerLinkActive="btn_info" class="btn">地图模式</a>
+      <a routerLink="/admin/monitor/clusters" routerLinkActive="btn_info" class="btn mr-3">集群模式</a>
     </nav>
 
     <div class="pull-right flex flex-row">
@@ -27,37 +27,43 @@
   </div>-->
 
   <div class="grid grid-pad row">
-    <div *ngFor="let data of clusters; trackBy : trackByUid;" class="col-6 mb-2">
+    <div *ngFor="let data of clusters; trackBy : trackByUid;" class="col-6" style="margin-bottom: 30px;">
       <div class="module flex">
         <div class="status_content">
           <a [routerLink]="['/admin/monitor/cluster', data.uid ,data.name]" target="_blank">
-            <h5 class="mb-3 status_name">
+            <h5 class="mb-3 status_name" style="color: #00a4ff; font-weight: bold; width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
               {{data.name}}
             </h5>
           </a>
 
           <div class="status_row ">
             <div class="status_col">
-              <b>终端 : </b>  在线 <span class="">{{data.termOnline}}</span> / 离线  <span class="">{{data.termOffline}}</span>
+              <b>联网 : </b>  <span class="">{{data.termOnline}}</span> / <span class="">{{data.termOffline}}</span>
             </div>
             <div class="status_col">
-              <b>设备 : </b>  在线 <span class="">{{data.eptOnline}}</span> / 总共 <span>{{data.eptCounts}}</span>
+              <b>运行 : </b>  <span class="">{{data.eptOnline}}</span> / <span>{{data.eptCounts}}</span>
             </div>
-            <div class="status_col" >
+            <div class="status_col" [ngClass]="{'text_danger':data.alarmCounts > 0}">
               <b>告警 : </b>
               <!--<span [ngClass]="{'text-muted':!data.Online, 'text-danger':data.Online && data.Warning , 'text-info':data.Online && !data.Warning}">
                 {{data.alarmCounts}}
               </span>-->
-              <span>
-                {{data.alarmCounts}}
+              <span *ngIf="!data.alarmCounts">
+                无告警
+              </span>
+              <span *ngIf="data.alarmCounts > 0">
+                有 {{data.alarmCounts}} 条告警
               </span>
             </div>
             <div class="status_col"
-                  style="margin-bottom: 0">
+                  style="margin-bottom: 0" [ngClass]="{'text-warning':data.mtCounts > 0}">
               <!--{{data.malfunction}}-->
               <b>故障 : </b>
-              <span [ngClass]="{'text-muted':!data.Online, 'text-danger':data.Online && data.Malfunction , 'text-info':data.Online && !data.Malfunction}">
-
+              <span *ngIf="!data.mtCounts">
+                无故障
+              </span>
+              <span *ngIf="data.mtCounts > 0">
+                  有 {{data.mtCounts}} 个故障
               </span>
             </div>
           </div>

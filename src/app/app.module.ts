@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
-// import { GlobalModule } from './global/global.module';
 import { ModulesModule } from './modules/modules.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
@@ -24,16 +22,17 @@ import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import zh from '@angular/common/locales/zh';
 import {NgxEchartsModule} from 'ngx-echarts';
 import {BsDatepickerModule} from 'ngx-bootstrap';
+
 import { QiantianComponent } from './homepage/qiantian/qiantian.component';
 import {VViewComponent} from './v-view/v-view.component';
+
 import {HeaderComponent} from './global/header/header.component';
 import {FooterComponent} from './global/footer/footer.component';
 import {SidebarComponent} from './global/sidebar/sidebar.component';
-
+import { RuikongComponent } from './homepage/ruikong/ruikong.component';
 
 
 registerLocaleData(zh);
-
 
 
 @NgModule({
@@ -46,12 +45,12 @@ registerLocaleData(zh);
     FooterComponent,
     SidebarComponent,
     QiantianComponent,
-    VViewComponent
+    VViewComponent,
+    RuikongComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    // GlobalModule,
     ModulesModule,
     AppRoutingModule,
     NgbModule.forRoot(),

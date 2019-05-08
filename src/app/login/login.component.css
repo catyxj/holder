@@ -32,7 +32,7 @@
 .login-form{
   margin-top: 20px;
 }
-a{
+.login-form-container a{
   text-align: center;
   color: #fff;
 }
@@ -43,10 +43,11 @@ a{
   left: 0;
   right: 0;
   width: 100%;
+  background-color: #ffffff;
   box-sizing: border-box;
   padding: 10px;
   text-align: center;
-  color: #ffffff;
+  color: #666;
   font-size: 12px;
 }
 

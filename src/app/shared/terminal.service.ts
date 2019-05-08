@@ -48,9 +48,9 @@ export class TerminalService {
   constructor(private http: HttpClient) { }
 
   // 获取终端列表
-  getTerminals(n: number, pageSize: number, search?: string ): Observable<any> {
+  getTerminals(n: number, pageSize: number, status: number, search?: string): Observable<any> {
     // TODO: send the message _after_ fetching the heroes
-    const url = `${this.terminalsUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
+    const url = `${this.terminalsUrl}/?page=${n}&pageSize=${pageSize}&status=${status}&search=${search}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error

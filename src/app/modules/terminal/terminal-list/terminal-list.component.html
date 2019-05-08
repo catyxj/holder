@@ -50,10 +50,13 @@
               <i class="fa fa-caret-down"></i>
             </a>
             <ul nz-menu nzSelectable>
-              <li nz-menu-item>
+              <li nz-menu-item (click)="filterData(0)">
+                <a>全部</a>
+              </li>
+              <li nz-menu-item (click)="filterData(1)">
                 <a>在线</a>
               </li>
-              <li nz-menu-item>
+              <li nz-menu-item (click)="filterData(-1)">
                 <a>离线</a>
               </li>
             </ul>
