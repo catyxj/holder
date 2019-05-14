@@ -67,7 +67,7 @@
               style="color: #555; text-align: center; border: 1px solid #ccc; ">
             通道
             <input type="number" [(ngModel)]="data.ChannelNumber" max="24" min="1"
-                   style="display: inline-block; width: 50%;" class="form-control">
+                   style="display: inline-block; width: 50%;" class="form-control" (change)="save1(data)">
           </td>
           <td>
             <button [matMenuTriggerFor]="menu" class="btn btn-block" [disabled]="!data.Parameter||!data.Parameter.Name"
@@ -97,29 +97,29 @@
           </td>
           <td>
             <input type="number" [(ngModel)]="data.Parameter.Scale" class="form-control" min="0" step="0.01"
-                   placeholder="未配置" [disabled]="!data.Parameter||!data.Parameter.Name">
+                   placeholder="未配置" [disabled]="!data.Parameter||!data.Parameter.Name" (change)="save1(data)">
           </td>
           <td>
             <input type="text" [(ngModel)]="data.Parameter.Unit" class="form-control"
-                   placeholder="未配置" [disabled]="!data.Parameter||!data.Parameter.Name">
+                   placeholder="未配置" [disabled]="!data.Parameter||!data.Parameter.Name" (change)="save1(data)">
           </td>
 
           <td>
             <select [(ngModel)]="data.Func" [disabled]="!data.Parameter||!data.Parameter.Name"
-                    class="form-control" type="number">
+                    class="form-control" type="number" (change)="save1(data)">
               <option *ngFor="let fc of funcs1" [value]="fc.Id">{{fc.Name}}</option>
             </select>
           </td>
           <td>
             <select [(ngModel)]="data.Byte" [disabled]="!data.Parameter||!data.Parameter.Name"
-                    class="form-control">
+                    class="form-control" (change)="save1(data)">
               <option *ngFor="let by of bytes" [value]="by.Id">{{by.Name}}</option>
             </select>
           </td>
           <td>
             <input type="number" [(ngModel)]="data.Modbus" placeholder="未配置"
                    [disabled]="!data.Parameter||!data.Parameter.Name"
-                   class="form-control">
+                   class="form-control" (change)="save1(data)">
 
           </td>
           <td class="t_btn">
@@ -130,7 +130,7 @@
                       title="编辑告警规则" (click)="addAlarmRule(data)">
                 <i class="fa fa-bell" style="font-size: 14px;"></i>
               </button>
-              <button type="button" (click)="removeAnalogue(i)" title="删除"
+              <button type="button" (click)="removeAnalogue(i,data)" title="删除"
                       class="btn btn-outline-danger">
                 <i class="fa fa-trash" style="font-size: 14px;"></i>
               </button>
@@ -187,7 +187,7 @@
               style="color: #555; text-align: center; border: 1px solid #ccc; ">
             通道
             <input type="number" [(ngModel)]="data.ChannelNumber" max="48" min="1"
-                   style="display: inline-block; width: 50%;" class="form-control">
+                   style="display: inline-block; width: 50%;" class="form-control" (change)="save2(data)">
           </td>
           <td>
             <button [matMenuTriggerFor]="menu1" class="btn btn-block" [disabled]="!data.Parameter||!data.Parameter.Name"
@@ -236,12 +236,12 @@
           </td>
           <td>
             <input type="number" [(ngModel)]="data.Modbus" placeholder="未配置"
-                   [disabled]="!data.Parameter||!data.Parameter.Name"
+                   [disabled]="!data.Parameter||!data.Parameter.Name" (change)="save2(data)"
                    class="form-control">
           </td>
           <td>
             <input type="number" [(ngModel)]="data.BitAddress" placeholder="未配置"
-                   [disabled]="!data.Parameter||!data.Parameter.Name"
+                   [disabled]="!data.Parameter||!data.Parameter.Name" (change)="save2(data)"
                    class="form-control">
 
           </td>
@@ -313,7 +313,7 @@
               style="color: #555; text-align: center; border: 1px solid #ccc; ">
             通道
             <input type="number" [(ngModel)]="data.ChannelNumber" max="12" min="1"
-                   style="display: inline-block; width: 50%;" class="form-control">
+                   style="display: inline-block; width: 50%;" class="form-control" (change)="save3(data)">
           </td>
           <td>
             <button [matMenuTriggerFor]="menu" class="btn btn-block" [disabled]="!data.Parameter||!data.Parameter.Name"
@@ -353,19 +353,19 @@
           </td>
           <td>
             <select [(ngModel)]="data.Func" [disabled]="!data.Parameter||!data.Parameter.Name"
-                    class="form-control">
+                    class="form-control" (change)="save3(data)">
               <option *ngFor="let fc of funcs1" [value]="fc.Id">{{fc.Name}}</option>
             </select>
           </td>
           <td>
             <select [(ngModel)]="data.Byte" [disabled]="!data.Parameter||!data.Parameter.Name"
-                    class="form-control">
+                    class="form-control" (change)="save3(data)">
               <option *ngFor="let by of bytes" [value]="by.Id">{{by.Name}}</option>
             </select>
           </td>
           <td>
             <input type="number" [(ngModel)]="data.Modbus" placeholder="未配置"
-                   [disabled]="!data.Parameter||!data.Parameter.Name"
+                   [disabled]="!data.Parameter||!data.Parameter.Name" (change)="save3(data)"
                    class="form-control">
 
           </td>
@@ -444,42 +444,42 @@
         <tr>
           <td>
             <select [(ngModel)]="infomation.BaudRate"
-                    class="form-control">
+                    class="form-control" (change)="save4()">
               <option *ngFor="let x of BaudRates" [value]="x.Id">{{x.Name}}</option>
             </select>
           </td>
 
           <td>
             <select [(ngModel)]="infomation.dataBit"
-                    class="form-control">
+                    class="form-control" (change)="save4()">
               <option *ngFor="let x of dataBits" [value]="x.Id">{{x.Name}}</option>
             </select>
           </td>
 
           <td>
             <select [(ngModel)]="infomation.stopBit"
-                    class="form-control">
+                    class="form-control" (change)="save4()">
               <option *ngFor="let x of stopBits" [value]="x.Id">{{x.Name}}</option>
             </select>
           </td>
 
           <td>
             <select [(ngModel)]="infomation.checkDigit"
-                    class="form-control">
+                    class="form-control" (change)="save4()">
               <option *ngFor="let x of checkDigits" [value]="x.Id">{{x.Name}}</option>
             </select>
           </td>
 
           <td>
             <select [(ngModel)]="infomation.communiInterface"
-                    class="form-control">
+                    class="form-control" (change)="save4()">
               <option *ngFor="let x of communiInterfaces" [value]="x.Id">{{x.Name}}</option>
             </select>
           </td>
 
           <td>
             <select [(ngModel)]="infomation.subAdr"
-                    class="form-control">
+                    class="form-control" (change)="save4()">
               <option *ngFor="let x of subAdrs" [value]="x.Id">{{x.Name}}</option>
             </select>
 
@@ -491,14 +491,14 @@
 
           <td>
             <select [(ngModel)]="infomation.heartbeat"
-                    class="form-control">
+                    class="form-control" (change)="save4()">
               <option *ngFor="let x of heartbeats" [value]="x.Id">{{x.Name}}</option>
             </select>
           </td>
 
           <td>
             <select [(ngModel)]="infomation.dataType"
-                    class="form-control">
+                    class="form-control" (change)="save4()">
               <option *ngFor="let x of dataTypes" [value]="x.Id">{{x.Name}}</option>
             </select>
           </td>
@@ -522,6 +522,11 @@
     <button class="btn btn_info ml-3" (click)="save()">
       <img src="assets/icons/icon_upload.png" alt="">
       提交
+    </button>
+    <button class="btn btn_info ml-3" (click)="rollback()">
+      <!--<img src="assets/icons/icon_upload.png" alt="">-->
+      <i class="fa fa-reply"></i>
+      版本回退
     </button>
   </div>
 

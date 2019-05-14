@@ -15,14 +15,14 @@ const httpOptions = {
 })
 export class OrganizationService {
 
-  // private orgUrl = 'assets/server/organization_list.json';
-  // private orgAllUrl = 'assets/server/organization_list_2.json';
-  // private orgTypeUrl = 'assets/server/organization_type_list.json';
+  private orgUrl = 'assets/server/organization_list.json';
+  private orgAllUrl = 'assets/server/organization_list_2.json';
+  private orgTypeUrl = 'assets/server/organization_type_list.json';
 
 
-  private orgUrl = '/organization_list';
-  private orgAllUrl = '/organization_list_all';
-  private orgTypeUrl = '/organization_type_list/';
+  // private orgUrl = '/organization_list';
+  // private orgAllUrl = '/organization_list_all';
+  // private orgTypeUrl = '/organization_type_list/';
 
 
 

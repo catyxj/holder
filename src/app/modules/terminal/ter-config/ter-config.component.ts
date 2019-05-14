@@ -77,136 +77,144 @@ export class TerConfigComponent implements OnInit {
 
   // 获取终端信息
   getTerminal() {
-
     this.terminalService.getChannel(this.code)
       .subscribe(data => {
         const channels = data.channelConfigs;
         const information = data.communication;
 
-        //
-        for (let i = 0; i < channels.length; i++) {
-          const chan = channels[i];
-
-          if (chan.ChannelType === 1) {
-            this.analogueList.push({
-              ChannelNumber: chan.ChannelNumber,
-              Parameter: {
-                Name: chan.Name,
-                Scale: chan.Scale,
-                Unit: chan.Unit
-              },
-              alarm: chan.AlarmRule,
-              Func: chan.FunctionCode ? chan.FunctionCode.Id : 0,
-              Byte: chan.Byte ? chan.Byte.Id : 0,
-              Modbus: chan.Modbus,
-              Status: chan.Status,
-              SequenceNumber: chan.SequenceNumber
-            });
-          }
-
-          if (chan.ChannelType === 3) {
-            this.switchList.push({
-              ChannelNumber: chan.ChannelNumber,
-              Parameter: {
-                Name: chan.Name,
-              },
-              alarm: chan.AlarmRule,
-              Func: chan.FunctionCode ? chan.FunctionCode.Id : 0,
-              Modbus: chan.Modbus,
-              BitAddress: chan.BitAddress,
-              Status: chan.Status,
-              SwitchStatus: chan.SwitchStatus,
-              SequenceNumber: chan.SequenceNumber
-            });
-          }
-
-          if (chan.ChannelType === 5) {
-            this.rangeList.push({
-              ChannelNumber: chan.ChannelNumber,
-              Parameter: {
-                Name: chan.Name,
-              },
-              alarm: chan.AlarmRule,
-              Ranges: chan.Ranges,
-              Func: chan.FunctionCode ? chan.FunctionCode.Id : 0,
-              Byte: chan.Byte ? chan.Byte.Id : 0,
-              Modbus: chan.Modbus,
-              Status: chan.Status,
-              SequenceNumber: chan.SequenceNumber
-            });
-          }
-        }
-
-        if (this.analogueList.length <= 0) {
-          this.analogueList = [
-            {
-              ChannelNumber: 1,
-              Parameter: {
-                Name: '',
-                Scale: null,
-                Unit: null
-              },
-              alarm: [],
-              Func: 0,
-              Byte: 0,
-              Modbus: null,
-              Status: -1,
-              SequenceNumber: -1
-            }
-          ];
-        }
-
-        if (this.switchList.length <= 0) {
-          this.switchList = [
-            {
-              ChannelNumber: 1,
-              Parameter: {
-                Name: '',
-              },
-              alarm: [],
-              Func: 0,
-              Modbus: null,
-              BitAddress: null,
-              Status: -1,
-              SwitchStatus: null,
-              SequenceNumber: -1
-            }
-          ];
-        }
-
-        if (this.rangeList.length <= 0) {
-          this.rangeList = [
-            {
-              ChannelNumber: 1,
-              Parameter: {
-                Name: '',
-              },
-              alarm: [],
-              Ranges: [],
-              Func: 0,
-              Byte: 0,
-              Modbus: null,
-              Status: -1,
-              SequenceNumber: -1
-            }
-          ];
-        }
-
-        // 通信参数
-        this.infomation = {
-          BaudRate: information.BaudRate ? information.BaudRate.Id : 0, // 波特率
-          dataBit: information.DataBit ? information.DataBit.Id : 0,  // 数据位
-          stopBit: information.StopBit ? information.StopBit.Id : 0,  // 停止位
-          checkDigit: information.ParityBit ? information.ParityBit.Id : 0, // 校验位
-          communiInterface: information.CorrespondType ? information.CorrespondType.Id : 0, // 通信接口地址
-          subAdr: information.SlaveAddress ? information.SlaveAddress.Id : 0,  // 从机地址
-          heartbeat: information.HeartBeat ? information.HeartBeat.Id : 0,  // 心跳包频率
-          dataType: information.DataType ? information.DataType.Id : 0
-        };
-
+        this.dataDeal(channels, information);
 
       });
 
+  }
+
+  // 数据处理
+  dataDeal(channels, information) {
+    for (let i = 0; i < channels.length; i++) {
+      const chan = channels[i];
+
+      if (chan.ChannelType === 1) {
+        this.analogueList.push({
+          ChannelType: chan.ChannelType,
+          ChannelNumber: chan.ChannelNumber,
+          Parameter: {
+            Name: chan.Name,
+            Scale: chan.Scale,
+            Unit: chan.Unit
+          },
+          alarm: chan.AlarmRule,
+          Func: chan.FunctionCode ? chan.FunctionCode.Id : 0,
+          Byte: chan.Byte ? chan.Byte.Id : 0,
+          Modbus: chan.Modbus,
+          Status: chan.Status,
+          SequenceNumber: chan.SequenceNumber
+        });
+      }
+
+      if (chan.ChannelType === 3) {
+        this.switchList.push({
+          ChannelType: chan.ChannelType,
+          ChannelNumber: chan.ChannelNumber,
+          Parameter: {
+            Name: chan.Name,
+          },
+          alarm: chan.AlarmRule,
+          Func: chan.FunctionCode ? chan.FunctionCode.Id : 0,
+          Modbus: chan.Modbus,
+          BitAddress: chan.BitAddress,
+          Status: chan.Status,
+          SwitchStatus: chan.SwitchStatus,
+          SequenceNumber: chan.SequenceNumber
+        });
+      }
+
+      if (chan.ChannelType === 5) {
+        this.rangeList.push({
+          ChannelType: chan.ChannelType,
+          ChannelNumber: chan.ChannelNumber,
+          Parameter: {
+            Name: chan.Name,
+          },
+          alarm: chan.AlarmRule,
+          Ranges: chan.Ranges,
+          Func: chan.FunctionCode ? chan.FunctionCode.Id : 0,
+          Byte: chan.Byte ? chan.Byte.Id : 0,
+          Modbus: chan.Modbus,
+          Status: chan.Status,
+          SequenceNumber: chan.SequenceNumber
+        });
+      }
+    }
+
+    if (this.analogueList.length <= 0) {
+      this.analogueList = [
+        {
+          ChannelType: 1,
+          ChannelNumber: 1,
+          Parameter: {
+            Name: '',
+            Scale: null,
+            Unit: null
+          },
+          alarm: [],
+          Func: 0,
+          Byte: 0,
+          Modbus: null,
+          Status: -1,
+          SequenceNumber: -1
+        }
+      ];
+    }
+
+    if (this.switchList.length <= 0) {
+      this.switchList = [
+        {
+          ChannelType: 3,
+          ChannelNumber: 1,
+          Parameter: {
+            Name: '',
+          },
+          alarm: [],
+          Func: 0,
+          Modbus: null,
+          BitAddress: null,
+          Status: -1,
+          SwitchStatus: null,
+          SequenceNumber: -1
+        }
+      ];
+    }
+
+    if (this.rangeList.length <= 0) {
+      this.rangeList = [
+        {
+          ChannelType: 5,
+          ChannelNumber: 1,
+          Parameter: {
+            Name: '',
+          },
+          alarm: [],
+          Ranges: [],
+          Func: 0,
+          Byte: 0,
+          Modbus: null,
+          Status: -1,
+          SequenceNumber: -1
+        }
+      ];
+    }
+
+    // 通信参数
+    this.infomation = {
+      BaudRate: information.BaudRate ? information.BaudRate.Id : 0, // 波特率
+      dataBit: information.DataBit ? information.DataBit.Id : 0,  // 数据位
+      stopBit: information.StopBit ? information.StopBit.Id : 0,  // 停止位
+      checkDigit: information.ParityBit ? information.ParityBit.Id : 0, // 校验位
+      communiInterface: information.CorrespondType ? information.CorrespondType.Id : 0, // 通信接口地址
+      subAdr: information.SlaveAddress ? information.SlaveAddress.Id : 0,  // 从机地址
+      heartbeat: information.HeartBeat ? information.HeartBeat.Id : 0,  // 心跳包频率
+      dataType: information.DataType ? information.DataType.Id : 0
+    };
   }
 
   // 初始化下拉列表
@@ -292,6 +300,7 @@ export class TerConfigComponent implements OnInit {
   addAnalogue() {
     const n = this.analogueList.length;
     this.analogueList.push({
+      ChannelType: 1,
       ChannelNumber: n + 1,
       Parameter: {
         Name: '',
@@ -311,6 +320,7 @@ export class TerConfigComponent implements OnInit {
   addSwitch() {
     const n = this.switchList.length;
     this.switchList.push({
+      ChannelType: 3,
       ChannelNumber: n + 1,
       Parameter: {
         Name: '',
@@ -328,6 +338,7 @@ export class TerConfigComponent implements OnInit {
   addRange() {
     const n = this.rangeList.length;
     this.rangeList.push({
+      ChannelType: 5,
       ChannelNumber: n + 1,
       Parameter: {
         Name: '',
@@ -342,8 +353,11 @@ export class TerConfigComponent implements OnInit {
     });
   }
 
+
+
   // 移除模拟量
-  removeAnalogue(index) {
+  removeAnalogue(index, data) {
+    this.removeItem(data);
     this.analogueList.splice(index, 1);
   }
 
@@ -355,6 +369,18 @@ export class TerConfigComponent implements OnInit {
   // 移除状态量
   removeRange(index) {
     this.rangeList.splice(index, 1);
+
+  }
+
+  // 移除
+  removeItem(data) {
+    console.log('delete', data);
+    this.terminalService.deleteItem(data)
+      .subscribe( () => {
+        console.log('delete');
+      }, err => {
+        console.log(err);
+      });
   }
 
 
@@ -378,16 +404,40 @@ export class TerConfigComponent implements OnInit {
       }
 
     }
+    switch (data.ChannelType) {
+      case 1:
+        this.save1(data);
+        break;
+      case 3:
+        this.save2(data);
+        break;
+      case 5:
+        this.save3(data);
+        break;
+    }
   }
 
   // 设置位置
   setStatus(data, status, sn?) {
+    console.log(data);
     data.Status = status;
     if (status === 1) {
       data.SequenceNumber = sn;
     } else {
       data.SequenceNumber = -1;
     }
+    switch (data.ChannelType) {
+      case 1:
+        this.save1(data);
+        break;
+      case 3:
+        this.save2(data);
+        break;
+      case 5:
+        this.save3(data);
+        break;
+    }
+
   }
 
   // 添加告警规则
@@ -396,7 +446,18 @@ export class TerConfigComponent implements OnInit {
     modalRef.componentInstance.currentData = data;
     modalRef.result.then((result) => {
       data.alarm = result;
-      console.log(data, this.analogueList);
+      switch (data.ChannelType) {
+        case 1:
+          this.save1(data);
+          break;
+        case 3:
+          this.save2(data);
+          break;
+        case 5:
+          this.save3(data);
+          break;
+      }
+      // console.log(data, this.analogueList);
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       console.log(reason);
@@ -407,13 +468,15 @@ export class TerConfigComponent implements OnInit {
   // 状态设置
   setSwitchStatus(outerIndex, status) {
     this.switchList[outerIndex].SwitchStatus = status;
+    this.save2(this.switchList[outerIndex]);
   }
 
   openRange(data) {
-    const modalRef = this.modalService.open(RangeConfigComponent, {size: 'lg'});
+    const modalRef = this.modalService.open(RangeConfigComponent, {size: 'lg', backdrop: 'static'});
     modalRef.componentInstance.currentData = data;
     modalRef.result.then((result) => {
       data.Ranges = result;
+      this.save3(data);
       console.log(result, data);
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -428,6 +491,174 @@ export class TerConfigComponent implements OnInit {
     }
   }
 
+
+  // 模拟通道
+  save1(data) {
+    const that = this;
+    if (data.ChannelNumber > 24) {
+      this.nzmodalService.error({
+        nzTitle: '通道配置更新失败',
+        nzContent: '模拟通道不能超过24'
+      });
+      return false;
+    }
+    if (!data.Parameter.Name) {
+      return false;
+    }
+    if (!data.Func || !data.Byte || !data.Modbus || !data.Parameter.Scale) {
+      return false;
+    }
+    const post = {
+      ChannelType: data.ChannelType,
+      ChannelNumber: data.ChannelNumber,
+      Name: data.Parameter.Name,
+      Scale: data.Parameter.Scale,
+      Unit: data.Parameter.Unit,
+      Alarm: data.alarm,
+      Func: parseInt(data.Func),
+      Byte: parseInt(data.Byte),
+      Modbus: data.Modbus,
+      Status: data.Status,
+      SequenceNumber: data.SequenceNumber
+    };
+    this.sendItem(post);
+  }
+
+  // 开关通道
+  save2(data) {
+    const that = this;
+    if (data.ChannelNumber > 48) {
+      this.nzmodalService.error({
+        nzTitle: '通道配置更新失败',
+        nzContent: '开关通道不能超过48'
+      });
+      return false;
+    }
+    if (!data.Parameter.Name) {
+      return false;
+    }
+    if ((parseInt(data.Func) !== 99) && (!data.Func || !data.BitAddress || !data.Modbus)) {
+      return false;
+    }
+    if (parseInt(data.Func) === 1) {
+      if (data.BitAddress !== 1) {
+        this.nzmodalService.error({
+          nzTitle: `开关通道位地址错误`,
+          nzContent: '功能码为01，对应位地址为1'
+        });
+        return false;
+      }
+    }
+    if (parseInt(data.Func) === 2) {
+      if (data.BitAddress !== 1) {
+        this.nzmodalService.error({
+          nzTitle: `开关通道位地址错误`,
+          nzContent: '功能码为02，对应位地址为1'
+        });
+        return false;
+      }
+    }
+    if (parseInt(data.Func) === 3) {
+
+      if (data.BitAddress < 1 || data.BitAddress > 16) {
+        this.nzmodalService.error({
+          nzTitle: `开关通道位地址错误`,
+          nzContent: '功能码为03，对应位地址范围为1-16'
+        });
+        return false;
+      }
+    }
+    let post = {
+      ChannelType: data.ChannelType,
+      ChannelNumber: data.ChannelNumber,
+      Name: data.Parameter.Name,
+      Alarm: data.alarm,
+      Func: parseInt(data.Func),
+      Modbus: data.Modbus,
+      BitAddress: data.BitAddress,
+      Status: data.Status,
+      SwitchStatus: data.SwitchStatus,
+      SequenceNumber: data.SequenceNumber
+    };
+    this.sendItem(post);
+  }
+
+  // 状态通道
+  save3(data) {
+    if (data.ChannelNumber > 12) {
+      this.nzmodalService.error({
+        nzTitle: '通道配置更新失败',
+        nzContent: '状态通道不能超过12'
+      });
+      return false;
+    }
+    if (!data.Func || !data.Byte || !data.Modbus) {
+      return false;
+    }
+    let post = {
+      ChannelType: data.ChannelType,
+      ChannelNumber: data.ChannelNumber,
+      Name: data.Parameter.Name,
+      Alarm: data.alarm,
+      Func: parseInt(data.Func),
+      Byte: parseInt(data.Byte),
+      Modbus: data.Modbus,
+      Status: data.Status,
+      Ranges: data.Ranges,
+      SequenceNumber: data.SequenceNumber
+    };
+    this.sendItem(post);
+  }
+
+  // 通信参数
+  save4() {
+    if (!this.infomation.BaudRate || !this.infomation.dataBit || !this.infomation.stopBit || !this.infomation.checkDigit || !this.infomation.communiInterface || !this.infomation.subAdr || !this.infomation.heartbeat || !this.infomation.dataType) {
+      return false;
+    }
+    let post = {
+      BaudRate: parseInt(this.infomation.BaudRate),
+      dataBit: parseInt(this.infomation.dataBit),
+      stopBit: parseInt(this.infomation.stopBit),
+      checkDigit: parseInt(this.infomation.checkDigit),
+      communiInterface: parseInt(this.infomation.communiInterface),
+      subAdr: parseInt(this.infomation.subAdr),
+      heartbeat: parseInt(this.infomation.heartbeat),
+      dataType: parseInt(this.infomation.dataType)
+    };
+    this.sendItem(post);
+  }
+
+  // 单项发送请求
+  sendItem(post) {
+    // post.code = this.code;
+    this.terminalService.saveItem(post)
+      .subscribe(() => {
+        console.log('success');
+      }, err => {
+        console.log(err);
+      });
+  }
+
+  // 单项删除
+  deteleItem(data) {
+    this.terminalService.deleteItem(data)
+      .subscribe(() => {
+
+      }, err => {
+        console.log(err);
+      });
+  }
+
+  // 版本回退
+  rollback() {
+    this. terminalService.rollbackConfig()
+      .subscribe( data => {
+        const channels = data.channelConfigs;
+        const information = data.communication;
+
+        this.dataDeal(channels, information);
+      });
+  }
 
   save() {
     const that = this;
@@ -448,7 +679,7 @@ export class TerConfigComponent implements OnInit {
         if (!this.analogueList[i].Func || !this.analogueList[i].Byte || !this.analogueList[i].Modbus || !this.analogueList[i].Parameter.Scale) {
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
-            nzContent: `模拟通道[ ${i} ]配置信息不全 ，参数不能为0 `
+            nzContent: `模拟通道[ ${this.analogueList[i].ChannelNumber} ]配置信息不全 ，参数不能为0 `
           });
           return false;
         }
@@ -514,7 +745,7 @@ export class TerConfigComponent implements OnInit {
 
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
-            nzContent: `开关通道[${i}]配置信息不全 ，参数不能为0 `
+            nzContent: `开关通道[${this.switchList[i].ChannelNumber}]配置信息不全 ，参数不能为0 `
           });
           return false;
         }
