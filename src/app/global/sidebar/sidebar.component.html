@@ -1,7 +1,7 @@
 
 <mat-nav-list>
   <ul>
-    <li [class.collapse1]="!submenuShow[0]" [class.expand]="submenuShow[0]" *ngIf="user&&user.Role.RoleId > 1">
+    <li [class.collapse1]="!submenuShow[0]" [class.expand]="submenuShow[0]" *ngIf="user&&user.Role.Id > 1">
       <a class="sidebar_title" (click)="submenuToggle(0)">
         主监控台
         <i class="fa fa-angle-right"></i>
@@ -45,54 +45,54 @@
         <i class="fa fa-angle-right"></i>
       </a>
       <ul class="sub_menu">
-        <li *ngIf="user&&user.Role.RoleId > 1">
+        <li *ngIf="user&&user.Role.Id > 1">
           <a routerLink="/admin/cluster" routerLinkActive="active" mat-list-item>
             <!--<i class="fa fa-cubes"></i>-->
             <img src="assets/icons/icon_cluster.png" alt="">
             集群管理
           </a>
         </li>
-        <li *ngIf="user&&user.Role.RoleId > 1">
+        <li *ngIf="user&&user.Role.Id > 1">
           <a routerLink="/admin/attendance" routerLinkActive="active" mat-list-item>
             <i class="fa fa-cubes"></i>
             <!--<img src="assets/icons/icon_cluster.png" alt="">-->
             考勤管理
           </a>
         </li>
-        <li *ngIf="user&&user.Role.RoleId > 1">
+        <li *ngIf="user&&user.Role.Id > 1">
           <a routerLink="/admin/equipments" routerLinkActive="active" mat-list-item>
             <!--<i class="fa fa-fire"></i>-->
             <img src="assets/icons/equip.png" alt="">
             设备信息
           </a>
         </li>
-        <li *ngIf="user&&user.Role.RoleId<=10">
+        <li *ngIf="user&&user.Role.Id<=10">
           <a routerLink="/admin/terminal" routerLinkActive="active" mat-list-item>
             <!--<i class="fa fa-sitemap"></i>-->
             <img src="assets/icons/icon_term.png" alt="">
             终端管理
           </a>
         </li>
-        <li *ngIf="user&&user.Role.RoleId<=10">
+        <li *ngIf="user&&user.Role.Id<=10">
           <a routerLink="/admin/video" routerLinkActive="active" mat-list-item>
             <i class="fa fa-video-camera"></i>
             视频管理
           </a>
         </li>
-        <li *ngIf="user&&user.Role.RoleId<=10">
+        <li *ngIf="user&&user.Role.Id<=10">
           <a routerLink="/admin/face-recognize" routerLinkActive="active" mat-list-item>
             <i class="fa fa-user-circle-o"></i>
             人脸识别
           </a>
         </li>
-        <li *ngIf="user && user.Role.RoleId > 1 && user.Role.RoleId<=10">
+        <li *ngIf="user && user.Role.Id > 1 && user.Role.Id<=10">
           <a routerLink="/admin/template" routerLinkActive="active" mat-list-item>
             <!--<i class="fa fa-newspaper-o"></i>-->
             <img src="assets/icons/icon_template.png" alt="">
             模板管理
           </a>
         </li>
-        <li *ngIf="user && user.Role.RoleId<=10">
+        <li *ngIf="user && user.Role.Id<=10">
           <a routerLink="/admin/bluetooth" routerLinkActive="active" mat-list-item>
             <i class="fa fa-bluetooth"></i>
             蓝牙管理
@@ -143,7 +143,7 @@
       </ul>
     </li>
 
-    <li [class.collapse1]="!submenuShow[3]" [class.expand]="submenuShow[3]" *ngIf="user && user.Role.RoleId <=1">
+    <li [class.collapse1]="!submenuShow[3]" [class.expand]="submenuShow[3]" *ngIf="user && user.Role.Id <=1">
       <a class="sidebar_title" (click)="submenuToggle(3)">
         其他
         <i class="fa fa-angle-right"></i>

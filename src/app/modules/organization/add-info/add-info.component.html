@@ -79,8 +79,8 @@
       </div>
     </div>
   </div>
-  <hr style="margin-top: 6px;" *ngIf="editing && currentUser.Role.RoleId < 10">
-  <div class="row" *ngIf="editing && currentUser.Role.RoleId < 10">
+  <hr style="margin-top: 6px;" *ngIf="editing && currentUser.Role.Id < 10">
+  <div class="row" *ngIf="editing && currentUser.Role.Id < 10">
     <div class="form-group col-6 flex">
       <label class="control-label" style="font-size: 15px; margin-right: 6px;">显示企业标识</label>
       <!--<input [(ngModel)]="data.showBrand"
@@ -104,7 +104,7 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="editing && currentUser.Role.RoleId < 10 && data.showBrand">
+  <div class="row" *ngIf="editing && currentUser.Role.Id < 10 && data.showBrand">
     <div class="form-group col-6 ">
       <div class="input-group">
         <span class="input-group-append">
@@ -138,7 +138,7 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="editing && currentUser.Role.RoleId < 10">
+  <div class="row" *ngIf="editing && currentUser.Role.Id < 10">
 
     <div class="form-group col-6 flex">
       <label class="control-label" style="font-size: 15px; margin-right: 6px;">是否主管单位</label>
@@ -167,7 +167,7 @@
 </div>
 <div class="modal-footer">
   <!--TODO: Temp User-->  <!--[disabled]="!name||typeId===-1"-->
-  <button class="btn btn_info" type="button" *ngIf="editing || currentUser.Role.RoleId <= 10"
+  <button class="btn btn_info" type="button" *ngIf="editing || currentUser.Role.Id <= 10"
           [disabled]="!data.name || !data.typeId"
           nz-button [nzLoading]="isLoading"
           (click)="save()"><span class="">保存</span></button>

@@ -22,7 +22,7 @@
     <nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning">
       <table class="table">
         <thead class="bg_light_primary">
-        <th *ngIf="user && user.Role.RoleId === 1">
+        <th *ngIf="user && user.Role.Id === 1">
           <div class="checkbox c-checkbox white">
             <label>
               <input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();">
@@ -39,7 +39,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let data of dataLists; let i = index">
-          <td *ngIf="user && user.Role.RoleId === 1">
+          <td *ngIf="user && user.Role.Id === 1">
             <div class="checkbox c-checkbox">
               <label>
                 <input type="checkbox" [(ngModel)]="data.checkDelete" (change)="checkDel(data);">
@@ -58,11 +58,11 @@
               查看
             </a>-->
             <button class="btn btn_info btn-sm ml-2" title="修改" (click)="editData(data)"
-                    *ngIf="user && user.Role.RoleId === 1">
+                    *ngIf="user && user.Role.Id === 1">
               修改
             </button>
             <button class="btn btn-danger btn-sm ml-2" title="删除" (click)="delete(data.Uid, data.Name)"
-                    *ngIf="user && user.Role.RoleId === 1">
+                    *ngIf="user && user.Role.Id === 1">
               删除
             </button>
           </td>
@@ -83,13 +83,13 @@
   <div class="t_bottom">
     <div class="pull-left">
       <button class="btn btn_info" (click)="deleteG()"
-              *ngIf="user && user.Role.RoleId === 1"
+              *ngIf="user && user.Role.Id === 1"
               nz-button [nzLoading]="isLoading">
         批量删除
       </button>
 
       <button class="btn btn_info ml-3" (click)="addData()"
-              *ngIf="user && user.Role.RoleId === 1">
+              *ngIf="user && user.Role.Id === 1">
         新增蓝牙
       </button>
 

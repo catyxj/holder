@@ -68,20 +68,21 @@ export class UserService {
   getUser(): Observable< any > {
     console.log('environment:', environment.production);
 
-    if (!environment.production) {
+    /*if (!environment.production) {
       return this.http.get< any >('assets/server/user.json');
     } else {
-      return this.http.get< any >('/user')
-        .pipe(
-          tap((val) => {
-            if (!val) {
-              this.isLoggedIn = 'false';
-              sessionStorage.setItem('user', 'false');
-            }
-          }),
-          catchError(this.handleError)
-        );
-    }
+
+    }*/
+    return this.http.get< any >('/user')
+      .pipe(
+        tap((val) => {
+          if (!val) {
+            this.isLoggedIn = 'false';
+            sessionStorage.setItem('user', 'false');
+          }
+        }),
+        catchError(this.handleError)
+      );
 
 
   }

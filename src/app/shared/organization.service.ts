@@ -20,16 +20,16 @@ export class OrganizationService {
   // private orgTypeUrl = 'assets/server/organization_type_list.json';
 
 
-  private orgUrl = '/organization_list';
-  private orgAllUrl = '/organization_list_all';
-  private orgTypeUrl = '/organization_type_list/';
+  private orgUrl = '/org_list';
+  private orgAllUrl = '/org_names';
+  private orgTypeUrl = '/org_types';
 
 
 
   constructor(private http: HttpClient) { }
 
-  getOrganization(n: number, pageSize: number, search?: string): Observable <any> {
-    const url = `${this.orgUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
+  getOrganization(n: number, pageSize: number, search?: string, order?: string, sort?: string): Observable <any> {
+    const url = `${this.orgUrl}/?page=${n}&rows=${pageSize}&search=${search}&order=${order}&sort=${sort}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -56,7 +56,7 @@ export class OrganizationService {
 
   // 删除
   deleteOrg(uid): Observable<any> {
-    return this.http.post('/organization_delete/', uid, httpOptions)
+    return this.http.post('/org_delete/', uid, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -65,7 +65,7 @@ export class OrganizationService {
 
   // 保存
   save(data): Observable<any> {
-    return this.http.post('/organization_update/', data, httpOptions)
+    return this.http.post('/org_update/', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -74,7 +74,7 @@ export class OrganizationService {
 
   // 添加企业
   add(data): Observable<any> {
-    return this.http.post('/organization_add/', data, httpOptions)
+    return this.http.post('/org_add/', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

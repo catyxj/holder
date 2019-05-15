@@ -41,6 +41,7 @@ export class AddInfoComponent implements OnInit {
       aProvince: 0,
       aCity: 0,
       aRegion: 0,
+      locationName: '全国',
       address: '',
       isSuper: false,
       showBrand: false,
@@ -69,10 +70,12 @@ export class AddInfoComponent implements OnInit {
       if ( parseInt(this.data.aProvince) === 0) {
         this.cities = [];
         this.regions = [];
+        this.data.locationName = '全国';
         return;
       }
       if ( parseInt(this.data.aProvince) === this.locations[i].LocationId ) {
         this.cities = this.locations[i].cities;
+        this.data.locationName = this.locations[i].LocationName;
       }
     }
     this.data.aCity = 0;
@@ -83,12 +86,18 @@ export class AddInfoComponent implements OnInit {
     for (let i = 0; i < this.cities.length; i++) {
       if ( parseInt(this.data.aCity) === this.cities[i].LocationId ) {
         this.regions = this.cities[i].regions;
+        this.data.locationName = this.cities[i].LocationName;
       }
     }
     this.data.location = parseInt(this.data.aCity);
   }
 
   changeRegion() {
+    for (let i = 0; i < this.regions.length; i++) {
+      if ( parseInt(this.data.aRegion) === this.regions[i].LocationId ) {
+        this.data.locationName = this.regions[i].LocationName;
+      }
+    }
     this.data.location = parseInt(this.data.aRegion);
   }
 
@@ -136,16 +145,19 @@ export class AddInfoComponent implements OnInit {
   save() {
     let postData = {
       name: this.data.name,
-      type_id: parseInt(this.data.typeId),
+      type: parseInt(this.data.typeId),
       address: this.data.address,
-      location_id: this.data.location,
+      location: this.data.location,
+      location_name : this.data.locationName,
       show_brand: null,
       brand_name: null,
       is_super: null,
       brand_img: '',
       is_ept_ctl: false
     };
-    if (this.currentUser.Role.RoleId <= 2) {
+
+
+    if (this.currentUser.Role.Id <= 2) {
       postData.show_brand = this.data.showBrand;
       postData.brand_name = this.data.brandName;
       postData.is_ept_ctl = this.data.is_ept_ctl;

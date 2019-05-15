@@ -4,28 +4,28 @@
 
     <!--企业标识-->
     <a class="navbar-brand" routerLink="/admin" style="margin-left:20px;"
-       *ngIf="user && (!user.Organization || ((!user.Organization.ShowBrand) && (!user.Organization.SuperOrganization || !user.Organization.SuperOrganization.ShowBrand)))">
+       *ngIf="user && (!user.Org || (!user.Org.ShowBrand))">
       <!--<img src="assets/images/light.png"  height="30" alt="">-->
       <h2 style="color: #ffffff;"> LUKEEP</h2>
     </a>
 
     <!--显示企业标识-->
-    <a class="navbar-brand" routerLink="/admin" *ngIf="user && user.Role.RoleId===10 && (user.Organization && user.Organization.ShowBrand)">
-      <h3 *ngIf="!user.Organization.BrandImageUrl" style="color: #ffffff;">
-        {{user.Organization.BrandName}}
+    <a class="navbar-brand" routerLink="/admin" *ngIf="user && user.Role.RoleId===10 && (user.Org && user.Org.ShowBrand)">
+      <h3 *ngIf="!user.Org.BrandImageUrl" style="color: #ffffff;">
+        {{user.Org.BrandName}}
       </h3>
-      <span *ngIf="user.Organization.BrandImageUrl" >
-        <img src="{{user.Organization.BrandImageUrl}}" alt="" height="30">
+      <span *ngIf="user.Org.BrandImageUrl" >
+        <img src="{{user.Org.BrandImageUrl}}" alt="" height="30">
       </span>
     </a>
 
     <a class="navbar-brand" routerLink="/admin"
-       *ngIf="user && user.Role.RoleId===11 && (user.Organization.SuperOrganization && user.Organization.SuperOrganization.ShowBrand)">
-      <h3 *ngIf="!user.Organization.SuperOrganization.BrandImageUrl" style="color: #ffffff;">
-        {{user.Organization.SuperOrganization.BrandName}}
+       *ngIf="user && user.Role.Id===11 && user.Org.ShowBrand">
+      <h3 *ngIf="!user.Org.BrandImageUrl" style="color: #ffffff;">
+        {{user.Org.BrandName}}
       </h3>
-      <span *ngIf="user.Organization.SuperOrganization.BrandImageUrl" >
-        <img src="{{user.Organization.SuperOrganization.BrandImageUrl}}" alt="" height="30" style="max-width: 180px;">
+      <span *ngIf="user.Org.BrandImageUrl" >
+        <img src="{{user.Org.BrandImageUrl}}" alt="" height="30" style="max-width: 180px;">
       </span>
     </a>
 

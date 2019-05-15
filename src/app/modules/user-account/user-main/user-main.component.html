@@ -31,7 +31,7 @@
     <nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning">
     <table class="table">
       <thead class="bg_light_primary">
-      <th *ngIf="user && user.Role.RoleId<=10">
+      <th *ngIf="user && user.Role.Id<=10">
         <div class="checkbox c-checkbox white">
           <label>
             <input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();">
@@ -47,7 +47,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let account of accounts">
-        <td *ngIf="user && user.Role.RoleId<=10">
+        <td *ngIf="user && user.Role.Id<=10">
           <div class="checkbox c-checkbox">
             <label>
               <input type="checkbox" [(ngModel)]="account.checkDelete" (change)="checkDel(account);" [disabled]="user.Uid === account.Uid">
@@ -55,17 +55,17 @@
           </div>
         </td>
         <td> {{ account.Username }} </td>
-        <td> {{ account.Role.Name }} </td>
+        <td> {{ account.Role__Name }} </td>
         <td> {{ account.Name }} </td>
-        <td> {{ account.Organization?.Name }}  </td>
+        <td> {{ account.Org__Name }}  </td>
         <td> {{ account.stat.name }} </td>
         <td>
           <button class="btn btn-sm btn_info" (click)="open(account)"
-                  *ngIf="user && user.Role.RoleId<=10">
+                  *ngIf="user && user.Role.Id<=10">
             设置
           </button>
           <button class="btn btn-sm btn_info" (click)="open(account)"
-                  *ngIf="user && user.Role.RoleId>10">
+                  *ngIf="user && user.Role.Id>10">
             查看
           </button>
 
@@ -89,7 +89,7 @@
       <div class="pull-left">
         <button class="btn btn_info" (click)="deleteG()"
                 nz-button [nzLoading]="isLoading"
-                *ngIf="user && user.Role.RoleId<=10">
+                *ngIf="user && user.Role.Id<=10">
           批量删除
         </button>
       </div>

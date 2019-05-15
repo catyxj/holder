@@ -25,7 +25,9 @@ export class OrgMainComponent implements OnInit {
   page = 1;
   totalItems = 0;
   organizations: any[];
-  search: string;
+  search = '';
+  order = '';
+  sort = '';
   deleteList = [];
   allDelete = false;
   locations: any;
@@ -65,12 +67,12 @@ export class OrgMainComponent implements OnInit {
   // 获取企业信息
   getOrganization(): void {
     this.isSpinning = true;
-    this.orgService.getOrganization(this.page, this.pageSize, this.search)
+    this.orgService.getOrganization(this.page, this.pageSize, this.search, this.order, this.sort)
       .subscribe(organization => {
         this.isSpinning = false;
         this.totalItems = organization.counts;
         this.organizations = organization.params;
-        if (this.organizations.length <= 0) {
+        if (!this.organizations || this.organizations.length <= 0) {
           return;
         }
         for (let i = 0; i < this.organizations.length; i++) {

@@ -30,11 +30,12 @@ export class UserloginGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     const url: string = state.url;
 
-    if (environment.production) {
-      return this.GuardLogin(url);
+    /*if (environment.production) {
+
     } else {
       return true;
-    }
+    }*/
+    return this.GuardLogin(url);
 
   }
 

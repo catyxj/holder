@@ -28,9 +28,9 @@
       </tr>
       <tr>
         <th>用户角色</th>
-        <td *ngIf="!editing">{{ currentData.Role.Name }}</td>
+        <td *ngIf="!editing">{{ currentData.Role__Name }}</td>
         <td *ngIf="editing">
-          <select [(ngModel)]="currentData.Role.RoleId" class="form-control">
+          <select [(ngModel)]="currentData.Role__Role" class="form-control">
             <option *ngFor="let role of aroles" [value]="role.id">{{role.name}}</option>
           </select>
         </td>
@@ -46,7 +46,7 @@
       </tr>
       <tr>
         <th>所属企业</th>
-        <td> <span *ngIf="currentData.Organization"> {{ currentData.Organization.Name }} </span> </td>
+        <td> <span> {{ currentData.Org__Name }} </span> </td>
 
       </tr>
       <tr>
@@ -64,14 +64,14 @@
     <button *ngIf="editing" type="button" class="btn btn_info" (click)="reset()">
       <i class="fa fa-reply"></i> 取消
     </button>
-    <button *ngIf="!editing && currentData &&  currentUser.Role.RoleId < currentData.Role.RoleId && currentData.Status == 0" type="button" class="btn btn_info" (click)="active()">
+    <button *ngIf="!editing && currentData &&  currentUser.Role.Id < currentData.Role__Role && currentData.Status == 0" type="button" class="btn btn_info" (click)="active()">
       <i class="fa fa-check"></i> 激活
     </button>
 
-    <button *ngIf="!editing && currentData && currentUser.Role.RoleId < currentData.Role.RoleId" type="button" class="btn btn_info" (click)="edit()">
+    <button *ngIf="!editing && currentData && currentUser.Role.Id < currentData.Role__Role" type="button" class="btn btn_info" (click)="edit()">
       <i class="fa fa-edit"></i> 编辑
     </button>
-    <button type="button" class="btn btn-danger" (click)="deleteUser()" *ngIf="!editing && currentData && currentUser.Role.RoleId < currentData.Role.RoleId">
+    <button type="button" class="btn btn-danger" (click)="deleteUser()" *ngIf="!editing && currentData && currentUser.Role.Id < currentData.Role__Role">
       <i class="fa fa-trash-o"></i>删除
     </button>
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss('close')">关闭</button>

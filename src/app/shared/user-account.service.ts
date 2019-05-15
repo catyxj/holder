@@ -34,8 +34,8 @@ export class UserAccountService {
       );
   }
 
-  getAccounts(n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.userAccountUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
+  getAccounts(n: number, pageSize: number, search?: string, order?: string, sort?: string): Observable<any> {
+    const url = `${this.userAccountUrl}/?page=${n}&rows=${pageSize}&search=${search}&order=${order}&sort=${sort}`;
     return this.http.get<any>(url)
       .pipe(
         // retry(3), // retry a failed request up to 3 times

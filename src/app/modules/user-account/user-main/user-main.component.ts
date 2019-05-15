@@ -30,7 +30,9 @@ export class UserMainComponent implements OnInit {
     {id: 1, name: '通常'},
     {id: 2, name: '禁用'}
   ];
-  search: string;
+  search = '';
+  order = '';
+  sort = '';
   deleteList = [];
   allDelete = false;
   pageSize = 10;
@@ -83,8 +85,8 @@ export class UserMainComponent implements OnInit {
         // console.log(this.roles);
         for ( let i = 0; i < this.roles.length; i++) {
           let d = this.roles[i];
-          if (d.RoleId > this.user.Role.RoleId) {
-            this.aroles.push({ id: d.RoleId, name: d.Name });
+          if (d.Id > this.user.Role.Id) {
+            this.aroles.push({ id: d.Id, name: d.Name });
           }
         }
         // console.log(this.aroles);
@@ -94,7 +96,7 @@ export class UserMainComponent implements OnInit {
   // -------获取账号信息--------
   getUserAccount(): void {
     this.isSpinning = true;
-    this.userAccountService.getAccounts(this.page, this.pageSize, this.search)
+    this.userAccountService.getAccounts(this.page, this.pageSize, this.search, this.order, this.sort)
       .subscribe(account => {
         this.totalItems = account.counts;
         this.accounts = account.params;

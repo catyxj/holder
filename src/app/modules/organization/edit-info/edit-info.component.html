@@ -31,7 +31,7 @@
         <select [(ngModel)]="data.typeId"
                 [disabled]="!editing"
                 class="form-control">
-          <option *ngFor="let type of orgTypes" [value]="type.TypeId" >{{type.Name}}</option>
+          <option *ngFor="let type of orgTypes" [value]="type.Id" >{{type.Name}}</option>
         </select>
       </div>
     </div>
@@ -41,7 +41,7 @@
     <div class="form-location col-md-6 col-sm-6 flex flex-row" style="justify-content:space-between;">
       <div class="form-group" style="flex: 1;">
         <select [(ngModel)]="data.aProvince"
-                [disabled]="currentUser.Role.RoleId > 10"
+                [disabled]="currentUser.Role.Id > 10"
                 (change)="changeProvince();"
                 class="form-control">
           <option *ngFor="let prov of locations" [value]="prov.LocationId">{{prov.Name}}</option>
@@ -58,7 +58,7 @@
       {{data.aProvince.cities}}
       <div class="form-group" style="flex: 1;">
         <select [(ngModel)]="data.aRegion"
-                [disabled]="currentUser.Role.RoleId > 10 || !data.aCity || data.aCity == 0"
+                [disabled]="currentUser.Role.Id > 10 || !data.aCity || data.aCity == 0"
                 (change)="changeRegion();"
                 class="form-control">
           <option *ngFor="let region of regions" [value]="region.LocationId" >{{region.Name}}</option>
@@ -73,14 +73,14 @@
           </span>
         </span>
         <input type="text" [(ngModel)]="data.address"
-               [disabled]="currentUser.Role.RoleId > 10"
-               class="form-control ng-pristine ng-valid ng-touched has-success"
+               [disabled]="currentUser.Role.Id > 10"
+               class="form-control"
                placeholder="输入地址详情">
       </div>
     </div>
   </div>
-  <hr style="margin-top: 6px;" *ngIf="editing && currentUser.Role.RoleId < 10">
-  <div class="row" *ngIf="editing && currentUser.Role.RoleId < 10">
+  <hr style="margin-top: 6px;" *ngIf="editing && currentUser.Role.Id < 10">
+  <div class="row" *ngIf="editing && currentUser.Role.Id < 10">
     <div class="form-group col-6 flex">
       <label class="control-label" style="font-size: 15px; margin-right: 6px;">显示企业标识</label>
       <!--<input [(ngModel)]="data.showBrand"
@@ -103,7 +103,7 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="editing && currentUser.Role.RoleId < 10 && data.showBrand">
+  <div class="row" *ngIf="editing && currentUser.Role.Id < 10 && data.showBrand">
     <div class="form-group col-6">
       <div class="input-group">
         <span class="input-group-append">
@@ -135,7 +135,7 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="editing && currentUser.Role.RoleId < 10">
+  <div class="row" *ngIf="editing && currentUser.Role.Id < 10">
     <div class="form-group col-6 flex">
       <label class="control-label" style="font-size: 15px; margin-right: 6px;">是否主管单位</label>
       <!--<input [(ngModel)]="data.isSuper"
@@ -165,7 +165,7 @@
 </div>
 <div class="modal-footer">
   <!--TODO: Temp User-->  <!--[disabled]="!name||typeId===-1"-->
-  <button class="btn btn_info" type="button" *ngIf="editing || currentUser.Role.RoleId <= 10"
+  <button class="btn btn_info" type="button" *ngIf="editing || currentUser.Role.Id <= 10"
           [disabled]="!data.name || !data.typeId"
           nz-button [nzLoading]="isLoading"
            (click)="save()"><span class="">保存</span></button>

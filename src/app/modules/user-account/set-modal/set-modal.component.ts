@@ -24,10 +24,11 @@ export class SetModalComponent implements OnInit {
               private userAccountService: UserAccountService) { }
 
   ngOnInit() {
+    // console.log(this.currentData, this.currentUser, this.aroles, this.status);
     this.currentData.aPassword = '';
     this.currentDataCopy = {
       name : this.currentData.Name,
-      role: this.currentData.Role.RoleId,
+      role: this.currentData.Role__Role,
       status : this.currentData.Status
   };
     // this.currentDataCopy.org = this.currentData.Organization.Uid;
@@ -48,7 +49,7 @@ export class SetModalComponent implements OnInit {
     this.currentData.Name = this.currentDataCopy.name;
     this.currentData.aPassword = '';
     this.currentData.resetPassowrd = false;
-    this.currentData.Role.RoleId = this.currentDataCopy.role;
+    this.currentData.Role__Role = this.currentDataCopy.role;
     this.currentData.Status = this.currentDataCopy.status;
     // this.currentData.aOrg = this.currentData.Organization ? this.currentData.Organization.Uid : "";
   }
@@ -58,9 +59,9 @@ export class SetModalComponent implements OnInit {
     let data = {
       uid: this.currentData.Uid,
       fullname: this.currentData.Name,
-      role: parseInt(this.currentData.Role.RoleId),
+      role: parseInt(this.currentData.Role__Role),
       stat: parseInt(this.currentData.Status),
-      org: this.currentData.Organization ? this.currentData.Organization.Uid : '',
+      // org: this.currentData.Org ? this.currentData.Org.Uid : '',
       password_new: null
     };
 

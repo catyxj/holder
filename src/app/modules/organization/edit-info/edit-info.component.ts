@@ -34,18 +34,19 @@ export class EditInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    console.log(this.currentUser, this.currentData);
     this.data = {
       name: this.currentData.Name,
-      typeId: this.currentData.Type.TypeId,
+      typeId: this.currentData.Type__Type,
       aProvince: 0,
       aCity: 0,
       aRegion: 0,
-      address: this.currentData.Address ? this.currentData.Address.Address : '',
+      address: this.currentData.Address,
       isSuper: this.currentData.IsSupervisor,
       showBrand: this.currentData.ShowBrand,
       brandName: this.currentData.BrandName,
-      is_ept_ctl: this.currentData.IsEptCtl
+      is_ept_ctl: this.currentData.IsEptCtl,
+      locationName: this.currentData.location_name,
     };
 
     this.brandImg = this.currentData.BrandImageUrl;
@@ -63,8 +64,8 @@ export class EditInfoComponent implements OnInit {
         this.locations = addr;
 
         let location;
-        if (this.currentData.Address) {
-          let locationId = this.currentData.Address.Location ? this.currentData.Address.Location.LocationId : 0;
+        if (this.currentData.Location) {
+          let locationId = this.currentData.Location ? this.currentData.Location : 0;
           if (locationId < 100) {
             location = locationId * 10000;
           } else if (locationId < 10000) {
@@ -120,10 +121,12 @@ export class EditInfoComponent implements OnInit {
     if (this.data.aProvince === 0) {
       this.cities = [];
       this.regions = [];
+      this.data.locationName = '全国';
     } else {
       for (let i = 0; i < this.locations.length; i++) {
         if (this.data.aProvince === this.locations[i].LocationId) {
           this.cities = this.locations[i].cities;
+          this.data.locationName = this.locations[i].LocationName;
         }
       }
     }
@@ -139,6 +142,7 @@ export class EditInfoComponent implements OnInit {
     for (let i = 0; i < this.cities.length; i++) {
       if (this.data.aCity === this.cities[i].LocationId) {
         this.regions = this.cities[i].regions;
+        this.data.locationName = this.cities[i].LocationName;
       }
     }
     this.data.location = this.data.aCity;
@@ -147,6 +151,11 @@ export class EditInfoComponent implements OnInit {
   changeRegion() {
     if (typeof(this.data.aRegion) !== 'number') {
       this.data.aRegion = parseInt(this.data.aRegion);
+    }
+    for (let i = 0; i < this.regions.length; i++) {
+      if ( this.data.aRegion === this.regions[i].LocationId ) {
+        this.data.locationName = this.regions[i].LocationName;
+      }
     }
     this.data.location = this.data.aRegion;
   }
@@ -201,16 +210,16 @@ export class EditInfoComponent implements OnInit {
     let postData = {
       uid: this.currentData.Uid,
       name: this.data.name,
-      type_id: parseInt(this.data.typeId),
+      type: parseInt(this.data.typeId),
       address: this.data.address,
-      location_id: this.data.location,
+      location: this.data.location,
       show_brand: null,
       brand_name: null,
       is_super: null,
       brand_img: '',
       is_ept_ctl: false
     };
-    if (this.currentUser.Role.RoleId <= 2) {
+    if (this.currentUser.Role.Id <= 2) {
       postData.show_brand = this.data.showBrand;
       postData.brand_name = this.data.brandName;
       postData.is_ept_ctl = this.data.is_ept_ctl;
