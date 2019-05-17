@@ -17,10 +17,13 @@ export class UserloginGuard implements CanActivate {
   constructor(  private userService: UserService, private router: Router ) {}
 
   GuardLogin(url): boolean {
-    if (sessionStorage.user === 'true') {
+    // sessionStorage.user === 'true'
+    console.log('status true');
+    if (localStorage.status === 'true') {
       return true;
     } else {
       // this.userService.redirectUrl = url;
+      console.log('status false');
       this.router.navigate(['/login']);
       return false;
     }
@@ -36,7 +39,6 @@ export class UserloginGuard implements CanActivate {
       return true;
     }*/
     return this.GuardLogin(url);
-
   }
 
   canLoad(route: Route): boolean {

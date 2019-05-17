@@ -44,8 +44,8 @@ export class AddAccountComponent implements OnInit {
         // console.log(this.roles);
         for ( let i = 0; i < this.roles.length; i++) {
           let d = this.roles[i];
-          if (d.RoleId > this.currentUser.Role.RoleId) {
-            this.aroles.push({ id: d.RoleId, name: d.Name });
+          if (d.Id > this.currentUser.Role.Id) {
+            this.aroles.push({ id: d.Id, name: d.Name });
           }
         }
         console.log(this.aroles);
@@ -57,7 +57,7 @@ export class AddAccountComponent implements OnInit {
     if (this.data.username.length < 6 || this.data.username.length > 16 ||
       this.data.password.length < 6 || this.data.username.length > 16 ||
       !this.data.role ||
-      this.data.role <= this.currentUser.Role.RoleId ||
+      this.data.role <= this.currentUser.Role.Id ||
       (this.data.role > 1 && this.data.org.length <= 0)) {
         this.isValid = false;
         return;

@@ -33,6 +33,7 @@ export class OrgMainComponent implements OnInit {
   locations: any;
   pageSize = 10;
   public isSpinning = false;
+  public isLoading = false;
 
   constructor(private userService: UserService,
               private orgService: OrganizationService,
@@ -167,8 +168,10 @@ export class OrgMainComponent implements OnInit {
   deleteG() {
     const cf = confirm(`确认删除选中企业 ？`);
     if (cf === true) {
+      this.isLoading = true;
       this.orgService.deleteOrg(this.deleteList)
         .subscribe( () => {
+          this.isLoading = false;
           Swal(
             '删除成功！',
             '',
@@ -176,6 +179,7 @@ export class OrgMainComponent implements OnInit {
           );
           this.pageChange();
         }, err => {
+          this.isLoading = false;
           Swal(
             '删除失败！',
             err,
@@ -210,6 +214,18 @@ export class OrgMainComponent implements OnInit {
     this.page = 1;
     this.pageChange();
   }
+
+  orderData(type) {
+    this.sort = type;
+    if (this.order === '') {
+      this.order = 'desc';
+    } else {
+      this.order = '';
+    }
+    this.pageChange();
+  }
+
+
 
   trackByUid(index, item) {
     return item.Uid;

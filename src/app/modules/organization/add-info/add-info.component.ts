@@ -155,7 +155,7 @@ export class AddInfoComponent implements OnInit {
       brand_img: '',
       is_ept_ctl: false
     };
-
+    console.log(this.data.typeId);
 
     if (this.currentUser.Role.Id <= 2) {
       postData.show_brand = this.data.showBrand;

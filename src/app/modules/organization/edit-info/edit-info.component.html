@@ -31,7 +31,9 @@
         <select [(ngModel)]="data.typeId"
                 [disabled]="!editing"
                 class="form-control">
-          <option *ngFor="let type of orgTypes" [value]="type.Id" >{{type.Name}}</option>
+          <option *ngFor="let type of orgTypes; let i = index;" [value]="type.Id" [disabled]="i===0">
+            {{type.Name}}
+          </option>
         </select>
       </div>
     </div>
@@ -166,7 +168,7 @@
 <div class="modal-footer">
   <!--TODO: Temp User-->  <!--[disabled]="!name||typeId===-1"-->
   <button class="btn btn_info" type="button" *ngIf="editing || currentUser.Role.Id <= 10"
-          [disabled]="!data.name || !data.typeId"
+          [disabled]="!data.name || !data.typeId || data.typeId==='0'"
           nz-button [nzLoading]="isLoading"
            (click)="save()"><span class="">保存</span></button>
   <button class="btn btn-default" type="button" (click)="cancel()">取消</button>

@@ -26,18 +26,14 @@ export class SetModalComponent implements OnInit {
   ngOnInit() {
     // console.log(this.currentData, this.currentUser, this.aroles, this.status);
     this.currentData.aPassword = '';
-    this.currentDataCopy = {
-      name : this.currentData.Name,
-      role: this.currentData.Role__Role,
-      status : this.currentData.Status
-  };
+    this.currentDataCopy = JSON.parse(JSON.stringify(this.currentData));
     // this.currentDataCopy.org = this.currentData.Organization.Uid;
     // console.log(this.currentUser, this.currentData);
   }
 
   // 编辑
   edit() {
-    if (!this.currentData) {
+    if (!this.currentDataCopy) {
       return;
     }
     this.editing = true;
@@ -46,30 +42,43 @@ export class SetModalComponent implements OnInit {
   // 取消
   reset() {
     this.editing = false;
-    this.currentData.Name = this.currentDataCopy.name;
-    this.currentData.aPassword = '';
-    this.currentData.resetPassowrd = false;
-    this.currentData.Role__Role = this.currentDataCopy.role;
-    this.currentData.Status = this.currentDataCopy.status;
+    this.currentDataCopy.Name = this.currentData.Name;
+    this.currentDataCopy.aPassword = '';
+    this.currentDataCopy.resetPassowrd = false;
+    this.currentDataCopy.Role__Role = this.currentData.Role__Role;
+    this.currentDataCopy.Status = this.currentData.Status;
     // this.currentData.aOrg = this.currentData.Organization ? this.currentData.Organization.Uid : "";
   }
 
   // 保存
   save() {
     let data = {
-      uid: this.currentData.Uid,
-      fullname: this.currentData.Name,
-      role: parseInt(this.currentData.Role__Role),
-      stat: parseInt(this.currentData.Status),
+      uid: this.currentDataCopy.Uid,
+      fullname: this.currentDataCopy.Name,
+      role: parseInt(this.currentDataCopy.Role__Role),
+      stat: parseInt(this.currentDataCopy.Status),
       // org: this.currentData.Org ? this.currentData.Org.Uid : '',
       password_new: null
     };
 
-    if (this.currentData.aPassword && this.currentData.aPassword.length > 0) {
-      data.password_new = this.currentData.aPassword;
+    if (this.currentDataCopy.aPassword && this.currentDataCopy.aPassword.length > 0) {
+      data.password_new = this.currentDataCopy.aPassword;
     }
     this.userAccountService.saveAccount(data)
-      .subscribe(account => {alert('保存成功'); this.activeModal.close('ok'); });
+      .subscribe(val => {
+        Swal(
+          '保存成功！',
+          '',
+          'success'
+        );
+        this.activeModal.close('ok');
+      }, err => {
+        Swal(
+          '保存失败！',
+          err,
+          'error'
+        );
+      });
   }
 
   // 激活
@@ -79,10 +88,10 @@ export class SetModalComponent implements OnInit {
 
   // 删除
   deleteUser() {
-    let cf = confirm(`确认删除用户 ${this.currentData.Username} ？`);
+    let cf = confirm(`确认删除用户 ${this.currentDataCopy.Username} ？`);
     // this.deleteList.push(this.currentData.Uid);
     if (cf === true) {
-      this.userAccountService.deleteAccount([this.currentData.Uid])
+      this.userAccountService.deleteAccount([this.currentDataCopy.Uid])
         .subscribe(
           () => {
             Swal(
@@ -106,8 +115,8 @@ export class SetModalComponent implements OnInit {
 
   // 重置密码
   resetPassword() {
-    if (this.currentData) {
-     this.currentData.resetPassword = true;
+    if (this.currentDataCopy) {
+     this.currentDataCopy.resetPassword = true;
     }
   }
 

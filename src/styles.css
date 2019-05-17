@@ -188,6 +188,10 @@ h5, .h5 {
   color: #ffffff;
 }
 
+.order_color{
+  color: #00a4ff;
+}
+
 
 .sidenav .mat-nav-list .mat-list-item .mat-list-item-content {
   padding: 0 46px;

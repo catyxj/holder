@@ -34,7 +34,7 @@ export class EditInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.currentUser, this.currentData);
+    // console.log(this.currentUser, this.currentData);
     this.data = {
       name: this.currentData.Name,
       typeId: this.currentData.Type__Type,
@@ -75,11 +75,12 @@ export class EditInfoComponent implements OnInit {
           }
         }
 
-        this.data.aProvince = this.currentData.Address ? Math.floor(location / 10000) : 0;
-        this.data.aCity = this.currentData.Address ? Math.floor(location / 100) : 0;
-        this.data.aRegion = this.currentData.Address ? location : 0;
+        this.data.aProvince = this.currentData.Location ? Math.floor(location / 10000) : 0;
+        this.data.aCity = this.currentData.Location ? Math.floor(location / 100) : 0;
+        this.data.aRegion = this.currentData.Location ? location : 0;
 
         // console.log(this.currentData, this.data);
+        // console.log(this.data.aProvince, this.data.aCity, this.data.aRegion);
 
         if (this.data.aProvince) {
           this.initProvince();
@@ -90,7 +91,6 @@ export class EditInfoComponent implements OnInit {
         if (this.data.aRegion) {
           this.changeRegion();
         }
-
 
       });
   }
@@ -213,6 +213,7 @@ export class EditInfoComponent implements OnInit {
       type: parseInt(this.data.typeId),
       address: this.data.address,
       location: this.data.location,
+      location_name : this.data.locationName,
       show_brand: null,
       brand_name: null,
       is_super: null,

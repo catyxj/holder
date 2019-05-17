@@ -9,49 +9,49 @@
     <table class="table table-striped table-bordered" >
       <tr>
         <th style="width:26%">登录名</th>
-        <td style="width:74%">{{ currentData.Username }}</td>
+        <td style="width:74%">{{ currentDataCopy.Username }}</td>
       </tr>
       <tr>
         <th>登录密码</th>
         <td>
-          <span *ngIf="!editing && currentData"> ******** </span>
-          <input type="button" *ngIf="editing && currentData && !currentData.resetPassword" (click)="resetPassword()" class="btn btn-outline-info btn-block" value="重置密码">
-          <input *ngIf="editing && currentData && currentData.resetPassword" [(ngModel)]="currentData.aPassword" type="password" class="form-control input" placeholder="输入新密码进行重置">
+          <span *ngIf="!editing && currentDataCopy"> ******** </span>
+          <input type="button" *ngIf="editing && currentDataCopy && !currentDataCopy.resetPassword" (click)="resetPassword()" class="btn btn-outline-info btn-block" value="重置密码">
+          <input *ngIf="editing && currentDataCopy && currentDataCopy.resetPassword" [(ngModel)]="currentDataCopy.aPassword" type="password" class="form-control input" placeholder="输入新密码进行重置">
         </td>
       </tr>
       <tr>
         <th>用户名称</th>
         <td>
-          <span *ngIf="!editing">{{ currentData.Name }}</span>
-          <input *ngIf="editing" [(ngModel)]="currentData.Name" type="text" class="form-control input" placeholder="{{ currentData.Name }}" value="{{ currentData.Name }}">
+          <span *ngIf="!editing">{{ currentDataCopy.Name }}</span>
+          <input *ngIf="editing" [(ngModel)]="currentDataCopy.Name" type="text" class="form-control input" placeholder="{{ currentDataCopy.Name }}">
         </td>
       </tr>
       <tr>
         <th>用户角色</th>
-        <td *ngIf="!editing">{{ currentData.Role__Name }}</td>
+        <td *ngIf="!editing">{{ currentDataCopy.Role__Name }}</td>
         <td *ngIf="editing">
-          <select [(ngModel)]="currentData.Role__Role" class="form-control">
+          <select [(ngModel)]="currentDataCopy.Role__Role" class="form-control">
             <option *ngFor="let role of aroles" [value]="role.id">{{role.name}}</option>
           </select>
         </td>
       </tr>
       <tr>
         <th>用户状态</th>
-        <td *ngIf="!editing">{{ currentData.stat.name }}</td>
+        <td *ngIf="!editing">{{ currentDataCopy.stat.name }}</td>
         <td *ngIf="editing">
-          <select [(ngModel)]="currentData.Status" class="form-control">
+          <select [(ngModel)]="currentDataCopy.Status" class="form-control">
             <option *ngFor="let stat of status" [value]="stat.id" [disabled]="stat.hidden">{{stat.name}}</option>
           </select>
         </td>
       </tr>
       <tr>
         <th>所属企业</th>
-        <td> <span> {{ currentData.Org__Name }} </span> </td>
+        <td> <span> {{ currentDataCopy.Org__Name }} </span> </td>
 
       </tr>
       <tr>
         <th>创建时间</th>
-        <td id="detail-createddate">{{ currentData.CreatedDate | date:"MM/dd/yy"}}</td>
+        <td id="detail-createddate">{{ currentDataCopy.CreatedDate | date:"MM/dd/yy"}}</td>
       </tr>
 
     </table>
@@ -64,14 +64,14 @@
     <button *ngIf="editing" type="button" class="btn btn_info" (click)="reset()">
       <i class="fa fa-reply"></i> 取消
     </button>
-    <button *ngIf="!editing && currentData &&  currentUser.Role.Id < currentData.Role__Role && currentData.Status == 0" type="button" class="btn btn_info" (click)="active()">
+    <button *ngIf="!editing && currentDataCopy &&  currentUser.Role.Id < currentDataCopy.Role__Role && currentDataCopy.Status == 0" type="button" class="btn btn_info" (click)="active()">
       <i class="fa fa-check"></i> 激活
     </button>
 
-    <button *ngIf="!editing && currentData && currentUser.Role.Id < currentData.Role__Role" type="button" class="btn btn_info" (click)="edit()">
+    <button *ngIf="!editing && currentDataCopy && currentUser.Role.Id < currentDataCopy.Role__Role" type="button" class="btn btn_info" (click)="edit()">
       <i class="fa fa-edit"></i> 编辑
     </button>
-    <button type="button" class="btn btn-danger" (click)="deleteUser()" *ngIf="!editing && currentData && currentUser.Role.Id < currentData.Role__Role">
+    <button type="button" class="btn btn-danger" (click)="deleteUser()" *ngIf="!editing && currentDataCopy && currentUser.Role.Id < currentDataCopy.Role__Role">
       <i class="fa fa-trash-o"></i>删除
     </button>
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss('close')">关闭</button>

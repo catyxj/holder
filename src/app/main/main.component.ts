@@ -41,9 +41,11 @@ export class MainComponent implements OnInit, OnDestroy {
         if (!this.user) {
           sessionStorage.user = false;
           sessionStorage.removeItem('currentUser');
+          localStorage.setItem('status', 'false');
           this.router.navigate(['/login']);
         }
       }, err => {
+        localStorage.setItem('status', 'false');
         this.router.navigate(['/login']);
       });
   }

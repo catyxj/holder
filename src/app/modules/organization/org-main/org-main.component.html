@@ -41,10 +41,28 @@
               <span class="fa fa-check"></span></label>
           </div>
         </th>
-        <th>企业名称</th>
+        <th>
+          <div style="display: flex; justify-content: center; cursor: pointer;" (click)="orderData('Name')">
+            <div>
+              企业名称
+            </div>
+            <div style="margin-left: 10px;">
+              <i class="fa fa-caret-up" *ngIf="order!=='desc'" [ngClass]="{'order_color': sort==='Name'&&order===''}"></i>
+              <i class="fa fa-caret-down" *ngIf="order==='desc'" [ngClass]="{'order_color': sort==='Name'&&order==='desc'}"></i>
+            </div>
+          </div>
+        </th>
         <th>区域</th>
         <th>地址</th>
-        <th>企业类型</th>
+        <th>
+          <div style="display: flex; justify-content: center; cursor: pointer;" (click)="orderData('Type__Name')">
+            企业类型
+            <div style="margin-left: 10px;">
+              <i class="fa fa-caret-up" *ngIf="order!=='desc'" [ngClass]="{'order_color': sort==='Type__Name'&&order===''}"></i>
+              <i class="fa fa-caret-down" *ngIf="order==='desc'" [ngClass]="{'order_color': sort==='Type__Name'&&order==='desc'}"></i>
+            </div>
+          </div>
+        </th>
         <th>操作</th>
       </thead>
       <tbody>
@@ -57,7 +75,7 @@
           </div>
         </td>
         <td (click)="goAccount(org.Name)"> {{ org.Name }}  </td>
-        <td> <span> {{ org.Address?.Location?.LocationName }} </span> </td>
+        <td> <span> {{ org.LocationName }} </span> </td>
         <td> <span> {{ org.Address }} </span> </td>
         <td> <span> {{ org.Type__Name }} </span>  </td>
 
@@ -107,6 +125,7 @@
     <div class="t_bottom">
       <div class="pull-left">
         <button class="btn btn_info" (click)="deleteG()"
+                nz-button [nzLoading]="isLoading"
                 *ngIf="user.Role.Id<=10">
           批量删除
         </button>
