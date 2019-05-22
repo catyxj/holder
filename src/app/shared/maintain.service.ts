@@ -27,7 +27,7 @@ export class MaintainService {
 
   // 获取单台设备维保记录列表
   getLists(n: number, pageSize: number, uid?: string, search?: string): Observable<any> {
-    const url = `${this.mlistUrl}/?pageNum=${n}&pageSize=${pageSize}&uid=${uid}`;
+    const url = `${this.mlistUrl}/?pageNum=${n}&row=${pageSize}&uid=${uid}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -45,7 +45,7 @@ export class MaintainService {
 
   // 获取故障列表
   getMalLists(n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.mlistUrl2}/?pageNum=${n}&pageSize=${pageSize}&search=${search}`;
+    const url = `${this.mlistUrl2}/?pageNum=${n}&row=${pageSize}&search=${search}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -54,7 +54,7 @@ export class MaintainService {
 
   // 获取故障历史列表
   getMalHistoryLists(n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.mlistUrl3}/?pageNum=${n}&pageSize=${pageSize}&search=${search}`;
+    const url = `${this.mlistUrl3}/?pageNum=${n}&row=${pageSize}&search=${search}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error

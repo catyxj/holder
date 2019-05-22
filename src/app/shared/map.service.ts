@@ -40,7 +40,7 @@ export class MapService {
 
   // 获取分页地图信息
   getMapBatch(n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.mapBatchUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
+    const url = `${this.mapBatchUrl}/?page=${n}&row=${pageSize}&search=${search}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error

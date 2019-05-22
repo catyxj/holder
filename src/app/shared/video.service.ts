@@ -20,7 +20,7 @@ export class VideoService {
 
   // 获取列表
   getLists(n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.videoListUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
+    const url = `${this.videoListUrl}/?page=${n}&row=${pageSize}&search=${search}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError)

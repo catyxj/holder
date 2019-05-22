@@ -27,7 +27,7 @@ export class TemplateService {
 
   // 获取模板列表
   getTemplates(n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.templatesUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
+    const url = `${this.templatesUrl}/?page=${n}&row=${pageSize}&search=${search}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error

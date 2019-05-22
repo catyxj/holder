@@ -50,7 +50,7 @@ export class TerminalService {
   // 获取终端列表
   getTerminals(n: number, pageSize: number, status: number, search?: string): Observable<any> {
     // TODO: send the message _after_ fetching the heroes
-    const url = `${this.terminalsUrl}/?page=${n}&pageSize=${pageSize}&status=${status}&search=${search}`;
+    const url = `${this.terminalsUrl}/?page=${n}&row=${pageSize}&status=${status}&search=${search}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -166,7 +166,7 @@ export class TerminalService {
 
   // 获取plc告警列表
   getPlcAlarm(code: string, n: number, pageSize: number): Observable<any> {
-    const url = `/plc_alarm_list/?code=${code}&page=${n}&pageSize=${pageSize}`;
+    const url = `/plc_alarm_list/?code=${code}&page=${n}&row=${pageSize}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError)

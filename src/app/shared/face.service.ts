@@ -21,7 +21,7 @@ export class FaceService {
 
   // 获取列表
   getLists(n: number, pageSize: number): Observable<any> {
-    const url = `${this.faceListUrl}/?page=${n}&pageSize=${pageSize}`;
+    const url = `${this.faceListUrl}/?page=${n}&row=${pageSize}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -30,7 +30,7 @@ export class FaceService {
 
   // 获取匹配列表
   getRecLists(n: number, pageSize: number): Observable<any> {
-    const url = `${this.faceRecUrl}/?page=${n}&pageSize=${pageSize}`;
+    const url = `${this.faceRecUrl}/?page=${n}&row=${pageSize}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error

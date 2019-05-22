@@ -14,7 +14,9 @@ export class ServiceListComponent implements OnInit {
   public serviceList = [];
   public page = 1;
   public totalItems = 0;
-  public search: string;
+  public search = '';
+  public order = '';
+  public sort = '';
   public deleteList = [];
   public allDelete = false;
   public pageSize = 10;
@@ -38,7 +40,7 @@ export class ServiceListComponent implements OnInit {
   }
 
   getList() {
-    this.serviceService.getLists(this.page, this.pageSize, this.search)
+    this.serviceService.getLists(this.page, this.pageSize, this.search, this.sort, this.order)
       .subscribe(data => {
         this.serviceList = data.params;
         this.totalItems = data.counts;

@@ -44,7 +44,7 @@ export class AlarmService {
 
   // 获取当前告警列表
   getCurrents(n: number, pageSize: number, search?: string, uid?: string): Observable<any> {
-    const url = `${this.currentUrl}/?page=${n}&pageSize=${pageSize}&search=${search}&uid=${uid}`;
+    const url = `${this.currentUrl}/?page=${n}&row=${pageSize}&search=${search}&uid=${uid}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -53,7 +53,7 @@ export class AlarmService {
 
   // 获取历史告警列表
   getHistories(n: number, pageSize: number, search?: string, uid?: string): Observable<any> {
-    const url = `${this.historyUrl}/?page=${n}&pageSize=${pageSize}&search=${search}&uid=${uid}`;
+    const url = `${this.historyUrl}/?page=${n}&row=${pageSize}&search=${search}&uid=${uid}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error

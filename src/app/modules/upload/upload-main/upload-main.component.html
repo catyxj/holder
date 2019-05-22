@@ -52,8 +52,8 @@
         </td>
         <!--<td> {{ i+1 }}  </td>-->
         <td> {{ data.Name }}  </td>
-        <td> {{ data.Organization?.Name }} </td>
-        <td> {{ data.UpdatedDate| date: 'yyyy-MM-dd HH:mm:ss'}} </td>
+        <td> {{ data.Org__Name }} </td>
+        <td> {{ data.CreatedDate| date: 'yyyy-MM-dd HH:mm:ss'}} </td>
         <!--<td>
           <span *ngIf="data.Status" class="label label-info">成功</span>
           <span *ngIf="!data.Status" class="label label-default">失败</span>

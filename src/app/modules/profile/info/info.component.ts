@@ -32,8 +32,8 @@ export class InfoComponent implements OnInit {
 
   updateUser() {
     let postData = {
-      fullname: this.profile.Name,
-      mobile: this.profile.MobileNumber,
+      name: this.profile.Name,
+      mobile_number: this.profile.MobileNumber,
       email: this.profile.Email
     };
     this.profileService.updateProfile(postData)

@@ -27,8 +27,8 @@ export class ClusterService {
   constructor(private http: HttpClient, private router: Router) { }
 
   // 获取集群列表
-  getClusters(n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.clusterUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
+  getClusters(n: number, pageSize: number, search?: string, sort?: string, order?: string): Observable<any> {
+    const url = `${this.clusterUrl}/?page=${n}&row=${pageSize}&search=${search}&order=${order}&sort=${sort}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -77,8 +77,8 @@ export class ClusterService {
   }
 
   // 获取集群设备列表
-  getClusEquip(uid: string, n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.clusEquipUrl}/?uid=${uid}&page=${n}&pageSize=${pageSize}&search=${search}`;
+  getClusEquip(uid: string, n: number, pageSize: number, search?: string, sort?: string, order?: string): Observable<any> {
+    const url = `${this.clusEquipUrl}/?uid=${uid}&page=${n}&row=${pageSize}&search=${search}&order=${order}&sort=${sort}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error

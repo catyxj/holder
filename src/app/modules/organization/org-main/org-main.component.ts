@@ -233,7 +233,7 @@ export class OrgMainComponent implements OnInit {
 
   // 编辑模态框
   edit(org) {
-    const modalRef = this.modalService.open(EditInfoComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(EditInfoComponent, { size: 'lg' , backdrop: 'static'});
     modalRef.componentInstance.currentData = org;
     modalRef.componentInstance.currentUser = this.user;
     modalRef.componentInstance.editing = true;
@@ -251,7 +251,7 @@ export class OrgMainComponent implements OnInit {
 
   // 查看模态框
   view(org) {
-    const modalRef = this.modalService.open(EditInfoComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(EditInfoComponent, { size: 'lg', backdrop: 'static'});
     modalRef.componentInstance.currentData = org;
     modalRef.componentInstance.currentUser = this.user;
     modalRef.componentInstance.editing = false;
@@ -267,7 +267,7 @@ export class OrgMainComponent implements OnInit {
 
   // 新增企业模态框
   newOrg() {
-    const modalRef = this.modalService.open(AddInfoComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(AddInfoComponent, { size: 'lg', backdrop: 'static'});
     modalRef.componentInstance.currentUser = this.user;
     modalRef.componentInstance.editing = true;
     // modalRef.componentInstance.locations = this.locations;
@@ -284,7 +284,7 @@ export class OrgMainComponent implements OnInit {
 
   // 添加账号模态框
   addAccount(org) {
-    const modalRef = this.modalService.open(AddAccountComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(AddAccountComponent, { size: 'lg', backdrop: 'static'});
     modalRef.componentInstance.currentData = org;
     modalRef.componentInstance.currentUser = this.user;
 

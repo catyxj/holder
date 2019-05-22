@@ -66,6 +66,7 @@ import { FaceRecListComponent } from './face-rec/face-rec-list/face-rec-list.com
 import { RecEditComponent } from './face-rec/rec-edit/rec-edit.component';
 import { FaceViewComponent } from './face-rec/face-view/face-view.component';
 import { VideoViewComponent } from './video/video-view/video-view.component';
+import { AuthMainComponent } from './authority/auth-main/auth-main.component';
 
 
 
@@ -140,6 +141,7 @@ import { VideoViewComponent } from './video/video-view/video-view.component';
     RecEditComponent,
     FaceViewComponent,
     VideoViewComponent,
+    AuthMainComponent,
 
   ],
   exports: [

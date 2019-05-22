@@ -21,8 +21,8 @@ export class BluetoothService {
   constructor(private http: HttpClient) { }
 
   // 获取集群列表
-  getlist(n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.bluetoothUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
+  getlist(n: number, pageSize: number, search?: string, sort?: string, order?: string ): Observable<any> {
+    const url = `${this.bluetoothUrl}/?page=${n}&row=${pageSize}&search=${search}&order=${order}&sort=${sort}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error

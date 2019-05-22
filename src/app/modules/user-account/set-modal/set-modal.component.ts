@@ -45,7 +45,7 @@ export class SetModalComponent implements OnInit {
     this.currentDataCopy.Name = this.currentData.Name;
     this.currentDataCopy.aPassword = '';
     this.currentDataCopy.resetPassowrd = false;
-    this.currentDataCopy.Role__Role = this.currentData.Role__Role;
+    this.currentDataCopy.Role__Id = this.currentData.Role__Id;
     this.currentDataCopy.Status = this.currentData.Status;
     // this.currentData.aOrg = this.currentData.Organization ? this.currentData.Organization.Uid : "";
   }
@@ -54,9 +54,9 @@ export class SetModalComponent implements OnInit {
   save() {
     let data = {
       uid: this.currentDataCopy.Uid,
-      fullname: this.currentDataCopy.Name,
-      role: parseInt(this.currentDataCopy.Role__Role),
-      stat: parseInt(this.currentDataCopy.Status),
+      name: this.currentDataCopy.Name,
+      role: parseInt(this.currentDataCopy.Role__Id),
+      status: parseInt(this.currentDataCopy.Status),
       // org: this.currentData.Org ? this.currentData.Org.Uid : '',
       password_new: null
     };

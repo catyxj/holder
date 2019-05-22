@@ -55,10 +55,8 @@ export class AddAccountComponent implements OnInit {
 
   dataChanged () {
     if (this.data.username.length < 6 || this.data.username.length > 16 ||
-      this.data.password.length < 6 || this.data.username.length > 16 ||
-      !this.data.role ||
-      this.data.role <= this.currentUser.Role.Id ||
-      (this.data.role > 1 && this.data.org.length <= 0)) {
+      this.data.password.length < 6  || !this.data.role || this.data.role <= this.currentUser.Role.Id ||
+      (this.data.role > 1 && !this.data.org)) {
         this.isValid = false;
         return;
       }
@@ -71,7 +69,7 @@ export class AddAccountComponent implements OnInit {
     let data = {
       username: this.data.username,
       password: this.data.password,
-      fullname: this.data.fullname,
+      name: this.data.fullname,
       role: parseInt(this.data.role),
       org: this.data.org.Uid,
     };

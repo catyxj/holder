@@ -32,23 +32,25 @@ export class BoilerService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getBoilers(n: number, pageSize: number, search?: string ): Observable<any> {
+  getBoilers(n: number, pageSize: number, search?: string, sort?: string, order?: string ): Observable<any> {
     // TODO: send the message _after_ fetching the heroes
-    const url = `${this.boilersUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
+    const url = `${this.boilersUrl}/?page=${n}&row=${pageSize}&search=${search}&order=${order}&sort=${sort}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error
       );
   }
 
-  getBoilerLists(n: number, pageSize: number, search?: string, online?: number ): Observable<any> {
+  getBoilerLists(n: number, pageSize: number, search?: string, online?: number, sort?: string, order?: string ): Observable<any> {
     // TODO: send the message _after_ fetching the heroes
     // const url = `${this.boilerList}/?pageNum=${n}&pageSize=${pageSize}&search=${search}&status=${online}`;
     let data = {
       page: n,
-      pageSize: pageSize,
+      row: pageSize,
       search: search,
-      status: online
+      status: online,
+      sort: sort,
+      order: order
     };
     return this.http.post<any>(this.boilerList, data, httpOptions)
       .pipe(
@@ -148,8 +150,8 @@ export class BoilerService {
   }
 
   // 获取设备型态列表
-  getTemplateList(n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.templateListUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
+  getTemplateList(n: number, pageSize: number, search?: string, sort?: string, order?: string): Observable<any> {
+    const url = `${this.templateListUrl}/?page=${n}&row=${pageSize}&search=${search}&order=${order}&sort=${sort}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError)

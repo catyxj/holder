@@ -23,8 +23,8 @@ export class ServiceService {
   constructor(private http: HttpClient) { }
 
   // 获取列表-我的表单
-  getLists(n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.listUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
+  getLists(n: number, pageSize: number, search?: string, sort?: string, order?: string): Observable<any> {
+    const url = `${this.listUrl}/?page=${n}&row=${pageSize}&search=${search}&order=${order}&sort=${sort}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -59,7 +59,7 @@ export class ServiceService {
 
   // 获取留言列表
   getComment(uid, page, pageSize) {
-    const url = `${this.commentUrl}/?uid=${uid}&pageNum=${page}&pageSize=${pageSize}`;
+    const url = `${this.commentUrl}/?uid=${uid}&pageNum=${page}&row=${pageSize}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError)

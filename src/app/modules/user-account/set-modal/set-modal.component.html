@@ -30,7 +30,7 @@
         <th>用户角色</th>
         <td *ngIf="!editing">{{ currentDataCopy.Role__Name }}</td>
         <td *ngIf="editing">
-          <select [(ngModel)]="currentDataCopy.Role__Role" class="form-control">
+          <select [(ngModel)]="currentDataCopy.Role__Id" class="form-control">
             <option *ngFor="let role of aroles" [value]="role.id">{{role.name}}</option>
           </select>
         </td>
@@ -64,14 +64,14 @@
     <button *ngIf="editing" type="button" class="btn btn_info" (click)="reset()">
       <i class="fa fa-reply"></i> 取消
     </button>
-    <button *ngIf="!editing && currentDataCopy &&  currentUser.Role.Id < currentDataCopy.Role__Role && currentDataCopy.Status == 0" type="button" class="btn btn_info" (click)="active()">
+    <!--<button *ngIf="!editing && currentDataCopy &&  currentUser.Role.Id < currentDataCopy.Role__Id && currentDataCopy.Status == 0" type="button" class="btn btn_info" (click)="active()">
       <i class="fa fa-check"></i> 激活
-    </button>
+    </button>-->
 
-    <button *ngIf="!editing && currentDataCopy && currentUser.Role.Id < currentDataCopy.Role__Role" type="button" class="btn btn_info" (click)="edit()">
+    <button *ngIf="!editing && currentDataCopy && currentUser.Role.Id < currentDataCopy.Role__Id" type="button" class="btn btn_info" (click)="edit()">
       <i class="fa fa-edit"></i> 编辑
     </button>
-    <button type="button" class="btn btn-danger" (click)="deleteUser()" *ngIf="!editing && currentDataCopy && currentUser.Role.Id < currentDataCopy.Role__Role">
+    <button type="button" class="btn btn-danger" (click)="deleteUser()" *ngIf="!editing && currentDataCopy && currentUser.Role.Id < currentDataCopy.Role__Id">
       <i class="fa fa-trash-o"></i>删除
     </button>
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss('close')">关闭</button>

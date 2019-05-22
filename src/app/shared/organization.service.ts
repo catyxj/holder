@@ -90,7 +90,7 @@ export class OrganizationService {
 
 
   entryAccount(uid): Observable<any> {
-    return this.http.get(`/login_in_organization?uid=${uid}`)
+    return this.http.get(`/login_in_org?uid=${uid}`)
       .pipe(
         catchError(this.handleError)
       );

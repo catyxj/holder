@@ -20,7 +20,7 @@ export class LifeService {
 
   // 获取列表
   getLifeLists(n: number, pageSize: number, uid: string): Observable<any> {
-    const url = `${this.lifelistUrl}/?pageNum=${n}&pageSize=${pageSize}&uid=${uid}`;
+    const url = `${this.lifelistUrl}/?pageNum=${n}&row=${pageSize}&uid=${uid}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError)

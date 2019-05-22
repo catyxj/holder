@@ -23,7 +23,7 @@ export class UploadService {
 
   // 获取文件列表
   getFiles(n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.filesUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
+    const url = `${this.filesUrl}/?page=${n}&row=${pageSize}&search=${search}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError)

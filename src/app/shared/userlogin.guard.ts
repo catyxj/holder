@@ -18,12 +18,12 @@ export class UserloginGuard implements CanActivate {
 
   GuardLogin(url): boolean {
     // sessionStorage.user === 'true'
-    console.log('status true');
+    // console.log('status true');
     if (localStorage.status === 'true') {
       return true;
     } else {
       // this.userService.redirectUrl = url;
-      console.log('status false');
+      // console.log('status false');
       this.router.navigate(['/login']);
       return false;
     }

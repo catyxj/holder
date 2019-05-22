@@ -29,7 +29,7 @@ export class OverviewService {
 
   // 获取档案列表
   getFileList(n: number, pageSize: number ): Observable<any> {
-    const url = `${this.fileListUrl}/?pageNum=${n}&pageSize=${pageSize}`;
+    const url = `${this.fileListUrl}/?pageNum=${n}&row=${pageSize}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError)
