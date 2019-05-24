@@ -91,6 +91,10 @@ a {
   border: 1px solid #607d8b;
 }
 
+.status_col b{
+  padding-right: 10px;
+}
+
 /*.module:hover .img_content img{
   transform: scale(1.2);
   transition: all 1s ease 0s;

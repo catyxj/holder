@@ -38,13 +38,16 @@
 
           <div class="status_row ">
             <div class="status_col">
-              <b>联网 : </b>  <span class="">{{data.termOnline}}</span> / <span class="">{{data.termOffline}}</span>
+              <b>联网   </b>  <span class="">{{data.termOnline}}</span> /
+              <span class="">
+                {{data.termOffline + data.termOnline + data.noCombined}}
+              </span>
             </div>
             <div class="status_col">
-              <b>运行 : </b>  <span class="">{{data.eptOnline}}</span> / <span>{{data.eptCounts}}</span>
+              <b>运行   </b>  <span class="">{{data.eptOnline}}</span> / <span>{{data.eptCounts}}</span>
             </div>
             <div class="status_col" [ngClass]="{'text_danger':data.alarmCounts > 0}">
-              <b>告警 : </b>
+              <b>告警  </b>
               <!--<span [ngClass]="{'text-muted':!data.Online, 'text-danger':data.Online && data.Warning , 'text-info':data.Online && !data.Warning}">
                 {{data.alarmCounts}}
               </span>-->
@@ -58,7 +61,7 @@
             <div class="status_col"
                   style="margin-bottom: 0" [ngClass]="{'text-warning':data.mtCounts > 0}">
               <!--{{data.malfunction}}-->
-              <b>故障 : </b>
+              <b>故障  </b>
               <span *ngIf="!data.mtCounts">
                 无故障
               </span>
