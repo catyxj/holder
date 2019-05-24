@@ -1,19 +1,19 @@
-<div class="container-flud login-screen ">
+<!--<div class="container-flud login-screen ">
 
-  <!--logo-->
+  &lt;!&ndash;logo&ndash;&gt;
   <div style="position: absolute; top: 20px; left: 50px;">
     <img src="assets/images/index_logo.png" alt="" style="">
   </div>
 
-  <!--图片-->
+  &lt;!&ndash;图片&ndash;&gt;
   <div style="position: absolute; top: 50%; left: 10%; margin-top: -181px;">
     <img src="assets/images/index_left.png" alt="" style="">
-    <!--<img src="assets/images/normal-lu1.png" alt="" style="width: 150px;">
+    &lt;!&ndash;<img src="assets/images/normal-lu1.png" alt="" style="width: 150px;">
     <br/>
-    <img src="assets/images/normal-lu2.png" alt="" style="width: 250px;">-->
+    <img src="assets/images/normal-lu2.png" alt="" style="width: 250px;">&ndash;&gt;
   </div>
 
-  <!--登录-->
+  &lt;!&ndash;登录&ndash;&gt;
   <div class="login-form-container">
     <h5 class="center-block sys-title">用户登录</h5>
     <form novalidate class="form-horizontal login-form" role="form" name="login">
@@ -51,7 +51,7 @@
           {{errMes}}
         </span>
 
-        <!--<div class="col-4">
+        &lt;!&ndash;<div class="col-4">
           <a href="javascript:void(0);" (click)="forgetPwd()" class="btn-link btn-block">忘记密码</a>
         </div>
         <div class="col-4">
@@ -61,70 +61,89 @@
         </div>
         <div class="col-4">
           <a href="" target="_blank">22</a>
-        </div>-->
+        </div>&ndash;&gt;
 
       </div>
     </form>
   </div>
 
-  <!--底部-->
+  &lt;!&ndash;底部&ndash;&gt;
   <div class="footer">
-    <!--炉管家 -->
+    &lt;!&ndash;炉管家 &ndash;&gt;
     Lukeeper物联网云平台v1.0 Copyright ©2019  Inohas. All Rights Reserved. 备案号（浙ICP备16036066号-6）建议分辨率：1920*1080 推荐浏览器：Chrome
     <a href="http://www.mydown.com/soft/421/472030921.shtml" style="margin-left: 38px;" target="_blank">点击下载Chrome</a>
   </div>
 
-</div>
+</div>-->
 
 
 
 
-<!--<div class="login_content">
-  <div class="login_header">
+<div class="login_content">
+  <div class="login_header container">
     <div class="logo">
-      LUKEEP
+      <!--LUKEEP-->
+      <img src="assets/images/yanhua/normal-lu.png" alt="">
     </div>
     <div>
-      &lt;!&ndash;<a> 登录 </a>&ndash;&gt;
+      <div class="loginBtn" (click)="loginBtn()"> 登录 </div>
     </div>
   </div>
 
   <div class="banner">
-    <nz-carousel [nzEffect]="'fade'" nzAutoPlay [nzAutoPlaySpeed]="5000">
-      <div nz-carousel-content *ngFor="let data of imgArr"><img src="{{data.img}}" alt="" style="width: 100%; height: 650px;"> </div>
-    </nz-carousel>
+    <div class="container">
+      <img src="assets/images/yanhua/pic_login.png" alt="">
+    </div>
   </div>
 
 
   <div class="login_box">
-    <div class="login-form-container">
+    <div class="mask" [class.hide]="hideLogin" (click)="hideLogin=true">
+    </div>
+    <div class="login-form-container animated fadeInUp" [class.hide]="hideLogin">
       <h5 class="center-block sys-title">用户登录</h5>
+      <div class="closeBtn" (click)="hideLogin=true">
+        <span aria-hidden="true" style="font-size: 18px;">&times;</span>
+      </div>
       <form novalidate class="form-horizontal login-form" role="form" name="login">
         <div class="form-group" style="padding-bottom: 10px;">
           <div class="col-xs-12">
-            <input required [(ngModel)]="user.username" name="userName" type="text" class="form-control" #userName="ngModel" placeholder="用户名">
-            <div *ngIf="userName.invalid && (userName.dirty || userName.touched) && userName.errors.required" class="text-danger">用户名不能为空</div>
+            <input required [(ngModel)]="user.username" name="userName" type="text" class="form-control input_lg"
+                   #userName="ngModel" placeholder="用户名">
+            <!--<div *ngIf="userName.invalid && (userName.dirty || userName.touched) && userName.errors.required" class="text-danger">用户名不能为空</div>-->
+            <span class="icon3" style="background: url(assets/images/yanhua/sprite2.png) no-repeat;"
+                  *ngIf="userName.invalid && (userName.dirty || userName.touched)">
+            </span>
+            <span class="icon3" style="background: url(assets/images/yanhua/sprite.png) no-repeat;"
+                  *ngIf="userName.valid">
+            </span>
           </div>
         </div>
         <div class="form-group" style="padding-bottom: 10px;">
           <div class="col-xs-12">
-            <input required [(ngModel)]="user.password" name="password"  type="password" class="form-control"
+            <input required [(ngModel)]="user.password" name="password" type="password" class="form-control input_lg"
                    #password="ngModel" placeholder="密码">
-            <div *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.required" class="text-danger">请输入密码</div>
+            <!--<div *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.required" class="text-danger">请输入密码</div>-->
+            <span class="icon3" style="background: url(assets/images/yanhua/sprite2.png) no-repeat;"
+                  *ngIf="password.invalid && (password.dirty || password.touched)">
+            </span>
+            <span class="icon3" style="background: url(assets/images/yanhua/sprite.png) no-repeat;"
+                  *ngIf="password.valid">
+            </span>
           </div>
         </div>
-        <div class="mb-3">
-          <div class="checkbox c-checkbox white">
+        <!--<div class="mb-3">
+          <div class="checkbox c-checkbox">
             <label>
               <input type="checkbox" [(ngModel)]="checkRemember" name="checkR">
               <span class="fa fa-check"></span>
               记住用户名
             </label>
           </div>
-        </div>
+        </div>-->
         <div class="form-group">
           <div class="">
-            <button type="submit" class="btn btn-info btn-block" (click)="login()">登录</button>
+            <button type="submit" class="btn btn_info btn-block input_lg" (click)="login()">登录</button>
           </div>
         </div>
 
@@ -134,28 +153,30 @@
           {{errMes}}
         </span>
 
-          &lt;!&ndash;<div class="col-4">
-            <a href="javascript:void(0);" (click)="forgetPwd()" class="btn-link btn-block">忘记密码</a>
-          </div>
-          <div class="col-4">
-            <a href="https://gitee.com/mumu-osc/OpenWMS-Frontend" target="_blank">
-              <i class="fa fa-github fa-2" aria-hidden="true"></i> 11
-            </a>
-          </div>
-          <div class="col-4">
-            <a href="" target="_blank">22</a>
-          </div>&ndash;&gt;
-
         </div>
       </form>
     </div>
   </div>
 
   <div class="footer">
-    厚德
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 c-col">
+            <span class="" style="font-size: 12px;">工业锅炉能效在线监测与分析平台Copyright  &copy; 2018. All Rights Reserved.建议分辨率：1920*1080 支持浏览器：Chrome</span>
+        </div>
+      </div>
+    </div>
+    <div class="weixin_ri">
+      <i class="fa fa-weixin"></i>
+      <div class="weixin_QR">
+        <p>扫一扫，享受微信端服务</p>
+        <img src="assets/images/yanhua/weixin.jpeg"/>
+      </div>
+    </div>
   </div>
 
-</div>-->
+</div>
+
 
 
 

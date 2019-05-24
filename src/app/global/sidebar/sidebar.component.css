@@ -22,7 +22,7 @@ mat-nav-list a.active{
   /*background-color: #3C8DBC;*/
   /*background-color: #607D8B;*/
   /*background-color: #51859d;*/
-  background-color: #00a4ff;
+  background-color: #19bc9c;
   color: #ffffff;
 }
 .sidebar_title{
@@ -61,7 +61,7 @@ mat-nav-list a.sidebar_title{
   display: flex;
   /*background-color: #8eacbb;*/
   /*color: #1976d2;*/
-  background-color: #224762;
+  background-color: #2c9a85;
   transition: all .3s linear;
 }
 

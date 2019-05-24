@@ -20,10 +20,10 @@ export class LoginComponent implements OnInit {
   public user = { username: '', password: '' , ip: ''};
   public errMes: string ;
   public checkRemember = false;
+  public hideLogin = true;
 
 
   constructor(public router: Router,
-              public activatedRoute: ActivatedRoute,
               private userService: UserService,
               private http: HttpClient) { }
 
@@ -42,7 +42,9 @@ export class LoginComponent implements OnInit {
 
   }
 
-  forgetPwd() {}
+  loginBtn() {
+    this.hideLogin = false;
+  }
 
   getConfig(): any {
     const IP_JSON_URL = 'https://ipv4.myexternalip.com/json';

@@ -3,14 +3,13 @@
   <mat-toolbar-row>
 
     <!--企业标识-->
-    <a class="navbar-brand" routerLink="/admin" style="margin-left:20px;"
-       *ngIf="user && (!user.Organization || ((!user.Organization.ShowBrand) && (!user.Organization.SuperOrganization || !user.Organization.SuperOrganization.ShowBrand)))">
-      <!--<img src="assets/images/light.png"  height="30" alt="">-->
-      <h2 style="color: #ffffff;"> LUKEEP</h2>
+    <a class="navbar-brand" routerLink="/admin" style="border-right: 1px solid #3f7e86;">
+      <img src="assets/images/yanhua/light.png"  height="35" alt="">
+      <!--<h2 style="color: #ffffff;"> LUKEEP</h2>-->
     </a>
 
     <!--显示企业标识-->
-    <a class="navbar-brand" routerLink="/admin" *ngIf="user && user.Role.RoleId===10 && (user.Organization && user.Organization.ShowBrand)">
+    <!--<a class="navbar-brand" routerLink="/admin" *ngIf="user && user.Role.RoleId===10 && (user.Organization && user.Organization.ShowBrand)">
       <h3 *ngIf="!user.Organization.BrandImageUrl" style="color: #ffffff;">
         {{user.Organization.BrandName}}
       </h3>
@@ -27,7 +26,7 @@
       <span *ngIf="user.Organization.SuperOrganization.BrandImageUrl" >
         <img src="{{user.Organization.SuperOrganization.BrandImageUrl}}" alt="" height="30" style="max-width: 180px;">
       </span>
-    </a>
+    </a>-->
 
 
 
