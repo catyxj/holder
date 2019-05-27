@@ -12,8 +12,9 @@
   /*text-decoration: none;*/
 }
 .tab_a a:hover{
-  background-color: #3ab5f9;
-  border: 1px solid #3ab5f9;
+  background-color: #19bc9c;
+  border: 1px solid #19bc9c;
+  color: #ffffff;
 }
 .tab_a a.btn_info{
   color: #ffffff;

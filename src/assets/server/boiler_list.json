@@ -367,7 +367,81 @@
       "termStatus": 1,
       "eptStatus" :false,
       "alarmStatus": true,
-      "mtStatus": false
+      "mtStatus": false,
+      "param": [
+        {
+          "ChannelName": "烟气氧量",
+          "ChannelNumber": 4,
+          "ChannelType": 1,
+          "EquipmentName": "",
+          "Status": 0,
+          "SwitchStatus": 0,
+          "TerminalCode": 682001,
+          "Uid": "fb8c8507-a15e-4fc4-aa12-d6dd0591fdf8",
+          "Unit": "%",
+          "Value": 20.6
+        },
+        {
+          "ChannelName": "烟气氧量",
+          "ChannelNumber": 4,
+          "ChannelType": 1,
+          "EquipmentName": "",
+          "Status": 0,
+          "SwitchStatus": 0,
+          "TerminalCode": 682001,
+          "Uid": "fb8c8507-a15e-4fc4-aa12-d6dd0591fdf8",
+          "Unit": "%",
+          "Value": 20.6
+        },
+        {
+          "ChannelName": "烟气氧量",
+          "ChannelNumber": 4,
+          "ChannelType": 1,
+          "EquipmentName": "",
+          "Status": 0,
+          "SwitchStatus": 0,
+          "TerminalCode": 682001,
+          "Uid": "fb8c8507-a15e-4fc4-aa12-d6dd0591fdf8",
+          "Unit": "%",
+          "Value": 20.6
+        },
+        {
+          "ChannelName": "烟气氧量",
+          "ChannelNumber": 4,
+          "ChannelType": 1,
+          "EquipmentName": "",
+          "Status": 0,
+          "SwitchStatus": 0,
+          "TerminalCode": 682001,
+          "Uid": "fb8c8507-a15e-4fc4-aa12-d6dd0591fdf8",
+          "Unit": "%",
+          "Value": 20.6
+        },
+        {
+          "ChannelName": "烟气氧量",
+          "ChannelNumber": 4,
+          "ChannelType": 1,
+          "EquipmentName": "",
+          "Status": 0,
+          "SwitchStatus": 0,
+          "TerminalCode": 682001,
+          "Uid": "fb8c8507-a15e-4fc4-aa12-d6dd0591fdf8",
+          "Unit": "%",
+          "Value": 20.6
+        },
+        {
+          "ChannelName": "烟气氧量",
+          "ChannelNumber": 4,
+          "ChannelType": 1,
+          "EquipmentName": "",
+          "Status": 0,
+          "SwitchStatus": 0,
+          "TerminalCode": 682001,
+          "Uid": "fb8c8507-a15e-4fc4-aa12-d6dd0591fdf8",
+          "Unit": "%",
+          "Value": 20.6
+        }
+      ]
     },
     {
       "Uid": "f2f8ea60-b2cd-4490-9ffe-00e096b110f0",

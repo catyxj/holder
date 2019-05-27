@@ -71,9 +71,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
   refreshData() {
     for (let i = 0; i < this.boilers.length; i++) {
       let bo = this.boilers[i];
+      bo.runtimeList = [];
       if (!bo.img) {
         bo.img = 'assets/images/no_image.png';
       }
+      for (let j = 0; j < bo.param.length; j++) {
+        let pa = bo.param[j];
+        if (j < 4) {
+          bo.runtimeList.push({
+            ChannelName: pa.ChannelName,
+            Value: pa.Value,
+            Unit: pa.Unit
+          });
+        }
+      }
+
 
       if (bo.termStatus === 1) {
         bo.online = '终端在线';
@@ -138,7 +150,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // console.log('page close');
-    // sessionStorage.setItem('pageNum', this.page.toString());
+
     this.socket.unsubscribe();
     this.boilerWsService.closeSocket();
   }

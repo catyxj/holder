@@ -43,6 +43,7 @@ export class RuntimeService {
 
   // 获取运行参数
   getRuntimeList(data): Observable<any> {
+    // return this.http.get('assets/server/equipment_runtime_list.json')
     return this.http.post(`/equipment_runtime_list`, data, httpOptions)
       .pipe(
         catchError(this.handleError)

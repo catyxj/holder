@@ -19,10 +19,14 @@
   border-bottom: 1px solid #eeeeee;
 }
 .flash_left .fl_head h6 a{
+  display: block;
   font-size: 18px;
   color: #19bc9c;
   margin-bottom: 0;
   padding-top: 10px;
+  /*width: 150px;*/
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .status_row{
   display: flex;
@@ -40,17 +44,24 @@
     width: 100px;
   }
 }
+@media (max-width: 1200px) {
+  .flash_left .fl_head h6 a{
+    width: 120px;
+  }
+}
+
+
 .status_col .status_t{
   color: #ffffff;
 }
 .s_blue.status_col{
-  border: 1px solid #00a4ff;
+  border: 1px solid #19bc9c;
 }
 .s_blue .status_t{
-  background-color: #00a4ff;
+  background-color: #19bc9c;
 }
 .s_blue .status_text{
-  color: #00a4ff;
+  color: #19bc9c;
 }
 .s_grey.status_col{
   border: 1px solid #a0a0a0;

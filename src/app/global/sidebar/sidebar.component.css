@@ -14,7 +14,7 @@
 mat-nav-list a{
   font-size: 14px;
   /*color:#34515e;*/
-  color: #ffffff;
+  color: #b4bcc8;
   display: block;
 }
 
@@ -28,13 +28,13 @@ mat-nav-list a.active{
 .sidebar_title{
   font-size: 16px;
   /*color: #0c5460;*/
-  color: #ffffff;
+  color: #708096;
   padding-left: 40px;
   line-height: 40px;
 }
 mat-nav-list a.sidebar_title{
   /*color:#607D8B;*/
-  color: #ffffff;
+  color: #708096;
 }
 
 .sidebar_title i{

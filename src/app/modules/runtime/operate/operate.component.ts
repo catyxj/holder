@@ -209,6 +209,9 @@ export class OperateComponent implements OnInit {
       /*if (!this.runtimes[i] || this.runtimes[i].length <= 0) {
         rts = null;
       }*/
+      if (!rts) {
+        rts = [];
+      }
       this.initChart(rts, i);
     }
   }
@@ -320,11 +323,11 @@ export class OperateComponent implements OnInit {
 
   // 单个图表初始化
   initChart(data, n) {
-    if (!data) {
+    if (!data || data.length <= 0) {
       data = [
         {
-          CreatedDate: new Date(),
-          Value: 0
+          created_date: new Date(),
+          value: 0
         }
       ];
     }

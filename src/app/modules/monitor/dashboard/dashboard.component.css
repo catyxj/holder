@@ -45,10 +45,7 @@ a {
   display: flex;
   flex-direction: column;
 }
-.module a h5{
-  /*color: #607d8b;*/
-  color: #666666;
-}
+
 
 /*.grid-pad {
   padding: 10px 0;
@@ -80,6 +77,30 @@ a {
   box-sizing: border-box;
   /*background-color: #ffffff;*/
 }
+.module .status_name > a{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.module .status_name h5{
+  width: 50%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /*line-height: 60px;*/
+  color: #666666;
+}
+.module .stat_label{
+  display: block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  margin-left: 5px;
+}
+
+
 
 .module .status_box{
   /*padding: 20px;*/
@@ -89,15 +110,11 @@ a {
   /*flex: 1;
   width: 0;
   margin-right: 15px;*/
-  padding: 10px;
+  padding: 10px 10px 10px 0;
 }
-.module h5{
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 60px;
-}
+
+
+
 .module .img_content{
   /*flex: 2;*/
   overflow: hidden;
@@ -130,24 +147,56 @@ a {
 }
 .status_row{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
-  padding: 25px 0;
+  /*padding: 25px 0;*/
 }
 
-.module .status_content a.status_col{
+/*.module .status_content a.status_col{
   width: 42%;
-  /*margin-right: 3%;*/
+  !*margin-right: 3%;*!
   box-sizing: border-box;
   padding: 12px 0;
   border-radius: 3px;
   margin-top: 15px;
   margin-bottom: 15px;
-  /*line-height: 40px;*/
-
+  text-align: center;
+  !*color: #ffffff;*!
+}*/
+.module .status_content .status_col{
+  width: 45%;
+  /*margin-right: 3%;*/
+  box-sizing: border-box;
+  padding: 12px 0;
+  border-radius: 3px;
+  /*margin-top: 15px;*/
+  /*margin-bottom: 15px;*/
   text-align: center;
   /*color: #ffffff;*/
 }
+/*通道参数*/
+.stat_key{
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #93a2a9;
+}
+/*通道值*/
+.stat_val{
+  background-color: #59bdaa;
+  color: #FFFFFF;
+  margin-top: 10px;
+  padding: 10px 0;
+  box-sizing: border-box;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  border-radius: .25em;
+}
+
 
 
 

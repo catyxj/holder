@@ -10,7 +10,7 @@
   border-bottom: 1px solid #eeeeee;
 }
 .op_header h6{
-  color: #00a4ff;
+  color: #19bc9c;
   font-size: 18px;
   line-height: 33px;
 }
@@ -72,14 +72,14 @@
 .operate_params ul li:hover{
   /*background-color: #17a2b8;
   color: #ffffff;*/
-  border: 1px solid #00a4ff;
-  color: #00a4ff;
+  border: 1px solid #19bc9c;
+  color: #19bc9c;
 }
 .operate_params ul li.active{
   /*background-color: #17a2b8;
   color: #ffffff;*/
-  border: 1px solid #00a4ff;
-  color: #00a4ff;
+  border: 1px solid #19bc9c;
+  color: #19bc9c;
 }
 
 
