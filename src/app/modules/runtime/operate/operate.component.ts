@@ -323,8 +323,8 @@ export class OperateComponent implements OnInit {
     if (!data) {
       data = [
         {
-          CreatedDate: new Date(),
-          Value: 0
+          created_date: new Date(),
+          value: 0
         }
       ];
     }
