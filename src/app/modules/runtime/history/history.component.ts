@@ -20,6 +20,7 @@ export class RuntimeHistoryComponent implements OnInit {
   public name;
   public termCode;
   public terminals;
+  public isSpinning = false;
 
   constructor(private runtimeService: RuntimeService,
               private datePipe: DatePipe) { }
@@ -71,16 +72,17 @@ export class RuntimeHistoryComponent implements OnInit {
       pageSize: this.pageSize,
       code: this.termCode
     };
+    this.isSpinning = true;
     this.runtimeService.getHistory(postData)
       .subscribe( data => {
         // console.log(data);
+        this.isSpinning = false;
         this.totalItems = data.counts;
         let runtimes = data.params;
         this.terminals = runtimes.terminals; // 终端列表
         if (!this.termCode) {
           this.termCode = this.terminals[0].TerminalCode;
         }
-
 
         this.params = [];
         this.history = [];
@@ -119,9 +121,10 @@ export class RuntimeHistoryComponent implements OnInit {
           }
         }
 
-
         // console.log(this.params, this.history);
 
+      }, err => {
+        this.isSpinning = false;
       });
   }
 
