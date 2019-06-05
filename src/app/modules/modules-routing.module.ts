@@ -76,6 +76,8 @@ import {MaintainComponent} from './runtime/maintain/maintain-main/maintain.compo
 import {MaintainDashboardComponent} from './runtime/maintain/maintain-dashboard/maintain-dashboard.component';
 import {MaintainViewComponent} from './runtime/maintain/maintain-view/maintain-view.component';
 import {MaintainAddComponent} from './runtime/maintain/maintain-add/maintain-add.component';
+import {ChargeMainComponent} from "./recharge/charge-main/charge-main.component";
+import {Charge1Component} from "./recharge/charge1/charge1.component";
 
 
 
@@ -447,6 +449,17 @@ export const ModulesRoutingModule = [
             component: FaceRecListComponent
           }
 
+        ]
+      },
+      {
+        path: 'recharge',
+        component: ChargeMainComponent,
+        children: [
+          { path: '', redirectTo: 'charge1', pathMatch: 'full' },
+          {
+            path: 'charge1',
+            component: Charge1Component
+          }
         ]
       },
     ]

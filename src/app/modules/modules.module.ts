@@ -66,6 +66,10 @@ import { FaceRecListComponent } from './face-rec/face-rec-list/face-rec-list.com
 import { RecEditComponent } from './face-rec/rec-edit/rec-edit.component';
 import { FaceViewComponent } from './face-rec/face-view/face-view.component';
 import { VideoViewComponent } from './video/video-view/video-view.component';
+import { ChargeMainComponent } from './recharge/charge-main/charge-main.component';
+import { Charge1Component } from './recharge/charge1/charge1.component';
+
+
 
 
 
@@ -140,6 +144,8 @@ import { VideoViewComponent } from './video/video-view/video-view.component';
     RecEditComponent,
     FaceViewComponent,
     VideoViewComponent,
+    ChargeMainComponent,
+    Charge1Component,
 
   ],
   exports: [

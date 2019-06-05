@@ -88,6 +88,7 @@ export class LoginComponent implements OnInit {
   }
 
   verify(vCode) {
+    let that = this;
     if (vCode.length === 4) {
       let post = {
         captcha: vCode,
@@ -105,10 +106,11 @@ export class LoginComponent implements OnInit {
         }, err => {
           this.codeRight = false;
           this.codeError = true;
+          this.getCode();
         });
     } else {
       this.codeRight = false;
-      if (vCode.length > 0) {
+      if (vCode.length > 4) {
         this.codeError = true;
       } else {
         this.codeError = false;

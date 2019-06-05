@@ -1,0 +1,76 @@
+<div class="">
+  <div class="mat-card-title">
+    <h5 class="text_info pull-left">
+      <i class="fa fa-money" style="padding-right: 5px;"></i>
+      流量卡充值
+    </h5>
+  </div>
+
+  <div class="charge">
+    <div>
+      <div class="charge_item">
+        <div class="item_name">
+          流量卡号：
+        </div>
+        <div class="item_input">
+          <input type="text" class="form-control" [(ngModel)]="simNumber">
+        </div>
+      </div>
+
+      <div class="charge_item" style="padding-bottom: 0;">
+        <div class="item_name">
+          充值面值：
+        </div>
+        <div class="item_list">
+          <ul>
+            <li (click)="select(300)" [class.cur]="this.price === 300">
+              300元
+            </li>
+            <li (click)="select(100)" [class.cur]="this.price === 100">
+              100元
+            </li>
+            <li (click)="select(50)" [class.cur]="this.price === 50">
+              50元
+            </li>
+            <li (click)="select(30)" [class.cur]="this.price === 30">
+              30元
+            </li>
+            <li (click)="select(500)" [class.cur]="this.price === 500">
+              500元
+            </li>
+            <li (click)="select(200)" [class.cur]="this.price === 200">
+              200元
+            </li>
+            <li (click)="select(20)" [class.cur]="this.price === 20">
+              20元
+            </li>
+            <li (click)="select(0.01)" [class.cur]="this.price === 0.01">
+              0.01元
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="charge_item">
+        <div class="item_name">
+          销售价格：
+        </div>
+        <div class="item_show">
+          {{this.price}} 元
+        </div>
+      </div>
+
+    </div>
+
+
+    <div>
+      <button type="button" class="btn btn_info" (click)="charge()" [disabled]="!simNumber">
+        立即充值
+      </button>
+    </div>
+
+  </div>
+
+
+
+</div>

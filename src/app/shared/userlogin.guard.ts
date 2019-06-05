@@ -17,7 +17,7 @@ export class UserloginGuard implements CanActivate {
   constructor(  private userService: UserService, private router: Router ) {}
 
   GuardLogin(url): boolean {
-    if (sessionStorage.user === 'true') {
+    if (localStorage.status === 'true') {
       return true;
     } else {
       // this.userService.redirectUrl = url;

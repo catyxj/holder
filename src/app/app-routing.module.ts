@@ -12,7 +12,7 @@ import {RuikongComponent} from "./homepage/ruikong/ruikong.component";
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'admin',
     pathMatch: 'full'
   },
   {

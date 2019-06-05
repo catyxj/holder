@@ -45,7 +45,7 @@ export class UserService {
         // retry(3), // retry a failed request up to 3 times
         tap((val) => {
           // this.isLoggedIn = 'true';
-          sessionStorage.setItem('status', this.isLoggedIn);
+          localStorage.setItem('status', 'true');
         }),
         catchError(this.handleError) // then handle the error
       );
@@ -57,8 +57,8 @@ export class UserService {
     return this.http.post<any> ('/user_logout/', uid, httpOptions)
       .pipe(
         tap( (val) => {
-          this.isLoggedIn = 'false';
-          sessionStorage.setItem('status', 'false');
+          // this.isLoggedIn = 'false';
+          localStorage.setItem('status', 'false');
         })
       );
   }
@@ -75,7 +75,7 @@ export class UserService {
         .pipe(
           tap((val) => {
             if (!val) {
-              this.isLoggedIn = 'false';
+              // this.isLoggedIn = 'false';
               sessionStorage.setItem('user', 'false');
             }
           }),
