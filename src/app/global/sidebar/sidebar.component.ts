@@ -16,6 +16,7 @@ export class SidebarComponent implements OnInit {
   /*public user;
   public roleId;*/
 
+
   constructor(private userService: UserService) {
     this.userService.userStatus$ // 监测父组件user
       .subscribe( data => {

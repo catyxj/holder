@@ -15,8 +15,8 @@ export class HeaderComponent implements OnInit {
 
   @Output() toggle = new EventEmitter<void>();
 
-  @Input()
-  user: any;
+  @Input() user: any;
+  @Input() isCollapsed: any;
 
   public alarmNum = 0;
   public malNum = 0;

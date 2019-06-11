@@ -1,10 +1,29 @@
 
 <div class="site">
   <header>
-    <app-header [user]="user" (toggle)="sidenav.toggle()"></app-header>
+    <app-header [user]="user" [isCollapsed]="isCollapsed" (toggle)="collap()"></app-header>
+    <!--<app-header [user]="user" (toggle)="sidenav.toggle()"></app-header>-->
   </header>
 
+
   <main>
+    <nz-layout style="height: 100%; overflow: hidden;">
+      <nz-sider [nzWidth]="260" [(nzCollapsed)]="isCollapsed" [nzCollapsedWidth]="0" class="sidenav-container">
+        <div class="sidenav">
+          <app-sidebar [user]="user"></app-sidebar>
+        </div>
+      </nz-sider>
+
+      <nz-content style="height: 100%; overflow: auto; padding-top: 60px; box-sizing: border-box;">
+        <div>
+          <router-outlet></router-outlet>
+        </div>
+      </nz-content>
+
+    </nz-layout>
+  </main>
+
+  <!--<main>
     <mat-sidenav-container class="sidenav-container">
       <mat-sidenav class="sidenav bg_light_default"  mode="side" opened #sidenav>
         <app-sidebar [user]="user"></app-sidebar>
@@ -14,7 +33,7 @@
       </mat-sidenav-content>
     </mat-sidenav-container>
 
-  </main>
+  </main>-->
 
 
 

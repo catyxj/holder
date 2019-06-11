@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {Observable, throwError} from "rxjs/index";
 import {catchError} from "rxjs/internal/operators";
+import {throwError} from "rxjs/index";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,28 +13,23 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class RechargeService {
-  private listUrl = '/cluster_list';
+export class AuthorityService {
 
   constructor(private http: HttpClient) { }
 
-  // 充值
-  charge1(uid): Observable<any> {
-    return this.http.post('/productPayOrder', uid, httpOptions)
+  getFunc() {
+    return this.http.get('/111')
       .pipe(
         catchError(this.handleError)
       );
   }
 
-
-  getLists(n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.listUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
-    return this.http.get(url)
+  postAuth(data) {
+    return this.http.post('/p', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
-
 
 
   private handleError(error: HttpErrorResponse) {

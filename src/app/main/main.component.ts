@@ -17,6 +17,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   public user;
   public subscription: Subscription;
+  public isCollapsed = false;
 
   constructor(private userService: UserService,
               private route: ActivatedRoute,
@@ -46,6 +47,11 @@ export class MainComponent implements OnInit, OnDestroy {
       }, err => {
         this.router.navigate(['/login']);
       });
+  }
+
+  collap() {
+    this.isCollapsed = !this.isCollapsed;
+    console.log(this.isCollapsed);
   }
 
   ngOnDestroy() {

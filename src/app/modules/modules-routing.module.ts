@@ -78,6 +78,9 @@ import {MaintainViewComponent} from './runtime/maintain/maintain-view/maintain-v
 import {MaintainAddComponent} from './runtime/maintain/maintain-add/maintain-add.component';
 import {ChargeMainComponent} from "./recharge/charge-main/charge-main.component";
 import {Charge1Component} from "./recharge/charge1/charge1.component";
+import {ChargeListComponent} from "./recharge/charge-list/charge-list.component";
+import {AuthMainComponent} from "./authority/auth-main/auth-main.component";
+import {AuthAddComponent} from "./authority/auth-add/auth-add.component";
 
 
 
@@ -459,6 +462,21 @@ export const ModulesRoutingModule = [
           {
             path: 'charge1',
             component: Charge1Component
+          },
+          {
+            path: 'list',
+            component: ChargeListComponent
+          }
+        ]
+      },
+      {
+        path: 'authority',
+        component: AuthMainComponent,
+        children: [
+          { path: '', redirectTo: 'add', pathMatch: 'full' },
+          {
+            path: 'add',
+            component: AuthAddComponent
           }
         ]
       },

@@ -40,6 +40,10 @@
       <img src="assets/icons/menu_unfold.svg" height="18" alt="">
     </button>
 
+    <i class="trigger" nz-icon (click)="onClick()"
+      [type]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+    ></i>
+
     <div class="we_box">
       <span>
         <img src="assets/images/wechat.png" style="width: 18px; height: 18px;" alt="">

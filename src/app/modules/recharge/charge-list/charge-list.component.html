@@ -1,0 +1,99 @@
+
+<div class="">
+  <div class="mat-card-title">
+    <h5 class="text_info pull-left">
+      <i class="fa fa-money" style="padding-right: 5px;"></i>
+      流量卡充值
+    </h5>
+
+    <nav class="pull-right">
+      <a routerLink="/admin/recharge/list" routerLinkActive="btn_info" class="btn">订单管理</a>
+      <a routerLink="/admin/recharge/charge1" routerLinkActive="btn_info" class="btn">支付页面</a>
+    </nav>
+
+    <!--<div class="pull-right flex flex-row">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="请输入集群名称" [(ngModel)]="search" >
+        <div class="input-group-append" (click)="searchChange()">
+          <button class="btn btn_info" type="button"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+
+    </div>-->
+
+  </div>
+
+  <div class="t_content">
+    <nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning">
+      <table class="table">
+        <thead class="bg_light_primary">
+        <!--<th *ngIf="user && user.Role.RoleId === 10">-->
+          <!--<div class="checkbox c-checkbox white">-->
+            <!--<label>-->
+              <!--<input type="checkbox" [(ngModel)]="allDelete" (change)="allDel();">-->
+              <!--<span class="fa fa-check"></span></label>-->
+          <!--</div>-->
+        <!--</th>-->
+        <!--<th> 序号 </th>-->
+        <th> 集群名称 </th>
+        <th> 设备数量 </th>
+        <th> 所属企业 </th>
+        <th> 使用企业 </th>
+        <th> 操作 </th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of orderList; let i = index">
+          <!--<td *ngIf="user && user.Role.RoleId === 10">
+            <div class="checkbox c-checkbox">
+              <label>
+                <input type="checkbox" [(ngModel)]="clus.checkDelete" (change)="checkDel(clus);">
+                <span class="fa fa-check"></span></label>
+            </div>
+          </td>-->
+          <!--<td> {{ i+1 }}  </td>-->
+          <td> {{ data.Name }}  </td>
+          <td> {{ data.Count }} </td>
+          <td> {{ data.Name}} </td>
+          <td> {{ data.Name}} </td>
+          <td>
+           <!-- <a [routerLink]="['/admin/cluster/detail', clus.Uid, clus.Name]"
+               class="btn btn_info btn-sm" style="color: #ffffff;" title="查看并管理集群中的设备">
+              查看
+            </a>
+            <button class="btn btn_info btn-sm ml-2" title="修改集群名称" (click)="editCluster(clus)">
+              修改
+            </button>
+            <button class="btn btn-danger btn-sm ml-2" title="删除该集群" (click)="delete(clus.Uid, clus.Name)">
+              删除
+            </button>-->
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </nz-spin>
+    <p class="text-muted" *ngIf="!clusters||clusters.length===0">
+      无有效数据
+    </p>
+  </div>
+
+
+  <div class="t_bottom">
+
+    <ngb-pagination class="pull-right"
+                    [collectionSize]="totalItems"
+                    [pageSize]="pageSize" [(page)]="page"
+                    [maxSize]="3" [rotate]="true" [boundaryLinks]="false"
+                    (pageChange)="pageChange()">
+
+    </ngb-pagination>
+    <div class="pull-right mr-3">
+      <select [(ngModel)]="pageSize" class="form-control" (change)="pageSizeChange()">
+        <option value="10">10</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
+    <div class="pull-right mr-3" style="line-height: 33px;"> 共 {{totalItems}} 项</div>
+  </div>
+
+</div>

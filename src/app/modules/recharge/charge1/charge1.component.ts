@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {RechargeService} from "../../../shared/recharge.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-charge1',
