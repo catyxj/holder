@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     this.getConfig()
       .subscribe(ipInfo => {this.user.ip = ipInfo.ip; });
 
-    this.getCode();
+    // this.getCode();
 
     let getLocal = localStorage.getItem('holderUser');
     if (getLocal) {
