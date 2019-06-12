@@ -1,0 +1,14 @@
+
+.authority1{
+  background-color: #ffffff;
+  padding: 30px;
+  box-sizing: border-box;
+  min-height: 500px;
+}
+.form-group{
+  /*display: flex;*/
+}
+.form-group label{
+  /*width: 90px;*/
+}
+

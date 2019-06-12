@@ -37,6 +37,12 @@ main{
   /*display: flex;
   flex-direction: row;*/
 }
+/*滚动条*/
+.sidenav-container::-webkit-scrollbar{
+  width: 0;     /*高宽分别对应横竖滚动条的尺寸*/
+  height: 12px;
+
+}
 
 .sidenav {
   width: 260px;
