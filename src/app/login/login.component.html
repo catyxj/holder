@@ -30,7 +30,7 @@
           <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger">请输入密码</div>
         </div>
       </div>
-      <!--<div class="mb-3">
+      <div class="mb-3">
         <div class="checkbox c-checkbox">
           <label>
             <input type="checkbox" [(ngModel)]="checkRemember" name="checkR">
@@ -38,9 +38,9 @@
             记住用户名
           </label>
         </div>
-      </div>-->
+      </div>
 
-      <div class="row mb-3">
+     <!-- <div class="row mb-3">
         <div class="col-6" style="position: relative;">
           <input required type="text" [(ngModel)]="vCode" (input)="verify(vCode)"
                  placeholder="输入验证码" class="form-control" name="code">
@@ -50,7 +50,7 @@
         <div class="col-6">
           <img src="{{codeImg}}" alt="验证码" (click)="getCode()" style="width: 100%; height: 34px; cursor: pointer;">
         </div>
-      </div>
+      </div>-->
 
       <div class="form-group">
         <div class="">
