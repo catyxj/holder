@@ -30,13 +30,18 @@
           <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger">请输入密码</div>
         </div>
       </div>
-      <div class="mb-3">
-        <div class="checkbox c-checkbox">
-          <label>
-            <input type="checkbox" [(ngModel)]="checkRemember" name="checkR">
-            <span class="fa fa-check"></span>
-            记住用户名
-          </label>
+      <div class="mb-3 flex justify-content-between">
+        <div class="">
+          <div class="checkbox c-checkbox">
+            <label>
+              <input type="checkbox" [(ngModel)]="checkRemember" name="checkR">
+              <span class="fa fa-check"></span>
+              记住用户名
+            </label>
+          </div>
+        </div>
+        <div class="">
+          <a (click)="forgetPwd()" class="" style="color: #00a4ff;">忘记密码</a>
         </div>
       </div>
 
@@ -57,6 +62,7 @@
           <button type="submit" class="btn btn_info btn-block" (click)="login()" [disabled]="!codeRight">登录</button>
         </div>
       </div>
+
 
       <div class="form-group row">
 
