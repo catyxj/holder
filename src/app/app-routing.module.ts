@@ -6,6 +6,8 @@ import {NotFound404Component} from './global/not-found404/not-found404.component
 import {QiantianComponent} from './homepage/qiantian/qiantian.component';
 import {VViewComponent} from "./v-view/v-view.component";
 import {RuikongComponent} from "./homepage/ruikong/ruikong.component";
+import {SignUpComponent} from "./register/sign-up/sign-up.component";
+import {RecoverPasswordComponent} from "./register/recover-password/recover-password.component";
 
 
 
@@ -18,6 +20,14 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: SignUpComponent
+  },
+  {
+    path: 'recover-password',
+    component: RecoverPasswordComponent
   },
   {
     path: 'admin',

@@ -18,7 +18,7 @@ import {VerifyCodeService} from "../shared/verify-code.service";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  public user = { username: '', password: '' , ip: ''};
+  public user = { username: '', password: '' , captcha: '', captcha_id: ''};
   public errMes: string ;
   public checkRemember = false;
   public vCode; // 验证码
@@ -35,8 +35,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
 
-    this.getConfig()
-      .subscribe(ipInfo => {this.user.ip = ipInfo.ip; });
+    // this.getConfig()
+    //   .subscribe(ipInfo => {this.user.ip = ipInfo.ip; });
 
     this.getCode();
 
@@ -57,7 +57,11 @@ export class LoginComponent implements OnInit {
     return this.http.get(IP_JSON_URL);
   }
 
+  // 登录
   login(): void {
+    this.user.captcha = this.vCode;
+    this.user.captcha_id = this.codeId;
+
     // console.log(this.user);
     if (this.checkRemember === true) {
       localStorage.setItem('holderUser', this.user.username);
@@ -76,6 +80,7 @@ export class LoginComponent implements OnInit {
          );
   }
 
+
   // 获取验证码图片
   getCode() {
     this.vCodeService.getCode()
@@ -92,7 +97,7 @@ export class LoginComponent implements OnInit {
     if (vCode.length === 4) {
       let post = {
         captcha: vCode,
-        captchaId: this.codeId
+        captcha_id: this.codeId
       };
       this.vCodeService.sendCode(post)
         .subscribe( val => {

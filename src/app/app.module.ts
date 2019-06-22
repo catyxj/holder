@@ -30,6 +30,8 @@ import {HeaderComponent} from './global/header/header.component';
 import {FooterComponent} from './global/footer/footer.component';
 import {SidebarComponent} from './global/sidebar/sidebar.component';
 import { RuikongComponent } from './homepage/ruikong/ruikong.component';
+import { SignUpComponent } from './register/sign-up/sign-up.component';
+import { RecoverPasswordComponent } from './register/recover-password/recover-password.component';
 
 
 registerLocaleData(zh);
@@ -46,7 +48,9 @@ registerLocaleData(zh);
     SidebarComponent,
     QiantianComponent,
     VViewComponent,
-    RuikongComponent
+    RuikongComponent,
+    SignUpComponent,
+    RecoverPasswordComponent
   ],
   imports: [
     BrowserModule,

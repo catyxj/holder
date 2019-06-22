@@ -12,11 +12,11 @@
 .login-form-container {
   position: absolute;
   width: 380px;
-  height: 350px;
+  height: 400px;
   left: 50%;
   top: 50%;
   /*margin-left: -200px;*/
-  margin-top: -175px;
+  margin-top: -200px;
   padding: 30px 60px;
   /*background: rgba(41,67,78,0.8);*/
   background: rgba(255,255,255,0.8);
@@ -30,12 +30,29 @@
   /*font-weight: bold;*/
 }
 .login-form{
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .login-form-container a{
   text-align: center;
   color: #fff;
 }
+
+.login_item{
+  position: relative;
+}
+.err_tip{
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+  font-size: 12px;
+}
+
+.btn_primary {
+  background-color: #28a745;
+  background-image: linear-gradient(-180deg,#34d058,#28a745 90%);
+  color: #fff;
+}
+
 
 .footer{
   position: fixed;

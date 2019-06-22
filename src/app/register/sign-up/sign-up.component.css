@@ -1,0 +1,49 @@
+
+.sign_up{
+  width: 600px;
+  margin: auto;
+  padding-top: 30px;
+  color: #666666;
+}
+
+.sign_up .logo{
+  font-size: 24px;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.sign_up_container{
+  border: 1px solid #eeeeee;
+  padding: 30px 60px;
+}
+.sign_up_container h5{
+    padding-bottom: 20px;
+}
+
+.sign_item{
+  display: flex;
+}
+.sign_item .sign_label{
+  width: 120px;
+  padding-top: 5px;
+}
+.sign_input{
+  flex: auto;
+}
+.sign_tip{
+  font-size: 12px;
+  color: #888888;
+}
+
+.agreement1{
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+.agreement2 a{
+  font-size: 12px;
+}
+
+
+
+

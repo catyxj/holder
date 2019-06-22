@@ -194,15 +194,17 @@ h5, .h5 {
   padding: 0 46px;
 }
 .mat-card-title{
-  position: fixed;
-  top: 0;
-  left: 290px;
-  z-index: 9;
+  /*position: fixed;*/
+  /*top: 0;*/
+  /*left: 290px;*/
+  /*z-index: 9;*/
   padding: 15px 0;
   box-sizing: border-box;
+  overflow: hidden;
+  width: 100%;
 }
 .mat-card-title .text_info{
-  color: #ffffff;
+  /*color: #ffffff;*/
   line-height: 33px;
   margin-bottom: 0;
 }
@@ -223,7 +225,7 @@ h5, .h5 {
   }
 }
 .mat-card-title nav a{
-  color: #ffffff;
+  /*color: #ffffff;*/
 }
 .tab_map{
   display: flex;

@@ -3,7 +3,7 @@
   <mat-toolbar-row>
 
     <!--企业标识-->
-    <a class="navbar-brand" routerLink="/admin" style="margin-left:20px;"
+    <a class="navbar-brand" routerLink="/admin"
        *ngIf="user && (!user.Organization || ((!user.Organization.ShowBrand) && (!user.Organization.SuperOrganization || !user.Organization.SuperOrganization.ShowBrand)))">
       <!--<img src="assets/images/light.png"  height="30" alt="">-->
       <h2 style="color: #ffffff;"> LUKEEP</h2>
@@ -31,9 +31,6 @@
 
 
 
-    <!-- This fills the remaining space of the current row -->
-    <span class="example-spacer"></span>
-
     <button mat-icon-button (click)="onClick()" style=" height: 64px; margin-left: 8px;">
       <!--<mat-icon>menu</mat-icon>-->
       <!--<img src="assets/icons/show_side.png" height="20" alt="">-->
@@ -48,6 +45,9 @@
         <img src="assets/images/wechat.jpg" alt="">
       </div>
     </div>
+
+    <!-- This fills the remaining space of the current row -->
+    <span class="example-spacer"></span>
 
 
     <!--<mat-icon> email </mat-icon>-->
