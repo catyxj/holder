@@ -38,8 +38,9 @@
           <i *ngIf="codeRight" class="fa fa-check-circle" aria-hidden="true" style="color: green; position: absolute; right: 20px; top: 10px;"></i>
           <i *ngIf="codeError" class="fa fa-times-circle" aria-hidden="true" style="color: red; position: absolute; right: 20px; top: 10px;"></i>
         </div>
-        <div class="col-6">
-          <img src="{{codeImg}}" alt="验证码" (click)="getCode()" style="width: 100%; height: 34px; cursor: pointer;">
+        <div class="col-6 v_img">
+          <!--{{codeImg}}-->
+          <img src="{{codeImg}}" alt="验证码" (click)="reloadCode()" style="width: 100%; height: 34px; cursor: pointer;">
         </div>
       </div>
 

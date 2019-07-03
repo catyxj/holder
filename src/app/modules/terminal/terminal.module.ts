@@ -23,6 +23,8 @@ import { AlarmRuleComponent } from './alarm-rule/alarm-rule.component';
 import { RangeConfigComponent } from './range-config/range-config.component';
 import { AddTemplateComponent } from './add-template/add-template.component';
 import { PlcAlarmComponent } from './plc-alarm/plc-alarm.component';
+import { TermListAdComponent } from './administrator/term-list-ad/term-list-ad.component';
+import { TermMainAdComponent } from './administrator/term-main-ad/term-main-ad.component';
 
 
 
@@ -55,7 +57,9 @@ import { PlcAlarmComponent } from './plc-alarm/plc-alarm.component';
     AlarmRuleComponent,
     RangeConfigComponent,
     AddTemplateComponent,
-    PlcAlarmComponent],
+    PlcAlarmComponent,
+    TermListAdComponent,
+    TermMainAdComponent],
   entryComponents: [
     AddTerminalComponent,
     GroupConfigComponent,

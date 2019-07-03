@@ -5,12 +5,12 @@
       <img src="assets/icons/monitor.png" alt="">
       设备概览
     </h5>
-    <nav class="pull-left">
-      <a routerLink="/admin/monitor/dashboard" routerLinkActive="btn_info" class="btn">图文模式</a>
-      <a routerLink="/admin/monitor/list" routerLinkActive="btn_info" class="btn">列表模式</a>
-      <a routerLink="/admin/monitor/map" routerLinkActive="btn_info" class="btn">地图模式</a>
-      <a routerLink="/admin/monitor/clusters" routerLinkActive="btn_info" class="btn mr-3">集群模式</a>
-    </nav>
+    <!--<nav class="pull-left">-->
+      <!--<a routerLink="/admin/monitor/dashboard" routerLinkActive="btn_info" class="btn">图文模式</a>-->
+      <!--<a routerLink="/admin/monitor/list" routerLinkActive="btn_info" class="btn">列表模式</a>-->
+      <!--<a routerLink="/admin/monitor/map" routerLinkActive="btn_info" class="btn">地图模式</a>-->
+      <!--<a routerLink="/admin/monitor/clusters" routerLinkActive="btn_info" class="btn mr-3">集群模式</a>-->
+    <!--</nav>-->
 
 
 
@@ -48,23 +48,47 @@
       <div *ngFor="let data of boilers; trackBy: trackByUid" class="col-sm-12 col-md-6">
         <div class="flex_c module">
           <div class="status_name">
-            <a [routerLink]="['/admin/runtime', data.uid, data.name]" target="_blank">
-              <h5 class="">
-                {{data.name}}
-              </h5>
-            </a>
+            <div class="sn_l">
+              <a class="status_param0" [routerLink]="['/admin/terminal']"
+                 [ngClass]="{'bg_info':data.termStatus > 0 ,'bg_grey':data.termStatus <= 0}">
+                <!--{{data.online}}--> <!--终端状态-->
+              </a>
+              <a [routerLink]="['/admin/runtime', data.uid, data.name]" target="_blank" class="sn_title">
+                <h6 class="">
+                  {{data.name}}
+                </h6>
+                <p>
+                  {{data.Address}}
+                </p>
+              </a>
+            </div>
+            <div class="sn_r">
+              <a class="status_param" [routerLink]="['/admin/runtime', data.uid, data.name]" target="_blank"
+                 [ngClass]="{'bg_info':data.termStatus > 0 && data.eptStatus ,'bg_grey':data.termStatus <= 0 || !data.eptStatus}">
+                {{data.isBurning}} <!--运行状态-->
+              </a>
+              <a class="status_param" [routerLink]="['/admin/runtime', data.uid, data.name]" target="_blank"
+                 [ngClass]="{'bg_grey':data.termStatus <= 0, 'bg-warning':data.termStatus > 0 && data.alarmStatus , 'bg_info':data.termStatus > 0 && !data.alarmStatus}">
+                {{data.warning}}
+              </a>
+              <a class="status_param" [routerLink]="['/admin/runtime/' + data.uid + '/' + data.name + '/maintain/dashboard']" target="_blank"
+                 [ngClass]="{'bg_grey':data.termStatus <= 0, 'bg-warning':data.termStatus > 0 && data.mtStatus , 'bg_info':data.termStatus > 0 && !data.mtStatus}">
+                {{data.malfunction}}
+              </a>
+            </div>
+
           </div>
 
           <div class="status_box">
             <div class="status_content">
               <div class="status_row">
-                <a class="status_col" [routerLink]="['/admin/terminal']"
+                <!--<a class="status_col" [routerLink]="['/admin/terminal']"
                    [ngClass]="{'bg_info':data.termStatus > 0 ,'bg_grey':data.termStatus <= 0}">
-                  {{data.online}} <!--终端状态-->
+                  {{data.online}} &lt;!&ndash;终端状态&ndash;&gt;
                 </a>
                 <a class="status_col" [routerLink]="['/admin/runtime', data.uid, data.name]" target="_blank"
                    [ngClass]="{'bg_info':data.termStatus > 0 && data.eptStatus ,'bg_grey':data.termStatus <= 0 || !data.eptStatus}">
-                  {{data.isBurning}} <!--运行状态-->
+                  {{data.isBurning}} &lt;!&ndash;运行状态&ndash;&gt;
                 </a>
                 <a class="status_col" [routerLink]="['/admin/runtime', data.uid, data.name]" target="_blank"
                    [ngClass]="{'bg_grey':data.termStatus <= 0, 'bg-warning':data.termStatus > 0 && data.alarmStatus , 'bg_info':data.termStatus > 0 && !data.alarmStatus}">
@@ -73,7 +97,42 @@
                 <a class="status_col" [routerLink]="['/admin/runtime/' + data.uid + '/' + data.name + '/maintain/dashboard']" target="_blank"
                    [ngClass]="{'bg_grey':data.termStatus <= 0, 'bg-warning':data.termStatus > 0 && data.mtStatus , 'bg_info':data.termStatus > 0 && !data.mtStatus}">
                   {{data.malfunction}}
-                </a>
+                </a>-->
+                <div class="status_data_item">
+                  <div class="status_data_head">
+                    含氧量
+                  </div>
+                  <div class="status_data_content">
+                    16.5 %
+                  </div>
+                </div>
+
+                <div class="status_data_item">
+                  <div class="status_data_head">
+                    含氧量
+                  </div>
+                  <div class="status_data_content">
+                    16.5 %
+                  </div>
+                </div>
+
+                <div class="status_data_item">
+                  <div class="status_data_head">
+                    含氧量
+                  </div>
+                  <div class="status_data_content">
+                    16.5 %
+                  </div>
+                </div>
+
+                <div class="status_data_item">
+                  <div class="status_data_head">
+                    含氧量
+                  </div>
+                  <div class="status_data_content">
+                    16.5 %
+                  </div>
+                </div>
               </div>
             </div>
             <div class="img_content ">
@@ -88,13 +147,14 @@
     </div>
 
     <div class="clearfix mt-3">
-      <!--<div class="pull-left"> 共 {{totalItems}} 项</div>-->
+
       <ngb-pagination class="pull-right"
                       [collectionSize]="totalItems"
                       [pageSize]="pageSize" [(page)]="page"
                       [maxSize]="3" [rotate]="true" [boundaryLinks]="false"
                       (pageChange)="pageChange()">
       </ngb-pagination>
+      <div class="pull-right"> 共 {{totalItems}} 项</div>
     </div>
   </div>
 

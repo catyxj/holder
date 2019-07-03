@@ -3,10 +3,11 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, Subject, throwError} from 'rxjs/index';
 import {catchError} from 'rxjs/internal/operators';
 
+const token = localStorage.getItem('authToken');
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': 'Ida'
+    'Authorization': token
   })
 };
 
@@ -36,7 +37,7 @@ export class AlarmService {
 
   // 获取未查看告警数
   getAlarmNum() {
-    return this.http.get<any>(this.alarmNumUrl)
+    return this.http.get<any>(this.alarmNumUrl, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -45,7 +46,7 @@ export class AlarmService {
   // 获取当前告警列表
   getCurrents(n: number, pageSize: number, search?: string, uid?: string): Observable<any> {
     const url = `${this.currentUrl}/?page=${n}&pageSize=${pageSize}&search=${search}&uid=${uid}`;
-    return this.http.get<any>(url)
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
       );
@@ -54,7 +55,7 @@ export class AlarmService {
   // 获取历史告警列表
   getHistories(n: number, pageSize: number, search?: string, uid?: string): Observable<any> {
     const url = `${this.historyUrl}/?page=${n}&pageSize=${pageSize}&search=${search}&uid=${uid}`;
-    return this.http.get<any>(url)
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
       );
@@ -63,14 +64,14 @@ export class AlarmService {
   // 获取告警详情
   getDetail(uid): Observable<any> {
     const url = `${this.detailUrl}/?uid=${uid}`;
-    return this.http.get<any>(url)
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
       );
   }
 
   getSubscribe(uid): Observable<any> {
-    return this.http.get(`/alarm_subscribe?uid=${uid}`)
+    return this.http.get(`/alarm_subscribe?uid=${uid}`, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
       );

@@ -39,7 +39,6 @@ export class TerminalListComponent implements OnInit {
   // 获取终端列表
   getTerminals(): void {
     this.isSpinning = true;
-    // console.log({page: this.page, pageSize: this.pageSize , search: this.search});
     this.terminalService.getTerminals(this.page, this.pageSize, this.status, this.search)
       .subscribe(terminals => {
         this.isSpinning = false;
@@ -50,11 +49,6 @@ export class TerminalListComponent implements OnInit {
         }
         for (let i = 0; i < this.terminals.length; i++) {
           let terminal = this.terminals[i];
-          /*if (terminal.TermVer === terminal.PlatVer) {
-            terminal.confStatus = '配置成功';
-          } else {
-            terminal.confStatus = '配置失败';
-          }*/
           if ( terminal.IsOnline === 1) {
             terminal.isOnline = '在线';
           } else {

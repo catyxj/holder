@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import {UserService} from "../../shared/user.service";
 
 
@@ -16,6 +16,8 @@ export class SidebarComponent implements OnInit {
   /*public user;
   public roleId;*/
 
+  public sideList;
+
   constructor(private userService: UserService) {
     this.userService.userStatus$ // 监测父组件user
       .subscribe( data => {
@@ -26,10 +28,19 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     // this.getUser();
+    this.getSide();
   }
 
-  submenuToggle(n) {
-    this.submenuShow[n] = !this.submenuShow[n];
+  submenuToggle(item) {
+    // this.submenuShow[n] = !this.submenuShow[n];
+    item.checked = !item.checked;
+  }
+
+  getSide() {
+    this.userService.getSide()
+      .subscribe(data => {
+        this.sideList = data.sidenav;
+      });
   }
 
   /*setPage() {
@@ -44,5 +55,6 @@ export class SidebarComponent implements OnInit {
         this.roleId = this.user.Role.RoleId;
       });
   }*/
+
 
 }

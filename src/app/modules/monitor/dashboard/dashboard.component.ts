@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getBoilers(message): void {
     console.log(message);
-    const wsUrl = `wss://${window.location.host}/equipment_show`;
+    /*const wsUrl = `wss://${window.location.host}/equipment_show`;
     this.socket = this.boilerWsService.creatSocket(wsUrl, message)
       .subscribe(
         data => {
@@ -57,14 +57,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
         },
         err => console.log(err),
         () => console.log('ws结束')
-      );
+      );*/
 
-    /*this.boilerService.getBoilers(this.page, this.pageSize, this.search)
+    this.boilerService.getBoilers(this.page, this.pageSize, this.search)
       .subscribe(data => {
         this.boilers = data.params;
         this.totalItems = data.counts;
         this.refreshData();
-      });*/
+      });
   }
 
 
@@ -75,33 +75,30 @@ export class DashboardComponent implements OnInit, OnDestroy {
         bo.img = 'assets/images/no_image.png';
       }
 
+      bo.isBurning = '未运行';
+      bo.warning = '无告警';
+      bo.malfunction = '无故障';
       if (bo.termStatus === 1) {
         bo.online = '终端在线';
         if (bo.eptStatus === true) {
-          bo.isBurning = '运行中';
-        } else {
-          bo.isBurning = '未运行';
+          bo.isBurning = '运行';
         }
         if (bo.alarmStatus === true) {
-          bo.warning = '有告警';
-        } else {
-          bo.warning = '无告警';
+          bo.warning = '告警';
         }
         if (bo.mtStatus === true) {
-          bo.malfunction = '有故障';
-        } else {
-          bo.malfunction = '无故障';
+          bo.malfunction = '故障';
         }
       } else if (bo.termStatus === 0) {
         bo.online = '终端离线';
-        bo.isBurning = '未运行';
-        bo.warning = '无告警';
-        bo.malfunction = '无故障';
+        bo.isBurning = '未知';
+        bo.warning = '未知';
+        bo.malfunction = '未知';
       } else {
         bo.online = '未绑定';
-        bo.isBurning = '未运行';
-        bo.warning = '无告警';
-        bo.malfunction = '无故障';
+        bo.isBurning = '未知';
+        bo.warning = '未知';
+        bo.malfunction = '未知';
       }
     }
   }
@@ -138,9 +135,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // console.log('page close');
-    // sessionStorage.setItem('pageNum', this.page.toString());
-    this.socket.unsubscribe();
-    this.boilerWsService.closeSocket();
+
+    // this.socket.unsubscribe();
+    // this.boilerWsService.closeSocket();
   }
 
 

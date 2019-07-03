@@ -68,6 +68,9 @@ import { FaceViewComponent } from './face-rec/face-view/face-view.component';
 import { VideoViewComponent } from './video/video-view/video-view.component';
 import { ChargeMainComponent } from './recharge/charge-main/charge-main.component';
 import { Charge1Component } from './recharge/charge1/charge1.component';
+import { HomeMainComponent } from './home/home-main/home-main.component';
+import { HomeGeneralComponent } from './home/home-general/home-general.component';
+import { HomeVipComponent } from './home/home-vip/home-vip.component';
 
 
 
@@ -146,6 +149,9 @@ import { Charge1Component } from './recharge/charge1/charge1.component';
     VideoViewComponent,
     ChargeMainComponent,
     Charge1Component,
+    HomeMainComponent,
+    HomeGeneralComponent,
+    HomeVipComponent,
 
   ],
   exports: [

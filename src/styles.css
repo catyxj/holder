@@ -198,7 +198,8 @@ h5, .h5 {
   /*top: 0;*/
   /*left: 290px;*/
   /*z-index: 9;*/
-  padding: 15px 0;
+  /*padding: 15px 0;*/
+  padding-bottom: 15px;
   box-sizing: border-box;
   overflow: hidden;
   width: 100%;
@@ -273,7 +274,7 @@ h5, .h5 {
   padding: 20px;
 }
 .t_bottom .pull-right.mr-3 select{
-  display: none;
+  /*display: none;*/
 }
 
 .content .page-link {

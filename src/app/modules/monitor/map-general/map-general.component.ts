@@ -150,11 +150,11 @@ export class MapGeneralComponent implements OnInit, OnDestroy {
     this.map = map;
 
     let point = new BMap.Point(105.000, 38.000);
-    map.centerAndZoom(point, 5);
+    map.centerAndZoom(point, 6);
     map.enableScrollWheelZoom(true);     // 开启鼠标滚轮缩放
     // 添加控件
     map.addControl(new BMap.OverviewMapControl());
-    map.addControl(new BMap.MapTypeControl());
+    // map.addControl(new BMap.MapTypeControl());
 
     // 定位
     /*let geolocation = new BMap.Geolocation();

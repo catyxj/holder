@@ -3,10 +3,11 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {Observable, throwError} from "rxjs/index";
 import {catchError} from "rxjs/internal/operators";
 
+const token = localStorage.getItem('authToken');
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': 'Ida'
+    'Authorization': token
   })
 };
 
@@ -18,9 +19,17 @@ export class VerifyCodeService {
 
   constructor(private http: HttpClient) { }
 
+  // 获取验证码id
+  getCodeId(): Observable< any > {
+    return this.http.get< any >('/login/captchaid')
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   // 获取验证码图片
-  getCode(): Observable< any > {
-    return this.http.get< any >('/captcha_get')
+  getCode(id) {
+    return this.http.get< any >(`/login/captcha?id=${id}`)
       .pipe(
         catchError(this.handleError)
       );

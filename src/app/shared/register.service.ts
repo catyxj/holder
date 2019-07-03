@@ -25,9 +25,18 @@ export class RegisterService {
       );
   }
 
+  // 获取手机验证码
+  getPhCode(data): Observable< any > {
+    return this.http.post< any >('/login/send_sms_code', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
   // 注册
   signUp(data): Observable<any> {
-    return this.http.post< any >('/user_register', data, httpOptions)
+    return this.http.post< any >('/login/register', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -35,7 +44,7 @@ export class RegisterService {
 
   // 重置密码
   recoverPass(data): Observable<any> {
-    return this.http.post< any >('/user_recover_password', data, httpOptions)
+    return this.http.post< any >('/login/password_recover', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

@@ -37,16 +37,34 @@ mat-nav-list a.sidebar_title{
   color: #ffffff;
 }
 
+
 .sidebar_title i{
   float: right;
   margin-right: 40px;
   line-height: 36px;
 }
+.sidebar_title span{
+  margin-right: 12px;
+}
+.smenu_head{
+  font-size: 16px;
+  color: #ffffff;
+  padding-left: 40px;
+  line-height: 40px;
+}
+.smenu_head:hover{
+  background-color: #224762;
+  transition: all .3s linear;
+}
 .sub_menu{
   /*background-color: #dbe1e7;*/
   transition: all .3s linear;
 }
-.sub_menu li a i{
+
+.sub_menu li a{
+  padding-left: 20px;
+}
+.smenu_head i,.sub_menu li a i{
   /*width: 30px;*/
   margin-right: 12px;
   /*margin-right: 5px;*/

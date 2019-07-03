@@ -5,13 +5,13 @@
       <img src="assets/icons/monitor.png" alt="">
       设备概览
     </h5>
-    <nav class="pull-left">
+    <!--<nav class="pull-left">-->
 
-      <a routerLink="/admin/monitor/dashboard" routerLinkActive="btn_info" class="btn">图文模式</a>
-      <a routerLink="/admin/monitor/list" routerLinkActive="btn_info" class="btn">列表模式</a>
-      <a routerLink="/admin/monitor/map" routerLinkActive="btn_info" class="btn">地图模式</a>
-      <a routerLink="/admin/monitor/clusters" routerLinkActive="btn_info" class="btn mr-3">集群模式</a>
-    </nav>
+      <!--<a routerLink="/admin/monitor/dashboard" routerLinkActive="btn_info" class="btn">图文模式</a>-->
+      <!--<a routerLink="/admin/monitor/list" routerLinkActive="btn_info" class="btn">列表模式</a>-->
+      <!--<a routerLink="/admin/monitor/map" routerLinkActive="btn_info" class="btn">地图模式</a>-->
+      <!--<a routerLink="/admin/monitor/clusters" routerLinkActive="btn_info" class="btn mr-3">集群模式</a>-->
+    <!--</nav>-->
 
 
     <div class="pull-right flex flex-row">
@@ -104,6 +104,10 @@
       </tbody>
     </table>
     </nz-spin>
+    <p class="text-muted" *ngIf="!boilers||boilers.length===0">
+      <!--无有效数据-->
+      <nz-empty></nz-empty>
+    </p>
   </div>
 
   <div class="t_bottom">

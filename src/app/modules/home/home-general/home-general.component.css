@@ -1,0 +1,22 @@
+
+.general_box{
+
+}
+
+.hc_header{
+  font-size: 18px;
+}
+.hc_content{
+  position: relative;
+}
+.hc_content img{
+  width: 100%;
+}
+.gen_btn{
+  position: absolute;
+  top:20px;
+  right: 20px;
+}
+
+
+

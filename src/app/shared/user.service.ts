@@ -5,10 +5,11 @@ import {catchError,  tap} from 'rxjs/internal/operators';
 import { Resolve, Router} from '@angular/router';
 import { environment } from './../../environments/environment';
 
+const token = localStorage.getItem('authToken');
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': 'my-auth-token'
+    'Authorization': token
   })
 };
 
@@ -39,8 +40,8 @@ export class UserService {
   // 登录
   login(user): Observable< any > {
     // TODO: send the message _after_ fetching the heroes
-    return this.http.post< any >('/user_login/', user, httpOptions)
-      // .subscribe(cuser => { this.userInfo = cuser; })
+    // return this.http.post< any >('/user_login/', user, httpOptions)
+    return this.http.post< any >('/login/', user, httpOptions)
       .pipe(
         // retry(3), // retry a failed request up to 3 times
         tap((val) => {
@@ -71,7 +72,7 @@ export class UserService {
     if (!environment.production) {
       return this.http.get< any >('assets/server/user.json');
     } else {
-      return this.http.get< any >('/user')
+      return this.http.get< any >('/user', httpOptions)
         .pipe(
           tap((val) => {
             if (!val) {
@@ -83,8 +84,28 @@ export class UserService {
         );
     }
 
+    /*return this.http.get< any >('/user', httpOptions)
+      .pipe(
+        tap((val) => {
+          if (!val) {
+            sessionStorage.setItem('user', 'false');
+          }
+        }),
+        catchError(this.handleError)
+      );*/
+
 
   }
+
+
+
+  // 获取侧边栏，权限
+  getSide(): Observable<any> {
+    return this.http.get< any >('assets/server/sidenav.json');
+  }
+
+
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

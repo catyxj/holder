@@ -31,6 +31,7 @@
 
 
 
+    <!--侧边栏按钮-->
     <button mat-icon-button (click)="onClick()" style=" height: 64px; margin-left: 8px;">
       <!--<mat-icon>menu</mat-icon>-->
       <!--<img src="assets/icons/show_side.png" height="20" alt="">-->
@@ -90,7 +91,7 @@
       <button mat-button id="dropdownBasic1" ngbDropdownToggle style="height: 64px;">
         <!--<img [src]="user?.Picture" alt="" style="width: 25px; height: 25px; border-radius: 25px;">-->
         <nz-avatar nzIcon="anticon anticon-user" nzSrc="{{user?.Picture}}"></nz-avatar>
-        {{user?.Name}} ( {{ user?.Role.Name}} )
+        <span *ngIf="!matches"> {{user?.Name}} ( {{ user?.Role.Name}} ) </span>
       </button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="animated fadeInDown">
         <a class="dropdown-item" routerLink="/admin/profile">用户信息</a>

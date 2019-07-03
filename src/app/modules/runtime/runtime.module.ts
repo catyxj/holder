@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 
 import { RuntimeDashboardComponent } from './dashboard/dashboard.component';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -59,6 +59,9 @@ import {MaintainViewComponent} from './maintain/maintain-view/maintain-view.comp
     ChartExpandComponent,
     LifeAddComponent,
     LifeEditComponent
+  ],
+  providers: [
+    DatePipe
   ]
 })
 export class RuntimeModule { }

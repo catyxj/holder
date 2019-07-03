@@ -17,6 +17,10 @@ export class HeaderComponent implements OnInit {
 
   @Input()
   user: any;
+  @Input()
+  matches: any;
+  @Input()
+  opened: any;
 
   public alarmNum = 0;
   public malNum = 0;
@@ -37,6 +41,7 @@ export class HeaderComponent implements OnInit {
     // console.log(this.user);
     this.getAlarm();
     // this.getUser();
+    console.log(this.matches);
   }
 
   getAlarm() {

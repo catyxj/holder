@@ -29,7 +29,7 @@ export class SignUpComponent implements OnInit {
               private orgService: OrganizationService) { }
 
   ngOnInit() {
-    this.getOrgType();
+    // this.getOrgType();
   }
 
   //  获取企业类型列表
@@ -68,7 +68,7 @@ export class SignUpComponent implements OnInit {
     }
 
     const post = {
-      type: 'register',
+      type: 1,
       telephone: this.phone
     };
 
@@ -86,7 +86,7 @@ export class SignUpComponent implements OnInit {
       }
     }, 1000);
 
-    this.registerService.getCode(post)
+    this.registerService.getPhCode(post)
       .subscribe(val => {
         Swal(
           {
@@ -100,6 +100,7 @@ export class SignUpComponent implements OnInit {
         Swal(
           {
             title: '信息发送失败',
+            text: err,
             type: 'error',
             showConfirmButton: false,
             timer: 2000
@@ -111,8 +112,6 @@ export class SignUpComponent implements OnInit {
   submit() {
     this.pComfirm();
     const post = {
-      org_name: this.orgName,
-      org_type: this.orgType,
       telephone: this.phone,
       password: this.password,
       code: this.verifyCode

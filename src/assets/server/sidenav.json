@@ -1,0 +1,94 @@
+{
+  "sidenav": [
+    {
+      "name": "首页",
+      "router": "/admin/home",
+      "icon": "fa-home"
+    },
+    {
+      "name": "主监控台",
+      "code": "",
+      "icon": "fa-home",
+      "children": [
+        {
+          "name": "快速配置",
+          "code": "",
+          "router": "/admin/overview",
+          "icon": "fa-file-text-o"
+        },
+        {
+          "name": "图文概览",
+          "code": "",
+          "router": "/admin/monitor/dashboard",
+          "icon": "fa-bar-chart-o"
+        },
+        {
+          "name": "列表模式",
+          "code": "sub1-option1",
+          "router": "/admin/monitor/list",
+          "icon": "fa-file-text-o"
+        },
+        {
+          "name": "地图模式",
+          "code": "sub1-option2",
+          "router": "/admin/monitor/map",
+          "icon": "fa-map"
+        },
+        {
+          "name": "集群概览",
+          "code": "sub1-option3",
+          "router": "/admin/monitor/clusters",
+          "icon": "fa-file-text-o"
+        },
+        {
+          "name": "告警记录",
+          "code": "sub1-option4",
+          "router": "/admin/alarm",
+          "icon": "fa-bell-o"
+        },
+        {
+          "name": "故障记录",
+          "code": "sub1-option4",
+          "router": "/admin/malfunction",
+          "icon": "fa-wrench"
+        }
+      ]
+    },
+    {
+      "name": "常用功能",
+      "code": "sub2",
+      "icon": "fa-home",
+      "children": [
+        { "name": "集群管理", "router": "/admin/cluster","icon": "fa-cubes"},
+        { "name": "考勤管理", "router": "/admin/attendance","icon": "fa-cubes"},
+        { "name": "设备信息", "router": "/admin/equipments","icon": "fa-fire"},
+        { "name": "终端管理", "router": "/admin/terminal","icon": "fa-sitemap"},
+        { "name": "终端分配", "router": "/admin/terminal/ad","icon": "fa-sitemap"},
+        { "name": "视频管理", "router": "/admin/video","icon": "fa-video-camera"},
+        { "name": "人脸识别", "router": "/admin/face-recognize","icon": "fa-user-circle-o"},
+        { "name": "模板管理", "router": "/admin/template","icon": "fa-newspaper-o"},
+        { "name": "蓝牙管理", "router": "/admin/bluetooth","icon": "fa-bluetooth"}
+      ]
+    },
+    {
+      "name": "信息维护",
+      "code": "sub3",
+      "icon": "fa-file-text-o",
+      "children": [
+        { "name": "企业信息", "router": "/admin/organization","icon": "fa-home"},
+        { "name": "账号管理", "router": "/admin/user-account","icon": "fa-credit-card"},
+        { "name": "服务支持", "router": "/admin/service","icon": "fa-file-text-o"},
+        { "name": "用户信息", "router": "/admin/profile","icon": "fa-user-o"}
+      ]
+    },
+    {
+      "name": "其他",
+      "code": "sub3",
+      "icon": "fa-file-text-o",
+      "children": [
+        { "name": "文件上传", "router": "/admin/upload","icon": "fa-upload"}
+      ]
+    }
+  ],
+  "authority": "sub1-authority,sub1-option1-add,sub1-option1-delete,sub1-option1-btn,sub1-option1-else"
+}

@@ -33,10 +33,7 @@ a {
 .module {
   padding: 0 15px;
   border: 1px solid #eeeeee;
-  /*border-radius: 2px;*/
   /*color: #607d8b;*/
-  /*background-color: #ffffff;*/
-  /*flex-direction: column;*/
   width: 100%;
   /*box-shadow: 1px 1px 5px #aaaaaa;*/
   margin-bottom: 30px;
@@ -45,8 +42,7 @@ a {
   display: flex;
   flex-direction: column;
 }
-.module a h5{
-  /*color: #607d8b;*/
+.module a h6{
   color: #666666;
 }
 
@@ -76,28 +72,60 @@ a {
   height: 60px;
   width: 100%;
   border-bottom: 1px solid #dddddd;
-  /*padding:0 20px;*/
   box-sizing: border-box;
-  /*background-color: #ffffff;*/
-}
-
-.module .status_box{
-  /*padding: 20px;*/
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.module .status_content{
-  /*flex: 1;
-  width: 0;
-  margin-right: 15px;*/
-  padding: 10px;
+.module .status_name .sn_l{
+  display: flex;
+  align-items: center;
+  width: 50%;
 }
-.module h5{
+.status_name .sn_l a{
+  display: block;
+}
+.status_name .sn_title{
+  width: 82%;
+}
+.module .status_name .sn_r{
+  flex: auto;
+  text-align: right;
+}
+.status_param0{
+  width: 16%;
+  height: 34px;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+.status_param{
+  width: 30%;
+  margin-left: 3%;
+  box-sizing: border-box;
+  padding: 9px 5px;
+  border-radius: 3px;
+}
+.module .status_name h6{
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 60px;
+  margin-bottom: 0.2rem;
 }
+.module .status_name p{
+  margin-bottom: 0;
+}
+
+
+
+.module .status_box{
+  display: flex;
+}
+.module .status_content{
+  padding: 10px;
+  width: 50%;
+}
+
 .module .img_content{
   /*flex: 2;*/
   overflow: hidden;
@@ -125,15 +153,29 @@ a {
   }*/
 }
 
-.module .status_content{
-  width: 50%;
-}
+
 .status_row{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
-  padding: 25px 0;
 }
+
+.status_data_item{
+  width: 48%;
+  height: 100px;
+  box-sizing: border-box;
+  text-align: center;
+}
+.status_data_head{
+  border-bottom: 1px solid #dddddd;
+  padding-bottom: 10px;
+}
+.status_data_content{
+  font-size: 20px;
+  color: #007bff;
+  padding-top: 10px;
+}
+
 
 .module .status_content a.status_col{
   width: 42%;
@@ -155,10 +197,10 @@ a {
   /*color: #607d8b;*/
   border: 1px solid #607d8b;
 }
-.module a:hover{
+.module .status_content a:hover{
   color: #ffffff;
 }
-.module a.bg_grey:hover{
+.module .status_content a.bg_grey:hover{
   color: #333333;
 }
 

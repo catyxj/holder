@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {
-  ActivatedRoute,
   Router,
-  ActivatedRouteSnapshot,
-  RouterState,
-  RouterStateSnapshot
 } from '@angular/router';
 import {UserService} from '../shared/user.service';
 import { HttpClient } from '@angular/common/http';
@@ -71,8 +66,9 @@ export class LoginComponent implements OnInit {
 
     this.userService.login(this.user)
       .subscribe(
-        user => {
-          this.user = user;
+        auth => {
+          localStorage.setItem('authToken', auth.Auth);
+
           sessionStorage.user = true;
           this.router.navigate(['/admin']);
           }, // success path
@@ -83,13 +79,18 @@ export class LoginComponent implements OnInit {
 
   // 获取验证码图片
   getCode() {
-    this.vCodeService.getCode()
+    this.vCodeService.getCodeId()
       .subscribe( data => {
-        this.codeImg = data.img;
-        this.codeId = data.captchaId;
+        this.codeId = data.CaptchaID;
+        this.codeImg = `/login/captcha?id=${this.codeId}`;
       }, err => {
 
       });
+  }
+
+  // 刷新验证码图片
+  reloadCode() {
+    this.codeImg = `/login/captcha?id=${this.codeId}&reload=true?${Math.random()}`;
   }
 
   verify(vCode) {

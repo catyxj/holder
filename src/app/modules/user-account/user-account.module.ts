@@ -6,6 +6,8 @@ import { SetModalComponent } from './set-modal/set-modal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ManagementComponent } from './management/management.component';
 import {NgZorroAntdModule} from "ng-zorro-antd";
+import { AccountMainAdComponent } from './admin/account-main-ad/account-main-ad.component';
+
 
 
 @NgModule({
@@ -20,6 +22,7 @@ import {NgZorroAntdModule} from "ng-zorro-antd";
   declarations: [
     SetModalComponent,
     ManagementComponent,
+    AccountMainAdComponent,
   ],
   entryComponents: [
     SetModalComponent,

@@ -32,7 +32,7 @@ export class RecoverPasswordComponent implements OnInit {
     }
 
     const post = {
-      type: 'register',
+      type: 2,
       telephone: this.phone
     };
 
@@ -50,7 +50,7 @@ export class RecoverPasswordComponent implements OnInit {
       }
     }, 1000);
 
-    this.registerService.getCode(post)
+    this.registerService.getPhCode(post)
       .subscribe(val => {
         Swal(
           {
@@ -76,7 +76,7 @@ export class RecoverPasswordComponent implements OnInit {
     const post = {
       telephone: this.phone,
       password: this.password,
-      code: this.verifyCode
+      sms_code: this.verifyCode
     };
     this.registerService.recoverPass(post)
       .subscribe(val => {

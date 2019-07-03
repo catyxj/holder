@@ -1,7 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {UserService} from "../shared/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs/index";
+import {MediaMatcher} from "@angular/cdk/layout";
 
 
 
@@ -18,13 +19,22 @@ export class MainComponent implements OnInit, OnDestroy {
   public user;
   public subscription: Subscription;
 
+  mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
+
   constructor(private userService: UserService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.subscription = this.userService.changeUserStatus$
       .subscribe( data => {
         this.getUser();
       });
+
+
+    this.mobileQuery = media.matchMedia('(max-width: 800px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
   ngOnInit() {
@@ -50,6 +60,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
 }

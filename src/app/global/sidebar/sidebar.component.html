@@ -1,44 +1,73 @@
 
 <mat-nav-list>
-  <ul>
+  <!--<ul>
+    <li>
+      <a routerLink="/admin/home" routerLinkActive="active" mat-list-item>
+        首页
+      </a>
+    </li>
     <li [class.collapse1]="!submenuShow[0]" [class.expand]="submenuShow[0]" *ngIf="user&&user.Role.RoleId > 1">
       <a class="sidebar_title" (click)="submenuToggle(0)">
         主监控台
         <i class="fa fa-angle-right"></i>
-        <!--<i class="fa fa-angle-down" *ngIf="submenuShow[0]"></i>-->
+        &lt;!&ndash;<i class="fa fa-angle-down" *ngIf="submenuShow[0]"></i>&ndash;&gt;
       </a>
       <ul class="sub_menu" >
-        <!--<li>
+        &lt;!&ndash;<li>
           <a routerLink="/admin/recharge" routerLinkActive="active" mat-list-item>
             &lt;!&ndash;<img src="assets/icons/icon_monitor.png" alt="">&ndash;&gt;
             <i class="fa fa-money"></i>
             流量卡充值
           </a>
-        </li>-->
+        </li>&ndash;&gt;
         <li>
           <a routerLink="/admin/overview" routerLinkActive="active" mat-list-item>
-            <!--<img src="assets/icons/icon_monitor.png" alt="">-->
+            &lt;!&ndash;<img src="assets/icons/icon_monitor.png" alt="">&ndash;&gt;
             <i class="fa fa-file-text-o"></i>
             快速配置
           </a>
         </li>
-        <li>
+        &lt;!&ndash;<li>
           <a routerLink="/admin/monitor" routerLinkActive="active" mat-list-item>
-            <!--<i class="fa fa-bar-chart-o"></i>-->
+            &lt;!&ndash;<i class="fa fa-bar-chart-o"></i>&ndash;&gt;
             <img src="assets/icons/icon_monitor.png" alt="">
             设备概览
+          </a>
+        </li>&ndash;&gt;
+        <li>
+          <a routerLink="/admin/monitor/dashboard" routerLinkActive="active" mat-list-item>
+            <img src="assets/icons/icon_monitor.png" alt="">
+            图文概览
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin/monitor/list" routerLinkActive="active" mat-list-item>
+            <img src="assets/icons/icon_monitor.png" alt="">
+            列表模式
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin/monitor/map" routerLinkActive="active" mat-list-item>
+            <img src="assets/icons/icon_monitor.png" alt="">
+            地图模式
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin/monitor/clusters" routerLinkActive="active" mat-list-item>
+            <img src="assets/icons/icon_monitor.png" alt="">
+            集群概览
           </a>
         </li>
         <li>
           <a routerLink="/admin/alarm" routerLinkActive="active" mat-list-item>
-            <!--<i class="fa fa-bell-o"></i>-->
+            &lt;!&ndash;<i class="fa fa-bell-o"></i>&ndash;&gt;
             <img src="assets/icons/icon_alarm.png" alt="">
             告警记录
           </a>
         </li>
         <li>
           <a routerLink="/admin/malfunction" routerLinkActive="active" mat-list-item>
-            <!--<i class="fa fa-wrench"></i>-->
+            &lt;!&ndash;<i class="fa fa-wrench"></i>&ndash;&gt;
             <img src="assets/icons/malfunction.png" alt="">
             故障记录
           </a>
@@ -54,7 +83,7 @@
       <ul class="sub_menu">
         <li *ngIf="user&&user.Role.RoleId > 1">
           <a routerLink="/admin/cluster" routerLinkActive="active" mat-list-item>
-            <!--<i class="fa fa-cubes"></i>-->
+            &lt;!&ndash;<i class="fa fa-cubes"></i>&ndash;&gt;
             <img src="assets/icons/icon_cluster.png" alt="">
             集群管理
           </a>
@@ -62,20 +91,20 @@
         <li *ngIf="user&&user.Role.RoleId > 1">
           <a routerLink="/admin/attendance" routerLinkActive="active" mat-list-item>
             <i class="fa fa-cubes"></i>
-            <!--<img src="assets/icons/icon_cluster.png" alt="">-->
+            &lt;!&ndash;<img src="assets/icons/icon_cluster.png" alt="">&ndash;&gt;
             考勤管理
           </a>
         </li>
         <li *ngIf="user&&user.Role.RoleId > 1">
           <a routerLink="/admin/equipments" routerLinkActive="active" mat-list-item>
-            <!--<i class="fa fa-fire"></i>-->
+            &lt;!&ndash;<i class="fa fa-fire"></i>&ndash;&gt;
             <img src="assets/icons/equip.png" alt="">
             设备信息
           </a>
         </li>
         <li *ngIf="user&&user.Role.RoleId<=10">
           <a routerLink="/admin/terminal" routerLinkActive="active" mat-list-item>
-            <!--<i class="fa fa-sitemap"></i>-->
+            &lt;!&ndash;<i class="fa fa-sitemap"></i>&ndash;&gt;
             <img src="assets/icons/icon_term.png" alt="">
             终端管理
           </a>
@@ -94,7 +123,7 @@
         </li>
         <li *ngIf="user && user.Role.RoleId > 1 && user.Role.RoleId<=10">
           <a routerLink="/admin/template" routerLinkActive="active" mat-list-item>
-            <!--<i class="fa fa-newspaper-o"></i>-->
+            &lt;!&ndash;<i class="fa fa-newspaper-o"></i>&ndash;&gt;
             <img src="assets/icons/icon_template.png" alt="">
             模板管理
           </a>
@@ -105,12 +134,12 @@
             蓝牙管理
           </a>
         </li>
-        <!--<li>
+        &lt;!&ndash;<li>
           <a routerLink="/admin/maintain" routerLinkActive="active" mat-list-item>
             <i class="fa fa-recycle"></i>
             维保记录
           </a>
-        </li>-->
+        </li>&ndash;&gt;
       </ul>
     </li>
 
@@ -122,21 +151,21 @@
       <ul class="sub_menu">
         <li>
           <a routerLink="/admin/organization" routerLinkActive="active" mat-list-item>
-            <!--<i class="fa fa-home"></i>-->
+            &lt;!&ndash;<i class="fa fa-home"></i>&ndash;&gt;
             <img src="assets/icons/org.png" alt="">
             企业信息
           </a>
         </li>
         <li>
           <a routerLink="/admin/user-account" routerLinkActive="active" mat-list-item>
-            <!--<i class="fa fa-credit-card"></i>-->
+            &lt;!&ndash;<i class="fa fa-credit-card"></i>&ndash;&gt;
             <img src="assets/icons/icon_account.png" alt="">
             账号管理
           </a>
         </li>
         <li>
           <a routerLink="/admin/service" routerLinkActive="active" mat-list-item>
-            <!--<img src="assets/icons/icon_account.png" alt="">-->
+            &lt;!&ndash;<img src="assets/icons/icon_account.png" alt="">&ndash;&gt;
             <i nz-icon type="customer-service" theme="outline"></i>
             服务支持
           </a>
@@ -158,12 +187,36 @@
       <ul class="sub_menu">
         <li>
           <a routerLink="/admin/upload" routerLinkActive="active" mat-list-item>
-            <!--<i class="fa fa-upload"></i>-->
+            &lt;!&ndash;<i class="fa fa-upload"></i>&ndash;&gt;
             <img src="assets/icons/icon_upload.png" alt="">
             文件上传
           </a>
         </li>
 
+      </ul>
+    </li>
+  </ul>-->
+
+  <ul>
+    <li *ngFor="let item0 of sideList" [class.collapse1]="!item0.checked" [class.expand]="item0.checked">
+      <a class="sidebar_title" (click)="submenuToggle(item0)" *ngIf="item0.children">
+        <span class="fa {{item0.icon}}"></span>
+        {{item0.name}}
+        <i class="fa fa-angle-right"></i>
+      </a>
+      <a class="smenu_head" [routerLink]="item0.router" routerLinkActive="active" *ngIf="!item0.children">
+        <i class="fa {{item0.icon}}"></i>
+        {{item0.name}}
+      </a>
+
+      <!--二级菜单-->
+      <ul *ngIf="item0.children" class="sub_menu" >
+        <li *ngFor="let item1 of item0.children">
+          <a [routerLink]="item1.router" routerLinkActive="active" mat-list-item>
+            <i class="fa {{item1.icon}}"></i>
+            {{item1.name}}
+          </a>
+        </li>
       </ul>
     </li>
   </ul>

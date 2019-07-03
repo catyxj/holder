@@ -78,6 +78,9 @@ import {MaintainViewComponent} from './runtime/maintain/maintain-view/maintain-v
 import {MaintainAddComponent} from './runtime/maintain/maintain-add/maintain-add.component';
 import {ChargeMainComponent} from "./recharge/charge-main/charge-main.component";
 import {Charge1Component} from "./recharge/charge1/charge1.component";
+import {HomeMainComponent} from "./home/home-main/home-main.component";
+import {TermListAdComponent} from "./terminal/administrator/term-list-ad/term-list-ad.component";
+import {TermMainAdComponent} from "./terminal/administrator/term-main-ad/term-main-ad.component";
 
 
 
@@ -89,6 +92,10 @@ export const ModulesRoutingModule = [
     canActivate: [UserloginGuard],
     children: [
       { path: '', redirectTo: 'monitor', pathMatch: 'full' },
+      {
+        path: 'home',
+        component: HomeMainComponent
+      },
       {
         path: 'monitor',
         component: MonitorMainComponent,
@@ -270,6 +277,17 @@ export const ModulesRoutingModule = [
           {
             path: 'plc/:code',
             component: PlcAlarmComponent
+          },
+          {
+            path: 'ad',
+            component: TermMainAdComponent,
+            children: [
+              { path: '', redirectTo: 'list', pathMatch: 'full' },
+              {
+                path: 'list',
+                component: TermListAdComponent
+              },
+            ]
           }
         ]
       },
