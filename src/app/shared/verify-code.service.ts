@@ -3,11 +3,11 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {Observable, throwError} from "rxjs/index";
 import {catchError} from "rxjs/internal/operators";
 
-const token = localStorage.getItem('authToken');
+
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': token
+    'Authorization': 'my-auth-token'
   })
 };
 
@@ -21,7 +21,7 @@ export class VerifyCodeService {
 
   // 获取验证码id
   getCodeId(): Observable< any > {
-    return this.http.get< any >('/login/captchaid')
+    return this.http.get< any >('/api/login/captchaid')
       .pipe(
         catchError(this.handleError)
       );
@@ -29,7 +29,7 @@ export class VerifyCodeService {
 
   // 获取验证码图片
   getCode(id) {
-    return this.http.get< any >(`/login/captcha?id=${id}`)
+    return this.http.get< any >(`/api/login/captcha?id=${id}`)
       .pipe(
         catchError(this.handleError)
       );
@@ -37,7 +37,7 @@ export class VerifyCodeService {
 
   // 发送验证码
   sendCode(data): Observable<any> {
-    return this.http.post('/captcha_checkout', data, httpOptions)
+    return this.http.post('/api/captcha_checkout', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

@@ -38,6 +38,9 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    /*setTimeout(() => {
+
+    }, 500);*/
     this.getUser();
   }
 

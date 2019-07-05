@@ -19,8 +19,6 @@ export class HeaderComponent implements OnInit {
   user: any;
   @Input()
   matches: any;
-  @Input()
-  opened: any;
 
   public alarmNum = 0;
   public malNum = 0;
@@ -31,17 +29,16 @@ export class HeaderComponent implements OnInit {
   constructor(private userService: UserService,
               private alarmService: AlarmService,
               private router: Router) {
-    this.subscription = this.alarmService.alarmStatus$
-      .subscribe( data => {
-        this.getAlarm();
-      });
+    // this.subscription = this.alarmService.alarmStatus$
+    //   .subscribe( data => {
+    //     this.getAlarm();
+    //   });
   }
 
   ngOnInit() {
     // console.log(this.user);
-    this.getAlarm();
+    // this.getAlarm();
     // this.getUser();
-    console.log(this.matches);
   }
 
   getAlarm() {

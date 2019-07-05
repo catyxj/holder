@@ -1,19 +1,68 @@
-<div class="container-flud login-screen ">
 
-  <!--logo-->
+
+<div class="login">
+  <div class="login_head">
+    <img src="assets/images/login/login_head.png" alt="">
+  </div>
+  <div class="login_con">
+    <div class="login_tab">
+      <div class="btn-group">
+        <button class="btn_tab" [class.active]="currentType === 1" (click)="currentType = 1"
+                style="border-top-right-radius: 0;border-bottom-right-radius: 0;">
+          登录
+        </button>
+        <button class="btn_tab" [class.active]="currentType === 2" (click)="currentType = 2"
+                style="border-top-left-radius: 0;border-bottom-left-radius: 0;">
+          注册
+        </button>
+      </div>
+
+    </div>
+    <div class="login_form">
+      <div *ngIf="currentType === 1" class="login_box">
+        <app-sign-in></app-sign-in>
+      </div>
+      <div *ngIf="currentType === 2" class="login_box">
+        <app-sign-up></app-sign-up>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--底部-->
+<div class="footer">
+  Lukeeper物联网云平台v1.0 Copyright ©2019  Inohas. All Rights Reserved. 备案号（浙ICP备16036066号-6）建议分辨率：1920*1080 推荐浏览器：Chrome
+  <a href="http://www.mydown.com/soft/421/472030921.shtml" style="margin-left: 38px;" target="_blank">点击下载Chrome</a>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="container-flud login-screen ">
+
+  &lt;!&ndash;logo&ndash;&gt;
   <div style="position: absolute; top: 20px; left: 50px;">
     <img src="assets/images/index_logo.png" alt="" style="">
   </div>
 
-  <!--图片-->
+  &lt;!&ndash;图片&ndash;&gt;
   <div style="position: absolute; top: 50%; left: 10%; margin-top: -181px;">
     <img src="assets/images/index_left.png" alt="" style="">
-    <!--<img src="assets/images/normal-lu1.png" alt="" style="width: 150px;">
+    &lt;!&ndash;<img src="assets/images/normal-lu1.png" alt="" style="width: 150px;">
     <br/>
-    <img src="assets/images/normal-lu2.png" alt="" style="width: 250px;">-->
+    <img src="assets/images/normal-lu2.png" alt="" style="width: 250px;">&ndash;&gt;
   </div>
 
-  <!--登录-->
+  &lt;!&ndash;登录&ndash;&gt;
   <div class="login-form-container">
     <h5 class="center-block sys-title">用户登录</h5>
     <form novalidate class="form-horizontal login-form" role="form" name="login">
@@ -39,7 +88,7 @@
           <i *ngIf="codeError" class="fa fa-times-circle" aria-hidden="true" style="color: red; position: absolute; right: 20px; top: 10px;"></i>
         </div>
         <div class="col-6 v_img">
-          <!--{{codeImg}}-->
+          &lt;!&ndash;{{codeImg}}&ndash;&gt;
           <img src="{{codeImg}}" alt="验证码" (click)="reloadCode()" style="width: 100%; height: 34px; cursor: pointer;">
         </div>
       </div>
@@ -75,7 +124,7 @@
           {{errMes}}
         </span>
 
-        <!--<div class="col-4">
+        &lt;!&ndash;<div class="col-4">
           <a href="javascript:void(0);" (click)="forgetPwd()" class="btn-link btn-block">忘记密码</a>
         </div>
         <div class="col-4">
@@ -85,20 +134,20 @@
         </div>
         <div class="col-4">
           <a href="" target="_blank">22</a>
-        </div>-->
+        </div>&ndash;&gt;
 
       </div>
     </form>
   </div>
 
-  <!--底部-->
+  &lt;!&ndash;底部&ndash;&gt;
   <div class="footer">
-    <!--炉管家 -->
+    &lt;!&ndash;炉管家 &ndash;&gt;
     Lukeeper物联网云平台v1.0 Copyright ©2019  Inohas. All Rights Reserved. 备案号（浙ICP备16036066号-6）建议分辨率：1920*1080 推荐浏览器：Chrome
     <a href="http://www.mydown.com/soft/421/472030921.shtml" style="margin-left: 38px;" target="_blank">点击下载Chrome</a>
   </div>
 
-</div>
+</div>-->
 
 
 

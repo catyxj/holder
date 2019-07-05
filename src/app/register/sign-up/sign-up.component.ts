@@ -74,7 +74,7 @@ export class SignUpComponent implements OnInit {
 
     this.hideBtn = true;
     let time = 60;
-    this.getCodeMess = `倒计时(${time}s)`;
+    this.getCodeMess = `${time}s 后再次获取`;
     const interval = setInterval(() => {
       time--;
       if (time >= 0) {

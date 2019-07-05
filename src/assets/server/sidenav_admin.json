@@ -1,0 +1,24 @@
+{
+  "sidenav": [
+
+    {
+      "name": "设备管理",
+      "code": "sub2",
+      "icon": "fa-home",
+      "children": [
+        { "name": "终端分配", "router": "/admin/ad/terminal","icon": "fa-sitemap"},
+        { "name": "视频管理", "router": "/admin/ad/video","icon": "fa-video-camera"},
+        { "name": "蓝牙管理", "router": "/admin/ad/bluetooth","icon": "fa-bluetooth"}
+      ]
+    },
+    {
+      "name": "信息维护",
+      "code": "sub3",
+      "icon": "fa-file-text-o",
+      "children": [
+        { "name": "账号管理", "router": "/admin/ad/account","icon": "fa-credit-card"}
+      ]
+    }
+  ],
+  "authority": "sub1-authority,sub1-option1-add,sub1-option1-delete,sub1-option1-btn,sub1-option1-else"
+}

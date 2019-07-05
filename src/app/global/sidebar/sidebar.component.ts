@@ -12,7 +12,6 @@ export class SidebarComponent implements OnInit {
   @Input()
   user: any;
 
-  public submenuShow: Array<boolean> = [true, true, true, false];
   /*public user;
   public roleId;*/
 

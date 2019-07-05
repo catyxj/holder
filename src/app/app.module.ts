@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { ModulesModule } from './modules/modules.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import {NotFound404Component} from './global/not-found404/not-found404.component';
@@ -23,15 +22,20 @@ import zh from '@angular/common/locales/zh';
 import {NgxEchartsModule} from 'ngx-echarts';
 import {BsDatepickerModule} from 'ngx-bootstrap';
 
-import { QiantianComponent } from './homepage/qiantian/qiantian.component';
-import {VViewComponent} from './v-view/v-view.component';
 
 import {HeaderComponent} from './global/header/header.component';
 import {FooterComponent} from './global/footer/footer.component';
 import {SidebarComponent} from './global/sidebar/sidebar.component';
 import { RuikongComponent } from './homepage/ruikong/ruikong.component';
+import { QiantianComponent } from './homepage/qiantian/qiantian.component';
 import { SignUpComponent } from './register/sign-up/sign-up.component';
 import { RecoverPasswordComponent } from './register/recover-password/recover-password.component';
+import { DirMainComponent } from './modules/directives/dir-main/dir-main.component';
+import {MainOrdComponent} from './modules/ordinary/main-ord/main-ord.component';
+import { SignInComponent } from './register/sign-in/sign-in.component';
+
+// import { MainOrdComponent } from './modules/ordinary/main-ord/main-ord.component';
+
 
 
 registerLocaleData(zh);
@@ -47,29 +51,31 @@ registerLocaleData(zh);
     FooterComponent,
     SidebarComponent,
     QiantianComponent,
-    VViewComponent,
     RuikongComponent,
     SignUpComponent,
-    RecoverPasswordComponent
+    RecoverPasswordComponent,
+    DirMainComponent,
+    MainOrdComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    ModulesModule,
-    AppRoutingModule,
+    FormsModule,
     NgbModule.forRoot(),
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule,
     LayoutModule,
+    AppRoutingModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
     AngularFontAwesomeModule,
-    FormsModule,
     NgZorroAntdModule,
-    NgxEchartsModule
+    NgxEchartsModule,
+
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},

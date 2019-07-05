@@ -4,17 +4,20 @@ import {LoginComponent} from './login/login.component';
 import {MainComponent} from './main/main.component';
 import {NotFound404Component} from './global/not-found404/not-found404.component';
 import {QiantianComponent} from './homepage/qiantian/qiantian.component';
-import {VViewComponent} from "./v-view/v-view.component";
 import {RuikongComponent} from "./homepage/ruikong/ruikong.component";
 import {SignUpComponent} from "./register/sign-up/sign-up.component";
 import {RecoverPasswordComponent} from "./register/recover-password/recover-password.component";
+import {MainAdComponent} from "./modules/admin/main-ad/main-ad.component";
+import {UserloginGuard} from "./shared/userlogin.guard";
+
+
 
 
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'admin',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -32,11 +35,23 @@ const routes: Routes = [
   {
     path: 'admin',
     component: MainComponent,
-    loadChildren: './modules/modules.module#ModulesModule'
-  },
-  {
-    path: 'video-view/:url/:name/:num/:serialName/:serialNumber/:consoleOn',
-    component: VViewComponent,
+    children: [
+      // {
+      //   path: '', redirectTo: 'ad', pathMatch: 'full'
+      // },
+      {
+        path: 'ad',
+        // component: MainAdComponent,
+        loadChildren: './modules/admin/admin.module#AdminModule',
+        canActivate: [UserloginGuard]
+      },
+      {
+        path: 'formal',
+        loadChildren: './modules/formal/formal.module#FormalModule',
+        canActivate: [UserloginGuard]
+      },
+    ]
+    // loadChildren: './modules/modules.module#ModulesModule'
   },
   {
     path: 'qiantian',

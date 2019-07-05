@@ -1,9 +1,0 @@
-a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {
-  color: #ffffff;
-  text-decoration: none;
-}
-
-.table td{
-  font-size: 12px;
-}
-

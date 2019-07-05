@@ -1,40 +1,53 @@
 
 .sign_up{
-  width: 600px;
-  margin: auto;
-  padding-top: 30px;
-  color: #666666;
-}
 
-.sign_up .logo{
-  font-size: 24px;
-  text-align: center;
-  padding-bottom: 20px;
 }
 
 .sign_up_container{
-  border: 1px solid #eeeeee;
-  padding: 30px 60px;
+
 }
 .sign_up_container h5{
     padding-bottom: 20px;
 }
 
 .sign_item{
-  display: flex;
+  /*display: flex;*/
+  margin-bottom: 17px;
 }
-.sign_item .sign_label{
-  width: 120px;
-  padding-top: 5px;
+.sign_item .sign_label label{
+  font-size: 18px;
+  color: #333333;
+  font-weight: bold;
+}
+.sign_item .sign_label span{
+  color: #666EE8;
 }
 .sign_input{
-  flex: auto;
-}
-.sign_tip{
-  font-size: 12px;
-  color: #888888;
+  position: relative;
 }
 
+.sign_input .form-control{
+  height: 48px;
+  padding-left: 46px;
+}
+.input_icon{
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 14px;
+}
+.sign_tip{
+  position: absolute;
+  top: 100%;
+  left: 45px;
+  font-size: 12px;
+  color: #FF4961;
+}
+
+.sign_agree{
+  display: flex;
+  margin-bottom: 40px;
+}
 .agreement1{
   display: flex;
   align-items: center;
@@ -44,6 +57,88 @@
   font-size: 12px;
 }
 
+.btn_purple{
+  width:100%;
+  height:48px;
+  background:#666EE8;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing:1px;
+}
 
+/*checkbox*/
+.c-checkbox{
+  margin-right: 4px;
+}
+.c-checkbox *{
+  cursor: pointer;
+}
+.c-checkbox input{
+  opacity: 0;
+  position: absolute;
+  margin-left: 0 !important;
+}
+.c-checkbox span{
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  /*margin-left: -20px;*/
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-right: 5px;
+  text-align: center;
+}
+.c-checkbox span:before{
+  margin-left: 0;
+}
+.c-checkbox:hover span{
+  border-color: #666EE8;
+  background-color: #ffffff;
+}
+.form-inline .c-checkbox span{
+  margin-left: 0;
+}
+.c-checkbox.c-checkbox-rounded span{
+  border-radius: 500px;
+}
+.c-checkbox label{
+  margin-bottom: 0;
+}
+
+
+/* the icon */
+.c-checkbox span:before{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  text-align: center !important;
+  font-size: 12px;
+  line-height: 14px;
+  vertical-align: middle;
+}
+/* Checked state */
+.c-checkbox input[type=checkbox]:checked + span:before{
+  color: #666EE8;
+  opacity: 1;
+  transition: color 0.3s ease-out;
+}
+.c-checkbox input[type=checkbox]:checked + span{
+  border-color: #666EE8;
+  background-color: #ffffff;
+}
+.c-checkbox input[type=checkbox]:disabled + span{
+  border-color: #dddddd !important;
+  background-color: #dddddd !important;
+}
+
+.form-control-rounded {
+  border-radius: 100px;
+}
 
 

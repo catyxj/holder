@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {RegisterService} from "../../shared/register.service";
 import Swal from 'sweetalert2';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-recover-password',
@@ -15,7 +16,8 @@ export class RecoverPasswordComponent implements OnInit {
   public getCodeMess = '获取短信验证码';
   public hideBtn = false;
 
-  constructor(private registerService: RegisterService) { }
+  constructor(private registerService: RegisterService,
+              public router: Router) { }
 
   ngOnInit() {
   }
@@ -99,6 +101,7 @@ export class RecoverPasswordComponent implements OnInit {
           }
         }).then((result) => {
           console.log(result);
+          this.router.navigate(['/login']);
         });
       }, err => {
         let timerInterval;

@@ -5,7 +5,7 @@
   margin: 0;
   padding: 0;
   font-size: 14px;
-  font-family: Arial, "Hiragino Sans GB", "Microsoft Yahei", "Microsoft Sans Serif", sans-serif;
+  font-family: Arial, "Microsoft Yahei", "Microsoft Sans Serif", sans-serif;
 }
 html,body,app-root,app-main,mat-sidenav-container,.site {
   height: 100%;
@@ -16,19 +16,6 @@ ul,li{
 }
 .content{
   padding: 30px;
-}
-.tab-content{
-  padding: 10px 0;
-  border-bottom: 1px solid #eeeeee;
-}
-.tab-content nav a{
-  padding:15px 10px;
-  color: #545b62;
-  text-decoration: none;
-}
-.tab-content nav a.active{
-  border-bottom: 2px solid #17a2b8;
-  color: #17a2b8;
 }
 
 .flex{
@@ -159,9 +146,8 @@ h5, .h5 {
 .bg_light_primary{
   /*background-color: #819ca9;*/
   background-color: #6f94a6;
-  background-image: url("./assets/images/table_header.jpg");
-  background-position: center;
-  background-size: 100% 100%;
+  /*background-position: center;*/
+  /*background-size: 100% 100%;*/
   color: #ffffff;
 }
 .bg_dark_primary{
@@ -194,11 +180,6 @@ h5, .h5 {
   padding: 0 46px;
 }
 .mat-card-title{
-  /*position: fixed;*/
-  /*top: 0;*/
-  /*left: 290px;*/
-  /*z-index: 9;*/
-  /*padding: 15px 0;*/
   padding-bottom: 15px;
   box-sizing: border-box;
   overflow: hidden;
@@ -228,20 +209,20 @@ h5, .h5 {
 .mat-card-title nav a{
   /*color: #ffffff;*/
 }
-.tab_map{
-  display: flex;
-  flex-direction: column;
-}
-.con_w{
-  background-color: #ffffff;
-  padding: 20px;
-}
+
 
 
 /*背景色*/
 .mat-drawer-container{
   background-color: #e5e5e5;
 }
+
+/*列表公共样式*/
+.list_head{
+  display: flex;
+  justify-content: space-between;
+}
+
 
 /*表格样式*/
 .content .table{

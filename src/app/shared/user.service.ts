@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import {Observable, of, Subject, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {catchError,  tap} from 'rxjs/internal/operators';
+import {catchError, retry, tap} from 'rxjs/internal/operators';
 import { Resolve, Router} from '@angular/router';
 import { environment } from './../../environments/environment';
 
-const token = localStorage.getItem('authToken');
+
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': token
+    'Authorization': 'auth'
   })
 };
 
@@ -41,11 +41,10 @@ export class UserService {
   login(user): Observable< any > {
     // TODO: send the message _after_ fetching the heroes
     // return this.http.post< any >('/user_login/', user, httpOptions)
-    return this.http.post< any >('/login/', user, httpOptions)
+    return this.http.post< any >('/api/login', user, httpOptions)
       .pipe(
         // retry(3), // retry a failed request up to 3 times
         tap((val) => {
-          // this.isLoggedIn = 'true';
           localStorage.setItem('status', 'true');
         }),
         catchError(this.handleError) // then handle the error
@@ -54,12 +53,14 @@ export class UserService {
 
   // 退出登录
   logout(uid): Observable< any > {
-    // this.isLoggedIn = false;
-    return this.http.post<any> ('/user_logout/', uid, httpOptions)
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post<any> ('/api/user/logout', uid, httpOptions)
       .pipe(
         tap( (val) => {
-          // this.isLoggedIn = 'false';
           localStorage.setItem('status', 'false');
+          localStorage.removeItem('authToken');
         })
       );
   }
@@ -68,11 +69,13 @@ export class UserService {
   // 获取用户信息
   getUser(): Observable< any > {
     console.log('environment:', environment.production);
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
     if (!environment.production) {
       return this.http.get< any >('assets/server/user.json');
     } else {
-      return this.http.get< any >('/user', httpOptions)
+      return this.http.get< any >('/api/user', httpOptions)
         .pipe(
           tap((val) => {
             if (!val) {
@@ -84,10 +87,11 @@ export class UserService {
         );
     }
 
-    /*return this.http.get< any >('/user', httpOptions)
+    /*return this.http.get< any >('/api/user', httpOptions)
       .pipe(
         tap((val) => {
           if (!val) {
+            // this.isLoggedIn = 'false';
             sessionStorage.setItem('user', 'false');
           }
         }),
@@ -101,7 +105,14 @@ export class UserService {
 
   // 获取侧边栏，权限
   getSide(): Observable<any> {
-    return this.http.get< any >('assets/server/sidenav.json');
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    // return this.http.get< any >('assets/server/sidenav.json');
+    return this.http.get< any >('assets/server/sidenav_admin.json')
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
 
@@ -112,11 +123,13 @@ export class UserService {
       console.error('An error occurred:', error.error.message);
     } else {
       console.error(
+        'error:', error,
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
     }
     return throwError(
-      error.error);
+      error.error
+    );
   }
 
 }
