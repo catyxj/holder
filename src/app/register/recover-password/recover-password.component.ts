@@ -38,22 +38,23 @@ export class RecoverPasswordComponent implements OnInit {
       telephone: this.phone
     };
 
-    this.hideBtn = true;
-    let time = 60;
-    this.getCodeMess = `倒计时(${time}s)`;
-    const interval = setInterval(() => {
-      time--;
-      if (time >= 0) {
-        this.getCodeMess = `倒计时(${time}s)`;
-      } else {
-        clearInterval(interval);
-        this.hideBtn = false;
-        this.getCodeMess = '获取短信验证码';
-      }
-    }, 1000);
+
 
     this.registerService.getPhCode(post)
       .subscribe(val => {
+        this.hideBtn = true;
+        let time = 60;
+        this.getCodeMess = `${time}s后再次获取`;
+        const interval = setInterval(() => {
+          time--;
+          if (time >= 0) {
+            this.getCodeMess = `${time}s后再次获取`;
+          } else {
+            clearInterval(interval);
+            this.hideBtn = false;
+            this.getCodeMess = '获取短信验证码';
+          }
+        }, 1000);
         Swal(
           {
             title: '信息发送成功',
@@ -65,7 +66,7 @@ export class RecoverPasswordComponent implements OnInit {
       }, err => {
         Swal(
           {
-            title: '信息发送失败',
+            title: err.message,
             type: 'error',
             showConfirmButton: false,
             timer: 2000
@@ -75,6 +76,7 @@ export class RecoverPasswordComponent implements OnInit {
   }
 
   submit() {
+    let that = this;
     const post = {
       telephone: this.phone,
       password: this.password,
@@ -84,17 +86,26 @@ export class RecoverPasswordComponent implements OnInit {
       .subscribe(val => {
         let timerInterval;
         Swal({
-          title: '密码重置成功',
-          html: '<span></span>秒后自动关闭',
+          title: '',
+          html: '<div class="success_tip"><img src="assets/icons/icon_check.png"> 密码重置成功!</div>' +
+          ' <div class="success_tip_time">正在跳转， <span>3</span>秒后自动关闭</div>',
           showConfirmButton: false,
           timer: 3000,
           onBeforeOpen: () => {
             let seconds = 3;
             timerInterval = setInterval(() => {
               seconds--;
+              if (seconds <= 0) {
+                clearInterval(timerInterval);
+              }
               Swal.getContent().querySelector('span')
                 .textContent = '' + seconds;
             }, 1000);
+            Swal.getContent().querySelector('.success_tip_time').addEventListener('click', () => {
+              clearInterval(timerInterval);
+              Swal.close();
+              that.router.navigate(['/login']);
+            });
           },
           onClose: () => {
             clearInterval(timerInterval);
@@ -106,17 +117,25 @@ export class RecoverPasswordComponent implements OnInit {
       }, err => {
         let timerInterval;
         Swal({
-          title: '密码重置失败',
-          html: `<div>提示信息：${err}</div><div style="color: #00a4ff;"><span>3</span>秒后自动关闭</div>`,
+          title: '',
+          html: '<div class="success_tip"> <img src="assets/icons/icon_fail.png"> 密码重置失败!</div>' +
+          `<div class="success_tip_mes"> ${err.message} </div> <div class="success_tip_time"><a><span>3</span>秒后自动关闭</a></div>`,
           showConfirmButton: false,
           timer: 3000,
           onBeforeOpen: () => {
             let seconds = 3;
             timerInterval = setInterval(() => {
               seconds--;
+              if (seconds <= 0) {
+                clearInterval(timerInterval);
+              }
               Swal.getContent().querySelector('span')
                 .textContent = '' + seconds;
             }, 1000);
+            Swal.getContent().querySelector('.success_tip_time').addEventListener('click', () => {
+              clearInterval(timerInterval);
+              Swal.close();
+            });
           },
           onClose: () => {
             clearInterval(timerInterval);

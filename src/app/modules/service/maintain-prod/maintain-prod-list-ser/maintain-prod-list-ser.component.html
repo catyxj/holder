@@ -1,0 +1,127 @@
+
+
+
+<div class="content">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>维保产品</h6>
+    </div>
+    <div class="li_head_r">
+      <!--刷 新-->
+      <button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="list_content">
+    <div class="content_h">
+      <div class="search_box">
+        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="addOnAfterTemplate">
+          <input type="text" nz-input [(ngModel)]="value" (keyup)="searchEnter($event)" maxlength="15"/>
+        </nz-input-group>
+        <ng-template #addOnBeforeTemplate>
+          <nz-select [(ngModel)]="search">
+            <nz-option [nzLabel]="'产品名称'" [nzValue]="'name'"></nz-option>
+            <nz-option [nzLabel]="'产品终端编码'" [nzValue]="'terminal_code'"></nz-option>
+          </nz-select>
+        </ng-template>
+        <ng-template #addOnAfterTemplate>
+          <img src="assets/icons/icon_seach.png" alt="" class="search_icon" (click)="searchChange()">
+        </ng-template>
+
+      </div>
+      <!--<div class="flex">
+        <button class="btn btn_purple btn_round bpm" (click)="addData()">
+          新增视频
+        </button>
+
+        <button class="btn btn_purple btn_round bpm ml-3" (click)="batchDelete()">
+          批量删除
+        </button>
+
+      </div>-->
+    </div>
+    <div class="content_t">
+      <nz-table
+        #dataTable
+        [nzFrontPagination]="false"
+        [nzShowPagination] = "false"
+        [nzLoading]="loading"
+        [nzData]="dataLists"
+      >
+        <thead>
+        <tr>
+          <!--<th
+            nzShowCheckbox
+            [(nzChecked)]="isAllChecked"
+            (nzCheckedChange)="checkAll($event)"
+          >
+          </th>-->
+          <th>产品名称</th>
+          <th>产品终端编码</th>
+          <th>使用单位</th>
+          <th>维保模板</th>
+          <th>
+            累计维保次数
+          </th>
+          <th>最近维保时间</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of dataTable.data">
+          <!-- <td
+             nzShowCheckbox
+             [(nzChecked)]="data.checked"
+             [nzDisabled]="data.disabled"
+             (nzCheckedChange)="refreshStatus()"
+           ></td>-->
+          <td> {{data.serial_number}} </td>
+          <td> {{data.name}} </td>
+          <td> {{data.username}} </td>
+          <td> {{data.terminal_code}} </td>
+          <td>
+            11
+          </td>
+          <td> {{data.created_at | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
+          <td>
+            <button type="button" class="btn btn_purple btn-sm" (click)="addData()">
+              新增维保
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+
+    <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+
+    <div class="content_b">
+      <nz-pagination nzShowSizeChanger
+                     [nzTotal]="totalItems"
+                     [nzShowTotal]="totalTemplate"
+                     [(nzPageIndex)]="page"
+                     [(nzPageSize)]="pageSize"
+                     (nzPageIndexChange)="pageChange()"
+                     (nzPageSizeChange)="pageSizeChange()"
+                     [nzPageSizeOptions] = "pageSizeList">
+
+      </nz-pagination>
+      <div class="ant-pagination-options-quick-jumper"> 跳至
+        <input type="number" [(ngModel)]="pageNum"> 页 </div>
+      <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+

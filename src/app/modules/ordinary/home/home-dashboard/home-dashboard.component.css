@@ -1,0 +1,100 @@
+.home_container{
+
+}
+.h_con{
+  display: flex;
+}
+.h_l{
+  flex: 2;
+}
+.h_r{
+  flex: 1;
+  margin-left: 12px;
+}
+.hc_1,.hc_2,.hc_3{
+  margin-bottom: 25px;
+}
+
+@media (max-width: 768px) {
+  .h_con{
+    display: block;
+  }
+  .h_l,.h_r{
+    width: 100%;
+  }
+}
+
+.hc_content{
+  position: relative;
+  border-radius:4px;
+  border:1px solid #E4E5EC;
+  overflow: hidden;
+}
+.hc_content2{
+  height:260px;
+  background:#F9FAFD;
+  border-radius:4px;
+  border:1px solid #E4E5EC;
+}
+
+/*主监控台*/
+.hc_1 .hc_content{
+  height: 138px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.hc_f1{
+  flex:1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 16px;
+  text-align: center;
+}
+.hc_f1 img{
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  margin-bottom: 18px;
+}
+.hc_f1 h6{
+  font-size: 14px;
+  color:#464855;
+}
+.h_divide{
+  width:2px;
+  height:30px;
+  background-color: #666EE8;
+}
+.hc_f1_value{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+
+
+/*设备关联*/
+.hc_2 .hc_content{
+  height: 386px;
+}
+.hc_2 .hc_content img{
+  width: 100%;
+  height: 384px;
+}
+.gen_btn{
+  position: absolute;
+  top:20px;
+  right: 20px;
+}
+
+
+
+
+.hc_more{
+  text-align: right;
+  font-size: 12px;
+}
+
+

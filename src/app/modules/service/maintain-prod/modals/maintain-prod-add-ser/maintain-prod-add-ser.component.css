@@ -1,0 +1,33 @@
+
+
+.mp_a_head{
+  display: flex;
+  margin-bottom: 35px;
+}
+.mp_a_head>div {
+  display: flex;
+  margin-right: 40px;
+}
+.mp_a_label{
+  font-size:16px;
+  font-weight:bold;
+  color: #464855;
+}
+.mp_a_value{
+  font-size:16px;
+  font-weight:bold;
+  color: #666EE8;
+}
+
+.form-control {
+  height: auto;
+  padding: 0.2rem 0.75rem;
+}
+
+
+.table thead{
+  background-color: #F9FAFD;
+}
+.table th, .table td{
+  vertical-align: middle;
+}

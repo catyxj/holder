@@ -1,0 +1,14 @@
+
+
+.info_body{
+  padding: 35px 5px;
+}
+.info_config .info_body{
+  padding: 13px 5px;
+}
+.info_config .info_item{
+  margin-bottom: 12px;
+}
+.info_item_title{
+  width: 96px;
+}

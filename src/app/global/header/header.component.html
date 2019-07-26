@@ -5,13 +5,13 @@
     <!--企业标识-->
     <a class="navbar-brand" routerLink="/admin"
        *ngIf="user && !user.show_brand">
-      <!--<img src="assets/images/light.png"  height="30" alt="">-->
-      <h2 style="color: #ffffff;"> LUKEEP</h2>
+      <img src="assets/images/global/head_logo.png"  height="38" style="margin-top: 9px;" alt="">
+      <!--<h2 style="color: #ffffff;"> LUKEEP</h2>-->
     </a>
 
     <!--显示企业标识-->
     <a class="navbar-brand" routerLink="/admin" *ngIf="user && user.show_brand">
-      <h3 *ngIf="!user.brand_image" style="color: #ffffff;">
+      <h3 *ngIf="!user.brand_image" style="color: #ffffff; line-height: 63px;">
         {{user.brand_name}}
       </h3>
       <span *ngIf="user.brand_image" >
@@ -32,15 +32,14 @@
 
 
     <!--侧边栏按钮-->
-    <button mat-icon-button (click)="onClick()" style=" height: 64px; margin-left: 8px;">
-      <!--<mat-icon>menu</mat-icon>-->
-      <!--<img src="assets/icons/show_side.png" height="20" alt="">-->
-      <img src="assets/icons/menu_unfold.svg" height="18" alt="">
+    <button mat-icon-button (click)="onClick()" style=" height: 64px;" *ngIf="btnShow">
+      <img src="assets/icons/icon_open.png" height="20" alt="">
     </button>
 
+    <!--二维码-->
     <div class="we_box">
       <span>
-        <img src="assets/images/wechat.png" style="width: 18px; height: 18px;" alt="">
+        <img src="assets/icons/icon_QR.png" style="width: 18px; height: 18px;" alt="">
       </span>
       <div class="we_show">
         <img src="assets/images/wechat.jpg" alt="">
@@ -51,32 +50,33 @@
     <span class="example-spacer"></span>
 
 
+    <!--告警-->
     <!--<mat-icon> email </mat-icon>-->
-    <div class="alarm_tip_box">
-      <div class="alarm_tip_btn" style="position: relative;">
-        <i class="fa fa-bell-o"></i>
+    <div ngbDropdown class="alarm_tip_box" placement="bottom">
+      <div class="alarm_tip_btn" style="position: relative;" id="dropdownBasic2" ngbDropdownToggle>
+        <img src="assets/icons/icon_remind.png" style="width: 18px; height: 18px;" alt="">
         <span class="badge badge-pill badge-danger" *ngIf="totalNum && totalNum !== 0"
               style="position: absolute; top: -5px; right: -12px;">
         {{totalNum}}
         </span>
       </div>
 
-      <div class="alarm_tip">
-        <a routerLink="/admin/alarm">
-          <div class="tip_item" style="background-color: #f4959c;">
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="animated fadeInDown dropdown_content">
+        <a class="dropdown-item" routerLink="/admin/alarm">
+          <div class="tip_item">
             告警信息 &nbsp;
             {{alarmNum}} 条
           </div>
         </a>
 
-        <a routerLink="/admin/malfunction">
-          <div class="tip_item" style="background-color: #f6bd95;">
+        <a class="dropdown-item" routerLink="/admin/malfunction">
+          <div class="tip_item">
             故障信息 &nbsp;
             {{malNum}} 条
           </div>
         </a>
-        <a routerLink="/admin/alarm">
-          <div class="tip_item" style="background-color: #dcedd3;">
+        <a class="dropdown-item" routerLink="/admin/alarm">
+          <div class="tip_item">
             提醒信息 &nbsp;
             {{noticeNum}} 条
           </div>
@@ -87,13 +87,32 @@
 
     <!--<i class="fa fa-envelope-o"></i>-->
 
-    <div ngbDropdown class="d-inline-block ml-3">
+    <!--用户-->
+    <div ngbDropdown class="d-inline-block ml-3 text_purple" placement="bottom">
       <button mat-button id="dropdownBasic1" ngbDropdownToggle style="height: 64px;">
         <!--<img [src]="user?.Picture" alt="" style="width: 25px; height: 25px; border-radius: 25px;">-->
         <nz-avatar nzIcon="anticon anticon-user" nzSrc="{{user?.picture}}"></nz-avatar>
-        <span *ngIf="!matches"> {{user?.username}} ( {{ user?.name}} ) </span>
+        <span *ngIf="!matches">
+          {{user?.username}} ( {{ user?.org_name}} )
+          <span *ngIf="user && user.role_id === 1">
+              系统用户
+          </span>
+          <span *ngIf="user && user.role_id === 10">
+              正式用户
+          </span>
+          <span *ngIf="user && user.role_id === 11">
+              普通用户
+          </span>
+          <span *ngIf="user && user.role_id === 15">
+              维保用户
+          </span>
+          <span *ngIf="user && user.role_id === 20">
+              测试用户
+          </span>
+        </span>
       </button>
-      <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="animated fadeInDown">
+
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="animated fadeInDown dropdown_content">
         <a class="dropdown-item" routerLink="/admin/profile">用户信息</a>
         <button class="dropdown-item" (click)="logout()">退出</button>
       </div>

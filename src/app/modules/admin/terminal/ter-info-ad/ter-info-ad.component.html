@@ -1,0 +1,190 @@
+
+<div class="bread">
+  设备管理 <span> / </span>终端设备
+</div>
+
+
+<div class="content">
+  <div class="info_head">
+    <div class="info_tname">
+      <img src="assets/icons/icon_terminal_settings.png" alt="">
+      <!--{{basic?.terminal_code}}-->
+      终端详情
+    </div>
+    <div>
+      <button class="btn btn_purple btn_round bpm ml-3" (click)="deleteData()">
+        删除
+      </button>
+      <button class="btn btn_purple btn_round bpm ml-3" (click)="scrap()" [disabled]="!basic || basic.status === 4">
+        终端报废
+      </button>
+    </div>
+  </div>
+
+  <div class="info_content flex">
+    <div class="info_l">
+      <div class="info_basic">
+        <div class="info_title">
+          <h6>
+            基础信息
+          </h6>
+          <button class="btn btn_purple btn_round bpm" (click)="editBasic()" [disabled]="!basic || basic.status === 4">
+            编辑
+          </button>
+        </div>
+        <div class="info_body">
+          <ul>
+            <li class="info_item">
+              <div class="info_item_title">
+                终端编码
+              </div>
+              <div class="info_item_value">
+                {{basic?.terminal_code}}
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                固件版本号
+              </div>
+              <div class="info_item_value">
+                {{basic?.fw_ver}}
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                物联网卡号
+              </div>
+              <div class="info_item_value">
+                {{basic?.sms_code}}
+              </div>
+              <div class="" style="float: right; font-size:12px;" *ngIf="basic&&basic.sms_code">
+                <a (click)="flowInfo()" style="color: #414B92; ">数据流量查询</a>
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                所属账号
+              </div>
+              <div class="info_item_value">
+                {{basic?.username || '空'}}
+                ({{basic?.org_name || '空'}})
+              </div>
+            </li>
+
+            <li class="info_item">
+              <div class="info_item_title">
+                使用账号
+              </div>
+              <div class="info_item_value">
+                {{basic?.use_username || '空'}}
+                ({{basic?.use_org_name || '空'}})
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info_config">
+        <div class="info_title">
+          <h6>
+            状态信息
+          </h6>
+        </div>
+        <div class="info_body">
+          <ul>
+            <li class="info_item">
+              <div class="info_item_title">
+                联网状态
+              </div>
+              <div class="info_item_value">
+                <span class="text_blue" *ngIf="basic && basic.online_status">
+                  已联网
+                </span>
+                <span class="text_grey" *ngIf="!basic || !basic.online_status">
+                  未联网
+                </span>
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                信号强度
+              </div>
+              <div class="info_item_value">
+                <span *ngIf="basic && basic.signal_strength>20">
+                  强
+                </span>
+                <span *ngIf="basic && basic.signal_strength>10 && basic.signal_strength<=20">
+                  中
+                </span>
+                <span *ngIf="basic && basic.signal_strength>0 && basic.signal_strength<=10">
+                  弱
+                </span>
+                <span *ngIf="basic && basic.signal_strength === 0">
+                  无
+                </span>
+
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                当前状态
+              </div>
+              <div class="info_item_value">
+                <span *ngIf="basic && basic.status === 1" class="text_grey">
+                  未激活
+                </span>
+                <span *ngIf="basic && basic.status === 2" class="text_green">
+                  已激活
+                </span>
+                <span *ngIf="basic && basic.status === 3" class="text_warning">
+                  维修
+                </span>
+                <span *ngIf="basic && basic.status === 4" class="text_danger">
+                  报废
+                </span>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="info_r">
+      <div class="info_title">
+        <h6>
+          状态记录
+        </h6>
+        <a class="btn btn_purple btn_round bpm" [routerLink]="['/dir/ad/terminal-operate', uid]">
+          查看更多
+        </a>
+      </div>
+      <div class="info_body">
+        <ul>
+          <li class="info_item" *ngFor="let data of operate">
+            <div class="info_item_date">
+              {{data.created_at | date: 'yyyy-MM-dd  HH:mm:ss'}}
+            </div>
+            <div class="info_item_op">
+              {{data.info}}
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+

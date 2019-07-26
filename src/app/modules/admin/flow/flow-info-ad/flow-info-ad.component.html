@@ -1,0 +1,186 @@
+
+<div class="bread">
+  流量卡管理 <span> / </span>流量卡
+</div>
+
+
+<div class="content">
+  <div class="info_head">
+    <div class="info_tname">
+      <img src="assets/icons/flow.png" alt="">
+      流量卡详情
+    </div>
+    <div>
+      <button class="btn btn_purple btn_round bpm ml-3" (click)="charge()">
+        在线充值
+      </button>
+    </div>
+  </div>
+
+  <div class="info_content flex">
+    <div class="info_l">
+      <div class="info_basic">
+        <div class="info_title">
+          <h6>
+            卡号信息
+          </h6>
+        </div>
+        <nz-spin [nzSpinning]="isSpinning" nzTip="Loading...">
+        <div class="info_body">
+          <ul>
+            <li class="info_item">
+              <div class="info_item_title">
+                ICCID
+              </div>
+              <div class="info_item_value">
+                {{basic?.iccid}}
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                开户时间
+              </div>
+              <div class="info_item_value">
+                {{basic?.create_date | date: 'yyyy-MM-dd HH:mm:ss'}}
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                激活时间
+              </div>
+              <div class="info_item_value">
+                {{basic?.active_date | date: 'yyyy-MM-dd HH:mm:ss'}}
+              </div>
+            </li>
+
+            <li class="info_item">
+              <div class="info_item_title">
+                关联终端编码
+              </div>
+              <div class="info_item_value">
+                {{basic?.terminal_code}}
+              </div>
+            </li>
+          </ul>
+        </div>
+        </nz-spin>
+      </div>
+
+      <div class="info_config">
+        <div class="info_title">
+          <h6>
+            状态信息
+          </h6>
+        </div>
+        <nz-spin [nzSpinning]="isSpinning" nzTip="Loading...">
+        <div class="info_body">
+          <ul>
+            <li class="info_item">
+              <div class="info_item_title">
+                使用状态
+              </div>
+              <div class="info_item_value">
+                {{basic?.billing_status}}
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                运行状态
+              </div>
+              <div class="info_item_value">
+                <span *ngIf="basic&&basic.os_status==='0'" class="text_danger">
+                  关机
+                </span>
+                <span *ngIf="basic&&basic.os_status==='1'" class="text_green">
+                  开机
+                </span>
+
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                通信状态
+              </div>
+              <div class="info_item_value">
+                <span *ngIf="basic&&basic.communicate_status==='00'" class="text_danger">
+                  离线
+                </span>
+                <span *ngIf="basic&&basic.communicate_status==='01'" class="text_green">
+                  在线
+                </span>
+                ( {{ basic?.communicate_ip || '无' }} /
+                <span *ngIf="basic&&basic.communicate_rat==='1'">
+                    3G
+                </span>
+                <span *ngIf="basic&&basic.communicate_rat==='2'">
+                    2G
+                </span>
+                <span *ngIf="basic&&basic.communicate_rat==='6'">
+                    4G及其他
+                </span>
+                )
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                当前套餐
+              </div>
+              <div class="info_item_value">
+                {{basic?.prod_name || '无'}} ({{basic?.prod_size || '无'}})
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                当前余额
+              </div>
+              <div class="info_item_value">
+                {{(basic?.user_amount | currency: '￥') || '0'}}
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                当前剩余流量
+              </div>
+              <div class="info_item_value">
+                {{basic?.fee_left || '0'}}MB / {{basic?.fee_total || '0'}}MB
+              </div>
+            </li>
+
+
+          </ul>
+        </div>
+        </nz-spin>
+      </div>
+    </div>
+
+    <div class="info_r">
+      <div class="info_title">
+        <h6>
+          充值记录
+        </h6>
+        <a class="btn btn_purple btn_round bpm" [routerLink]="['/dir/ad/flow-operate', uid]">
+          查看更多
+        </a>
+      </div>
+      <div class="info_body">
+        <ul>
+          <li class="info_item" *ngFor="let data of operate">
+            <div class="info_item_date">
+              {{data.created_at | date: 'yyyy-MM-dd  HH:mm:ss'}}
+            </div>
+            <div class="info_item_op">
+              {{data.info}}
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
+

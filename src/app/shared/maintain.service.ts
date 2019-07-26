@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs/index';
-import {catchError} from 'rxjs/internal/operators';
-
+import {catchError} from "rxjs/internal/operators";
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': 'Ida'
+    'Authorization': 'auth'
   })
 };
 
@@ -15,69 +14,49 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class MaintainService {
-  private mlistUrl = '/maintenance_list'; // 维保记录
-  private mlExportUrl = '/maintenance_export'; // 导出
-  private mlistUrl2 = '/maintenance_alarm_list'; // 故障列表
-  private mlistUrl3 = '/maintenance_alarm_list_all'; // 故障列表
-  private mdetailUrl = '/maintenance_detail';  // 维保详情
-  private maddUrl = '/maintenance_add';
+
+  // private dataListUrl = '/api/admin/maintain/list';
+
+
+  // private token = 'authtoken';
+  private dataListUrl = 'assets/server/cluster_list.json';
 
   constructor(private http: HttpClient) { }
 
+  // 获取列表
+  getLists(n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-  // 获取单台设备维保记录列表
-  getLists(n: number, pageSize: number, uid?: string, search?: string): Observable<any> {
-    const url = `${this.mlistUrl}/?pageNum=${n}&pageSize=${pageSize}&uid=${uid}`;
-    return this.http.get<any>(url)
-      .pipe(
-        catchError(this.handleError) // then handle the error
-      );
-  }
-
-  // 获取单台设备导出列表
-  exports(uid: string): Observable<any> {
-    const url = `${this.mlExportUrl}/?uid=${uid}`;
-    return this.http.get<any>(url)
-      .pipe(
-        catchError(this.handleError) // then handle the error
-      );
-  }
-
-  // 获取故障列表
-  getMalLists(n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.mlistUrl2}/?pageNum=${n}&pageSize=${pageSize}&search=${search}`;
-    return this.http.get<any>(url)
-      .pipe(
-        catchError(this.handleError) // then handle the error
-      );
-  }
-
-  // 获取故障历史列表
-  getMalHistoryLists(n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.mlistUrl3}/?pageNum=${n}&pageSize=${pageSize}&search=${search}`;
-    return this.http.get<any>(url)
-      .pipe(
-        catchError(this.handleError) // then handle the error
-      );
-  }
-
-
-  // 获取故障详情
-  getDetail(uid): Observable<any> {
-    const url = `${this.mdetailUrl}/?uid=${uid}`;
-    return this.http.get<any>(url)
-      .pipe(
-        catchError(this.handleError) // then handle the error
-      );
-  }
-
-  // 添加
-  add(data): Observable<any> {
-    return this.http.post('/maintenance_add', data, httpOptions)
+    const url = `${this.dataListUrl}?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
+
+  addData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/admin/maintain/add', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 删除
+  deleteData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/admin/a/batch/delete', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

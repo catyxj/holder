@@ -1,0 +1,184 @@
+<div class="site">
+  <header>
+    <app-header [user]="user" [btnShow]="false"></app-header>
+  </header>
+
+  <main class="directive">
+    <mat-sidenav-container class="sidenav-container">
+      <mat-sidenav-content>
+        <div class="bread">
+          设备管理 <span> / </span>视频设备
+        </div>
+
+        <div class="vlive_container">
+          <!--<div class="mat-card-title">
+            <h5 class="text_info">
+              {{video?.name}}
+            </h5>
+          </div>-->
+
+          <div class="vlive_con">
+            <div class="vlive_play">
+              <div class="vlive_head">
+                <div class="vlive_hname">
+                  <img src="assets/icons/audio.png" alt="">
+                  {{video?.name}}
+                </div>
+              </div>
+              <video id="myPlayer" poster="" controls playsInline webkit-playsinline style="width: 100%; height: 539px;">
+                <source [src]="url" type="application/x-mpegURL" />
+                <!--<source src="rtmp://rtmp01open.ys7.com/openlive/3aea2979dfd94d17b17ff08356099295" type="application/x-mpegURL" />-->
+              </video>
+            </div>
+
+            <div class="vlive_ctrl">
+              <div class="vlive_head">
+                <div class="vlive_hname">
+                  <img src="assets/icons/control.png" alt="">
+                  云控制台
+                </div>
+                <div class="vlive_number">
+                  {{video?.serial_number}}
+                </div>
+              </div>
+              <div class="vc_con">
+                <!--<div *ngIf="!isControl" style="padding: 20px;">
+                  当前设备没有控制功能
+                </div>-->
+
+                <div>
+
+
+                  <div class="ctrl_0">
+                    <img src="assets/images/video/ctrl0.png" alt="">
+
+                    <div class="v_reset" (click)="endCtrl()">
+                      复 位
+                    </div>
+
+                    <div class="v_c1"
+                         style="top: 24px; left:50%; margin-left: -58px;">
+                      <img [src]="ctrls[0]" alt="" title="上"
+                           (mousedown)="startCtrl(0)" (mouseup)="endCtrl(0)" >
+                    </div>
+
+                    <div class="v_c1"
+                         style=" bottom: 25px; left:50%; margin-left: -58px;">
+                      <img [src]="ctrls[1]" alt="" title="下"
+                           (mousedown)="startCtrl(1)" (mouseup)="endCtrl(1)" >
+                    </div>
+
+                    <div class="v_c1"
+                         style="left:26px; top: 50%; margin-top: -58px;">
+                      <img [src]="ctrls[2]" alt="" title="左"
+                           (mousedown)="startCtrl(2)" (mouseup)="endCtrl(2)" >
+                    </div>
+
+                    <div class="v_c1"
+                         style="right:25px; top: 50%; margin-top: -58px;">
+                      <img [src]="ctrls[3]" alt="" title="右"
+                           (mousedown)="startCtrl(3)" (mouseup)="endCtrl(3)" >
+                    </div>
+
+
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+
+
+
+          <!--<div (click)="sidenav.toggle()" class="sideBtn">
+            <i class="fa fa-angle-right" *ngIf="sideshow"></i>
+            <i class="fa fa-angle-left" *ngIf="!sideshow"></i>
+          </div>-->
+
+        </div>
+      </mat-sidenav-content>
+
+
+
+      <!--<mat-sidenav class="sidenav" mode="side" position="end" #sidenav
+                   (opened)="sideshow = true" (closed)="sideshow = false">
+        <div class="v_side">
+          <h6 style="font-size: 16px; padding: 10px 0;">云台控制</h6>
+          <div *ngIf="!isControl">
+            当前设备没有控制功能
+          </div>
+
+          <div *ngIf="isControl">
+            <div class="v_con">
+              <div class="v_cr">
+                <div class="v_item" (mousedown)="startCtrl(4)" (mouseup)="endCtrl(4)">
+                  <img src="assets/images/video/5.png" alt="" title="左上">
+                </div>
+                <div class="v_item" (mousedown)="startCtrl(0)" (mouseup)="endCtrl(0)">
+                  <img src="assets/images/video/12.png" alt="" title="上">
+                </div>
+                <div class="v_item" (mousedown)="startCtrl(6)" (mouseup)="endCtrl(6)">
+                  <img src="assets/images/video/11.png" alt="" title="右上">
+                </div>
+              </div>
+              <div class="v_cr">
+                <div class="v_item" (mousedown)="startCtrl(2)" (mouseup)="endCtrl(2)">
+                  <img src="assets/images/video/6.png" alt="" title="左">
+                </div>
+                <div class="v_item" style="text-align: center;">
+                  <div (click)="endCtrl()" style="line-height: 40px;">复位</div>
+                </div>
+                <div class="v_item" (mousedown)="startCtrl(3)" (mouseup)="endCtrl(3)">
+                  <img src="assets/images/video/10.png" alt="" title="右">
+                </div>
+              </div>
+              <div class="v_cr">
+                <div class="v_item" (mousedown)="startCtrl(5)" (mouseup)="endCtrl(5)">
+                  <img src="assets/images/video/7.png" alt="" title="左下">
+                </div>
+                <div class="v_item" (mousedown)="startCtrl(1)" (mouseup)="endCtrl(1)">
+                  <img src="assets/images/video/8.png" alt="" title="下">
+                </div>
+                <div class="v_item" (mousedown)="startCtrl(7)" (mouseup)="endCtrl(7)">
+                  <img src="assets/images/video/9.png" alt="" title="右下">
+                </div>
+              </div>
+            </div>
+
+            <div class="v_con" style="padding-top:10px;">
+              <div class="v_cr">
+                <div class="v_item" (mousedown)="startCtrl(8)" (mouseup)="endCtrl(8)">
+                  <img src="assets/images/video/1.png" alt="" title="放大">
+                </div>
+                <div class="v_item" (mousedown)="startCtrl(9)" (mouseup)="endCtrl(9)">
+                  <img src="assets/images/video/2.png" alt="" title="缩小">
+                </div>
+              </div>
+              <div class="v_cr">
+                <div class="v_item" (mousedown)="startCtrl(10)" (mouseup)="endCtrl(10)">
+                  <img src="assets/images/video/3.png" alt="" title="近焦距">
+                </div>
+                <div class="v_item" (mousedown)="startCtrl(11)" (mouseup)="endCtrl(11)">
+                  <img src="assets/images/video/4.png" alt="" title="远焦距">
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </mat-sidenav>-->
+
+    </mat-sidenav-container>
+
+  </main>
+
+</div>
+
+
+
+

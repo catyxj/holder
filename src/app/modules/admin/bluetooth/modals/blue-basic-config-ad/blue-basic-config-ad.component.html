@@ -1,0 +1,61 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    <img src="assets/icons/bluetooth_information.png" alt="" style="margin-right: 19px;">
+    基础信息
+  </h4>
+</div>
+
+<div class="modal-body m_form">
+  <div class="m_item">
+    <div class="m_label">
+      蓝牙MAC地址 <span>*</span>：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="mac" placeholder="请输入蓝牙MA地址" disabled>
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      蓝牙名称：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="name" placeholder="请输入蓝牙名称" maxlength="15">
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      所属账号：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="account" placeholder="请输入所属账号" maxlength="11">
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      关联产品终端：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="terminal" placeholder="请输入关联产品终端" maxlength="6">
+    </div>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取 消</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 35px;" (click)="save()">确 定</button>
+</div>
+
+
+
+
+
+
+
+
+
+

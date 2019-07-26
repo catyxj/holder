@@ -1,0 +1,223 @@
+<div class="content">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>设备概况</h6>
+    </div>
+
+  </div>
+
+  <div class="overview_dashboard">
+    <div class="ov_content">
+      <div class="ov_col">
+        <div class="ov_head">
+          <div class="ov_title">
+            <a routerLink="/admin/ad/terminal">终端设备</a>
+          </div>
+          <div class="ov_img">
+            <img src="assets/images/overview/pic_terminal.svg" alt="">
+          </div>
+        </div>
+        <div class="ov_data">
+          <ul>
+            <li class="ov_item" routerLink="/admin/ad/terminal">
+              <div class="ov_item_label">
+                <span> </span>
+                总数量
+              </div>
+              <div class="ov_item_value text_blue">
+                {{terminal?.total}}
+              </div>
+            </li>
+
+            <li class="ov_item" [routerLink]="['/admin/ad/terminal/list', {status:1}]">
+              <div class="ov_item_label">
+                <span class="iconfont iconjihuo text_grey"></span>
+                未激活
+              </div>
+              <div class="ov_item_value text_grey">
+                {{terminal?.inactivated}}
+                <i class="iconfont iconright"></i>
+              </div>
+            </li>
+
+            <li class="ov_item" [routerLink]="['/admin/ad/terminal/list', {status:2}]">
+              <div class="ov_item_label">
+                <span class="iconfont iconjihuo text_purple"></span>
+                已激活
+              </div>
+              <div class="ov_item_value text_green">
+                {{terminal?.activated}}
+                <i class="iconfont iconright"></i>
+              </div>
+            </li>
+
+            <li class="ov_item" [routerLink]="['/admin/ad/terminal/list', {status:3}]">
+              <div class="ov_item_label">
+                <span class="iconfont iconrepair text_purple"></span>
+                维修中
+              </div>
+              <div class="ov_item_value text_warning">
+                {{terminal?.service}}
+                <i class="iconfont iconright"></i>
+              </div>
+            </li>
+
+            <li class="ov_item" [routerLink]="['/admin/ad/terminal/list', {status:4}]">
+              <div class="ov_item_label">
+                <span class="iconfont icontrash text_purple"></span>
+                已报废
+              </div>
+              <div class="ov_item_value text_danger">
+                {{terminal?.scrapped}}
+                <!--<i nz-icon [nzIconfont]="'iconright'"></i>-->
+                <!--<i nz-icon nzType="right" nzTheme="outline"></i>-->
+                <i class="iconfont iconright"></i>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ov_col">
+        <div class="ov_head">
+          <div class="ov_title">
+            <a routerLink="/admin/ad/video">视频设备</a>
+          </div>
+          <div class="ov_img">
+            <img src="assets/images/overview/pic_video.svg" alt="">
+          </div>
+        </div>
+        <div class="ov_data">
+          <ul>
+            <li class="ov_item" routerLink="/admin/ad/video">
+              <div class="ov_item_label">
+                <span> </span>
+                总数量
+              </div>
+              <div class="ov_item_value text_blue">
+                {{video?.total}}
+              </div>
+            </li>
+
+            <li class="ov_item" [routerLink]="['/admin/ad/video/list', {status:1}]">
+              <div class="ov_item_label">
+                <span class="iconfont iconjihuo text_grey"></span>
+                未激活
+              </div>
+              <div class="ov_item_value text_grey">
+                {{video?.inactivated}}
+                <i class="iconfont iconright"></i>
+              </div>
+            </li>
+
+            <li class="ov_item" [routerLink]="['/admin/ad/video/list', {status:2}]">
+              <div class="ov_item_label">
+                <span class="iconfont iconjihuo text_purple"></span>
+                已激活
+              </div>
+              <div class="ov_item_value text_green">
+                {{video?.activated}}
+                <i class="iconfont iconright"></i>
+              </div>
+            </li>
+
+            <li class="ov_item" [routerLink]="['/admin/ad/video/list', {status:3}]">
+              <div class="ov_item_label">
+                <span class="iconfont iconrepair text_purple"></span>
+                维修中
+              </div>
+              <div class="ov_item_value text_warning">
+                {{video?.service}}
+                <i class="iconfont iconright"></i>
+              </div>
+            </li>
+
+            <li class="ov_item" [routerLink]="['/admin/ad/video/list', {status:4}]">
+              <div class="ov_item_label">
+                <span class="iconfont icontrash text_purple"></span>
+                已报废
+              </div>
+              <div class="ov_item_value text_danger">
+                {{video?.scrapped}}
+                <i class="iconfont iconright"></i>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ov_col">
+        <div class="ov_head">
+          <div class="ov_title">
+            <a routerLink="/admin/ad/bluetooth/list">蓝牙设备</a>
+          </div>
+          <div class="ov_img">
+            <img src="assets/images/overview/pic_bluetooth.svg" alt="">
+          </div>
+        </div>
+
+        <div class="ov_data">
+          <ul>
+            <li class="ov_item" routerLink="/admin/ad/bluetooth/list">
+              <div class="ov_item_label">
+                <span> </span>
+                总数量
+              </div>
+              <div class="ov_item_value text_blue">
+                {{bluetooth?.total}}
+              </div>
+            </li>
+
+            <li class="ov_item" [routerLink]="['/admin/ad/bluetooth/list', {status:1}]">
+              <div class="ov_item_label">
+                <span class="iconfont iconjihuo text_grey"></span>
+                未激活
+              </div>
+              <div class="ov_item_value text_grey">
+                {{bluetooth?.inactivated}}
+                <i class="iconfont iconright"></i>
+              </div>
+            </li>
+
+            <li class="ov_item" [routerLink]="['/admin/ad/bluetooth/list', {status:2}]">
+              <div class="ov_item_label">
+                <span class="iconfont iconjihuo text_purple"></span>
+                已激活
+              </div>
+              <div class="ov_item_value text_green">
+                {{bluetooth?.activated}}
+                <i class="iconfont iconright"></i>
+              </div>
+            </li>
+
+            <li class="ov_item" [routerLink]="['/admin/ad/bluetooth/list', {status:3}]">
+              <div class="ov_item_label">
+                <span class="iconfont iconrepair text_purple"></span>
+                维修中
+              </div>
+              <div class="ov_item_value text_warning">
+                {{bluetooth?.service}}
+                <i class="iconfont iconright"></i>
+              </div>
+            </li>
+
+            <li class="ov_item" [routerLink]="['/admin/ad/bluetooth/list', {status:4}]">
+              <div class="ov_item_label">
+                <span class="iconfont icontrash text_purple"></span>
+                已报废
+              </div>
+              <div class="ov_item_value text_danger">
+                {{bluetooth?.scrapped}}
+                <i class="iconfont iconright"></i>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
+</div>

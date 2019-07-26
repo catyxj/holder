@@ -1,0 +1,22 @@
+
+.stat_label{
+  width:20px;
+  height:16px;
+  border-radius:2px;
+  margin-right: 12px;
+}
+.stat_warning{
+  background-color:#FFC06A;
+}
+.stat_green{
+  background-color: #28D094;
+}
+
+.maintain_status{
+  display: flex;
+  align-items: center;
+}
+
+
+
+

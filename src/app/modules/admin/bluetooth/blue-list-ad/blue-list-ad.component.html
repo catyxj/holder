@@ -1,0 +1,155 @@
+
+
+<div class="content">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>
+        蓝牙列表
+        <span *ngIf="status === '1'" class="text_grey" style="font-weight: normal">
+          (未激活)
+        </span>
+        <span *ngIf="status === '2'" class="text_green" style="font-weight: normal">
+          (已激活)
+        </span>
+        <span *ngIf="status === '3'" class="text_warning" style="font-weight: normal">
+          (维修)
+        </span>
+        <span *ngIf="status === '4'" class="text_danger" style="font-weight: normal">
+          (报废)
+        </span>
+      </h6>
+    </div>
+    <div class="li_head_r">
+      <!--刷新-->
+      <button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>
+
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="addData()">
+        新增蓝牙
+      </button>
+
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="batchDelete()">
+        批量删除
+      </button>
+
+    </div>
+  </div>
+
+  <div class="list_content">
+    <div class="content_h">
+      <div class="search_box">
+        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="addOnAfterTemplate">
+          <input type="text" nz-input [(ngModel)]="value" (keyup)="searchEnter($event)" maxlength="15"/>
+        </nz-input-group>
+        <ng-template #addOnBeforeTemplate>
+          <nz-select [(ngModel)]="search">
+            <nz-option [nzLabel]="'蓝牙名称'" [nzValue]="'name'"></nz-option>
+            <nz-option [nzLabel]="'蓝牙序列号'" [nzValue]="'id'"></nz-option>
+            <nz-option [nzLabel]="'所属账号'" [nzValue]="'username'"></nz-option>
+            <nz-option [nzLabel]="'关联终端编码'" [nzValue]="'terminal_code'"></nz-option>
+          </nz-select>
+        </ng-template>
+        <ng-template #addOnAfterTemplate>
+          <img src="assets/icons/icon_seach.png" alt="" class="search_icon" (click)="searchChange()">
+        </ng-template>
+
+      </div>
+      <div class="flex">
+
+
+      </div>
+    </div>
+    <div class="content_t">
+      <nz-table
+        #dataTable
+        [nzFrontPagination]="false"
+        [nzShowPagination] = "false"
+        [nzLoading]="loading"
+        [nzData]="dataLists"
+      >
+        <thead>
+        <tr>
+          <th
+            nzShowCheckbox
+            [(nzChecked)]="isAllChecked"
+            (nzCheckedChange)="checkAll($event)"
+          >
+          </th>
+          <th>蓝牙序列号</th>
+          <th>MAC地址</th>
+          <th>蓝牙名称</th>
+          <th>所属账号</th>
+          <th>关联产品</th>
+          <th>当前状态</th>
+          <th>创建时间</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of dataTable.data">
+          <td
+            nzShowCheckbox
+            [(nzChecked)]="data.checked"
+            [nzDisabled]="data.disabled"
+            (nzCheckedChange)="refreshStatus()"
+          ></td>
+          <td> {{data.id}} </td>
+          <td> {{data.mac}} </td>
+          <td> {{data.name}} </td>
+          <td> {{data.username || '空'}} ({{data.org_name || '空'}}) </td>
+          <td> {{data.terminal_code || '空'}} ({{'空'}}) </td>
+          <td>
+            <span *ngIf="data.status === 1" class="text_grey">
+              <img src="assets/icons/icon_active2.png" alt="" style="margin-right: 6px;">
+              未激活
+            </span>
+            <span *ngIf="data.status === 2" class="text_green">
+              <img src="assets/icons/icon_active.png" alt="" style="margin-right: 6px;">
+              已激活
+            </span>
+            <span *ngIf="data.status === 3" class="text_warning">
+              <img src="assets/icons/icon_repair.png" alt="" style="margin-right: 6px;">
+              维修
+            </span>
+            <span *ngIf="data.status === 4" class="text_danger">
+              <img src="assets/icons/icon_Scrap.png" alt="" style="margin-right: 6px;">
+              报废
+            </span>
+          </td>
+          <td> {{data.created_at | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
+          <td>
+            <a class="btn btn_purple btn-sm" [routerLink]="['/dir/ad/blue-info', data.uid]" target="_blank">
+              设置
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+
+    <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+
+    <div class="content_b">
+      <nz-pagination nzShowSizeChanger
+                     [nzTotal]="totalItems"
+                     [nzShowTotal]="totalTemplate"
+                     [(nzPageIndex)]="page"
+                     [(nzPageSize)]="pageSize"
+                     (nzPageIndexChange)="pageChange()"
+                     (nzPageSizeChange)="pageSizeChange()"
+                     [nzPageSizeOptions] = "pageSizeList">
+
+      </nz-pagination>
+      <div class="ant-pagination-options-quick-jumper"> 跳至
+        <input type="number" [(ngModel)]="pageNum"> 页 </div>
+      <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+

@@ -1,0 +1,104 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    <img src="assets/icons/icon_terminal.png" alt="" style="margin-right: 19px;">
+    批量新增终端
+  </h4>
+</div>
+
+
+<nz-spin [nzSpinning]="isSpinning" nzTip="正在处理，请耐心等待......">
+<div class="modal-body m_form">
+  <div class="m_item">
+    <div class="m_label">
+      终端编码(起) <span>*</span> ：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="code1" placeholder="请输入6位终端编码（起）"
+             maxlength="6" #tCode1="ngModel" pattern="^[A-Za-z0-9]{6}$" required>
+      <div class="sign_tip">
+        <span class="text_danger" *ngIf="tCode1.invalid && (tCode1.dirty || tCode1.touched)">请输入正确6位终端编码</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      终端编码(止) <span>*</span> ：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="code2" placeholder="请输入6位终端编码（止）"
+             maxlength="6" #tCode2="ngModel" pattern="^[A-Za-z0-9]{6}$" required>
+      <div class="sign_tip">
+        <span class="text_danger" *ngIf="tCode2.invalid && (tCode2.dirty || tCode2.touched)">请输入正确6位终端编码</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      固件版本号 <span>*</span> ：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="version" placeholder="请输入6位固件版本号" maxlength="6"
+             #tVersion="ngModel" pattern="^[A-Za-z0-9]{6}$" required>
+      <div class="sign_tip">
+        <span class="text_danger" *ngIf="tVersion.invalid && (tVersion.dirty || tVersion.touched)">请输入6位正确固件版本号</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      物联网卡号(起)：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="sim1" placeholder="请输入物联网卡号（起）" maxlength="20"
+             #simCode1="ngModel" pattern="^[A-Za-z0-9]{20}$">
+      <div class="sign_tip">
+        <span class="text_danger" *ngIf="simCode1.invalid && (simCode1.dirty || simCode1.touched)">请输入20位正确物联网卡号</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      物联网卡号(止)：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="sim2" placeholder="请输入物联网卡号（止）" maxlength="20"
+             #simCode2="ngModel" pattern="^[A-Za-z0-9]{20}$">
+      <div class="sign_tip">
+        <span class="text_danger" *ngIf="simCode2.invalid && (simCode2.dirty || simCode2.touched)">请输入20位正确物联网卡号</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      所属账号：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="account" placeholder="请输入所属账号" maxlength="15">
+    </div>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取 消</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 35px;" (click)="save()"
+          [disabled]="tCode1.invalid || tCode2.invalid || tVersion.invalid || simCode1.invalid || simCode2.invalid">
+    确 定
+  </button>
+</div>
+</nz-spin>
+
+
+
+
+
+
+
+
+

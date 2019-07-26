@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs/index';
-import {catchError} from 'rxjs/internal/operators';
+import {catchError, last, map, tap} from 'rxjs/internal/operators';
 
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': 'Ida'
-  })
+    'Authorization': 'auth'
+  }),
+  // reportProgress: true,
+  // observe: 'events'
 };
 
 
@@ -17,120 +19,156 @@ const httpOptions = {
 })
 export class TerminalService {
 
-  // private terminalsUrl = 'assets/server/terminal_list.json';
-  // private messageUrl = 'assets/server/terminal_origin_message_list.json';
-  // private funcUrl = 'assets/server/term_function_code_list.json';
-  // private byteUrl = 'assets/server/term_byte_list.json';
-  // private correspondUrl = 'assets/server/correspond_type_list.json';
-  // private dataBitUrl = 'assets/server/date_bit_list.json';
-  // private heartbeatUrl = 'assets/server/heartbeat_packet_list.json';
-  // private parityUrl = 'assets/server/parity_bit.json';
-  // private slaveUrl = 'assets/server/slave_address_list.json';
-  // private stopBitUrl = 'assets/server/stop_bit_list.json';
-  // private baudRateUrl = 'assets/server/baud_rate_list.json';
-  // private channelUrl = 'assets/server/chan_config_list.json';
+  private dataListUrl = '/api/admin/terminal/list';
+  private dataBasicUrl = '/api/admin/terminal/detail';
+  private dataOperateUrl = '/api/admin/terminal/log/info';
+  private dataOperateMoreUrl = '/api/admin/terminal/log/list';
 
 
-  private terminalsUrl = '/terminal_list';
-  private messageUrl = '/terminal_message_list';
-  private funcUrl = '/term_function_code_list';
-  private byteUrl = '/term_byte_list';
-  private correspondUrl = '/correspond_type_list';
-  private dataBitUrl = '/data_bit_list';
-  private heartbeatUrl = '/heartbeat_packet_list';
-  private parityUrl = '/parity_bit';
-  private slaveUrl = '/slave_address_list';
-  private stopBitUrl = '/stop_bit_list';
-  private baudRateUrl = '/baud_rate_list';
-  private channelUrl = '/chan_config_list';
+
+  // private dataListUrl = 'assets/server/terminal_list.json';
+
+
+  private messageUrl = 'assets/server/terminal_origin_message_list.json';
+  private funcUrl = 'assets/server/term_function_code_list.json';
+  private byteUrl = 'assets/server/term_byte_list.json';
+  private correspondUrl = 'assets/server/correspond_type_list.json';
+  private dataBitUrl = 'assets/server/date_bit_list.json';
+  private heartbeatUrl = 'assets/server/heartbeat_packet_list.json';
+  private parityUrl = 'assets/server/parity_bit.json';
+  private slaveUrl = 'assets/server/slave_address_list.json';
+  private stopBitUrl = 'assets/server/stop_bit_list.json';
+  private baudRateUrl = 'assets/server/baud_rate_list.json';
+  private channelUrl = 'assets/server/chan_config_list.json';
+
   private dataTypeUrl = '/channel_data_type_list';
 
   constructor(private http: HttpClient) { }
 
   // 获取终端列表
-  getTerminals(n: number, pageSize: number, status: number, search?: string): Observable<any> {
-    // TODO: send the message _after_ fetching the heroes
-    const url = `${this.terminalsUrl}/?page=${n}&pageSize=${pageSize}&status=${status}&search=${search}`;
-    return this.http.get<any>(url)
+  getLists(n: number, pageSize: number, status?: string, search?: string, value?: string, online?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `${this.dataListUrl}?page=${n}&rows=${pageSize}&status=${status}&search=${search}&value=${value}&online=${online}`;
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
       );
   }
 
-  // 获取通道配置数据
-  getChannel(code: string): Observable<any> {
-    const url = `${this.channelUrl}/?code=${code}`;
-    return this.http.get<any>(url)
-      .pipe(
-        catchError(this.handleError) // then handle the error
-      );
-  }
 
-  // 获取调试消息
-  getMessage(code: string): Observable<any> {
-    const url = `${this.messageUrl}/?code=${code}`;
-    return this.http.get<any>(url)
-      .pipe(
-        catchError(this.handleError) // then handle the error
-      );
-  }
+  // 获取基本信息
+  getBasic(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-  // 添加终端
-  addTerminal(ter): Observable<any> {
-    return this.http.post('/terminal_add/', ter, httpOptions)
+    const url = `${this.dataBasicUrl}?uid=${uid}`;
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
 
-  // 终端关联
-  editTerminal(ter): Observable<any> {
-    return this.http.post('/terminal_update/', ter, httpOptions)
+
+  // 获取记录信息
+  getOperate(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `${this.dataOperateUrl}?uid=${uid}`;
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  // 批量添加终端
-  groupAdd(ter): Observable<any> {
-    return this.http.post('/terminal_group_add/', ter, httpOptions)
+  // 获取记录信息列表
+  getOperateMore(uid, n, pageSize): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `${this.dataOperateMoreUrl}?uid=${uid}&page=${n}&rows=${pageSize}`;
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  // 批量配置模板
-  groupConfig(item): Observable<any> {
-    return this.http.post('/template_group_config', item, httpOptions)
+
+  // 新增终端
+  addData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/admin/terminal/add', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
+
+  // 批量新增终端
+  addBatchData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/admin/terminal/batch/add', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
 
   // 删除
-  deleteTerminal(code): Observable<any> {
-    return this.http.post('/terminal_delete/', code, httpOptions)
+  deleteData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/admin/terminal/batch/delete', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  // 批量下发
-  groupIssued(code): Observable<any> {
-    return this.http.post('/term_config_batch_issued', code, httpOptions)
+
+  // 报废
+  scrap(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get(`/api/admin/terminal/scrapped?uid=${data}`, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  // 通道配置提交
-  save(data): Observable<any> {
-    return this.http.post('/channel_config_update', data, httpOptions)
+  // 编辑基础信息
+  updateBasic(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/admin/terminal/update', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
+
+
+  getFlow(iccid) {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get<any>(`/api/admin/terminal/traffic/card/query?iccid=${iccid}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+
+
+
 
   // 获取bin文件
   getBin(): Observable<any> {

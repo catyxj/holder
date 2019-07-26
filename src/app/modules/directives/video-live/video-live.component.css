@@ -1,0 +1,141 @@
+
+.site{
+  display: flex;
+  flex-direction: column;
+}
+
+main{
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+.display{
+  flex: 9;
+  padding: 10px;
+}
+
+.sidenav-container {
+  height: 100%;
+  width: 100%;
+  flex: 2;
+}
+
+
+.vlive_container{
+  padding-top: 12px;
+  padding-bottom: 12px;
+  width: 1200px;
+  margin: auto;
+}
+
+.vlive_con{
+  display: flex;
+  justify-content: space-between;
+}
+
+.vlive_play{
+  width: 911px;
+  height: 539px;
+}
+.vlive_head{
+  background-color: #ffffff;
+  height: 35px;
+  line-height: 34px;
+  padding: 0 12px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+.vlive_hname{
+  font-size: 13px;
+  color: #464855;
+}
+.vlive_hname img{
+  margin-right: 8px;
+}
+/*控制台*/
+.vlive_ctrl{
+  width: 274px;
+}
+.vc_con{
+  height: 539px;
+  background-color: #3C3D41;
+  color: #ffffff;
+  padding-top: 48px;
+  box-sizing: border-box;
+}
+.vlive_number{
+  font-size: 11px;
+  color: #A7ABBE;
+}
+
+/*控制按钮*/
+.ctrl_0{
+  position: relative;
+  width: 218px;
+  margin: auto;
+}
+.v_c1{
+  cursor: pointer;
+  position: absolute;
+}
+.v_c1_1{
+
+}
+.v_reset{
+  cursor: pointer;
+  position: absolute;
+  left: 67px;
+  top: 67px;
+  width: 84px;
+  height: 84px;
+  text-align: center;
+  line-height: 84px;
+  color: #666EE8;
+  font-weight: bold;
+  border-radius: 50%;
+}
+.v_reset:active{
+  text-shadow:0px 0px 15px rgba(102,110,232,1);
+}
+
+
+.sidenav {
+  width: 220px;
+  background-color: #2b303b;
+  overflow-x: hidden;
+  color: #fff;
+}
+
+.sideBtn{
+  position:absolute;
+  top:48%;
+  right:0;
+  padding: 20px 3px;
+  background-color: #666EE8;
+  color:#fff;
+  cursor: pointer;
+}
+
+.v_side{
+  padding: 10px 20px;
+}
+
+.v_cr{
+  display: flex;
+}
+.v_item{
+  width: 44px;
+  height: 44px;
+  padding: 2px;
+  cursor: pointer;
+}
+.v_item img{
+  width: 40px;
+  height: 40px;
+}
+.v_item img:active{
+  opacity: 0.6;
+}

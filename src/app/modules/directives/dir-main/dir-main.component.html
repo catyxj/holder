@@ -1,13 +1,22 @@
+
 <div class="site">
   <header>
-    <!--<app-header [user]="user" [matches]="mobileQuery.matches"></app-header>-->
+    <app-header [user]="user" [btnShow]="false" [matches]="mobileQuery.matches"></app-header>
   </header>
 
-  <main>
-    <router-outlet></router-outlet>
+  <main class="directive">
+    <mat-sidenav-container class="sidenav-container">
+      <!--<mat-sidenav class="sidenav bg_light_default"  [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="false" #sidenav>
+        <app-sidebar [user]="user"></app-sidebar>
+      </mat-sidenav>-->
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
 
   </main>
 
 
 
 </div>
+

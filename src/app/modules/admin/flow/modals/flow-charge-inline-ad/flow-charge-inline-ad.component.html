@@ -1,0 +1,64 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    <img src="assets/icons/icon_Recharge.png" alt="" style="margin-right: 19px;">
+    在线充值
+  </h4>
+</div>
+
+<nz-spin [nzSpinning]="isSpinning" nzTip="正在处理，请耐心等待......">
+<div class="modal-body m_form">
+  <div style="font-weight: bold; color: #666EE8; text-align: center; margin-bottom: 16px;">
+    系统余额：{{(amount | currency: '￥') || '0'}}
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      ICCID：
+    </div>
+    <div class="m_text">
+      {{currentData?.iccid}}
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      当前余额：
+    </div>
+    <div class="m_text">
+      {{(currentData?.user_amount | currency: '￥') || '0'}}
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      当前套餐：
+    </div>
+    <div class="m_text">
+      {{currentData?.prod_name || '无'}} ({{currentData?.prod_size || '无'}})
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      充值金额：
+    </div>
+    <div class="m_input">
+      <input type="number" class="form-control" [(ngModel)]="price" placeholder="请输入金额">
+    </div>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取 消</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 35px;" (click)="save()">确 定</button>
+</div>
+</nz-spin>
+
+
+
+
+
+
+

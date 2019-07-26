@@ -1,0 +1,164 @@
+import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {BluetoothService} from "../../../../shared/bluetooth.service";
+import {BlueBasicConfigAdComponent} from "../modals/blue-basic-config-ad/blue-basic-config-ad.component";
+import {BlueScrapAdComponent} from "../modals/blue-scrap-ad/blue-scrap-ad.component";
+import {ComfirmComponent} from "../../../directives/alert/comfirm/comfirm.component";
+import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
+
+import Swal from 'sweetalert2';
+
+@Component({
+  selector: 'app-blue-info-ad',
+  templateUrl: './blue-info-ad.component.html',
+  styleUrls: ['./blue-info-ad.component.css']
+})
+export class BlueInfoAdComponent implements OnInit {
+  public uid;
+  public basic;
+  public config;
+  public operate;
+
+  tplModal: NzModalRef;
+
+  constructor(private route: ActivatedRoute,
+              public router: Router,
+              private modalService: NgbModal,
+              private blueService: BluetoothService,
+              private nzModal: NzModalService) { }
+
+  ngOnInit() {
+    this.uid = this.route.snapshot.paramMap.get('uid');
+
+    /*this.basic = {
+      status: 4
+    };*/
+
+    this.getBasic();
+    this.getOperate();
+  }
+
+  // 获取基础信息
+  getBasic() {
+    this.blueService.getBasic(this.uid)
+      .subscribe(data => {
+        this.basic = data;
+      }, err => {
+
+      });
+  }
+
+
+  // 获取记录信息
+  getOperate() {
+    this.blueService.getOperate(this.uid)
+      .subscribe(data => {
+        this.operate = data;
+      }, err => {
+
+      });
+  }
+
+  // 编辑基础信息模态框
+  editBasic() {
+    let that = this;
+    const modalRef = this.modalService.open(BlueBasicConfigAdComponent, {windowClass: 'modal_md', centered: true});
+    modalRef.componentInstance.currentData = this.basic;
+    modalRef.componentInstance.uid = this.uid;
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+        that.getBasic();
+        that.getOperate();
+      }
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(reason);
+    });
+  }
+
+  // 终端报废模态框
+  scrap() {
+    let that = this;
+    const modalRef = this.modalService.open(BlueScrapAdComponent, {windowClass: 'modal_md', centered: true});
+    modalRef.componentInstance.currentData = this.basic;
+    modalRef.componentInstance.uid = this.uid;
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+        that.getBasic();
+        that.getOperate();
+      }
+    }, (reason) => {
+      console.log(reason);
+    });
+  }
+
+  // 删除
+  deleteData() {
+    let title = '确认要删除此蓝牙设备吗？';
+    let subtitle = '';
+    this.creatModal(title, subtitle, () => {
+      this.checkBatch( [this.uid]);
+    });
+  }
+
+
+  creatModal(title, subtitle, call) {
+    let that = this;
+    this.tplModal = this.nzModal.create({
+      nzTitle: '',
+      nzContent: ComfirmComponent,
+      nzComponentParams: {
+        title: title,
+        subtitle: subtitle
+      },
+      nzMaskClosable: true,
+      nzClosable: false,
+      nzClassName: 'comfirm_modal',
+      nzWidth: 440,
+      nzFooter: [
+        {
+          label: '取消',
+          shape: 'default',
+          onClick: () => that.tplModal.destroy()
+        },
+        {
+          label: '确定',
+          type: 'primary',
+          onClick: () => {
+            call();
+            that.tplModal.destroy();
+          }
+        }
+      ],
+    });
+  }
+
+  // 发送批量操作请求
+  checkBatch( checked) {
+    let that = this;
+    let post = {
+      data: checked
+    };
+
+    this.blueService.deleteData(post)
+      .subscribe(val => {
+        Swal(
+          '操作成功！',
+          '',
+          'success'
+        );
+        that.router.navigate(['/admin/ad/bluetooth/list']);
+      }, err => {
+        Swal(
+          err.message || err,
+          '',
+          'error'
+        );
+      });
+  }
+
+
+
+
+}

@@ -83,7 +83,7 @@ export class UserService {
               sessionStorage.setItem('user', 'false');
             }
           }),
-          catchError(this.handleError)
+          catchError(this.handleError2)
         );
     }
 
@@ -95,7 +95,7 @@ export class UserService {
             sessionStorage.setItem('user', 'false');
           }
         }),
-        catchError(this.handleError)
+        catchError(this.handleError2)
       );*/
 
 
@@ -108,11 +108,43 @@ export class UserService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
+    let roleId = localStorage.getItem('roleId');
+    // 管理员
+    if (roleId === '1') {
+      return this.http.get< any >('assets/server/sidenav_admin.json')
+        .pipe(
+          catchError(this.handleError)
+        );
+    }
+    // 正式版
+    if (roleId === '10') {
+      return this.http.get< any >('assets/server/sidenav_formal.json')
+        .pipe(
+          catchError(this.handleError)
+        );
+    }
+    // 普通版
+    if (roleId === '11') {
+      return this.http.get< any >('assets/server/sidenav_ordinary.json')
+        .pipe(
+          catchError(this.handleError)
+        );
+    }
+    // 维保
+    if (roleId === '15') {
+      return this.http.get< any >('assets/server/sidenav_service.json')
+        .pipe(
+          catchError(this.handleError)
+        );
+    }
+
+
     // return this.http.get< any >('assets/server/sidenav.json');
-    return this.http.get< any >('assets/server/sidenav_admin.json')
-      .pipe(
-        catchError(this.handleError)
-      );
+    // return this.http.get< any >('assets/server/sidenav_admin.json')
+    // return this.http.get< any >('assets/server/sidenav_service.json')
+    //   .pipe(
+    //     catchError(this.handleError)
+    //   );
   }
 
 
@@ -127,8 +159,28 @@ export class UserService {
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
     }
+    if (error.status === 550) {
+      alert(error.error);
+    }
     return throwError(
       error.error
+    );
+  }
+
+  private handleError2(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      console.error('An error occurred:', error.error.message);
+    } else {
+      console.error(
+        'error:', error,
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+    }
+    if (error.status === 550) {
+      alert(error.error);
+    }
+    return throwError(
+      error
     );
   }
 

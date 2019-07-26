@@ -1,22 +1,38 @@
 {
   "sidenav": [
-
+    {
+      "name": "统计概览",
+      "code": "sub2",
+      "icon": "fa-home",
+      "img": "assets/icons/icon_statistics.png",
+      "checked": true,
+      "children": [
+        { "name": "设备概况", "router": "/admin/ad/overview","icon": ""}
+      ]
+    },
     {
       "name": "设备管理",
       "code": "sub2",
       "icon": "fa-home",
+      "img": "assets/icons/icon_Monitor.png",
+      "checked": true,
       "children": [
-        { "name": "终端分配", "router": "/admin/ad/terminal","icon": "fa-sitemap"},
-        { "name": "视频管理", "router": "/admin/ad/video","icon": "fa-video-camera"},
-        { "name": "蓝牙管理", "router": "/admin/ad/bluetooth","icon": "fa-bluetooth"}
+        { "name": "终端设备", "router": "/admin/ad/terminal","icon": ""},
+        { "name": "视频设备", "router": "/admin/ad/video","icon": ""},
+        { "name": "蓝牙设备", "router": "/admin/ad/bluetooth","icon": ""}
       ]
     },
     {
       "name": "信息维护",
       "code": "sub3",
       "icon": "fa-file-text-o",
+      "img": "assets/icons/icon_Information.png",
+      "checked": true,
       "children": [
-        { "name": "账号管理", "router": "/admin/ad/account","icon": "fa-credit-card"}
+        { "name": "账号管理", "router": "/admin/ad/account"},
+        { "name": "服务支持", "router": "/admin/ad/service"},
+        { "name": "订单管理", "router": "/admin/ad/order"},
+        { "name": "流量卡管理", "router": "/admin/ad/flow"}
       ]
     }
   ],

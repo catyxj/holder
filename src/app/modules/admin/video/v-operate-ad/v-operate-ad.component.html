@@ -1,0 +1,72 @@
+
+
+<div class="bread">
+  设备管理 <span> / </span>视频设备
+</div>
+
+
+<div class="content operate">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>状态记录</h6>
+    </div>
+    <div class="li_head_r">
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" (click)="goBack()">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="opera_content">
+    <div class="content_t">
+      <nz-table
+        #dataList
+        [nzFrontPagination]="false"
+        [nzShowPagination] = "false"
+        [nzData]="operateList"
+        [nzLoading]="loading"
+      >
+        <thead>
+        <tr>
+          <th style="width: 260px;">事件时间</th>
+          <th>描述</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of dataList.data">
+          <td> {{data.created_at | date: 'yyyy-MM-dd, HH:mm:ss'}} </td>
+          <td> {{data.info}} </td>
+        </tr>
+        </tbody>
+      </nz-table>
+
+    </div>
+
+    <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+
+    <div class="content_b">
+      <nz-pagination nzShowSizeChanger
+                     [nzTotal]="totalItems"
+                     [nzShowTotal]="totalTemplate"
+                     [(nzPageIndex)]="page"
+                     [(nzPageSize)]="pageSize"
+                     (nzPageIndexChange)="pageChange()"
+                     (nzPageSizeChange)="pageSizeChange()"
+                     [nzPageSizeOptions] = "pageSizeList">
+
+      </nz-pagination>
+      <div class="ant-pagination-options-quick-jumper"> 跳至
+        <input type="number" [(ngModel)]="pageNum"> 页 </div>
+      <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+

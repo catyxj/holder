@@ -1,0 +1,30 @@
+
+
+
+.ecof_label{
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 70px;
+  margin-left: 12px;
+  margin-right: 17px;
+}
+.m_item{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.ecof_radio{
+
+}
+.ecof_check{
+  display: flex;
+  flex-wrap: wrap;
+}
+.ecof_check label{
+  width: 30%;
+  margin-bottom: 14px;
+}
+
+
+
+
+

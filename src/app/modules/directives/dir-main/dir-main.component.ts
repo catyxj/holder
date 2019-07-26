@@ -30,6 +30,7 @@ export class DirMainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.getUser();
   }
 
   getUser(): void {

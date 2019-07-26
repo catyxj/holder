@@ -1,0 +1,120 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    <img src="assets/icons/icon_config3.png" alt="" style="margin-right: 19px;">
+    编辑维保记录
+  </h4>
+</div>
+
+<div class="modal-body m_form">
+  <div class="mp_a_head">
+    <div class="">
+      <b class="mp_a_label">
+        设备终端：
+      </b>
+      <div class="mp_a_value">
+        681004（某某某锅炉）
+      </div>
+    </div>
+
+    <div class="">
+      <b class="mp_a_label">
+        维保模版：
+      </b>
+      <div class="mp_a_value">
+        ESE47441477（A型锅炉巡检模版）
+      </div>
+    </div>
+  </div>
+
+  <div class="maintain_modal">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>
+          序号
+        </th>
+        <th>
+          描述
+        </th>
+        <th>
+          状态
+        </th>
+        <th>
+          备注
+        </th>
+        <th>
+          图片
+        </th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let item of dataList; let n = index;">
+        <td> {{ n+1 }} </td>
+        <td style="font-weight: bold; color:#666EE8;"> {{ item.description }} </td>
+        <td>
+          <nz-radio-group [(ngModel)]="item.status">
+            <label nz-radio nzValue="10" class="success">正式用户</label>
+            <label nz-radio nzValue="11" class="error">普通用户</label>
+          </nz-radio-group>
+        </td>
+        <td>
+          <input type="text" class="form-control" [(ngModel)]="item.remark" placeholder="请输入">
+        </td>
+        <td>
+          <div class="clearfix">
+            <nz-upload
+              nzAction="https://jsonplaceholder.typicode.com/posts/"
+              nzListType="picture-card"
+              [(nzFileList)]="item.imgList"
+              [nzShowButton]="item.imgList.length < 3"
+              [nzPreview]="handlePreview"
+              [nzBeforeUpload]="beforeUpload"
+              (nzChange)="handleChange($event)"
+              style="display: flex; align-items: center;"
+            >
+              <!--<img src="assets/icons/icon_add.png" alt="">-->
+              <i class="iconfont iconplus text_purple" style="font-size: 20px;"></i>
+            </nz-upload>
+          </div>
+
+
+          <!--<div class="pull-left" style="width: 100px; height: 100px; overflow: hidden; position: relative;">
+            <img src="{{imgUrl}}" title="点击上传图片" style="width: 100px; height: 100px;">
+            <input type="file"  (change)="imgChange($event)" style="position: absolute; left: 0; top: 0; opacity: 0; width: 110px; height: 100px;">
+          </div>-->
+
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <!--缩略图-->
+  <nz-modal
+    [nzVisible]="previewVisible"
+    [nzContent]="modalContent"
+    [nzFooter]="null"
+    (nzOnCancel)="previewVisible = false"
+  >
+    <ng-template #modalContent>
+      <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+    </ng-template>
+  </nz-modal>
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取 消</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 35px;" (click)="save()">确 定</button>
+</div>
+
+
+
+
+
+
+
+

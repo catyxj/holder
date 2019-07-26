@@ -1,0 +1,82 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    <img src="assets/icons/icon_traffic.png" alt="" style="margin-right: 19px;">
+    数据流量查询
+  </h4>
+</div>
+
+<nz-spin [nzSpinning]="isSpinning" nzTip="Loading...">
+<div class="modal-body m_form">
+  <div class="m_item">
+    <div class="m_label">
+      物联网卡号：
+    </div>
+    <div class="m_text">
+      {{iccid}}
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      当前剩余流量：
+    </div>
+    <div class="m_text">
+      {{flowInfo?.prod_left || '0'}} MB
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      资费套餐：
+    </div>
+    <div class="m_text">
+      {{flowInfo?.prod_name || '无'}}
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      当前余额：
+    </div>
+    <div class="m_text">
+      {{flowInfo?.amount | currency: '￥'}}
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      激活时间：
+    </div>
+    <div class="m_text">
+      {{flowInfo?.active_date | date: 'yyyy-MM-dd  HH:mm:ss'}}
+    </div>
+  </div>
+
+  <div class="text_danger text-center">
+    {{errMes}}
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <div *ngIf="!err">
+    <button type="button" class="btn" (click)="activeModal.dismiss('close')">取 消</button>
+    <a class="btn btn_purple" [routerLink]="['/dir/ad/flow-info', iccid]" target="_blank" style="margin-left: 35px;">充 值</a>
+  </div>
+  <div *ngIf="err">
+    <button type="button" class="btn btn_purple" (click)="activeModal.dismiss('close')">确 定</button>
+  </div>
+
+</div>
+
+</nz-spin>
+
+
+
+
+
+
+
+
+

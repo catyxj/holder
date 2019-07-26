@@ -6,7 +6,7 @@ import {catchError, filter} from "rxjs/internal/operators";
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': 'Ida'
+    'Authorization': 'auth'
   })
 };
 
@@ -14,77 +14,83 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ServiceService {
-  private listUrl = '/dialogue_list'; // 我的表单列表
+
+  private dataListUrl = '/api/admin/dialogue/list';  // 服务支持列表
+  private dataBasicUrl = '/api/admin/dialogue/detail';
+  private commentUrl = '/api/admin/dialogue/comment/list';
+
+
+
+  // private token = 'authtoken';
+  // private dataListUrl = 'assets/server/terminal_list.json';
+
   private questionUrl = '/dialogue_problem_list';  // 提交表单列表
   private questionDetailUrl = '/dialogue_problem_detail_list';
   private typeUrl = '/dialogue_type_list';
-  private commentUrl = '/dialogue_comment_list';
+
+
 
   constructor(private http: HttpClient) { }
 
-  // 获取列表-我的表单
-  getLists(n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.listUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
-    return this.http.get<any>(url)
-      .pipe(
-        catchError(this.handleError) // then handle the error
-      );
-  }
+  // 获取列表
+  getLists(n: number, pageSize: number, search?: string, value?: string, type?: string, status?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-  // 获取问题类型
-  getType() {
-    return this.http.get<any>(this.typeUrl)
-      .pipe(
-        catchError(this.handleError) // then handle the error
-      );
-  }
-
-  // 获取问题列表-提交表单
-  getQuestion(n: number, pageSize: number, id) {
-    const url = `${this.questionUrl}/?page=${n}&pageSize=${pageSize}&typeId=${id}`;
-    return this.http.get<any>(url)
+    const url = `${this.dataListUrl}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&type=${type}&status=${status}`;
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  // 获取问题详情
-  getQDetail(uid) {
-    const url = `${this.questionDetailUrl}/?uid=${uid}`;
-    return this.http.get<any>(url)
+  // 获取基本信息
+  getBasic(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `${this.dataBasicUrl}?uid=${uid}`;
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   // 获取留言列表
-  getComment(uid, page, pageSize) {
-    const url = `${this.commentUrl}/?uid=${uid}&pageNum=${page}&pageSize=${pageSize}`;
-    return this.http.get<any>(url)
+  getComments(uid, page, pageSize): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `${this.commentUrl}?uid=${uid}&page=${page}&rows=${pageSize}`;
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
 
-  // 新增
-  addComment(data) {
-    return this.http.post('/dialogue_add', data, httpOptions)
+
+  // 批量关闭
+  closeData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/admin/dialogue/close', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
-
 
   // 回复表单
-  updateComment(data) {
-    return this.http.post('/dialogue_update', data, httpOptions)
+  updateComment(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/admin/dialogue/comment/commit', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
-
-
 
 
   // 上传文件-(废)
@@ -100,14 +106,6 @@ export class ServiceService {
       );
   }
 
-
-
-  delete(data) {
-    return this.http.post('/dialogue_delete', data, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
 
 
   private handleError(error: HttpErrorResponse) {

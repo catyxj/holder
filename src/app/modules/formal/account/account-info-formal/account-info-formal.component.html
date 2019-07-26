@@ -1,0 +1,177 @@
+
+<div class="content">
+  <div class="info_head">
+    <div class="info_tname">
+      <img src="assets/icons/icon_Personal.png" alt="">
+      账号信息
+    </div>
+    <div>
+      <button class="btn btn_purple btn_round bpm ml-3" (click)="getBasic()">
+        刷新
+      </button>
+      <button class="btn btn_purple btn_round bpm ml-3" (click)="changePass()">
+        密码修改
+      </button>
+    </div>
+  </div>
+
+  <div class="info_content flex">
+    <div class="info_l">
+      <div class="info_basic">
+        <div class="info_title">
+          <h6>
+            基础信息
+          </h6>
+          <button class="btn btn_purple btn_round bpm" (click)="editConfig()">
+            编辑
+          </button>
+        </div>
+        <div class="info_body">
+          <ul>
+            <li class="info_item">
+              <div class="info_item_title">
+                用户名
+              </div>
+              <div class="info_item_value">
+                {{basic?.name}}
+              </div>
+            </li>
+
+            <li class="info_item">
+              <div class="info_item_title">
+                单位名称
+              </div>
+              <div class="info_item_value">
+                {{basic?.org_name}}
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                单位类型
+              </div>
+              <div class="info_item_value">
+                {{basic?.org_tag}}
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                地域地址
+              </div>
+              <div class="info_item_value">
+                {{basic?.location_name}}
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                邮箱
+              </div>
+              <div class="info_item_value">
+                {{basic?.email}}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info_config">
+        <div class="info_title">
+          <h6>
+            配置信息
+          </h6>
+          <button class="btn btn_purple btn_round bpm" (click)="editConfig()" *ngIf="config&&config.account_type!==1">
+            编辑
+          </button>
+        </div>
+        <div class="info_body">
+          <ul>
+            <li class="info_item">
+              <div class="info_item_title">
+                账号
+              </div>
+              <div class="info_item_value">
+                {{basic?.username}}
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                账号状态
+              </div>
+              <div class="info_item_value">
+                <span class="text_danger" *ngIf="config&&config.account_status===0">
+                  禁用
+                </span>
+                <span class="" *ngIf="config&&config.account_status===1">
+                  正常
+                </span>
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                版本类型
+              </div>
+              <div class="info_item_value">
+                <span *ngIf="config&&config.account_type===1">
+                  系统用户
+                </span>
+                <span class="" *ngIf="config&&config.account_type===10">
+                  正式用户
+                </span>
+                <span class="" *ngIf="config&&config.account_type===11">
+                  普通用户
+                </span>
+                <span class="" *ngIf="config&&config.account_type===15">
+                  维保用户
+                </span>
+                <span class="" *ngIf="config&&config.account_type===20">
+                  测试用户
+                </span>
+
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                扩展应用
+              </div>
+              <div class="info_item_value">
+                <span *ngFor="let data of expand">
+                  {{data.name}}
+                </span>
+              </div>
+            </li>
+
+
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="info_r">
+      <div class="info_title">
+        <h6>
+          订单记录
+        </h6>
+        <a class="btn btn_purple btn_round bpm" [routerLink]="['/dir/formal/account-operate', basic?.uid, basic?.username]">
+          查看更多
+        </a>
+      </div>
+      <div class="info_body" style="height: 640px;">
+        <ul>
+          <li class="info_item" *ngFor="let data of operate">
+            <div class="info_item_date">
+              {{data.created_at | date: 'yyyy-MM-dd  HH:mm:ss'}}
+            </div>
+            <div class="info_item_op">
+              {{data.info}}
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+

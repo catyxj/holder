@@ -20,14 +20,14 @@
 
 /*按钮*/
 .btn_tab{
-  width:133px;
-  height:48px;
-  border-radius:4px;
+  width:106px;
+  height:38px;
+  border-radius:3px;
   border:1px solid rgba(0,0,0,0.2);
   background-color: #ffffff;
   cursor: pointer;
   color: #333333;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   letter-spacing:2px;
 }
@@ -42,7 +42,7 @@
   padding-top: 20px;
 }
 .login_box{
-  width: 604px;
+  width: 482px;
   margin: auto;
 }
 
@@ -62,122 +62,6 @@
 }
 
 
-
-/*.login-screen {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  !*background-color: #29434e;*!
-  !*background-image: url("../../assets/images/bg0.jpg");*!
-  background-size: cover;
-  overflow: hidden;
-}
-.login-form-container {
-  position: absolute;
-  width: 380px;
-  height: 400px;
-  left: 50%;
-  top: 50%;
-  !*margin-left: -200px;*!
-  margin-top: -200px;
-  padding: 30px 60px;
-  !*background: rgba(41,67,78,0.8);*!
-  background: rgba(255,255,255,0.8);
-  color: #666666;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);}
-
-@media (max-width: 800px){
-  .login-form-container{
-    margin-left: -190px;
-  }
-}
-
-
-
-
-.sys-title {
-  !*text-align: center;*!
-  font-size: 18px;
-  line-height: 50px;
-  margin: 0;
-  !*font-weight: bold;*!
-}
-.login-form{
-  margin-top: 10px;
-}
-.login-form-container a{
-  text-align: center;
-  color: #fff;
-}
-
-.login_item{
-  position: relative;
-}
-.err_tip{
-  position: absolute;
-  bottom: -18px;
-  left: 0;
-  font-size: 12px;
-}
-
-.btn_primary {
-  background-color: #28a745;
-  background-image: linear-gradient(-180deg,#34d058,#28a745 90%);
-  color: #fff;
-}
-
-
-.footer{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  background-color: #ffffff;
-  box-sizing: border-box;
-  padding: 10px;
-  text-align: center;
-  color: #666;
-  font-size: 12px;
-}*/
-
-
-
-
-
-
-/*.login_content{
-  position: absolute;
-  height: 100%;
-  width: 100%;
-}
-.login_header{
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  box-sizing: border-box;
-  padding:10px 20px;
-}
-.logo{
-  font-size: 24px;
-  font-weight: bold;
-}
-.banner{
-  width: 100%;
-  height: 560px;
-}
-
-[nz-carousel-content] {
-  text-align: center;
-  height: 560px;
-  background: #364d79;
-  color: #fff;
-  overflow: hidden;
-}
-
-h3 {
-  color: #fff;
-}*/
 
 
 

@@ -12,57 +12,65 @@
 
 .sign_item{
   /*display: flex;*/
-  margin-bottom: 17px;
+  margin-bottom: 15px;
 }
 .sign_item .sign_label label{
-  font-size: 18px;
+  font-size: 14px;
   color: #333333;
   font-weight: bold;
+  margin-bottom: 6px;
 }
 .sign_item .sign_label span{
   color: #666EE8;
+  font-size: 16px;
 }
 .sign_input{
   position: relative;
 }
 
 .sign_input .form-control{
-  height: 48px;
-  padding-left: 46px;
+  height: 38px;
+  padding-left: 36px;
+  font-size: 12px;
 }
 .input_icon{
   position: absolute;
-  top: 16px;
-  left: 16px;
-  width: 14px;
+  top: 13px;
+  left: 13px;
+  width: 12px;
+  height: 12px;
 }
 .sign_tip{
   position: absolute;
   top: 100%;
-  left: 45px;
-  font-size: 12px;
+  left: 36px;
+  font-size: 10px;
   color: #FF4961;
+}
+.sign_tip span{
+  font-size: 10px;
 }
 
 .sign_agree{
   display: flex;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 .agreement1{
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 11px;
+  color: #999999;
 }
 .agreement2 a{
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .btn_purple{
   width:100%;
-  height:48px;
+  height:38px;
   background:#666EE8;
   color: #ffffff;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   letter-spacing:1px;
 }

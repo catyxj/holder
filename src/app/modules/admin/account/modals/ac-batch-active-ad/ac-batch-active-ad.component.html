@@ -1,0 +1,37 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    <img src="assets/icons/check1.png" alt="" style="margin-right: 19px;">
+    批量解禁
+  </h4>
+</div>
+
+<div class="modal-body m_form">
+
+  <div class="m_item">
+    <div class="m_label">
+      原因：
+    </div>
+    <div class="m_input">
+      <nz-select [(ngModel)]="reason">
+        <nz-option [nzLabel]="'审核通过'" [nzValue]="'审核通过'"></nz-option>
+        <nz-option [nzLabel]="'验证通过'" [nzValue]="'验证通过'"></nz-option>
+        <nz-option [nzLabel]="'认证通过'" [nzValue]="'认证通过'"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取 消</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 35px;" (click)="save()">确 定</button>
+</div>
+
+
+
+
+
+
+
+

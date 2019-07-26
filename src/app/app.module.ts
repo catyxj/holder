@@ -31,10 +31,14 @@ import { QiantianComponent } from './homepage/qiantian/qiantian.component';
 import { SignUpComponent } from './register/sign-up/sign-up.component';
 import { RecoverPasswordComponent } from './register/recover-password/recover-password.component';
 import { DirMainComponent } from './modules/directives/dir-main/dir-main.component';
-import {MainOrdComponent} from './modules/ordinary/main-ord/main-ord.component';
 import { SignInComponent } from './register/sign-in/sign-in.component';
+import { VideoLiveComponent } from './modules/directives/video-live/video-live.component';
 
-// import { MainOrdComponent } from './modules/ordinary/main-ord/main-ord.component';
+import {AdminModule} from './modules/admin/admin.module';
+
+import { ComfirmComponent } from './modules/directives/alert/comfirm/comfirm.component';
+import { ErrorComponent } from './modules/directives/alert/error/error.component';
+import {FormalModule} from "./modules/formal/formal.module";
 
 
 
@@ -55,8 +59,10 @@ registerLocaleData(zh);
     SignUpComponent,
     RecoverPasswordComponent,
     DirMainComponent,
-    MainOrdComponent,
-    SignInComponent
+    SignInComponent,
+    ComfirmComponent,
+    ErrorComponent,
+    VideoLiveComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +81,11 @@ registerLocaleData(zh);
     AngularFontAwesomeModule,
     NgZorroAntdModule,
     NgxEchartsModule,
-
+    AdminModule,
+    FormalModule
+  ],
+  entryComponents: [
+    ComfirmComponent
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},

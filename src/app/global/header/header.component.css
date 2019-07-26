@@ -3,17 +3,18 @@ mat-toolbar{
   /*background-color: #3C8DBC;*/
   /*background-color: #607D8B;*/
   /*background-color: #51859d;*/
-  background-image: url("../../../assets/images/header.jpg");
-  background-position: center;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  color: #fff;
-  border-bottom: 1px solid #ffffff;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #ededed;
 }
 
 .navbar-brand{
-  margin-left:20px;
-  min-width: 200px;
+  padding-left:20px;
+  box-sizing: border-box;
+  width:220px;
+  height: 64px;
+  background:#414B92;
+  box-shadow:2px 0px 6px 0px rgba(0,21,41,0.35);
+  margin-right: 22px;
 }
 
 .example-icon {
@@ -31,36 +32,38 @@ mat-toolbar{
 
 /*告警*/
 .alarm_tip_box{
-  position: relative;
-  padding: 10px 0;
+  /*position: relative;*/
+  /*padding: 10px 0;*/
 }
 .alarm_tip_btn{
+  padding: 15px 0;
   cursor: pointer;
 }
-.alarm_tip{
+/*.alarm_tip{
   position: absolute;
   top:99%;
   right: -10px;
   z-index: 19;
-  /*width: 100px;*/
+  !*width: 100px;*!
   background-color: #ffffff;
   padding: 20px 10px;
-  box-shadow: 1px 1px 3px #888888;
+  !*box-shadow: 1px 1px 3px #888888;*!
   display: none;
+  transition: 0.3s;
 }
 .alarm_tip_box:hover .alarm_tip{
   display: block;
 }
 .tip_item{
   margin-bottom: 10px;
-  padding: 5px;
+  padding: 5px 30px;
   color: #333333;
   text-decoration: none;
   font-size: 14px;
 }
 .alarm_tip a{
   text-decoration: none;
-}
+}*/
 
 .we_box{
   position: relative;
@@ -71,12 +74,45 @@ mat-toolbar{
 .we_box .we_show{
   position: absolute;
   top:90%;
-  left: -50px;
+  left: -120px;
   z-index: 99;
-  border: 1px solid #e5e5e5;
+  border: 3px solid #666EE8;
   display: none;
 }
 .we_box:hover .we_show{
   display: block;
 }
+
+/*下拉框*/
+
+.dropdown_content{
+  border: 1px solid #E4E5EC;
+  border-radius: 5px;
+  padding: 0;
+  overflow: hidden;
+}
+.dropdown_content .dropdown-item{
+  border-top: 1px solid #E4E5EC;
+  padding: 10px 32px;
+  color: #666EE8;
+}
+
+.dropdown_content .dropdown-item.active, .dropdown_content .dropdown-item:active{
+  background-color: #9DA4FF;
+  color: #ffffff;
+}
+.dropdown_content .dropdown-item:hover, .dropdown_content .dropdown-item:focus {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #9DA4FF;
+}
+
+button:focus {
+  outline: none;
+}
+
+
+
+
+
 

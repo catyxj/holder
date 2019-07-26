@@ -1,0 +1,77 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    <img src="assets/icons/icon_Traffic2.png" alt="" style="margin-right: 19px;">
+    基础信息
+  </h4>
+</div>
+
+<div class="modal-body m_form">
+  <div class="m_item">
+    <div class="m_label">
+      终端编码 <span>*</span>：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="code" placeholder="请输入终端编码" disabled>
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      固件版本号 <span>*</span>：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="version" #tVersion="ngModel" maxlength="6"
+             placeholder="请输入固件版本号" pattern="^[A-Za-z0-9]{6}$" required>
+      <div class="sign_tip">
+        <span class="text_danger" *ngIf="tVersion.invalid && (tVersion.dirty || tVersion.touched)">请输入6位正确固件版本号</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      物联网卡号：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="sim" placeholder="请输入物联网卡号" maxlength="20"
+             #simCode="ngModel" pattern="^[A-Za-z0-9]{20}$">
+      <div class="sign_tip">
+        <span class="text_danger" *ngIf="simCode.invalid && (simCode.dirty || simCode.touched)">请输入20位正确物联网卡号</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      所属账号：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="account" placeholder="请输入所属账号">
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      使用账号：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="account2" placeholder="请输入使用账号">
+    </div>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取 消</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 35px;" (click)="save()" [disabled]="!code || tVersion.invalid || simCode.invalid">修 改</button>
+</div>
+
+
+
+
+
+
+
+
+

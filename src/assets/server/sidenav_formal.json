@@ -1,0 +1,62 @@
+{
+  "sidenav": [
+    {
+      "name": "首页",
+      "code": "sub2",
+      "icon": "fa-home",
+      "img": "assets/icons/icon_Monitor.png",
+      "router": "/admin/ordinary/home"
+    },
+    {
+      "name": "主监控台",
+      "code": "sub2",
+      "icon": "fa-home",
+      "img": "assets/icons/icon_Monitor.png",
+      "checked": true,
+      "children": [
+        { "name": "图文模式", "router": "/admin/ordinary/graphic","icon": ""},
+        { "name": "列表模式", "router": "/admin/ordinary/equip-list","icon": ""},
+        { "name": "地图模式", "router": "/admin/ordinary/map","icon": ""},
+        { "name": "集群模式", "router": "/admin/ordinary/cluster","icon": ""}
+      ]
+    },
+    {
+      "name": "设备管理",
+      "code": "sub3",
+      "icon": "fa-file-text-o",
+      "img": "assets/icons/icon_Information.png",
+      "checked": false,
+      "children": [
+        { "name": "模板管理", "router": "1"},
+        { "name": "终端管理", "router": "2"},
+        { "name": "视频管理", "router": "3"},
+        { "name": "蓝牙管理", "router": "4"}
+      ]
+    },
+    {
+      "name": "信息维护",
+      "code": "sub3",
+      "icon": "fa-file-text-o",
+      "img": "assets/icons/icon_Information.png",
+      "checked": true,
+      "children": [
+        { "name": "用户管理", "router": "/admin/formal/users"},
+        { "name": "账号信息", "router": "/admin/formal/account"},
+        { "name": "服务支持", "router": "/admin/formal/service"}
+      ]
+    },
+    {
+      "name": "维保管理",
+      "code": "sub3",
+      "icon": "fa-file-text-o",
+      "img": "assets/icons/icon_Information.png",
+      "checked": false,
+      "children": [
+        { "name": "维保记录", "router": "/admin/formal/maintenance-record"},
+        { "name": "维保账号", "router": "/admin/formal/maintenance-account"},
+        { "name": "维保模板", "router": "/admin/formal/maintenance-template"}
+      ]
+    }
+  ],
+  "authority": ""
+}

@@ -3,48 +3,207 @@
 <div class="content">
   <div class="list_head">
     <div class="li_head_l">
-      账号列表
+      <h6>账号列表</h6>
     </div>
     <div class="li_head_r">
-      <button>
-        刷新
+      <button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
+        <!--<img src="assets/icons/refresh.png" alt="">-->
+        <!--<i nz-icon nzType="reload" nzTheme="outline"></i>-->
+        <!--刷 新-->
+        <i class="iconfont iconicon_Refresh"></i>
       </button>
-      <button>
-        批量操作
+
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="batch(1)">
+        批量激活
+      </button>
+
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="batch(0)">
+        批量禁用
       </button>
     </div>
   </div>
 
   <div class="list_content">
     <div class="content_h">
-      <div class="input-group">
-        <select name="">
-          <option value="name">账号</option>
-          <option value="username">用户名</option>
+      <div class="search_box">
+        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="addOnAfterTemplate">
+          <input type="text" nz-input [(ngModel)]="value" (keyup)="searchEnter($event)" maxlength="15"/>
+        </nz-input-group>
+        <ng-template #addOnBeforeTemplate>
+          <nz-select [(ngModel)]="search">
+            <nz-option [nzLabel]="'账号'" [nzValue]="'username'"></nz-option>
+            <nz-option [nzLabel]="'用户名'" [nzValue]="'name'"></nz-option>
+            <nz-option [nzLabel]="'所属单位'" [nzValue]="'org_name'"></nz-option>
+          </nz-select>
+        </ng-template>
+        <ng-template #addOnAfterTemplate>
+          <img src="assets/icons/icon_seach.png" alt="" class="search_icon" (click)="searchChange()">
+        </ng-template>
+
+
+        <!--<select [(ngModel)]="search" class="form-control">
+          <option value="username">账号</option>
+          <option value="name">用户名</option>
+          &lt;!&ndash;<option value="wechat">关联微信</option>&ndash;&gt;
+          <option value="org_name">所属单位</option>
+          &lt;!&ndash;<option value="org">地域地址</option>&ndash;&gt;
+          &lt;!&ndash;<option value="email">邮箱</option>&ndash;&gt;
         </select>
-        <input type="text" >
-        <button>
+        <input type="text" [(ngModel)]="value" class="form-control">
+        <button (click)="searchChange()">
           搜索
-        </button>
+        </button>-->
+      </div>
+      <div class="flex">
+
+
       </div>
     </div>
     <div class="content_t">
-      <table class="table">
+      <nz-table
+        #dataTable
+        [nzFrontPagination]="false"
+        [nzShowPagination] = "false"
+        [nzLoading]="loading"
+        [nzData]="accountList"
+      >
         <thead>
         <tr>
+          <th
+            nzShowCheckbox
+            [(nzChecked)]="isAllChecked"
+            (nzCheckedChange)="checkAll($event)"
+          >
+          </th>
           <th>账号</th>
-          <th>账号</th>
-          <th>账号</th>
+          <th>用户名</th>
+          <th>所属单位</th>
+          <th>
+            <nz-dropdown [nzTrigger]="'click'">
+              <a nz-dropdown>
+                用户类型
+                <i nz-icon type="down" style="color: #898EA3;"></i>
+              </a>
+
+              <ul nz-menu>
+                <li nz-menu-item (click)="searchRoleId()">
+                  <a>全部</a>
+                </li>
+                <li nz-menu-item (click)="searchRoleId('10')">
+                  <a>正式用户</a>
+                </li>
+                <li nz-menu-item (click)="searchRoleId('11')">
+                  <a>普通用户</a>
+                </li>
+                <li nz-menu-item (click)="searchRoleId('20')">
+                  <a>测试用户</a>
+                </li>
+              </ul>
+            </nz-dropdown>
+          </th>
+          <th>账号状态</th>
+          <th>创建时间</th>
+          <th>操作</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
+        <tr *ngFor="let data of dataTable.data">
+          <td
+            nzShowCheckbox
+            [(nzChecked)]="data.checked"
+            [nzDisabled]="data.role_id === 1"
+            (nzCheckedChange)="refreshStatus()"
+          ></td>
+          <td> {{data.username}} </td>
+          <td> {{data.name}} </td>
+          <td>
+            <div style="max-width: 150px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+              {{data.org_name}}
+            </div>
+          </td>
+          <td>
+            <span *ngIf="data.role_id === 1">
+              系统用户
+            </span>
+            <span *ngIf="data.role_id === 10">
+              正式用户
+            </span>
+            <span *ngIf="data.role_id === 11">
+              普通用户
+            </span>
+            <span *ngIf="data.role_id === 15">
+              维保用户
+            </span>
+            <span *ngIf="data.role_id === 20">
+              测试用户
+            </span>
+          </td>
+          <td>
+            <span *ngIf="data.status === 0">
+              禁用
+            </span>
+            <span *ngIf="data.status === 1">
+              正常
+            </span>
+          </td>
+          <td> {{data.created_at | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
+          <td>
+            <a class="btn btn_purple btn-sm" [routerLink]="['/dir/ad/account-info', data.uid]" target="_blank">
+              设置
+            </a>
+          </td>
         </tr>
         </tbody>
-      </table>
+      </nz-table>
+
+      <!--<table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>账号</th>
+          <th>用户名</th>
+          <th>所属单位</th>
+          <th>用户类型</th>
+          <th>账号状态</th>
+          <th>创建时间</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of accountList">
+          <td> {{data.Name}} </td>
+          <td> {{data.Username}} </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+            <a class="btn" [routerLink]="['/dir/ad/account-info', data.Uid]" target="_blank">
+              查看
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </table>-->
+
+    </div>
+
+    <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+
+
+    <div class="content_b">
+      <nz-pagination nzShowSizeChanger
+                     [nzTotal]="totalItems"
+                     [nzShowTotal]="totalTemplate"
+                     [(nzPageIndex)]="page"
+                     [(nzPageSize)]="pageSize"
+                     (nzPageIndexChange)="pageChange()"
+                     (nzPageSizeChange)="pageSizeChange()"
+                     [nzPageSizeOptions] = "pageSizeList">
+
+      </nz-pagination>
+      <div class="ant-pagination-options-quick-jumper"> 跳至
+        <input type="number" [(ngModel)]="pageNum"> 页 </div>
+      <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
     </div>
   </div>
 

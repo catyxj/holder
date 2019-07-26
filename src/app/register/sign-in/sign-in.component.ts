@@ -54,26 +54,37 @@ export class SignInComponent implements OnInit {
         res => {
           sessionStorage.user = true;
           localStorage.setItem('authToken', res.Auth);
+          localStorage.setItem('roleId', res.roleId);
+
 
           let timerInterval;
           Swal({
-            title: '登录成功',
-            html: '正在跳转<span></span>秒后自动关闭',
+            title: '',
+            html: '<div class="success_tip"><img src="assets/icons/icon_check.png"> 登录成功!</div>' +
+            ' <div class="success_tip_time">正在跳转， <span>3</span>秒后自动关闭</div>',
             showConfirmButton: false,
             timer: 3000,
             onBeforeOpen: () => {
               let seconds = 3;
               timerInterval = setInterval(() => {
                 seconds--;
+                if (seconds <= 0) {
+                  clearInterval(timerInterval);
+                }
                 Swal.getContent().querySelector('span')
                   .textContent = '' + seconds;
               }, 1000);
+              Swal.getContent().querySelector('.success_tip_time').addEventListener('click', () => {
+                clearInterval(timerInterval);
+                Swal.close();
+                that.goAdmin();
+              });
             },
             onClose: () => {
               clearInterval(timerInterval);
             }
           }).then((result) => {
-            this.router.navigate(['/admin/ad']);
+            that.goAdmin();
           });
 
           // this.router.navigate(['/admin/ad']);
@@ -84,17 +95,25 @@ export class SignInComponent implements OnInit {
           let timerInterval;
           Swal({
             title: '',
-            html: '<div> <img src="assets/icons/icon_fail.png" alt="" style="width: 16px; margin-right: 20px;"> 登录失败</div>' +
-            `<div> ${error.message} </div> <a style="color:#666EE8;"><span></span>秒后自动关闭</a>`,
+            html: '<div class="success_tip"> <img src="assets/icons/icon_fail.png"> 登录失败!</div>' +
+            `<div class="success_tip_mes"> ${error.message} </div> <div class="success_tip_time"><a><span>3</span>秒后自动关闭</a></div>`,
             showConfirmButton: false,
             timer: 3000,
             onBeforeOpen: () => {
               let seconds = 3;
               timerInterval = setInterval(() => {
                 seconds--;
+                if (seconds <= 0) {
+                  clearInterval(timerInterval);
+                }
                 Swal.getContent().querySelector('span')
                   .textContent = '' + seconds;
               }, 1000);
+
+              Swal.getContent().querySelector('.success_tip_time').addEventListener('click', () => {
+                clearInterval(timerInterval);
+                Swal.close();
+              });
             },
             onClose: () => {
               clearInterval(timerInterval);
@@ -126,7 +145,21 @@ export class SignInComponent implements OnInit {
 
 
   goAdmin() {
-    this.router.navigate(['/admin/ad']);
+    let roleId = localStorage.getItem('roleId');
+    console.log(roleId);
+    switch (roleId) {
+      case '1':
+        this.router.navigate(['/admin/ad']);
+        break;
+      case '15':
+        this.router.navigate(['/admin/service']);
+        break;
+      default:
+        this.router.navigate(['/admin']);
+    }
+
+
+
   }
 
   /*verify(vCode) {

@@ -4,32 +4,6 @@
   <div class="sign_up_container">
     <div class="sign_box">
       <form>
-        <!--<div class="sign_item form-group">
-          <div class="sign_label">
-            <label>企业名称 *</label>
-          </div>
-          <div class="sign_input">
-            <input type="text" [(ngModel)]="orgName" class="form-control" name="orgName" required>
-            <div class="sign_tip">
-              企业名称
-            </div>
-          </div>
-        </div>
-
-        <div class="sign_item form-group">
-          <div class="sign_label">
-            <label>企业类型 *</label>
-          </div>
-          <div class="sign_input">
-            <select [(ngModel)]="orgType" class="form-control" name="orgType" required>
-              <option *ngFor="let type of orgTypes" [value]="type.TypeId" >{{type.Name}}</option>
-            </select>
-            &lt;!&ndash;<input type="text" [(ngModel)]="orgType" class="form-control" name="orgType" required>&ndash;&gt;
-            <div class="sign_tip">
-              企业类型
-            </div>
-          </div>
-        </div>-->
 
         <div class="sign_item form-group">
           <div class="sign_label">
@@ -37,7 +11,7 @@
           </div>
           <div class="sign_input">
             <input type="text" [(ngModel)]="phone" class="form-control" name="phone" required #telephone="ngModel"
-                   pattern="^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$"
+                   pattern="^(13|14|15|17|18|19)\d{9}$"
                    placeholder="作为登录账号">
             <img src="assets/icons/icon_account.png" class="input_icon" alt="">
             <div class="sign_tip">
@@ -54,11 +28,11 @@
             <label>密码 <span>*</span></label>
           </div>
           <div class="sign_input">
-            <input type="password" [(ngModel)]="password" class="form-control" name="password" minlength="6" required #pword="ngModel"
+            <input type="password" [(ngModel)]="password" class="form-control" name="password" (input)="pComfirm()" minlength="6" required #pword="ngModel"
                    placeholder="6-20个数字，小写字母，大写字母，特殊符号">
             <img src="assets/icons/icon_password.png" class="input_icon" alt="">
             <div class="sign_tip">
-              <div *ngIf="pword.invalid && (pword.dirty || pword.touched)" class="err_tip"></div>
+              <div *ngIf="pword.invalid && (pword.dirty || pword.touched)" class="err_tip">密码格式填写错误，请重试</div>
             </div>
           </div>
         </div>
@@ -68,7 +42,7 @@
             <label>确认密码 <span>*</span></label>
           </div>
           <div class="sign_input">
-            <input type="password" [(ngModel)]="confirmPass" class="form-control" name="confirmPass" (change)="pComfirm()" required #cPass="ngModel"
+            <input type="password" [(ngModel)]="confirmPass" class="form-control" name="confirmPass" (input)="pComfirm()" required #cPass="ngModel"
                    placeholder="请再次输入密码">
             <img src="assets/icons/icon_password.png" class="input_icon" alt="">
             <div class="sign_tip">
@@ -84,10 +58,11 @@
             <label>短信验证码 <span>*</span></label>
           </div>
           <div class="sign_input flex">
-            <input type="text" [(ngModel)]="verifyCode" name="verifyCode" class="form-control"
+            <input type="text" [(ngModel)]="verifyCode" name="verifyCode" class="form-control" style="width:280px;"
                    placeholder="请输入短信验证码">
-            <img src="assets/icons/icon_message.png" class="input_icon" alt="" style="top:18px;">
-            <button class="btn btn_purple ml-2" (click)="getCode()" [disabled]="hideBtn">
+            <img src="assets/icons/icon_message.png" class="input_icon" alt="">
+            <button class="btn btn_purple" style="font-weight: normal; margin-left: 34px; width: 165px;" (click)="getCode()"
+                    [disabled]="hideBtn">
               <!--获取短信验证码-->
               {{getCodeMess}}
             </button>
@@ -113,18 +88,18 @@
 
         <div style="">
           <button class="btn btn_purple" (click)="submit()"
-                  [disabled]="!phone || !password || !verifyCode || !agreement || !equal">
-            提交
+                  [disabled]="telephone.invalid || pword.invalid || !verifyCode || !agreement || !equal || pword.invalid">
+            注 册
           </button>
         </div>
 
       </form>
 
-      <div style="padding-top: 10px;">
-        <a routerLink="/login" style="color: #666EE8;">已有账号，直接登录</a>
+      <div class="text_purple" style="padding-top: 10px;">
+        <a (click)="goLogin()" style="font-size: 11px;">已有账号，直接登录</a>
       </div>
 
-      <div class="text-danger text-center">
+      <div class="text_danger text-center">
         {{errMess}}
       </div>
 

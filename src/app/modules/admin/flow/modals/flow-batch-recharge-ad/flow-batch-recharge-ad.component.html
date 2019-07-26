@@ -1,0 +1,36 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    <img src="assets/icons/icon_Recharge.png" alt="" style="margin-right: 19px;">
+    批量充值
+  </h4>
+</div>
+
+<nz-spin [nzSpinning]="isSpinning" nzTip="正在处理，请耐心等待......">
+<div class="modal-body m_form">
+
+  <div class="m_item">
+    <div class="m_label">
+      每张卡充值金额：
+    </div>
+    <div class="m_input" style="position: relative;">
+      <input type="number" class="form-control" [(ngModel)]="amount"
+             style="padding-left: 25px;">
+      <span [class.text-muted]="!amount" style="position: absolute; top: 8px; left: 10px;">￥</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取 消</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 35px;" (click)="save()">确 定</button>
+</div>
+
+</nz-spin>
+
+
+
+
+
+

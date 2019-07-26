@@ -13,47 +13,45 @@
 }*/
 mat-nav-list a{
   font-size: 14px;
-  /*color:#34515e;*/
   color: #ffffff;
   display: block;
 }
 
 mat-nav-list a.active{
-  /*background-color: #3C8DBC;*/
-  /*background-color: #607D8B;*/
-  /*background-color: #51859d;*/
-  background-color: #00a4ff;
+  background-color: #666EE8;
   color: #ffffff;
 }
-.sidebar_title{
-  font-size: 16px;
-  /*color: #0c5460;*/
-  color: #ffffff;
-  padding-left: 40px;
-  line-height: 40px;
-}
+
 mat-nav-list a.sidebar_title{
-  /*color:#607D8B;*/
   color: #ffffff;
+  background-color: #2D2E4F;
+  /*font-size: 14px;*/
+  padding-left: 23px;
+  line-height: 40px;
 }
 
 
 .sidebar_title i{
   float: right;
-  margin-right: 40px;
+  margin-right: 14px;
   line-height: 36px;
 }
 .sidebar_title span{
   margin-right: 12px;
 }
+.side_icon{
+  /*width: 16px;*/
+  margin-right: 12px;
+}
 .smenu_head{
   font-size: 16px;
   color: #ffffff;
-  padding-left: 40px;
+  padding-left: 23px;
   line-height: 40px;
+  background-color: #2D2E4F;
 }
 .smenu_head:hover{
-  background-color: #224762;
+  background-color: #666EE8;
   transition: all .3s linear;
 }
 .sub_menu{
@@ -62,42 +60,56 @@ mat-nav-list a.sidebar_title{
 }
 
 .sub_menu li a{
-  padding-left: 20px;
+  padding-left: 10px;
+  background-color: #18192D;
 }
 .smenu_head i,.sub_menu li a i{
-  /*width: 30px;*/
   margin-right: 12px;
-  /*margin-right: 5px;*/
 }
-.sub_menu li a img{
+.sub_menu li a .side_icon{
   width: 16px;
   margin-right: 12px;
 }
+.sub_menu li a.active{
+  background-color: #666EE8;
+}
 .sub_menu li a:hover{
-  /*background-color: rgba(72,198,255,.8);*/
+  background-color: rgba(102,110,232,.6);
   color: #fff;
-  display: flex;
-  /*background-color: #8eacbb;*/
-  /*color: #1976d2;*/
-  background-color: #224762;
+  /*display: flex;*/
+  /*background-color: #666EE8;*/
   transition: all .3s linear;
+}
+
+/* 选中 图标*/
+.cur_icon{
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  right: 14px;
+  top: 15px;
+  margin: 0;
+  display: none;
+}
+.active .cur_icon{
+  display: block;
 }
 
 
 .collapse1 .fa-angle-right{
-  -webkit-transform: rotate(0deg);
-  transform: rotate(0deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
   transition: transform 150ms,-webkit-transform 150ms;
 }
 .expand .fa-angle-right{
-  -webkit-transform: rotate(90deg);
-  transform: rotate(90deg);
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
   transition: transform 150ms,-webkit-transform 150ms;
 }
 .collapse1 .sub_menu{
   visibility: hidden;
   opacity: 0;
-  max-height: 1px;
+  max-height: 0;
   transition: visibility 275ms,opacity 275ms,max-height 280ms;
   transition-timing-function: ease-out;
 }

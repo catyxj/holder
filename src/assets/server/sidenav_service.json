@@ -1,0 +1,27 @@
+{
+  "sidenav": [
+
+    {
+      "name": "维保管理",
+      "code": "sub2",
+      "icon": "fa-home",
+      "img": "assets/icons/icon_Monitor.png",
+      "checked": true,
+      "children": [
+        { "name": "维保产品", "router": "/admin/service/products","icon": ""},
+        { "name": "维保记录", "router": "/admin/service/records","icon": ""}
+      ]
+    },
+    {
+      "name": "信息维护",
+      "code": "sub3",
+      "icon": "fa-file-text-o",
+      "img": "assets/icons/icon_Information.png",
+      "checked": true,
+      "children": [
+        { "name": "个人信息", "router": "/admin/service/account"}
+      ]
+    }
+  ],
+  "authority": "sub1-authority,sub1-option1-add,sub1-option1-delete,sub1-option1-btn,sub1-option1-else"
+}

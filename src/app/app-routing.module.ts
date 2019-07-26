@@ -7,8 +7,25 @@ import {QiantianComponent} from './homepage/qiantian/qiantian.component';
 import {RuikongComponent} from "./homepage/ruikong/ruikong.component";
 import {SignUpComponent} from "./register/sign-up/sign-up.component";
 import {RecoverPasswordComponent} from "./register/recover-password/recover-password.component";
-import {MainAdComponent} from "./modules/admin/main-ad/main-ad.component";
 import {UserloginGuard} from "./shared/userlogin.guard";
+import {DirMainComponent} from "./modules/directives/dir-main/dir-main.component";
+import {AcInfoAdComponent} from "./modules/admin/account/ac-info-ad/ac-info-ad.component";
+import {AcOperateAdComponent} from "./modules/admin/account/ac-operate-ad/ac-operate-ad.component";
+import {SerInfoAdComponent} from "./modules/admin/service/ser-info-ad/ser-info-ad.component";
+import {TerInfoAdComponent} from "./modules/admin/terminal/ter-info-ad/ter-info-ad.component";
+import {TerOperateAdComponent} from "./modules/admin/terminal/ter-operate-ad/ter-operate-ad.component";
+import {VInfoAdComponent} from "./modules/admin/video/v-info-ad/v-info-ad.component";
+import {VOperateAdComponent} from "./modules/admin/video/v-operate-ad/v-operate-ad.component";
+import {BlueInfoAdComponent} from "./modules/admin/bluetooth/blue-info-ad/blue-info-ad.component";
+import {BlueOperateAdComponent} from "./modules/admin/bluetooth/blue-operate-ad/blue-operate-ad.component";
+import {FlowInfoAdComponent} from "./modules/admin/flow/flow-info-ad/flow-info-ad.component";
+import {FlowOperateAdComponent} from "./modules/admin/flow/flow-operate-ad/flow-operate-ad.component";
+import {OrderInfoAdComponent} from "./modules/admin/order/order-info-ad/order-info-ad.component";
+import {VideoLiveAdComponent} from "./modules/admin/video/video-live-ad/video-live-ad.component";
+import {SignInComponent} from "./register/sign-in/sign-in.component";
+import {VideoLiveComponent} from "./modules/directives/video-live/video-live.component";
+import {UserDetailFormalComponent} from "./modules/formal/users/user-detail-formal/user-detail-formal.component";
+import {AccountOperateFormalComponent} from "./modules/formal/account/account-operate-formal/account-operate-formal.component";
 
 
 
@@ -22,11 +39,17 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'register',
-    component: SignUpComponent
+    component: LoginComponent,
+    children: [
+      {
+        path: 'login',
+        component: SignInComponent
+      },
+      {
+        path: 'register',
+        component: SignUpComponent
+      }
+    ]
   },
   {
     path: 'recover-password',
@@ -36,12 +59,8 @@ const routes: Routes = [
     path: 'admin',
     component: MainComponent,
     children: [
-      // {
-      //   path: '', redirectTo: 'ad', pathMatch: 'full'
-      // },
       {
         path: 'ad',
-        // component: MainAdComponent,
         loadChildren: './modules/admin/admin.module#AdminModule',
         canActivate: [UserloginGuard]
       },
@@ -50,8 +69,87 @@ const routes: Routes = [
         loadChildren: './modules/formal/formal.module#FormalModule',
         canActivate: [UserloginGuard]
       },
+      {
+        path: 'ordinary',
+        loadChildren: './modules/ordinary/ordinary.module#OrdinaryModule',
+        canActivate: [UserloginGuard]
+      },
+      {
+        path: 'service',
+        loadChildren: './modules/service/service.module#ServiceModule',
+        canActivate: [UserloginGuard]
+      },
     ]
     // loadChildren: './modules/modules.module#ModulesModule'
+  },
+  {
+    path: 'dir',
+    component: DirMainComponent,
+    children: [
+      // 管理员
+      {
+        path: 'ad/account-info/:uid',
+        component: AcInfoAdComponent
+      },
+      {
+        path: 'ad/account-operate/:uid/:name',
+        component: AcOperateAdComponent
+      },
+      {
+        path: 'ad/service-info/:uid',
+        component: SerInfoAdComponent
+      },
+      {
+        path: 'ad/terminal-info/:uid',
+        component: TerInfoAdComponent
+      },
+      {
+        path: 'ad/terminal-operate/:uid',
+        component: TerOperateAdComponent
+      },
+      {
+        path: 'ad/video-info/:uid',
+        component: VInfoAdComponent
+      },
+      {
+        path: 'ad/video-operate/:uid',
+        component: VOperateAdComponent
+      },
+      {
+        path: 'ad/blue-info/:uid',
+        component: BlueInfoAdComponent
+      },
+      {
+        path: 'ad/blue-operate/:uid',
+        component: BlueOperateAdComponent
+      },
+      {
+        path: 'ad/flow-info/:uid',
+        component: FlowInfoAdComponent
+      },
+      {
+        path: 'ad/flow-operate/:uid',
+        component: FlowOperateAdComponent
+      },
+      {
+        path: 'ad/order-info/:uid',
+        component: OrderInfoAdComponent
+      },
+      // 正式用户
+      {
+        path: 'formal/user-info/:uid',
+        component: UserDetailFormalComponent
+      },
+      {
+        path: 'formal/account-operate/:uid/:name',
+        component: AccountOperateFormalComponent
+      },
+
+    ]
+  },
+  {
+    path: 'video-live/:uid',
+    component: VideoLiveComponent
   },
   {
     path: 'qiantian',

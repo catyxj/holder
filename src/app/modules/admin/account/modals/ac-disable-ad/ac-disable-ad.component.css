@@ -1,0 +1,12 @@
+.ecof_label{
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 70px;
+  margin-left: 40px;
+  margin-right: 17px;
+  text-align: right;
+}
+.m_item{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

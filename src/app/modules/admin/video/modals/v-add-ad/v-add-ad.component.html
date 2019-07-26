@@ -1,0 +1,89 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    <img src="assets/icons/icon_tv.png" alt="" style="margin-right: 19px;">
+    新增视频
+  </h4>
+</div>
+
+<div class="modal-body m_form">
+  <div class="m_item">
+    <div class="m_label">
+      视频设备序列号 <span>*</span>：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="cameraId" placeholder="请输入摄像头序列号" #caId="ngModel"
+             pattern="^[A-Za-z0-9]{9}$" required>
+      <div class="sign_tip">
+        <span class="text_danger" *ngIf="caId.invalid && (caId.dirty || caId.touched)">请输入正确9位视频设备序列号</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      视频设备通道号 <span>*</span>：
+    </div>
+    <div class="m_input">
+      <input type="number" class="form-control" [(ngModel)]="cameraNum" placeholder="请输入摄像头通道号"
+             pattern="^[0-9]$" #caNum="ngModel" required>
+      <div class="sign_tip">
+        <span class="text_danger" *ngIf="caNum.invalid && (caNum.dirty || caNum.touched)">请输入正确1位视频设备通道号</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      视频设备验证码 <span>*</span>：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="cameraVerify" placeholder="请输入摄像头验证码" #caVerify="ngModel"
+             pattern="^[A-Za-z0-9]{6}$" required>
+      <div class="sign_tip">
+        <span class="text_danger" *ngIf="caVerify.invalid && (caVerify.dirty || caVerify.touched)">请输入正确6位视频设备验证码</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      所属账号：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="account" placeholder="请输入所属账号" maxlength="15">
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      视频名称：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="name" placeholder="请输入视频名称" maxlength="15">
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      关联终端编码：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="code" placeholder="请输入关联终端编码" maxlength="6">
+    </div>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取 消</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 35px;" (click)="save()" [disabled]="caId.invalid || caNum.invalid || caVerify.invalid">确 定</button>
+</div>
+
+
+
+
+
+
+
+

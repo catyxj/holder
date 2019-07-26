@@ -1,0 +1,12 @@
+
+.content_h2{
+  padding: 20px;
+  background-color: #eeeeee;
+  margin-bottom: 20px;
+}
+.h2_row{
+  display: flex;
+  justify-content: space-between;
+}
+
+

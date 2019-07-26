@@ -200,21 +200,26 @@
   <ul>
     <li *ngFor="let item0 of sideList" [class.collapse1]="!item0.checked" [class.expand]="item0.checked">
       <a class="sidebar_title" (click)="submenuToggle(item0)" *ngIf="item0.children">
-        <span class="fa {{item0.icon}}"></span>
+        <span class="fa {{item0.icon}}" *ngIf="item0.icon && !item0.img"></span>
+        <img src="{{item0.img}}" class="side_icon" *ngIf="item0.img">
         {{item0.name}}
         <i class="fa fa-angle-right"></i>
       </a>
       <a class="smenu_head" [routerLink]="item0.router" routerLinkActive="active" *ngIf="!item0.children">
-        <i class="fa {{item0.icon}}"></i>
+        <i class="fa {{item0.icon}}" *ngIf="item0.icon && !item0.img"></i>
+        <img src="{{item0.img}}" class="side_icon" *ngIf="item0.img">
         {{item0.name}}
+        <img class="cur_icon" src="assets/icons/icon_this.svg" alt="">
       </a>
 
       <!--二级菜单-->
       <ul *ngIf="item0.children" class="sub_menu" >
         <li *ngFor="let item1 of item0.children">
           <a [routerLink]="item1.router" routerLinkActive="active" mat-list-item>
-            <i class="fa {{item1.icon}}"></i>
+            <i class="fa {{item1.icon}}" *ngIf="item1.icon && !item1.img"></i>
+            <img src="{{item1.img}}" class="side_icon" *ngIf="item1.img">
             {{item1.name}}
+            <img class="cur_icon" src="assets/icons/icon_this.svg">
           </a>
         </li>
       </ul>

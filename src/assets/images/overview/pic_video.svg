@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="129px" height="88px" viewBox="0 0 129 88" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>分组 7</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="-24.3377641%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#666EE8" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="10.1377852%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#666EE8" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD-Copy-75" transform="translate(-766.000000, -247.000000)">
+            <g id="分组-7" transform="translate(765.000000, 236.000000)">
+                <g id="分组-5" transform="translate(0.000000, 25.000000)">
+                    <ellipse id="椭圆形" fill="url(#linearGradient-1)" opacity="0.186755952" cx="65.5" cy="56.5" rx="55.5" ry="17.5"></ellipse>
+                    <path d="M0,0 L131,0 C124.333333,37.9216747 121,56.882512 121,56.882512 C121,64.7270472 100,73.4779258 67,74 C35,74 10.6821758,66.0238274 10,56.882512 C10,56.882512 6.66666667,37.9216747 0,0 Z" id="矩形" fill="url(#linearGradient-2)" opacity="0.548828125"></path>
+                </g>
+                <g id="视频" transform="translate(38.000000, 0.000000)">
+                    <g id="分组">
+                        <rect id="矩形" fill="#000000" opacity="0" x="0" y="0" width="49" height="49"></rect>
+                        <path d="M53.519731,14.647945 C52.3799134,13.930963 43.8312817,17.9509647 43.8312817,17.9509647 L43.8312817,17.5281291 C43.8312817,14.0167557 40.889817,11.1733398 37.2558826,11.1733398 L11.9347742,11.1733398 C8.30083967,11.1794679 5.359375,14.0228837 5.359375,17.5342572 L5.359375,38.8966444 C5.359375,42.4080178 8.30083967,45.2514337 11.9347742,45.2514337 L37.2620106,45.2514337 C40.8959451,45.2514337 43.8374098,42.4080178 43.8374098,38.8966444 L43.8374098,38.37576 C43.8374098,38.37576 52.4350659,42.3651215 53.525859,41.6787797 C54.6105241,40.992438 54.6656766,15.364927 53.519731,14.647945 Z M19.312948,38.4247844 L19.312948,17.9509647 L35.9873759,28.1848105 L19.312948,38.4247844 Z" id="形状" fill="#666EE8" fill-rule="nonzero"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

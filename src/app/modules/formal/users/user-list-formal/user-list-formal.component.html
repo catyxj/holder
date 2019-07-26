@@ -1,0 +1,161 @@
+
+
+<div class="content">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>
+        用户列表
+      </h6>
+    </div>
+    <div class="li_head_r">
+      <!--刷新-->
+      <button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>
+
+    </div>
+  </div>
+
+  <div class="list_content">
+    <div class="content_h">
+      <div class="search_box">
+        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="addOnAfterTemplate">
+          <input type="text" nz-input [(ngModel)]="value" (keyup)="searchEnter($event)" maxlength="15"/>
+        </nz-input-group>
+        <ng-template #addOnBeforeTemplate>
+          <nz-select [(ngModel)]="search">
+            <nz-option [nzLabel]="'手机号码'" [nzValue]="'phone'"></nz-option>
+            <nz-option [nzLabel]="'所属单位'" [nzValue]="'org_name'"></nz-option>
+            <nz-option [nzLabel]="'用户名'" [nzValue]="'username'"></nz-option>
+            <nz-option [nzLabel]="'地域地址'" [nzValue]="'address'"></nz-option>
+          </nz-select>
+        </ng-template>
+        <ng-template #addOnAfterTemplate>
+          <img src="assets/icons/icon_seach.png" alt="" class="search_icon" (click)="searchChange()">
+        </ng-template>
+
+      </div>
+      <div class="flex">
+
+
+      </div>
+    </div>
+    <div class="content_t">
+      <nz-table
+        #dataTable
+        [nzFrontPagination]="false"
+        [nzShowPagination] = "false"
+        [nzLoading]="loading"
+        [nzData]="dataLists"
+      >
+        <thead>
+        <tr>
+          <!--<th
+            nzShowCheckbox
+            [(nzChecked)]="isAllChecked"
+            (nzCheckedChange)="checkAll($event)"
+          >
+          </th>-->
+          <th>手机号码</th>
+          <th>用户名</th>
+          <th>所属单位</th>
+          <th>地域地址</th>
+          <th>
+            <nz-dropdown [nzTrigger]="'click'">
+              <a nz-dropdown>
+                单位类型
+                <i nz-icon type="down" style="color: #898EA3;"></i>
+              </a>
+
+              <ul nz-menu>
+                <li nz-menu-item (click)="searchStatus('')">
+                  <a>全部</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('1')">
+                  <a>产品使用</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('2')">
+                  <a>产品制造</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('3')">
+                  <a>产品运维</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('4')">
+                  <a>组件供应</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('5')">
+                  <a>监管机构</a>
+                </li>
+
+              </ul>
+            </nz-dropdown>
+          </th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of dataTable.data">
+          <!--<td
+            nzShowCheckbox
+            [(nzChecked)]="data.checked"
+            [nzDisabled]="data.disabled"
+            (nzCheckedChange)="refreshStatus()"
+          ></td>-->
+          <td> {{data.id}} </td>
+          <td> {{data.mac}} </td>
+          <td> {{data.name}} </td>
+          <td> {{data.username || '空'}} ({{data.org_name || '空'}}) </td>
+          <td>
+            <span *ngIf="data.status === 1" class="text_grey">
+              <img src="assets/icons/icon_active2.png" alt="" style="margin-right: 6px;">
+              未激活
+            </span>
+            <span *ngIf="data.status === 2" class="text_green">
+              <img src="assets/icons/icon_active.png" alt="" style="margin-right: 6px;">
+              已激活
+            </span>
+            <span *ngIf="data.status === 3" class="text_warning">
+              <img src="assets/icons/icon_repair.png" alt="" style="margin-right: 6px;">
+              维修
+            </span>
+            <span *ngIf="data.status === 4" class="text_danger">
+              <img src="assets/icons/icon_Scrap.png" alt="" style="margin-right: 6px;">
+              报废
+            </span>
+          </td>
+          <td>
+            <a class="btn btn_purple btn-sm" [routerLink]="['/dir/formal/user-info', data.uid]" target="_blank">
+              查看
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+
+    <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+
+    <div class="content_b">
+      <nz-pagination nzShowSizeChanger
+                     [nzTotal]="totalItems"
+                     [nzShowTotal]="totalTemplate"
+                     [(nzPageIndex)]="page"
+                     [(nzPageSize)]="pageSize"
+                     (nzPageIndexChange)="pageChange()"
+                     (nzPageSizeChange)="pageSizeChange()"
+                     [nzPageSizeOptions] = "pageSizeList">
+
+      </nz-pagination>
+      <div class="ant-pagination-options-quick-jumper"> 跳至
+        <input type="number" [(ngModel)]="pageNum"> 页 </div>
+      <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+

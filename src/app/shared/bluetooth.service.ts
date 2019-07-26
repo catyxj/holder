@@ -15,71 +15,112 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class BluetoothService {
-  private bluetoothUrl = '/bluetooth_list';
+
+  private dataListUrl = '/api/admin/bluetooth/list';
+  private dataBasicUrl = '/api/admin/bluetooth/detail';
+  // private dataConfigUrl = '/api/admin/bluetooth/config';
+  private dataOperateUrl = '/api/admin/bluetooth/log/info';
+  private dataOperateMoreUrl = '/api/admin/bluetooth/log/list';
+
+
+  // private token = 'authtoken';
+  // private dataListUrl = 'assets/server/cluster_list.json';
+
+
   private bluetoothAllUrl = '/bluetooth_list_all';
 
   constructor(private http: HttpClient) { }
 
-  // 获取集群列表
-  getlist(n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.bluetoothUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
-    return this.http.get<any>(url)
+  // 获取蓝牙列表
+  getLists(n: number, pageSize: number, search?: string, value?: string, status?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `${this.dataListUrl}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&status=${status}`;
+    return this.http.get<any>(url, httpOptions)
       .pipe(
-        catchError(this.handleError) // then handle the error
+        catchError(this.handleError)
+      );
+  }
+
+
+  // 获取基本信息
+  getBasic(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `${this.dataBasicUrl}?uid=${uid}`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+  // 获取记录信息
+  getOperate(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `${this.dataOperateUrl}?uid=${uid}`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取记录信息列表
+  getOperateMore(uid, n, pageSize): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `${this.dataOperateMoreUrl}/?uid=${uid}&page=${n}&rows=${pageSize}`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
       );
   }
 
 
   addData(data): Observable<any> {
-    return this.http.post('/bluetooth_add', data, httpOptions)
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/admin/bluetooth/add', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   // 删除
-  deleteData(uid): Observable<any> {
-    return this.http.post('/bluetooth_delete', uid, httpOptions)
+  deleteData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/admin/bluetooth/batch/delete', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  // 修改
-  updateData(data): Observable<any> {
-    return this.http.post('/bluetooth_update', data, httpOptions)
+  // 修改基础信息
+  updateBasic(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/admin/bluetooth/update', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  // 获取蓝牙列表-下拉
-  getBlueAll(): Observable<any> {
-    return this.http.get(this.bluetoothAllUrl)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
 
-  // 设备绑定蓝牙---设备查看页
-  bindEqBlue(data): Observable<any> {
-    return this.http.post('/bluetooth_bind', data, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
+  // 报废
+  scrap(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-  // 蓝牙绑定设备
-  bindBlueEq(data): Observable<any> {
-    return this.http.post('/bind', data, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  // 蓝牙解绑
-  unBind(data): Observable<any> {
-    return this.http.post('/bluetooth_unbind', data, httpOptions)
+    return this.http.get(`/api/admin/bluetooth/scrapped?uid=${uid}`, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

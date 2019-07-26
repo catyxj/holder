@@ -3,6 +3,7 @@ import {UserService} from "../shared/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs/index";
 import {MediaMatcher} from "@angular/cdk/layout";
+import {NzModalService} from "ng-zorro-antd/modal";
 
 
 
@@ -25,6 +26,7 @@ export class MainComponent implements OnInit, OnDestroy {
   constructor(private userService: UserService,
               private route: ActivatedRoute,
               private router: Router,
+              private modalService: NzModalService,
               changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.subscription = this.userService.changeUserStatus$
       .subscribe( data => {
@@ -57,7 +59,18 @@ export class MainComponent implements OnInit, OnDestroy {
           this.router.navigate(['/login']);
         }
       }, err => {
+        /*console.log(err);
+        if (err.status === 550) {
+          // alert(err.error);
+          this.modalService.warning({
+            nzTitle: err.error.message || err.error,
+            nzContent: '',
+            nzOnOk: () => {this.router.navigate(['/login']); }
+          });
+        }*/
+
         this.router.navigate(['/login']);
+
       });
   }
 

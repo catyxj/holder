@@ -1,0 +1,179 @@
+
+
+
+
+<div class="content">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>订单管理</h6>
+    </div>
+    <div class="li_head_r">
+      <button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="list_content">
+    <div class="content_h">
+      <div class="search_box">
+        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="addOnAfterTemplate">
+          <input type="text" nz-input [(ngModel)]="value" (keyup)="searchEnter($event)" maxlength="15"/>
+        </nz-input-group>
+        <ng-template #addOnBeforeTemplate>
+          <nz-select [(ngModel)]="search">
+            <nz-option [nzLabel]="'订单编号'" [nzValue]="'uid'"></nz-option>
+            <nz-option [nzLabel]="'订购产品'" [nzValue]="'value'"></nz-option>
+            <nz-option [nzLabel]="'主题内容'" [nzValue]="'username'"></nz-option>
+            <nz-option [nzLabel]="'所属单位'" [nzValue]="'username'"></nz-option>
+          </nz-select>
+        </ng-template>
+        <ng-template #addOnAfterTemplate>
+          <img src="assets/icons/icon_seach.png" alt="" class="search_icon" (click)="searchChange()">
+        </ng-template>
+
+      </div>
+      <div class="flex">
+        <!--<button class="btn btn_purple btn_round bpm" (click)="batchClose()">-->
+          <!--批量关闭-->
+        <!--</button>-->
+
+      </div>
+    </div>
+    <div class="content_t">
+      <nz-table
+        #dataList
+        [nzFrontPagination]="false"
+        [nzShowPagination] = "false"
+        [nzLoading]="loading"
+        [nzData]="dataLists"
+      >
+        <thead>
+        <tr>
+          <!--<th
+            nzShowCheckbox
+            [(nzChecked)]="isAllChecked"
+            (nzCheckedChange)="checkAll($event)"
+          >
+          </th>-->
+          <th>订单编号</th>
+          <th>
+            <nz-dropdown [nzTrigger]="'click'">
+              <a nz-dropdown>
+                订购产品
+                <i nz-icon type="down" style="color: #898EA3;"></i>
+              </a>
+              <ul nz-menu>
+                <li nz-menu-item (click)="searchStatus('')">
+                  <a>全部</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('1')">
+                  <a>设备采购服务</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('2')">
+                  <a>功能扩展服务</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('0')">
+                  <a>存储升级服务</a>
+                </li>
+              </ul>
+            </nz-dropdown>
+          </th>
+          <th>订单创建账号</th>
+          <th>所属单位</th>
+          <th>创建时间</th>
+          <th>支付时间</th>
+          <th>
+            当前状态
+            <!--<nz-dropdown [nzTrigger]="'click'">
+              <a nz-dropdown>
+                当前状态
+                <i nz-icon type="down" style="color: #898EA3;"></i>
+              </a>
+
+              <ul nz-menu>
+                <li nz-menu-item (click)="searchStatus('')">
+                  <a>全部</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('1')">
+                  <a>待回复</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('2')">
+                  <a>已回复</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('0')">
+                  <a>关闭</a>
+                </li>
+              </ul>
+            </nz-dropdown>-->
+          </th>
+          <th>支付金额</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of dataList.data">
+          <!--<td
+            nzShowCheckbox
+            [(nzChecked)]="data.checked"
+            [nzDisabled]="data.disabled"
+            (nzCheckedChange)="refreshStatus()"
+          ></td>-->
+          <td> {{data.uid}} </td>
+          <td>
+            <span>
+              设备采购服务
+            </span>
+            <span>
+              功能扩展服务
+            </span>
+            <span>
+              存储升级服务
+            </span>
+          </td>
+          <td> {{data.username || '空'}}({{data.account_name || '空'}}) </td>
+          <td> {{data.org_name}} </td>
+          <td> {{data.created_at | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
+          <td> {{data.pay_at | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
+          <td>
+            <nz-tag [nzColor]="'#1E9FF2'" *ngIf="data.status===2">已支付</nz-tag>
+            <nz-tag [nzColor]="'#FFC06A'" *ngIf="data.status===1">待支付</nz-tag>
+            <nz-tag [nzColor]="'#C0C4D2'" *ngIf="data.status===0">作废</nz-tag>
+          </td>
+          <td style="color: #666EE8;"> {{data.amount | currency: '￥'}} </td>
+          <td>
+            <a class="btn btn_purple btn-sm" [routerLink]="['/dir/ad/order-info', data.uid]" target="_blank">
+              详情
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
+
+    </div>
+
+    <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+
+    <div class="content_b">
+      <nz-pagination nzShowSizeChanger
+                     [nzTotal]="totalItems"
+                     [nzShowTotal]="totalTemplate"
+                     [(nzPageIndex)]="page"
+                     [(nzPageSize)]="pageSize"
+                     (nzPageIndexChange)="pageChange()"
+                     (nzPageSizeChange)="pageSizeChange()"
+                     [nzPageSizeOptions] = "pageSizeList">
+
+      </nz-pagination>
+      <div class="ant-pagination-options-quick-jumper"> 跳至
+        <input type="number" [(ngModel)]="pageNum"> 页 </div>
+      <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+

@@ -19,11 +19,15 @@
 
     </div>
     <div class="login_form">
+      <!--<div class="login_box">
+        <router-outlet></router-outlet>
+      </div>-->
+
       <div *ngIf="currentType === 1" class="login_box">
         <app-sign-in></app-sign-in>
       </div>
       <div *ngIf="currentType === 2" class="login_box">
-        <app-sign-up></app-sign-up>
+        <app-sign-up (toggle)="currentType = 1"></app-sign-up>
       </div>
 
     </div>
@@ -33,7 +37,7 @@
 <!--底部-->
 <div class="footer">
   Lukeeper物联网云平台v1.0 Copyright ©2019  Inohas. All Rights Reserved. 备案号（浙ICP备16036066号-6）建议分辨率：1920*1080 推荐浏览器：Chrome
-  <a href="http://www.mydown.com/soft/421/472030921.shtml" style="margin-left: 38px;" target="_blank">点击下载Chrome</a>
+  <a href="http://www.mydown.com/soft/421/472030921.shtml" class="text_purple" style="margin-left: 38px;" target="_blank">点击下载Chrome</a>
 </div>
 
 

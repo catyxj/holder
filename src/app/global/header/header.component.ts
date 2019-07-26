@@ -19,6 +19,8 @@ export class HeaderComponent implements OnInit {
   user: any;
   @Input()
   matches: any;
+  @Input()
+  btnShow: any;
 
   public alarmNum = 0;
   public malNum = 0;
