@@ -58,7 +58,7 @@ export class AddAccountComponent implements OnInit {
       this.data.password.length < 6 || this.data.username.length > 16 ||
       !this.data.role ||
       this.data.role <= this.currentUser.Role.RoleId ||
-      (this.data.role > 1 && this.data.org.length <= 0)) {
+      (this.data.role > 1 && !this.data.org)) {
         this.isValid = false;
         return;
       }
