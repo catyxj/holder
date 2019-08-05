@@ -4,7 +4,7 @@
     <app-header [user]="user" [btnShow]="false" [matches]="mobileQuery.matches"></app-header>
   </header>
 
-  <main class="directive">
+  <main class="directive" [class.formal]="roleId==='10' || roleId==='11'">
     <mat-sidenav-container class="sidenav-container">
       <!--<mat-sidenav class="sidenav bg_light_default"  [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="false" #sidenav>
         <app-sidebar [user]="user"></app-sidebar>

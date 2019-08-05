@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserListService} from "../../../../shared/user-list.service";
+import {switchMap} from "rxjs/internal/operators";
+import {ActivatedRoute, ParamMap} from "@angular/router";
 
 @Component({
   selector: 'app-user-list-formal',
@@ -11,7 +13,7 @@ export class UserListFormalComponent implements OnInit {
   public page = 1;
   public pageNum;
   public pageSize = 15;
-  public search = 'phone';
+  public search = 'username';
   public value;
   public status = '';
   public totalItems;
@@ -19,10 +21,22 @@ export class UserListFormalComponent implements OnInit {
   public pageSizeList = [15, 30, 50, 100];
 
 
-  constructor(private usersService: UserListService) { }
+  constructor(private usersService: UserListService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getList();
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        // console.log('param', params.get('status'));
+        this.page = parseInt(params.get('page'));
+        if (!this.page) {
+          this.page = 1;
+        }
+        this.getList();
+        return (params.get('status') || []);
+      })
+    ).subscribe();
+    // this.getList();
   }
 
   // 获取列表
@@ -51,7 +65,6 @@ export class UserListFormalComponent implements OnInit {
   // 页码变化
   pageChange(): void {
     this.getList();
-    this.isAllChecked = false;
   }
 
   // 页码跳转
@@ -76,11 +89,8 @@ export class UserListFormalComponent implements OnInit {
     }
   }
 
-  searchRoleId(n?) {
+  searchStatus(n?) {
     this.status = n;
-    // if (!n) {
-    //   this.type = '';
-    // }
     this.searchChange();
   }
 

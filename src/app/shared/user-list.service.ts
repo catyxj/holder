@@ -14,19 +14,20 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UserListService {
-  // private dataListUrl = '/api/list';
-  private dataBasicUrl = '/api/detail';
+  private dataListUrl = '/api/formal/user/list';
+  private dataBasicUrl = '/api/formal/user/detail';
+  private dataEptListUrl = '/api/formal/user/ept/list';
 
-  private dataListUrl = 'assets/server/user_list.json';
+  // private dataListUrl = 'assets/server/user_list.json';
 
   constructor(private http: HttpClient) { }
 
-  // 获取蓝牙列表
-  getLists(n: number, pageSize: number, search?: string, value?: string, status?: string): Observable<any> {
+  // 获取用户列表
+  getLists(n: number, pageSize: number, search?: string, value?: string, tag?: string): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.dataListUrl}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&status=${status}`;
+    const url = `${this.dataListUrl}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&tag=${tag}`;
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -46,6 +47,20 @@ export class UserListService {
       );
   }
 
+
+  // 获取用户设备列表
+  getEptLists(uid: string, n: number, pageSize: number, search?: string, value?: string, online?: string, run?: string, status?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `${this.dataEptListUrl}?uid=${uid}&page=${n}&rows=${pageSize}&search=${search}&value=${value}&online=${online}&run=${run}&status=${status}`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);
@@ -55,6 +70,7 @@ export class UserListService {
         `错误内容: ${error.error}`);
     }
     if (error.status === 550) {
+      localStorage.removeItem('authToken');
       window.location.reload();
     }
     return throwError(

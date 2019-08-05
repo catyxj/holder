@@ -79,8 +79,8 @@ export class UserService {
         .pipe(
           tap((val) => {
             if (!val) {
-              // this.isLoggedIn = 'false';
               sessionStorage.setItem('user', 'false');
+              localStorage.removeItem('authToken');
             }
           }),
           catchError(this.handleError2)
@@ -160,6 +160,7 @@ export class UserService {
         `body was: ${error.error}`);
     }
     if (error.status === 550) {
+      localStorage.removeItem('authToken');
       alert(error.error);
     }
     return throwError(
@@ -177,6 +178,7 @@ export class UserService {
         `body was: ${error.error}`);
     }
     if (error.status === 550) {
+      localStorage.removeItem('authToken');
       alert(error.error);
     }
     return throwError(

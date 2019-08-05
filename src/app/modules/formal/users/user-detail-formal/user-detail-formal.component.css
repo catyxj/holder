@@ -1,12 +1,33 @@
 
 .content_h2{
-  padding: 20px;
-  background-color: #eeeeee;
+  padding: 19px 39px;
+  box-sizing: border-box;
+  height:93px;
+  background:#F9FAFD;
+  border-radius:2px;
+  border:1px solid #E4E5EC;
   margin-bottom: 20px;
 }
 .h2_row{
   display: flex;
   justify-content: space-between;
 }
+.h2_col{
+  width: 14%;
+  height: 55px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.h2_col_title{
+  font-size: 13px;
+  font-weight: bold;
+  color: #464855;
+}
+.h2_col_value{
+  font-size: 13px;
+  color: #666EE8;
+}
+
 
 

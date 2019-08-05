@@ -53,17 +53,15 @@
   text-align: center;
 }
 .hc_f1 img{
-  width: 40px;
-  height: 40px;
   margin: auto;
-  margin-bottom: 18px;
+  margin-bottom: 24px;
 }
 .hc_f1 h6{
   font-size: 14px;
   color:#464855;
 }
 .h_divide{
-  width:2px;
+  width:1px;
   height:30px;
   background-color: #666EE8;
 }

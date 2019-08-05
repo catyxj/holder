@@ -82,7 +82,6 @@ registerLocaleData(zh);
     NgZorroAntdModule,
     NgxEchartsModule,
     AdminModule,
-    FormalModule
   ],
   entryComponents: [
     ComfirmComponent

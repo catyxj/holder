@@ -1,0 +1,62 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    <img src="assets/icons/icon_terminal.png" alt="" style="margin-right: 19px;">
+    终端基础信息设置
+  </h4>
+</div>
+
+<div class="modal-body m_form">
+  <div class="m_item">
+    <div class="m_label">
+      模板名称 <span>*</span>：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="name" placeholder="请输入模板名称" #tCode="ngModel"
+             pattern="^[A-Za-z0-9]{6}$" required>
+      <div class="sign_tip">
+        <!--<span class="text_danger" *ngIf="tCode.invalid && (tCode.dirty || tCode.touched)">请输入正确模板名称</span>-->
+      </div>
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      设备名称 <span>*</span>：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="equip" placeholder="请输入设备名称" #tVersion="ngModel"
+             required>
+      <div class="sign_tip">
+        <!--<span class="text_danger" *ngIf="tVersion.invalid && (tVersion.dirty || tVersion.touched)">请输入6位正确固件版本号</span>-->
+      </div>
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      概览图片：
+    </div>
+    <div class="m_input">
+      <img src="assets/images/no_img,jpg" alt="">
+    </div>
+
+  </div>
+
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取 消</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 35px;" [disabled]="tCode.invalid" (click)="save()">
+    确 定
+  </button>
+</div>
+
+
+
+
+
+
+
+

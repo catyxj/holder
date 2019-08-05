@@ -3,7 +3,7 @@
     <app-header [user]="user" [btnShow]="false"></app-header>
   </header>
 
-  <main class="directive">
+  <main class="directive" [class.formal]="roleId==='10' || roleId==='11'">
     <mat-sidenav-container class="sidenav-container">
       <mat-sidenav-content>
         <div class="bread">

@@ -8,6 +8,8 @@ import Swal from 'sweetalert2';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AcBatchDisabledAdComponent} from "../modals/ac-batch-disabled-ad/ac-batch-disabled-ad.component";
 import {AcBatchActiveAdComponent} from "../modals/ac-batch-active-ad/ac-batch-active-ad.component";
+import {ActivatedRoute, ParamMap} from "@angular/router";
+import {switchMap} from "rxjs/internal/operators";
 
 
 
@@ -33,9 +35,26 @@ export class AcListAdComponent implements OnInit {
 
   constructor(private accountService: AccountService,
               private nzModal: NzModalService,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        this.page = parseInt(params.get('page'));
+        if (!this.page) {
+          this.page = 1;
+        }
+        this.getList();
+        return (params.get('page') || []);
+      })
+    ).subscribe();
+    // this.getList();
+  }
+
+  // 获取列表
+  getList() {
     /*this.accountList = [
       {
         uid: 'asdfasdf',
@@ -49,11 +68,6 @@ export class AcListAdComponent implements OnInit {
     ];
     this.totalItems = 30;*/
 
-    this.getList();
-  }
-
-  // 获取列表
-  getList() {
     this.loading = true;
     this.accountService.getLists(this.page, this.pageSize, this.search, this.value, this.type)
       .subscribe(data => {

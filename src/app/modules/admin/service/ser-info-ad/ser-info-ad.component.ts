@@ -4,7 +4,7 @@ import {UploadFile, UploadFilter} from 'ng-zorro-antd/upload';
 import Swal from 'sweetalert2';
 import {ServiceService} from '../../../../shared/service.service';
 import {ActivatedRoute} from '@angular/router';
-import {Observable, Observer} from 'rxjs/index';
+
 
 @Component({
   selector: 'app-ser-info-ad',
@@ -24,11 +24,15 @@ export class SerInfoAdComponent implements OnInit {
   public fileList = []; // 上传文件列表
   public headOption;
 
+  public listPage;
+
   constructor(private serviceService: ServiceService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
+    this.listPage = this.route.snapshot.paramMap.get('page');
+
     /*this.basic = {
       account_name: '',
       created_at: '0001-01-01T00:00:00Z',
@@ -187,7 +191,7 @@ export class SerInfoAdComponent implements OnInit {
     console.log(this.fileList);
     let files = '';
     for (let i = 0; i < this.fileList.length; i++) {
-        files += this.fileList[i].response.id + ',';
+      files += this.fileList[i].response.id + ',';
     }
     const post = {
       uid: this.uid,

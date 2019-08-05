@@ -19,6 +19,7 @@ export class VideoLiveComponent implements OnInit {
   public url;
   public video;
   public user;
+  public roleId;
   public sideshow;
   public isControl;
   public subscription: Subscription;
@@ -61,6 +62,7 @@ export class VideoLiveComponent implements OnInit {
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
+    this.roleId = localStorage.getItem('roleId');
     // this.player = new EZUIPlayer('myPlayer');
     // this.isControl = true;
 

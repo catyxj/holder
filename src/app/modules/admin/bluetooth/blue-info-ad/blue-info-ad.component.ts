@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {BluetoothService} from "../../../../shared/bluetooth.service";
 import {BlueBasicConfigAdComponent} from "../modals/blue-basic-config-ad/blue-basic-config-ad.component";
@@ -8,6 +8,7 @@ import {ComfirmComponent} from "../../../directives/alert/comfirm/comfirm.compon
 import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 
 import Swal from 'sweetalert2';
+import {switchMap} from "rxjs/internal/operators";
 
 @Component({
   selector: 'app-blue-info-ad',
@@ -22,6 +23,9 @@ export class BlueInfoAdComponent implements OnInit {
 
   tplModal: NzModalRef;
 
+  public listPage;
+  public status;
+
   constructor(private route: ActivatedRoute,
               public router: Router,
               private modalService: NgbModal,
@@ -29,7 +33,20 @@ export class BlueInfoAdComponent implements OnInit {
               private nzModal: NzModalService) { }
 
   ngOnInit() {
-    this.uid = this.route.snapshot.paramMap.get('uid');
+    // this.uid = this.route.snapshot.paramMap.get('uid');
+
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        console.log(params);
+        this.uid = params.get('uid');
+        this.listPage = params.get('page');
+        this.status = params.get('status');
+        if (!this.status) {
+          this.status = '';
+        }
+        return (params.get('status') || []);
+      })
+    ).subscribe();
 
     /*this.basic = {
       status: 4

@@ -13,6 +13,7 @@ html,body,app-root,app-main,mat-sidenav-container,.site {
 }
 ul,li{
   list-style: none;
+  margin: 0;
 }
 .content{
   margin: 12px;
@@ -96,7 +97,12 @@ app-header .dropdown-toggle::after{
 .directive .bread{
   left: 296px;
 }
-
+.formal .bread, .ordinary .bread{
+  left: 376px;
+}
+.directive.formal .bread{
+  left: 336px;
+}
 
 /*列表页*/
 .list_head{
@@ -208,15 +214,18 @@ app-header .dropdown-toggle::after{
 }
 .info_basic .info_body{
   height: 324px;
+  background-color: #F9FAFD;
 }
 .info_config .info_body{
   height: 230px;
+  background-color: #F9FAFD;
 }
 .info_r{
   margin-left: 34px;
 }
 .info_r .info_body{
   height: 625px;
+  background-color: #F9FAFD;
 }
 .info_title{
   display: flex;
@@ -247,7 +256,8 @@ app-header .dropdown-toggle::after{
 
 
 .info_body{
-  border: 1px solid #A7ABBE;
+  /*border: 1px solid #A7ABBE;*/
+  border: 1px solid #E4E5EC;
   padding: 35px 20px;
   border-radius:4px;
 }
@@ -279,10 +289,13 @@ app-header .dropdown-toggle::after{
 
 .info_item_date{
   color: #464855;
+  width: 156px;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 .info_item_op{
   color: #464855;
-  margin-left: 20px;
+  /*margin-left: 20px;*/
 }
 
 
@@ -329,7 +342,7 @@ app-header .dropdown-toggle::after{
 }
 .m_form .sign_tip{
   position: absolute;
-  bottom: -16px;
+  bottom: -17px;
 }
 .m_form .sign_tip span{
   font-size: 10px;
@@ -385,6 +398,9 @@ app-header .dropdown-toggle::after{
 .modal_md .modal-dialog{
   /*margin-top: 10%;*/
   width: 435px;
+}
+.modal_m .modal-dialog{
+  max-width: 600px;
 }
 .modal_lg .modal-dialog{
   max-width: 1050px;
@@ -587,9 +603,9 @@ header .anticon svg{
 }
 
 /*批量禁用下拉列表*/
-.m_input .ant-select-selection--single{
+/*.m_input .ant-select-selection--single{
   width: 180px;
-}
+}*/
 
 
 

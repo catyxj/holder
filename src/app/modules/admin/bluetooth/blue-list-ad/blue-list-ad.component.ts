@@ -36,10 +36,13 @@ export class BlueListAdComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
-        // console.log('param', params.get('status'));
         this.status = params.get('status');
+        this.page = parseInt(params.get('page'));
         if (!this.status) {
           this.status = '';
+        }
+        if (!this.page) {
+          this.page = 1;
         }
         this.getList();
         return (params.get('status') || []);
@@ -50,6 +53,15 @@ export class BlueListAdComponent implements OnInit {
 
   // 获取列表
   getList() {
+    /*this.dataLists = [
+      {
+        name: 'asdfa',
+        uid: 'adsfa'
+      }
+    ];
+    this.totalItems = 30;*/
+
+
     this.loading = true;
     this.blueService.getLists(this.page, this.pageSize, this.search, this.value, this.status)
       .subscribe(data => {

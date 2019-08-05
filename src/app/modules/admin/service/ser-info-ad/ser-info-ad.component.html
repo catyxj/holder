@@ -1,6 +1,6 @@
-<div class="bread">
+<!--<div class="bread">
   信息维护 <span> / </span>服务支持
-</div>
+</div>-->
 
 
 <div class="content">
@@ -8,6 +8,12 @@
     <div class="info_tname">
       <img src="assets/icons/icon_list_setting.png" alt="">
       表单详情
+    </div>
+    <div>
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/ad/service/list', {page: listPage}]">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
     </div>
   </div>
 
@@ -127,7 +133,7 @@
             <div class="flex sinfo_item_bottom">
               <div class="sinfo_item_down">
                 <div *ngFor="let file of data.attach; let n = index;" title="{{file.name}}">
-                  <a class="text_purple" href="{{file.oss_path}}" download="">附件{{n+1}}</a>
+                  <a class="text_purple" href="{{file.oss_path}}" download="{{file.name}}">附件{{n+1}}</a>
                 </div>
               </div>
               <div class="sinfo_item_date">
@@ -171,13 +177,14 @@
           </div>
           <div class="flex justify-content-between">
             <div class="sinfo_upload">
-              <nz-upload nzAction="/api/admin/dialogue/attach/upload"
+              <nz-upload nzAction="/api/dialogue/attach/upload"
                          [nzBeforeUpload]="beforeUpload"
                          [nzDisabled]="fileList.length >= 5 || !basic || basic.status===0"
                          [nzHeaders]="headOption"
                          [nzFileList]="fileList" (nzChange)="handleChange($event)">
                 <button class="btn btn_purple bpm" [disabled]="fileList.length >= 5 || !basic || basic.status===0">
-                  <img src="assets/icons/icon_Enclosure.png" alt="">
+                  <!--<img src="assets/icons/icon_Enclosure.png" alt="">-->
+                  <i class="iconfont iconicon_Enclosure"></i>
                   <span style="font-size: 10px;">上传附件</span>
                 </button>
               </nz-upload>

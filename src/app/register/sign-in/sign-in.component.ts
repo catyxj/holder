@@ -151,6 +151,9 @@ export class SignInComponent implements OnInit {
       case '1':
         this.router.navigate(['/admin/ad']);
         break;
+      case '10':
+        this.router.navigate(['/admin/formal']);
+        break;
       case '15':
         this.router.navigate(['/admin/service']);
         break;

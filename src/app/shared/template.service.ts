@@ -15,13 +15,13 @@ const httpOptions = {
 })
 export class TemplateService {
 
-  // private templatesUrl = 'assets/server/template_lists.json';
-  // private channelUrl = 'assets/server/chan_config_list.json';
-  // private templateAllUrl = 'assets/server/template_list.json';
+  private templatesUrl = 'assets/server/template_lists.json';
+  private channelUrl = 'assets/server/chan_config_list.json';
+  private templateAllUrl = 'assets/server/template_list.json';
 
-  private templatesUrl = '/terminal_template_list';
-  private channelUrl = '/terminal_template_detail';
-  private templateAllUrl = '/terminal_template_list_all';
+  // private templatesUrl = '/terminal_template_list';
+  // private channelUrl = '/terminal_template_detail';
+  // private templateAllUrl = '/terminal_template_list_all';
 
   constructor(private http: HttpClient) { }
 
@@ -36,7 +36,10 @@ export class TemplateService {
 
   // 获取模板列表--下拉列表
   getTemplateAll(): Observable<any> {
-    return this.http.get<any>(this.templateAllUrl)
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get<any>(this.templateAllUrl, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -85,6 +88,7 @@ export class TemplateService {
         `错误内容: ${error.error}`);
     }
     if (error.status === 550) {
+      localStorage.removeItem('authToken');
       window.location.reload();
     }
     return throwError(

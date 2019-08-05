@@ -1,0 +1,193 @@
+<!--<div class="bread">
+  信息维护 <span> / </span>订单管理
+</div>-->
+
+
+<div class="content">
+  <div class="info_head">
+    <div class="info_tname">
+      <img src="assets/icons/icon_Ordersetting.png" alt="">
+      订单编号 {{basic?.name}}
+    </div>
+    <div style="text-align: right;">
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" (click)="goBack()">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+
+
+      <div style="margin-top: 15px; font-weight: bold;">
+        订单状态：
+        <span style="color: #1E9FF2;">已支付</span>
+        <span style="color: #FFC06A;">未支付</span>
+        <span style="color: #A7ABBE;">作废</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="info_content">
+    <div class="info_order_1">
+      <div class="info_title">
+        <h6>
+          支付信息
+        </h6>
+      </div>
+      <div class="info_body">
+        <div class="ord1_con">
+          <div class="ord1_l">
+            <div class="order1_item">
+              <div class="or_item_label">
+                订单编号
+              </div>
+              <div class="or_item_text">
+                203861209130361
+              </div>
+            </div>
+
+            <div class="order1_item">
+              <div class="or_item_label">
+                创建时间
+              </div>
+              <div class="or_item_text">
+                {{basic?.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}
+              </div>
+            </div>
+
+            <div class="order1_item">
+              <div class="or_item_label">
+                订单创建账号
+              </div>
+              <div class="or_item_text">
+                {{basic?.username || '空'}} ({{basic?.username || '空'}})
+              </div>
+            </div>
+
+            <div class="order1_item">
+              <div class="or_item_label">
+                所属单位
+              </div>
+              <div class="or_item_text">
+                {{basic?.org_name}}
+              </div>
+            </div>
+
+            <div class="order1_item">
+              <div class="or_item_label">
+                订单类型
+              </div>
+              <div class="or_item_text">
+                <span *ngIf="basic&&basic.type === 1">
+                  定期
+                </span>
+                <span *ngIf="basic&&basic.type === 2">
+                  永久
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div style="width: 1px; height:143px; background-color: #666EE8;"></div>
+
+          <div class="ord1_r">
+            <div class="order1_item">
+              <div class="or_item_label">
+                支付状态
+              </div>
+              <div class="or_item_text">
+                <span *ngIf="basic&&basic.status === 1">
+                  待支付
+                </span>
+                <span *ngIf="basic&&basic.status === 2">
+                  支付完成
+                </span>
+              </div>
+            </div>
+
+            <div class="order1_item">
+              <div class="or_item_label">
+                支付完成时间
+              </div>
+              <div class="or_item_text">
+                {{basic?.pay_at | date: 'yyyy-MM-dd HH:mm:ss'}}
+              </div>
+            </div>
+
+            <div class="order1_item">
+              <div class="or_item_label">
+                支付金额
+              </div>
+              <div class="or_item_text">
+                {{basic?.amount | currency: '￥'}}
+              </div>
+            </div>
+
+            <div class="order1_item">
+              <div class="or_item_label">
+                支付方式
+              </div>
+              <div class="or_item_text">
+                <span *ngIf="basic&&basic.status === 1">
+                  支付码扫码
+                </span>
+                <span *ngIf="basic&&basic.status === 2">
+                  对公转账
+                </span>
+              </div>
+            </div>
+
+            <div class="order1_item">
+              <div class="or_item_label">
+                支付账号
+              </div>
+              <div class="or_item_text">
+                {{basic?.pay_account}}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="info_order_2">
+      <div class="info_title">
+        <h6>
+          订单产品信息
+        </h6>
+      </div>
+      <div class="info_body">
+        <div class="order2_item">
+          <div class="or2_label">
+            产品名称：
+          </div>
+          <div class="or2_text">
+            <span>
+              设备采购服务
+            </span>
+            <span>
+              功能扩展服务
+            </span>
+            <span>
+              存储升级服务
+            </span>
+          </div>
+        </div>
+
+        <div class="order2_item">
+          <div class="or2_label">
+            产品说明：
+          </div>
+          <div class="text_content">
+            普通账号升级为正式账号（永久性）
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+

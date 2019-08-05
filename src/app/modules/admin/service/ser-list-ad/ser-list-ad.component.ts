@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
-import {AccountService} from "../../../../shared/account.service";
 import {ServiceService} from "../../../../shared/service.service";
 import {ComfirmComponent} from "../../../directives/alert/comfirm/comfirm.component";
 
 
 import Swal from 'sweetalert2';
+import {ActivatedRoute, ParamMap} from "@angular/router";
+import {switchMap} from "rxjs/internal/operators";
 
 @Component({
   selector: 'app-ser-list-ad',
@@ -29,9 +30,27 @@ export class SerListAdComponent implements OnInit {
 
 
   constructor(private serviceService: ServiceService,
-              private nzModal: NzModalService) { }
+              private nzModal: NzModalService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        this.page = parseInt(params.get('page'));
+        if (!this.page) {
+          this.page = 1;
+        }
+        this.getList();
+        return (params.get('page') || []);
+      })
+    ).subscribe();
+
+    // this.getList();
+  }
+
+  // 获取列表
+  getList() {
     /*this.serviceList = [
       {
         username: 'asdfasf',
@@ -43,11 +62,7 @@ export class SerListAdComponent implements OnInit {
     ];
     this.totalItems = 20;*/
 
-    this.getList();
-  }
 
-  // 获取列表
-  getList() {
     this.loading = true;
     this.serviceService.getLists(this.page, this.pageSize, this.search, this.value, this.type, this.status)
       .subscribe(data => {

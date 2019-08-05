@@ -18,6 +18,18 @@ import {OrderMainAdComponent} from "./order/order-main-ad/order-main-ad.componen
 import {OrderListAdComponent} from "./order/order-list-ad/order-list-ad.component";
 import {OvMainAdComponent} from "./overview/ov-main-ad/ov-main-ad.component";
 import {OvDashboardAdComponent} from "./overview/ov-dashboard-ad/ov-dashboard-ad.component";
+import {TerInfoAdComponent} from "./terminal/ter-info-ad/ter-info-ad.component";
+import {TerOperateAdComponent} from "./terminal/ter-operate-ad/ter-operate-ad.component";
+import {AcInfoAdComponent} from "./account/ac-info-ad/ac-info-ad.component";
+import {AcOperateAdComponent} from "./account/ac-operate-ad/ac-operate-ad.component";
+import {VOperateAdComponent} from "./video/v-operate-ad/v-operate-ad.component";
+import {VInfoAdComponent} from "./video/v-info-ad/v-info-ad.component";
+import {BlueInfoAdComponent} from "./bluetooth/blue-info-ad/blue-info-ad.component";
+import {BlueOperateAdComponent} from "./bluetooth/blue-operate-ad/blue-operate-ad.component";
+import {SerInfoAdComponent} from "./service/ser-info-ad/ser-info-ad.component";
+import {FlowInfoAdComponent} from "./flow/flow-info-ad/flow-info-ad.component";
+import {FlowOperateAdComponent} from "./flow/flow-operate-ad/flow-operate-ad.component";
+import {OrderInfoAdComponent} from "./order/order-info-ad/order-info-ad.component";
 
 export const AdminRoutingModule = [
   {
@@ -44,6 +56,14 @@ export const AdminRoutingModule = [
           {
             path: 'list',
             component: TerListAdComponent
+          },
+          {
+            path: 'info/:uid/:page',
+            component: TerInfoAdComponent
+          },
+          {
+            path: 'operate/:uid',
+            component: TerOperateAdComponent
           }
         ]
       },
@@ -55,6 +75,14 @@ export const AdminRoutingModule = [
           {
             path: 'list',
             component: VListAdComponent
+          },
+          {
+            path: 'info/:uid/:page',
+            component: VInfoAdComponent
+          },
+          {
+            path: 'operate/:uid',
+            component: VOperateAdComponent
           }
         ]
       },
@@ -66,6 +94,14 @@ export const AdminRoutingModule = [
           {
             path: 'list',
             component: BlueListAdComponent
+          },
+          {
+            path: 'info/:uid/:page',
+            component: BlueInfoAdComponent
+          },
+          {
+            path: 'operate/:uid',
+            component: BlueOperateAdComponent
           }
         ]
       },
@@ -77,6 +113,14 @@ export const AdminRoutingModule = [
           {
             path: 'list',
             component: AcListAdComponent
+          },
+          {
+            path: 'info/:uid/:page',
+            component: AcInfoAdComponent
+          },
+          {
+            path: 'operate/:uid/:name',
+            component: AcOperateAdComponent
           }
         ]
       },
@@ -88,6 +132,10 @@ export const AdminRoutingModule = [
           {
             path: 'list',
             component: SerListAdComponent
+          },
+          {
+            path: 'info/:uid/:page',
+            component: SerInfoAdComponent
           }
         ]
       },
@@ -99,6 +147,14 @@ export const AdminRoutingModule = [
           {
             path: 'list',
             component: FlowListAdComponent
+          },
+          {
+            path: 'info/:uid/:page',
+            component: FlowInfoAdComponent
+          },
+          {
+            path: 'operate/:uid',
+            component: FlowOperateAdComponent
           }
         ]
       },
@@ -110,6 +166,10 @@ export const AdminRoutingModule = [
           {
             path: 'list',
             component: OrderListAdComponent
+          },
+          {
+            path: 'info/:uid/:page',
+            component: OrderInfoAdComponent
           }
         ]
       }

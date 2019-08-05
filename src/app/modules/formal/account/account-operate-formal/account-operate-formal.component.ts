@@ -26,6 +26,21 @@ export class AccountOperateFormalComponent implements OnInit {
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
     this.name = this.route.snapshot.paramMap.get('name');
+    this.operateList = [
+      {
+        uid: 'asdfa',
+        name: 'asdfa',
+        status: 1,
+        amount: 222
+      },
+      {
+        uid: 'dsa2adf',
+        name: 'sdwwrf',
+        status: 2,
+        amount: 111
+      }
+    ];
+
     this.getList();
   }
 

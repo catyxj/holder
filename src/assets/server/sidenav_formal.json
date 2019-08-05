@@ -4,7 +4,7 @@
       "name": "首页",
       "code": "sub2",
       "icon": "fa-home",
-      "img": "assets/icons/icon_Monitor.png",
+      "img": "assets/icons/home.png",
       "router": "/admin/ordinary/home"
     },
     {
@@ -12,7 +12,7 @@
       "code": "sub2",
       "icon": "fa-home",
       "img": "assets/icons/icon_Monitor.png",
-      "checked": true,
+      "checked": false,
       "children": [
         { "name": "图文模式", "router": "/admin/ordinary/graphic","icon": ""},
         { "name": "列表模式", "router": "/admin/ordinary/equip-list","icon": ""},
@@ -24,20 +24,20 @@
       "name": "设备管理",
       "code": "sub3",
       "icon": "fa-file-text-o",
-      "img": "assets/icons/icon_Information.png",
+      "img": "assets/icons/equip.png",
       "checked": false,
       "children": [
         { "name": "模板管理", "router": "1"},
-        { "name": "终端管理", "router": "2"},
-        { "name": "视频管理", "router": "3"},
-        { "name": "蓝牙管理", "router": "4"}
+        { "name": "终端管理", "router": "/admin/formal/terminal"},
+        { "name": "视频管理", "router": "/admin/formal/video"},
+        { "name": "蓝牙管理", "router": "/admin/formal/bluetooth"}
       ]
     },
     {
       "name": "信息维护",
       "code": "sub3",
       "icon": "fa-file-text-o",
-      "img": "assets/icons/icon_Information.png",
+      "img": "assets/icons/info.png",
       "checked": true,
       "children": [
         { "name": "用户管理", "router": "/admin/formal/users"},
@@ -49,7 +49,7 @@
       "name": "维保管理",
       "code": "sub3",
       "icon": "fa-file-text-o",
-      "img": "assets/icons/icon_Information.png",
+      "img": "assets/icons/maintain.png",
       "checked": false,
       "children": [
         { "name": "维保记录", "router": "/admin/formal/maintenance-record"},

@@ -1,0 +1,177 @@
+
+<!--<div class="bread">
+  设备管理 <span> / </span>终端设备
+</div>-->
+
+
+<div class="content">
+  <div class="t_info_head">
+    <div class="info_title">
+      <h6>
+        222222
+      </h6>
+    </div>
+    <!--<div class="info_tname">
+      &lt;!&ndash;<img src="assets/icons/icon_terminal_settings.png" alt="">&ndash;&gt;
+      {{basic?.terminal_code}}
+      &lt;!&ndash;终端详情&ndash;&gt;
+    </div>-->
+    <div>
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/formal/terminal/list', {page: listPage}]">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+      <!--刷新-->
+      <button class="btn btn_purple-o btn_round bps ml-1" (click)="getBasic(); getOperate();">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>
+      <a class="btn btn_purple btn_round bpm ml-1" [routerLink]="['/admin/formal/terminal/messages', uid]">
+        调试报文
+      </a>
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="deleteData()">
+        终端删除
+      </button>
+
+    </div>
+  </div>
+
+  <div class="info_content flex terminal_info">
+    <div class="term_info_l">
+      <div class="term_info_c1">
+        <div class="term_info_h">
+          <h6>关联信息</h6>
+
+        </div>
+        <div class="term_info_body">
+          <div class="term_info_item">
+            <div class="t_info_label">
+              所属企业：
+            </div>
+            <div class="t_info_value">
+              呜呜呜
+            </div>
+          </div>
+
+          <div class="term_info_item">
+            <div class="t_info_label">
+              关联设备：
+            </div>
+            <div class="t_info_value">
+                dddd
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="term_info_c2">
+        <div class="term_info_h">
+          <h6>配置状态</h6>
+        </div>
+
+        <div class="term_info_body">
+          <div class="term_info_item">
+            <div class="t_info_label">
+              固件版本：
+            </div>
+            <div class="t_info_value">
+              VE21.21 485 标准版
+            </div>
+          </div>
+
+          <div class="term_info_item">
+            <div class="t_info_label">
+              联网状态：
+            </div>
+            <div class="t_info_value t_bt">
+              呜呜呜
+
+              <a (click)="flowInfo()">流量查询</a>
+            </div>
+          </div>
+
+          <div class="term_info_item">
+            <div class="t_info_label">
+              配置状态：
+            </div>
+            <div class="t_info_value t_bt">
+              配置成功 15/15
+              <button class="btn btn_purple btn-sm" (click)="issued()">
+                下发配置
+              </button>
+            </div>
+          </div>
+
+          <div class="term_info_item">
+            <div class="t_info_label">
+              配置模板：
+            </div>
+            <div class="t_info_value t_bt">
+              呜呜呜
+
+              <a class="btn btn_purple btn-sm" [routerLink]="['/admin/formal/terminal/config', uid]">
+                设置
+              </a>
+            </div>
+          </div>
+
+          <div class="term_info_item">
+            <div class="t_info_label">
+              配置概况：
+            </div>
+            <div class="t_info_value">
+              <div class="t_value_text">
+                模拟量数量 【2】  开关量数量 【2】 状态量数量 【3】
+              </div>
+              <div class="t_value_text">
+                波特率 【9600】
+              </div>
+              <div class="t_value_text">
+                从机模式 【1】
+              </div>
+              <div class="t_value_text">
+                数据心跳包频率 【45秒/次】
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="term_info_r">
+      <div class="term_info_h">
+        <h6>配置记录</h6>
+        <div>
+          <a class="btn btn_purple btn_round bpm" [routerLink]="['/admin/formal/terminal/operate', uid]">
+            查看更多
+          </a>
+        </div>
+      </div>
+
+      <div class="term_info_body" style="padding: 18px; box-sizing: border-box;">
+        <ul>
+          <li class="info_item" *ngFor="let data of operate">
+            <div class="info_item_date">
+              {{data.created_at | date: 'yyyy-MM-dd  HH:mm:ss'}}
+            </div>
+            <div class="info_item_op text_purple">
+              {{data.info}}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+

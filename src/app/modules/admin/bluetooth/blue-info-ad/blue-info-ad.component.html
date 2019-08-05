@@ -1,7 +1,7 @@
 
-<div class="bread">
+<!--<div class="bread">
   设备管理 <span> / </span>蓝牙设备
-</div>
+</div>-->
 
 
 <div class="content">
@@ -12,10 +12,14 @@
       蓝牙详情
     </div>
     <div>
-      <button class="btn btn_purple btn_round bpm ml-3" (click)="deleteData()">
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/ad/bluetooth/list', {page: listPage}]">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="deleteData()">
         删除
       </button>
-      <button class="btn btn_purple btn_round bpm ml-3" (click)="scrap()" [disabled]="!basic || basic.status === 4">
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="scrap()" [disabled]="!basic || basic.status === 4">
         设备报废
       </button>
     </div>
@@ -117,7 +121,7 @@
         <h6>
           状态记录
         </h6>
-        <a class="btn btn_purple btn_round bpm" [routerLink]="['/dir/ad/blue-operate', uid]">
+        <a class="btn btn_purple btn_round bpm" [routerLink]="['/admin/ad/bluetooth/operate', uid]">
           查看更多
         </a>
       </div>

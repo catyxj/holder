@@ -14,7 +14,7 @@
       </button>
 
       <button class="btn btn_purple btn_round bpm ml-1" (click)="batch(1)">
-        批量激活
+        批量解禁
       </button>
 
       <button class="btn btn_purple btn_round bpm ml-1" (click)="batch(0)">
@@ -139,7 +139,7 @@
             </span>
           </td>
           <td>
-            <span *ngIf="data.status === 0">
+            <span *ngIf="data.status === 0" class="text_danger">
               禁用
             </span>
             <span *ngIf="data.status === 1">
@@ -148,7 +148,7 @@
           </td>
           <td> {{data.created_at | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
           <td>
-            <a class="btn btn_purple btn-sm" [routerLink]="['/dir/ad/account-info', data.uid]" target="_blank">
+            <a class="btn btn_purple btn-sm" [routerLink]="['/admin/ad/account/info', data.uid, page]">
               设置
             </a>
           </td>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {OrderService} from "../../../../shared/order.service";
+import {ActivatedRoute, ParamMap} from "@angular/router";
+import {switchMap} from "rxjs/internal/operators";
 
 
 @Component({
@@ -22,10 +24,28 @@ export class OrderListAdComponent implements OnInit {
   public pageSizeList = [15, 30, 50, 100];
 
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
 
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        this.page = parseInt(params.get('page'));
+        if (!this.page) {
+          this.page = 1;
+        }
+        this.getList();
+        return (params.get('page') || []);
+      })
+    ).subscribe();
+
+
+    // this.getList();
+  }
+
+  // 获取列表
+  getList() {
     this.dataLists = [
       {
         name: 'asdfas',
@@ -38,11 +58,6 @@ export class OrderListAdComponent implements OnInit {
     ];
     this.totalItems = 22;
 
-    // this.getList();
-  }
-
-  // 获取列表
-  getList() {
     this.loading = true;
     this.orderService.getLists(this.page, this.pageSize, this.status, this.search, this.value)
       .subscribe(data => {

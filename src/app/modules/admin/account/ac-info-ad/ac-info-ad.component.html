@@ -1,6 +1,6 @@
-<div class="bread">
+<!--<div class="bread">
   信息维护 <span> / </span>用户管理
-</div>
+</div>-->
 
 
 <div class="content">
@@ -10,7 +10,11 @@
       {{basic?.username}}
     </div>
     <div>
-      <button class="btn btn_purple btn_round bpm" (click)="entry()" [disabled]="!config || config.account_type!==10">
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/ad/account/list', {page: listPage}]">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="entry()" [disabled]="!config || config.account_type!==10">
         进入
       </button>
       <!--<button class="btn btn_purple btn_round bpm ml-3" (click)="disable()">
@@ -164,7 +168,7 @@
         <h6>
           状态记录
         </h6>
-        <a class="btn btn_purple btn_round bpm" [routerLink]="['/dir/ad/account-operate', uid, basic?.username]">
+        <a class="btn btn_purple btn_round bpm" [routerLink]="['/admin/ad/account/operate', uid, basic?.username]">
           查看更多
         </a>
       </div>

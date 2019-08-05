@@ -32,7 +32,7 @@
 
 
     <!--侧边栏按钮-->
-    <button mat-icon-button (click)="onClick()" style=" height: 64px;" *ngIf="btnShow">
+    <button mat-icon-button (click)="onClick()" style=" height: 64px;" *ngIf="btnShow" title="显示/隐藏侧边栏">
       <img src="assets/icons/icon_open.png" height="20" alt="">
     </button>
 
@@ -46,9 +46,14 @@
       </div>
     </div>
 
+    <a style="display:block; width: 40px; height: 64px; line-height: 64px;" title="云组态监控台"
+         *ngIf="roleId === '10' || roleId === '11'">
+      <img src="assets/icons/cloud.png" alt="">
+    </a>
+
     <!-- This fills the remaining space of the current row -->
     <span class="example-spacer"></span>
-
+    <!--<nz-breadcrumb [nzAutoGenerate]="true"></nz-breadcrumb>-->
 
     <!--告警-->
     <!--<mat-icon> email </mat-icon>-->

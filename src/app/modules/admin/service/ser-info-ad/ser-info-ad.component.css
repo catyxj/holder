@@ -45,6 +45,9 @@
   padding-bottom: 13px;
   border-bottom: 1px solid #E4E5EC;
 }
+.sinfo_item:last-child{
+  border-bottom: none;
+}
 .sinfo_item .ser_h_label{
   display: flex;
 }
@@ -92,6 +95,8 @@
 }
 .btn_purple.bpm{
   padding: 0;
+  display: flex;
+  align-items: center;
 }
 .btn_purple.bpm img{
   margin-right: 5px;

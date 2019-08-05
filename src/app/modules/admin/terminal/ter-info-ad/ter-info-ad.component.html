@@ -12,10 +12,14 @@
       终端详情
     </div>
     <div>
-      <button class="btn btn_purple btn_round bpm ml-3" (click)="deleteData()">
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/ad/terminal/list', {page: listPage, status: status}]">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="deleteData()">
         删除
       </button>
-      <button class="btn btn_purple btn_round bpm ml-3" (click)="scrap()" [disabled]="!basic || basic.status === 4">
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="scrap()" [disabled]="!basic || basic.status === 4">
         终端报废
       </button>
     </div>
@@ -156,7 +160,7 @@
         <h6>
           状态记录
         </h6>
-        <a class="btn btn_purple btn_round bpm" [routerLink]="['/dir/ad/terminal-operate', uid]">
+        <a class="btn btn_purple btn_round bpm" [routerLink]="['/admin/ad/terminal/operate', uid]">
           查看更多
         </a>
       </div>

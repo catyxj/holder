@@ -1,0 +1,152 @@
+
+<!--<div class="bread">
+  设备管理 <span> / </span>蓝牙设备
+</div>-->
+
+
+<div class="content">
+  <div class="info_head">
+    <div class="info_tname">
+      <img src="assets/icons/icon_buletooth_setting.png" alt="">
+      <!--{{basic?.mac}}-->
+      蓝牙详情
+    </div>
+    <div>
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/formal/bluetooth/list', {page: listPage}]">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="repair()" [disabled]="!basic || basic.status === 4">
+        设备报修
+      </button>
+    </div>
+  </div>
+
+  <div class="info_content flex">
+    <div class="info_l">
+      <div class="info_basic">
+        <div class="info_title">
+          <h6>
+            基础信息
+          </h6>
+          <button class="btn btn_purple btn_round bpm" (click)="editBasic()" [disabled]="!basic || basic.status === 4">
+            编辑
+          </button>
+        </div>
+        <div class="info_body">
+          <ul>
+            <li class="info_item">
+              <div class="info_item_title">
+                蓝牙序列号
+              </div>
+              <div class="info_item_value">
+                {{basic?.id}}
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                蓝牙MAC地址
+              </div>
+              <div class="info_item_value">
+                {{basic?.mac}}
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                蓝牙名称
+              </div>
+              <div class="info_item_value">
+                {{basic?.name}}
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                关联产品
+              </div>
+              <div class="info_item_value">
+                 空 ({{basic?.terminal_code || '空'}})
+              </div>
+            </li>
+            <li class="info_item">
+              <div class="info_item_title">
+                所属单位
+              </div>
+              <div class="info_item_value">
+                {{basic?.org_name || '空'}}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info_config">
+        <div class="info_title">
+          <h6>
+            状态信息
+          </h6>
+        </div>
+        <div class="info_body">
+          <ul>
+            <li class="info_item">
+              <div class="info_item_title">
+                蓝牙设备状态
+              </div>
+              <div class="info_item_value">
+                <span *ngIf="basic&&basic.status === 1" class="text_grey">
+                  未激活
+                </span>
+                <span *ngIf="basic&&basic.status === 2" class="text_green">
+                  已激活
+                </span>
+                <span *ngIf="basic&&basic.status === 3" class="text_warning">
+                  维修
+                </span>
+                <span *ngIf="basic&&basic.status === 4" class="text_danger">
+                  报废
+                </span>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="info_r">
+      <div class="info_title">
+        <h6>
+          状态记录
+        </h6>
+        <a class="btn btn_purple btn_round bpm" [routerLink]="['/admin/formal/bluetooth/operate', uid]">
+          查看更多
+        </a>
+      </div>
+      <div class="info_body">
+        <ul>
+          <li class="info_item" *ngFor="let data of operate">
+            <div class="info_item_date">
+              {{data.created_at | date: 'yyyy-MM-dd  HH:mm:ss'}}
+            </div>
+            <div class="info_item_op">
+              {{data.info}}
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+

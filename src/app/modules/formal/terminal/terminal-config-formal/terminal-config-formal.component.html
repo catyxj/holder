@@ -1,0 +1,267 @@
+
+
+
+
+<div class="content">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>
+        【622222】终端配置
+      </h6>
+    </div>
+    <div class="li_head_r">
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" (click)="goBack()">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+      <!--刷 新-->
+      <button class="btn btn_purple-o btn_round bps ml-1">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="terminal_content flex">
+    <div class="t_content_l">
+      <!--通信参数-->
+      <div class="t_section">
+        <div class="tsection_h">
+          <h6>通信参数</h6>
+          <div>
+            <button class="btn btn_purple btn_round bpm" (click)="communicationSet()">设置</button>
+          </div>
+        </div>
+        <div class="tsection_body">
+          <div class="ts_row">
+            <div class="ts_item">
+              <div class="ts_label">
+                波特率
+              </div>
+              <div class="ts_value">
+                9600
+              </div>
+            </div>
+
+            <div class="ts_item">
+              <div class="ts_label">
+                通信接口
+              </div>
+              <div class="ts_value">
+                9600
+              </div>
+            </div>
+          </div>
+
+          <div class="ts_row">
+            <div class="ts_item">
+              <div class="ts_label">
+                数据位
+              </div>
+              <div class="ts_value">
+                9600
+              </div>
+            </div>
+
+            <div class="ts_item">
+              <div class="ts_label">
+                停止位
+              </div>
+              <div class="ts_value">
+                9600
+              </div>
+            </div>
+          </div>
+
+          <div class="ts_row">
+            <div class="ts_item">
+              <div class="ts_label">
+                数据包类型
+              </div>
+              <div class="ts_value">
+                9600
+              </div>
+            </div>
+
+            <div class="ts_item">
+              <div class="ts_label">
+                校验位
+              </div>
+              <div class="ts_value">
+                9600
+              </div>
+            </div>
+          </div>
+
+          <div class="ts_row">
+            <div class="ts_item">
+              <div class="ts_label">
+                心跳包频率
+              </div>
+              <div class="ts_value">
+                9600
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+
+      <!--数据点位-->
+      <div class="t_section mt-3">
+        <div class="tsection_h">
+          <h6>数据点位</h6>
+          <div>
+            <button class="btn btn_purple btn_round bpm" [routerLink]="['/admin/formal/terminal/channel-config', uid]">设置</button>
+          </div>
+        </div>
+        <div class="tsection_body">
+          <div class="ts_row">
+            <div class="ts_item">
+              <div class="ts_label">
+                模拟量数量
+              </div>
+              <div class="ts_value">
+                9600
+              </div>
+            </div>
+
+            <div class="ts_item">
+              <div class="ts_label">
+                开关量数量
+              </div>
+              <div class="ts_value">
+                9600
+              </div>
+            </div>
+
+            <div class="ts_item">
+              <div class="ts_label">
+                状态量数量
+              </div>
+              <div class="ts_value">
+                9600
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--组态设置-->
+      <div class="t_section mt-3">
+        <div class="tsection_h">
+          <h6>组态设置</h6>
+          <div>
+            <button class="btn btn_purple btn_round bpm" [routerLink]="['/admin/formal/terminal/customize', uid]">设置</button>
+          </div>
+        </div>
+        <div class="tsection_body">
+          <div class="ts_row">
+            <div class="ts_item">
+              <div class="ts_label">
+                组态编码
+              </div>
+              <div class="ts_value">
+                9600
+              </div>
+            </div>
+
+            <div class="ts_item">
+              <div class="ts_label">
+                组态名称
+              </div>
+              <div class="ts_value">
+                红红火火
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="t_content_r">
+      <div class="tsection_h">
+        <h6>基础信息</h6>
+        <div>
+          <button class="btn btn_purple btn_round bpm">设置</button>
+        </div>
+      </div>
+      <div class="tsection_body">
+        <div>
+          <div class="ts_item">
+            <div class="ts_label">
+              模板编码
+            </div>
+            <div class="ts_value">
+              ddw
+            </div>
+          </div>
+
+          <div class="ts_item">
+            <div class="ts_label">
+              模板名称
+            </div>
+            <div class="ts_value">
+              红红火火
+            </div>
+          </div>
+
+          <div class="ts_item">
+            <div class="ts_label">
+              创建者
+            </div>
+            <div class="ts_value">
+              啊啊啊
+            </div>
+          </div>
+
+          <div class="ts_item">
+            <div class="ts_label">
+              创建时间
+            </div>
+            <div class="ts_value">
+              2019-2-2 20:10:10
+            </div>
+          </div>
+
+
+          <div class="ts_item">
+            <div class="ts_label">
+              设备名称
+            </div>
+            <div class="ts_value">
+              2订单
+            </div>
+          </div>
+
+          <div class="ts_img">
+            <div class="ts_label">
+              概览图片
+            </div>
+            <div class="ts_image">
+              <img src="assets/images/no_img.jpg" alt="">
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

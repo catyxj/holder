@@ -1,145 +1,156 @@
 
 <div class="content">
-  <div class="info_head">
-    <div class="info_tname">
-      <img src="assets/icons/icon_Personal.png" alt="">
-      账号信息
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>
+        账号信息
+      </h6>
     </div>
-    <div>
-      <button class="btn btn_purple btn_round bpm ml-3" (click)="getBasic()">
-        刷新
+    <div class="li_head_r">
+      <!--刷新-->
+      <button class="btn btn_purple-o btn_round bps ml-1" (click)="refresh()">
+        <i class="iconfont iconicon_Refresh"></i>
       </button>
-      <button class="btn btn_purple btn_round bpm ml-3" (click)="changePass()">
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="changePass()">
         密码修改
       </button>
     </div>
   </div>
 
-  <div class="info_content flex">
-    <div class="info_l">
-      <div class="info_basic">
-        <div class="info_title">
+  <div class="info_content flex" style="margin-top: 5px;">
+    <div class="f_info_l">
+      <div class="f_info_basic">
+        <div class="f_info_title">
           <h6>
             基础信息
           </h6>
           <button class="btn btn_purple btn_round bpm" (click)="editConfig()">
-            编辑
+            修 改
           </button>
         </div>
-        <div class="info_body">
+        <div class="f_info_body">
           <ul>
-            <li class="info_item">
-              <div class="info_item_title">
+            <li class="f_info_item">
+              <div class="f_info_item_title">
                 用户名
               </div>
-              <div class="info_item_value">
-                {{basic?.name}}
+              <div class="f_info_item_value">
+                {{user?.name}}
               </div>
             </li>
 
-            <li class="info_item">
-              <div class="info_item_title">
+            <li class="f_info_item">
+              <div class="f_info_item_title">
                 单位名称
               </div>
-              <div class="info_item_value">
-                {{basic?.org_name}}
+              <div class="f_info_item_value">
+                {{user?.org_name}}
               </div>
             </li>
-            <li class="info_item">
-              <div class="info_item_title">
+            <li class="f_info_item">
+              <div class="f_info_item_title">
                 单位类型
               </div>
-              <div class="info_item_value">
-                {{basic?.org_tag}}
+              <div class="f_info_item_value">
+                <span *ngIf="user&&user.org_tag === 1">
+                  产品使用
+                </span>
+                <span *ngIf="user&&user.org_tag === 2">
+                  产品制造
+                </span>
+                <span *ngIf="user&&user.org_tag === 3">
+                  产品运维
+                </span>
+                <span *ngIf="user&&user.org_tag === 4">
+                  组件供应
+                </span>
+                <span *ngIf="user&&user.org_tag === 5">
+                  监管机构
+                </span>
               </div>
             </li>
-            <li class="info_item">
-              <div class="info_item_title">
+            <li class="f_info_item">
+              <div class="f_info_item_title">
                 地域地址
               </div>
-              <div class="info_item_value">
-                {{basic?.location_name}}
+              <div class="f_info_item_value">
+                {{user?.location_name}}
               </div>
             </li>
-            <li class="info_item">
-              <div class="info_item_title">
+            <li class="f_info_item">
+              <div class="f_info_item_title">
                 邮箱
               </div>
-              <div class="info_item_value">
-                {{basic?.email}}
+              <div class="f_info_item_value">
+                {{user?.email}}
               </div>
             </li>
           </ul>
         </div>
       </div>
 
-      <div class="info_config">
-        <div class="info_title">
+      <div class="f_info_config">
+        <div class="f_info_title">
           <h6>
             配置信息
           </h6>
-          <button class="btn btn_purple btn_round bpm" (click)="editConfig()" *ngIf="config&&config.account_type!==1">
-            编辑
-          </button>
         </div>
-        <div class="info_body">
+        <div class="f_info_body">
           <ul>
-            <li class="info_item">
-              <div class="info_item_title">
+            <li class="f_info_item">
+              <div class="f_info_item_title">
                 账号
               </div>
-              <div class="info_item_value">
-                {{basic?.username}}
+              <div class="f_info_item_value">
+                {{user?.username}}
               </div>
             </li>
-            <li class="info_item">
-              <div class="info_item_title">
+            <li class="f_info_item">
+              <div class="f_info_item_title">
                 账号状态
               </div>
-              <div class="info_item_value">
-                <span class="text_danger" *ngIf="config&&config.account_status===0">
+              <div class="f_info_item_value">
+                <span class="text_danger" *ngIf="user&&user.status===0">
                   禁用
                 </span>
-                <span class="" *ngIf="config&&config.account_status===1">
+                <span class="" *ngIf="user&&user.status===1">
                   正常
                 </span>
               </div>
             </li>
-            <li class="info_item">
-              <div class="info_item_title">
+            <li class="f_info_item">
+              <div class="f_info_item_title">
                 版本类型
               </div>
-              <div class="info_item_value">
-                <span *ngIf="config&&config.account_type===1">
+              <div class="f_info_item_value">
+                <span *ngIf="user&&user.role_id===1">
                   系统用户
                 </span>
-                <span class="" *ngIf="config&&config.account_type===10">
+                <span class="" *ngIf="user&&user.role_id===10">
                   正式用户
                 </span>
-                <span class="" *ngIf="config&&config.account_type===11">
+                <span class="" *ngIf="user&&user.role_id===11">
                   普通用户
                 </span>
-                <span class="" *ngIf="config&&config.account_type===15">
+                <span class="" *ngIf="user&&user.role_id===15">
                   维保用户
                 </span>
-                <span class="" *ngIf="config&&config.account_type===20">
+                <span class="" *ngIf="user&&user.role_id===20">
                   测试用户
                 </span>
 
               </div>
             </li>
-            <li class="info_item">
-              <div class="info_item_title">
+            <li class="f_info_item">
+              <div class="f_info_item_title">
                 扩展应用
               </div>
-              <div class="info_item_value">
-                <span *ngFor="let data of expand">
+              <div class="f_info_item_value flex flex-wrap">
+                <span *ngFor="let data of expand" class="expand">
                   {{data.name}}
                 </span>
               </div>
             </li>
-
-
 
           </ul>
         </div>
@@ -147,23 +158,25 @@
       </div>
     </div>
 
-    <div class="info_r">
-      <div class="info_title">
+    <div class="f_info_r">
+      <div class="f_info_title">
         <h6>
           订单记录
         </h6>
-        <a class="btn btn_purple btn_round bpm" [routerLink]="['/dir/formal/account-operate', basic?.uid, basic?.username]">
+        <a class="btn btn_purple btn_round bpm" [routerLink]="['/admin/formal/account/operate', user?.uid, user?.username]">
           查看更多
         </a>
       </div>
-      <div class="info_body" style="height: 640px;">
-        <ul>
-          <li class="info_item" *ngFor="let data of operate">
-            <div class="info_item_date">
-              {{data.created_at | date: 'yyyy-MM-dd  HH:mm:ss'}}
+      <div class="f_info_body">
+        <ul class="f_info_op">
+          <li class="f_info_op_item" *ngFor="let data of operate">
+            <div class="f_info_item_date">
+              {{data.created_at | date: 'yyyy-MM-dd'}}
             </div>
-            <div class="info_item_op">
-              {{data.info}}
+            <div class="f_info_item_op" >
+              <a [routerLink]="['/admin/formal/account/order-detail', data.uid]">
+                {{data.info}}
+              </a>
             </div>
           </li>
         </ul>

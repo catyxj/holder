@@ -4,10 +4,11 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {VAddAdComponent} from "../modals/v-add-ad/v-add-ad.component";
 import {VideoService} from "../../../../shared/video.service";
 import {ComfirmComponent} from "../../../directives/alert/comfirm/comfirm.component";
-
-import Swal from 'sweetalert2';
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {switchMap} from "rxjs/internal/operators";
+
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-v-list-ad',
@@ -38,8 +39,12 @@ export class VListAdComponent implements OnInit {
       switchMap((params: ParamMap) => {
         // console.log('param', params.get('status'));
         this.status = params.get('status');
+        this.page = parseInt(params.get('page'));
         if (!this.status) {
           this.status = '';
+        }
+        if (!this.page) {
+          this.page = 1;
         }
         this.getList();
         return (params.get('status') || []);
@@ -50,6 +55,13 @@ export class VListAdComponent implements OnInit {
 
   // 获取列表
   getList() {
+    /*this.dataLists = [
+      {
+        name: 'asdfa',
+        uid: 'adsfa'
+      }
+    ];*/
+
     this.loading = true;
     this.videoService.getLists(this.page, this.pageSize, this.search, this.value, this.status)
       .subscribe(data => {
@@ -129,7 +141,7 @@ export class VListAdComponent implements OnInit {
   }
 
 
-  // 新增终端模态框
+  // 新增视频模态框
   addData() {
     let that = this;
     const modalRef = this.modalService.open(VAddAdComponent, {windowClass: 'modal_md', centered: true});

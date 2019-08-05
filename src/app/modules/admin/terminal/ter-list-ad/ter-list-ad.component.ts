@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 import {TerminalService} from "../../../../shared/terminal.service";
 import {ComfirmComponent} from "../../../directives/alert/comfirm/comfirm.component";
-
-import Swal from 'sweetalert2';
 import {TerAddAdComponent} from "../modals/ter-add-ad/ter-add-ad.component";
 import {TerBatchAddAdComponent} from "../modals/ter-batch-add-ad/ter-batch-add-ad.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {switchMap} from "rxjs/internal/operators";
+
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ter-list-ad',
@@ -41,8 +41,12 @@ export class TerListAdComponent implements OnInit {
       switchMap((params: ParamMap) => {
         // console.log('param', params.get('status'));
         this.status = params.get('status');
+        this.page = parseInt(params.get('page'));
         if (!this.status) {
           this.status = '';
+        }
+        if (!this.page) {
+          this.page = 1;
         }
         this.getList();
         return (params.get('status') || []);

@@ -56,6 +56,7 @@ export class MainComponent implements OnInit, OnDestroy {
         if (!this.user) {
           sessionStorage.user = false;
           sessionStorage.removeItem('currentUser');
+          localStorage.removeItem('authToken');
           this.router.navigate(['/login']);
         }
       }, err => {
@@ -68,7 +69,6 @@ export class MainComponent implements OnInit, OnDestroy {
             nzOnOk: () => {this.router.navigate(['/login']); }
           });
         }*/
-
         this.router.navigate(['/login']);
 
       });

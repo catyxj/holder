@@ -1,0 +1,150 @@
+{
+  "content":{
+    "btns":[
+      {
+        "type": "btn",
+        "cType": "开关型态",
+        "cName": "交互按钮",
+        "address": "fkhfgkhg589760",
+        "id":"btn20",
+        "style":{
+          "position":"absolute",
+          "left": "221px",
+          "top": "143px",
+          "zIndex": 102
+        }
+      }
+    ],
+    "imgs1":[
+      {
+        "cName": "图片1",
+        "cType": "单形态",
+        "id": "img20",
+        "imgs":{
+          "id": 1,
+          "name": "图片1",
+          "src": "assets/images/no_image.png"
+        },
+        "src": "http://localhost:4200/assets/images/no_image.png",
+        "style":{
+          "height": "124px",
+          "left": "109px",
+          "position": "absolute",
+          "top": "23px",
+          "width": "37px",
+          "zIndex": 2
+        },
+        "type": "imgA"
+      }
+    ],
+    "imgs2":[
+      {
+        "type": "imgB",
+        "cName": "自定义图片1",
+        "cType": "单形态",
+        "id": "img20",
+        "imgs":{
+          "id": 1,
+          "img": "assets/images/no_image.png",
+          "name": "自定义图片1"
+        },
+        "src": "http://localhost:4200/assets/images/no_image.png",
+        "style":{
+          "height": "69px",
+          "left": "466px",
+          "position": "absolute",
+          "top": "38px",
+          "width": "75px",
+          "zIndex": 4
+        }
+
+      }
+    ],
+    "imgs3":[
+      {
+        "cName": "自定义多态图片4",
+        "cType": "多形态",
+        "chanName": "温度1",
+        "chanNum": "3",
+        "chanType": "1",
+        "id": "img30",
+        "imgs":{
+          "id": 5,
+          "name": "自定义多态图片4",
+          "imgs": [
+            {
+              "imgUrl": "assets/images/boilerwater.gif",
+              "max": 222,
+              "min": 111,
+              "num": 1
+            },
+            {
+              "imgUrl": "assets/images/boilerwater.png",
+              "max": 444,
+              "min": 233,
+              "num": 2
+            }
+          ]
+        },
+        "src":"http://localhost:4200/assets/images/coalsingle.png",
+        "style": {
+          "height": "100px",
+          "left": "100px",
+          "position": "absolute",
+          "top": "183px",
+          "width": "100px",
+          "zIndex": 3
+        },
+        "type": "imgC"
+      }
+    ],
+    "data1":[
+      {
+        "cName": "固定文本框",
+        "cType": "固定显示模式",
+        "id": "data20",
+        "style":{
+          "backgroundColor": "",
+          "borderColor": "",
+          "borderStyle": "solid",
+          "borderWidth": "1px",
+          "color": "#000000",
+          "fontSize": "16px",
+          "left": "346px",
+          "padding": "3px 6px",
+          "position": "absolute",
+          "top": "257px",
+          "zIndex": 4
+        },
+        "text": "固定文本框",
+        "type": "data1"
+      }
+    ],
+    "data2":[
+      {
+        "cName": "自定义文本框",
+        "cType": "自定义显示模式",
+        "chanName": "温度1",
+        "chanNum": "3",
+        "chanType": "1",
+        "id": "data20",
+        "style": {
+          "padding": "3px 6px",
+          "position": "absolute",
+          "left": "229px",
+          "top": "197px",
+          "zIndex": 102,
+          "backgroundColor": "",
+          "borderColor": "",
+          "borderStyle": "solid",
+          "borderWidth": "1px",
+          "color": "#000000",
+          "fontSize": "16px"
+        },
+        "type": "data2"
+      }
+    ]
+  }
+}
+
+

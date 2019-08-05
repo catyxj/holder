@@ -1,6 +1,6 @@
-<div class="bread">
+<!--<div class="bread">
   信息维护 <span> / </span>用户管理
-</div>
+</div>-->
 
 <div class="content">
   <div class="list_head">
@@ -10,8 +10,12 @@
       </h6>
     </div>
     <div class="li_head_r">
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/formal/users/list', {page: listPage}]">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
       <!--刷新-->
-      <button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
+      <button class="btn btn_purple-o btn_round bps ml-1" (click)="searchChange(); getInfo();">
         <i class="iconfont iconicon_Refresh"></i>
       </button>
 
@@ -23,49 +27,57 @@
       <div class="h2_col">
         <div class="h2_col_title">手机号码</div>
         <div class="h2_col_value">
-          122345667833
+          {{info?.username}}
         </div>
       </div>
 
       <div class="h2_col">
         <div class="h2_col_title">用户名</div>
         <div class="h2_col_value">
-          hhah
+          {{info?.name}}
         </div>
       </div>
 
-      <div class="h2_col">
-        <div class="h2_col_title">关联微信</div>
-        <div class="h2_col_value">
-          122345667833
-        </div>
-      </div>
 
       <div class="h2_col">
         <div class="h2_col_title">所属单位</div>
         <div class="h2_col_value">
-          122345667833
+          {{info?.org_name}}
         </div>
       </div>
 
       <div class="h2_col">
         <div class="h2_col_title">单位类型</div>
         <div class="h2_col_value">
-          122345667833
+          <span *ngIf="info&&info.org_tag===1">
+            产品使用
+          </span>
+          <span *ngIf="info&&info.org_tag===2">
+            产品制造
+          </span>
+          <span *ngIf="info&&info.org_tag===3">
+            产品运维
+          </span>
+          <span *ngIf="info&&info.org_tag===4">
+            组件供应
+          </span>
+          <span *ngIf="info&&info.org_tag===5">
+            监管机构
+          </span>
         </div>
       </div>
 
       <div class="h2_col">
         <div class="h2_col_title">地域地址</div>
         <div class="h2_col_value">
-          122345667833
+          {{info?.location_name}}
         </div>
       </div>
 
       <div class="h2_col">
         <div class="h2_col_title">邮箱地址</div>
         <div class="h2_col_value">
-          122345667833
+          {{info?.email}}
         </div>
       </div>
 
@@ -124,13 +136,13 @@
               </a>
 
               <ul nz-menu>
-                <li nz-menu-item (click)="searchStatus('')">
+                <li nz-menu-item (click)="searchOnline('')">
                   <a>全部</a>
                 </li>
-                <li nz-menu-item (click)="searchStatus('1')">
+                <li nz-menu-item (click)="searchOnline('true')">
                   <a>已联网</a>
                 </li>
-                <li nz-menu-item (click)="searchStatus('2')">
+                <li nz-menu-item (click)="searchOnline('false')">
                   <a>未联网</a>
                 </li>
               </ul>
@@ -144,14 +156,23 @@
               </a>
 
               <ul nz-menu>
-                <li nz-menu-item (click)="searchStatus('')">
+                <li nz-menu-item (click)="searchRun('')">
                   <a>全部</a>
                 </li>
-                <li nz-menu-item (click)="searchStatus('1')">
-                  <a>已联网</a>
+                <li nz-menu-item (click)="searchRun('0')">
+                  <a>未知</a>
                 </li>
-                <li nz-menu-item (click)="searchStatus('2')">
-                  <a>未联网</a>
+                <li nz-menu-item (click)="searchRun('1')">
+                  <a>未运行</a>
+                </li>
+                <li nz-menu-item (click)="searchRun('2')">
+                  <a>运行</a>
+                </li>
+                <li nz-menu-item (click)="searchRun('3')">
+                  <a>告警</a>
+                </li>
+                <li nz-menu-item (click)="searchRun('4')">
+                  <a>故障</a>
                 </li>
               </ul>
             </nz-dropdown>
@@ -168,10 +189,10 @@
                   <a>全部</a>
                 </li>
                 <li nz-menu-item (click)="searchStatus('1')">
-                  <a>已联网</a>
+                  <a>正常</a>
                 </li>
                 <li nz-menu-item (click)="searchStatus('2')">
-                  <a>未联网</a>
+                  <a>禁用</a>
                 </li>
               </ul>
             </nz-dropdown>
@@ -187,54 +208,42 @@
             [nzDisabled]="data.disabled"
             (nzCheckedChange)="refreshStatus()"
           ></td>-->
-          <td> {{data.id}} </td>
-          <td> {{data.mac}} </td>
           <td> {{data.name}} </td>
-          <td> {{data.username || '空'}} ({{data.org_name || '空'}}) </td>
+          <td> {{data.terminal_code}} </td>
+          <td> {{data.location_name}} </td>
+          <td> {{data.user_org}} </td>
           <td>
-            <span *ngIf="data.status === 1" class="text_grey">
-              <img src="assets/icons/icon_active2.png" alt="" style="margin-right: 6px;">
-              未激活
+            <nz-tag [nzColor]="'#1E9FF2'" *ngIf="data.online">已联网</nz-tag>
+            <nz-tag [nzColor]="'#C0C4D2'" *ngIf="!data.online">未联网</nz-tag>
+          </td>
+          <td>
+            <span *ngIf="data.run === 0">
+              <img src="assets/icons/group_0.png" alt="">
+              未知
             </span>
-            <span *ngIf="data.status === 2" class="text_green">
-              <img src="assets/icons/icon_active.png" alt="" style="margin-right: 6px;">
-              已激活
+            <span *ngIf="data.run === 1">
+              <img src="assets/icons/group_4.png" alt="">
+              未运行
             </span>
-            <span *ngIf="data.status === 3" class="text_warning">
-              <img src="assets/icons/icon_repair.png" alt="" style="margin-right: 6px;">
-              维修
+            <span *ngIf="data.run === 2">
+              <img src="assets/icons/group_2.png" alt="">
+              运行
             </span>
-            <span *ngIf="data.status === 4" class="text_danger">
-              <img src="assets/icons/icon_Scrap.png" alt="" style="margin-right: 6px;">
-              报废
+            <span *ngIf="data.run === 3">
+              <img src="assets/icons/group_1.png" alt="">
+              告警
+            </span>
+            <span *ngIf="data.run === 4">
+              <img src="assets/icons/group_3.png" alt="">
+              故障
             </span>
           </td>
           <td>
-             <span *ngIf="data.status === 1" class="text_grey">
-              <img src="assets/icons/icon_active2.png" alt="" style="margin-right: 6px;">
-              未联网
+            <span *ngIf="data.status === 1">
+              正常
             </span>
-            <span *ngIf="data.status === 2" class="text_green">
-              <img src="assets/icons/icon_active.png" alt="" style="margin-right: 6px;">
-              已联网
-            </span>
-          </td>
-          <td>
-            <span *ngIf="data.status === 1" class="text_grey">
-              <img src="assets/icons/icon_active2.png" alt="" style="margin-right: 6px;">
-              未激活
-            </span>
-            <span *ngIf="data.status === 2" class="text_green">
-              <img src="assets/icons/icon_active.png" alt="" style="margin-right: 6px;">
-              已激活
-            </span>
-            <span *ngIf="data.status === 3" class="text_warning">
-              <img src="assets/icons/icon_repair.png" alt="" style="margin-right: 6px;">
-              维修
-            </span>
-            <span *ngIf="data.status === 4" class="text_danger">
-              <img src="assets/icons/icon_Scrap.png" alt="" style="margin-right: 6px;">
-              报废
+            <span *ngIf="data.status === 2" class="text_danger">
+              禁用
             </span>
           </td>
           <td>

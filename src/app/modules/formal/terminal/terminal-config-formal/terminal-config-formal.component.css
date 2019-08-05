@@ -1,0 +1,47 @@
+
+.terminal_content{
+
+}
+.t_content_l{
+  flex:2;
+}
+.t_content_r{
+  flex:1;
+  margin-left: 20px;
+}
+.t_section,.t_content_r{
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.tsection_h{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+.tsection_h h6{
+  margin-bottom: 0;
+}
+
+
+.tsection_body{
+  padding: 20px;
+}
+.ts_row{
+  display: flex;
+}
+.ts_item{
+  flex: 1;
+  display: flex;
+}
+.ts_label{
+  width: 90px;
+}
+
+
+
+
+

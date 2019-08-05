@@ -1,7 +1,7 @@
 
-<div class="bread">
+<!--<div class="bread">
   流量卡管理 <span> / </span>流量卡
-</div>
+</div>-->
 
 
 <div class="content">
@@ -11,7 +11,11 @@
       流量卡详情
     </div>
     <div>
-      <button class="btn btn_purple btn_round bpm ml-3" (click)="charge()">
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/ad/flow/list', {page: listPage}]">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="charge()">
         在线充值
       </button>
     </div>
@@ -158,7 +162,7 @@
         <h6>
           充值记录
         </h6>
-        <a class="btn btn_purple btn_round bpm" [routerLink]="['/dir/ad/flow-operate', uid]">
+        <a class="btn btn_purple btn_round bpm" [routerLink]="['/admin/ad/flow/operate', uid]">
           查看更多
         </a>
       </div>

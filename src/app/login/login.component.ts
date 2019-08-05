@@ -22,10 +22,33 @@ export class LoginComponent implements OnInit {
               private http: HttpClient) { }
 
   ngOnInit() {
+    let token = localStorage.getItem('authToken');
+    if (token) {
+      this.goAdmin();
+    }
 
   }
 
+  goAdmin() {
+    let roleId = localStorage.getItem('roleId');
+    console.log(roleId);
+    switch (roleId) {
+      case '1':
+        this.router.navigate(['/admin/ad']);
+        break;
+      case '10':
+        this.router.navigate(['/admin/formal']);
+        break;
+      case '15':
+        this.router.navigate(['/admin/service']);
+        break;
+      default:
+        this.router.navigate(['/admin']);
+    }
 
+
+
+  }
 
 
 }

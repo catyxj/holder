@@ -6,6 +6,8 @@ import {ComfirmComponent} from '../../../directives/alert/comfirm/comfirm.compon
 
 import Swal from 'sweetalert2';
 import {FlowBatchRechargeAdComponent} from '../modals/flow-batch-recharge-ad/flow-batch-recharge-ad.component';
+import {switchMap} from "rxjs/internal/operators";
+import {ActivatedRoute, ParamMap} from "@angular/router";
 
 @Component({
   selector: 'app-flow-list-ad',
@@ -30,22 +32,38 @@ export class FlowListAdComponent implements OnInit {
 
   constructor(private nzModal: NzModalService,
               private modalService: NgbModal,
-              private flowService: FlowService) { }
+              private flowService: FlowService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
-    /*this.dataLists = [
-      {
-        iccid: 'asdfsa'
-      }
-    ];
-*/
-    this.getList();
-    this.getAmount();
+
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        this.page = parseInt(params.get('page'));
+        if (!this.page) {
+          this.page = 1;
+        }
+        this.getList();
+        this.getAmount();
+        return (params.get('page') || []);
+      })
+    ).subscribe();
+
+
+    // this.getList();
+    // this.getAmount();
   }
 
 
   // 获取列表
   getList() {
+    /*this.dataLists = [
+      {
+        iccid: 'asdfsa'
+      }
+    ];*/
+
+
     this.loading = true;
     this.flowService.getLists(this.page, this.pageSize, this.status, this.search, this.value)
       .subscribe(data => {

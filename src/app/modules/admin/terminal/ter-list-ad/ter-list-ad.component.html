@@ -85,6 +85,7 @@
           </th>
           <th>终端编码</th>
           <th>固件版本</th>
+          <th>秘钥</th>
           <th>所属账号</th>
           <th>使用账号</th>
           <th>
@@ -124,6 +125,7 @@
           ></td>
           <td> {{data.terminal_code}} </td>
           <td> {{data.fw_ver}} </td>
+          <td> {{data.secret_key}} </td>
           <td>
             <div style="max-width: 160px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
               {{data.username || '空'}}
@@ -178,7 +180,7 @@
           </td>
           <td> {{data.created_at | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
           <td>
-            <a class="btn btn_purple btn-sm" [routerLink]="['/dir/ad/terminal-info', data.uid]" target="_blank">
+            <a class="btn btn_purple btn-sm" [routerLink]="['/admin/ad/terminal/info', data.uid, page, {status:status}]">
               设置
             </a>
           </td>

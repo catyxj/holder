@@ -1,0 +1,12 @@
+
+
+.m_form .m_item .m_input{
+  /*flex:auto;*/
+  width: 240px;
+  position: relative;
+}
+
+.m_input_l{
+  width: 393px;
+}
+

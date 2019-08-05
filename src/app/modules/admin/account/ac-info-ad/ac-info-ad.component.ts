@@ -17,6 +17,8 @@ export class AcInfoAdComponent implements OnInit {
   public operate;
   public expand = [];
 
+  public listPage;
+
   constructor(private accountService: AccountService,
               private route: ActivatedRoute,
               public router: Router,
@@ -24,10 +26,11 @@ export class AcInfoAdComponent implements OnInit {
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
+    this.listPage = this.route.snapshot.paramMap.get('page');
 
     let roleId = parseInt(localStorage.getItem('roleId'));
-    if (roleId > 1) {
-      this.router.navigate(['/admin']);
+    if (roleId === 10) {
+      this.router.navigate(['/admin/formal']);
     }
 
     /*this.basic = {

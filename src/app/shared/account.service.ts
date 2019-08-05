@@ -17,11 +17,14 @@ const httpOptions = {
 })
 export class AccountService {
 
+  // 管理员
   private accountListUrl = '/api/admin/user_list';
   private accountBasicUrl = '/api/admin/user_basic_info';
   private accountConfigUrl = '/api/admin/user_config_info';
   private accountOperateUrl = '/api/admin/user_operate_info';
   private accountOperateMoreUrl = '/api/admin/user_operate_more';
+
+
 
   // private token = 'authtoken';
   // private accountListUrl = 'assets/server/user_list.json';
@@ -120,7 +123,7 @@ export class AccountService {
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
     const url = `/api/admin/forced_entry?uid=${uid}`;
-    return this.http.post(url, httpOptions)
+    return this.http.get(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -149,6 +152,30 @@ export class AccountService {
   }
 
 
+  /*--------正式用户--------------------------------------------------*/
+  // 修改配置信息
+  updateConfigF(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/user/info/update', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  changePassF(data) {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/user/password/update', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+
 
 
   private handleError(error: HttpErrorResponse) {
@@ -160,6 +187,7 @@ export class AccountService {
         `body was: ${error.error}`);
     }
     if (error.status === 550) {
+      localStorage.removeItem('authToken');
       window.location.reload();
     }
     // return an observable with a user-facing error message

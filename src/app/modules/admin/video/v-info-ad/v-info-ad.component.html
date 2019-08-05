@@ -1,7 +1,7 @@
 
-<div class="bread">
+<!--<div class="bread">
   设备管理 <span> / </span>视频设备
-</div>
+</div>-->
 
 
 <div class="content">
@@ -11,13 +11,17 @@
       视频详情
     </div>
     <div>
-      <a class="btn btn_purple btn_round bpm ml-3" [routerLink]="['/video-live', uid]" target="_blank" *ngIf="basic&&basic.status !== 4">
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/ad/video/list', {page: listPage}]">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+      <a class="btn btn_purple btn_round bpm ml-1" [routerLink]="['/video-live', uid]" target="_blank" *ngIf="basic&&basic.status !== 4">
         在线直播
       </a>
-      <button class="btn btn_purple btn_round bpm ml-3" (click)="deleteData()">
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="deleteData()">
         删除
       </button>
-      <button class="btn btn_purple btn_round bpm ml-3" (click)="scrap()" [disabled]="!basic || basic.status === 4">
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="scrap()" [disabled]="!basic || basic.status === 4">
         设备报废
       </button>
     </div>
@@ -145,7 +149,7 @@
         <h6>
           状态记录
         </h6>
-        <a class="btn btn_purple btn_round bpm" [routerLink]="['/dir/ad/video-operate', uid]">
+        <a class="btn btn_purple btn_round bpm" [routerLink]="['/admin/ad/video/operate', uid]">
           查看更多
         </a>
       </div>

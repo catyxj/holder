@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {TerminalService} from "../../../../shared/terminal.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TerBasicConfigAdComponent} from "../modals/ter-basic-config-ad/ter-basic-config-ad.component";
 import {TerScrapAdComponent} from "../modals/ter-scrap-ad/ter-scrap-ad.component";
 import {TerFlowAdComponent} from "../modals/ter-flow-ad/ter-flow-ad.component";
-
-import Swal from 'sweetalert2';
 import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 import {ComfirmComponent} from "../../../directives/alert/comfirm/comfirm.component";
+
+import Swal from 'sweetalert2';
+import {switchMap} from "rxjs/internal/operators";
 
 @Component({
   selector: 'app-ter-info-ad',
@@ -20,8 +21,11 @@ export class TerInfoAdComponent implements OnInit {
   public basic;
   // public config;
   public operate;
+  public status;
 
   tplModal: NzModalRef;
+
+  public listPage;
 
   constructor(private terminalService: TerminalService,
               private route: ActivatedRoute,
@@ -30,8 +34,20 @@ export class TerInfoAdComponent implements OnInit {
               private nzModal: NzModalService) { }
 
   ngOnInit() {
-    this.uid = this.route.snapshot.paramMap.get('uid');
-
+    // this.uid = this.route.snapshot.paramMap.get('uid');
+    // this.listPage = this.route.snapshot.paramMap.get('page');
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        console.log(params);
+        this.uid = params.get('uid');
+        this.listPage = params.get('page');
+        this.status = params.get('status');
+        if (!this.status) {
+          this.status = '';
+        }
+        return (params.get('status') || []);
+      })
+    ).subscribe();
     /*this.basic = {
       terminal_code: '122334',
       fw_ver: 12,

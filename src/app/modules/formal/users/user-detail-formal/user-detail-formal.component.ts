@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserListService} from "../../../../shared/user-list.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-user-detail-formal',
@@ -7,6 +8,8 @@ import {UserListService} from "../../../../shared/user-list.service";
   styleUrls: ['./user-detail-formal.component.css']
 })
 export class UserDetailFormalComponent implements OnInit {
+  public uid;
+  public info;
   public dataLists = [];
   public page = 1;
   public pageNum;
@@ -14,20 +17,44 @@ export class UserDetailFormalComponent implements OnInit {
   public search = 'phone';
   public value;
   public status = '';
+  public online = '';
+  public run = '';
   public totalItems;
   public loading;
   public pageSizeList = [15, 30, 50, 100];
+  public listPage;
 
-  constructor(private usersService: UserListService) { }
+  constructor(private usersService: UserListService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.uid = this.route.snapshot.paramMap.get('uid');
+    this.listPage = this.route.snapshot.paramMap.get('page');
+    this.getInfo();
     this.getList();
+  }
+
+  getInfo() {
+
+    // this.info = {"address":"","email":"zhangsan@124.com","name":"zd","org_name":"测试企业","org_tag":1,"username":"17855846864","location_name":"浙江省宁波市鄞州区南部商务区1号"};
+
+    this.usersService.getBasic(this.uid)
+      .subscribe(data => {
+        this.info = data;
+      }, err => {
+
+      });
   }
 
   // 获取列表
   getList() {
+    /*let tdata = {"count":2,"data":[{"location_name":"","name":"cc锅炉","online":true,"run":4,"status":2,"terminal_code":"685257","uid":"4b3941e8-b3fb-11e9-a701-7cd30abeae02","use_org":"测试企业","use_username":"17855846864"},{"location_name":"","name":"aaa锅炉","online":false,"run":0,"status":1,"terminal_code":"685272","uid":"4ee34a9b-b2ac-11e9-a701-7cd30abeae02","use_org":"测试企业","use_username":"17855846864"}]};
+    this.dataLists = tdata.data;
+    this.totalItems = tdata.count;*/
+
+
     this.loading = true;
-    this.usersService.getLists(this.page, this.pageSize, this.search, this.value, this.status)
+    this.usersService.getEptLists(this.uid, this.page, this.pageSize, this.search, this.value, this.online, this.run, this.status)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;
@@ -50,7 +77,6 @@ export class UserDetailFormalComponent implements OnInit {
   // 页码变化
   pageChange(): void {
     this.getList();
-    this.isAllChecked = false;
   }
 
   // 页码跳转
@@ -75,11 +101,16 @@ export class UserDetailFormalComponent implements OnInit {
     }
   }
 
-  searchRoleId(n?) {
+  searchOnline(n?) {
+    this.online = n;
+    this.searchChange();
+  }
+  searchRun(n?) {
+    this.run = n;
+    this.searchChange();
+  }
+  searchStatus(n?) {
     this.status = n;
-    // if (!n) {
-    //   this.type = '';
-    // }
     this.searchChange();
   }
 

@@ -15,11 +15,19 @@ const httpOptions = {
 })
 export class VideoService {
 
+  // 管理员
   private dataListUrl = '/api/admin/camera/list';
   private dataBasicUrl = '/api/admin/camera/detail';
   private dataExpandUrl = '/api/admin/camera/capacity/get';
   private dataOperateUrl = '/api/admin/camera/log/info';
   private dataOperateMoreUrl = '/api/admin/camera/log/list';
+
+  // 正式用户
+  private dataListUrlF = '/api/formal/camera/list';
+  private dataBasicUrlF = '/api/formal/camera/detail';
+  private dataExpandUrlF = '/api/formal/camera/capacity/get';
+  private dataOperateUrlF = '/api/formal/camera/log/info';
+  private dataOperateMoreUrlF = '/api/formal/camera/log/info/more';
 
   // private token = 'authtoken';
   // private dataListUrl = 'assets/server/cluster_list.json';
@@ -31,7 +39,16 @@ export class VideoService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.dataListUrl}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&status=${status}`;
+
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = `${this.dataListUrl}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&status=${status}`;
+    }
+    if (roleId === '10') {
+      url = `${this.dataListUrlF}?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -43,7 +60,14 @@ export class VideoService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.dataBasicUrl}?uid=${uid}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = `${this.dataBasicUrl}?uid=${uid}`;
+    }
+    if (roleId === '10') {
+      url = `${this.dataBasicUrlF}?uid=${uid}`;
+    }
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -55,7 +79,15 @@ export class VideoService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.dataExpandUrl}?uid=${uid}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = `${this.dataExpandUrl}?uid=${uid}`;
+    }
+    if (roleId === '10') {
+      url = `${this.dataExpandUrlF}?uid=${uid}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -67,7 +99,15 @@ export class VideoService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.dataOperateUrl}?uid=${uid}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = `${this.dataOperateUrl}?uid=${uid}`;
+    }
+    if (roleId === '10') {
+      url = `${this.dataOperateUrlF}?uid=${uid}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -79,19 +119,36 @@ export class VideoService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.dataOperateMoreUrl}?uid=${uid}&page=${n}&rows=${pageSize}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = `${this.dataOperateMoreUrl}?uid=${uid}&page=${n}&rows=${pageSize}`;
+    }
+    if (roleId === '10') {
+      url = `${this.dataOperateMoreUrlF}?uid=${uid}&page=${n}&rows=${pageSize}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  // 新增终端
+  // 新增视频
   addData(data): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/admin/camera/add', data, httpOptions)
+
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = '/api/admin/camera/add';
+    }
+    if (roleId === '10') {
+      url = '/api/formal/camera/create';
+    }
+    return this.http.post(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -102,7 +159,16 @@ export class VideoService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/admin/camera/batch/delete', data, httpOptions)
+
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = '/api/admin/camera/batch/delete';
+    }
+    if (roleId === '10') {
+      url = '/api/formal/camera/batch/delete';
+    }
+    return this.http.post(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -114,7 +180,15 @@ export class VideoService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/admin/camera/update', data, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = '/api/admin/camera/update';
+    }
+    if (roleId === '10') {
+      url = '/api/formal/camera/update';
+    }
+    return this.http.post(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -137,7 +211,16 @@ export class VideoService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.get(`/api/admin/camera/live/address?uid=${uid}`, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = `/api/admin/camera/live/address?uid=${uid}`;
+    }
+    if (roleId === '10') {
+      url = `/api/formal/camera/live/address?uid=${uid}`;
+    }
+
+    return this.http.get(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -149,19 +232,50 @@ export class VideoService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post(`/api/admin/camera/console/start`, data, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = `/api/admin/camera/console/start`;
+    }
+    if (roleId === '10') {
+      url = `/api/formal/camera/console/start`;
+    }
+
+    return this.http.post(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
 
-  // 视频控制开始
+  // 视频控制结束
   endCtrl(data): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post(`/api/admin/camera/console/stop`, data, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = `/api/admin/camera/console/stop`;
+    }
+    if (roleId === '10') {
+      url = `/api/formal/camera/console/stop`;
+    }
+
+    return this.http.post(url, data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+
+  /*-----正式用户---------------------------------*/
+  repair(data) {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get(`/api/formal/camera/repair?uid=${data}`, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -178,6 +292,7 @@ export class VideoService {
         `body was: ${error.error}`);
     }
     if (error.status === 550) {
+      localStorage.removeItem('authToken');
       window.location.reload();
     }
     return throwError(

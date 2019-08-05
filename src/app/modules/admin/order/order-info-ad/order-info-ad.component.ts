@@ -14,6 +14,7 @@ export class OrderInfoAdComponent implements OnInit {
   public uid;
   public basic;
   public products;
+  public listPage;
 
   constructor(private route: ActivatedRoute,
               public router: Router,
@@ -22,6 +23,7 @@ export class OrderInfoAdComponent implements OnInit {
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
+    this.listPage = this.route.snapshot.paramMap.get('page');
     this.basic = {
         amount: 300,
         pay_account: 'asdfa@123.com'

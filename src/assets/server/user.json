@@ -1,9 +1,17 @@
 
 {
-  "RoleId": 1,
+  "name": "ad",
+  "role_id": 1,
   "brand_image": "",
   "brand_name": "",
   "picture": "",
   "show_brand": 0,
-  "username": "admin"
+  "username": "admin",
+  "org_name": "adsf",
+  "org_tag": 1,
+  "location_id": 110102,
+  "location_name": "全国",
+  "address": "啊哇哇哇无",
+  "email": "",
+  "status": 1
 }

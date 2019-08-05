@@ -1,0 +1,108 @@
+
+.info_title{
+  margin-top: 24px;
+}
+.info_body{
+  padding: 17px 28px;
+}
+
+
+/*基础信息*/
+.ser_h_r{
+  margin-bottom: 17px;
+}
+.ser_h_col{
+  display: flex;
+}
+.ser_h_label{
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 103px;
+  font-weight: bold;
+  text-align: right;
+  color: #464855;
+}
+.ser_h_text{
+  color: #666EE8;
+  margin-left: 12px;
+  font-weight: bold;
+}
+.text_content{
+  width: 100%;
+  min-height: 45px;
+  background: #EDEEF4;
+  padding: 4px 13px;
+  box-sizing: border-box;
+  font-size: 12px;
+  margin-left: 12px;
+}
+
+
+
+/*沟通记录*/
+.sinfo_item{
+  padding-top: 4px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid #E4E5EC;
+}
+.sinfo_item:last-child{
+  border-bottom: none;
+}
+.sinfo_item .ser_h_label{
+  display: flex;
+}
+.sinfo_item_img img{
+  /*width: 17px;*/
+  /*height: 17px;*/
+  margin-right: 7px;
+}
+.sinfo_item_name{
+  /*max-width: 73px;
+  overflow: hidden;
+  text-overflow: ellipsis;*/
+  text-align: left;
+}
+.sinfo_item_bottom{
+  display: flex;
+  justify-content: flex-end;
+}
+.sinfo_item_date{
+  font-size: 10px;
+  color: #C0C4D2;
+}
+.sinfo_item_down{
+  display: flex;
+}
+.sinfo_item_down a{
+  margin-right: 10px;
+  font-size: 10px;
+}
+
+.info_page{
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+/*我要反馈*/
+.sinfo_message{
+
+}
+
+.sinfo_upload{
+  display: flex;
+  margin-left: 113px;
+}
+.btn_purple.bpm{
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+.btn_purple.bpm img{
+  margin-right: 5px;
+}
+
+
+
+
+

@@ -11,6 +11,7 @@ import {MediaMatcher} from "@angular/cdk/layout";
 })
 export class DirMainComponent implements OnInit, OnDestroy {
   public user;
+  public roleId;
   public subscription: Subscription;
 
   mobileQuery: MediaQueryList;
@@ -30,6 +31,7 @@ export class DirMainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.roleId = localStorage.getItem('roleId');
     this.getUser();
   }
 

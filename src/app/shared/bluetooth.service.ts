@@ -16,18 +16,21 @@ const httpOptions = {
 })
 export class BluetoothService {
 
+  //  管理员
   private dataListUrl = '/api/admin/bluetooth/list';
   private dataBasicUrl = '/api/admin/bluetooth/detail';
-  // private dataConfigUrl = '/api/admin/bluetooth/config';
   private dataOperateUrl = '/api/admin/bluetooth/log/info';
   private dataOperateMoreUrl = '/api/admin/bluetooth/log/list';
 
+  // 正式用户
+  private dataListUrlF = '/api/formal/bluetooth/list';
+  private dataBasicUrlF = '/api/formal/bluetooth/detail';
+  private dataOperateUrlF = '/api/formal/bluetooth/log/info';
+  private dataOperateMoreUrlF = '/api/formal/bluetooth/log/info/more';
 
   // private token = 'authtoken';
-  // private dataListUrl = 'assets/server/cluster_list.json';
+  // private dataListUrlF = 'assets/server/cluster_list.json';
 
-
-  private bluetoothAllUrl = '/bluetooth_list_all';
 
   constructor(private http: HttpClient) { }
 
@@ -36,7 +39,15 @@ export class BluetoothService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.dataListUrl}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&status=${status}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = `${this.dataListUrl}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&status=${status}`;
+    }
+    if (roleId === '10') {
+      url = `${this.dataListUrlF}?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -49,7 +60,16 @@ export class BluetoothService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.dataBasicUrl}?uid=${uid}`;
+
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = `${this.dataBasicUrl}?uid=${uid}`;
+    }
+    if (roleId === '10') {
+      url = `${this.dataBasicUrlF}?uid=${uid}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -62,7 +82,15 @@ export class BluetoothService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.dataOperateUrl}?uid=${uid}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = `${this.dataOperateUrl}?uid=${uid}`;
+    }
+    if (roleId === '10') {
+      url = `${this.dataOperateUrlF}?uid=${uid}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -74,7 +102,15 @@ export class BluetoothService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.dataOperateMoreUrl}/?uid=${uid}&page=${n}&rows=${pageSize}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = `${this.dataOperateMoreUrl}?uid=${uid}&page=${n}&rows=${pageSize}`;
+    }
+    if (roleId === '10') {
+      url = `${this.dataOperateMoreUrlF}?uid=${uid}&page=${n}&rows=${pageSize}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -82,11 +118,22 @@ export class BluetoothService {
   }
 
 
+  // 新增
   addData(data): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/admin/bluetooth/add', data, httpOptions)
+
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = '/api/admin/bluetooth/add';
+    }
+    if (roleId === '10') {
+      url = '/api/formal/bluetooth/create';
+    }
+
+    return this.http.post(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -97,7 +144,16 @@ export class BluetoothService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/admin/bluetooth/batch/delete', data, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = '/api/admin/bluetooth/batch/delete';
+    }
+    if (roleId === '10') {
+      url = '/api/formal/bluetooth/batch/delete';
+    }
+
+    return this.http.post(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -108,7 +164,15 @@ export class BluetoothService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/admin/bluetooth/update', data, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = '/api/admin/bluetooth/update';
+    }
+    if (roleId === '10') {
+      url = '/api/formal/bluetooth/update';
+    }
+    return this.http.post(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -127,6 +191,19 @@ export class BluetoothService {
   }
 
 
+  /*----正式用户-----------*/
+  // 报修
+  repair(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get(`/api/formal/bluetooth/repair?uid=${data}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -137,6 +214,7 @@ export class BluetoothService {
         `错误内容: ${error.error}`);
     }
     if (error.status === 550) {
+      localStorage.removeItem('authToken');
       window.location.reload();
     }
     return throwError(

@@ -1,6 +1,6 @@
-<div class="bread">
+<!--<div class="bread">
   信息维护 <span> / </span>订单管理
-</div>
+</div>-->
 
 
 <div class="content">
@@ -10,7 +10,11 @@
       订单编号{{basic?.name}}
     </div>
     <div style="text-align: right;">
-      <button class="btn btn_purple btn_round bpm ml-3" (click)="statusSet()">
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/ad/order/list', {page: listPage}]">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="statusSet()">
         状态设置
       </button>
       <div style="margin-top: 15px; font-weight: bold;">

@@ -1,53 +1,53 @@
 
 [
     {
-        "Id": 1,
-        "Name": "1200",
-        "Value": 1
+        "id": 1,
+        "name": "1200",
+        "value": 1
     },
     {
-        "Id": 2,
-        "Name": "2400",
-        "Value": 2
+        "id": 2,
+        "name": "2400",
+        "value": 2
     },
     {
-        "Id": 3,
-        "Name": "4800",
-        "Value": 3
+        "id": 3,
+        "name": "4800",
+        "value": 3
     },
     {
-        "Id": 4,
-        "Name": "9600",
-        "Value": 4
+        "id": 4,
+        "name": "9600",
+        "value": 4
     },
     {
-        "Id": 5,
-        "Name": "14400",
-        "Value": 5
+        "id": 5,
+        "name": "14400",
+        "value": 5
     },
     {
-        "Id": 6,
-        "Name": "19200",
-        "Value": 6
+        "id": 6,
+        "name": "19200",
+        "value": 6
     },
     {
-        "Id": 7,
-        "Name": "38400",
-        "Value": 7
+        "id": 7,
+        "name": "38400",
+        "value": 7
     },
     {
-        "Id": 8,
-        "Name": "56000",
-        "Value": 8
+        "id": 8,
+        "name": "56000",
+        "value": 8
     },
     {
-        "Id": 9,
-        "Name": "57600",
-        "Value": 9
+        "id": 9,
+        "name": "57600",
+        "value": 9
     },
     {
-        "Id": 10,
-        "Name": "115200",
-        "Value": 10
+        "id": 10,
+        "name": "115200",
+        "value": 10
     }
 ]

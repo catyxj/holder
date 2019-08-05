@@ -15,6 +15,8 @@ export class FlowInfoAdComponent implements OnInit {
   public operate;
   public isSpinning = false;
 
+  public listPage;
+
   constructor(private flowService: FlowService,
               private route: ActivatedRoute,
               public router: Router,
@@ -22,6 +24,7 @@ export class FlowInfoAdComponent implements OnInit {
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
+    this.listPage = this.route.snapshot.paramMap.get('page');
     this.getBasic();
     this.getOperate();
   }

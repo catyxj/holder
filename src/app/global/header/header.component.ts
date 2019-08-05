@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
   public noticeNum = 0;
   public totalNum = 0;
   public subscription: Subscription;
+  public roleId;
 
   constructor(private userService: UserService,
               private alarmService: AlarmService,
@@ -38,9 +39,12 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.roleId = localStorage.getItem('roleId');
+
     // console.log(this.user);
     // this.getAlarm();
     // this.getUser();
+
   }
 
   getAlarm() {
@@ -73,9 +77,11 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.userService.logout(this.user.Uid)
-      .subscribe();
-    sessionStorage.user = false;
-    this.router.navigate(['/login']);
+      .subscribe( val => {
+        sessionStorage.user = false;
+        this.router.navigate(['/login']);
+      });
+
   }
 
 }
