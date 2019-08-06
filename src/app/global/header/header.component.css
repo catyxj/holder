@@ -83,6 +83,7 @@ mat-toolbar{
   display: block;
 }
 
+
 /*下拉框*/
 
 .dropdown_content{
@@ -111,6 +112,23 @@ button:focus {
   outline: none;
 }
 
+
+.head_user{
+  cursor: pointer;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: right;
+}
+.head_user span{
+  font-size: 10px;
+  color: #666EE8;
+}
+/*.head_user:hover{
+
+}*/
 
 
 

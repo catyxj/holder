@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {TerminalService} from "../../../../shared/terminal.service";
 import {NzModalService} from "ng-zorro-antd/modal";
+import {TerminalAddImgFormalComponent} from "../modals/terminal-add-img-formal/terminal-add-img-formal.component";
 
 @Component({
   selector: 'app-terminal-customize-formal',
@@ -48,6 +49,7 @@ export class TerminalCustomizeFormalComponent implements OnInit {
   public curText; // 当前选中组件文本内容
   public curAddress; // 当前选中组件寄存器地址
 
+
   constructor(private route: ActivatedRoute,
               private terminalService: TerminalService,
               public el: ElementRef,
@@ -68,31 +70,11 @@ export class TerminalCustomizeFormalComponent implements OnInit {
     //   });
 
     this.imgComponents1 = [
-      {
+      /*{
         id: 1,
         name: '图片1',
         src: 'assets/images/mapicon1.png'
-      },
-      {
-        id: 2,
-        name: '图片2',
-        src: 'assets/images/mapicon2.png'
-      },
-      {
-        id: 3,
-        name: '图片3',
-        src: 'assets/images/mapicon4.png'
-      },
-      {
-        id: 4,
-        name: '图片4',
-        src: 'assets/images/no_image.png'
-      },
-      {
-        id: 5,
-        name: '图片5',
-        src: 'assets/images/no_img.jpg'
-      }
+      }*/
     ];
     this.imgComponents2 = [
       {
@@ -107,12 +89,6 @@ export class TerminalCustomizeFormalComponent implements OnInit {
         img: 'assets/images/no_image.png',
         type: '1'
       },
-      {
-        id: 4,
-        name: '自定义图片4',
-        img: 'assets/images/no_image.png',
-        type: '1'
-      }
     ];
     this.imgComponents3 = [
       {
@@ -226,7 +202,7 @@ export class TerminalCustomizeFormalComponent implements OnInit {
 
   getContent() {
     let that = this;
-    this.terminalService.getContent()
+    this.terminalService.getContent(this.uid)
       .subscribe(data => {
         let content = data.content;
         that.imgLists1 = content.imgs1;
@@ -321,15 +297,6 @@ export class TerminalCustomizeFormalComponent implements OnInit {
   addImg1(e, styles) {
     const that = this;
     const con = this.el.nativeElement.querySelector('#capture');
-    // let img;
-    // 获取图片组件id
-    /*let iid = parseInt(e.id.slice(3));
-    for (let i = 0; i < this.imgComponents1.length; i++) {
-      let imgc = this.imgComponents1[i];
-      if (iid === imgc.id) {
-        img = imgc;
-      }
-    }*/
     /*let w = e.naturalWidth;
     let h = e.naturalHeight;
     styles.width = w > 200 ? '200px' : w + 'px';
@@ -443,35 +410,8 @@ export class TerminalCustomizeFormalComponent implements OnInit {
         this.dataLists2.push(dataData);
         that.select22(dataData);
         break;
-      case 'data3':
-        // dataData.key = '开关量';
-        // dataData.chanType = 5;
-        // dataData.type = 'data3';
-        // typeId = 5;
-        // this.dataLists3.push(dataData);
-        // this.showCh = 3;
-        break;
     }
 
-    // that.select2(dataData);
-
-
-    /*const node = document.createElement('div');
-    node.className = 'dataComponent';
-    node.setAttribute('style', styles);
-    node.setAttribute('data-type', '0');
-    node.id = 'data' + that.z;
-    node.innerHTML = '监测点';
-    this.addListener(node);
-    node.addEventListener('click', function(e) {
-      that.select2(node);
-    });
-    /!*let renode = document.createElement('div'); // 添加右下角缩放按钮
-    renode.className = 'scale';
-    this.resizeItem(renode); // 添加缩放
-    node.appendChild(renode);*!/
-    con.appendChild(node);
-    that.select2(node);*/
   }
 
 
@@ -926,17 +866,23 @@ export class TerminalCustomizeFormalComponent implements OnInit {
   // 打开自定义组件模态框
   createComponentModal(): void {
     const that = this;
-    /*const modal = this.modalService.create({
+    const modal = this.modalService.create({
       nzTitle: '自定义组件上传',
-      nzContent: a,
-      nzWidth: '660',
+      nzContent: TerminalAddImgFormalComponent,
+      nzWidth: '600',
+      nzClassName: 'customize',
       nzComponentParams: {
         // title: '',
         // subtitle: 'component sub title，will be changed after 2 sec'
       },
       nzFooter: [
         {
-          label: '提交',
+          label: '取消',
+          shape: 'default',
+          onClick: () => modal.destroy()
+        },
+        {
+          label: '确定',
           type: 'primary',
           onClick: (componentInstance) => {
             let post;
@@ -958,23 +904,23 @@ export class TerminalCustomizeFormalComponent implements OnInit {
               return;
             }
             console.log(post);
-            this.dragService.uploadCom(post)
+            /*this.terminalService.uploadCom(post)
               .subscribe(val => {
                 alert('组件上传成功');
                 modal.destroy();
               }, err => {
                 alert('组件上传失败');
-              });
+              });*/
 
           }
-        }
+        },
       ]
     });
 
     modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
 
     // Return a result when closed
-    modal.afterClose.subscribe(result => console.log('[afterClose] The result is:', result));*/
+    modal.afterClose.subscribe(result => console.log('[afterClose] The result is:', result));
 
     // delay until modal instance created
     /*setTimeout(() => {
@@ -1003,7 +949,7 @@ export class TerminalCustomizeFormalComponent implements OnInit {
       const im = that.imgLists3[k];
 
       if (!im.chanNum) {
-        alert('有组件未选择参数');
+        alert('有图片组件未选择参数');
         return;
       }
       img3.push({
@@ -1033,7 +979,7 @@ export class TerminalCustomizeFormalComponent implements OnInit {
       // const dr2 = this.el.nativeElement.querySelector('#' + d2.id);
 
       if (!d2.chanNum) {
-        alert('有组件未选择参数');
+        alert('有文本组件未选择参数');
         return;
       }
       // 提出数据通道
@@ -1062,7 +1008,7 @@ export class TerminalCustomizeFormalComponent implements OnInit {
     for (let k = 0; k < that.btnLists.length; k++) {
       const im = that.btnLists[k];
       if (!im.address) {
-        alert('有地址组件未添加寄存器地址');
+        alert('有按钮组件未添加寄存器地址');
         return;
       }
     }

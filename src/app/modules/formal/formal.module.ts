@@ -53,6 +53,19 @@ import { TerminalChannelConfigFormalComponent } from './terminal/terminal-channe
 import { TerminalCustomizeFormalComponent } from './terminal/terminal-customize-formal/terminal-customize-formal.component';
 import { BlueAddFormalComponent } from './bluetooth/modals/blue-add-formal/blue-add-formal.component';
 import { VideoAddFormalComponent } from './video/modals/video-add-formal/video-add-formal.component';
+import { TerminalAddImgFormalComponent } from './terminal/modals/terminal-add-img-formal/terminal-add-img-formal.component';
+import { TemplateMainFormalComponent } from './template/template-main-formal/template-main-formal.component';
+import { TemplateListFormalComponent } from './template/template-list-formal/template-list-formal.component';
+import {MatGridListModule, MatMenuModule} from "@angular/material";
+import { TemplateChannelFormalComponent } from './template/template-channel-formal/template-channel-formal.component';
+import { TemplateConfigFormalComponent } from './template/template-config-formal/template-config-formal.component';
+import { TemplateCustomizeFormalComponent } from './template/template-customize-formal/template-customize-formal.component';
+import { TemplateAddMainComponent } from './template/add/template-add-main/template-add-main.component';
+import { TemplateAddEptComponent } from './template/add/template-add-ept/template-add-ept.component';
+import { TemplateAddCmtComponent } from './template/add/template-add-cmt/template-add-cmt.component';
+import { TemplateAddChannelComponent } from './template/add/template-add-channel/template-add-channel.component';
+import { TemplateAddCustomizeComponent } from './template/add/template-add-customize/template-add-customize.component';
+import { TemplateAddFinishComponent } from './template/add/template-add-finish/template-add-finish.component';
 
 @NgModule({
   imports: [
@@ -62,6 +75,8 @@ import { VideoAddFormalComponent } from './video/modals/video-add-formal/video-a
     RouterModule.forChild( FormalRoutingModule ),
     NgbModule,
     NgZorroAntdModule,
+    MatMenuModule,
+    MatGridListModule,
   ],
   declarations: [
     MainFormalComponent,
@@ -110,26 +125,20 @@ import { VideoAddFormalComponent } from './video/modals/video-add-formal/video-a
     TerminalAddFormalComponent, // 新增终端
     TerminalBasicEditFormalComponent, // 终端基础信息设置
     TerminalCommunicationEditFormalComponent, // 终端通信参数设置
+    TerminalAddImgFormalComponent,
+    TemplateMainFormalComponent,
+    TemplateListFormalComponent,
+    TemplateChannelFormalComponent,
+    TemplateConfigFormalComponent,
+    TemplateCustomizeFormalComponent,
+    TemplateAddMainComponent,
+    TemplateAddEptComponent,
+    TemplateAddCmtComponent,
+    TemplateAddChannelComponent,
+    TemplateAddCustomizeComponent,
+    TemplateAddFinishComponent,
   ],
-  exports: [
-    UserDetailFormalComponent,
-    AccountOperateFormalComponent,
-    AccountOrderDetailFormalComponent,
-    ServiceInfoFormalComponent,
-    ServiceDetailFormalComponent,
-    MRecordInfoFormalComponent,
-    MAccountInfoFormalComponent,
-    BlueInfoFormalComponent,
-    BlueOperateFormalComponent,
-    VideoInfoFormalComponent,
-    VideoOperateFormalComponent,
-    TerminalInfoFormalComponent,
-    TerminalOperateFormalComponent,
-    TerminalMessageFormalComponent,
-    TerminalConfigFormalComponent,
-    TerminalChannelConfigFormalComponent,
-    TerminalCustomizeFormalComponent,
-  ],
+  exports: [],
   entryComponents: [
     AccountEditFormalComponent,
     ServiceAddFormalComponent,
@@ -141,6 +150,7 @@ import { VideoAddFormalComponent } from './video/modals/video-add-formal/video-a
     TerminalAddFormalComponent,
     TerminalBasicEditFormalComponent,
     TerminalCommunicationEditFormalComponent,
+    TerminalAddImgFormalComponent
   ]
 })
 export class FormalModule { }

@@ -1,4 +1,6 @@
 
+
+
 <div class="content">
   <div class="list_head">
     <div class="li_head_l">
@@ -15,7 +17,7 @@
   </div>
 
   <div class="list_content">
-    <div class="flex">
+    <div class="flex lc_head">
       <!--<div class="flex">
         <div>
           组态编码
@@ -25,11 +27,11 @@
         </div>
       </div>-->
 
-      <div class="flex">
-        <div>
-          组态名称
+      <div class="lc_head_item">
+        <div class="lc_head_lable">
+          组态名称：
         </div>
-        <div>
+        <div class="lc_head_value">
           aaa
         </div>
       </div>
@@ -38,19 +40,19 @@
     <!--组态-->
     <div class="zutai">
 
-      <div class="row">
+      <div class="flex">
         <!--组件-->
-        <div class="col-2 component_box">
+        <div class="component_box">
           <div class="component">
             <!-- 公共组件-->
-            <h6>通用组件</h6>
+            <!--<h6>通用组件</h6>-->
             <div class="imgBox">
               <img *ngFor="let img1 of imgComponents1; let n = index;" src="{{img1.src}}" title="{{img1.name}}"
                    draggable="true" (dragstart)="dragstart($event,img1);" id="imgA{{n}}">
             </div>
 
             <!--单形态-->
-            <h6>自定义组件</h6>
+            <!--<h6>自定义组件</h6>-->
             <div class="imgBox">
               <img *ngFor="let img2 of imgComponents2; let n = index;" src="{{img2.img}}" title="{{img2.name}}"
                    draggable="true" (dragstart)="dragstart($event, img2);" id="imgB{{n}}">
@@ -77,7 +79,7 @@
             </div>
 
             <div class="btnBox">
-              <button class="btn btn-success btn-sm" id="btn1" draggable="true" (dragstart)="dragstart($event, '交互按钮');">
+              <button class="btn btn_dark btn-sm" id="btn1" draggable="true" (dragstart)="dragstart($event, '交互按钮');">
                 交互按钮
               </button>
             </div>
@@ -85,14 +87,14 @@
           </div>
 
           <div class="com_bottom">
-            <button nz-button nzType="primary" (click)="createComponentModal()">
-              <span>上传自定义组件</span>
+            <button class="btn btn_purple bpm" style="width: 110px;" (click)="createComponentModal()">
+              上传自定义组件
             </button>
           </div>
         </div>
 
         <!--视图-->
-        <div class="col-8">
+        <div class="view_box">
           <div id="capture" (drop)="drop($event)" (dragover)="allowDrop($event)">
             <!--公共图片-->
             <div class="imgComponent" *ngFor="let img1 of imgLists1" id="{{img1.id}}" (click)="select1(img1)" [class.selected]="selected === img1"
@@ -134,7 +136,7 @@
             <!--按钮-->
             <div class="btnComponent" *ngFor="let btn of btnLists" id="{{btn.id}}" (click)="select3(btn)" [class.selected]="selected === btn"
                  [ngStyle]="btn.style" (mousedown)="eventDown($event);select3(btn)" (mouseup)="eventUp($event)">
-              <button class="btn btn-success btn-sm">
+              <button class="btn btn_dark btn-sm">
                 {{btn.cName}}
               </button>
             </div>
@@ -144,7 +146,7 @@
         </div>
 
         <!--控制-->
-        <div class="col-2 ctrl_container">
+        <div class="ctrl_container">
           <div>
             <div class="ct_item">
               <div class="ct_label">
@@ -172,7 +174,7 @@
               </div>
 
 
-              <div>
+              <div class="ct_select">
                 <select *ngIf="showCh===0" [(ngModel)]="dataValue" (change)="chooseValue(dataValue)">
                   <option *ngFor="let chan of chans; let n = index;" [value]="chan.id">{{chan.name}}</option>
                 </select>
@@ -237,7 +239,7 @@
             <div>
               <div class="ct_item">
                 <div class="ct_label">
-                  背景色：
+                  背景颜色：
                 </div>
                 <div>
                   <input type="color" #color11 (change)="changeColor11(color11.value)" [(ngModel)]="color1">
@@ -267,7 +269,7 @@
                 <div class="ct_label">
                   字体大小：
                 </div>
-                <div>
+                <div class="ct_select">
                   <select (change)="changeSize1(fontSize1)" [(ngModel)]="fontSize1">
                     <option value="12">12</option>
                     <option value="14">14</option>
@@ -294,14 +296,14 @@
           </div>
 
 
-          <div class="ct_item justify-content-between">
+          <div class="ct_btn_box">
             <div class="ct_btn">
-              <button class="btn btn-info btn-block btn-sm" (click)="save()">
+              <button class="btn btn_purple bpm" (click)="save()">
                 保存
               </button>
             </div>
-            <div class="ct_btn">
-              <button class="btn btn-danger btn-block btn-sm" (click)="deleteD()">
+            <div class="ct_btn ml-3">
+              <button class="btn btn_purple bpm" (click)="deleteD()">
                 删除
               </button>
             </div>
@@ -309,6 +311,11 @@
 
         </div>
       </div>
+    </div>
+
+
+    <div class="text-center">
+      <button class="btn btn_purple bpm">确认提交</button>
     </div>
 
 

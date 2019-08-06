@@ -15,8 +15,8 @@ export class HeaderComponent implements OnInit {
 
   @Output() toggle = new EventEmitter<void>();
 
-  @Input()
-  user: any;
+  // @Input()
+  // user: any;
   @Input()
   matches: any;
   @Input()
@@ -28,6 +28,8 @@ export class HeaderComponent implements OnInit {
   public totalNum = 0;
   public subscription: Subscription;
   public roleId;
+  public user;
+  public picture = '';
 
   constructor(private userService: UserService,
               private alarmService: AlarmService,
@@ -39,9 +41,14 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.user = JSON.parse(sessionStorage.getItem('currentUser'));
     this.roleId = localStorage.getItem('roleId');
 
-    // console.log(this.user);
+    if (this.user && !this.user.picture) {
+      this.picture = 'assets/icons/anticon_user.png';
+    }
+
+    console.log(this.user);
     // this.getAlarm();
     // this.getUser();
 

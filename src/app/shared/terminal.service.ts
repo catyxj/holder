@@ -26,9 +26,9 @@ export class TerminalService {
 
 
   // private dataListUrlF = '/api/formal/terminal/list';
-  // private dataBasicUrlF = '/api/formal/terminal/detail';
-  // private dataOperateUrlF = '/api/formal/terminal/log/info';
-  // private dataOperateMoreUrlF = '/api/formal/terminal/log/list';
+  private dataBasicUrlF = '/api/formal/terminal/detail';
+  private dataOperateUrlF = '/api/formal/terminal/log/info';
+  private dataOperateMoreUrlF = '/api/formal/terminal/log/info/more';
 
   private dataListUrlF = 'assets/server/terminal_list.json';
 
@@ -75,7 +75,15 @@ export class TerminalService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.dataBasicUrl}?uid=${uid}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = `${this.dataBasicUrl}?uid=${uid}`;
+    }
+    if (roleId === '10') {
+      url = `${this.dataBasicUrlF}?uid=${uid}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -89,7 +97,15 @@ export class TerminalService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.dataOperateUrl}?uid=${uid}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = `${this.dataOperateUrl}?uid=${uid}`;
+    }
+    if (roleId === '10') {
+      url = `${this.dataOperateUrlF}?uid=${uid}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -101,7 +117,15 @@ export class TerminalService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.dataOperateMoreUrl}?uid=${uid}&page=${n}&rows=${pageSize}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = `${this.dataOperateMoreUrl}?uid=${uid}&page=${n}&rows=${pageSize}`;
+    }
+    if (roleId === '10') {
+      url = `${this.dataOperateMoreUrlF}?uid=${uid}&page=${n}&rows=${pageSize}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -114,7 +138,16 @@ export class TerminalService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/admin/terminal/add', data, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = '/api/admin/terminal/add';
+    }
+    if (roleId === '10') {
+      url = '/api/formal/terminal/create';
+    }
+
+    return this.http.post(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -137,7 +170,16 @@ export class TerminalService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/admin/terminal/batch/delete', data, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = '/api/admin/terminal/batch/delete';
+    }
+    if (roleId === '10') {
+      url = '/api/formal/terminal/batch/delete';
+    }
+
+    return this.http.post(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -194,7 +236,7 @@ export class TerminalService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/formal/term_config_issued', data, httpOptions)
+    return this.http.post('/api/formal/terminal/batch/issued', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -206,14 +248,84 @@ export class TerminalService {
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
 
-    return this.http.get(`/api/formal/message?uid=${uid}`, httpOptions)
+    return this.http.get(`/api/formal/terminal/debug/list?uid=${uid}`, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
 
-  // 通信参数
+  // 获取通信参数信息
+  getCmt(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get<any>(`/api/formal/terminal/cmt/config/detail?uid=${uid}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取模板配置基本信息
+  getEpt(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get<any>(`/api/formal/terminal/ept/config/detail?uid=${uid}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取通道基本信息
+  getChannelBrief(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get<any>(`/api/formal/terminal/channel/config/brief?uid=${uid}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取组态基本信息
+  getzZTBrief(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get<any>(`/api/formal/terminal/zt/config/brief?uid=${uid}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取通道具体信息
+  getChannelInfo(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get<any>(`/api/formal/terminal/channel/config/detail?uid=${uid}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+
+  // 获取组态内容
+  getContent(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get('assets/server/device.json', httpOptions);
+    // return this.http.get<any>(`/api/formal/terminal/zt/config/detail?uid=${uid}`, httpOptions)
+    //   .pipe(
+    //     catchError(this.handleError)
+    //   );
+
+  }
+
+
   // 通信接口地址
   getCorrespond(): Observable<any> {
     let token = localStorage.getItem('authToken');
@@ -311,12 +423,7 @@ export class TerminalService {
     return this.http.post('/zt_save', data, httpOptions);
   }
 
-  getContent(): Observable<any> {
-    let token = localStorage.getItem('authToken');
-    httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.get('assets/server/device.json', httpOptions);
-  }
 
 
 

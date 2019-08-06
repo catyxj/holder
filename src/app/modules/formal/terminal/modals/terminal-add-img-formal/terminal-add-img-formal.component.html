@@ -1,0 +1,97 @@
+<div class="cus_form">
+  <div class="cus_item">
+    <div class="cus_label">
+      组件名称
+    </div>
+    <div class="cus_content">
+      <input type="text" class="form-control" [(ngModel)]="name" style="width: 358px;" placeholder="请输入组件名称">
+    </div>
+  </div>
+
+  <div class="cus_item">
+    <div class="cus_label">
+      组件类型
+    </div>
+    <div class="cus_content">
+      <select name="" class="form-control" [(ngModel)]="type" (change)="typeChange(type)" style="width: 138px;">
+        <option value="1">单形态</option>
+        <option value="2">多形态</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="cus_item">
+    <div class="cus_label" style="color: #464855;">
+      展示素材
+    </div>
+    <div class="cus_content">
+      *素材大小100kb以内
+    </div>
+  </div>
+
+  <div class="cus_img" *ngIf="type === '1'">
+    <div class="img_con">
+      <img src="{{img}}" title="点击上传图片">
+      <input type="file"  (change)="imgChange1($event)" class="img_input">
+    </div>
+  </div>
+
+  <div class="cus_img2" *ngIf="type === '2'">
+    <div class="img_item">
+      <div class="img_num">
+        <div class="img_tag">
+          1
+        </div>
+      </div>
+      <div class="img_con">
+        <img src="{{imgs[0].imgUrl}}" title="点击上传图片">
+        <input type="file"  (change)="imgChange2($event, 0)" class="img_input">
+      </div>
+      <div class="img_value">
+        <div class="img_label">
+          对应数值区间
+        </div>
+        <div class="value_con">
+          <input type="number" [(ngModel)]="imgs[0].min" (change)="checkNumber()"
+                 class="form-control" style="width: 120px;">
+          <span>至</span>
+          <input type="number" [(ngModel)]="imgs[0].max" (change)="checkNumber()"
+                 class="form-control" style="width: 120px;">
+        </div>
+      </div>
+    </div>
+
+    <div class="img_item">
+      <div class="img_num">
+        <div class="img_tag">
+          2
+        </div>
+      </div>
+      <div class="img_con">
+        <img src="{{imgs[1].imgUrl}}" title="点击上传图片">
+        <input type="file"  (change)="imgChange2($event, 1)" class="img_input">
+      </div>
+      <div class="img_value">
+        <div class="img_label">
+          对应数值区间
+        </div>
+        <div class="value_con">
+          <input type="number" [(ngModel)]="imgs[1].min" (change)="checkNumber()"
+                 class="form-control" style="width: 120px;">
+          <span>至</span>
+          <input type="number" [(ngModel)]="imgs[1].max" (change)="checkNumber()"
+                 class="form-control" style="width: 120px;">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div>
+    <p class="text-danger">
+      {{errMes}}
+    </p>
+  </div>
+
+
+</div>

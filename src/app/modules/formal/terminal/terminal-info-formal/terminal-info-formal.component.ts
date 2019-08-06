@@ -37,7 +37,7 @@ export class TerminalInfoFormalComponent implements OnInit {
       status: 4
     };*/
 
-    this.operate = [
+    /*this.operate = [
       {
         created_at: '2019-1-2',
         info: 'asdfasdf'
@@ -46,7 +46,8 @@ export class TerminalInfoFormalComponent implements OnInit {
         created_at: '2019-11-2',
         info: 'aasdfadfadsfaf'
       }
-    ];
+    ];*/
+
   }
 
 
@@ -92,7 +93,7 @@ export class TerminalInfoFormalComponent implements OnInit {
 
   // 删除
   deleteData() {
-    const title = '确认要下发此终端吗？';
+    const title = '确认要删除此终端吗？';
     const subtitle = '';
     this.creatModal(title, subtitle, () => {
       this.checkBatch( [this.uid]);
@@ -105,8 +106,11 @@ export class TerminalInfoFormalComponent implements OnInit {
     let that = this;
     const title = '确认要下发此终端吗？';
     const subtitle = '';
+    let post = {
+      data: [this.uid]
+    };
     this.creatModal(title, subtitle, () => {
-      this.terminalService.issued(this.uid)
+      this.terminalService.issued(post)
         .subscribe(val => {
           Swal(
             '操作成功！',

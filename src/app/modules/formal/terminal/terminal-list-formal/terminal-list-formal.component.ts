@@ -162,7 +162,7 @@ export class TerminalListFormalComponent implements OnInit {
       }
     }
     if (checked.length > 0) {
-      title = '确认要删除此终端吗？';
+      title = '确认要下发此终端吗？';
       // subtitle = '';
 
       this.creatModal(title, subtitle, () => {

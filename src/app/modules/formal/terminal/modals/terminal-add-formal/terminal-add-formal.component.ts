@@ -39,7 +39,8 @@ export class TerminalAddFormalComponent implements OnInit {
     let that = this;
     let post = {
       terminal_code: this.code,
-
+      verify: this.verify,
+      template: this.template
     };
     // console.log(post);
     this.terminalService.addData(post)

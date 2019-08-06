@@ -34,6 +34,8 @@ import {VideoOperateFormalComponent} from "./video/video-operate-formal/video-op
 import {MRecordInfoFormalComponent} from "./maintain/m-record/m-record-info-formal/m-record-info-formal.component";
 import {TerminalCustomizeFormalComponent} from "./terminal/terminal-customize-formal/terminal-customize-formal.component";
 import {TerminalChannelConfigFormalComponent} from "./terminal/terminal-channel-config-formal/terminal-channel-config-formal.component";
+import {TemplateMainFormalComponent} from "./template/template-main-formal/template-main-formal.component";
+import {TemplateListFormalComponent} from "./template/template-list-formal/template-list-formal.component";
 
 export const FormalRoutingModule = [
   {
@@ -201,6 +203,17 @@ export const FormalRoutingModule = [
           {
             path: 'customize/:uid',
             component: TerminalCustomizeFormalComponent
+          }
+        ]
+      },
+      {
+        path: 'template',
+        component: TemplateMainFormalComponent,
+        children: [
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
+          {
+            path: 'list',
+            component: TemplateListFormalComponent
           }
         ]
       },

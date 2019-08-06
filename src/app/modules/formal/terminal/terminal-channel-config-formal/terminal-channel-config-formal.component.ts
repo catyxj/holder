@@ -12,4 +12,8 @@ export class TerminalChannelConfigFormalComponent implements OnInit {
   ngOnInit() {
   }
 
+  goBack() {
+    window.history.go(-1);
+  }
+
 }

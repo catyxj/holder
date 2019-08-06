@@ -34,6 +34,11 @@ h5, .h5 {
   font-size: 1.25rem;
 }
 
+
+.text_primary{
+  color: #2D2E4F;
+}
+
 .text_purple{
   color:#666EE8;
 }
@@ -388,7 +393,7 @@ app-header .dropdown-toggle::after{
 
 
 /*---------插件样式修改-----------*/
-/*模态框*/
+/*模态框 ngbootstrap*/
 .modal-backdrop {
   z-index: 880 !important;
 }
@@ -429,6 +434,24 @@ app-header .dropdown-toggle::after{
 }
 @media (min-width: 992px){
 
+}
+
+
+/*ng-zorro*/
+.customize .ant-modal-close{
+  display: none;
+}
+.customize .ant-modal-title *{
+  text-align: center;
+  font-size: 16px;
+  color: #000000;
+}
+.customize .ant-modal-footer{
+  text-align: center;
+}
+.customize .ant-modal-footer button{
+  margin-left: 17px;
+  margin-right: 17px;
 }
 
 .maintain_modal .ant-upload.ant-upload-select-picture-card{
@@ -698,6 +721,12 @@ a.btn_purple{
   /*border-radius:16px;*/
   border-radius:5px;
 }
+
+.btn_dark{
+  background-color: #464855;
+  color: #FFFFFF;
+}
+
 
 
 

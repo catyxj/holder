@@ -1,0 +1,19 @@
+.lc_head{
+  padding: 10px 10px 0 10px;
+}
+.lc_head_item{
+  display: flex;
+  min-width: 20%;
+  margin-right: 50px;
+}
+.lc_head_lable{
+  font-size: 12px;
+  color: #464855;
+  font-weight: bold;
+  margin-right: 10px;
+}
+.lc_head_value{
+  font-size: 12px;
+  color: #666EE8;
+  font-weight: bold;
+}

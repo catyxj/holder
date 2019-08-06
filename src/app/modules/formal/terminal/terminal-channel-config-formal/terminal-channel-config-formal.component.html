@@ -1,3 +1,194 @@
-<p>
-  terminal-channel-config-formal works!
-</p>
+<div class="content">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>
+        终端数据点位设置
+      </h6>
+    </div>
+    <div class="li_head_r">
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" (click)="goBack()">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="list_content">
+    <div class="flex lc_head">
+      <div class="lc_head_item">
+        <div class="lc_head_lable">
+          模板编号
+        </div>
+        <div class="lc_head_value">
+          aaa
+        </div>
+      </div>
+
+      <div class="lc_head_item">
+        <div class="lc_head_lable">
+          模板名称
+        </div>
+        <div class="lc_head_value">
+          aaa
+        </div>
+      </div>
+    </div>
+
+    <!--通道配置-->
+    <div class="channel">
+      <!--模拟通道-->
+      <div class="channel_content">
+        <div class="conf_title">
+          模拟通道
+          <!--<i class="fa fa-question-circle-o" nz-popover nzPlacement="bottom"
+             [nzContent]="analoguetip" nzTrigger="hover" nzTitle="说明">
+          </i>-->
+
+          <!--<div class="conf_add">
+            <a (click)="addAnalogue()"
+               *ngIf="analogueList.length < 24 "
+               class="">
+              <i class="fa fa-plus-circle"></i>
+              添加模拟通道
+            </a>
+          </div>-->
+        </div>
+        <table class="table table-striped table-hover table-bordered">
+          <thead class="t_head">
+          <tr>
+            <th>通道</th>
+            <th colspan="2">参数名称</th>
+            <th style="width: 100px;">换算比例</th>
+            <th>参数单位</th>
+            <!--<th colspan="2">告警阀值</th>-->
+            <th style="width: 12%;">功能码</th>
+            <th style="width: 12%;">高低字节</th>
+            <th>
+            <span nz-popover
+                  [nzContent]="modbusTips1" nzTrigger="hover" nzTitle="范围说明">
+              MODBUS地址
+            </span>
+            </th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of analogueList; let i = index">
+            <td width="10%"
+                style="color: #555; text-align: center; border: 1px solid #ccc; ">
+              通道
+              <input type="number" [(ngModel)]="data.ChannelNumber" max="24" min="1"
+                     style="display: inline-block; width: 50%;" class="form-control">
+            </td>
+            <td>
+              <button [matMenuTriggerFor]="menu" class="btn btn-block" [disabled]="!data.Parameter||!data.Parameter.Name"
+                      [ngClass]="{'btn_info': data.Status === 1, 'btn-danger': data.Status === 2}">
+                <i class="fa"
+                   [ngClass]="{'fa-ellipsis-h':data.Status === 0, 'fa-eye': data.Status === 1, 'fa-eye-slash': data.Status === 2}"></i>
+                <span *ngIf="data.Status === 1">{{ data.SequenceNumber }}</span>
+              </button>
+              <mat-menu #menu="matMenu" [overlapTrigger]="false">
+                <button mat-menu-item [matMenuTriggerFor]="subMenu"><i class="fa fa-eye"></i>位置</button>
+                <button mat-menu-item (click)="setStatus(data, 2)"><i class="fa fa-eye-slash"></i> 隐藏</button>
+                <button mat-menu-item (click)="setStatus(data, 0)"><i class="fa fa-ellipsis-h"></i> 默认</button>
+              </mat-menu>
+              <mat-menu #subMenu="matMenu">
+                <mat-grid-list cols="4" rowHeight="34">
+                  <mat-grid-tile
+                    *ngFor="let priority of priorities1" (click)="setStatus(data, 1, priority)">
+                    {{ priority }}
+                  </mat-grid-tile>
+                </mat-grid-list>
+              </mat-menu>
+
+            </td>
+            <td>
+              <input type="text" [(ngModel)]="data.Parameter.Name" (change)="dataChanged(data);"
+                     class="form-control" placeholder="{{data.Parameter.Name||'未配置'}}">
+            </td>
+            <td>
+              <input type="number" [(ngModel)]="data.Parameter.Scale" class="form-control" min="0" step="0.01"
+                     placeholder="未配置" [disabled]="!data.Parameter||!data.Parameter.Name">
+            </td>
+            <td>
+              <input type="text" [(ngModel)]="data.Parameter.Unit" class="form-control"
+                     placeholder="未配置" [disabled]="!data.Parameter||!data.Parameter.Name">
+            </td>
+
+            <td>
+              <select [(ngModel)]="data.Func" [disabled]="!data.Parameter||!data.Parameter.Name"
+                      class="form-control" type="number">
+                <option *ngFor="let fc of funcs1" [value]="fc.Id">{{fc.Name}}</option>
+              </select>
+            </td>
+            <td>
+              <select [(ngModel)]="data.Byte" [disabled]="!data.Parameter||!data.Parameter.Name"
+                      class="form-control">
+                <option *ngFor="let by of bytes" [value]="by.Id">{{by.Name}}</option>
+              </select>
+            </td>
+            <td>
+              <input type="number" [(ngModel)]="data.Modbus" placeholder="未配置"
+                     [disabled]="!data.Parameter||!data.Parameter.Name"
+                     class="form-control">
+
+            </td>
+            <td class="t_btn">
+              <div class="btn-group">
+                <button type="button" class="btn"
+                        [ngClass]="{'btn-outline-info': !data.alarm || data.alarm.length<=0, 'btn-outline-warning':data.alarm && data.alarm.length>0}"
+                        [disabled]="!data.Parameter||!data.Parameter.Name"
+                        title="编辑告警规则" (click)="addAlarmRule(data)">
+                  <i class="fa fa-bell" style="font-size: 14px;"></i>
+                </button>
+                <button type="button" (click)="removeAnalogue(i)" title="删除"
+                        class="btn btn-outline-danger">
+                  <i class="fa fa-trash" style="font-size: 14px;"></i>
+                </button>
+              </div>
+
+            </td>
+          </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<ng-template #modbusTips1>
+  功能码03对应范围 <b>40001-49999</b>
+  <br/>
+  功能码04对应范围 <b>30001-39999</b>
+</ng-template>
+
+<ng-template #modbusTips2>
+  功能码01对应范围 <b>00001-09999</b>
+  <br/>
+  功能码02对应范围 <b>10001-19999</b>
+  <br/>
+  功能码03对应范围 <b>40001-49999</b>
+</ng-template>
+
+
+<ng-template #bitAddressTips>
+  功能码01对应位地址 <b>1</b>
+  <br/>
+  功能码02对应位地址 <b>1</b>
+  <br/>
+  功能码03对应位地址 <b>1-16</b>
+</ng-template>
+
+
+
+
+
+
