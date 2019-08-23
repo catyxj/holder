@@ -1,22 +1,22 @@
 
 {
-  "params":[
+  "data":[
     {
       "Uid": "8727fadb-94ed-4a89-bf02-5fc34f52dd94",
-      "Name": "测试模版A",
+      "name": "测试模版A",
       "CreateTime": "2018-06-25T17:16:21+08:00",
       "UpdateTime": "2018-06-25T17:16:21+08:00",
       "IsDeleted": false,
       "Organization": {
         "Uid": "49495ba9-7a17-46e3-9dd9-c8bc3c3d5c74",
-        "Name": "杭州市特种设备检测研究院",
-        "NameEn": "",
+        "name": "杭州市特种设备检测研究院",
+        "nameEn": "",
         "Remark": "",
         "CreatedDate": "2018-06-16T09:08:05+08:00",
         "CreatedBy": {
           "Uid": "ef2d8e44-4ad6-4a8e-a628-4b7cec23721a",
-          "Name": "",
-          "NameEn": "",
+          "name": "",
+          "nameEn": "",
           "Remark": "",
           "CreatedDate": "0001-01-01T00:00:00Z",
           "CreatedBy": null,
@@ -45,8 +45,8 @@
         "UpdatedDate": "2018-06-15T17:41:25+08:00",
         "UpdatedBy": {
           "Uid": "6f651eee-7411-4b41-ac1e-681a70103fc1",
-          "Name": "",
-          "NameEn": "",
+          "name": "",
+          "nameEn": "",
           "Remark": "",
           "CreatedDate": "0001-01-01T00:00:00Z",
           "CreatedBy": null,
@@ -76,8 +76,8 @@
         "IsDeleted": false,
         "Type": {
           "Uid": "7cbdc217-b933-47c7-adae-7b58588465e3",
-          "Name": "",
-          "NameEn": "",
+          "name": "",
+          "nameEn": "",
           "Remark": "",
           "CreatedDate": "0001-01-01T00:00:00Z",
           "CreatedBy": null,
@@ -93,8 +93,8 @@
         "SubOrganizations": null,
         "Address": {
           "Uid": "92076eeb-60f1-4a45-afd6-ddb55c453350",
-          "Name": "",
-          "NameEn": "",
+          "name": "",
+          "nameEn": "",
           "Remark": "",
           "CreatedDate": "0001-01-01T00:00:00Z",
           "CreatedBy": null,
@@ -112,7 +112,7 @@
         },
         "Contact": null,
         "ShowBrand": false,
-        "BrandName": "",
+        "Brandname": "",
         "BrandImageUrl": "",
         "Users": null,
         "Boilers": null,
@@ -120,5 +120,5 @@
       }
     }
   ],
-  "counts":25
+  "count":25
 }

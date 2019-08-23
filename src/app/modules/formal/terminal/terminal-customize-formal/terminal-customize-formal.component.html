@@ -5,34 +5,34 @@
   <div class="list_head">
     <div class="li_head_l">
       <h6>
-        【611111】 终端组态设置
+        【{{code}}】 终端组态设置
       </h6>
     </div>
     <div class="li_head_r">
       <!--返回-->
-      <button class="btn btn_purple-o btn_round bps" (click)="goBack()">
+      <!--<button class="btn btn_purple-o btn_round bps" (click)="goBack()">
         <i class="iconfont iconicon_comeback1"></i>
-      </button>
+      </button>-->
     </div>
   </div>
 
   <div class="list_content">
     <div class="flex lc_head">
-      <!--<div class="flex">
-        <div>
-          组态编码
+      <div class="lc_head_item">
+        <div class="lc_head_lable">
+          组态编码：
         </div>
-        <div>
-          aaa
+        <div class="lc_head_value">
+          {{id}}
         </div>
-      </div>-->
+      </div>
 
       <div class="lc_head_item">
         <div class="lc_head_lable">
           组态名称：
         </div>
         <div class="lc_head_value">
-          aaa
+          {{name}}
         </div>
       </div>
     </div>
@@ -60,7 +60,7 @@
 
             <!--多形态-->
             <div class="imgBox">
-              <img *ngFor="let img3 of imgComponents3; let n = index;" src="{{img3.imgs[0].imgUrl}}" title="{{img3.name}}"
+              <img *ngFor="let img3 of imgComponents3; let n = index;" src="{{img3.imgs[0].img}}" title="{{img3.name}}"
                    draggable="true" (dragstart)="dragstart($event, img3);" id="imgC{{n}}">
             </div>
 
@@ -79,16 +79,20 @@
             </div>
 
             <div class="btnBox">
-              <button class="btn btn_dark btn-sm" id="btn1" draggable="true" (dragstart)="dragstart($event, '交互按钮');">
-                交互按钮
+              <!--<nz-switch [ngModel]="true" id="btn1" draggable="true" (dragstart)="dragstart($event, '交互按钮');"></nz-switch>-->
+              <button class="b_switch" id="btn1" draggable="true" (dragstart)="dragstart($event, '交互按钮');">
+                <!--交互按钮-->
               </button>
             </div>
 
           </div>
 
           <div class="com_bottom">
-            <button class="btn btn_purple bpm" style="width: 110px;" (click)="createComponentModal()">
+            <button class="btn btn_purple bpm" style="width: 100px; padding: 0.375rem;" (click)="createComponentModal()">
               上传自定义组件
+            </button>
+            <button class="btn btn_purple-o bpm ml-1" style="width: 100px; padding: 0.375rem;" (click)="deleteComponentModal()">
+              删除自定义组件
             </button>
           </div>
         </div>
@@ -136,9 +140,11 @@
             <!--按钮-->
             <div class="btnComponent" *ngFor="let btn of btnLists" id="{{btn.id}}" (click)="select3(btn)" [class.selected]="selected === btn"
                  [ngStyle]="btn.style" (mousedown)="eventDown($event);select3(btn)" (mouseup)="eventUp($event)">
-              <button class="btn btn_dark btn-sm">
-                {{btn.cName}}
+              <button class="b_switch">
+                <!--{{btn.cName}}-->
+                <!--<img src="assets/images/customize/switch.png" alt="">-->
               </button>
+              <!--<nz-switch [ngModel]="true"></nz-switch>-->
             </div>
 
           </div>
@@ -297,12 +303,12 @@
 
 
           <div class="ct_btn_box">
-            <div class="ct_btn">
+            <!--<div class="ct_btn">
               <button class="btn btn_purple bpm" (click)="save()">
                 保存
               </button>
-            </div>
-            <div class="ct_btn ml-3">
+            </div>-->
+            <div class="ct_btn" *ngIf="selected">
               <button class="btn btn_purple bpm" (click)="deleteD()">
                 删除
               </button>
@@ -315,7 +321,11 @@
 
 
     <div class="text-center">
-      <button class="btn btn_purple bpm">确认提交</button>
+      <div class="btn-group">
+        <button class="btn btn_purple bpm" (click)="goBack()">返回</button>
+        <button class="btn btn_purple bpm" (click)="save()" style="margin-left: 1px;">确认提交</button>
+      </div>
+
     </div>
 
 

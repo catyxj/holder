@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': 'Ida'
+    'Authorization': 'auth'
   })
 };
 
@@ -18,13 +18,13 @@ const httpOptions = {
 })
 export class BoilerService {
 
-  private boilersUrl = 'assets/server/boiler_list.json';
+  private eptUrl = 'assets/server/boiler_list.json';
   private templatesUrl = 'assets/server/boiler_template_list.json';
   private boilerUrl = 'assets/server/boiler.json';
   private templateListUrl = 'assets/server/boiler_template_list.json';
   private boilerList = 'assets/server/boiler_list.json';
 
-  // private boilersUrl = '/equipment_list';
+  // private eptUrl = '/api/formal/equipment/list';
   // private templatesUrl = '/equipment_template';
   // private boilerUrl = '/equipment_detail';
   // private templateListUrl = '/equipment_template_list'; // 设备型态列表
@@ -32,10 +32,12 @@ export class BoilerService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getBoilers(n: number, pageSize: number, search?: string ): Observable<any> {
-    // TODO: send the message _after_ fetching the heroes
-    const url = `${this.boilersUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
-    return this.http.get<any>(url)
+  getLists(n: number, pageSize: number, search?: string, value?: string, online?: string, run?: string, status?: string  ): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `${this.eptUrl}?page=${n}&pageSize=${pageSize}&search=${search}&value=${value}&online=${online}&run_status=${run}&status=${status}`;
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
       );
@@ -67,6 +69,9 @@ export class BoilerService {
 
   // 添加
   addBoiler(boiler): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
     return this.http.post('/equipment_add', boiler, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -76,14 +81,20 @@ export class BoilerService {
 
   // 删除
   deleteBoiler(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
     return this.http.post('/equipment_delete/', uid, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  // 批量添加集群
+  // 添加集群
   addCluster(boiler): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
     return this.http.post('/equipment_batch_cluster', boiler, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -191,7 +202,6 @@ export class BoilerService {
         `错误内容: ${error.error}`);
     }
     if (error.status === 550) {
-      localStorage.removeItem('authToken');
       window.location.reload();
     }
     return throwError(

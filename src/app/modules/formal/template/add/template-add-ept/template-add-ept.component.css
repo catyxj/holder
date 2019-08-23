@@ -1,0 +1,50 @@
+
+.t_ept{
+  width: 430px;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.t_ept_h{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.t_ept_h_label{
+  font-size: 12px;
+}
+
+.t_ept_h_input{
+  width: 360px;
+}
+.t_ept_h_input input{
+  height: 29px;
+}
+
+.t_ept_img{
+  margin-top: 40px;
+  padding-bottom: 50px;
+}
+
+
+.m_img{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: flex-end;
+}
+.img_text{
+  width: 156px;
+  font-size: 12px;
+  color: #464855;
+}
+
+.t_add_b{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+
+

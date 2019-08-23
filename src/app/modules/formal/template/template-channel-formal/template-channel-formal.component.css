@@ -1,0 +1,53 @@
+.lc_head{
+  padding: 10px 10px 0 10px;
+}
+.lc_head_item{
+  display: flex;
+  min-width: 20%;
+  margin-right: 50px;
+}
+.lc_head_lable{
+  font-size: 12px;
+  color: #464855;
+  font-weight: bold;
+  margin-right: 10px;
+}
+.lc_head_value{
+  font-size: 12px;
+  color: #666EE8;
+  font-weight: bold;
+}
+
+.channel_content{
+  margin-bottom: 35px;
+}
+
+
+.channel_content .form-control{
+  padding: 0.375rem;
+}
+
+mat-grid-tile {
+  cursor: pointer;
+}
+mat-grid-tile:hover{
+  background-color: #cce5ff;
+}
+.t_btn_g{
+  display: flex;
+}
+.t_btn_g button{
+  margin-right: 10px;
+}
+
+
+.input99{
+  background-color: #e9ecef;
+  line-height: 33px;
+  padding-left: 5px;
+}
+input.write_input{
+  width:57px;
+  height:19px;
+  border:1px solid #EDEEF4;
+}

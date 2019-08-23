@@ -5,28 +5,30 @@
 
 
 <div class="content">
-  <div class="info_head">
-    <div class="info_tname">
-      <img src="assets/icons/icon_buletooth_setting.png" alt="">
-      <!--{{basic?.mac}}-->
-      122345
+  <div class="t_info_head">
+    <div class="info_title">
+      <h6>
+        {{code}}
+      </h6>
     </div>
     <div>
-      <span>
-        最后收到消息时间： {{ updateDate | date:'yyyy-MM-dd HH:mm:ss' }}
-      </span>
-
-      <!--刷新-->
-      <button class="btn btn_purple-o btn_round bps ml-3" (click)="getList()">
-        <i class="iconfont iconicon_Refresh"></i>
-      </button>
       <!--返回-->
       <button class="btn btn_purple-o btn_round bps ml-1" (click)="goBack()">
         <i class="iconfont iconicon_comeback1"></i>
       </button>
-
+      <!--刷新-->
+      <button class="btn btn_purple-o btn_round bps ml-1" (click)="getList()">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>
     </div>
   </div>
+
+  <div style="text-align: right;">
+     <span style="font-size: 12px; color:#666EE8; ">
+        最后收到消息时间： {{ updateDate | date:'yyyy-MM-dd HH:mm:ss' }}
+      </span>
+  </div>
+
 
   <div class="info_content">
     <div class="content_t">
@@ -49,7 +51,7 @@
         </thead>
         <tbody>
 
-        <!--<tr>
+        <tr>
           <td></td>
           <td> - </td>
           <td> - </td>
@@ -57,10 +59,7 @@
               *ngFor="let col of temperCols; let i = index">
             {{ i + 1 }}
           </td>
-          <td width="3%" class="num"
-              *ngFor="let col of analogCols; let i = index">
-            {{ i + 1 }}
-          </td>
+
           <td width="3%" class="num"
               *ngFor="let col of switchCols; let i = index">
             {{ i + 1 }}
@@ -69,16 +68,13 @@
               *ngFor="let col of calcCols; let i = index">
             {{ i + 1 }}
           </td>
-        </tr>-->
+        </tr>
 
         <tr *ngFor="let data of dataTable.data; trackBy: trackByUid; let i = index">
           <td> {{ i + 1 }} </td>
-          <td style="white-space: nowrap;"> {{ data.TS}} </td>
-          <td> {{ data.Equipment_data_fmt_ver }} </td>
+          <td style="white-space: nowrap;"> {{ data.receive_time | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
+          <td> {{ data.term_ver }} </td>
           <td *ngFor="let col of temperCols">
-            {{ data[col] }}
-          </td>
-          <td *ngFor="let col of analogCols">
             {{ data[col] }}
           </td>
           <td *ngFor="let col of switchCols">

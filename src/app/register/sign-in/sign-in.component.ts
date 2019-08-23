@@ -52,7 +52,7 @@ export class SignInComponent implements OnInit {
     this.userService.login(this.user)
       .subscribe(
         res => {
-          sessionStorage.user = true;
+          localStorage.setItem('user', 'true');
           localStorage.setItem('authToken', res.Auth);
           localStorage.setItem('roleId', res.roleId);
 
@@ -96,7 +96,7 @@ export class SignInComponent implements OnInit {
           Swal({
             title: '',
             html: '<div class="success_tip"> <img src="assets/icons/icon_fail.png"> 登录失败!</div>' +
-            `<div class="success_tip_mes"> ${error.message} </div> <div class="success_tip_time"><a><span>3</span>秒后自动关闭</a></div>`,
+            `<div class="success_tip_mes"> ${error.message || error} </div> <div class="success_tip_time"><a><span>3</span>秒后自动关闭</a></div>`,
             showConfirmButton: false,
             timer: 3000,
             onBeforeOpen: () => {

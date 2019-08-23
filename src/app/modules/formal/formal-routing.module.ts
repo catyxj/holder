@@ -36,6 +36,24 @@ import {TerminalCustomizeFormalComponent} from "./terminal/terminal-customize-fo
 import {TerminalChannelConfigFormalComponent} from "./terminal/terminal-channel-config-formal/terminal-channel-config-formal.component";
 import {TemplateMainFormalComponent} from "./template/template-main-formal/template-main-formal.component";
 import {TemplateListFormalComponent} from "./template/template-list-formal/template-list-formal.component";
+import {TerminalCalculateConfigComponent} from "./terminal/terminal-calculate-config/terminal-calculate-config.component";
+import {TerCal1Component} from "./terminal/calculate/ter-cal1/ter-cal1.component";
+import {TerCal2Component} from "./terminal/calculate/ter-cal2/ter-cal2.component";
+import {TerCal3Component} from "./terminal/calculate/ter-cal3/ter-cal3.component";
+import {TemplateAddMainComponent} from "./template/add/template-add-main/template-add-main.component";
+import {TemplateAddEptComponent} from "./template/add/template-add-ept/template-add-ept.component";
+import {TemplateConfigFormalComponent} from "./template/template-config-formal/template-config-formal.component";
+import {TemplateBatchDeleteFComponent} from "./template/template-batch-delete-f/template-batch-delete-f.component";
+import {TemplateBatchAllocateComponent} from "./template/template-batch-allocate/template-batch-allocate.component";
+import {TemplateChannelFormalComponent} from "./template/template-channel-formal/template-channel-formal.component";
+import {TemplateCustomizeFormalComponent} from "./template/template-customize-formal/template-customize-formal.component";
+import {TempCalMainComponent} from "./template/calculate/temp-cal-main/temp-cal-main.component";
+import {MAccountInfoFormalComponent} from "./maintain/m-account/m-account-info-formal/m-account-info-formal.component";
+import {MAccountProductFComponent} from "./maintain/m-account/m-account-product-f/m-account-product-f.component";
+import {MTempBatchAllocateFComponent} from "./maintain/m-template/m-temp-batch-allocate-f/m-temp-batch-allocate-f.component";
+import {MTempBatchDeleteFComponent} from "./maintain/m-template/m-temp-batch-delete-f/m-temp-batch-delete-f.component";
+import {MAcBatchAddComponent} from "./maintain/m-account/product/m-ac-batch-add/m-ac-batch-add.component";
+import {MAcBatchDeleteComponent} from "./maintain/m-account/product/m-ac-batch-delete/m-ac-batch-delete.component";
 
 export const FormalRoutingModule = [
   {
@@ -119,7 +137,23 @@ export const FormalRoutingModule = [
           {
             path: 'list',
             component: MAccountListFormalComponent
-          }
+          },
+          {
+            path: 'info/:uid/:page',
+            component: MAccountInfoFormalComponent
+          },
+          {
+            path: 'product/:uid',
+            component: MAccountProductFComponent
+          },
+          {
+            path: 'batch-delete/:uid',
+            component: MAcBatchDeleteComponent
+          },
+          {
+            path: 'batch-add/:uid',
+            component: MAcBatchAddComponent
+          },
         ]
       },
       {
@@ -130,7 +164,15 @@ export const FormalRoutingModule = [
           {
             path: 'list',
             component: MTemplateListFormalComponent
-          }
+          },
+          {
+            path: 'batch-delete',
+            component: MTempBatchDeleteFComponent
+          },
+          {
+            path: 'batch-allocate',
+            component: MTempBatchAllocateFComponent
+          },
         ]
       },
       {
@@ -181,19 +223,19 @@ export const FormalRoutingModule = [
             component: TerminalListFormalComponent
           },
           {
-            path: 'info/:uid/:page',
+            path: 'info/:uid/:code/:page',
             component: TerminalInfoFormalComponent
           },
           {
-            path: 'messages/:uid',
+            path: 'messages/:uid/:code',
             component: TerminalMessageFormalComponent
           },
           {
-            path: 'config/:uid',
+            path: 'config/:uid/:code',
             component: TerminalConfigFormalComponent
           },
           {
-            path: 'channel-config/:uid',
+            path: 'channel-config/:uid/:code',
             component: TerminalChannelConfigFormalComponent
           },
           {
@@ -201,8 +243,24 @@ export const FormalRoutingModule = [
             component: TerminalOperateFormalComponent
           },
           {
-            path: 'customize/:uid',
+            path: 'customize/:uid/:code',
             component: TerminalCustomizeFormalComponent
+          },
+          {
+            path: 'calculate-list/:uid/:code',
+            component: TerminalCalculateConfigComponent
+          },
+          {
+            path: 'calculate1/:uid/:code',
+            component: TerCal1Component
+          },
+          {
+            path: 'calculate2/:uid/:code',
+            component: TerCal2Component
+          },
+          {
+            path: 'calculate3/:uid/:code',
+            component: TerCal3Component
           }
         ]
       },
@@ -214,7 +272,41 @@ export const FormalRoutingModule = [
           {
             path: 'list',
             component: TemplateListFormalComponent
-          }
+          },
+          {
+            path: 'batch-delete',
+            component: TemplateBatchDeleteFComponent
+          },
+          {
+            path: 'batch-allocate',
+            component: TemplateBatchAllocateComponent
+          },
+          {
+            path: 'config/:uid/:page',
+            component: TemplateConfigFormalComponent
+          },
+          {
+            path: 'add1',
+            component: TemplateAddMainComponent,
+            children: [
+              {
+                path: 'equip',
+                component: TemplateAddEptComponent
+              },
+            ]
+          },
+          {
+            path: 'channel-config/:uid',
+            component: TemplateChannelFormalComponent
+          },
+          {
+            path: 'customize/:uid',
+            component: TemplateCustomizeFormalComponent
+          },
+          {
+            path: 'calculate/:uid',
+            component: TempCalMainComponent
+          },
         ]
       },
     ]

@@ -15,10 +15,17 @@ import Swal from 'sweetalert2';
 })
 export class TerminalInfoFormalComponent implements OnInit {
   public uid;
+  public code;
   public basic;
   public operate;
   tplModal: NzModalRef;
   public listPage;
+
+  public baudRateList = []; // 波特率下拉列表
+  public heartbeatList = []; // 心跳包频率下拉列表
+  public baud_rate;
+  public heart_beat;
+  public isSpinning;
 
   constructor(private terminalService: TerminalService,
               private route: ActivatedRoute,
@@ -28,13 +35,19 @@ export class TerminalInfoFormalComponent implements OnInit {
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
+    this.code = this.route.snapshot.paramMap.get('code');
     this.listPage = this.route.snapshot.paramMap.get('page');
+
+    this.getCmtList();
+    this.getOperate();
 
     /*this.basic = {
       terminal_code: '122334',
       fw_ver: 12,
       sms_code: 'asdfasdf',
-      status: 4
+      status: 4,
+      plat_ver: 1,
+      term_ver: 0
     };*/
 
     /*this.operate = [
@@ -51,11 +64,39 @@ export class TerminalInfoFormalComponent implements OnInit {
   }
 
 
+  // 获取通信参数下拉列表
+  getCmtList() {
+    this.terminalService.getCmtParam()
+      .subscribe(data => {
+        this.baudRateList = data.baud_rate;  // 波特率
+        this.heartbeatList = data.heart_beat;  // 心跳包频率
+
+        this.getBasic();
+      });
+  }
+
+
   // 获取基础信息
   getBasic() {
     this.terminalService.getBasic(this.uid)
       .subscribe(data => {
         this.basic = data;
+
+        // 波特率
+        for (let i = 0; i < this.baudRateList.length; i++) {
+          if (this.basic.baud_rate === this.baudRateList[i].value) {
+            this.baud_rate = this.baudRateList[i].name;
+            break;
+          }
+        }
+
+        // 心跳包频率
+        for (let i = 0; i < this.heartbeatList.length; i++) {
+          if (this.basic.heart_beat === this.heartbeatList[i].value) {
+            this.heart_beat = this.heartbeatList[i].name;
+            break;
+          }
+        }
       }, err => {
 
       });
@@ -107,23 +148,31 @@ export class TerminalInfoFormalComponent implements OnInit {
     const title = '确认要下发此终端吗？';
     const subtitle = '';
     let post = {
-      data: [this.uid]
+      data: this.uid
     };
+
     this.creatModal(title, subtitle, () => {
-      this.terminalService.issued(post)
+      this.isSpinning = true;
+      this.terminalService.issued(this.uid)
         .subscribe(val => {
+          this.isSpinning = false;
           Swal(
             '操作成功！',
             '',
             'success'
           );
-          that.router.navigate(['/admin/ad/terminal/list']);
+          that.getBasic();
+          that.getOperate();
+          // that.router.navigate(['/admin/ad/terminal/list']);
         }, err => {
+          this.isSpinning = false;
           Swal(
             err.message || err,
             '',
             'error'
           );
+          that.getBasic();
+          that.getOperate();
         });
     });
   }
@@ -131,32 +180,14 @@ export class TerminalInfoFormalComponent implements OnInit {
 
   creatModal(title, subtitle, call) {
     const that = this;
-    this.tplModal = this.nzModal.create({
-      nzTitle: '',
-      nzContent: ComfirmComponent,
-      nzComponentParams: {
-        title: title,
-        subtitle: subtitle
-      },
-      nzMaskClosable: true,
-      nzClosable: false,
-      nzClassName: 'comfirm_modal',
-      nzWidth: 440,
-      nzFooter: [
-        {
-          label: '取消',
-          shape: 'default',
-          onClick: () => that.tplModal.destroy()
-        },
-        {
-          label: '确定',
-          type: 'primary',
-          onClick: () => {
-            call();
-            that.tplModal.destroy();
-          }
-        }
-      ],
+    this.tplModal = this.nzModal.confirm({
+      nzTitle: title,
+      nzContent: subtitle,
+      nzIconType: 'fill:question-circle',
+      nzOnOk: () => {
+        call();
+        that.tplModal.destroy();
+      }
     });
   }
 
@@ -174,7 +205,7 @@ export class TerminalInfoFormalComponent implements OnInit {
           '',
           'success'
         );
-        that.router.navigate(['/admin/ad/terminal/list']);
+        that.router.navigate(['/admin/formal/terminal/list']);
       }, err => {
         Swal(
           err.message || err,

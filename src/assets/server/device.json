@@ -5,6 +5,9 @@
         "type": "btn",
         "cType": "开关型态",
         "cName": "交互按钮",
+        "chanName": "温度1",
+        "chanNum": "3",
+        "chanType": "11",
         "address": "fkhfgkhg589760",
         "id":"btn20",
         "style":{
@@ -12,6 +15,22 @@
           "left": "221px",
           "top": "143px",
           "zIndex": 102
+        }
+      },
+      {
+        "type": "btn",
+        "cType": "开关型态",
+        "cName": "交互按钮",
+        "chanName": "温度3",
+        "chanNum": "5",
+        "chanType": "11",
+        "address": "fkhfgkhg589760",
+        "id":"btn20",
+        "style":{
+          "position":"absolute",
+          "left": "61px",
+          "top": "343px",
+          "zIndex": 105
         }
       }
     ],
@@ -66,7 +85,7 @@
         "cType": "多形态",
         "chanName": "温度1",
         "chanNum": "3",
-        "chanType": "1",
+        "chanType": "12",
         "id": "img30",
         "imgs":{
           "id": 5,

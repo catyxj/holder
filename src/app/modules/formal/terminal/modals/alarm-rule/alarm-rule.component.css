@@ -1,0 +1,18 @@
+
+
+.alarm_r_row{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.ar_1,.ar_2,.ar_3{
+
+}
+.ar_3{
+  display: flex;
+}
+
+.alarm_rule input{
+  height: 33.5px;
+}

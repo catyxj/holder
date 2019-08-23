@@ -1,0 +1,92 @@
+
+<div>
+  <div class="r_dashbord_h">
+    <div class="h_date">
+      数据更新于2019年01月02日12时21分
+    </div>
+    <button class="btn btn_purple bpm" [routerLink]="['/admin/ordinary/equip-charts', uid]">
+      数据详情
+    </button>
+  </div>
+
+  <div class="r_dashboard_c">
+    <div class="d_head">
+      <h6>
+        某某某某某某某某某某某智能设备
+      </h6>
+      <div class="flex">
+        <div class="tag" [class.blue]="online">
+          联网
+        </div>
+        <div class="tag ml-1" [class.green]="run">
+          运行
+        </div>
+        <div class="tag ml-1" [class.red]="alarm">
+          警告
+        </div>
+        <div class="tag ml-1" [class.yellow]="malfunction">
+          故障
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="" style="position: relative; width: 60%; height: 500px; margin: auto;">
+        <div *ngFor="let img of imgs1">
+          <img src="{{img.imgs.src}}" alt="" [ngStyle]="img.style">
+        </div>
+        <div *ngFor="let img of imgs2">
+          <img src="{{img.imgs.img}}" alt="" [ngStyle]="img.style">
+        </div>
+        <div *ngFor="let img of imgs3">
+          <img src="{{img.src}}" alt="" [ngStyle]="img.style">
+        </div>
+        <div *ngFor="let btn of btns">
+          <!--<button *ngIf="!status" class="btn btn-sm btn-success" [ngStyle]="btn.style" (click)="sendMes(1,btn)">
+            启动
+          </button>
+          <button *ngIf="status" class="btn btn-sm btn-warning" [ngStyle]="btn.style" (click)="sendMes(2,btn)">
+            关闭
+          </button>-->
+          <nz-switch [(ngModel)]="btn.switchValue" [ngStyle]="btn.style"
+                     [nzControl]="true" (click)="clickSwitch(btn)" [nzLoading]="btn.loading">
+
+          </nz-switch>
+        </div>
+
+        <div *ngFor="let data of dataLists1" class="dataC" [ngStyle]="data.style">
+          <span>
+            {{data.text}}
+          </span>
+        </div>
+
+        <div *ngFor="let data of dataLists2" class="dataC" [ngStyle]="data.style">
+          <span>
+            {{data.name}}
+          </span>
+          <span *ngIf="data.chanNum === '10' || data.chanNum === '12'">
+            ：
+          </span>
+          <span *ngIf="data.chanNum === '10'">
+            {{data.value}} {{data.unit}}
+          </span>
+          <span *ngIf="data.chanNum === '12'">
+            {{data.remark}}
+          </span>
+        </div>
+
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+
+
+
+
+
+

@@ -1,0 +1,14 @@
+.m_form .m_item .m_input{
+  /*flex:auto;*/
+  width: 240px;
+  position: relative;
+}
+
+.m_input_l{
+  width: 100%;
+}
+.m_input_2{
+  font-size: 12px;
+  display: flex;
+  align-items: flex-end;
+}

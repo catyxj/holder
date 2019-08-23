@@ -12,7 +12,7 @@
   overflow: hidden;
 }
 .f_info_config{
-  margin-top: 28px;
+  /*margin-top: 28px;*/
 }
 .f_info_title{
   height:40px;
@@ -67,6 +67,7 @@
 }
 .f_info_op_item{
   display: flex;
+  align-items: center;
   margin-bottom: 18px;
 }
 .f_info_item_date{

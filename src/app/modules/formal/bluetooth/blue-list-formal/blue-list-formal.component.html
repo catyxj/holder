@@ -83,7 +83,7 @@
           <td> {{data.id}} </td>
           <td> {{data.name}} </td>
           <td> {{data.mac}} </td>
-          <td> {{'空'}} ({{data.terminal_code || '空'}}) </td>
+          <td> {{data.ept_name || '空'}} ({{data.terminal_code || '空'}}) </td>
           <td> {{data.org_name || '空'}} </td>
           <td>
             <a class="btn btn_purple btn-sm" [routerLink]="['/admin/formal/bluetooth/info', data.uid, page]">

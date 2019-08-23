@@ -10,38 +10,92 @@
   margin-left: 20px;
 }
 .t_section,.t_content_r{
-  border: 1px solid #e5e5e5;
-  border-radius: 4px;
+  border-radius:4px;
+  border:1px solid #E4E5EC;
   overflow: hidden;
 }
 .tsection_h{
+  height:40px;
+  background:#F9FAFD;
+  border-bottom:1px solid #E4E5EC;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 40px;
-  padding: 0 20px;
-  box-sizing: border-box;
+  padding-left: 19px;
+  padding-right: 16px;
 }
 .tsection_h h6{
-  margin-bottom: 0;
+  color: #464855;
+  margin: 0;
 }
 
 
 .tsection_body{
-  padding: 20px;
+  padding: 24px 10px 4px 10px;
 }
 .ts_row{
   display: flex;
 }
 .ts_item{
-  flex: 1;
+  width: 33%;
   display: flex;
+  padding-bottom: 24px;
+  align-items: center;
+}
+.ts_item_w{
+  width: 100%;
+  display: flex;
+  padding-bottom: 24px;
 }
 .ts_label{
+  flex-grow: 0;
+  flex-shrink: 0;
   width: 90px;
+  font-size: 12px;
+  color: #464855;
+  text-align: right;
+  margin-right: 8px;
+}
+.ts_value{
+  font-size: 12px;
+  color: #666EE8;
+  font-weight: bold;
+  flex: auto;
+}
+
+.ts_image{
+  margin-top: 10px;
+  margin-left: 30px;
+  display: flex;
+  align-items: flex-end;
+}
+.ts_image_text{
+  font-size: 12px;
+  color: #464855;
+  margin-left: 30px;
 }
 
 
+.ts_round{
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  border: 1px solid #666EE8;
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
 
-
+.ts_round_in{
+  width: 8px;
+  height: 8px;
+  border-radius: 8px;
+  background-color: #666EE8;
+  margin: auto;
+}
+.ts_text{
+  color: #464855;
+  font-size: 12px;
+  margin-left: 8px;
+}
 

@@ -199,13 +199,13 @@
 
   <ul>
     <li *ngFor="let item0 of sideList" [class.collapse1]="!item0.checked" [class.expand]="item0.checked">
-      <a class="sidebar_title" (click)="submenuToggle(item0)" *ngIf="item0.children">
+      <a class="sidebar_title" (click)="submenuToggle(item0)" *ngIf="!item0.index">
         <span class="fa {{item0.icon}}" *ngIf="item0.icon && !item0.img"></span>
         <img src="{{item0.img}}" class="side_icon" *ngIf="item0.img">
         {{item0.name}}
         <i class="fa fa-angle-right"></i>
       </a>
-      <a class="smenu_head" [routerLink]="item0.router" routerLinkActive="active" *ngIf="!item0.children">
+      <a class="smenu_head" [routerLink]="item0.router" routerLinkActive="active" *ngIf="item0.index">
         <i class="fa {{item0.icon}}" *ngIf="item0.icon && !item0.img"></i>
         <img src="{{item0.img}}" class="side_icon" *ngIf="item0.img">
         {{item0.name}}

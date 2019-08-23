@@ -187,33 +187,15 @@ export class ServiceListFormalComponent implements OnInit {
   }
 
   creatModal(title, subtitle, call) {
-    let that = this;
-    this.tplModal = this.nzModal.create({
-      nzTitle: '',
-      nzContent: ComfirmComponent,
-      nzComponentParams: {
-        title: title,
-        subtitle: subtitle
-      },
-      nzMaskClosable: true,
-      nzClosable: false,
-      nzClassName: 'comfirm_modal',
-      nzWidth: 440,
-      nzFooter: [
-        {
-          label: '取消',
-          shape: 'default',
-          onClick: () => this.tplModal.destroy()
-        },
-        {
-          label: '确定',
-          type: 'primary',
-          onClick: () => {
-            call();
-            that.tplModal.destroy();
-          }
-        }
-      ],
+    const that = this;
+    this.tplModal = this.nzModal.confirm({
+      nzTitle: title,
+      nzContent: subtitle,
+      nzIconType: 'fill:question-circle',
+      nzOnOk: () => {
+        call();
+        that.tplModal.destroy();
+      }
     });
   }
 

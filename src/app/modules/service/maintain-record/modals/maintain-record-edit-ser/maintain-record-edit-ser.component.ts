@@ -84,10 +84,8 @@ export class MaintainRecordEditSerComponent implements OnInit {
     console.log(info);
     switch (info.file.status) {
       case 'uploading':
-
         break;
       case 'done':
-
         break;
       case 'error':
         Swal(

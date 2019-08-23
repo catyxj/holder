@@ -1,0 +1,36 @@
+
+.modal-body{
+  padding-left: 82px;
+  padding-right: 82px;
+}
+
+.m_form .m_item .m_label{
+  width: 80px;
+  font-size: 12px;
+}
+.m_form .m_item .m_input{
+  width: 100%;
+  font-size: 12px;
+}
+
+
+.m_img{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 10px;
+}
+.img_text{
+  width: 156px;
+  font-size: 12px;
+  color: #464855;
+}
+
+
+
+
+
+
+
+
+

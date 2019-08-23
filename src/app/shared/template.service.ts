@@ -19,16 +19,19 @@ export class TemplateService {
   private channelUrl = 'assets/server/chan_config_list.json';
   private templateAllUrl = 'assets/server/template_list.json';
 
-  // private templatesUrl = '/terminal_template_list';
-  // private channelUrl = '/terminal_template_detail';
-  // private templateAllUrl = '/terminal_template_list_all';
+  // private templatesUrl = '/api/formal/template/list';
+  // private channelUrl = '/api/formal/template/detail';
+  // private templateAllUrl = '/api/formal/template/list/all';
 
   constructor(private http: HttpClient) { }
 
   // 获取模板列表
-  getTemplates(n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.templatesUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
-    return this.http.get<any>(url)
+  getLists(n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `${this.templatesUrl}/?page=${n}&pageSize=${pageSize}&search=${search}&value=${value}`;
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
       );
@@ -46,26 +49,35 @@ export class TemplateService {
   }
 
   // 删除
-  deleteTemplate(uid): Observable<any> {
-    return this.http.post('/terminal_template_delete/', uid, httpOptions)
+  deleteData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/template/delete', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
 
-  // 获取模板配置数据
+  // 获取模板通道数据
   getChannel(uid: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
     const url = `${this.channelUrl}/?uid=${uid}`;
-    return this.http.get<any>(url)
+    return this.http.get<any>(url, httpOptions)
       .pipe(
-        catchError(this.handleError) // then handle the error
+        catchError(this.handleError)
       );
   }
 
   // 添加模板
   add(data): Observable<any> {
-    return this.http.post('/terminal_template_add', data, httpOptions)
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/template/add', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -73,6 +85,9 @@ export class TemplateService {
 
   // 修改
   save(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
     return this.http.post('/terminal_template_update', data, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -88,7 +103,6 @@ export class TemplateService {
         `错误内容: ${error.error}`);
     }
     if (error.status === 550) {
-      localStorage.removeItem('authToken');
       window.location.reload();
     }
     return throwError(

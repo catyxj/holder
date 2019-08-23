@@ -1,0 +1,75 @@
+div{
+  box-sizing: border-box;
+}
+h6{
+  margin: 0;
+}
+
+
+.list_content{
+  margin-top: 17px;
+}
+
+
+.eq_info{
+  box-shadow:0px 0px 8px 8px rgba(249,250,253,0.5);
+  border-radius:4px;
+  border:1px solid #E4E5EC;
+  margin-bottom: 15px;
+}
+
+.eq_h{
+  height:39px;
+  background:#F9FAFD;
+  border-bottom:1px solid #E4E5EC;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.eq_body{
+  padding: 24px 20px 0 20px;
+}
+.eq_row{
+  display: flex;
+}
+.eq_item{
+  display: flex;
+  margin-bottom: 24px;
+}
+.c_4 .eq_item{
+  width: 25%;
+}
+.eq_item *{
+  font-size: 12px;
+}
+.eq_label{
+  width: 86px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  color: #464855;
+  text-align: right;
+}
+.eq_value{
+  color: #666EE8;
+}
+
+.eq_addr{
+  width: 45%;
+  border-right: 1px solid #E4E5EC;
+}
+
+.eq_map{
+  padding: 12px;
+  flex: auto;
+}
+
+
+
+
+
+
+
+

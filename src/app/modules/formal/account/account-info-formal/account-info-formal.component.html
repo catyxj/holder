@@ -24,9 +24,11 @@
           <h6>
             基础信息
           </h6>
-          <button class="btn btn_purple btn_round bpm" (click)="editConfig()">
-            修 改
-          </button>
+
+          <!--修改-->
+          <a (click)="editConfig()" title="修改">
+            <span class="iconfont iconedit text_purple"></span>
+          </a>
         </div>
         <div class="f_info_body">
           <ul>
@@ -89,7 +91,7 @@
         </div>
       </div>
 
-      <div class="f_info_config">
+      <div class="f_info_config mt-3">
         <div class="f_info_title">
           <h6>
             配置信息
@@ -120,7 +122,7 @@
             </li>
             <li class="f_info_item">
               <div class="f_info_item_title">
-                版本类型
+                账号类型
               </div>
               <div class="f_info_item_value">
                 <span *ngIf="user&&user.role_id===1">

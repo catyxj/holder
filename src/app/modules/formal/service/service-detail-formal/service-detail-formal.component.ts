@@ -178,6 +178,7 @@ export class ServiceDetailFormalComponent implements OnInit {
         );
         that.message = '';
         that.fileList = [];
+        that.getBasic();
         that.getComments();
       }, err => {
         Swal(

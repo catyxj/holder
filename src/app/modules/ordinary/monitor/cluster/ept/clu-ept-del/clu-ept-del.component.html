@@ -1,0 +1,221 @@
+
+
+<div class="content">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>
+        批量操作
+      </h6>
+    </div>
+    <div class="li_head_r">
+      <!--刷新-->
+      <!--<button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>-->
+
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" (click)="goBack()">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="batchLink()">
+        批量取消
+      </button>
+
+
+    </div>
+  </div>
+
+  <div class="list_content">
+    <div class="content_h">
+      <div class="search_box">
+        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="addOnAfterTemplate">
+          <input type="text" nz-input [(ngModel)]="value" (keyup)="searchEnter($event)" maxlength="20"/>
+        </nz-input-group>
+        <ng-template #addOnBeforeTemplate>
+          <nz-select [(ngModel)]="search">
+            <nz-option [nzLabel]="'设备名称'" [nzValue]="'name'"></nz-option>
+            <nz-option [nzLabel]="'地域位置'" [nzValue]="'location_name'"></nz-option>
+          </nz-select>
+        </ng-template>
+        <ng-template #addOnAfterTemplate>
+          <img src="assets/icons/icon_seach.png" alt="" class="search_icon" (click)="searchChange()">
+        </ng-template>
+
+      </div>
+      <div class="flex">
+
+
+      </div>
+    </div>
+    <div class="content_t">
+      <nz-table
+        #dataTable
+        [nzFrontPagination]="false"
+        [nzShowPagination] = "false"
+        [nzLoading]="loading"
+        [nzData]="dataLists"
+      >
+        <thead>
+        <tr>
+          <th
+            nzShowCheckbox
+            [(nzChecked)]="isAllChecked"
+            (nzCheckedChange)="checkAll($event)"
+          >
+          </th>
+          <th>设备名称</th>
+          <th>终端编码</th>
+          <th>地域位置</th>
+          <th>使用单位</th>
+          <th>
+            <nz-dropdown [nzTrigger]="'click'">
+              <a nz-dropdown>
+                连接状态
+                <i nz-icon type="down" style="color: #898EA3;"></i>
+              </a>
+
+              <ul nz-menu>
+                <li nz-menu-item (click)="searchStatus('')">
+                  <a>全部</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('true')">
+                  <a>已连接</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('false')">
+                  <a>未连接</a>
+                </li>
+
+              </ul>
+            </nz-dropdown>
+          </th>
+          <th>
+            <nz-dropdown [nzTrigger]="'click'">
+              <a nz-dropdown>
+                设备状态
+                <i nz-icon type="down" style="color: #898EA3;"></i>
+              </a>
+
+              <ul nz-menu>
+                <li nz-menu-item (click)="searchRun('')">
+                  <a>全部</a>
+                </li>
+                <li nz-menu-item (click)="searchRun('0')">
+                  <a>未知</a>
+                </li>
+                <li nz-menu-item (click)="searchRun('1')">
+                  <a>未运行</a>
+                </li>
+                <li nz-menu-item (click)="searchRun('2')">
+                  <a>运行</a>
+                </li>
+                <li nz-menu-item (click)="searchRun('3')">
+                  <a>告警</a>
+                </li>
+                <li nz-menu-item (click)="searchRun('4')">
+                  <a>故障</a>
+                </li>
+              </ul>
+            </nz-dropdown>
+          </th>
+          <th>
+            <nz-dropdown [nzTrigger]="'click'">
+              <a nz-dropdown>
+                使用状态
+                <i nz-icon type="down" style="color: #898EA3;"></i>
+              </a>
+
+              <ul nz-menu>
+                <li nz-menu-item (click)="searchStatus('')">
+                  <a>全部</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('1')">
+                  <a>正常</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('2')">
+                  <a>未激活</a>
+                </li>
+              </ul>
+            </nz-dropdown>
+          </th>
+          <!--<th>操作</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of dataTable.data">
+          <td
+            nzShowCheckbox
+            [(nzChecked)]="data.checked"
+            [nzDisabled]="data.disabled"
+            (nzCheckedChange)="refreshStatus()"
+          ></td>
+          <td> {{data.name}} </td>
+          <td> {{data.terminal_code}} </td>
+          <td> {{data.location_name}} </td>
+          <td> {{data.user_org}} </td>
+          <td>
+            <nz-tag [nzColor]="'#1E9FF2'"  *ngIf="data.online">已连接</nz-tag>
+            <nz-tag [nzColor]="'#C0C4D2'" *ngIf="!data.online">未连接</nz-tag>
+          </td>
+          <td>
+            <span *ngIf="!data.online">
+              <img src="assets/icons/group_0.png" alt="">
+              未知
+            </span>
+            <span *ngIf="data.online && !data.run">
+              <img src="assets/icons/group_4.png" alt="">
+              未运行
+            </span>
+            <span *ngIf="data.online && data.run">
+              <img src="assets/icons/group_2.png" alt="">
+              运行
+            </span>
+            <span *ngIf="data.online && data.alarm_count>0" class="ml-2">
+              <img src="assets/icons/group_1.png" alt="">
+              告警
+            </span>
+            <span *ngIf="!data.run" class="ml-2">
+              <img src="assets/icons/group_3.png" alt="">
+              故障
+            </span>
+          </td>
+          <td>
+            <span *ngIf="data.status === 0">
+              正常
+            </span>
+            <span *ngIf="data.status === 1" style="color: #BE1414;">
+              禁用
+            </span>
+          </td>
+          <!--<td>
+            <a class="text_purple" [routerLink]="['/admin/ordinary/runtime', data.uid]">
+              详情
+            </a>
+          </td>-->
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+
+    <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+
+    <div class="content_b">
+      <nz-pagination nzShowSizeChanger
+                     [nzTotal]="totalItems"
+                     [nzShowTotal]="totalTemplate"
+                     [(nzPageIndex)]="page"
+                     [(nzPageSize)]="pageSize"
+                     (nzPageIndexChange)="pageChange()"
+                     (nzPageSizeChange)="pageSizeChange()"
+                     [nzPageSizeOptions] = "pageSizeList">
+
+      </nz-pagination>
+      <div class="ant-pagination-options-quick-jumper"> 跳至
+        <input type="number" [(ngModel)]="pageNum"> 页 </div>
+      <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
+    </div>
+
+  </div>
+
+</div>
+

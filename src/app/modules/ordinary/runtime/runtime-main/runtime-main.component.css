@@ -1,0 +1,22 @@
+
+.btn_purple_o {
+  width: 60px;
+  height: 26px;
+  line-height: 1.2;
+  font-size: 12px;
+  border-radius:3px;
+  color: #666EE8;
+  background-color: #E5E9FB;
+  border-color: #666EE8;
+  padding: 0;
+}
+.btn_purple_o:hover, .btn_purple_o.active{
+  color: #FFFFFF;
+  background-color: #666EE8;
+  border-color: #666EE8;
+}
+
+
+
+
+

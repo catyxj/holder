@@ -10,7 +10,7 @@ import {ActivatedRoute} from "@angular/router";
 export class TerminalOperateFormalComponent implements OnInit {
   public uid;
   public name;
-  public operateList;
+  public operateList = [];
   public page = 1;
   public pageNum;
   public pageSize = 15;
@@ -40,6 +40,19 @@ export class TerminalOperateFormalComponent implements OnInit {
       }, err => {
         this.loading = false;
       });
+
+
+    /*this.operateList = [
+      {
+        created_at: '2016-5-10',
+        info: 'asdf'
+      },
+      {
+        created_at: '2016-5-10',
+        info: 'asdf'
+      }
+    ];
+    this.totalItems = 22;*/
   }
 
   // 每页数量

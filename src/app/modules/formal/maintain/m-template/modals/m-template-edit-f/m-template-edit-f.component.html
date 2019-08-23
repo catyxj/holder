@@ -1,0 +1,75 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    <img src="assets/icons/add_m.png" alt="" style="margin-right: 19px;">
+    维保模版详情
+  </h4>
+</div>
+
+<div class="modal-body m_form">
+  <div class="m_row">
+    <div class="m_item">
+      <div class="m_label">
+        维保模版名称：
+      </div>
+      <div class="m_input">
+        <span class="text_purple" *ngIf="!edit">
+          {{name}}
+        </span>
+        <input type="text" class="form-control" [(ngModel)]="name"
+               *ngIf="edit"
+               placeholder="15个汉字以内" maxlength="15"
+               required>
+      </div>
+    </div>
+    <div class="m_btn">
+      <i class="iconfont iconedit text_purple" (click)="editD()" *ngIf="!edit"></i>
+      <i class="iconfont iconshanchu1 text_purple ml-3" (click)="deleteData()"></i>
+    </div>
+  </div>
+
+
+  <div class="m_table">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th style="width: 90px;">序号</th>
+        <th>
+          <div style="display: flex; justify-content: space-between;">
+            描述
+            <!--<button class="btn btn_purple bpm" (click)="addItem()">
+              新增条目
+            </button>-->
+          </div>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of tList; let i = index;">
+        <td>
+          {{ i+1 }}
+        </td>
+        <td>
+          <span *ngIf="!edit" class="text_purple">{{ item.info }}</span>
+
+          <input type="text" class="form-control" [(ngModel)]="item.info"
+                 *ngIf="edit"
+                 placeholder="50个汉字以内" maxlength="50">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取消</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 30px;" (click)="save()" *ngIf="edit">确定</button>
+</div>
+
+
+
+
+

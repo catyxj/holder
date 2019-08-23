@@ -66,7 +66,7 @@ export class RecoverPasswordComponent implements OnInit {
       }, err => {
         Swal(
           {
-            title: err.message,
+            title: err.message || err,
             type: 'error',
             showConfirmButton: false,
             timer: 2000
@@ -119,7 +119,7 @@ export class RecoverPasswordComponent implements OnInit {
         Swal({
           title: '',
           html: '<div class="success_tip"> <img src="assets/icons/icon_fail.png"> 密码重置失败!</div>' +
-          `<div class="success_tip_mes"> ${err.message} </div> <div class="success_tip_time"><a><span>3</span>秒后自动关闭</a></div>`,
+          `<div class="success_tip_mes"> ${err.message || err} </div> <div class="success_tip_time"><a><span>3</span>秒后自动关闭</a></div>`,
           showConfirmButton: false,
           timer: 3000,
           onBeforeOpen: () => {

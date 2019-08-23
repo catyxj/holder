@@ -1,6 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NzModalRef} from "ng-zorro-antd/modal";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {TerminalService} from "../../../../../shared/terminal.service";
+
+import Swal from 'sweetalert2';
+import {UploadFile} from "ng-zorro-antd/upload";
 
 @Component({
   selector: 'app-terminal-add-img-formal',
@@ -20,10 +24,17 @@ export class TerminalAddImgFormalComponent implements OnInit {
   public imgFiles = [];
   public errMes;
   public isValid = true;
+  public headOption;
 
-  constructor(private modal: NzModalRef) { }
+  constructor(private modal: NzModalRef,
+              private terminalService: TerminalService) { }
 
   ngOnInit() {
+    let token = localStorage.getItem('authToken');
+    this.headOption = {
+      'Authorization': token
+    };
+
     this.img = 'assets/images/photo.png';
     this.imgs = [
       {
@@ -51,7 +62,80 @@ export class TerminalAddImgFormalComponent implements OnInit {
 
 
   // ------------图片上传------------
-  imgChange1(event) {
+  beforeUpload = (file: File) => {
+    const isJPG = file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/gif';
+    if (!isJPG) {
+      Swal(
+        '请上传png,jpg,gif图片',
+        '',
+        'error'
+      );
+      return false;
+    }
+    const isLt2M = file.size / 1024  < 200;
+    if (!isLt2M) {
+      Swal(
+        '图片大小不能超过2M',
+        '',
+        'error'
+      );
+      return false;
+    }
+    return true;
+  }
+
+  getBase64(img: File, callback: (img: string) => void): void {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result!.toString()));
+    reader.readAsDataURL(img);
+  }
+
+
+  imgChange1(info: { file: UploadFile }): void {
+    switch (info.file.status) {
+      case 'uploading':
+        break;
+      case 'done':
+        console.log(info);
+        this.imgFile1 = info.file;
+        this.getBase64(info.file!.originFileObj!, (img: string) => {
+          this.img = img;
+        });
+        break;
+      case 'error':
+        Swal(
+          '上传失败，请重试',
+          info.file.message,
+          'error'
+        );
+        break;
+    }
+  }
+
+
+  imgChange2(info: { file: UploadFile }, n): void {
+    let that = this;
+    switch (info.file.status) {
+      case 'uploading':
+        break;
+      case 'done':
+        console.log(info);
+        that.imgFiles[n] = info.file;
+        this.getBase64(info.file!.originFileObj!, (img: string) => {
+          that.imgs[n].imgUrl = img;
+        });
+        break;
+      case 'error':
+        Swal(
+          '上传失败，请重试',
+          info.file.message,
+          'error'
+        );
+        break;
+    }
+  }
+
+  /*imgChange1(event) {
     let that = this;
     // console.log(event);
     if (!event.target.files[0]) {
@@ -63,6 +147,7 @@ export class TerminalAddImgFormalComponent implements OnInit {
     const isLt200k = file.size / 1024;
     // console.log(isPNG, isLt200k);
     if (!!file && (isPNG === 'image/jpeg' || isPNG === 'image/png' || isPNG === 'image/gif') && isLt200k < 200) {
+
       let reader = new FileReader();
       // 图片文件转换为base64
       reader.readAsDataURL(file);
@@ -75,9 +160,9 @@ export class TerminalAddImgFormalComponent implements OnInit {
       that.errMes = '图片格式或大小错误';
     }
 
-  }
+  }*/
 
-  imgChange2(event, n) {
+  /*imgChange2(event, n) {
     let that = this;
     // console.log(event);
     if (!event.target.files[0]) {
@@ -101,7 +186,7 @@ export class TerminalAddImgFormalComponent implements OnInit {
       that.errMes = '图片格式或大小错误';
     }
 
-  }
+  }*/
 
   // 区间验证
   checkNumber() {

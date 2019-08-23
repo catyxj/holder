@@ -187,7 +187,6 @@ export class AccountService {
         `body was: ${error.error}`);
     }
     if (error.status === 550) {
-      localStorage.removeItem('authToken');
       window.location.reload();
     }
     // return an observable with a user-facing error message

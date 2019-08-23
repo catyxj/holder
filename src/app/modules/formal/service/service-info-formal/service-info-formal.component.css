@@ -107,6 +107,7 @@
 .q_list{
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 /*.q_list:last-child{
   border-bottom: none;

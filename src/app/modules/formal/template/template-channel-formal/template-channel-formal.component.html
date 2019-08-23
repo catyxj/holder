@@ -1,3 +1,714 @@
-<p>
-  template-channel-formal works!
-</p>
+<div class="content">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>
+        终端数据点位设置
+      </h6>
+    </div>
+    <div class="li_head_r">
+      <!--返回-->
+      <!--<button class="btn btn_purple-o btn_round bps" (click)="goBack()">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>-->
+    </div>
+  </div>
+
+  <div class="list_content">
+    <div class="flex lc_head">
+      <!--<div class="lc_head_item">
+        <div class="lc_head_lable">
+          模板编号
+        </div>
+        <div class="lc_head_value">
+          aaa
+        </div>
+      </div>-->
+
+      <div class="lc_head_item">
+        <div class="lc_head_lable">
+          模板名称
+        </div>
+        <div class="lc_head_value">
+          {{name || '默认模板'}}
+        </div>
+      </div>
+    </div>
+
+    <!--通道配置-->
+    <div class="channel">
+      <!--模拟通道-->
+      <div class="channel_content">
+        <div class="conf_title">
+          模拟量数据
+          <!--<i class="fa fa-question-circle-o" nz-popover nzPlacement="bottom"
+             [nzContent]="analoguetip" nzTrigger="hover" nzTitle="说明">
+          </i>-->
+
+          <div class="conf_add">
+            <a (click)="addAnalogue()"
+               *ngIf="analogueList.length < 24 "
+               class="">
+              <i nz-icon nzType="plus" nzTheme="outline"></i>
+              <!--<i class="fa fa-plus"></i>-->
+              <!--添加模拟通道-->
+            </a>
+          </div>
+        </div>
+        <table class="table table-bordered">
+          <thead class="t_head">
+          <tr>
+            <th style="width: 80px;">通道</th>
+            <th>通道显示名称</th>
+            <th>乘积转换比</th>
+            <th>单位显示</th>
+            <th style="width: 65px;">功能码</th>
+            <th>高低字节</th>
+            <th>
+              MODBUS地址
+              <!--<span nz-popover
+                    [nzContent]="modbusTips1" nzTrigger="hover" nzTitle="范围说明">
+                MODBUS地址
+              </span>-->
+            </th>
+            <th style="width: 96px;">从机地址 <br>(1-255)</th>
+            <th>寄存器写入规则</th>
+            <th>寄存器写入值</th>
+            <th>其他</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of analogueList; let i = index">
+            <td style="padding:0 10px; ">
+              通道
+              {{ i+1 }}
+              <!--<input type="number" [(ngModel)]="data.ChannelNumber" max="24" min="1"
+                     style="display: inline-block; width: 50%;" class="form-control">-->
+            </td>
+
+            <td>
+              <div style="display: flex; align-items: center; padding-left: 10px;">
+                <div class="mr-1">
+                  <nz-dropdown [nzTrigger]="'click'">
+                    <button nz-dropdown class="btn btn-sm" [disabled]="!data.Parameter||!data.Parameter.Name"
+                            [ngClass]="{'btn_purple': data.Status === 1}">
+                      <i class="fa"
+                         [ngClass]="{'fa-ellipsis-h':data.Status === 0, 'fa-times': data.Status === 2}"></i>
+                      <span *ngIf="data.Status === 1">{{ data.SequenceNumber }}</span>
+                    </button>
+                    <ul nz-menu>
+                      <li nz-submenu>
+                        <span title><i class="fa fa-eye"></i> 位置 </span>
+                        <ul>
+                          <li nz-menu-item *ngFor="let priority of priorities1" (click)="setStatus(data, 1, priority)"
+                              [nzDisabled]="priority.disabled" >
+                            {{ priority.name }}
+                          </li>
+                        </ul>
+                      </li>
+                      <!--<li nz-menu-item (click)="setStatus(data, 2)"><i class="fa fa-eye-slash"></i> 隐藏</li>-->
+                      <li nz-menu-item (click)="setStatus(data, 0)"><i class="fa fa-ellipsis-h"></i>&nbsp; 默认</li>
+                    </ul>
+                  </nz-dropdown>
+
+
+                  <!--<button [matMenuTriggerFor]="menu" class="btn btn-sm" [disabled]="!data.Parameter||!data.Parameter.Name"
+                          [ngClass]="{'btn_purple': data.Status === 1}">
+                    <i class="fa"
+                       [ngClass]="{'fa-ellipsis-h':data.Status === 0, '': data.Status === 1, 'fa-eye-slash': data.Status === 2}"></i>
+                    <span *ngIf="data.Status === 1">{{ data.SequenceNumber }}</span>
+                  </button>
+                  <mat-menu #menu="matMenu" [overlapTrigger]="false">
+                    <button mat-menu-item [matMenuTriggerFor]="subMenu"><i class="fa fa-eye"></i>位置</button>
+                    <button mat-menu-item (click)="setStatus(data, 2)"><i class="fa fa-eye-slash"></i> 隐藏</button>
+                    <button mat-menu-item (click)="setStatus(data, 0)"><i class="fa fa-ellipsis-h"></i> 默认</button>
+                  </mat-menu>
+                  <mat-menu #subMenu="matMenu">
+                    <div mat-menu-item *ngFor="let priority of priorities1" (click)="setStatus(data, 1, priority)">
+                      {{ priority }}
+                    </div>
+                    &lt;!&ndash;<mat-grid-list cols="4" rowHeight="34">
+                      <mat-grid-tile
+                        *ngFor="let priority of priorities1" (click)="setStatus(data, 1, priority)">
+                        {{ priority }}
+                      </mat-grid-tile>
+                    </mat-grid-list>&ndash;&gt;
+                  </mat-menu>-->
+                </div>
+
+                <input type="text" [(ngModel)]="data.Parameter.Name" (change)="dataChanged(data);"
+                       class="form-control" placeholder="{{data.Parameter.Name||'未配置'}}">
+              </div>
+
+            </td>
+
+            <td>
+              <input type="number" [(ngModel)]="data.Parameter.Scale" class="form-control" min="0" step="0.01"
+                     placeholder="未配置" [disabled]="!data.Parameter||!data.Parameter.Name">
+            </td>
+            <td>
+              <input type="text" [(ngModel)]="data.Parameter.Unit" class="form-control"
+                     placeholder="未配置" [disabled]="!data.Parameter||!data.Parameter.Name">
+            </td>
+
+            <td>
+              <select [(ngModel)]="data.Func" [disabled]="!data.Parameter||!data.Parameter.Name"
+                      class="form-control" type="number">
+                <option *ngFor="let fc of funcs" [value]="fc.Id">{{fc.Name}}</option>
+              </select>
+            </td>
+            <td>
+              <div *ngIf="data.Func == 99"
+                   class="input99">
+                无
+              </div>
+              <select [(ngModel)]="data.Byte" [disabled]="!data.Parameter||!data.Parameter.Name"
+                      class="form-control" *ngIf="data.Func != 99">
+                <option *ngFor="let by of bytes" [value]="by.value">{{by.name}}</option>
+              </select>
+            </td>
+            <td>
+              <div *ngIf="data.Func == 99"
+                   class="input99">
+                无
+              </div>
+              <input type="number" [(ngModel)]="data.Modbus" placeholder="未配置"
+                     [disabled]="!data.Parameter||!data.Parameter.Name" *ngIf="data.Func != 99"
+                     class="form-control">
+            </td>
+            <td>
+              <div *ngIf="data.Func == 99" class="input99">
+                无
+              </div>
+              <input type="number" [(ngModel)]="data.slaveAddress" placeholder="未配置"
+                     [disabled]="!data.Parameter||!data.Parameter.Name" *ngIf="data.Func != 99"
+                     class="form-control">
+            </td>
+            <!--寄存器写入规则-->
+            <td>
+              <div *ngIf="!data.Func || data.Func == 2 || data.Func == 4 || data.Func == 99"
+                   class="input99">
+                无
+              </div>
+              <select [(ngModel)]="data.writeRule" [disabled]="!data.Parameter||!data.Parameter.Name"
+                      class="form-control" *ngIf="data.Func && data.Func != 2 && data.Func != 4 && data.Func != 99">
+                <option value="1">16位</option>
+                <option value="2" *ngIf="data.Func == 3">32位</option>
+                <option value="0">不写</option>
+              </select>
+            </td>
+            <!--寄存器写入值-->
+            <td>
+              <div *ngIf="!data.Func || data.Func == 2 || data.Func == 4 || data.Func == 99 || data.writeRule === '0'"
+                   class="input99">
+                无
+              </div>
+              <div class="flex" style="padding: 5px; align-items: center;"
+                   *ngIf="data.Func && data.Func != 2 && data.Func != 4 && data.Func != 99 && data.writeRule !== '0'">
+                0x
+                <input type="text" [(ngModel)]="data.writeValue" placeholder="未配置"
+                       [disabled]="!data.Parameter||!data.Parameter.Name"
+                       class="write_input">
+              </div>
+
+            </td>
+
+            <td class="t_btn">
+              <div class="t_btn_g">
+                <!--<button type="button" class="btn btn_green btn-sm"
+                        [disabled]="!data.Parameter||!data.Parameter.Name"
+                        title="能效">
+                  <i class="iconfont iconnengyuanguanli"></i>
+                  能效
+                </button>-->
+                <button type="button" class="btn btn_red btn-sm"
+                        [disabled]="!data.Parameter||!data.Parameter.Name"
+                        title="编辑告警规则" (click)="addAlarmRule(data)">
+                  <i class="iconfont iconjinggao"></i>
+                  告警
+                </button>
+                <!--[ngClass]="{'btn-outline-info': !data.alarm || data.alarm.length<=0, 'btn-outline-warning':data.alarm && data.alarm.length>0}"-->
+
+                <button type="button" (click)="removeAnalogue(i)" title="删除"
+                        class="btn btn_warning btn-sm">
+                  <i class="iconfont iconshanchu"></i>
+                  删除
+                </button>
+              </div>
+
+            </td>
+          </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+      <!--开关通道-->
+      <div class="channel_content">
+        <div class="conf_title">
+          开关量数据
+          <!-- <i class="fa fa-question-circle-o" nz-popover nzPlacement="bottom"
+              [nzContent]="switchtip" nzTrigger="hover" nzTitle="说明">
+           </i>-->
+
+          <div class="conf_add">
+            <a (click)="addSwitch()"
+               *ngIf="switchList.length < 48 "
+               class="">
+              <i nz-icon nzType="plus" nzTheme="outline"></i>
+              <!--<i class="fa fa-plus-circle"></i>
+              添加开关通道-->
+            </a>
+          </div>
+
+        </div>
+
+        <table class="table table-bordered">
+          <thead class="t_head">
+          <tr>
+            <th style="width: 80px;">通道</th>
+            <th>参数名称</th>
+            <th>功能码</th>
+            <th>
+              <span nz-popover [nzContent]="modbusTips2" nzTrigger="hover" nzTitle="范围说明">MODBUS地址</span>
+            </th>
+            <th>
+              <span nz-popover [nzContent]="bitAddressTips" nzTrigger="hover" nzTitle="范围说明">
+                位地址
+              </span>
+            </th>
+            <th style="width: 96px;">从机地址 <br>(1-255)</th>
+            <th>寄存器写入规则</th>
+            <th>寄存器写入值</th>
+            <th> 其他</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of switchList; let i = index">
+            <td style="padding:0 10px; ">
+              通道
+              {{ i+1 }}
+              <!-- <input type="number" [(ngModel)]="data.ChannelNumber" max="48" min="1"
+                      style="display: inline-block; width: 50%;" class="form-control">-->
+            </td>
+            <td>
+              <div style="display: flex; align-items: center; padding-left: 10px;">
+                <div class="mr-1">
+                  <nz-dropdown [nzTrigger]="'click'">
+                    <button nz-dropdown class="btn btn-sm" [disabled]="!data.Parameter||!data.Parameter.Name"
+                            [ngClass]="{'btn_purple': data.Status === 1}">
+                      <i class="fa"
+                         [ngClass]="{'fa-ellipsis-h':data.Status === 0, '': data.Status === 1, 'fa-eye-slash': data.Status === 2}"></i>
+                      <span *ngIf="data.Status === 1">{{ data.SequenceNumber }}</span>
+                    </button>
+                    <ul nz-menu>
+                      <li nz-submenu>
+                        <span title><i class="fa fa-eye"></i> 位置 </span>
+                        <ul>
+                          <li nz-menu-item *ngFor="let priority of priorities1" (click)="setStatus(data, 1, priority)"
+                              [nzDisabled]="priority.disabled" >
+                            {{ priority.name }}
+                          </li>
+                        </ul>
+                      </li>
+                      <!--<li nz-menu-item (click)="setStatus(data, 2)"><i class="fa fa-eye-slash"></i> 隐藏</li>-->
+                      <li nz-menu-item (click)="setStatus(data, 0)"><i class="fa fa-ellipsis-h"></i>&nbsp;  默认</li>
+                    </ul>
+                  </nz-dropdown>
+
+                  <!--<button [matMenuTriggerFor]="menu1" class="btn btn-sm" [disabled]="!data.Parameter||!data.Parameter.Name"
+                          [ngClass]="{'btn_info': data.Status === 1}">
+                    <i class="fa"
+                       [ngClass]="{'fa-ellipsis-h':data.Status === 0, 'fa-eye': data.Status === 1, 'fa-eye-slash': data.Status === 2}"></i>
+                    <span *ngIf="data.Status === 1">{{ data.SequenceNumber }}</span>
+                  </button>
+                  <mat-menu #menu1="matMenu" [overlapTrigger]="false">
+                    <button mat-menu-item [matMenuTriggerFor]="subMenu"><i class="fa fa-eye"></i>位置</button>
+                    <button mat-menu-item (click)="setStatus(data, 2)"><i class="fa fa-eye-slash"></i> 隐藏</button>
+                    <button mat-menu-item (click)="setStatus(data, 0)"><i class="fa fa-ellipsis-h"></i> 默认</button>
+                  </mat-menu>
+                  <mat-menu #subMenu="matMenu">
+                    <mat-grid-list cols="4" rowHeight="34">
+                      <mat-grid-tile
+                        *ngFor="let priority of priorities2" (click)="setStatus(data, 1, priority)">
+                        {{ priority }}
+                      </mat-grid-tile>
+                    </mat-grid-list>
+                  </mat-menu>-->
+                </div>
+
+                <input type="text" [(ngModel)]="data.Parameter.Name" (change)="dataChanged(data);"
+                       class="form-control" placeholder="{{data.Parameter.Name||'未配置'}}">
+              </div>
+
+            </td>
+
+            <!--<td>
+              <button [matMenuTriggerFor]="menu2" class="btn btn-block" [disabled]="!data.Parameter||!data.Parameter.Name"
+                      [ngClass]="{'btn_info': data.SwitchStatus === 1, 'btn-warning': data.SwitchStatus === 2}">
+                <i class="fa"
+                   [ngClass]="{ 'fa-bolt': data.SwitchStatus === 1, 'fa-warning': data.SwitchStatus === 2}"></i>
+              </button>
+              <mat-menu #menu2="matMenu" [overlapTrigger]="false">
+                <button mat-menu-item (click)="setSwitchStatus(i, 1)"><i class="fa fa-bolt"></i> 运行状态</button>
+                <button mat-menu-item (click)="setSwitchStatus(i, 2)"><i class="fa fa-warning"></i> 故障状态</button>
+              </mat-menu>
+
+            </td>-->
+
+            <td>
+              <select [(ngModel)]="data.Func" [disabled]="!data.Parameter||!data.Parameter.Name"
+                      class="form-control" (click)="fCodeChange(data)">
+                <option *ngFor="let fc of funcs" [value]="fc.Id">{{fc.Name}}</option>
+              </select>
+            </td>
+            <td>
+              <div *ngIf="data.Func == 99"
+                   class="input99">
+                无
+              </div>
+              <input type="number" [(ngModel)]="data.Modbus" placeholder="未配置"
+                     [disabled]="!data.Parameter||!data.Parameter.Name"
+                     class="form-control" *ngIf="data.Func != 99">
+            </td>
+            <td>
+              <div *ngIf="data.Func == 99"
+                   class="input99">
+                无
+              </div>
+              <input type="number" [(ngModel)]="data.BitAddress" placeholder="未配置"
+                     [disabled]="!data.Parameter||!data.Parameter.Name || data.Func == 1 || data.Func == 2"
+                     class="form-control" *ngIf="data.Func != 99">
+
+            </td>
+            <td>
+              <div *ngIf="data.Func == 99"
+                   class="input99">
+                无
+              </div>
+              <input type="number" [(ngModel)]="data.slaveAddress" placeholder="未配置"
+                     [disabled]="!data.Parameter||!data.Parameter.Name" *ngIf="data.Func != 99"
+                     class="form-control">
+            </td>
+            <!--寄存器写入规则-->
+            <td>
+              <div *ngIf="!data.Func || data.Func == 2 || data.Func == 4 || data.Func == 99"
+                   class="input99">
+                无
+              </div>
+              <select [(ngModel)]="data.writeRule" [disabled]="!data.Parameter||!data.Parameter.Name"
+                      class="form-control" *ngIf="data.Func && data.Func != 2 && data.Func != 4 && data.Func != 99">
+                <option value="1">16位</option>
+                <option value="2" *ngIf="data.Func == 3">32位</option>
+                <option value="0">不写</option>
+              </select>
+            </td>
+            <!--寄存器写入值-->
+            <td>
+              <div *ngIf="!data.Func || data.Func == 2 || data.Func == 4 || data.Func == 99 || data.writeRule === '0'"
+                   class="input99">
+                无
+              </div>
+              <div class="flex" style="padding: 5px; align-items: center;"
+                   *ngIf="data.Func && data.Func != 2 && data.Func != 4 && data.Func != 99 && data.writeRule !== '0'">
+
+                <div class="flex" style="align-items: center;">
+                  <span>开：</span>
+                  0x
+                  <input type="text" [(ngModel)]="data.writeValue1" placeholder="未配置"
+                         [disabled]="!data.Parameter||!data.Parameter.Name"
+                         class="write_input">
+                </div>
+
+                <div class="flex ml-5" style="align-items: center;">
+                  <span>关：</span>
+                  0x
+                  <input type="text" [(ngModel)]="data.writeValue2" placeholder="未配置"
+                         [disabled]="!data.Parameter||!data.Parameter.Name"
+                         class="write_input">
+                </div>
+              </div>
+
+            </td>
+
+            <td class="t_btn">
+              <div class="t_btn_g">
+                <button type="button" class="btn btn_red btn-sm"
+                        [disabled]="!data.Parameter||!data.Parameter.Name"
+                        title="编辑告警规则" (click)="addAlarmRule(data)">
+                  <i class="iconfont iconjinggao"></i>
+                  告警
+                </button>
+                <!--[ngClass]="{'btn-outline-info': !data.alarm || data.alarm.length<=0, 'btn-outline-warning':data.alarm && data.alarm.length>0}"-->
+                <button type="button" (click)="removeSwitch(i)" title="删除"
+                        class="btn btn_warning btn-sm">
+                  <i class="iconfont iconshanchu"></i>
+                  删除
+                </button>
+              </div>
+
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <!--状态通道-->
+      <div class="channel_content">
+        <div class="conf_title">
+          状态量数据
+          <!--<i class="fa fa-question-circle-o" nz-popover nzPlacement="bottom"
+             [nzContent]="rangetip" nzTrigger="hover" nzTitle="说明">
+          </i>-->
+
+          <div class="conf_add">
+            <a (click)="addRange()"
+               *ngIf="rangeList.length < 12 "
+               class="">
+              <i nz-icon nzType="plus" nzTheme="outline"></i>
+              <!--<i class="fa fa-plus-circle"></i>
+              添加状态通道-->
+            </a>
+          </div>
+
+        </div>
+
+        <table class="table table-bordered">
+          <thead class="t_head">
+          <tr>
+            <th style="width: 80px;">通道</th>
+            <th>参数名称</th>
+            <th style="width: 10%;">功能码</th>
+            <th style="width: 12%;">高低字节</th>
+            <th>
+              <span nz-popover [nzContent]="modbusTips1" nzTrigger="hover" nzTitle="范围说明">
+                MODBUS地址
+              </span>
+            </th>
+            <th style="width: 96px;">从机地址 <br>(1-255)</th>
+            <th>寄存器写入规则</th>
+            <th>寄存器写入值</th>
+            <th>其他</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of rangeList; let i = index">
+            <td style="padding:0 10px; ">
+              通道
+              {{ i+1 }}
+              <!--<input type="number" [(ngModel)]="data.ChannelNumber" max="12" min="1"
+                     style="display: inline-block; width: 50%;" class="form-control">-->
+            </td>
+            <td>
+              <div style="display: flex; align-items: center; padding-left: 10px;">
+                <div class="mr-1">
+                  <nz-dropdown [nzTrigger]="'click'">
+                    <button nz-dropdown class="btn btn-sm" [disabled]="!data.Parameter||!data.Parameter.Name"
+                            [ngClass]="{'btn_purple': data.Status === 1}">
+                      <i class="fa"
+                         [ngClass]="{'fa-ellipsis-h':data.Status === 0, '': data.Status === 1, 'fa-eye-slash': data.Status === 2}"></i>
+                      <span *ngIf="data.Status === 1">{{ data.SequenceNumber }}</span>
+                    </button>
+                    <ul nz-menu>
+                      <li nz-submenu>
+                        <span title><i class="fa fa-eye"></i> 位置 </span>
+                        <ul>
+                          <li nz-menu-item *ngFor="let priority of priorities1" (click)="setStatus(data, 1, priority)"
+                              [nzDisabled]="priority.disabled" >
+                            {{ priority.name }}
+                          </li>
+                        </ul>
+                      </li>
+                      <li nz-menu-item (click)="setStatus(data, 2)"><i class="fa fa-eye-slash"></i> 隐藏</li>
+                      <li nz-menu-item (click)="setStatus(data, 0)"><i class="fa fa-ellipsis-h"></i>&nbsp;  默认</li>
+                    </ul>
+                  </nz-dropdown>
+
+                  <!-- <button [matMenuTriggerFor]="menu" class="btn btn-sm" [disabled]="!data.Parameter||!data.Parameter.Name"
+                           [ngClass]="{'btn_info': data.Status === 1}">
+                     <i class="fa"
+                        [ngClass]="{'fa-ellipsis-h':data.Status === 0, 'fa-eye': data.Status === 1, 'fa-eye-slash': data.Status === 2}"></i>
+                     <span *ngIf="data.Status === 1">{{ data.SequenceNumber }}</span>
+                   </button>
+                   <mat-menu #menu="matMenu" [overlapTrigger]="false">
+                     <button mat-menu-item [matMenuTriggerFor]="subMenu"><i class="fa fa-eye"></i>位置</button>
+                     <button mat-menu-item (click)="setStatus(data, 2)"><i class="fa fa-eye-slash"></i> 隐藏</button>
+                     <button mat-menu-item (click)="setStatus(data, 0)"><i class="fa fa-ellipsis-h"></i> 默认</button>
+                   </mat-menu>
+                   <mat-menu #subMenu="matMenu">
+                     <mat-grid-list cols="4" rowHeight="34">
+                       <mat-grid-tile
+                         *ngFor="let priority of priorities3" (click)="setStatus(data, 1, priority)">
+                         {{ priority }}
+                       </mat-grid-tile>
+                     </mat-grid-list>
+                   </mat-menu>-->
+                </div>
+
+                <input type="text" [(ngModel)]="data.Parameter.Name" (change)="dataChanged(data);"
+                       class="form-control" placeholder="{{data.Parameter.Name||'未配置'}}">
+              </div>
+
+              <!--<div class="ml-1">
+                <button type="button" class="btn btn-sm"
+                        [disabled]="!data.Parameter || !data.Parameter.Name || data.Status === -1"
+                        [class.btn_info]="data.Ranges.length > 0"
+                        (click)="openRange(data)">
+                  <i class="fa"
+                     [ngClass]="{'fa-calendar-plus-o': data.Ranges.length <= 0, 'fa-calendar-check-o': data.Ranges.length > 0}"></i>
+                </button>
+              </div>-->
+
+            </td>
+
+            <td>
+              <select [(ngModel)]="data.Func" [disabled]="!data.Parameter||!data.Parameter.Name"
+                      class="form-control">
+                <option *ngFor="let fc of funcs" [value]="fc.Id">{{fc.Name}}</option>
+              </select>
+            </td>
+            <td>
+              <div *ngIf="data.Func == 99"
+                   class="input99">
+                无
+              </div>
+              <select [(ngModel)]="data.Byte" [disabled]="!data.Parameter||!data.Parameter.Name"
+                      class="form-control" *ngIf="data.Func != 99">
+                <option *ngFor="let by of bytes" [value]="by.value">{{by.name}}</option>
+              </select>
+            </td>
+            <td>
+              <div *ngIf="data.Func == 99"
+                   class="input99">
+                无
+              </div>
+              <input type="number" [(ngModel)]="data.Modbus" placeholder="未配置"
+                     [disabled]="!data.Parameter||!data.Parameter.Name"
+                     class="form-control"  *ngIf="data.Func != 99">
+
+            </td>
+            <td>
+              <div *ngIf="data.Func == 99"
+                   class="input99">
+                无
+              </div>
+              <input type="number" [(ngModel)]="data.slaveAddress" placeholder="未配置"
+                     [disabled]="!data.Parameter||!data.Parameter.Name" *ngIf="data.Func != 99"
+                     class="form-control">
+            </td>
+            <!--寄存器写入规则-->
+            <td>
+              <div *ngIf="!data.Func || data.Func == 2 || data.Func == 4 || data.Func == 99"
+                   class="input99">
+                无
+              </div>
+              <select [(ngModel)]="data.writeRule" [disabled]="!data.Parameter||!data.Parameter.Name"
+                      class="form-control" *ngIf="data.Func && data.Func != 2 && data.Func != 4 && data.Func != 99">
+                <option value="1">16位</option>
+                <option value="2" *ngIf="data.Func == 3">32位</option>
+                <option value="0">不写</option>
+              </select>
+            </td>
+            <!--寄存器写入值-->
+            <td>
+              <div *ngIf="!data.Func || data.Func == 2 || data.Func == 4 || data.Func == 99 || data.writeRule === '0'"
+                   class="input99">
+                无
+              </div>
+              <div class="flex" style="padding: 5px; align-items: center;"
+                   *ngIf="data.Func && data.Func != 2 && data.Func != 4 && data.Func != 99 && data.writeRule !== '0'">
+                0x
+                <input type="text" [(ngModel)]="data.writeValue" placeholder="未配置"
+                       [disabled]="!data.Parameter||!data.Parameter.Name"
+                       class="write_input">
+              </div>
+
+            </td>
+
+            <td class="t_btn">
+              <div class="t_btn_g">
+
+                <button type="button" class="btn btn_purple btn-sm"
+                        [disabled]="!data.Parameter||!data.Parameter.Name"
+                        title="设置" (click)="openRange(data)">
+                  <i class="iconfont iconshezhi"></i>
+                  设置
+                </button>
+
+                <button type="button" class="btn btn_red btn-sm"
+                        [disabled]="!data.Parameter||!data.Parameter.Name"
+                        title="编辑告警规则" (click)="addAlarmRule(data)">
+                  <i class="iconfont iconjinggao"></i>
+                  告警
+                </button>
+                <!--[ngClass]="{'btn-outline-info': !data.alarm || data.alarm.length<=0, 'btn-outline-warning':data.alarm && data.alarm.length>0}"-->
+
+                <button type="button" (click)="removeRange(i)" title="删除"
+                        class="btn btn_warning btn-sm">
+                  <i class="iconfont iconshanchu"></i>
+                  删除
+                </button>
+              </div>
+            </td>
+
+          </tr>
+          </tbody>
+
+        </table>
+      </div>
+
+    </div>
+
+    <div class="flex justify-content-center">
+      <div class="btn-group">
+        <button class="btn btn_purple bpm" (click)="goBack()">返回</button>
+        <button class="btn btn_purple bpm" (click)="save()" style="margin-left: 1px;">
+          <!--<img src="assets/icons/icon_upload.png" alt="">-->
+          确认提交
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div *ngIf="isSpinning"
+     style="position: fixed; height: 100%; width: 100%; left: 0; right: 0; top: 0; bottom: 0; z-index:20; background-color: rgba(255,255,255,0.3);">
+  <nz-spin nzTip='信息发送中...' [nzSpinning]="isSpinning" style="position: absolute; top:50%; left:50%;">
+  </nz-spin>
+</div>
+
+
+<ng-template #modbusTips1>
+  功能码03对应范围 <b>40001-49999</b>
+  <br/>
+  功能码04对应范围 <b>30001-39999</b>
+</ng-template>
+
+<ng-template #modbusTips2>
+  功能码01对应范围 <b>00001-09999</b>
+  <br/>
+  功能码02对应范围 <b>10001-19999</b>
+  <br/>
+  功能码03对应范围 <b>40001-49999</b>
+</ng-template>
+
+
+<ng-template #bitAddressTips>
+  功能码01对应位地址 <b>1</b>
+  <br/>
+  功能码02对应位地址 <b>1</b>
+  <br/>
+  功能码03对应位地址 <b>1-16</b>
+</ng-template>
+
+
+
+
+
+

@@ -10,7 +10,7 @@ import {ActivatedRoute} from "@angular/router";
 export class FlowOperateAdComponent implements OnInit {
   public uid;
   public name;
-  public operateList;
+  public operateList = [];
   public page = 1;
   public pageNum;
   public pageSize = 15;

@@ -4,17 +4,17 @@
 
     <!--企业标识-->
     <a class="navbar-brand" routerLink="/admin"
-       *ngIf="user && !user.show_brand">
+       *ngIf="user && !checkAuth('1001')">
       <img src="assets/images/global/head_logo.png"  height="38" style="margin-top: 9px;" alt="">
       <!--<h2 style="color: #ffffff;"> LUKEEP</h2>-->
     </a>
 
     <!--显示企业标识-->
-    <a class="navbar-brand" routerLink="/admin" *ngIf="user && user.show_brand">
+    <a class="navbar-brand" routerLink="/admin" *ngIf="user && checkAuth('1001')">
       <h3 *ngIf="!user.brand_image" style="color: #ffffff; line-height: 63px;">
         {{user.brand_name}}
       </h3>
-      <span *ngIf="user.brand_image" >
+      <span *ngIf="user.brand_image">
         <img src="{{user.brand_image}}" alt="" height="30">
       </span>
     </a>

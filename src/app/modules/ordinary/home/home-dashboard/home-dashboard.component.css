@@ -11,7 +11,7 @@
   flex: 1;
   margin-left: 12px;
 }
-.hc_1,.hc_2,.hc_3{
+.hc_1,.hc_3{
   margin-bottom: 25px;
 }
 
@@ -32,9 +32,42 @@
 }
 .hc_content2{
   height:260px;
+  padding: 12px;
+  box-sizing: border-box;
   background:#F9FAFD;
   border-radius:4px;
   border:1px solid #E4E5EC;
+}
+
+.hc_content2 ul{
+  height: 215px;
+}
+.hc_content2 ul li a{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3px;
+  cursor: pointer;
+}
+.hc_content2 ul li *{
+  font-size: 12px;
+}
+
+.h_date{
+  display: flex;
+  align-items: center;
+}
+.h_circle{
+  width: 6px;
+  height: 6px;
+  border-radius: 6px;
+  border: 1px solid #666EE8;
+  margin-right: 10px;
+}
+.h_circle.active{
+  background-color: #666EE8;
+}
+.hc_more i{
+  font-size: 12px;
 }
 
 /*主监控台*/
@@ -75,7 +108,8 @@
 
 /*设备关联*/
 .hc_2 .hc_content{
-  height: 386px;
+  height: 384px;
+  overflow: hidden;
 }
 .hc_2 .hc_content img{
   width: 100%;

@@ -1,0 +1,132 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    <img src="assets/icons/setting.png" alt="" style="margin-right: 19px;">
+    集群基础信息设置
+  </h4>
+</div>
+
+<div class="modal-body m_form">
+  <div class="m_item">
+    <div class="m_label">
+      集群编号：
+    </div>
+    <div class="m_input">
+     {{info?.id}}
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      集群验证码：
+    </div>
+    <div class="m_input">
+      {{info?.verify}}
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      使用单位：
+    </div>
+    <div class="m_input">
+      {{info?.use_org_name}}
+    </div>
+  </div>
+
+  <div class="m_item" style="margin-bottom: 20px;">
+    <div class="m_label">
+      <span>*</span> 集群名称：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="name" placeholder="请输入集群名称" #tName="ngModel"
+             minlength="3" maxlength="10"  required> <!--pattern="(\S){3,10}"-->
+      <div class="sign_tip">
+        <span class="text_danger" *ngIf="tName.invalid && (tName.dirty || tName.touched)">请输入3-10个字符</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      集群地址：
+    </div>
+    <div class="m_input">
+      <nz-select style="width: 139px; margin-right: 10px;" [(ngModel)]="selectedProvince" (ngModelChange)="provinceChange($event)"
+                 nzPlaceHolder="请选择">
+        <nz-option *ngFor="let p of addrList" [nzValue]="p" [nzLabel]="p.Name"></nz-option>
+      </nz-select>
+      省
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label"></div>
+    <div class="m_input">
+      <nz-select style="width: 139px; margin-right: 10px;" [(ngModel)]="selectedCity" (ngModelChange)="cityChange($event)"
+                 [nzDisabled]="!selectedProvince || selectedProvince.LocationId===0 " nzPlaceHolder="请选择">
+        <nz-option *ngFor="let c of cities" [nzValue]="c" [nzLabel]="c.Name"></nz-option>
+      </nz-select>
+      市
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label"></div>
+    <div class="m_input">
+      <nz-select style="width: 139px; margin-right: 10px;" [(ngModel)]="selectedRegion" (ngModelChange)="regionChange($event)"
+                 [nzDisabled]="!selectedCity" nzPlaceHolder="请选择">
+        <nz-option *ngFor="let r of regions" [nzValue]="r" [nzLabel]="r.Name"></nz-option>
+      </nz-select>
+      区/县
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      详细地址：
+    </div>
+    <div class="m_input">
+      <textarea [(ngModel)]="address" class="form-control" placeholder="请输入详细地址…" style="height:89px;"></textarea>
+    </div>
+  </div>
+
+  <div class="m_img">
+    <nz-upload
+      class="avatar-uploader"
+      nzAction="/api/dialogue/attach/upload"
+      nzListType="picture-card"
+      [nzHeaders]="headOption"
+      [nzShowUploadList]="false"
+      [nzBeforeUpload]="beforeUpload"
+      (nzChange)="handleChange($event)"
+    >
+      <ng-container *ngIf="!imgUrl">
+        <img src="assets/images/photo.png" style="width: 210px; height: 210px;" alt="">
+      </ng-container>
+      <img *ngIf="imgUrl" [src]="imgUrl" style="width: 210px; height: 210px;"/>
+    </nz-upload>
+
+    <div class="img_text">
+      请点击左侧图片，<br/>
+      上传要设置的设备展示图片，
+      支持jpg、png、gif格式，
+      文件大小不超过200k。
+      <br/><br/>
+      最佳效果像素为240*240
+    </div>
+  </div>
+
+
+
+
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取 消</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 35px;" (click)="save()" [disabled]="!name">确 定</button>
+</div>
+
+
+

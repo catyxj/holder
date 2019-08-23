@@ -8,7 +8,7 @@
   <div class="t_info_head">
     <div class="info_title">
       <h6>
-        222222
+        {{basic?.terminal_code}}
       </h6>
     </div>
     <!--<div class="info_tname">
@@ -25,7 +25,7 @@
       <button class="btn btn_purple-o btn_round bps ml-1" (click)="getBasic(); getOperate();">
         <i class="iconfont iconicon_Refresh"></i>
       </button>
-      <a class="btn btn_purple btn_round bpm ml-1" [routerLink]="['/admin/formal/terminal/messages', uid]">
+      <a class="btn btn_purple btn_round bpm ml-1" [routerLink]="['/admin/formal/terminal/messages', uid, code]">
         调试报文
       </a>
       <button class="btn btn_purple btn_round bpm ml-1" (click)="deleteData()">
@@ -48,7 +48,7 @@
               所属企业：
             </div>
             <div class="t_info_value">
-              呜呜呜
+              {{basic?.org_name}}
             </div>
           </div>
 
@@ -57,7 +57,7 @@
               关联设备：
             </div>
             <div class="t_info_value">
-                dddd
+              {{basic?.ept_name}}
             </div>
           </div>
         </div>
@@ -73,7 +73,8 @@
               固件版本：
             </div>
             <div class="t_info_value">
-              VE21.21 485 标准版
+              {{basic?.fw_ver}}
+              <!--VE21.21 485 标准版-->
             </div>
           </div>
 
@@ -82,9 +83,14 @@
               联网状态：
             </div>
             <div class="t_info_value t_bt">
-              呜呜呜
+              <span class="text_blue" *ngIf="basic && basic.online">
+                  已联网
+              </span>
+              <span class="text_grey" *ngIf="!basic || !basic.online">
+                  未联网
+              </span>
 
-              <a (click)="flowInfo()">流量查询</a>
+              <!--<a (click)="flowInfo()" style="font-size: 10px;">流量查询</a>-->
             </div>
           </div>
 
@@ -93,8 +99,25 @@
               配置状态：
             </div>
             <div class="t_info_value t_bt">
-              配置成功 15/15
-              <button class="btn btn_purple btn-sm" (click)="issued()">
+              <div>
+                <span class="text_blue" *ngIf="basic && basic.plat_ver !== 0 && basic.term_ver !== 0 && basic.plat_ver === basic.term_ver">
+                  配置成功
+                </span>
+                <span class="text_danger" *ngIf="basic && basic.plat_ver !== 0 && basic.term_ver !== 0 && basic.plat_ver !== basic.term_ver">
+                  配置失败
+                </span>
+                <span class="text_grey" *ngIf="basic && basic.plat_ver === 0">
+                  未配置
+                </span>
+                <span class="text_grey" *ngIf="basic && basic.term_ver === 0">
+                  未下发
+                </span>
+                &nbsp;
+                {{basic?.term_ver}} / {{basic?.plat_ver }}
+              </div>
+
+
+              <button class="btn btn_purple btn-sm" (click)="issued()" [disabled]="!basic || basic.plat_ver === 0">
                 下发配置
               </button>
             </div>
@@ -105,11 +128,18 @@
               配置模板：
             </div>
             <div class="t_info_value t_bt">
-              呜呜呜
+              <span>
+                {{basic?.template_name || '默认模板'}}
+              </span>
 
-              <a class="btn btn_purple btn-sm" [routerLink]="['/admin/formal/terminal/config', uid]">
-                设置
+
+              <!--设置-->
+              <a [routerLink]="['/admin/formal/terminal/config', uid, code]" title="设置">
+                <span class="iconfont iconedit text_purple" style="font-size: 16px;"></span>
               </a>
+              <!--<a class="btn btn_purple btn-sm" [routerLink]="['/admin/formal/terminal/config', uid, code]">-->
+                <!--设置-->
+              <!--</a>-->
             </div>
           </div>
 
@@ -119,16 +149,18 @@
             </div>
             <div class="t_info_value">
               <div class="t_value_text">
-                模拟量数量 【2】  开关量数量 【2】 状态量数量 【3】
+                模拟量数量 【{{basic?.analogue_count}}】
+                开关量数量 【{{basic?.switch_count}}】
+                状态量数量 【{{basic?.range_count}}】
               </div>
               <div class="t_value_text">
-                波特率 【9600】
+                波特率 【{{baud_rate}}】
               </div>
+              <!--<div class="t_value_text">-->
+                <!--从机模式 【{{basic?.range_count}}】-->
+              <!--</div>-->
               <div class="t_value_text">
-                从机模式 【1】
-              </div>
-              <div class="t_value_text">
-                数据心跳包频率 【45秒/次】
+                数据心跳包频率 【{{heart_beat}} 秒/次】
               </div>
             </div>
           </div>
@@ -163,6 +195,12 @@
     </div>
   </div>
 
+</div>
+
+<div *ngIf="isSpinning"
+     style="position: fixed; height: 100%; width: 100%; left: 0; right: 0; top: 0; bottom: 0; z-index:2000; background-color: rgba(255,255,255,0.3);">
+  <nz-spin nzTip='信息发送中...' [nzSpinning]="isSpinning" style="position: absolute; top:50%; left:50%; width: 100px;">
+  </nz-spin>
 </div>
 
 

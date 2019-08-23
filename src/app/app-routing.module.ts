@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {MainComponent} from './main/main.component';
 import {NotFound404Component} from './global/not-found404/not-found404.component';
@@ -11,6 +11,7 @@ import {UserloginGuard} from "./shared/userlogin.guard";
 import {DirMainComponent} from "./modules/directives/dir-main/dir-main.component";
 import {SignInComponent} from "./register/sign-in/sign-in.component";
 import {VideoLiveComponent} from "./modules/directives/video-live/video-live.component";
+import {Err404Component} from "./global/error/err404/err404.component";
 
 
 
@@ -18,7 +19,7 @@ import {VideoLiveComponent} from "./modules/directives/video-live/video-live.com
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'admin',
     pathMatch: 'full'
   },
   {
@@ -136,16 +137,19 @@ const routes: Routes = [
   },
   {
     path: '404',
-    component: NotFound404Component
+    component: Err404Component
   },
   {
     path: '**', // fallback router must in the last
-    component: NotFound404Component
+    component: Err404Component
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(
+    routes,
+    {preloadingStrategy: PreloadAllModules}
+  )],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -14,18 +14,19 @@ export class MRecordInfoFormalComponent implements OnInit {
       status: false,
       remark: '',
       imgList: [
+        'assets/images/no_img.jpg',
         'assets/images/no_img.jpg'
       ]
     },
     {
       description: '点火器是否正常',
-      status: false,
+      status: true,
       remark: '',
       imgList: []
     },
     {
       description: '排风机是否正常',
-      status: false,
+      status: true,
       remark: '',
       imgList: []
     },

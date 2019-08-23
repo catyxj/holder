@@ -1,0 +1,18 @@
+<div class="cus_d_content">
+  <div class="cus_d_img">
+    <ul>
+      <li *ngFor="let img of img1" (click)="check(img)" [class.active]="img.checked">
+        <img src="{{img.img}}" alt="" title="{{img.name}}">
+      </li>
+    </ul>
+    <ul>
+      <li *ngFor="let img of img2" (click)="check(img)" [class.active]="img.checked">
+        <img src="{{img.imgs[0].img}}" alt="" title="{{img.name}}">
+      </li>
+    </ul>
+  </div>
+
+
+
+
+</div>

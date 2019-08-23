@@ -6,7 +6,7 @@ import {catchError} from 'rxjs/internal/operators';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': 'Ida'
+    'Authorization': 'auth'
   })
 };
 
@@ -17,8 +17,23 @@ export class RuntimeService {
 
   constructor(private http: HttpClient) { }
 
+  getContent(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    // return this.http.get('assets/server/device.json', httpOptions);
+    return this.http.get(`/api/formal/ept/instant/content/get?uid=${uid}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   getInstants(): Observable<any> {
-    return this.http.get('assets/server/runtime.json')
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    // /ept/instant/ws
+    return this.http.get('assets/server/runtime.json', httpOptions)
       .pipe(
         catchError(this.handleError)
       );

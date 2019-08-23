@@ -26,6 +26,9 @@ export class AdressService {
     //   );
   }
 
+  getMapStyle() {
+    return this.http.get('assets/server/map_config.json');
+  }
 
 
 

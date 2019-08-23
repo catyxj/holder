@@ -1,0 +1,118 @@
+
+
+
+<div class="content">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>
+        【{{code}}】 能效计算设置3
+      </h6>
+    </div>
+    <div class="li_head_r">
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" (click)="goBack()">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+
+
+    </div>
+  </div>
+
+  <div class="list_content">
+    <div>
+      <nz-radio-group [(ngModel)]="checked">
+        <label nz-radio nzValue="1">启用</label>
+        <label nz-radio nzValue="0">停用</label>
+      </nz-radio-group>
+    </div>
+
+    <div class="content_t">
+      <div class="ct_h">
+        能效正平衡计算
+      </div>
+      <nz-table nzTemplateMode>
+        <thead>
+        <tr>
+          <th>序号</th>
+          <th>对应计算参数</th>
+          <th>数据通道</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td> 能效计算正平衡 </td>
+          <td> 15 </td>
+          <td>
+            <nz-select
+              style="width: 200px;"
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="Select a person"
+              [(ngModel)]="selectedValue"
+            >
+              <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+              <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+              <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+            </nz-select>
+          </td>
+
+        </tr>
+        <tr>
+          <td> 能效计算反平衡 </td>
+          <td> 15 </td>
+          <td>
+            <nz-select
+              style="width: 200px;"
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="Select a person"
+              [(ngModel)]="selectedValue"
+            >
+              <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+              <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+              <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+            </nz-select>
+          </td>
+
+        </tr>
+        <tr>
+          <td> 能耗统计 </td>
+          <td> 1 </td>
+          <td>
+            <nz-select
+              style="width: 200px;"
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="Select a person"
+              [(ngModel)]="selectedValue"
+            >
+              <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+              <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+              <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+            </nz-select>
+          </td>
+
+        </tr>
+        </tbody>
+      </nz-table>
+
+      <div class="ct-b">
+        <button class="btn btn_purple bpm">
+          确认提交
+        </button>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+

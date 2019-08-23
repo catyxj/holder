@@ -1,3 +1,132 @@
-<p>
-  clu-dashboard works!
-</p>
+
+<div class="content">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>
+        集群概览
+      </h6>
+    </div>
+    <div class="li_head_r">
+      <!--刷新-->
+      <!--<button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>-->
+
+      <button class="btn btn_purple btn_round bpm ml-1" routerLink="/admin/ordinary/cluster/add">
+        新增集群
+      </button>
+
+      <button class="btn btn_purple btn_round bpm ml-1" routerLink="/admin/ordinary/cluster/batch">
+        批量操作
+      </button>
+
+    </div>
+  </div>
+
+  <div class="list_content">
+    <div class="content_h">
+      <div class="search_box">
+        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="addOnAfterTemplate">
+          <input type="text" nz-input [(ngModel)]="value" (keyup)="searchEnter($event)" maxlength="20"/>
+        </nz-input-group>
+        <ng-template #addOnBeforeTemplate>
+          <nz-select [(ngModel)]="search">
+            <nz-option [nzLabel]="'集群名称'" [nzValue]="'name'"></nz-option>
+            <nz-option [nzLabel]="'地域'" [nzValue]="'location_name'"></nz-option>
+          </nz-select>
+        </ng-template>
+        <ng-template #addOnAfterTemplate>
+          <img src="assets/icons/icon_seach.png" alt="" class="search_icon" (click)="searchChange()">
+        </ng-template>
+
+      </div>
+      <div class="flex">
+
+
+      </div>
+    </div>
+    <div class="content_d">
+      <div class="grid">
+        <div *ngFor="let data of dataLists; trackBy: trackByUid" class="d_col">
+          <a class="module" [routerLink]="['/admin/ordinary/cluster/info', data.uid, page]">
+            <div class="status_box">
+              <div class="status_content">
+                <div class="status_name">
+                  <div class="sn_title">
+                    <h6 class="">
+                      {{data.name}}
+                    </h6>
+                    <p>
+                      {{data.location_name}}
+                    </p>
+                  </div>
+                </div>
+
+                <div class="status_col">
+                  <div class="status_row d_label" [ngClass]="{'bg_blue':data.termOffline > 0}">
+                    <b>联网 : </b>
+                    <span class="">{{data.termOnline}}</span> / <span class="">{{data.termOffline}}</span>
+                  </div>
+                  <div class="status_row d_label" [ngClass]="{'bg_info':data.eptOnline > 0}">
+                    <b>运行 : </b>
+                    <span class="">{{data.eptOnline}}</span> / <span>{{data.eptCounts}}</span>
+                  </div>
+                  <div class="status_row d_label" [ngClass]="{'bg_red':data.alarm_count > 0}">
+                    <b>告警 : </b>
+                    <span *ngIf="data.alarm_count <= 0">
+                      无告警
+                    </span>
+                    <span *ngIf="data.alarm_count > 0">
+                      有 {{data.alarm_count}} 条告警
+                    </span>
+                  </div>
+                  <div class="status_row d_label" [ngClass]="{'bg_warning':data.mtCounts > 0}">
+                    <b>故障 : </b>
+                    <span *ngIf="!data.mtCounts">
+                      无故障
+                    </span>
+                    <span *ngIf="data.mtCounts > 0">
+                        有 {{data.mtCounts}} 个故障
+                    </span>
+                  </div>
+                </div>
+
+
+              </div>
+              <div class="img_content ">
+                <img src="{{data.img}}" alt="">
+              </div>
+            </div>
+
+            <div class="mask" *ngIf="data.status === 1">
+              集群未激活 <br/>
+              请联系产品厂家
+            </div>
+
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+
+    <div class="content_b">
+      <nz-pagination [nzTotal]="totalItems"
+                     [nzShowTotal]="totalTemplate"
+                     [(nzPageIndex)]="page"
+                     [(nzPageSize)]="pageSize"
+                     (nzPageIndexChange)="pageChange()">
+
+      </nz-pagination>
+      <div class="ant-pagination-options-quick-jumper"> 跳至
+        <input type="number" [(ngModel)]="pageNum"> 页 </div>
+      <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+

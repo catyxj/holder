@@ -4,6 +4,9 @@ import {TerminalService} from "../../../../shared/terminal.service";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {TerminalAddImgFormalComponent} from "../modals/terminal-add-img-formal/terminal-add-img-formal.component";
 
+import Swal from 'sweetalert2';
+import {TerminalDeleteImgComponent} from "../modals/terminal-delete-img/terminal-delete-img.component";
+
 @Component({
   selector: 'app-terminal-customize-formal',
   templateUrl: './terminal-customize-formal.component.html',
@@ -11,6 +14,9 @@ import {TerminalAddImgFormalComponent} from "../modals/terminal-add-img-formal/t
 })
 export class TerminalCustomizeFormalComponent implements OnInit {
   public uid;
+  public code;
+  public name;
+  public id;
 
   public devices = {}; // 所有控件属性
   public imgLists1 = []; // 公共图片控件
@@ -57,6 +63,7 @@ export class TerminalCustomizeFormalComponent implements OnInit {
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
+    this.code = this.route.snapshot.paramMap.get('code');
     this.getImages();
     this.getChans();
     this.getContent();
@@ -64,10 +71,12 @@ export class TerminalCustomizeFormalComponent implements OnInit {
 
   // 获取图片
   getImages() {
-    // this.terminalService.getImages()
-    //   .subscribe(data => {
-    //     console.log(data)
-    //   });
+    this.terminalService.getComponents()
+      .subscribe(data => {
+        console.log(data);
+        this.imgComponents2 = data.single;
+        this.imgComponents3 = data.multi;
+      });
 
     this.imgComponents1 = [
       /*{
@@ -76,18 +85,18 @@ export class TerminalCustomizeFormalComponent implements OnInit {
         src: 'assets/images/mapicon1.png'
       }*/
     ];
-    this.imgComponents2 = [
+    /*this.imgComponents2 = [
       {
         id: 1,
         name: '自定义图片1',
         img: 'assets/images/no_image.png',
-        type: '1'
+        type: 1
       },
       {
         id: 3,
         name: '自定义图片3',
         img: 'assets/images/no_image.png',
-        type: '1'
+        type: 1
       },
     ];
     this.imgComponents3 = [
@@ -96,115 +105,156 @@ export class TerminalCustomizeFormalComponent implements OnInit {
         name: '自定义多态图片2',
         imgs: [
           {
-            imgUrl: 'assets/images/boilerwater.gif',
+            img: 'assets/images/boilerwater.gif',
             max: 2,
             min: 1,
-            num: 1
+            sort: 1
           },
           {
-            imgUrl: 'assets/images/boilerwater.png',
+            img: 'assets/images/boilerwater.png',
             max: 4,
             min: 3,
-            num: 2
+            sort: 2
           }
-        ]
+        ],
+        type: 2
       },
       {
         id: 4,
         name: '自定义多态图片3',
         imgs: [
           {
-            imgUrl: 'assets/images/gasboiler.gif',
+            img: 'assets/images/gasboiler.gif',
             max: 2,
             min: 1,
-            num: 1
+            sort: 1
           },
           {
-            imgUrl: 'assets/images/gasboiler.png',
+            img: 'assets/images/gasboiler.png',
             max: 4,
             min: 3,
-            num: 2
+            sort: 2
           }
-        ]
+        ],
+        type: 2
       },
       {
         id: 5,
         name: '自定义多态图片4',
         imgs: [
           {
-            imgUrl: 'assets/images/coalsingle.gif',
+            img: 'assets/images/coalsingle.gif',
             max: 2,
             min: 1,
-            num: 1
+            sort: 1
           },
           {
-            imgUrl: 'assets/images/coalsingle.png',
+            img: 'assets/images/coalsingle.png',
             max: 4,
             min: 3,
-            num: 2
+            sort: 2
           }
-        ]
+        ],
+        type: 2
       }
-    ];
+    ];*/
+
+
   }
 
   // 获取通道
   getChans() {
-    this.chans = [
+
+    /*this.chans = [
       {
-        chanType: 1,
-        chanNumber: 3,
+        channel_type: 10,
+        channel_number: 3,
         name: '温度1',
-        value: 222
       },
       {
-        chanType: 3,
-        chanNumber: 3,
-        name: '排烟温度',
-        value: 22331
+        chanType: 10,
+        channel_number: 4,
+        name: '气压'
       },
       {
-        chanType: 1,
-        chanNumber: 4,
-        name: '气压',
-        value: 21211
+        channel_type: 10,
+        channel_number: 5,
+        name: '模拟hhhhhhh'
       },
       {
-        chanType: 1,
-        chanNumber: 5,
-        name: 'hhhhhhh',
-        value: 56544
+        channel_type: 11,
+        channel_number: 3,
+        name: '开关排烟温度'
       },
       {
-        chanType: 5,
-        chanNumber: 5,
-        name: 'hhhhhhh',
-        value: 56544
+        channel_type: 12,
+        channel_number: 5,
+        name: '状态hhhhhhh'
       }
     ];
     for (let i = 0; i < this.chans.length; i++) {
       const ch = this.chans[i];
-      ch.id = ch.chanType + '_' + ch.chanNumber + '_' + ch.name;
-      switch (ch.chanType) {
-        case 1:
+      ch.id = ch.channel_type + '_' + ch.channel_number + '_' + ch.name;
+      switch (ch.channel_type) {
+        case 10:
           this.chans1.push(ch);
           break;
-        case 3:
+        case 11:
           this.chans2.push(ch);
+          this.chans3.push(ch);
           break;
-        case 5:
+        case 12:
           this.chans3.push(ch);
           break;
       }
     }
+    console.log(this.chans1, this.chans2, this.chans3);*/
+
+
+    this.terminalService.getChannelName(this.uid)
+      .subscribe(data => {
+
+        this.chans = data.channel;
+
+        /*this.chans1 = data.alalog;
+        this.chans2 = data.switch;
+        this.chans3 = data.range;
+        this.chans = this.chans1.concat(this.chans2, this.chans3);*/
+
+        for (let i = 0; i < this.chans.length; i++) {
+          const ch = this.chans[i];
+          ch.id = ch.channel_type + '_' + ch.channel_number + '_' + ch.name;
+          switch (ch.channel_type) {
+            case 10:
+              this.chans1.push(ch);
+              break;
+            case 11:
+              this.chans2.push(ch);
+              this.chans3.push(ch);
+              break;
+            case 12:
+              this.chans3.push(ch);
+              break;
+          }
+        }
+        console.log(this.chans1, this.chans2, this.chans3);
+
+      });
+
   }
 
 
+  // ----获取组态内容---------
   getContent() {
     let that = this;
     this.terminalService.getContent(this.uid)
       .subscribe(data => {
-        let content = data.content;
+        let content = JSON.parse(data.content);
+        this.id = data.id;
+        this.name = data.name;
+        if (!content) {
+          return;
+        }
         that.imgLists1 = content.imgs1;
         that.imgLists2 = content.imgs2;
         that.imgLists3 = content.imgs3;
@@ -442,7 +492,6 @@ export class TerminalCustomizeFormalComponent implements OnInit {
 
   eventDown(e) {
     const that = this;
-
     that.dragImg(e, that);
   }
 
@@ -455,6 +504,7 @@ export class TerminalCustomizeFormalComponent implements OnInit {
 
   // 点击移动
   dragImg(event, that) {
+    // console.log(event);
     event.preventDefault();
     that.moving = true;
     that.z = that.z + 1;
@@ -464,6 +514,7 @@ export class TerminalCustomizeFormalComponent implements OnInit {
     let tgt = event.target;
     let dataS = false;
     let isBtn = false;
+    // console.log(tgt);
     if (tgt.className === 'dataComponent') {
       dataS = true;
     }
@@ -602,7 +653,7 @@ export class TerminalCustomizeFormalComponent implements OnInit {
     this.ctrl1 = true;
     this.ctrl0 = true;
     this.ctrl4 = false;
-    this.showCh = 1;
+    this.showCh = 3;
     const chType = this.selected.chanType;
     const chNum = this.selected.chanNum;
     const chName = this.selected.chanName;
@@ -718,22 +769,41 @@ export class TerminalCustomizeFormalComponent implements OnInit {
   select3(d) {
     const that = this;
     this.selected = d;
-    this.ctrl0 = false;
+    this.ctrl0 = true;
     this.ctrl1 = false;
     this.ctrl2 = false;
     this.ctrl3 = false;
-    this.ctrl4 = true;
+    this.ctrl4 = false;
+
 
     if (this.selected) {
-      // this.showCh = 3;
+      const chType = this.selected.chanType;
+      const chNum = this.selected.chanNum;
+      const chName = this.selected.chanName;
+
+      this.showCh = 2;
       this.cName = this.selected.cName;
       this.cType = this.selected.cType;
-      this.curAddress = this.selected.address;
+      this.dataValue = chType + '_' + chNum + '_' + chName;
+      // this.curAddress = this.selected.address;
+
     } else {
-      this.ctrl4 = false;
+      this.ctrl0 = false;
+      this.showCh = 0;
     }
   }
 
+
+
+  // 改变宽度
+  changeH(h) {
+    this.selected.style.height = h + 'px';
+  }
+
+  // 改变高度
+  changeW(w) {
+    this.selected.style.width = w + 'px';
+  }
 
   // 选择通道
   chooseValue(val) {
@@ -852,12 +922,13 @@ export class TerminalCustomizeFormalComponent implements OnInit {
 
     // con.removeChild(this.selected);
     this.selected = null;
+    this.cName = '';
+    this.cType = '';
     this.ctrl0 = false;
     this.ctrl1 = false;
     this.ctrl2 = false;
     this.ctrl3 = false;
   }
-
 
 
 
@@ -886,31 +957,167 @@ export class TerminalCustomizeFormalComponent implements OnInit {
           type: 'primary',
           onClick: (componentInstance) => {
             let post;
-            if (componentInstance.type === '1') {
-              post = {
-                name: componentInstance.name,
-                type: componentInstance.type,
-                img: componentInstance.img
-              };
-            } else {
-              post = {
-                name: componentInstance.name,
-                type: componentInstance.type,
-                imgs: componentInstance.imgs
-              };
-            }
-
-            if (!componentInstance.isValid) {
+            if (!componentInstance.name) {
+              Swal(
+                '请输入组件名称',
+                '',
+                'info'
+              );
               return;
             }
+            if (componentInstance.type === '1') {
+              if (!componentInstance.imgFile1) {
+                Swal(
+                  '请上传图片',
+                  '',
+                  'info'
+                );
+                return;
+              } else {
+                post = {
+                  name: componentInstance.name,
+                  type: parseInt(componentInstance.type),
+                  img: componentInstance.imgFile1.response.id
+                };
+              }
+
+            } else {
+              if (!componentInstance.isValid) {
+                Swal(
+                  '请填写正确数值区间',
+                  '',
+                  'info'
+                );
+                return;
+              }
+              if (!componentInstance.imgFiles[0] || !componentInstance.imgFiles[1]) {
+                Swal(
+                  '请上传图片',
+                  '',
+                  'info'
+                );
+                return;
+              }
+
+                post = {
+                  name: componentInstance.name,
+                  type: parseInt(componentInstance.type),
+                  imgs: [
+                    {
+                      img: componentInstance.imgFiles[0].response.id,
+                      min: componentInstance.imgs[0].min,
+                      max: componentInstance.imgs[0].max,
+                      sort: 1
+                    },
+                    {
+                      img: componentInstance.imgFiles[1].response.id,
+                      min: componentInstance.imgs[1].min,
+                      max: componentInstance.imgs[1].max,
+                      sort: 2
+                    }
+                  ]
+                };
+
+            }
+
             console.log(post);
-            /*this.terminalService.uploadCom(post)
+            this.terminalService.uploadComponent(post)
               .subscribe(val => {
-                alert('组件上传成功');
+                Swal(
+                  '组件上传成功',
+                  '',
+                  'success'
+                );
                 modal.destroy();
+                that.getImages();
               }, err => {
-                alert('组件上传失败');
-              });*/
+                Swal(
+                  '组件上传失败',
+                  err.message || err,
+                  'error'
+                );
+              });
+
+          }
+        },
+      ]
+    });
+
+    modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
+
+    // Return a result when closed
+    modal.afterClose.subscribe(result => console.log('[afterClose] The result is:', result));
+
+    // delay until modal instance created
+    /*setTimeout(() => {
+      const instance = modal.getContentComponent();
+      instance.subtitle = 'sub title is changed';
+    }, 2000);*/
+  }
+
+
+  // 删除自定义组件模态框
+  deleteComponentModal(): void {
+    const that = this;
+    const modal = this.modalService.create({
+      nzTitle: '删除自定义组件',
+      nzContent: TerminalDeleteImgComponent,
+      nzWidth: '600',
+      nzClassName: 'customize',
+      nzComponentParams: {
+        // title: '',
+        // subtitle: 'component sub title，will be changed after 2 sec'
+        imgList1: this.imgComponents2,
+        imgList2: this.imgComponents3
+      },
+      nzFooter: [
+        {
+          label: '取消',
+          shape: 'default',
+          onClick: () => modal.destroy()
+        },
+        {
+          label: '确定',
+          type: 'primary',
+          onClick: (componentInstance) => {
+            this.modalService.confirm({
+              nzTitle: '<b>确认删除当前组件?</b>',
+              nzContent: '<b></b>',
+              nzOnOk: () => {
+                let post = [];
+                let img1 = componentInstance.img1;
+                let img2 = componentInstance.img2;
+                img1.forEach((item) => {
+                  if (item.checked) {
+                    post.push(item.id);
+                  }
+                });
+                img2.forEach((item) => {
+                  if (item.checked) {
+                    post.push(item.id);
+                  }
+                });
+
+                // console.log(img1, img2, post);
+                this.terminalService.deleteComponent({data: post})
+                  .subscribe(val => {
+                    Swal(
+                      '组件删除成功',
+                      '',
+                      'success'
+                    );
+                    modal.destroy();
+                    that.getImages();
+                  }, err => {
+                    Swal(
+                      '组件删除失败',
+                      err.message || err,
+                      'error'
+                    );
+                  });
+              }
+            });
+
 
           }
         },
@@ -932,16 +1139,14 @@ export class TerminalCustomizeFormalComponent implements OnInit {
 
 
 
-
-
-
   // 保存
   save() {
     const that = this;
-    const img3 = [];
-    const da1 = [];
-    const da2 = [];
-    const da3 = [];
+    let img3 = [];
+    // let da1 = [];
+    let da2 = [];
+    // let da3 = [];
+    let btn = []
 
 
     // 多形态图片通道
@@ -953,8 +1158,8 @@ export class TerminalCustomizeFormalComponent implements OnInit {
         return;
       }
       img3.push({
-        chanType: im.chanType,
-        chanNum: im.chanNum
+        chanType: parseInt(im.chanType),
+        chanNum: parseInt(im.chanNum)
       });
     }
 
@@ -984,8 +1189,8 @@ export class TerminalCustomizeFormalComponent implements OnInit {
       }
       // 提出数据通道
       da2.push({
-        chanType: d2.chanType,
-        chanNum: d2.chanNum
+        chanType: parseInt(d2.chanType),
+        chanNum: parseInt(d2.chanNum)
       });
     }
     /*for (let n = 0; n < that.dataLists3.length; n++) {
@@ -1006,18 +1211,23 @@ export class TerminalCustomizeFormalComponent implements OnInit {
 
 
     for (let k = 0; k < that.btnLists.length; k++) {
-      const im = that.btnLists[k];
-      if (!im.address) {
-        alert('有按钮组件未添加寄存器地址');
+      const bt = that.btnLists[k];
+      if (!bt.chanNum) {
+        alert('有按钮组件未选择参数');
         return;
       }
+      // 提出数据通道
+      btn.push({
+        chanType: parseInt(bt.chanType),
+        chanNum: parseInt(bt.chanNum)
+      });
     }
 
     this.devices = {
+      terminal_id: this.uid,
       img: img3,
-      // d1: da1,
       data: da2,
-      // d3: da3,
+      btn: btn,
       content:  {
         imgs1: that.imgLists1,
         imgs2: that.imgLists2,
@@ -1034,7 +1244,17 @@ export class TerminalCustomizeFormalComponent implements OnInit {
 
     this.terminalService.saveZ(this.devices)
       .subscribe(val => {
-
+        Swal(
+          '保存成功',
+          '',
+          'success'
+        );
+      }, err => {
+        Swal(
+          '保存失败',
+          err.message || err,
+          'error'
+        );
       });
 
 

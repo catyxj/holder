@@ -1,3 +1,73 @@
-<p>
-  template-add-main works!
-</p>
+
+<div class="content">
+  <div class="template_add">
+    <nz-steps [nzCurrent]="current">
+      <nz-step nzTitle="设备信息"></nz-step>
+      <nz-step nzTitle="通信参数"></nz-step>
+      <nz-step nzTitle="数据点位"></nz-step>
+      <nz-step *ngIf="show" nzTitle="能效计算"></nz-step>
+      <nz-step nzTitle="组态设置"></nz-step>
+      <nz-step nzTitle="完成配置"></nz-step>
+    </nz-steps>
+  </div>
+
+
+  <div *ngIf="show">
+    <div *ngIf="current === 0">
+      <app-template-add-ept (next)="changeCurrent($event)" (changeUid)="changeUid($event)" [uid]="uid"></app-template-add-ept>
+    </div>
+    <div *ngIf="current === 1">
+      <app-template-add-cmt (next)="changeCurrent($event)" [uid]="uid"></app-template-add-cmt>
+    </div>
+    <div *ngIf="current === 2">
+      <app-template-add-channel (next)="changeCurrent($event)" [uid]="uid"></app-template-add-channel>
+    </div>
+    <div *ngIf="current === 3">
+      <app-template-add-calculate (next)="changeCurrent($event)" [uid]="uid"></app-template-add-calculate>
+    </div>
+    <div *ngIf="current === 4">
+      <app-template-add-customize (next)="changeCurrent($event)" [uid]="uid"></app-template-add-customize>
+    </div>
+    <div *ngIf="current === 5">
+      <app-template-add-finish (next)="changeCurrent($event)" [uid]="uid"></app-template-add-finish>
+    </div>
+  </div>
+
+
+  <div *ngIf="!show">
+    <div *ngIf="current === 0">
+      <app-template-add-ept (next)="changeCurrent($event)" (changeUid)="changeUid($event)" [uid]="uid"></app-template-add-ept>
+    </div>
+    <div *ngIf="current === 1">
+      <app-template-add-cmt (next)="changeCurrent($event)" [uid]="uid"></app-template-add-cmt>
+    </div>
+    <div *ngIf="current === 2">
+      <app-template-add-channel (next)="changeCurrent($event)" [uid]="uid"></app-template-add-channel>
+    </div>
+    <div *ngIf="current === 3">
+      <app-template-add-customize (next)="changeCurrent($event)" [uid]="uid"></app-template-add-customize>
+    </div>
+    <div *ngIf="current === 4">
+      <app-template-add-finish (next)="changeCurrent($event)" [uid]="uid"></app-template-add-finish>
+    </div>
+  </div>
+
+
+  <!--<div class="t_add_b">
+    <div class="btn-group">
+      <button class="btn btn_purple bpm" *ngIf="current===0">返回</button>
+      <button class="btn btn_purple bpm" (click)="current = current-1" *ngIf="current>0" style="margin-left: 1px;">
+        上一步
+      </button>
+      <button class="btn btn_purple bpm" (click)="current = current+1"  style="margin-left: 1px;"
+              *ngIf="(show && current < 5) || (!show && current < 4)">
+        下一步
+      </button>
+    </div>
+
+  </div>-->
+
+
+</div>
+
+

@@ -39,7 +39,7 @@ export class AcEcofAdComponent implements OnInit {
         ex.status = false;
       }
       if (ex.status) {
-        exArr += ex.Id + ',';
+        exArr += ex.value + ',';
       }
     }
     let post = {

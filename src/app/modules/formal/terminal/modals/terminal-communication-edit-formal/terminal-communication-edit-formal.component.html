@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h4 class="modal-title">
-    <img src="assets/icons/icon_config3.png" alt="" style="margin-right: 19px;">
+    <!--<img src="assets/icons/icon_config3.png" alt="" style="margin-right: 19px;">-->
     终端通信参数设置
   </h4>
 </div>
@@ -12,7 +12,7 @@
     </div>
     <div class="m_input">
       <select [(ngModel)]="baudRate" class="form-control">
-        <option *ngFor="let data of baudRateList" [value]="data.id" >{{data.name}}</option>
+        <option *ngFor="let data of baudRateList" [value]="data.value" >{{data.name}}</option>
       </select>
     </div>
   </div>
@@ -23,7 +23,7 @@
     </div>
     <div class="m_input">
       <select [(ngModel)]="dataBit" class="form-control">
-        <option *ngFor="let data of dataBitList" [value]="data.id" >{{data.name}}</option>
+        <option *ngFor="let data of dataBitList" [value]="data.value" >{{data.name}}</option>
       </select>
     </div>
   </div>
@@ -34,7 +34,7 @@
     </div>
     <div class="m_input">
       <select [(ngModel)]="stopBit" class="form-control">
-        <option *ngFor="let data of stopBitList" [value]="data.id" >{{data.name}}</option>
+        <option *ngFor="let data of stopBitList" [value]="data.value" >{{data.name}}</option>
       </select>
     </div>
   </div>
@@ -45,7 +45,7 @@
     </div>
     <div class="m_input">
       <select [(ngModel)]="parity" class="form-control">
-        <option *ngFor="let data of parityList" [value]="data.id" >{{data.name}}</option>
+        <option *ngFor="let data of parityList" [value]="data.value" >{{data.name}}</option>
       </select>
     </div>
   </div>
@@ -56,7 +56,7 @@
     </div>
     <div class="m_input">
       <select [(ngModel)]="correspond" class="form-control">
-        <option *ngFor="let data of correspondList" [value]="data.id" >{{data.name}}</option>
+        <option *ngFor="let data of correspondList" [value]="data.value" >{{data.name}}</option>
       </select>
     </div>
   </div>
@@ -67,7 +67,7 @@
     </div>
     <div class="m_input">
       <select [(ngModel)]="dataType" class="form-control">
-        <option *ngFor="let data of dataTypeList" [value]="data.id" >{{data.name}}</option>
+        <option *ngFor="let data of dataTypeList" [value]="data.value" >{{data.name}}</option>
       </select>
     </div>
   </div>
@@ -78,7 +78,7 @@
     </div>
     <div class="m_input">
       <select [(ngModel)]="heartbeat" class="form-control">
-        <option *ngFor="let data of heartbeatList" [value]="data.id" >{{data.name}}</option>
+        <option *ngFor="let data of heartbeatList" [value]="data.value" >{{data.name}}</option>
       </select>
     </div>
   </div>

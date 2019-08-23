@@ -66,7 +66,21 @@
                 单位类型
               </div>
               <div class="info_item_value">
-                {{basic?.org_tag}}
+                <span *ngIf="basic&&basic.org_tag === 1">
+                  产品使用
+                </span>
+                <span *ngIf="basic&&basic.org_tag === 2">
+                  产品制造
+                </span>
+                <span *ngIf="basic&&basic.org_tag === 3">
+                  产品运维
+                </span>
+                <span *ngIf="basic&&basic.org_tag === 4">
+                  组件供应
+                </span>
+                <span *ngIf="basic&&basic.org_tag === 5">
+                  监管机构
+                </span>
               </div>
             </li>
             <li class="info_item">

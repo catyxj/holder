@@ -22,10 +22,11 @@ export class LoginComponent implements OnInit {
               private http: HttpClient) { }
 
   ngOnInit() {
-    let token = localStorage.getItem('authToken');
-    if (token) {
-      this.goAdmin();
-    }
+    // let token = localStorage.getItem('authToken');
+    // let status = sessionStorage.getItem('user');
+    // if (status === 'true' && token) {
+    //   this.goAdmin();
+    // }
 
   }
 

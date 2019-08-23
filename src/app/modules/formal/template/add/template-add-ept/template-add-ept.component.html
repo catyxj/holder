@@ -1,3 +1,50 @@
-<p>
-  template-add-ept works!
-</p>
+<div class="t_ept">
+  <div class="t_ept_h">
+    <div class="t_ept_h_label">
+      <span class="text_purple">*</span>设备名称：
+    </div>
+    <div class="t_ept_h_input">
+      <input type="text" class="form-control" [(ngModel)]="equip">
+    </div>
+  </div>
+
+  <div class="t_ept_img">
+    <div class="m_img">
+      <nz-upload
+        class="avatar-uploader"
+        nzAction="/api/dialogue/attach/upload"
+        nzListType="picture-card"
+        [nzHeaders]="headOption"
+        [nzShowUploadList]="false"
+        [nzBeforeUpload]="beforeUpload"
+        (nzChange)="handleChange($event)"
+      >
+        <ng-container *ngIf="!imgUrl">
+          <img src="assets/images/photo.png" style="width: 210px; height: 210px;" alt="">
+        </ng-container>
+        <img *ngIf="imgUrl" [src]="imgUrl" style="width: 210px; height: 210px;"/>
+      </nz-upload>
+
+      <div class="img_text">
+        请点击左侧图片，<br/>
+        上传要设置的设备展示图片，
+        支持jpg、png、gif格式，
+        文件大小不超过200k。
+        <br/><br/>
+        最佳效果像素为240*240
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="t_add_b">
+  <div class="btn-group">
+    <button class="btn btn_purple bpm" routerLink="/admin/formal/template/list">返回</button>
+    <button class="btn btn_purple bpm" (click)="save()" style="margin-left: 1px;">
+      下一步
+    </button>
+  </div>
+
+</div>
+

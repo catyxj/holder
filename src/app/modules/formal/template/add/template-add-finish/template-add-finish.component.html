@@ -1,3 +1,25 @@
-<p>
-  template-add-finish works!
-</p>
+<div class="tp_finish">
+  <div class="tp_row">
+    <div class="tp_lable">
+      <span class="text_purple">*</span> 模版保存为：
+    </div>
+    <div class="tp_input">
+      <input type="text" class="form-control" [(ngModel)]="name">
+    </div>
+
+  </div>
+
+</div>
+
+<div class="t_add_b">
+  <div class="btn-group">
+    <button class="btn btn_purple bpm" (click)="pre()">
+      上一步
+    </button>
+    <button class="btn btn_purple bpm" (click)="save()" style="margin-left: 1px;">
+      完成配置
+    </button>
+  </div>
+
+</div>
+

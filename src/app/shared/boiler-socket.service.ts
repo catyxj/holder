@@ -4,6 +4,8 @@ import { map } from 'rxjs/operators';
 import {HttpErrorResponse} from "@angular/common/http";
 import {catchError} from "rxjs/internal/operators";
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +15,8 @@ export class BoilerSocketService {
   constructor() { }
 
   creatSocket(url: string, data: any): Observable<any> {
-    this.ws = new WebSocket(url);
+
+    this.ws = new WebSocket(`ws://${window.location.host}/${url}`);
     this.ws.onopen = () => {
       this.sendMessage(data);
     };

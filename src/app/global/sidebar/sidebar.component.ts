@@ -11,11 +11,12 @@ export class SidebarComponent implements OnInit {
 
   @Input()
   user: any;
+  @Input()
+  sideList: any;
 
   /*public user;
   public roleId;*/
-
-  public sideList;
+  // public sideList;
 
   constructor(private userService: UserService) {
     this.userService.userStatus$ // 监测父组件user
@@ -27,7 +28,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     // this.getUser();
-    this.getSide();
+
   }
 
   submenuToggle(item) {
@@ -35,16 +36,9 @@ export class SidebarComponent implements OnInit {
     item.checked = !item.checked;
   }
 
-  getSide() {
-    this.userService.getSide()
-      .subscribe(data => {
-        this.sideList = data.sidenav;
-      });
-  }
 
-  /*setPage() {
-    sessionStorage.setItem('pageNum', '1');
-  }*/
+
+
 
   // 获取用户信息
   /*getUser(): void {

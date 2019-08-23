@@ -3,6 +3,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TerminalService} from "../../../../shared/terminal.service";
 import {TerminalCommunicationEditFormalComponent} from "../modals/terminal-communication-edit-formal/terminal-communication-edit-formal.component";
 import {ActivatedRoute} from "@angular/router";
+import {TerminalBasicEditFormalComponent} from "../modals/terminal-basic-edit-formal/terminal-basic-edit-formal.component";
 
 @Component({
   selector: 'app-terminal-config-formal',
@@ -11,10 +12,22 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class TerminalConfigFormalComponent implements OnInit {
   public uid;
+  public code;
+  public auth;
   public basic;
   public communication;
+  public communicateInfo = {baud_rate: '', cmt_type: '', data_bit: '', data_type: '', stop_bit: '', heart_beat: '', parity_bit: '' };
   public channels;
   public zutai;
+  public img = 'assets/images/photo.png';
+
+  public baudRateList = []; // 波特率下拉列表
+  public dataBitList = []; // 数据位下拉列表
+  public stopBitList = []; // 停止位下拉列表
+  public parityList = []; // 校验位下拉列表
+  public heartbeatList = []; // 心跳包频率下拉列表
+  public correspondList = []; // 通信接口地址下拉列表
+  public dataTypeList = []; // 包类型下拉列表
 
   constructor(private modalService: NgbModal,
               private terminalService: TerminalService,
@@ -22,10 +35,27 @@ export class TerminalConfigFormalComponent implements OnInit {
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
-    this.getCommunication();
+    this.code = this.route.snapshot.paramMap.get('code');
+    this.auth = JSON.parse(localStorage.getItem('auth'));
+    this.getCmtList();
     this.getBasic();
     this.getChannel();
     this.getZT();
+  }
+
+  // 获取通信参数下拉列表
+  getCmtList() {
+    this.terminalService.getCmtParam()
+      .subscribe(data => {
+        this.baudRateList = data.baud_rate;  // 波特率
+        this.correspondList = data.cmt_inf; // 通信接口地址
+        this.dataBitList = data.data_bit; // 数据位
+        this.heartbeatList = data.heart_beat;  // 心跳包频率
+        this.parityList = data.parity_bit; // 校验位
+        this.stopBitList = data.stop_bit; // 停止位
+        this.dataTypeList = data.data_type; // 包类型
+        this.getCommunication();
+      });
   }
 
   // 获取通信参数
@@ -33,6 +63,65 @@ export class TerminalConfigFormalComponent implements OnInit {
     this.terminalService.getCmt(this.uid)
       .subscribe(data => {
         this.communication = data;
+
+
+        // 波特率
+        for (let i = 0; i < this.baudRateList.length; i++) {
+          if (this.communication.baud_rate === this.baudRateList[i].value) {
+            this.communicateInfo.baud_rate = this.baudRateList[i].name;
+            break;
+          }
+        }
+
+        // 通信接口地址
+        for (let i = 0; i < this.correspondList.length; i++) {
+          if (this.communication.cmt_type === this.correspondList[i].value) {
+            this.communicateInfo.cmt_type = this.correspondList[i].name;
+            break;
+          }
+        }
+
+        // 数据位
+        for (let i = 0; i < this.dataBitList.length; i++) {
+          if (this.communication.data_bit === this.dataBitList[i].value) {
+            this.communicateInfo.data_bit = this.dataBitList[i].name;
+            break;
+          }
+        }
+
+        // 心跳包频率
+        for (let i = 0; i < this.heartbeatList.length; i++) {
+          if (this.communication.heart_beat === this.heartbeatList[i].value) {
+            this.communicateInfo.heart_beat = this.heartbeatList[i].name;
+            break;
+          }
+        }
+
+        // 校验位
+        for (let i = 0; i < this.parityList.length; i++) {
+          if (this.communication.parity_bit === this.parityList[i].value) {
+            this.communicateInfo.parity_bit = this.parityList[i].name;
+            break;
+          }
+        }
+
+        // 停止位
+        for (let i = 0; i < this.stopBitList.length; i++) {
+          if (this.communication.stop_bit === this.stopBitList[i].value) {
+            this.communicateInfo.stop_bit = this.stopBitList[i].name;
+            break;
+          }
+        }
+
+        // 包类型
+        for (let i = 0; i < this.dataTypeList.length; i++) {
+          if (this.communication.data_type === this.dataTypeList[i].value) {
+            this.communicateInfo.data_type = this.dataTypeList[i].name;
+            break;
+          }
+        }
+
+
       }, err => {
 
       });
@@ -64,17 +153,48 @@ export class TerminalConfigFormalComponent implements OnInit {
     this.terminalService.getEpt(this.uid)
       .subscribe(data => {
         this.basic = data;
+        if (this.basic && this.basic.ept_img) {
+          this.img = this.basic.ept_img;
+        }
       }, err => {
 
       });
   }
 
+
+  // 刷新
+  refresh() {
+    this.getCommunication();
+    this.getBasic();
+    this.getChannel();
+    this.getZT();
+  }
+
+
+
+  // 设置通信参数
   communicationSet() {
-    const modalRef = this.modalService.open(TerminalCommunicationEditFormalComponent, {windowClass: 'modal_md', centered: true});
-    // modalRef.componentInstance.currentUser = this.user;
+    const modalRef = this.modalService.open(TerminalCommunicationEditFormalComponent, {windowClass: 'modal_m', centered: true});
+    modalRef.componentInstance.currentData = this.communication;
+    modalRef.componentInstance.uid = this.uid;
     modalRef.result.then((result) => {
       if (result === 'ok') {
-        // this.pageChange();
+        this.getCommunication();
+      }
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(reason);
+    });
+  }
+
+  // 设置基础信息
+  basicSet() {
+    const modalRef = this.modalService.open(TerminalBasicEditFormalComponent, {windowClass: 'modal_m', centered: true});
+    modalRef.componentInstance.currentData = this.basic;
+    modalRef.componentInstance.uid = this.uid;
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+        this.getBasic();
       }
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

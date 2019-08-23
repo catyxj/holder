@@ -1,0 +1,81 @@
+
+<div class="tp_cal">
+
+  <div>
+    <div class="ct_h">
+      配置计算参数
+    </div>
+    <nz-table nzTemplateMode>
+      <thead>
+      <tr>
+        <th>数据计算模块名称</th>
+        <th>参与计算通道数</th>
+        <th>状态</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td> 能效计算正平衡 </td>
+        <td> 15 </td>
+        <td>
+          <span class="text_purple">已启用</span>
+          <span>未启用</span>
+        </td>
+
+        <td>
+          <a class="btn btn_purple btn-sm" > <!--[routerLink]="['/admin/formal/terminal/calculate1', uid, code]"-->
+            设置
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td> 能效计算反平衡 </td>
+        <td> 15 </td>
+        <td>
+          <span>未启用</span>
+        </td>
+
+        <td>
+          <a class="btn btn_purple btn-sm" > <!--[routerLink]="['/admin/formal/terminal/calculate2', uid, code]"-->
+            设置
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td> 能耗统计 </td>
+        <td> 1 </td>
+        <td>
+          <span class="text_purple">已启用</span>
+        </td>
+
+        <td>
+          <a class="btn btn_purple btn-sm" >  <!--[routerLink]="['/admin/formal/terminal/calculate3', uid, code]"-->
+            设置
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+
+</div>
+
+<div class="t_add_b">
+  <div class="btn-group">
+    <button class="btn btn_purple bpm" (click)="pre()">
+      上一步
+    </button>
+    <button class="btn btn_purple bpm" (click)="save()" style="margin-left: 1px;">
+      下一步
+    </button>
+  </div>
+
+  <button class="btn btn_purple bpm ml-3" (click)="goNext()">
+    跳过
+  </button>
+
+</div>
+
+
+

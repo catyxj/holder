@@ -32,7 +32,7 @@
               <img src="assets/images/service/ser_pic1.png" alt="">
             </div>
             <div>
-              <img src="assets/images/service/ser_more.png" alt="">
+              <!--<img src="assets/images/service/ser_more.png" alt="">-->
             </div>
           </div>
           <div class="tab_text">
@@ -51,7 +51,7 @@
               <img src="assets/images/service/ser_pic2.png" alt="">
             </div>
             <div>
-              <img src="assets/images/service/ser_more.png" alt="">
+              <!--<img src="assets/images/service/ser_more.png" alt="">-->
             </div>
           </div>
           <div class="tab_text">
@@ -70,7 +70,7 @@
               <img src="assets/images/service/ser_pic3.png" alt="">
             </div>
             <div>
-              <img src="assets/images/service/ser_more.png" alt="">
+              <!--<img src="assets/images/service/ser_more.png" alt="">-->
             </div>
           </div>
           <div class="tab_text">
@@ -90,7 +90,7 @@
           <div class="q_h">
             <h6>问题列表</h6>
             <div>
-              <img src="assets/images/service/right.png" alt="">
+
             </div>
 
           </div>
@@ -99,6 +99,7 @@
               <a (click)="question(data)">
                 <div class="q_list">
                   <p>{{(page-1)*10 + i + 1}}.  {{data.name}}</p>
+                  <img src="assets/images/service/right.png" alt="" *ngIf="data.id === currentData">
                   <!--<i class="fa fa-caret-right" [class.text_blue]="data.id === currentData"></i>-->
                 </div>
               </a>

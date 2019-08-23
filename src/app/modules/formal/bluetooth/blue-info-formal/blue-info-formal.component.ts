@@ -3,7 +3,6 @@ import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {BluetoothService} from "../../../../shared/bluetooth.service";
-import {ComfirmComponent} from "../../../directives/alert/comfirm/comfirm.component";
 import {BlueEditFormalComponent} from "../modals/blue-edit-formal/blue-edit-formal.component";
 
 import Swal from 'sweetalert2';
@@ -109,33 +108,15 @@ export class BlueInfoFormalComponent implements OnInit {
 
 
   creatModal(title, subtitle, call) {
-    let that = this;
-    this.tplModal = this.nzModal.create({
-      nzTitle: '',
-      nzContent: ComfirmComponent,
-      nzComponentParams: {
-        title: title,
-        subtitle: subtitle
-      },
-      nzMaskClosable: true,
-      nzClosable: false,
-      nzClassName: 'comfirm_modal',
-      nzWidth: 440,
-      nzFooter: [
-        {
-          label: '取消',
-          shape: 'default',
-          onClick: () => that.tplModal.destroy()
-        },
-        {
-          label: '确定',
-          type: 'primary',
-          onClick: () => {
-            call();
-            that.tplModal.destroy();
-          }
-        }
-      ],
+    const that = this;
+    this.tplModal = this.nzModal.confirm({
+      nzTitle: title,
+      nzContent: subtitle,
+      nzIconType: 'fill:question-circle',
+      nzOnOk: () => {
+        call();
+        that.tplModal.destroy();
+      }
     });
   }
 
@@ -153,6 +134,8 @@ export class BlueInfoFormalComponent implements OnInit {
           '',
           'success'
         );
+        that.getBasic();
+        that.getOperate();
         // that.router.navigate(['/admin/formal/bluetooth/list']);
       }, err => {
         Swal(

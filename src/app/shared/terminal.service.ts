@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpRequest, HttpResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs/index';
-import {catchError, last, map, tap} from 'rxjs/internal/operators';
+import {catchError, filter, last, map, tap} from 'rxjs/internal/operators';
 
 
 const httpOptions = {
@@ -25,15 +25,15 @@ export class TerminalService {
   private dataOperateMoreUrl = '/api/admin/terminal/log/list';
 
 
-  // private dataListUrlF = '/api/formal/terminal/list';
+  private dataListUrlF = '/api/formal/terminal/list';
   private dataBasicUrlF = '/api/formal/terminal/detail';
   private dataOperateUrlF = '/api/formal/terminal/log/info';
   private dataOperateMoreUrlF = '/api/formal/terminal/log/info/more';
 
-  private dataListUrlF = 'assets/server/terminal_list.json';
+  // private dataListUrlF = 'assets/server/terminal_list.json';
 
 
-  private messageUrl = 'assets/server/terminal_origin_message_list.json';
+  /*private messageUrl = 'assets/server/terminal_origin_message_list.json';
   private funcUrl = 'assets/server/term_function_code_list.json';
   private byteUrl = 'assets/server/term_byte_list.json';
   private correspondUrl = 'assets/server/correspond_type_list.json';
@@ -45,7 +45,7 @@ export class TerminalService {
   private baudRateUrl = 'assets/server/baud_rate_list.json';
   private channelUrl = 'assets/server/chan_config_list.json';
 
-  private dataTypeUrl = '/channel_data_type_list';
+  private dataTypeUrl = '/channel_data_type_list';*/
 
   constructor(private http: HttpClient) { }
 
@@ -60,7 +60,7 @@ export class TerminalService {
       url = `${this.dataListUrl}?page=${n}&rows=${pageSize}&status=${status}&search=${search}&value=${value}&online=${online}`;
     }
     if (roleId === '10') {
-      url = `${this.dataListUrlF}?page=${n}&rows=${pageSize}&status=${status}&search=${search}&value=${value}&online=${online}`;
+      url = `${this.dataListUrlF}?page=${n}&rows=${pageSize}&config_status=${status}&search=${search}&value=${value}&online=${online}`;
     }
 
     return this.http.get<any>(url, httpOptions)
@@ -208,7 +208,7 @@ export class TerminalService {
       url = '/api/admin/terminal/update';
     }
     if (roleId === '10') {
-      url = '/api/formal/terminal/update';
+      url = '/api/formal/terminal/ept/update';
     }
 
     return this.http.post(url, data, httpOptions)
@@ -231,12 +231,23 @@ export class TerminalService {
 
 
   /*----正式用户-------------------------------------*/
+  // 批量下发
+  batchIssued(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/terminal/batch/issued', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   // 下发
   issued(data): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/formal/terminal/batch/issued', data, httpOptions)
+    return this.http.get(`/api/formal/terminal/issued?uid=${data}`, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -248,6 +259,7 @@ export class TerminalService {
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
 
+    //  ${this.messageUrl}
     return this.http.get(`/api/formal/terminal/debug/list?uid=${uid}`, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -304,6 +316,7 @@ export class TerminalService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
+    // return this.http.get('assets/server/chan_config_list.json');
     return this.http.get<any>(`/api/formal/terminal/channel/config/detail?uid=${uid}`, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -317,15 +330,55 @@ export class TerminalService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.get('assets/server/device.json', httpOptions);
-    // return this.http.get<any>(`/api/formal/terminal/zt/config/detail?uid=${uid}`, httpOptions)
-    //   .pipe(
-    //     catchError(this.handleError)
-    //   );
+    // return this.http.get('assets/server/device.json', httpOptions);
+    return this.http.get<any>(`/api/formal/terminal/zt/config/detail?uid=${uid}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
 
   }
 
 
+  // 获取组态-通道列表
+  getChannelName(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get<any>(`/api/formal/terminal/channel/name/list?uid=${uid}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+
+
+  // 获取通信参数下拉列表
+  getCmtParam(): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+
+    //  assets/server/cmt_param.json
+    return this.http.get<any>('/api/formal/terminal/cmt/param/list', httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取通道设置下拉列表
+  getChannelParam(): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get<any>('/api/formal/terminal/channel/param/list', httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+/*
   // 通信接口地址
   getCorrespond(): Observable<any> {
     let token = localStorage.getItem('authToken');
@@ -413,6 +466,19 @@ export class TerminalService {
         catchError(this.handleError)
       );
   }
+  */
+
+
+  // 保存通信参数
+  saveCmt(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/terminal/cmt/config/update', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
 
   // 保存组态
@@ -420,13 +486,57 @@ export class TerminalService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/zt_save', data, httpOptions);
+    return this.http.post('/api/formal/terminal/zt/config/update', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 保存通道设置
+  saveChannel(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/terminal/channel/config/update', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
 
+  // 上传自定义组件
+  uploadComponent(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/terminal/zt/component/upload', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 删除自定义组件
+  deleteComponent(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/terminal/zt/component/batch/delete', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
 
+  // 获取自定义组件列表
+  getComponents(): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
+    return this.http.get<any>('/api/formal/terminal/zt/component/list', httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
 
 
@@ -456,33 +566,6 @@ export class TerminalService {
 
 
 
-  // 获取plc告警列表
-  getPlcAlarm(code: string, n: number, pageSize: number): Observable<any> {
-    const url = `/plc_alarm_list/?code=${code}&page=${n}&pageSize=${pageSize}`;
-    return this.http.get<any>(url)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  // 获取功能码
-  getFuncode(): Observable<any> {
-    return this.http.get<any>(this.funcUrl)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-
-  // 获取高低字节
-  getByte(): Observable<any> {
-    return this.http.get<any>(this.byteUrl)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-
 
 
   private handleError(error: HttpErrorResponse) {
@@ -494,7 +577,6 @@ export class TerminalService {
         `错误内容: ${error.error}`);
     }
     if (error.status === 550) {
-      localStorage.removeItem('authToken');
       window.location.reload();
     }
     return throwError(

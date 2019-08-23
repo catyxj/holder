@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-template-main-formal',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TemplateMainFormalComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: ActivatedRoute) { }
 
   ngOnInit() {
+    console.log(this.router);
   }
 
 }

@@ -1,3 +1,333 @@
-<p>
-  template-config-formal works!
-</p>
+
+
+
+
+<div class="content">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>
+        模板详情
+      </h6>
+    </div>
+    <div class="li_head_r">
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/formal/template/list', {page: listPage}]">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+      <!--刷 新-->
+      <button class="btn btn_purple-o btn_round bps ml-1" (click)="refresh()">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>
+
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="deleteData()">
+        删除模板
+      </button>
+    </div>
+  </div>
+
+  <div class="terminal_content flex">
+    <div class="t_content_l">
+      <!--通信参数-->
+      <div class="t_section">
+        <div class="tsection_h">
+          <h6>通信参数</h6>
+          <div>
+            <!--设置-->
+            <a (click)="communicationSet()" title="设置">
+              <span class="iconfont iconedit text_purple"></span>
+            </a>
+          </div>
+        </div>
+        <div class="tsection_body">
+          <div class="ts_row">
+            <div class="ts_item">
+              <div class="ts_label">
+                波特率：
+              </div>
+              <div class="ts_value">
+                {{communicateInfo?.baud_rate}}
+              </div>
+            </div>
+
+            <div class="ts_item">
+              <div class="ts_label">
+                通信接口：
+              </div>
+              <div class="ts_value">
+                {{communicateInfo?.cmt_type}}
+              </div>
+            </div>
+          </div>
+
+          <div class="ts_row">
+            <div class="ts_item">
+              <div class="ts_label">
+                数据位：
+              </div>
+              <div class="ts_value">
+                {{communicateInfo?.data_bit}}
+              </div>
+            </div>
+
+            <div class="ts_item">
+              <div class="ts_label">
+                数据包类型：
+              </div>
+              <div class="ts_value">
+                {{communicateInfo?.data_type}}
+              </div>
+            </div>
+          </div>
+
+          <div class="ts_row">
+            <div class="ts_item">
+              <div class="ts_label">
+                停止位：
+              </div>
+              <div class="ts_value">
+                {{communicateInfo?.stop_bit}}
+              </div>
+            </div>
+
+
+            <div class="ts_item">
+              <div class="ts_label">
+                心跳包频率：
+              </div>
+              <div class="ts_value">
+                {{communicateInfo?.heart_beat}}
+              </div>
+            </div>
+
+          </div>
+
+          <div class="ts_row">
+            <div class="ts_item">
+              <div class="ts_label">
+                校验位：
+              </div>
+              <div class="ts_value">
+                {{communicateInfo?.parity_bit}}
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!--数据点位-->
+      <div class="t_section mt-3">
+        <div class="tsection_h">
+          <h6>数据点位</h6>
+          <div>
+            <!--设置-->
+            <a [routerLink]="['/admin/formal/template/channel-config', uid]" title="设置">
+              <span class="iconfont iconedit text_purple"></span>
+            </a>
+
+            <!--<button class="btn btn_purple btn_round bpm" [routerLink]="['/admin/formal/terminal/channel-config', uid]">设置</button>-->
+          </div>
+        </div>
+        <div class="tsection_body">
+          <div class="ts_row">
+            <div class="ts_item">
+              <div class="ts_label">
+                模拟量数量：
+              </div>
+              <div class="ts_value">
+                {{channels?.analogue_count}}
+              </div>
+            </div>
+
+            <div class="ts_item">
+              <div class="ts_label">
+                开关量数量：
+              </div>
+              <div class="ts_value">
+                {{channels?.switch_count}}
+              </div>
+            </div>
+
+            <div class="ts_item">
+              <div class="ts_label">
+                状态量数量：
+              </div>
+              <div class="ts_value">
+                {{channels?.range_count}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--组态设置-->
+      <div class="t_section mt-3">
+        <div class="tsection_h">
+          <h6>组态设置</h6>
+          <div>
+            <!--设置-->
+            <a title="设置" [routerLink]="['/admin/formal/template/customize', uid]">
+              <span class="iconfont iconedit text_purple"></span>
+            </a>
+            <!--<button class="btn btn_purple btn_round bpm" >设置</button>-->
+          </div>
+        </div>
+        <div class="tsection_body">
+          <div class="ts_row">
+            <div class="ts_item">
+              <div class="ts_label">
+                组态编码：
+              </div>
+              <div class="ts_value">
+                {{zutai?.id}}
+              </div>
+            </div>
+
+            <div class="ts_item">
+              <div class="ts_label">
+                组态名称：
+              </div>
+              <div class="ts_value">
+                {{zutai?.name}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--能效计算-->
+      <div class="t_section mt-3" *ngIf="auth.calculate">
+        <div class="tsection_h">
+          <h6>能效计算</h6>
+          <div>
+            <!--设置-->
+            <a title="设置" [routerLink]="['/admin/formal/template/calculate', uid]">
+              <span class="iconfont iconedit text_purple"></span>
+            </a>
+          </div>
+        </div>
+        <div class="tsection_body">
+          <div class="ts_row">
+            <div class="ts_item">
+              <div class="ts_round">
+                <div class="ts_round_in"></div>
+              </div>
+              <div class="ts_text">
+                能效正平衡
+              </div>
+            </div>
+
+            <div class="ts_item">
+              <div class="ts_round">
+                <div class="ts_round_in"></div>
+              </div>
+              <div class="ts_text">
+                能效反平衡
+              </div>
+            </div>
+
+            <div class="ts_item">
+              <div class="ts_round">
+                <div class="ts_round_in"></div>
+              </div>
+              <div class="ts_text">
+                能耗统计
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="t_content_r">
+      <div class="tsection_h">
+        <h6>基础信息</h6>
+        <div>
+          <!--设置-->
+          <a title="设置" (click)="basicSet()">
+            <span class="iconfont iconedit text_purple"></span>
+          </a>
+          <!--<button class="btn btn_purple btn_round bpm" (click)="basicSet()">设置</button>-->
+        </div>
+      </div>
+      <div class="tsection_body">
+        <div>
+          <!--<div class="ts_item">
+            <div class="ts_label">
+              模板编码：
+            </div>
+            <div class="ts_value">
+              {{basic.template}}
+            </div>
+          </div>-->
+
+          <div class="ts_item_w">
+            <div class="ts_label">
+              模板名称：
+            </div>
+            <div class="ts_value">
+              {{basic?.template_name || '默认模板'}}
+            </div>
+          </div>
+
+          <div class="ts_item_w">
+            <div class="ts_label">
+              创建者：
+            </div>
+            <div class="ts_value">
+              {{basic?.created_by_username}} ({{basic?.created_by_name || '空'}})
+            </div>
+          </div>
+
+          <div class="ts_item_w">
+            <div class="ts_label">
+              创建时间：
+            </div>
+            <div class="ts_value">
+              {{basic?.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}
+            </div>
+          </div>
+
+
+          <div class="ts_item_w">
+            <div class="ts_label">
+              设备名称：
+            </div>
+            <div class="ts_value">
+              {{basic?.ept_name}}
+            </div>
+          </div>
+
+          <div class="ts_img">
+            <div class="ts_image">
+              <img src="{{img}}" alt="" style="width: 170px; height: 170px;">
+              <div class="ts_image_text">
+                图片概览
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

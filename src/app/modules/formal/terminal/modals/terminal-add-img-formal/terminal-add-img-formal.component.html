@@ -29,13 +29,29 @@
     </div>
   </div>
 
+  <!--单形态-->
   <div class="cus_img" *ngIf="type === '1'">
-    <div class="img_con">
-      <img src="{{img}}" title="点击上传图片">
-      <input type="file"  (change)="imgChange1($event)" class="img_input">
+    <div class="img_con m_img">
+      <nz-upload
+        nzAction="/api/dialogue/attach/upload"
+        nzListType="picture-card"
+        [nzHeaders]="headOption"
+        [nzShowUploadList]="false"
+        [nzBeforeUpload]="beforeUpload"
+        (nzChange)="imgChange1($event)"
+      >
+        <ng-container *ngIf="!img">
+          <img src="assets/images/photo.png" style="width: 133px; height: 133px;" alt="">
+        </ng-container>
+        <img *ngIf="img" [src]="img" style="width: 133px; height: 133px;"/>
+      </nz-upload>
+      <!--<img src="{{img}}" title="点击上传图片">
+      <input type="file"  (change)="imgChange1($event)" class="img_input">-->
     </div>
   </div>
 
+
+  <!--多形态-->
   <div class="cus_img2" *ngIf="type === '2'">
     <div class="img_item">
       <div class="img_num">
@@ -43,9 +59,22 @@
           1
         </div>
       </div>
-      <div class="img_con">
-        <img src="{{imgs[0].imgUrl}}" title="点击上传图片">
-        <input type="file"  (change)="imgChange2($event, 0)" class="img_input">
+      <div class="img_con m_img">
+        <nz-upload
+          nzAction="/api/dialogue/attach/upload"
+          nzListType="picture-card"
+          [nzHeaders]="headOption"
+          [nzShowUploadList]="false"
+          [nzBeforeUpload]="beforeUpload"
+          (nzChange)="imgChange2($event, 0)"
+        >
+          <ng-container *ngIf="!imgs[0].imgUrl">
+            <img src="assets/images/photo.png" style="width: 133px; height: 133px;" alt="">
+          </ng-container>
+          <img *ngIf="imgs[0].imgUrl" [src]="imgs[0].imgUrl" style="width: 133px; height: 133px;"/>
+        </nz-upload>
+        <!--<img src="{{imgs[0].imgUrl}}" title="点击上传图片">
+        <input type="file"  (change)="imgChange2($event, 0)" class="img_input">-->
       </div>
       <div class="img_value">
         <div class="img_label">
@@ -67,9 +96,22 @@
           2
         </div>
       </div>
-      <div class="img_con">
-        <img src="{{imgs[1].imgUrl}}" title="点击上传图片">
-        <input type="file"  (change)="imgChange2($event, 1)" class="img_input">
+      <div class="img_con m_img">
+        <nz-upload
+          nzAction="/api/dialogue/attach/upload"
+          nzListType="picture-card"
+          [nzHeaders]="headOption"
+          [nzShowUploadList]="false"
+          [nzBeforeUpload]="beforeUpload"
+          (nzChange)="imgChange2($event, 1)"
+        >
+          <ng-container *ngIf="!imgs[1].imgUrl">
+            <img src="assets/images/photo.png" style="width: 133px; height: 133px;" alt="">
+          </ng-container>
+          <img *ngIf="imgs[1].imgUrl" [src]="imgs[1].imgUrl" style="width: 133px; height: 133px;"/>
+        </nz-upload>
+        <!--<img src="{{imgs[1].imgUrl}}" title="点击上传图片">
+        <input type="file"  (change)="imgChange2($event, 1)" class="img_input">-->
       </div>
       <div class="img_value">
         <div class="img_label">
@@ -88,7 +130,7 @@
   </div>
 
   <div>
-    <p class="text-danger">
+    <p [ngClass]="{'text_danger': !isValid, 'text_green': isValid }" style="margin-left: 210px;">
       {{errMes}}
     </p>
   </div>

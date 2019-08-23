@@ -1,0 +1,24 @@
+
+
+.tp_finish{
+  margin-top: 30px;
+  min-height: 300px;
+}
+
+.tp_row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tp_lable{
+  font-size: 12px;
+}
+.tp_input input{
+  width: 359px;
+  height: 29px;
+}
+.t_add_b{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}

@@ -66,6 +66,31 @@ import { TemplateAddCmtComponent } from './template/add/template-add-cmt/templat
 import { TemplateAddChannelComponent } from './template/add/template-add-channel/template-add-channel.component';
 import { TemplateAddCustomizeComponent } from './template/add/template-add-customize/template-add-customize.component';
 import { TemplateAddFinishComponent } from './template/add/template-add-finish/template-add-finish.component';
+import { AlarmRuleComponent } from './terminal/modals/alarm-rule/alarm-rule.component';
+import { RangeConfigComponent } from './terminal/modals/range-config/range-config.component';
+import { TerminalCalculateConfigComponent } from './terminal/terminal-calculate-config/terminal-calculate-config.component';
+import { TerCal1Component } from './terminal/calculate/ter-cal1/ter-cal1.component';
+import { TerCal2Component } from './terminal/calculate/ter-cal2/ter-cal2.component';
+import { TerCal3Component } from './terminal/calculate/ter-cal3/ter-cal3.component';
+import { TemplateBatchDeleteFComponent } from './template/template-batch-delete-f/template-batch-delete-f.component';
+import { TemplateBatchAllocateComponent } from './template/template-batch-allocate/template-batch-allocate.component';
+import { TerminalDeleteImgComponent } from './terminal/modals/terminal-delete-img/terminal-delete-img.component';
+import { TemplateAddCalculateComponent } from './template/add/template-add-calculate/template-add-calculate.component';
+import { TemplateCmtEditFComponent } from './template/modals/template-cmt-edit-f/template-cmt-edit-f.component';
+import { TemplateBasicEditFComponent } from './template/modals/template-basic-edit-f/template-basic-edit-f.component';
+import { TempCal1Component } from './template/calculate/temp-cal1/temp-cal1.component';
+import { TempCal2Component } from './template/calculate/temp-cal2/temp-cal2.component';
+import { TempCal3Component } from './template/calculate/temp-cal3/temp-cal3.component';
+import { TempCalMainComponent } from './template/calculate/temp-cal-main/temp-cal-main.component';
+import { MAccountAddFComponent } from './maintain/m-account/modals/m-account-add-f/m-account-add-f.component';
+import { MAccountBasicFComponent } from './maintain/m-account/modals/m-account-basic-f/m-account-basic-f.component';
+import { MAccountProductFComponent } from './maintain/m-account/m-account-product-f/m-account-product-f.component';
+import { MTemplateAddFComponent } from './maintain/m-template/modals/m-template-add-f/m-template-add-f.component';
+import { MTempBatchDeleteFComponent } from './maintain/m-template/m-temp-batch-delete-f/m-temp-batch-delete-f.component';
+import { MTempBatchAllocateFComponent } from './maintain/m-template/m-temp-batch-allocate-f/m-temp-batch-allocate-f.component';
+import { MTemplateEditFComponent } from './maintain/m-template/modals/m-template-edit-f/m-template-edit-f.component';
+import { MAcBatchAddComponent } from './maintain/m-account/product/m-ac-batch-add/m-ac-batch-add.component';
+import { MAcBatchDeleteComponent } from './maintain/m-account/product/m-ac-batch-delete/m-ac-batch-delete.component';
 
 @NgModule({
   imports: [
@@ -137,6 +162,31 @@ import { TemplateAddFinishComponent } from './template/add/template-add-finish/t
     TemplateAddChannelComponent,
     TemplateAddCustomizeComponent,
     TemplateAddFinishComponent,
+    AlarmRuleComponent,
+    RangeConfigComponent,
+    TerminalCalculateConfigComponent,
+    TerCal1Component,
+    TerCal2Component,
+    TerCal3Component,
+    TemplateBatchDeleteFComponent,
+    TemplateBatchAllocateComponent,
+    TerminalDeleteImgComponent,
+    TemplateAddCalculateComponent,
+    TemplateCmtEditFComponent,
+    TemplateBasicEditFComponent,
+    TempCal1Component,
+    TempCal2Component,
+    TempCal3Component,
+    TempCalMainComponent,
+    MAccountAddFComponent,
+    MAccountBasicFComponent,
+    MAccountProductFComponent,
+    MTemplateAddFComponent,
+    MTempBatchDeleteFComponent,
+    MTempBatchAllocateFComponent,
+    MTemplateEditFComponent,
+    MAcBatchAddComponent,
+    MAcBatchDeleteComponent,
   ],
   exports: [],
   entryComponents: [
@@ -150,7 +200,16 @@ import { TemplateAddFinishComponent } from './template/add/template-add-finish/t
     TerminalAddFormalComponent,
     TerminalBasicEditFormalComponent,
     TerminalCommunicationEditFormalComponent,
-    TerminalAddImgFormalComponent
+    TerminalAddImgFormalComponent,
+    AlarmRuleComponent,
+    RangeConfigComponent,
+    TerminalDeleteImgComponent,
+    TemplateCmtEditFComponent,
+    TemplateBasicEditFComponent,
+    MAccountAddFComponent,
+    MAccountBasicFComponent,
+    MTemplateAddFComponent,
+    MTemplateEditFComponent
   ]
 })
 export class FormalModule { }

@@ -1,0 +1,19 @@
+
+.tp_cal{
+  padding: 10px 30px;
+}
+
+
+.ct_h{
+  text-align: center;
+  line-height: 35px;
+  background-color: #586188;
+  color: #FFFFFF;
+}
+
+
+.t_add_b{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}

@@ -1,0 +1,138 @@
+
+
+{
+  "baud_rate":[
+    {
+      "id": 1,
+      "name": "1200",
+      "value": 1
+    },
+    {
+      "id": 2,
+      "name": "2400",
+      "value": 2
+    },
+    {
+      "id": 3,
+      "name": "4800",
+      "value": 3
+    },
+    {
+      "id": 4,
+      "name": "9600",
+      "value": 4
+    },
+    {
+      "id": 5,
+      "name": "14400",
+      "value": 5
+    },
+    {
+      "id": 6,
+      "name": "19200",
+      "value": 6
+    },
+    {
+      "id": 7,
+      "name": "38400",
+      "value": 7
+    },
+    {
+      "id": 8,
+      "name": "56000",
+      "value": 8
+    },
+    {
+      "id": 9,
+      "name": "57600",
+      "value": 9
+    },
+    {
+      "id": 10,
+      "name": "115200",
+      "value": 10
+    }
+  ],
+  "data_bit": [
+    {
+      "Id": 1,
+      "name": "7",
+      "value": 1
+    },
+    {
+      "Id": 2,
+      "name": "8",
+      "value": 2
+    }
+  ],
+  "stop_bit":[
+    {
+      "Id": 1,
+      "name": "1",
+      "value": 1
+    },
+    {
+      "Id": 2,
+      "name": "2",
+      "value": 2
+    }
+  ],
+  "parity_bit":[
+    {
+      "Id": 1,
+      "name": "无校验",
+      "value": 1
+    },
+    {
+      "Id": 2,
+      "name": "奇校验",
+      "value": 2
+    },
+    {
+      "Id": 3,
+      "name": "偶校验",
+      "value": 3
+    }
+  ],
+  "cmt_inf":[
+    {
+      "name": "RS485",
+      "value": 1
+    },
+    {
+      "name": "RS232",
+      "value": 2
+    },
+    {
+      "name": "TTL",
+      "value": 3
+    }
+  ],
+  "data_type": [ ],
+  "heart_beat":[
+    {
+      "name": "5",
+      "value": 1
+    },
+    {
+      "name": "10",
+      "value": 2
+    },
+    {
+      "name": "15",
+      "value": 3
+    },
+    {
+      "name": "30",
+      "value": 4
+    },
+    {
+      "name": "45",
+      "value": 5
+    },
+    {
+      "name": "60",
+      "value": 6
+    }
+  ]
+}

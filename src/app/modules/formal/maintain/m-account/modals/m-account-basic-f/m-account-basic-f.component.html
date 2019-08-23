@@ -1,0 +1,112 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    <!--<img src="assets/icons/ac_add.png" alt="" style="margin-right: 19px;">-->
+    维保账号基础信息设置
+  </h4>
+</div>
+
+<div class="modal-body m_form">
+  <div class="m_item">
+    <div class="m_label">
+      账号 <span>*</span>：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="username" placeholder="请输入账号" maxlength="15">
+    </div>
+  </div>
+  <div class="m_item">
+    <div class="m_label">
+      账号类型：
+    </div>
+    <div class="m_input text_purple">
+      运维账号
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      用户名：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="name" placeholder="请输入用户名" maxlength="15">
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      所属单位：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="orgName" placeholder="请输入所属单位" maxlength="15">
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      单位类型：
+    </div>
+    <div class="m_input">
+      <nz-select style="width: 100%;" [(ngModel)]="orgType" nzAllowClear>
+        <nz-option nzValue="1" nzLabel="产品使用"></nz-option>
+        <nz-option nzValue="2" nzLabel="产品制造"></nz-option>
+        <nz-option nzValue="3" nzLabel="产品运维"></nz-option>
+        <nz-option nzValue="4" nzLabel="组件供应"></nz-option>
+        <nz-option nzValue="5" nzLabel="监管机构"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      地域地址：
+    </div>
+    <div class="m_input_l">
+      <div class="m_input_2">
+        <nz-select style="width: 100px; margin-right: 5px;" [(ngModel)]="selectedProvince" (ngModelChange)="provinceChange($event)">
+          <nz-option *ngFor="let p of addrList" [nzValue]="p" [nzLabel]="p.Name"></nz-option>
+        </nz-select>
+        省
+        <nz-select style="width: 100px; margin-left: 5px; margin-right: 5px;" [(ngModel)]="selectedCity" (ngModelChange)="cityChange($event)" [nzDisabled]="!selectedProvince || selectedProvince.LocationId===0 ">
+          <nz-option *ngFor="let c of cities" [nzValue]="c" [nzLabel]="c.Name"></nz-option>
+        </nz-select>
+        市
+        <nz-select style="width: 100px; margin-left: 5px; margin-right: 5px;" [(ngModel)]="selectedRegion" (ngModelChange)="regionChange($event)" [nzDisabled]="!selectedCity">
+          <nz-option *ngFor="let r of regions" [nzValue]="r" [nzLabel]="r.Name"></nz-option>
+        </nz-select>
+        区/县
+      </div>
+
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label"></div>
+    <div class="m_input_l">
+      <input type="text" class="form-control" [(ngModel)]="address" style="width: 345px;" placeholder="请输入详细地址">
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      邮箱地址：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="email" placeholder="请输入邮箱地址"
+             pattern="^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" #mail="ngModel">
+      <div class="sign_tip">
+        <span class="text_danger" *ngIf="mail.invalid && (mail.dirty || mail.touched)">请输入邮箱格式</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取消</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 30px;" (click)="save()">确定</button>
+</div>
+
+
+
+
+

@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs/index";
 import {MediaMatcher} from "@angular/cdk/layout";
 import {NzModalService} from "ng-zorro-antd/modal";
+import {PlatformLocation} from "@angular/common";
 
 
 
@@ -20,12 +21,16 @@ export class MainComponent implements OnInit, OnDestroy {
   public user;
   public subscription: Subscription;
 
+  public authority;
+  public sideList;
+
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
 
   constructor(private userService: UserService,
               private route: ActivatedRoute,
               private router: Router,
+              private location: PlatformLocation,
               private modalService: NzModalService,
               changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.subscription = this.userService.changeUserStatus$
@@ -40,10 +45,28 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    /*setTimeout(() => {
-
-    }, 500);*/
+    this.getSide();
     this.getUser();
+    let roleId = localStorage.getItem('roleId');
+
+    // console.log(this.location.hash);
+    if (this.location.hash === '#/admin') {
+      switch (roleId) {
+        case '1':
+          this.router.navigate(['/admin/ad']);
+          break;
+        case '10':
+          this.router.navigate(['/admin/ordinary']);
+          break;
+        case '11':
+          this.router.navigate(['/admin/ordinary']);
+          break;
+        case '15':
+          this.router.navigate(['/admin/service']);
+          break;
+      }
+    }
+
   }
 
   getUser(): void {
@@ -54,7 +77,7 @@ export class MainComponent implements OnInit, OnDestroy {
         sessionStorage.setItem('currentUser', JSON.stringify(this.user));
         this.userService.StatusMission(this.user);
         if (!this.user) {
-          sessionStorage.user = false;
+          localStorage.user = 'false';
           sessionStorage.removeItem('currentUser');
           localStorage.removeItem('authToken');
           this.router.navigate(['/login']);
@@ -73,6 +96,30 @@ export class MainComponent implements OnInit, OnDestroy {
 
       });
   }
+
+
+  getSide() {
+    this.userService.getSide()
+      .subscribe(data => {
+        this.sideList = data.sidenav;
+        this.authority = data.authority;
+        let auth = {
+          logo: this.checkAuth('1001'),
+          eptCtrl: this.checkAuth('1006'),
+          calculate: this.checkAuth('1007'),
+          face: this.checkAuth('1008')
+        };
+        localStorage.setItem('authorities', this.authority);
+        localStorage.setItem('auth', JSON.stringify(auth));
+      });
+  }
+
+
+  checkAuth(data) {
+    return this.authority.indexOf(data) !== -1;
+  }
+
+
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

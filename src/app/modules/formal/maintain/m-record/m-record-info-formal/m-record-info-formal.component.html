@@ -3,12 +3,11 @@
 </div>-->
 
 <div class="content">
-  <div class="info_head">
-    <div class="info_tname">
-      <img src="assets/icons/icon_buletooth_setting.png" alt="">
-      维保详情
+  <div class="list_head">
+    <div class="li_head_l">
+     <h6>维保详情</h6>
     </div>
-    <div>
+    <div class="li_head_r">
       <!--返回-->
       <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/formal/maintenance-record/list', {page: listPage}]">
         <i class="iconfont iconicon_comeback1"></i>
@@ -16,9 +15,7 @@
       <!--<button class="btn btn_purple btn_round bpm ml-3" (click)="deleteData()">
         删除
       </button>
-      <button class="btn btn_purple btn_round bpm ml-3" (click)="scrap()" [disabled]="!basic || basic.status === 4">
-        设备报废
-      </button>-->
+      -->
     </div>
   </div>
 
@@ -59,7 +56,7 @@
             维保模板：
           </div>
           <div class="r_info_value">
-            asdfa
+            ESE12345432（A型锅炉巡检模版）
           </div>
         </div>
 
@@ -110,12 +107,18 @@
           <td> {{ n+1 }} </td>
           <td style="font-weight: bold; color:#666EE8;"> {{ item.description }} </td>
           <td>
-            <span *ngIf="item.status" class="">
+            <div *ngIf="item.status" class="i_row">
+              <div class="r_circle green">
+                <div class="r_circle_in"></div>
+              </div>
               正常
-            </span>
-            <span *ngIf="!item.status" class="text_danger">
+            </div>
+            <div *ngIf="!item.status" class="i_row">
+              <div class="r_circle warning">
+                <div class="r_circle_in"></div>
+              </div>
               异常
-            </span>
+            </div>
           </td>
           <td>
             {{item.remark || '无'}}
@@ -125,9 +128,9 @@
             <!--<span *ngFor="let img of item.imgList; let n = index;">
               <a href="{{img}}" download="图片{{ n+1 }}">图片{{ n+1 }}</a>
             </span>-->
-            <span *ngFor="let img of item.imgList; let n = index;" (click)="preview(img)" class="text_blue">
-              <!--<img src="{{img}}" alt="">-->
-              <a>图片{{ n+1 }}</a>
+            <span *ngFor="let img of item.imgList; let n = index;" (click)="preview(img)" class="m-r-img">
+              <img src="{{img}}" alt="">
+              <!--<a>图片{{ n+1 }}</a>-->
             </span>
           </td>
         </tr>

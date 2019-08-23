@@ -1,0 +1,31 @@
+
+.content_t{
+  margin-top: 13px;
+}
+.ct_radio{
+  margin-bottom: 10px;
+}
+.ct_radio label{
+  margin-right: 60px;
+}
+
+
+
+.ct_h{
+  text-align: center;
+  line-height: 35px;
+  background-color: #586188;
+  color: #FFFFFF;
+}
+
+
+
+
+
+
+.ct-b{
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+

@@ -3,11 +3,11 @@ import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 import {TerminalService} from "../../../../shared/terminal.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ActivatedRoute, ParamMap} from "@angular/router";
-
-import Swal from 'sweetalert2';
 import {ComfirmComponent} from "../../../directives/alert/comfirm/comfirm.component";
 import {TerminalAddFormalComponent} from "../modals/terminal-add-formal/terminal-add-formal.component";
 import {switchMap} from "rxjs/internal/operators";
+
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-terminal-list-formal',
@@ -102,8 +102,12 @@ export class TerminalListFormalComponent implements OnInit {
     }
   }
 
-  searchStatus(n?) {
+  searchOnline(n?) {
     this.online = n;
+    this.searchChange();
+  }
+  searchStatus(n?) {
+    this.status = n;
     this.searchChange();
   }
 
@@ -112,7 +116,9 @@ export class TerminalListFormalComponent implements OnInit {
   checkAll(value: boolean): void {
     // console.log(value);
     this.dataLists.forEach(item => {
-      item.checked = value;
+      if (item.term_plat !== 0) {
+        item.checked = value;
+      }
     });
   }
 
@@ -185,33 +191,15 @@ export class TerminalListFormalComponent implements OnInit {
 
 
   creatModal(title, subtitle, call) {
-    let that = this;
-    this.tplModal = this.nzModal.create({
-      nzTitle: '',
-      nzContent: ComfirmComponent,
-      nzComponentParams: {
-        title: title,
-        subtitle: subtitle
-      },
-      nzMaskClosable: true,
-      nzClosable: false,
-      nzClassName: 'comfirm_modal',
-      nzWidth: 440,
-      nzFooter: [
-        {
-          label: '取消',
-          shape: 'default',
-          onClick: () => that.tplModal.destroy()
-        },
-        {
-          label: '确定',
-          type: 'primary',
-          onClick: () => {
-            call();
-            that.tplModal.destroy();
-          }
-        }
-      ],
+    const that = this;
+    this.tplModal = this.nzModal.confirm({
+      nzTitle: title,
+      nzContent: subtitle,
+      nzIconType: 'fill:question-circle',
+      nzOnOk: () => {
+        call();
+        that.tplModal.destroy();
+      }
     });
   }
 
@@ -222,7 +210,7 @@ export class TerminalListFormalComponent implements OnInit {
       data: checked
     };
     this.loading = true;
-    this.terminalService.issued(post)
+    this.terminalService.batchIssued(post)
       .subscribe(val => {
         that.loading = false;
         Swal(
@@ -234,7 +222,7 @@ export class TerminalListFormalComponent implements OnInit {
       }, err => {
         that.loading = false;
         Swal(
-          err.message,
+          err.message || err,
           '',
           'error'
         );

@@ -59,7 +59,7 @@ export class UserService {
     return this.http.post<any> ('/api/user/logout', uid, httpOptions)
       .pipe(
         tap( (val) => {
-          localStorage.setItem('status', 'false');
+          localStorage.setItem('user', 'false');
           localStorage.removeItem('authToken');
         })
       );
@@ -72,17 +72,18 @@ export class UserService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
+    console.log('getUser:', token);
+
     if (!environment.production) {
       return this.http.get< any >('assets/server/user.json');
     } else {
       return this.http.get< any >('/api/user', httpOptions)
         .pipe(
-          tap((val) => {
-            if (!val) {
-              sessionStorage.setItem('user', 'false');
-              localStorage.removeItem('authToken');
-            }
-          }),
+          // tap((val) => {
+          //   if (!val) {
+          //     sessionStorage.setItem('user', 'false');
+          //   }
+          // }),
           catchError(this.handleError2)
         );
     }
@@ -107,6 +108,11 @@ export class UserService {
   getSide(): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    /*return this.http.get< any >('/api/user/menutree', httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );*/
 
     let roleId = localStorage.getItem('roleId');
     // 管理员
@@ -139,12 +145,8 @@ export class UserService {
     }
 
 
-    // return this.http.get< any >('assets/server/sidenav.json');
-    // return this.http.get< any >('assets/server/sidenav_admin.json')
-    // return this.http.get< any >('assets/server/sidenav_service.json')
-    //   .pipe(
-    //     catchError(this.handleError)
-    //   );
+
+
   }
 
 
@@ -160,6 +162,7 @@ export class UserService {
         `body was: ${error.error}`);
     }
     if (error.status === 550) {
+      localStorage.setItem('user', 'false');
       localStorage.removeItem('authToken');
       alert(error.error);
     }
@@ -178,6 +181,7 @@ export class UserService {
         `body was: ${error.error}`);
     }
     if (error.status === 550) {
+      sessionStorage.setItem('user', 'false');
       localStorage.removeItem('authToken');
       alert(error.error);
     }

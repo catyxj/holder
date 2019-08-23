@@ -14,7 +14,7 @@ export class UserDetailFormalComponent implements OnInit {
   public page = 1;
   public pageNum;
   public pageSize = 15;
-  public search = 'phone';
+  public search = 'name';
   public value;
   public status = '';
   public online = '';

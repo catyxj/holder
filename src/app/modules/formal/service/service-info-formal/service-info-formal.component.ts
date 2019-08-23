@@ -55,7 +55,7 @@ export class ServiceInfoFormalComponent implements OnInit {
       .subscribe(data => {
         this.questionList = data.data;
         this.totalItems = data.count;
-        this.currentData = this.questionList[0].uid;
+        this.currentData = this.questionList[0].id;
         this.getAnswer();
       }, err => {
 

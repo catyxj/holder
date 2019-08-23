@@ -1,3 +1,158 @@
-<p>
-  graphic-dashboard works!
-</p>
+
+<div class="content">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>
+        图文概览
+      </h6>
+    </div>
+    <div class="li_head_r">
+      <!--刷新-->
+      <!--<button class="btn btn_purple-o btn_round bps" (click)="refreshPage()">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>-->
+
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="addData()">
+        新增设备
+      </button>
+
+      <button class="btn btn_purple btn_round bpm ml-1" routerLink="/admin/ordinary/equip-list/batch">
+        批量操作
+      </button>
+
+    </div>
+  </div>
+
+  <div class="list_content">
+    <div class="content_h" style="align-items: center;">
+      <div class="search_box">
+        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="addOnAfterTemplate">
+          <input type="text" nz-input [(ngModel)]="value" (keyup)="searchEnter($event)" maxlength="20"/>
+        </nz-input-group>
+        <ng-template #addOnBeforeTemplate>
+          <nz-select [(ngModel)]="search">
+            <nz-option [nzLabel]="'设备名称'" [nzValue]="'name'"></nz-option>
+            <nz-option [nzLabel]="'地域位置'" [nzValue]="'location_name'"></nz-option>
+          </nz-select>
+        </ng-template>
+        <ng-template #addOnAfterTemplate>
+          <img src="assets/icons/icon_seach.png" alt="" class="search_icon" (click)="searchChange()">
+        </ng-template>
+
+      </div>
+      <div class="flex">
+        <!--<nz-radio-group [(ngModel)]="run" [nzButtonStyle]="'solid'" (ngModelChange)="searchChange()">
+          <label nz-radio-button nzValue="">全部</label>
+          <label nz-radio-button nzValue="run">运行</label>
+          <label nz-radio-button nzValue="stop">未运行</label>
+        </nz-radio-group>-->
+
+        <!--<div class="btn-group">
+          <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 2, 'btn_purple': checkValue === 2}" (click)="checkStatus(2)">
+            全部
+          </button>
+          <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 1, 'btn_purple': checkValue === 1}" (click)="checkStatus(1)">
+            运行
+          </button>
+          <button class="btn" [ngClass]="{'btn-outline-info': checkValue !== 0, 'btn_purple': checkValue === 0}" (click)="checkStatus(0)">
+            未运行
+          </button>
+        </div>-->
+
+      </div>
+    </div>
+    <div class="content_d">
+      <div class="grid">
+        <div *ngFor="let data of dataLists; trackBy: trackByUid" class="d_col">
+          <a class="module" [routerLink]="['/admin/ordinary/runtime', data.uid]" target="_blank">
+            <div class="status_name">
+              <div class="sn_l">
+                <a class="status_param0" *ngIf="data.online">
+                  <img src="assets/icons/graphic_1.png" alt="">
+                </a>
+                <a class="status_param0" *ngIf="!data.online">
+                  <img src="assets/icons/graphic_0.png" alt="">
+                </a>
+                <a class="sn_title">
+                  <h6 class="">
+                    {{data.name}}
+                  </h6>
+                  <p>
+                    {{data.location_name}}
+                  </p>
+                </a>
+              </div>
+              <div class="sn_r">
+                <a class="d_label" title="{{data.isBurning}}"
+                   [ngClass]="{'bg_info':data.online && data.run ,'bg_grey':!data.online || !data.run}">
+                  <!--{{data.isBurning}}-->
+                  运行
+                </a>
+                <a class="d_label" title="{{data.warning}}"
+                   [ngClass]="{'bg_grey':!data.online || data.alarm_count <= 0, 'bg_red':data.online && data.alarm_count > 0 }">
+                  <!--{{data.warning}}-->
+                  警告
+                </a>
+                <a class="d_label" title="{{data.malfunction}}"
+                   [ngClass]="{'bg_grey':!data.mtStatus, 'bg_warning':data.mtStatus }">
+                  <!--{{data.malfunction}}-->
+                  故障
+                </a>
+              </div>
+            </div>
+
+            <div class="status_box">
+              <div class="status_content">
+                <div class="status_row">
+                  <div class="status_data_item" *ngFor="let item of data.instant">
+                    <div class="status_data_head">
+                      {{item.name}}
+                    </div>
+                    <div class="status_data_content">
+                      {{item.value}} {{item.unit}}
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+              <div class="img_content ">
+                <a>
+                  <img src="{{data.img}}" alt="">
+                </a>
+              </div>
+            </div>
+
+            <div class="mask" *ngIf="data.status === 1">
+              设备未激活 <br/>
+              请联系产品厂家
+            </div>
+
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+
+    <div class="content_b">
+      <nz-pagination [nzTotal]="totalItems"
+                     [nzShowTotal]="totalTemplate"
+                     [(nzPageIndex)]="page"
+                     [(nzPageSize)]="pageSize"
+                     (nzPageIndexChange)="pageChange()">
+
+      </nz-pagination>
+      <div class="ant-pagination-options-quick-jumper">
+        &nbsp; 跳至
+        <input type="number" [(ngModel)]="pageNum"> 页 </div>
+      <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+

@@ -7,6 +7,12 @@
   font-size: 14px;
   font-family: Arial, "Microsoft Yahei", "Microsoft Sans Serif", sans-serif;
 }
+
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 html,body,app-root,app-main,mat-sidenav-container,.site {
   height: 100%;
   margin: 0;
@@ -15,12 +21,16 @@ ul,li{
   list-style: none;
   margin: 0;
 }
+.form-control{
+  /*height: 2rem;*/
+}
 .content{
   margin: 12px;
   padding: 12px;
   background-color: #ffffff;
   border-radius:2px;
   color: #6B6F82;
+  /*min-height: 500px;*/
 }
 .directive .content{
   padding: 25px 32px;
@@ -56,6 +66,25 @@ h5, .h5 {
 }
 .text_grey{
   color: #A7ABBE;
+}
+
+.bg_purple{
+  background-color:#666EE8;
+}
+.bg_danger{
+  background-color: #FF4961;
+}
+.bg_warning{
+  background-color: #FFC06A;
+}
+.bg_blue{
+  background-color: #1E9FF2;
+}
+.bg_green{
+  background-color: #28D094;
+}
+.bg_grey{
+  background-color: #A7ABBE;
 }
 
 
@@ -151,7 +180,9 @@ app-header .dropdown-toggle::after{
 .content .table thead th{
   vertical-align: middle;
 }
-
+.table-bordered thead th{
+  border-bottom-width: 1px;
+}
 .ant-table-thead>tr>th {
   color: #464855;
   background: #F9FAFD;
@@ -227,9 +258,12 @@ app-header .dropdown-toggle::after{
 }
 .info_r{
   margin-left: 34px;
+  display: flex;
+  flex-direction: column;
 }
 .info_r .info_body{
-  height: 625px;
+  /*height: 625px;*/
+  flex: auto;
   background-color: #F9FAFD;
 }
 .info_title{
@@ -314,10 +348,15 @@ app-header .dropdown-toggle::after{
 }
 
 
+
+
+
 /*模态框表单样式*/
 .modal-header .modal-title{
   font-size: 16px;
   font-weight: bold;
+  display: flex;
+  align-items: center;
 }
 .m_form{
   padding-top: 23px;
@@ -363,7 +402,12 @@ app-header .dropdown-toggle::after{
   padding-top: 0;
   padding-bottom: 30px;
 }
-
+.modal_m .m_form .m_item .m_input{
+  width: 359px;
+}
+.modal_m .m_form .m_item .m_label{
+  font-size: 12px;
+}
 
 
 /*分页*/
@@ -407,9 +451,22 @@ app-header .dropdown-toggle::after{
 .modal_m .modal-dialog{
   max-width: 600px;
 }
+.modal_l .modal-dialog{
+  max-width: 790px;
+}
 .modal_lg .modal-dialog{
   max-width: 1050px;
 }
+
+.m_img .ant-upload.ant-upload-select-picture-card{
+  border-radius: 0;
+  border: none;
+  margin-bottom: 0;
+}
+.m_img .ant-upload.ant-upload-select-picture-card>.ant-upload{
+  padding: 0;
+}
+
 
 
 .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
@@ -484,7 +541,14 @@ app-header .dropdown-toggle::after{
   display: none;
 }
 
+.ant-upload-list-item-info {
+  padding: 0 20px 0 4px;
+}
 
+
+.cal .ant-select-selection{
+  border: none;
+}
 
 
 
@@ -517,6 +581,12 @@ app-header .dropdown-toggle::after{
   color: #666EE8;
   cursor: pointer;
 }
+
+.swal2-popup .swal2-title {
+  word-break: break-all;
+}
+
+
 
 
 /*ng-zorro提示框*/
@@ -624,6 +694,29 @@ header .anticon svg{
 .search_box .ant-select-selection__rendered {
   min-width: 100px;
 }
+/*通道位置下拉*/
+.ant-dropdown-menu-submenu-title .ant-dropdown-menu-submenu-arrow {
+  top: 0;
+}
+.ant-dropdown-menu-submenu-title .ant-dropdown-menu-submenu-arrow-icon{
+  color: inherit;
+}
+
+
+/*模板批量分配下拉*/
+.template .ant-select-selection__rendered {
+  line-height: 24px;
+}
+.template .li_head_r .ant-select-selection__rendered *{
+  font-size: 11px;
+}
+.template .li_head_r .ant-select-arrow .ant-select-arrow-icon svg{
+  font-size: 11px;
+}
+.ant-select-selection {
+  border-top-width: 1px;
+}
+
 
 /*批量禁用下拉列表*/
 /*.m_input .ant-select-selection--single{
@@ -632,9 +725,55 @@ header .anticon svg{
 
 
 
+/*新增模板- 步骤条ng-zorro*/
+.template_add .ant-steps-item-content, .ant-steps-item-icon{
+  display: block;
+}
+.template_add .ant-steps-item-title::after {
+  top: -16px;
+}
+.template_add .ant-steps-item-title {
+  padding-right:0;
+  font-size: 14px;
+  /*color: #464855;*/
+}
+.template_add .ant-steps-item-finish .ant-steps-item-icon {
+  margin-left: 12px;
+  border-color: #666EE8;
+}
+.template_add .ant-steps-item-finish .ant-steps-item-icon>.ant-steps-icon {
+  color: #666EE8;
+}
+.template_add .ant-steps-item-icon>.ant-steps-icon .anticon {
+  vertical-align: 0.125em;
+}
+.template_add .ant-steps-item-finish>.ant-steps-item-content>.ant-steps-item-title::after,.template_add .ant-steps-item-finish>.ant-steps-item-tail::after {
+  background-color: #666EE8;
+}
+.template_add .ant-steps-item-process .ant-steps-item-icon {
+  background: #666EE8;
+  border-color: #666EE8;
+  margin-left: 12px;
+}
+.template_add .ant-steps-item-wait .ant-steps-item-icon {
+  margin-left: 12px;
+}
+
+.template_add  .ant-steps-horizontal:not(.ant-steps-label-vertical) .ant-steps-item {
+  margin-right: 0;
+}
+
+.template_add .ant-steps-item-process>.ant-steps-item-content>.ant-steps-item-title {
+  color: #464855;
+}
+
+
+
+
 .text_info {
   color: #17a2b8;
 }
+
 
 
 /*按钮*/
@@ -648,6 +787,8 @@ header .anticon svg{
   background-color: #00a4ff;
   border-color: #00a4ff;
 }
+
+
 
 
 .btn_purple {
@@ -717,6 +858,12 @@ header .anticon svg{
 a.btn_purple{
   color: #ffffff;
 }
+a:not([href]):not([tabindex]).btn_purple{
+  color: #FFFFFF;
+}
+a:not([href]):not([tabindex]).btn_purple:hover{
+  color: #666EE8;
+}
 .btn_round{
   /*border-radius:16px;*/
   border-radius:5px;
@@ -726,7 +873,45 @@ a.btn_purple{
   background-color: #464855;
   color: #FFFFFF;
 }
-
+.btn_green{
+  background-color: #28D094;
+  color: #FFFFFF;
+}
+.btn_green:hover{
+  color: #28D094;
+  background-color: #fff;
+  border-color: #28D094;
+}
+.btn_red{
+  background-color: #FF4961;
+  color: #FFFFFF;
+}
+.btn_red:hover{
+  color: #FF4961;
+  background-color: #fff;
+  border-color: #FF4961;
+}
+.btn_warning{
+  background-color: #FFC06A;
+  color: #FFFFFF;
+}
+.btn_warning:hover{
+  color: #FFC06A;
+  background-color: #fff;
+  border-color: #FFC06A;
+}
+.btn_blue{
+  background-color: #1E9FF2;
+  color: #FFFFFF;
+}
+.btn_blue:hover{
+  color: #1E9FF2;
+  background-color: #fff;
+  border-color: #1E9FF2;
+}
+span.iconfont.iconedit{
+  cursor: pointer;
+}
 
 
 
@@ -780,6 +965,28 @@ a.btn_purple{
 }
 
 
+/*按钮式单选*/
+.ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+  color: #fff;
+  background: #666EE8;
+  border-color: #666EE8;
+}
+.ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover {
+  color: #fff;
+  background: #666EE8;
+  border-color: #666EE8;
+}
+.ant-radio-button-wrapper:hover {
+  position: relative;
+  color: #666EE8;
+}
+.ant-radio-button-wrapper{
+  height: 26px;
+  line-height: 24px;
+}
+.ant-radio-button-wrapper span{
+  font-size: 12px;
+}
 
 
 
@@ -846,7 +1053,74 @@ a.btn_purple{
 }
 
 
+/*---------------通道配置------------------------------*/
+.channel{
+  margin-top: 10px;
+}
+.channel *{
+  font-size: 12px;
+}
+.conf_title{
+  height: 35px;
+  background-color: #586188;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 35px;
+  font-size: 12px;
+  position: relative;
+}
+.conf_add{
+  position: absolute;
+  right: 10px;
+  top: 7px;
+  color: #666EE8;
+}
+.conf_add a{
+  display: block;
+  width: 20px;
+  height: 20px;
+  line-height: 16px;
+  border-radius:3px;
+  text-align: center;
+  background-color: #FFFFFF;
+}
+.conf_add:hover a{
+  background-color: #f0f1ff;
+}
+.conf_add a i{
+  font-size: 14px;
+  font-weight: bold;
+}
 
+.channel_content table{
+  border-collapse: collapse;
+}
+.channel_content table th{
+  background-color: #F9FAFD;
+}
+.channel_content table .t_head th *{
+  font-size: 12px;
+  color: #464855;
+}
+.channel_content table tr td{
+  vertical-align: middle;
+  padding: 0;
+}
+.channel_content table tr td input, .channel_content table tr td select{
+  border: none;
+  border-radius: 0;
+}
+.channel_content .t_btn{
+  padding: 0 10px;
+}
+/*---------------end通道配置---------------------------*/
+
+
+
+/*switch*/
+.ant-switch-checked {
+  background-color: #666EE8;
+}
 
 
 

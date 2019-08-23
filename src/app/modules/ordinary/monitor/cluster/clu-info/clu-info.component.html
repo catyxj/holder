@@ -1,0 +1,167 @@
+
+<div class="content">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>
+        集群详情
+      </h6>
+    </div>
+    <div class="li_head_r">
+      <!--刷新-->
+      <button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>
+
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="addData()">
+        基本设置
+      </button>
+
+      <button class="btn btn_purple btn_round bpm ml-1" [routerLink]="['/admin/ordinary/cluster/ept-add', uid]">
+        新增设备
+      </button>
+
+      <button class="btn btn_purple btn_round bpm ml-1" [routerLink]="['/admin/ordinary/cluster/ept-del', uid]">
+        批量操作
+      </button>
+
+    </div>
+  </div>
+
+  <div class="list_content">
+    <div class="content_h">
+      <div class="search_box">
+        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="addOnAfterTemplate">
+          <input type="text" nz-input [(ngModel)]="value" (keyup)="searchEnter($event)" maxlength="20"/>
+        </nz-input-group>
+        <ng-template #addOnBeforeTemplate>
+          <nz-select [(ngModel)]="search">
+            <nz-option [nzLabel]="'设备名称'" [nzValue]="'name'"></nz-option>
+          </nz-select>
+        </ng-template>
+        <ng-template #addOnAfterTemplate>
+          <img src="assets/icons/icon_seach.png" alt="" class="search_icon" (click)="searchChange()">
+        </ng-template>
+
+      </div>
+      <div class="flex">
+
+
+      </div>
+    </div>
+    <div class="content_d">
+      <div class="d_head">
+        <div class="d_h_l">
+          某某某某某某某某某某某锅炉房
+        </div>
+        <div class="d_h_r">
+          <div class="c_label bg_blue">
+            13/15联网
+          </div>
+          <div class="c_label bg_green ml-1">
+            10/13运行
+          </div>
+          <div class="c_label bg_danger ml-1">
+            6个警告
+          </div>
+          <div class="c_label bg_warning ml-1">
+            4个故障
+          </div>
+        </div>
+      </div>
+
+      <div class="grid">
+
+        <div class="grid_content">
+          <a class="grid_col" *ngFor="let data of data1" [routerLink]="['/admin/ordinary/runtime', data.uid]" target="_blank">
+            <div class="grid_col_in"  [ngClass]="{'bg_running': data.online, 'bg_default': !data.online, 'bg_inactive': data.status===0 }">
+              <div class="grid_col_1">
+                <div class="gc_l">
+                  <div class="flex" *ngIf="data.online && data.status > 0">
+                    <div class="dot bg_default" *ngIf="!data.run"></div>
+                    <div class="dot bg_green" *ngIf="data.run"></div>
+                    <div class="dot bg_danger" *ngIf="data.alarm_count>0"></div>
+                    <div class="dot bg_warning" *ngIf="data.mal_func>0"></div>
+                  </div>
+                </div>
+                <div class="gc_r">
+                  <img src="assets/images/boiler.png" alt="">
+                </div>
+              </div>
+
+              <div class="grid_col_2">
+                {{data.name}}
+                <span *ngIf="!data.online"> (未连接) </span>
+                <!--<span> (未激活) </span>-->
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="grid_content">
+          <a class="grid_col" *ngFor="let data of data2" [routerLink]="['/admin/ordinary/runtime', data.uid]" target="_blank">
+            <div class="grid_col_in"  [ngClass]="{'bg_running': data.online, 'bg_default': !data.online, 'bg_inactive': data.status===0 }">
+              <div class="grid_col_1">
+                <div class="gc_l">
+                  <div class="flex" *ngIf="data.online && data.status > 0">
+                    <div class="dot bg_default" *ngIf="!data.run"></div>
+                    <div class="dot bg_green" *ngIf="data.run"></div>
+                    <div class="dot bg_danger" *ngIf="data.alarm_count>0"></div>
+                    <div class="dot bg_warning" *ngIf="data.mal_func>0"></div>
+                  </div>
+                </div>
+                <div class="gc_r">
+                  <img src="assets/images/boiler.png" alt="">
+                </div>
+              </div>
+
+              <div class="grid_col_2">
+                {{data.name}}
+                <span *ngIf="!data.online"> (未连接) </span>
+                <!--<span> (未激活) </span>-->
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="grid_content">
+          <a class="grid_col" *ngFor="let data of data3" [routerLink]="['/admin/ordinary/runtime', data.uid]" target="_blank">
+            <div class="grid_col_in"  [ngClass]="{'bg_running': data.online, 'bg_default': !data.online, 'bg_inactive': data.status===0 }">
+              <div class="grid_col_1">
+                <div class="gc_l">
+                  <div class="flex" *ngIf="data.online && data.status > 0">
+                    <div class="dot bg_default" *ngIf="!data.run"></div>
+                    <div class="dot bg_green" *ngIf="data.run"></div>
+                    <div class="dot bg_danger" *ngIf="data.alarm_count>0"></div>
+                    <div class="dot bg_warning" *ngIf="data.mal_func>0"></div>
+                  </div>
+                </div>
+                <div class="gc_r">
+                  <img src="assets/images/boiler.png" alt="">
+                </div>
+              </div>
+
+              <div class="grid_col_2">
+                {{data.name}}
+                <span *ngIf="!data.online"> (未连接) </span>
+                <!--<span> (未激活) </span>-->
+              </div>
+            </div>
+          </a>
+        </div>
+
+
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+

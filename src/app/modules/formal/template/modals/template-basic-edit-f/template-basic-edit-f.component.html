@@ -1,0 +1,82 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    <!--<img src="assets/icons/icon_terminal.png" alt="" style="margin-right: 19px;">-->
+    模版基础信息设置
+  </h4>
+</div>
+
+<div class="modal-body m_form">
+  <div class="m_item">
+    <div class="m_label">
+      <span>*</span> 模板名称：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="name" placeholder="请输入模板名称" #tName="ngModel"
+             required>
+      <div class="sign_tip">
+        <!--<span class="text_danger" *ngIf="tCode.invalid && (tCode.dirty || tCode.touched)">请输入正确模板名称</span>-->
+      </div>
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      <span>*</span> 设备名称：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="equip" placeholder="请输入设备名称" #eName="ngModel"
+             required>
+      <div class="sign_tip">
+        <!--<span class="text_danger" *ngIf="tVersion.invalid && (tVersion.dirty || tVersion.touched)">请输入6位正确固件版本号</span>-->
+      </div>
+    </div>
+  </div>
+
+  <div class="m_item">
+
+    <div class="m_img">
+      <nz-upload
+        class="avatar-uploader"
+        nzAction="/api/dialogue/attach/upload"
+        nzListType="picture-card"
+        [nzHeaders]="headOption"
+        [nzShowUploadList]="false"
+        [nzBeforeUpload]="beforeUpload"
+        (nzChange)="handleChange($event)"
+      >
+        <ng-container *ngIf="!imgUrl">
+          <img src="assets/images/photo.png" style="width: 210px; height: 210px;" alt="">
+        </ng-container>
+        <img *ngIf="imgUrl" [src]="imgUrl" style="width: 210px; height: 210px;"/>
+      </nz-upload>
+
+      <div class="img_text">
+        请点击左侧图片，<br/>
+        上传要设置的设备展示图片，
+        支持jpg、png、gif格式，
+        文件大小不超过200k。
+        <br/><br/>
+        最佳效果像素为240*240
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取 消</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 35px;" [disabled]="tName.invalid || eName.invalid" (click)="save()">
+    确 定
+  </button>
+</div>
+
+
+
+
+
+
+
+

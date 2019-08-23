@@ -17,8 +17,6 @@ export class MaintainService {
 
   // private dataListUrl = '/api/admin/maintain/list';
 
-
-  // private token = 'authtoken';
   private dataListUrl = 'assets/server/cluster_list.json';
 
   constructor(private http: HttpClient) { }
@@ -35,6 +33,7 @@ export class MaintainService {
       );
   }
 
+  // 新增
   addData(data): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
@@ -56,6 +55,18 @@ export class MaintainService {
       );
   }
 
+  // 产品批量新增
+  batchAddP(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/admin/formal/maintain/add', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
 
 
   private handleError(error: HttpErrorResponse) {
@@ -67,7 +78,6 @@ export class MaintainService {
         `错误内容: ${error.error}`);
     }
     if (error.status === 550) {
-      localStorage.removeItem('authToken');
       window.location.reload();
     }
     return throwError(

@@ -1,0 +1,58 @@
+<div>
+  <div class="bread">
+    主监控台 / 设备详情
+  </div>
+
+
+  <div class="content">
+    <div class="list_head">
+      <div class="li_head_l">
+        <h6>
+          设备详情
+        </h6>
+      </div>
+      <div class="li_head_r">
+        <!--刷新-->
+        <!--<button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
+          <i class="iconfont iconicon_Refresh"></i>
+        </button>-->
+
+        <div class="btn-group">
+          <button class="btn btn_purple_o" [routerLink]="['./dashboard']" routerLinkActive="active">
+            运行动态
+          </button>
+
+          <button class="btn btn_purple_o" [routerLink]="['./alarm']" routerLinkActive="active">
+            告警记录
+          </button>
+
+          <button class="btn btn_purple_o" [routerLink]="['./maintain']" routerLinkActive="active">
+            维保记录
+          </button>
+
+          <button class="btn btn_purple_o" [routerLink]="['./cycle']" routerLinkActive="active">
+            组件状态
+          </button>
+
+          <button class="btn btn_purple_o" [routerLink]="['./video']" routerLinkActive="active">
+            视频监控
+          </button>
+
+        </div>
+
+        <button class="btn btn_purple btn_round bpm ml-1" [routerLink]="['/admin/ordinary/equip-info', uid]" style="width: 90px;">
+          设备基础信息
+        </button>
+
+
+      </div>
+    </div>
+
+    <div class="runtime">
+      <router-outlet></router-outlet>
+
+    </div>
+
+  </div>
+
+</div>

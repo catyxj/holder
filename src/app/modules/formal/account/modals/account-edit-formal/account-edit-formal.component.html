@@ -71,7 +71,7 @@
       邮箱地址：
     </div>
     <div class="m_input">
-      <input type="text" class="form-control" [(ngModel)]="email" placeholder="请输入邮箱地址"
+      <input type="text" class="form-control" [(ngModel)]="email" placeholder="请输入邮箱地址" maxlength="30"
              pattern="^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" #mail="ngModel">
       <div class="sign_tip">
         <span class="text_danger" *ngIf="mail.invalid && (mail.dirty || mail.touched)">请输入邮箱格式</span>

@@ -223,7 +223,6 @@ export class ServiceService {
         `错误内容: ${error.error}`);
     }
     if (error.status === 550) {
-      localStorage.removeItem('authToken');
       window.location.reload();
     }
     return throwError(

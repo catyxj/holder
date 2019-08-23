@@ -34,11 +34,12 @@ import { DirMainComponent } from './modules/directives/dir-main/dir-main.compone
 import { SignInComponent } from './register/sign-in/sign-in.component';
 import { VideoLiveComponent } from './modules/directives/video-live/video-live.component';
 
-import {AdminModule} from './modules/admin/admin.module';
+// import {AdminModule} from './modules/admin/admin.module';
 
 import { ComfirmComponent } from './modules/directives/alert/comfirm/comfirm.component';
 import { ErrorComponent } from './modules/directives/alert/error/error.component';
-import {FormalModule} from "./modules/formal/formal.module";
+import {FormalModule} from './modules/formal/formal.module';
+import { Err404Component } from './global/error/err404/err404.component';
 
 
 
@@ -63,6 +64,7 @@ registerLocaleData(zh);
     ComfirmComponent,
     ErrorComponent,
     VideoLiveComponent,
+    Err404Component,
   ],
   imports: [
     BrowserModule,
@@ -81,7 +83,8 @@ registerLocaleData(zh);
     AngularFontAwesomeModule,
     NgZorroAntdModule,
     NgxEchartsModule,
-    AdminModule,
+    // AdminModule,
+    // FormalModule
   ],
   entryComponents: [
     ComfirmComponent

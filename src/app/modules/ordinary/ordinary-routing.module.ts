@@ -14,6 +14,22 @@ import {ServiceListOrdComponent} from "./service/service-list-ord/service-list-o
 import {ServiceMainOrdComponent} from "./service/service-main-ord/service-main-ord.component";
 import {CluMainComponent} from "./monitor/cluster/clu-main/clu-main.component";
 import {CluDashboardComponent} from "./monitor/cluster/clu-dashboard/clu-dashboard.component";
+import {RemindListComponent} from "./home/remind/remind-list/remind-list.component";
+import {RemindReportMainComponent} from "./home/remind/remind-report-main/remind-report-main.component";
+import {EqBatchComponent} from "./monitor/list/eq-batch/eq-batch.component";
+import {RuntimeMainComponent} from "./runtime/runtime-main/runtime-main.component";
+import {RuntimeDashboardComponent} from "./runtime/runtime-dashboard/runtime-dashboard.component";
+import {RuntimeAlarmMainComponent} from "./runtime/alarm/runtime-alarm-main/runtime-alarm-main.component";
+import {CluAddMainComponent} from "./monitor/cluster/add/clu-add-main/clu-add-main.component";
+import {CluBatchComponent} from "./monitor/cluster/clu-batch/clu-batch.component";
+import {CluInfoComponent} from "./monitor/cluster/clu-info/clu-info.component";
+import {CluEptAddComponent} from "./monitor/cluster/ept/clu-ept-add/clu-ept-add.component";
+import {CluEptDelComponent} from "./monitor/cluster/ept/clu-ept-del/clu-ept-del.component";
+import {RuntimeMaintainComponent} from "./runtime/maintain/runtime-maintain/runtime-maintain.component";
+import {RuntimeCycleComponent} from "./runtime/cycle/runtime-cycle/runtime-cycle.component";
+import {RuntimeVideoComponent} from "./runtime/video/runtime-video/runtime-video.component";
+import {EquipInfoOrComponent} from "./runtime/equip/equip-info-or/equip-info-or.component";
+import {EqChartsComponent} from "./runtime/equip/eq-charts/eq-charts.component";
 
 export const OrdinaryRoutingModule = [
   {
@@ -29,6 +45,14 @@ export const OrdinaryRoutingModule = [
           {
             path: 'dashborad',
             component: HomeDashboardComponent
+          },
+          {
+            path: 'remind',
+            component: RemindListComponent
+          },
+          {
+            path: 'remind-info/:type',
+            component: RemindReportMainComponent
           }
         ]
       },
@@ -51,6 +75,10 @@ export const OrdinaryRoutingModule = [
           {
             path: 'list',
             component: EqListListComponent,
+          },
+          {
+            path: 'batch',
+            component: EqBatchComponent,
           }
         ]
       },
@@ -73,8 +101,63 @@ export const OrdinaryRoutingModule = [
           {
             path: 'dashboard',
             component: CluDashboardComponent,
+          },
+          {
+            path: 'add',
+            component: CluAddMainComponent
+          },
+          {
+            path: 'batch',
+            component: CluBatchComponent
+          },
+          {
+            path: 'info/:uid/:page',
+            component: CluInfoComponent
+          },
+          {
+            path: 'ept-add/:uid',
+            component: CluEptAddComponent
+          },
+          {
+            path: 'ept-del/:uid',
+            component: CluEptDelComponent
           }
         ]
+      },
+      {
+        path: 'runtime/:uid',
+        component: RuntimeMainComponent,
+        children: [
+          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+          {
+            path: 'dashboard',
+            component: RuntimeDashboardComponent,
+          },
+          {
+            path: 'alarm',
+            component: RuntimeAlarmMainComponent,
+          },
+          {
+            path: 'maintain',
+            component: RuntimeMaintainComponent,
+          },
+          {
+            path: 'cycle',
+            component: RuntimeCycleComponent,
+          },
+          {
+            path: 'video',
+            component: RuntimeVideoComponent,
+          }
+        ]
+      },
+      {
+        path: 'equip-info/:uid',
+        component: EquipInfoOrComponent,
+      },
+      {
+        path: 'equip-charts/:uid',
+        component: EqChartsComponent,
       },
       {
         path: 'account',

@@ -1,0 +1,21 @@
+
+
+.m_form .m_item .m_label{
+  width: 98px;
+  text-align: left;
+}
+
+.m_table{
+  padding-top: 15px;
+}
+.m_table .table tr th{
+  background-color: #F9FAFD;
+}
+.m_table .table td input{
+  border: none;
+}
+
+
+
+
+

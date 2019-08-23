@@ -9,12 +9,12 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class TerminalMessageFormalComponent implements OnInit {
   public uid;
+  public code;
   public dataLists = [];
   public totalItems;
   public loading;
   public updateDate;
   public temperCols = [];
-  public analogCols = [];
   public switchCols = [];
   public calcCols = [];
 
@@ -23,20 +23,28 @@ export class TerminalMessageFormalComponent implements OnInit {
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
+    this.code = this.route.snapshot.paramMap.get('code');
     this.initCol();
     this.getList();
   }
 
   initCol() {
-    for (let i = 1; i <= 12; i++) {
-      this.temperCols.push('Temper' + i + '_channel');
-      this.analogCols.push('Analog' + i + '_channel');
-      this.calcCols.push('C' + i + '_calculate_parm');
+
+    for (let i = 1; i <= 24; i++) {
+      this.temperCols.push('temper_' + i + '_channel');
     }
 
-    for (let i = 1; i <= 3; i++) {
-      this.switchCols.push('Switch_' + i + '_channel');
+    for (let i = 1; i <= 12; i++) {
+      this.calcCols.push('calculate_' + i + '_param');
     }
+
+    this.switchCols = [
+      'switch_1_16_channel_bit', 'switch_17_32_channel_bit', 'switch_33_48_channel_bit'
+    ];
+
+    /*for (let i = 1; i <= 3; i++) {
+      this.switchCols.push('Switch_' + i + '_channel');
+    }*/
   }
 
   // 获取列表
@@ -45,7 +53,7 @@ export class TerminalMessageFormalComponent implements OnInit {
     this.terminalService.getMessage(this.uid)
       .subscribe(data => {
         this.loading = false;
-        this.dataLists = data.data;
+        this.dataLists = data;
         this.updateDate = new Date();
       }, err => {
         this.loading = false;
