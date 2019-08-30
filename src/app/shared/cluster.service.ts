@@ -16,13 +16,12 @@ const httpOptions = {
 })
 export class ClusterService {
 
-  private clusterUrl = 'assets/server/cluster_list.json';
+  // private clusterUrl = 'assets/server/cluster_list.json';
   // private clustersUrl = 'assets/server/cluster_list_all.json';
-  private clusEquipUrl = 'assets/server/cluster_equip.json';
+  // private clusEquipUrl = 'assets/server/cluster_equip.json';
 
-  // private clusterUrl = '/api/formal/cluster_list';
-  // private clustersUrl = '/cluster_list_all';
-  // private clusEquipUrl = '/cluster_detail';
+  private clusterUrl = '/api/formal/cluster/list';
+  private clusEquipUrl = '/api/formal/cluster/ept/list';
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -38,23 +37,84 @@ export class ClusterService {
       );
   }
 
-  // 获取集群列表-下拉列表
-  /*getClustersAll(): Observable<any> {
+  // 获取集群列表-批量操作
+  getBatchLists(n: number, pageSize: number, search?: string, value?: string, status?: string): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.get<any>(this.clustersUrl, httpOptions)
+    const url = `/api/formal/cluster/name/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}&status=${status}`;
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
       );
-  }*/
+  }
+
+  // 获取设备列表-全部（集群外）
+  getEptAll(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    //  return this.http.get<any>('assets/server/cluster_list.json', httpOptions);
+    return this.http.get<any>(`/api/formal/cluster/bind/ept/list?uid=${uid}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getStatus(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `/api/formal/cluster/status/detail?uid=${uid}`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取集群设备列表
+  getClusEquip(uid: string, n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `${this.clusEquipUrl}?uid=${uid}&page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+
+  // 集群批量操作-删除，激活，禁用
+  batchD(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `/api/formal/cluster/batch`;
+    return this.http.post<any>(url, data, httpOptions)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
 
   // 添加
   addCluster(data): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/cluster_add', data, httpOptions)
+    return this.http.post('/api/formal/cluster/create', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 批量关联设备
+  eptLink(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/cluster/bind', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -65,18 +125,7 @@ export class ClusterService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/cluster_update', data, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  // 删除
-  deleteCluster(uid): Observable<any> {
-    let token = localStorage.getItem('authToken');
-    httpOptions.headers = httpOptions.headers.set('Authorization', token);
-
-    return this.http.post('/cluster_delete/', uid, httpOptions)
+    return this.http.post('/api/formal/cluster/update', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -94,28 +143,10 @@ export class ClusterService {
       );
   }
 
-  // 获取集群设备列表
-  getClusEquip(uid: string): Observable<any> {
-    let token = localStorage.getItem('authToken');
-    httpOptions.headers = httpOptions.headers.set('Authorization', token);
-
-    const url = `${this.clusEquipUrl}/?uid=${uid}`;
-    return this.http.get<any>(url, httpOptions)
-      .pipe(
-        catchError(this.handleError) // then handle the error
-      );
-  }
 
 
-  groupControl(data): Observable<any> {
-    let token = localStorage.getItem('authToken');
-    httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/equipment_ctl_batch', data, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
+
 
 
 

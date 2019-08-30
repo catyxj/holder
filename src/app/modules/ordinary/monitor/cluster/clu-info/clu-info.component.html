@@ -7,8 +7,13 @@
       </h6>
     </div>
     <div class="li_head_r">
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" (click)="goBack()">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+
       <!--刷新-->
-      <button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
+      <button class="btn btn_purple-o btn_round bps ml-1" (click)="searchChange()">
         <i class="iconfont iconicon_Refresh"></i>
       </button>
 
@@ -149,8 +154,26 @@
           </a>
         </div>
 
-
       </div>
+
+    </div>
+
+    <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+
+    <div class="content_b">
+      <nz-pagination nzShowSizeChanger
+                     [nzTotal]="totalItems"
+                     [nzShowTotal]="totalTemplate"
+                     [(nzPageIndex)]="page"
+                     [(nzPageSize)]="pageSize"
+                     (nzPageIndexChange)="pageChange()"
+                     (nzPageSizeChange)="pageSizeChange()"
+                     [nzPageSizeOptions] = "pageSizeList">
+
+      </nz-pagination>
+      <div class="ant-pagination-options-quick-jumper"> 跳至
+        <input type="number" [(ngModel)]="pageNum"> 页 </div>
+      <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
     </div>
 
 

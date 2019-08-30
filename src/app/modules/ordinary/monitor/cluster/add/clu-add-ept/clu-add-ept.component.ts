@@ -3,6 +3,7 @@ import {UploadFile} from "ng-zorro-antd/upload";
 
 import Swal from 'sweetalert2';
 import {AdressService} from "../../../../../../shared/adress.service";
+import {ClusterService} from "../../../../../../shared/cluster.service";
 
 @Component({
   selector: 'app-clu-add-ept',
@@ -31,7 +32,8 @@ export class CluAddEptComponent implements OnInit {
   public cities = [];
   public regions = [];
 
-  constructor(private addressService: AdressService) { }
+  constructor(private addressService: AdressService,
+              private clusterService: ClusterService) { }
 
   ngOnInit() {
     let token = localStorage.getItem('authToken');
@@ -179,18 +181,43 @@ export class CluAddEptComponent implements OnInit {
     let post;
     if (this.img) {
       post = {
+        name: this.name,
+        location: this.locationId,
+        location_name: this.locationName,
+        address: this.address,
         img: this.img.response.id
       };
     } else {
       post = {
-
+        name: this.name,
+        location: this.locationId,
+        location_name: this.locationName,
+        address: this.address
       };
     }
 
+    this.clusterService.addCluster(post)
+      .subscribe( res => {
+        Swal(
+          '操作成功！',
+          '',
+          'success'
+        );
+        this.uid = res;
+        this.changeUid.emit(this.uid);
+        this.next.emit(1);
+      }, err => {
+        Swal(
+          '操作失败！',
+          err.message || err,
+          'error'
+        );
 
-    this.uid = 'aaaas';
-    this.changeUid.emit(this.uid);
+      });
+
+
     this.next.emit(1);
+
   }
 
 }

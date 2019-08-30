@@ -1,0 +1,20 @@
+
+<div class="content">
+
+  <div *ngIf="type==='1'&&status==='true'">
+    <app-notice-online></app-notice-online>
+  </div>
+
+  <div *ngIf="type==='1'&&status==='false'">
+    <app-notice-offline></app-notice-offline>
+  </div>
+
+  <div *ngIf="type==='2'">
+    <app-notice-malfunction></app-notice-malfunction>
+  </div>
+
+  <div *ngIf="type==='3'">
+    <app-notice-alarm></app-notice-alarm>
+  </div>
+
+</div>

@@ -18,7 +18,14 @@ export class CluInfoComponent implements OnInit {
   public data2 = [];
   public data3 = [];
   public search = 'name';
+  public page = 1;
+  public pageNum;
+  public pageSize = 50;
+  public totalItems;
   public value = '';
+  public status;
+  public pageSizeList = [15, 30, 50, 100];
+
 
   constructor(private route: ActivatedRoute,
               private modalService: NgbModal,
@@ -29,12 +36,22 @@ export class CluInfoComponent implements OnInit {
     this.getList();
   }
 
+  // 获取状态
+  getStatus() {
+    this.clusterService.getStatus(this.uid)
+      .subscribe(data => {
+        this.status = data;
+      }, err => {
+
+      });
+  }
+
   getList() {
     this.data1 = [];
     this.data2 = [];
     this.data3 = [];
 
-    this.dataLists = [
+    /*this.dataLists = [
       {
         uid: 'asdfa',
         online: false,
@@ -164,11 +181,12 @@ export class CluInfoComponent implements OnInit {
         this.data1.push(item);
       }
 
-    }
+    }*/
 
-    /*this.clusterService.getClusEquip(this.uid)
+    this.clusterService.getClusEquip(this.uid, this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.dataLists = data.data;
+        this.totalItems = data.count;
         for (let i = 0; i < this.dataLists.length; i++) {
           let item = this.dataLists[i];
           if (item.status === 0) {
@@ -181,13 +199,13 @@ export class CluInfoComponent implements OnInit {
         }
       }, err => {
 
-      });*/
+      });
 
   }
 
 
 
-  /*// 每页数量
+  // 每页数量
   pageSizeChange() {
     this.page = 1;
     if (typeof(this.pageSize) !== 'number') {
@@ -199,7 +217,6 @@ export class CluInfoComponent implements OnInit {
   // 页码变化
   pageChange(): void {
     this.getList();
-    this.isAllChecked = false;
   }
 
   // 页码跳转
@@ -210,7 +227,7 @@ export class CluInfoComponent implements OnInit {
     }
     this.page = this.pageNum;
     this.pageChange();
-  }*/
+  }
 
   // 搜索
   searchChange() {
@@ -239,5 +256,10 @@ export class CluInfoComponent implements OnInit {
       console.log(reason);
     });
   }
+
+  goBack() {
+    window.history.go(-1);
+  }
+
 
 }

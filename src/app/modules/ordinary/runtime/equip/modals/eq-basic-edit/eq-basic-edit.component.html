@@ -1,3 +1,75 @@
-<p>
-  eq-basic-edit works!
-</p>
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    <img src="assets/icons/setting.png" alt="" style="margin-right: 19px;">
+    设备常规信息设置
+  </h4>
+</div>
+
+<div class="modal-body m_form">
+  <div class="eq_item">
+    <div class="input_group">
+      <input type="text" class="input_label" [ngModel]="'设备名称'" disabled style="background-color: #ffffff;">
+      <input type="text" class="input_value" [(ngModel)]="name" placeholder="请输入">
+    </div>
+  </div>
+
+  <div class="eq_item" *ngFor="let data of infoList; let i = index;">
+    <div class="input_group">
+      <input type="text" class="input_label" [ngModel]="data.label">
+      <input type="text" class="input_value" [(ngModel)]="data.value" placeholder="请输入">
+    </div>
+
+    <a (click)="delData(i)">
+      <img src="assets/icons/minus.png" alt="">
+    </a>
+  </div>
+
+  <div class="eq_btn">
+    <button class="btn btn-block btn_purple" (click)="addData()">
+      添加其他信息
+    </button>
+  </div>
+
+  <div class="m_img">
+    <nz-upload
+      class="avatar-uploader"
+      nzAction="/api/dialogue/attach/upload"
+      nzListType="picture-card"
+      [nzHeaders]="headOption"
+      [nzShowUploadList]="false"
+      [nzBeforeUpload]="beforeUpload"
+      (nzChange)="handleChange($event)"
+    >
+      <ng-container *ngIf="!imgUrl">
+        <img src="assets/images/photo.png" style="width: 210px; height: 210px;" alt="">
+      </ng-container>
+      <img *ngIf="imgUrl" [src]="imgUrl" style="width: 210px; height: 210px;"/>
+    </nz-upload>
+
+    <div class="img_text">
+      请点击左侧图片，<br/>
+      上传要设置的设备展示图片，
+      支持jpg、png、gif格式，
+      文件大小不超过200k。
+      <br/><br/>
+      最佳效果像素为240*240
+    </div>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取 消</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 35px;" (click)="save()" [disabled]="!name">确 定</button>
+</div>
+
+
+
+
+
+
+
+
+
+

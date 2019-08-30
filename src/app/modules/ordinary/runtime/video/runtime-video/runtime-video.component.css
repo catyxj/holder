@@ -1,0 +1,39 @@
+
+
+
+
+.v_row{
+  display: flex;
+}
+.v_item{
+  /*width: 33%;*/
+  border: 1px solid #E4E5EC;
+  margin-bottom: 10px;
+}
+.v_head{
+  height: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+.v_head *{
+  font-size: 10px;
+}
+.v_head h6{
+  color: #464855;
+  margin-bottom: 0;
+}
+
+.v_video{
+  display: block;
+}
+
+.v_video img{
+  width: 100%;
+}
+
+
+
+

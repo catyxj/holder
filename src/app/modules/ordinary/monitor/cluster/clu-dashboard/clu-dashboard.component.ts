@@ -7,6 +7,7 @@ import {EqListAddComponent} from "../../list/modals/eq-list-add/eq-list-add.comp
 import {BoilerSocketService} from "../../../../../shared/boiler-socket.service";
 
 import Swal from 'sweetalert2';
+import {ClusterService} from "../../../../../shared/cluster.service";
 
 @Component({
   selector: 'app-clu-dashboard',
@@ -27,7 +28,7 @@ export class CluDashboardComponent implements OnInit, OnDestroy {
   public pageSizeList = [15, 30, 50, 100];
 
   constructor(private modalService: NgbModal,
-              private eptService: BoilerService,
+              private clusterService: ClusterService,
               private boilerWsService: BoilerSocketService,
               private route: ActivatedRoute) { }
 
@@ -46,13 +47,13 @@ export class CluDashboardComponent implements OnInit, OnDestroy {
   }
 
 
-  sendMessage(message) {
+  /*sendMessage(message) {
     this.boilerWsService.sendMessage(message);
-  }
+  }*/
 
   // 获取列表
   getList() {
-    this.eptService.getLists(this.page, this.pageSize, this.search, this.value)
+    this.clusterService.getLists(this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.dataLists = data.data;
         this.totalItems = data.count;
@@ -107,13 +108,14 @@ export class CluDashboardComponent implements OnInit, OnDestroy {
 
   // 页码变化
   pageChange() {
-    let message = {
+    /*let message = {
       page: this.page,
       rows: this.pageSize,
       search: this.search,
       value: this.value
     };
-    this.sendMessage(message);
+    this.sendMessage(message);*/
+    this.getList();
   }
 
   // 页码跳转
@@ -140,7 +142,7 @@ export class CluDashboardComponent implements OnInit, OnDestroy {
 
 
   // 新增模态框
-  addData() {
+  /*addData() {
     let that = this;
     const modalRef = this.modalService.open(EqListAddComponent, {windowClass: 'modal_md', centered: true});
     // modalRef.componentInstance.currentData = this.config;
@@ -152,7 +154,7 @@ export class CluDashboardComponent implements OnInit, OnDestroy {
     }, (reason) => {
       console.log(reason);
     });
-  }
+  }*/
 
   trackByUid(index, item) {
     return item.uid;

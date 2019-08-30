@@ -16,13 +16,12 @@ const httpOptions = {
 })
 export class AlarmService {
 
-  // private currentUrl = 'assets/server/boiler_alarm_list.json';
-  // private historyUrl = 'assets/server/boiler_alarm_history_list.json';
+  private currentUrl = 'assets/server/boiler_alarm_list.json';
+  private historyUrl = 'assets/server/boiler_alarm_history_list.json';
   // private detailUrl = 'assets/server/boiler_alarm_detail.json';
 
-  private currentUrl = '/alarm_list';
-  private historyUrl = '/alarm_history_list';
-  private detailUrl = '/equipment_alarm_detail';
+
+  private detailUrl = '/api/formal/ept/alarm/detail';
   private alarmNumUrl = '/alarm_new_count';
 
   private alarmSource = new Subject<any>();
@@ -35,8 +34,37 @@ export class AlarmService {
     this.alarmSource.next(message);
   }
 
+
+
+  // 获取告警列表-设备详情页
+  getAlarm(uid, page, pageSize, search, value): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+    return this.http.get(`/api/formal/ept/alarm/list?uid=${uid}&page=${page}&rows=${pageSize}&search=${search}&value=${value}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+  // 获取告警详情
+  getDetail(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `${this.detailUrl}/?uid=${uid}`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+
   // 获取未查看告警数
-  getAlarmNum() {
+  getAlarmNum(): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
     return this.http.get<any>(this.alarmNumUrl, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -61,14 +89,7 @@ export class AlarmService {
       );
   }
 
-  // 获取告警详情
-  getDetail(uid): Observable<any> {
-    const url = `${this.detailUrl}/?uid=${uid}`;
-    return this.http.get<any>(url, httpOptions)
-      .pipe(
-        catchError(this.handleError) // then handle the error
-      );
-  }
+
 
   getSubscribe(uid): Observable<any> {
     return this.http.get(`/alarm_subscribe?uid=${uid}`, httpOptions)

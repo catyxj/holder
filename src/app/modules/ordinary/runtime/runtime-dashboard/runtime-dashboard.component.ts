@@ -42,6 +42,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
     this.getContent();
   }
 
+  // 获取页面内容
   getContent() {
     let that = this;
     this.runtimeService.getContent(this.uid)
@@ -66,6 +67,8 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
       });
   }
 
+
+  // 获取数据
   getData() {
     /*this.chans = [
       {
@@ -104,7 +107,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
     let message = {
       uid: this.uid
     };
-    const wsUrl = `api/formal/ept/list/ws?token=${this.token}`;
+    const wsUrl = `api/formal/ept/instant/ws?token=${this.token}`;
     this.socket = this.boilerWsService.creatSocket(wsUrl, message)
       .subscribe(
         data => {
@@ -126,6 +129,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
 
   }
 
+  // 数据处理
   dataList() {
     let that = this;
 
@@ -209,10 +213,16 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
     }
   }*/
 
+  // 开关
   clickSwitch(btn) {
     if (!btn.loading ) {
       btn.loading = true;
       console.log(btn);
+      // cName: "交互按钮"
+      // cType: "开关型态"
+      // chanName: "温度1"
+      // chanNum: "3"
+      // chanType: "11"
       let n;
       switch (btn.switchValue) {
         case true:
@@ -222,15 +232,35 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
           n = 1; // 开启
           break;
       }
-      setTimeout(() => {
+      let post = {
+
+      }
+
+      this.runtimeService.equipControl(post)
+        .subscribe( res => {
+          btn.loading = false;
+          Swal(
+            '请求发送成功，请等待终端操作',
+            '',
+            'error'
+          );
+        }, err => {
+          btn.loading = false;
+          Swal(
+            '请求发送失败',
+            err.message || err,
+            'error'
+          );
+        })
+      /*setTimeout(() => {
         btn.loading = false;
         Swal(
-          '还没加路径呢，点了也没用',
+          '没加路径呢，点了也没用',
           '',
           'error'
         );
         // btn.switchValue = !btn.switchValue;
-      }, 2000);
+      }, 2000);*/
     }
   }
 

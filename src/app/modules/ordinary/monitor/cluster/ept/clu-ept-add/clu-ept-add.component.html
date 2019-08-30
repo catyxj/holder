@@ -68,7 +68,7 @@
           <th>终端编码</th>
           <th>地域位置</th>
           <th>使用单位</th>
-          <th>
+          <!--<th>
             <nz-dropdown [nzTrigger]="'click'">
               <a nz-dropdown>
                 连接状态
@@ -137,7 +137,7 @@
                 </li>
               </ul>
             </nz-dropdown>
-          </th>
+          </th>-->
           <!--<th>操作</th>-->
         </tr>
         </thead>
@@ -153,7 +153,7 @@
           <td> {{data.terminal_code}} </td>
           <td> {{data.location_name}} </td>
           <td> {{data.user_org}} </td>
-          <td>
+          <!--<td>
             <nz-tag [nzColor]="'#1E9FF2'"  *ngIf="data.online">已连接</nz-tag>
             <nz-tag [nzColor]="'#C0C4D2'" *ngIf="!data.online">未连接</nz-tag>
           </td>
@@ -186,7 +186,7 @@
             <span *ngIf="data.status === 1" style="color: #BE1414;">
               禁用
             </span>
-          </td>
+          </td>-->
           <!--<td>
             <a class="text_purple" [routerLink]="['/admin/ordinary/runtime', data.uid]">
               详情
@@ -197,7 +197,7 @@
       </nz-table>
     </div>
 
-    <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+    <!--<ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
 
     <div class="content_b">
       <nz-pagination nzShowSizeChanger
@@ -213,7 +213,7 @@
       <div class="ant-pagination-options-quick-jumper"> 跳至
         <input type="number" [(ngModel)]="pageNum"> 页 </div>
       <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
-    </div>
+    </div>-->
 
   </div>
 

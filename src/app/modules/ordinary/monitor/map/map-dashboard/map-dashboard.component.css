@@ -1,0 +1,120 @@
+
+
+.map_content{
+  position: relative;
+  height: 608px;
+  background-color: #505050;
+  margin-top: 5px;
+}
+.map_side{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 13px;
+  height: 467px;
+  background: linear-gradient(90deg,rgba(0,0,0,0.68) 0%,rgba(0,0,0,0.68) 100%);
+  transition: 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFFFFF;
+}
+.map_text{
+  width: 0;
+  overflow: hidden;
+  display: none;
+}
+.map_side:hover{
+  transition: 0.3s;
+  width:166px;
+  background:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0.68) 100%);
+}
+.map_side:hover .map_text{
+  width: 100%;
+  display: block;
+}
+.map_side:hover .map_side_btn{
+  display: none;
+}
+
+.map_text ul{
+  padding: 0 12px;
+}
+.map_text ul li{
+  min-width: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+.map_tt{
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+
+.round{
+  width:15px;
+  height:15px;
+  border-radius: 15px;
+  border:1px solid rgba(102,110,232,1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 7px;
+}
+.round_in{
+  width:5px;
+  height:5px;
+  border-radius: 14px;
+}
+.purple.round{
+  border:1px solid rgba(102,110,232,1);
+}
+.purple .round_in{
+  background:rgba(102,110,232,1);
+  box-shadow:0px 0px 4px 1px rgba(102,110,232,1);
+}
+.blue.round{
+  border:1px solid rgba(2,139,255,1);
+}
+.blue .round_in{
+  background:rgba(2,139,255,1);
+  box-shadow:0px 0px 4px 1px rgba(2,139,255,1);
+}
+.green.round{
+  border:1px solid rgba(40,208,148,1);
+}
+.green .round_in{
+  background:rgba(40,208,148,1);
+  box-shadow:0px 0px 4px 1px rgba(40,208,148,1);
+}
+
+.red.round{
+  border:1px solid #FF4961;
+}
+.red .round_in{
+  background:#FF4961;
+  box-shadow:0px 0px 4px 1px #FF4961;
+}
+
+.yellow.round{
+  border:1px solid #FFC06A;
+}
+.yellow .round_in{
+  background:#FFC06A;
+  box-shadow:0px 0px 4px 1px #FFC06A;
+}
+
+.grey.round{
+  border:1px solid #A7ABBE;
+}
+.grey .round_in{
+  background:#A7ABBE;
+  box-shadow:0px 0px 4px 1px #A7ABBE;
+}
+
+
+

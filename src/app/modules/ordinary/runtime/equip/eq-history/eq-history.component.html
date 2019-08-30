@@ -1,0 +1,107 @@
+<div class="content charts">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>
+        设备详情
+      </h6>
+    </div>
+    <div class="li_head_r">
+      <!--刷新-->
+      <!--<button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>-->
+
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" (click)="goBack()">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+
+      <!--<nz-range-picker [(ngModel)]="dateRange" nzShowTime nzFormat="yyyy-MM-dd HH:mm" [nzDisabledDate]="disabledDate"
+                       (ngModelChange)="changeDate()" class="ml-1">
+
+      </nz-range-picker>-->
+
+      <!--<div class="ml-1">
+        <nz-radio-group [(ngModel)]="rangeValue" [nzButtonStyle]="'solid'">
+          <label nz-radio-button nzValue="day" (click)="selectDate()">今天</label>
+          <label nz-radio-button nzValue="week" (click)="selectDate()">一周</label>
+          <label nz-radio-button nzValue="month" (click)="selectDate()">一月</label>
+        </nz-radio-group>
+      </div>-->
+
+      <!--<button class="btn btn_purple bpm ml-1" (click)="export()">
+        导出表格
+      </button>-->
+
+      <nz-dropdown [nzTrigger]="'click'">
+        <button nz-dropdown class="btn btn_purple bpm ml-1">
+          导出表格
+        </button>
+
+        <ul nz-menu>
+          <li nz-menu-item (click)="export('day')">
+            <a>今天</a>
+          </li>
+          <li nz-menu-item (click)="export('week')">
+            <a>一周</a>
+          </li>
+          <li nz-menu-item (click)="export('month')">
+            <a>一月</a>
+          </li>
+
+        </ul>
+      </nz-dropdown>
+
+    </div>
+  </div>
+
+  <div class="list_content">
+
+    <div class="content_t scroll_bar" style="width: 100%; max-height: 530px; overflow: auto; white-space: nowrap; ">
+      <nz-table
+        #dataTable
+        [nzFrontPagination]="false"
+        [nzShowPagination] = "false"
+        [nzLoading]="loading"
+        [nzData]="history"
+      >
+        <thead>
+        <tr>
+          <th> 采样时间 </th>
+          <th *ngFor="let data of params">
+            {{data.Name}} {{data.Unit}}
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of dataTable.data; let i = index;">
+          <td> {{ row.date | date:'yyyy-MM-dd HH:mm:ss' }} </td>
+          <td *ngFor="let data of params">
+            {{ row.data[data.id] || '-' }}
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+
+    <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+
+    <div class="content_b">
+      <nz-pagination nzShowSizeChanger
+                     [nzTotal]="totalItems"
+                     [nzShowTotal]="totalTemplate"
+                     [(nzPageIndex)]="page"
+                     [(nzPageSize)]="pageSize"
+                     (nzPageIndexChange)="pageChange()"
+                     (nzPageSizeChange)="pageSizeChange()"
+                     [nzPageSizeOptions] = "pageSizeList">
+
+      </nz-pagination>
+      <div class="ant-pagination-options-quick-jumper"> 跳至
+        <input type="number" [(ngModel)]="pageNum"> 页 </div>
+      <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
+    </div>
+
+  </div>
+
+</div>

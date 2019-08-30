@@ -1,3 +1,131 @@
-<p>
-  map-dashboard works!
-</p>
+
+
+<div class="content">
+  <div>
+    <div class="content_h">
+      <div class="search_box">
+        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="addOnAfterTemplate">
+          <input type="text" nz-input [(ngModel)]="value" (change)="searchChange()" maxlength="20"/>
+        </nz-input-group>
+        <ng-template #addOnBeforeTemplate>
+          <nz-select [(ngModel)]="search">
+            <nz-option [nzLabel]="'设备名称'" [nzValue]="'name'"></nz-option>
+            <!--<nz-option [nzLabel]="'终端编码'" [nzValue]="'terminal_code'"></nz-option>-->
+            <!--<nz-option [nzLabel]="'地域位置'" [nzValue]="'location_name'"></nz-option>-->
+            <!--<nz-option [nzLabel]="'使用单位'" [nzValue]="'user_org'"></nz-option>-->
+          </nz-select>
+        </ng-template>
+        <ng-template #addOnAfterTemplate>
+          <img src="assets/icons/icon_seach.png" alt="" class="search_icon" (click)="searchChange()">
+        </ng-template>
+
+      </div>
+      <div class="flex">
+        <button class="btn btn_purple bpm" (click)="resetData()">重 置</button>
+      </div>
+    </div>
+
+    <div class="map_content">
+      <div class="map">
+        <div id="container" style=" width: 100%; height: 608px;"></div>
+      </div>
+      <div class="map_side">
+        <div class="map_side_btn">
+          <i class="fa fa-angle-left"></i>
+        </div>
+        <div class="map_text">
+          <ul>
+            <li>
+              <div class="map_tt">
+                <div class="round purple">
+                  <div class="round_in"></div>
+                </div>
+                监控设备总数
+              </div>
+
+              <span class="text_purple">
+                {{statusData?.all_count}}
+              </span>
+            </li>
+
+            <li>
+              <div class="map_tt">
+                <div class="round blue">
+                  <div class="round_in"></div>
+                </div>
+                在线设备
+              </div>
+
+              <span class="text_blue">
+                {{statusData?.online_count}}
+              </span>
+            </li>
+
+            <li>
+              <div class="map_tt">
+                <div class="round green">
+                  <div class="round_in"></div>
+                </div>
+                运行设备
+              </div>
+
+              <span class="text_green">
+                {{statusData?.run_count}}
+              </span>
+            </li>
+
+            <li>
+              <div class="map_tt">
+                <div class="round red">
+                  <div class="round_in"></div>
+                </div>
+                告警设备
+              </div>
+
+              <span class="text_danger">
+                {{statusData?.alarm_count}}
+              </span>
+            </li>
+
+
+            <li>
+              <div class="map_tt">
+                <div class="round yellow">
+                  <div class="round_in"></div>
+                </div>
+                故障设备
+              </div>
+
+              <span class="text_warning">
+                {{statusData?.malfunction_count}}
+              </span>
+            </li>
+
+            <li>
+              <div class="map_tt">
+                <div class="round grey">
+                  <div class="round_in"></div>
+                </div>
+                离线设备
+              </div>
+
+              <span class="text_grey">
+                {{statusData?.no_run_count}}
+              </span>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+

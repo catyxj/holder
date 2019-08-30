@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 import {BoilerService} from "../../../../../../shared/boiler.service";
+import {ClusterService} from "../../../../../../shared/cluster.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-clu-add-clu',
@@ -13,6 +15,7 @@ export class CluAddCluComponent implements OnInit {
   @Input()
   uid;
 
+  public dataAll = [];
   public dataLists = [];
   public page = 1;
   public pageNum;
@@ -29,7 +32,7 @@ export class CluAddCluComponent implements OnInit {
   tplModal: NzModalRef;
 
   constructor(private nzModal: NzModalService,
-              private eptService: BoilerService) { }
+              private clusterService: ClusterService) { }
 
   ngOnInit() {
     this.getList();
@@ -38,10 +41,11 @@ export class CluAddCluComponent implements OnInit {
   // 获取列表
   getList() {
     this.loading = true;
-    this.eptService.getLists(this.page, this.pageSize, this.search, this.value)
+    this.clusterService.getEptAll(this.uid)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;
+        this.dataAll = this.dataLists.slice();
         this.totalItems = data.count;
       }, err => {
         this.loading = false;
@@ -49,7 +53,7 @@ export class CluAddCluComponent implements OnInit {
   }
 
 
-  // 每页数量
+  /*// 每页数量
   pageSizeChange() {
     this.page = 1;
     if (typeof(this.pageSize) !== 'number') {
@@ -72,13 +76,19 @@ export class CluAddCluComponent implements OnInit {
     }
     this.page = this.pageNum;
     this.pageChange();
-  }
+  }*/
 
   // 搜索
   searchChange() {
-    console.log(this.search);
+    /*console.log(this.search);
     this.page = 1;
-    this.pageChange();
+    this.pageChange();*/
+    console.log(this.value, this.search);
+    if (!this.value) {
+      this.dataLists = this.dataAll.slice();
+    } else {
+      this.dataLists = this.dataAll.filter(data => data[this.search].indexOf(this.value) !== -1 );
+    }
   }
   searchEnter(event) {
     if (event.keyCode === 13) {
@@ -141,8 +151,8 @@ export class CluAddCluComponent implements OnInit {
         let post = {
           data: checked
         };
-        /*that.loading = true;
-        that.eptService.deleteData(post)
+        that.loading = true;
+        that.clusterService.eptLink(post)
           .subscribe(val => {
             that.loading = false;
             Swal(
@@ -150,7 +160,8 @@ export class CluAddCluComponent implements OnInit {
               '',
               'success'
             );
-            this.pageChange();
+            this.next.emit(1);
+            // this.pageChange();
           }, err => {
             that.loading = false;
             Swal(
@@ -158,7 +169,7 @@ export class CluAddCluComponent implements OnInit {
               err,
               'error'
             );
-          });*/
+          });
       });
     } else {
       /*this.nzModal.info({
@@ -167,6 +178,7 @@ export class CluAddCluComponent implements OnInit {
         nzOnOk: () => console.log('Info OK')
       });*/
 
+      this.next.emit(1);
     }
   }
 
@@ -188,9 +200,9 @@ export class CluAddCluComponent implements OnInit {
     this.next.emit(-1);
   }
 
-  save() {
+  /*save() {
     this.batchLink();
     this.next.emit(1);
-  }
+  }*/
 
 }

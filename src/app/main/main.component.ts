@@ -32,7 +32,8 @@ export class MainComponent implements OnInit, OnDestroy {
               private router: Router,
               private location: PlatformLocation,
               private modalService: NzModalService,
-              changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+              changeDetectorRef: ChangeDetectorRef,
+              media: MediaMatcher) {
     this.subscription = this.userService.changeUserStatus$
       .subscribe( data => {
         this.getUser();

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
@@ -7,6 +7,9 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./m-record-info-formal.component.css']
 })
 export class MRecordInfoFormalComponent implements OnInit {
+  @Input()
+  currentData;
+
   public uid;
   public dataList = [
     {

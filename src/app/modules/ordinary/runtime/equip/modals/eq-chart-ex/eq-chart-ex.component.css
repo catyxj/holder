@@ -1,0 +1,12 @@
+
+.modal-header{
+  justify-content: space-between;
+  padding-left: 84px;
+}
+.modal-header h4{
+  font-size: 15px;
+  color: #464855;
+}
+.modal-header span{
+  color: #464855;
+}

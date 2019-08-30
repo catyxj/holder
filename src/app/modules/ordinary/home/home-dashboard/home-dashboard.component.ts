@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {BoilerService} from "../../../../shared/boiler.service";
 
 @Component({
   selector: 'app-home-dashboard',
@@ -8,32 +9,79 @@ import {Router} from "@angular/router";
 })
 export class HomeDashboardComponent implements OnInit {
   public roleId;
+  public monitor;
   public reminds = [];
   public notice = [];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private eptService: BoilerService) { }
 
   ngOnInit() {
     this.roleId = localStorage.getItem('roleId');
 
+    this.getMonitor();
     this.getRemind();
+    this.getNotice();
   }
 
+  // 获取监控数量
+  getMonitor() {
+    this.eptService.getMonitor()
+      .subscribe(data => {
+        this.monitor = data;
+      });
+  }
+
+  // 获取重要提醒
   getRemind() {
     this.reminds = [
       {
-        date: '2018-2-13 12:12:12',
-        name: 'XXXXX锅炉运行周报',
-        type: 1,
-        read: false
+        created_at: '2018-2-13 12:12:12',
+        info: 'XXXXX锅炉运行周报',
+        log_type: 1,
+        is_read: false,
+        log_status: true
       },
       {
-        date: '2018-2-13 12:12:12',
-        name: 'XXXXX锅炉运行周报',
-        type: 2,
-        read: true
+        created_at: '2018-2-13 12:12:12',
+        info: 'XXXXX锅炉运行周报',
+        log_type: 2,
+        is_read: true,
+        log_status: false
       }
     ];
+
+    this.eptService.getRemind()
+      .subscribe(data => {
+        this.reminds = data;
+      }, err => {
+
+      });
+  }
+
+  // 获取通知消息
+  getNotice() {
+    /*this.notice = [
+      {
+        created_at: '2018-2-13 12:12:12',
+        info: 'XXXXX锅炉运行周报',
+        log_type: 1, // 1设备上下线，2设备故障，3设备告警
+        is_read: false
+      },
+      {
+        created_at: '2018-2-13 12:12:12',
+        info: 'XXXXX锅炉运行周报',
+        log_type: 2,
+        is_read: true
+      }
+    ];*/
+
+    this.eptService.getNotice()
+      .subscribe(data => {
+        this.notice = data.data;
+      }, err => {
+
+      });
   }
 
 

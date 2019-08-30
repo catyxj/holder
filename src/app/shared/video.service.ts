@@ -28,6 +28,7 @@ export class VideoService {
   private dataExpandUrlF = '/api/formal/camera/capacity/get';
   private dataOperateUrlF = '/api/formal/camera/log/info';
   private dataOperateMoreUrlF = '/api/formal/camera/log/info/more';
+  private eptListUrl = '/api/formal/ept/camera/list'; // 设备详情页-视频列表
 
   // private token = 'authtoken';
   // private dataListUrl = 'assets/server/cluster_list.json';
@@ -74,7 +75,7 @@ export class VideoService {
       );
   }
 
-// 获取基本信息
+  // 获取扩展应用
   getExpand(uid): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
@@ -276,6 +277,17 @@ export class VideoService {
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
     return this.http.get(`/api/formal/camera/repair?uid=${data}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取详情页视频列表
+  getEptList(data): Observable<any>  {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get(`${this.eptListUrl}?uid=${data}`, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

@@ -1,3 +1,118 @@
-<p>
-  runtime-maintain works!
-</p>
+
+
+<div>
+  <div class="content_h">
+    <!--搜索-->
+    <div class="search_box">
+      <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="addOnAfterTemplate">
+        <input type="text" nz-input [(ngModel)]="value" (keyup)="searchEnter($event)" maxlength="15"/>
+      </nz-input-group>
+      <ng-template #addOnBeforeTemplate>
+        <nz-select [(ngModel)]="search">
+          <nz-option [nzLabel]="'维保编号'" [nzValue]="'id'"></nz-option>
+          <nz-option [nzLabel]="'上传账号'" [nzValue]="'username'"></nz-option>
+          <nz-option [nzLabel]="'上传人员'" [nzValue]="'account_name'"></nz-option>
+        </nz-select>
+      </ng-template>
+      <ng-template #addOnAfterTemplate>
+        <img src="assets/icons/icon_seach.png" alt="" class="search_icon" (click)="searchChange()">
+      </ng-template>
+
+    </div>
+  </div>
+
+  <!--表格-->
+  <div class="content_t">
+    <nz-table
+      #dataTable
+      [nzFrontPagination]="false"
+      [nzShowPagination] = "false"
+      [nzLoading]="loading"
+      [nzData]="dataLists"
+    >
+      <thead>
+      <tr>
+        <th>维保编号</th>
+        <th>产品设备</th>
+        <th>产品终端编码</th>
+        <th>
+          <!--设备状态-->
+          <nz-dropdown [nzTrigger]="'click'">
+            <a nz-dropdown>
+              设备状态
+              <i nz-icon type="down" style="color: #898EA3;"></i>
+            </a>
+            <ul nz-menu>
+              <li nz-menu-item (click)="searchRoleId()">
+                <a>全部</a>
+              </li>
+              <li nz-menu-item (click)="searchRoleId('10')">
+                <a>正常</a>
+              </li>
+              <li nz-menu-item (click)="searchRoleId('11')">
+                <a>异常</a>
+              </li>
+            </ul>
+          </nz-dropdown>
+        </th>
+        <th>上传账号</th>
+        <th>上传人员</th>
+        <th>上传时间</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of dataTable.data">
+
+        <td> {{data.number}} </td>
+        <td> {{data.name}} </td>
+        <td> {{data.terminal_code}} </td>
+        <td>
+          <div class="maintain_status" *ngIf="data.status">
+            <div class="stat_label stat_warning"></div>
+            正常
+          </div>
+          <div class="maintain_status" *ngIf="!data.status">
+            <div class="stat_label stat_green"></div>
+            异常
+          </div>
+
+        </td>
+        <td> 11 </td>
+        <td> 11 </td>
+        <td> {{data.created_at | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
+        <td class="text_purple">
+          <a class="" (click)="viewData()">
+            详情
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+
+
+  <!--分页-->
+  <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+
+  <div class="content_b">
+    <nz-pagination nzShowSizeChanger
+                   [nzTotal]="totalItems"
+                   [nzShowTotal]="totalTemplate"
+                   [(nzPageIndex)]="page"
+                   [(nzPageSize)]="pageSize"
+                   (nzPageIndexChange)="pageChange()"
+                   (nzPageSizeChange)="pageSizeChange()"
+                   [nzPageSizeOptions] = "pageSizeList">
+
+    </nz-pagination>
+    <div class="ant-pagination-options-quick-jumper"> 跳至
+      <input type="number" [(ngModel)]="pageNum"> 页 </div>
+    <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
+  </div>
+</div>
+
+
+
+
+

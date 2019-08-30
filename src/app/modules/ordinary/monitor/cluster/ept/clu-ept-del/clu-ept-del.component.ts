@@ -41,7 +41,7 @@ export class CluEptDelComponent implements OnInit {
   // 获取列表
   getList() {
     this.loading = true;
-    this.clusterService.getLists(this.page, this.pageSize, this.search, this.value)
+    this.clusterService.getClusEquip(this.uid, this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;
@@ -127,13 +127,13 @@ export class CluEptDelComponent implements OnInit {
       }
     }
     if (checked.length > 0) {
-      title = '确认要关联此设备吗？';
+      title = '确认要取消关联此设备吗？';
       this.creatModal(title, subtitle, () => {
         let post = {
           data: checked
         };
-        /*that.loading = true;
-        that.eptService.deleteData(post)
+        that.loading = true;
+        that.clusterService.eptLink(post)
           .subscribe(val => {
             that.loading = false;
             Swal(
@@ -149,7 +149,7 @@ export class CluEptDelComponent implements OnInit {
               err,
               'error'
             );
-          });*/
+          });
       });
     } else {
       this.nzModal.info({

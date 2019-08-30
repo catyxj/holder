@@ -13,7 +13,7 @@
             <img src="assets/icons/monitor_1.png" alt="">
             <h6>监控设备总数</h6>
             <div class="hc_f1_value" style="color: #666EE8;">
-              1222
+              {{monitor?.all_count}}
             </div>
           </div>
           <div class="h_divide"></div>
@@ -22,7 +22,7 @@
             <img src="assets/icons/monitor_2.png" alt="">
             <h6>在线设备</h6>
             <div class="hc_f1_value" style="color: #1E9FF2;">
-              1234
+              {{monitor?.online_count}}
             </div>
           </div>
           <div class="h_divide"></div>
@@ -31,7 +31,7 @@
             <img src="assets/icons/monitor_3.png" alt="">
             <h6>运行设备</h6>
             <div class="hc_f1_value" style="color: #28D094;">
-              160
+              {{monitor?.run_count}}
             </div>
           </div>
           <div class="h_divide"></div>
@@ -40,7 +40,7 @@
             <img src="assets/icons/monitor_4.png" alt="">
             <h6>故障设备</h6>
             <div class="hc_f1_value" style="color: #FFC06A;">
-              1222
+              {{monitor?.malfunction_count}}
             </div>
           </div>
           <div class="h_divide"></div>
@@ -49,7 +49,7 @@
             <img src="assets/icons/monitor_5.png" alt="">
             <h6>警告设备</h6>
             <div class="hc_f1_value" style="color: #FF4961;">
-              1222
+              {{monitor?.alarm_count}}
             </div>
           </div>
           <div class="h_divide"></div>
@@ -58,7 +58,7 @@
             <img src="assets/icons/monitor_6.png" alt="">
             <h6>离线设备</h6>
             <div class="hc_f1_value" style="color: #A7ABBE;">
-              1222
+              {{monitor?.no_run_count}}
             </div>
           </div>
         </div>
@@ -108,22 +108,23 @@
         </div>
         <div class="hc_content2">
           <ul>
-            <li class="h_item" *ngFor="let item of reminds" [routerLink]="['/admin/ordinary/home/remind-info', item.type]">
+            <li class="h_item" *ngFor="let item of reminds" [routerLink]="['/admin/ordinary/home/remind-info', item.log_type]">
               <a>
                 <div class="h_date">
-                  <span class="h_circle" [class.active]="!item.read"></span>
-                  {{item.date | date: 'yyyy-MM-dd HH:mm:ss'}}
+                  <span class="h_circle" [class.active]="!item.is_read"></span>
+                  {{item.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}
                 </div>
                 <div>
-                  {{item.name}}
+                  {{item.info}}
                 </div>
               </a>
             </li>
 
           </ul>
           <div class="hc_more" >
-            <a routerLink="/admin/ordinary/home/remind">
-              <i nz-icon nzType="arrow-right" nzTheme="outline" class="text_purple" title="查看更多"></i>
+            <a [routerLink]="['/admin/ordinary/home/remind']">
+              <img src="assets/icons/direct_right.png" alt="" title="查看更多">
+              <!--<i nz-icon nzType="arrow-right" nzTheme="outline" class="text_purple" title="查看更多"></i>-->
             </a>
           </div>
         </div>
@@ -135,23 +136,24 @@
         </div>
         <div class="hc_content2">
           <ul>
-            <li class="h_item" *ngFor="let item of reminds">
+            <li class="h_item" *ngFor="let item of reminds" [routerLink]="['/admin/ordinary/home/notice-info', item.log_type, item.log_status]">
               <a>
                 <div class="h_date">
-                  <span class="h_circle" [class.active]="!item.read"></span>
-                  {{item.date | date: 'yyyy-MM-dd HH:mm:ss'}}
+                  <span class="h_circle" [class.active]="!item.is_read"></span>
+                  {{item.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}
                 </div>
                 <div>
-                  {{item.name}}
+                  {{item.info}}
                 </div>
               </a>
             </li>
           </ul>
           <div class="hc_more">
-            <a>
-              <i nz-icon nzType="arrow-right" nzTheme="outline"
+            <a [routerLink]="['/admin/ordinary/home/notice']">
+              <img src="assets/icons/direct_right.png" alt="" title="查看更多">
+              <!--<i nz-icon nzType="arrow-right" nzTheme="outline"
                  class="text_purple" title="查看更多">
-              </i>
+              </i>-->
             </a>
           </div>
         </div>

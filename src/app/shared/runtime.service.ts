@@ -40,41 +40,45 @@ export class RuntimeService {
   }
 
 
-  // 获取设备型态信息
-  getEquipTemp(uid): Observable<any>  {
-    return this.http.get(`/equipment_template_get?uid=${uid}`)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
   //  设备控制开关
   equipControl(data): Observable<any> {
-    return this.http.post('/equipment_ctl', data, httpOptions)
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/ept/switch/console', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  // 获取运行参数
-  getRuntimeList(data): Observable<any> {
-    return this.http.post(`/equipment_runtime_list`, data, httpOptions)
+  // 获取运行参数--图表页
+  getRuntimeList(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get(`/api/formal/ept/runtime/channel/list?uid=${uid}`, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   // 获取图表数据
-  getRuntimeData(uid): Observable<any> {
-    return this.http.get(`/equipment_runtime_data_list?uid=${uid}`)
+  getRuntimeData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post(`/api/formal/ept/runtime/list`, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   // 历史数据
-  getHistory(data): Observable<any> {
-    return this.http.post('/equipment_runtime_history', data, httpOptions)
+  getHistory(uid, page, pageSize): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get(`/api/formal/ept/runtime/history?uid=${uid}&page=${page}&rows=${pageSize}`, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -82,12 +86,62 @@ export class RuntimeService {
 
 
   // 导出历史数据
-  getHistoryExport(data): Observable<any> {
-    return this.http.post('/equipment_runtime_history_export', data, httpOptions)
+  getHistoryExport(uid, type): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get(`/api/formal/ept/runtime/history/export?uid=${uid}&type=${type}`, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
+
+
+  // 获取组件列表
+  getCompLists(uid, page, pageSize, search?, value?): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get(`/api/formal/ept/component/list?uid=${uid}&page=${page}&pageSize=${pageSize}&search=${search}&value=${value}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+  // 新增组件
+  addCompData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/ept/component/create', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 设置组件
+  editCompData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/ept/component/update', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 删除组件
+  deleteCompData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/ept/component/delete', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
 
 
   private handleError(error: HttpErrorResponse) {

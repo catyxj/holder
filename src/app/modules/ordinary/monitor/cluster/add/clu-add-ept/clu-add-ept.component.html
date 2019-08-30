@@ -89,7 +89,7 @@
 <div class="t_add_b">
   <div class="btn-group">
     <button class="btn btn_purple bpm" routerLink="/admin/ordinary/cluster/dashboard">返回</button>
-    <button class="btn btn_purple bpm" (click)="save()" style="margin-left: 1px;">
+    <button class="btn btn_purple bpm" (click)="save()" style="margin-left: 1px;" [disabled]="tName.invalid">
       下一步
     </button>
   </div>

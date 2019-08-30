@@ -451,6 +451,9 @@ app-header .dropdown-toggle::after{
 .modal_m .modal-dialog{
   max-width: 600px;
 }
+.modal_m2 .modal-dialog{
+  max-width: 664px;
+}
 .modal_l .modal-dialog{
   max-width: 790px;
 }
@@ -549,6 +552,24 @@ app-header .dropdown-toggle::after{
 .cal .ant-select-selection{
   border: none;
 }
+
+
+/*datepicker*/
+.charts .ant-input {
+  height: 26px;
+  padding: 1px 5px;
+}
+.charts .anticon {
+  vertical-align: .125em;
+}
+
+.cycle .ant-calendar-picker{
+  width: 100%;
+}
+.cycle .anticon {
+  vertical-align: .125em;
+}
+
 
 
 

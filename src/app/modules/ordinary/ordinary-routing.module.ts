@@ -30,6 +30,9 @@ import {RuntimeCycleComponent} from "./runtime/cycle/runtime-cycle/runtime-cycle
 import {RuntimeVideoComponent} from "./runtime/video/runtime-video/runtime-video.component";
 import {EquipInfoOrComponent} from "./runtime/equip/equip-info-or/equip-info-or.component";
 import {EqChartsComponent} from "./runtime/equip/eq-charts/eq-charts.component";
+import {EqHistoryComponent} from "./runtime/equip/eq-history/eq-history.component";
+import {NoticeListComponent} from "./home/notice/notice-list/notice-list.component";
+import {NoticeReportMainComponent} from "./home/notice/notice-report-main/notice-report-main.component";
 
 export const OrdinaryRoutingModule = [
   {
@@ -53,6 +56,14 @@ export const OrdinaryRoutingModule = [
           {
             path: 'remind-info/:type',
             component: RemindReportMainComponent
+          },
+          {
+            path: 'notice',
+            component: NoticeListComponent
+          },
+          {
+            path: 'notice-info/:type/:status',
+            component: NoticeReportMainComponent
           }
         ]
       },
@@ -158,6 +169,10 @@ export const OrdinaryRoutingModule = [
       {
         path: 'equip-charts/:uid',
         component: EqChartsComponent,
+      },
+      {
+        path: 'equip-history/:uid',
+        component: EqHistoryComponent,
       },
       {
         path: 'account',

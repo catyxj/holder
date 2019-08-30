@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BoilerService} from "../../../../../../shared/boiler.service";
+import {ClusterService} from "../../../../../../shared/cluster.service";
 
 @Component({
   selector: 'app-clu-add-finish',
@@ -27,7 +28,7 @@ export class CluAddFinishComponent implements OnInit {
   public pageSizeList = [15, 30, 50, 100];
 
 
-  constructor(private eptService: BoilerService) { }
+  constructor(private clusterService: ClusterService) { }
 
   ngOnInit() {
     this.getList();
@@ -36,7 +37,7 @@ export class CluAddFinishComponent implements OnInit {
   // 获取列表
   getList() {
     this.loading = true;
-    this.eptService.getLists(this.page, this.pageSize, this.search, this.value)
+    this.clusterService.getClusEquip(this.uid, this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;

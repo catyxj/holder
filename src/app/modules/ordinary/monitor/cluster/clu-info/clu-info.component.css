@@ -18,6 +18,7 @@ a{
   border-radius:4px;
   border:1px solid #E4E5EC;
   margin-top: 12px;
+  overflow: hidden;
 }
 .d_head{
   height:40px;

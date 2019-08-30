@@ -1,0 +1,49 @@
+
+
+.eq_item{
+  padding: 0 80px;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+.input_group{
+  border: 1px solid #E4E5EC;
+  width: 370px;
+}
+
+
+.input_group input{
+  border: none;
+  padding: 6px 16px;
+  font-size: 12px;
+}
+.input_label{
+  width: 30%;
+  color: #464855;
+
+}
+.input_value{
+  width:70%;
+  text-align: right;
+  color: #666EE8;
+}
+
+.eq_btn{
+  margin-left: 80px;
+  width: 370px;
+}
+
+.m_img{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 20px 80px 10px 80px;
+}
+.img_text{
+  width: 156px;
+  font-size: 12px;
+  color: #464855;
+}
+
+
+

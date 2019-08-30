@@ -1,3 +1,138 @@
-<p>
-  runtime-cycle works!
-</p>
+
+<div>
+  <div class="content_h" style="align-items: flex-end;">
+    <div class="search_box">
+      <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="addOnAfterTemplate">
+        <input type="text" nz-input [(ngModel)]="value" (keyup)="searchEnter($event)" maxlength="20"/>
+      </nz-input-group>
+      <ng-template #addOnBeforeTemplate>
+        <nz-select [(ngModel)]="search">
+          <nz-option [nzLabel]="'组件名称'" [nzValue]="'name'"></nz-option>
+          <nz-option [nzLabel]="'组件状态'" [nzValue]="'status'"></nz-option>
+        </nz-select>
+      </ng-template>
+      <ng-template #addOnAfterTemplate>
+        <img src="assets/icons/icon_seach.png" alt="" class="search_icon" (click)="searchChange()">
+      </ng-template>
+
+    </div>
+    <div class="flex" style="">
+      <button class="btn btn_purple bpm" (click)="addData()">
+        新增组件
+      </button>
+
+      <button class="btn btn_purple bpm ml-1" (click)="batchDelete()">
+        批量删除
+      </button>
+
+    </div>
+  </div>
+  <div class="content_t">
+    <nz-table
+      #dataTable
+      [nzFrontPagination]="false"
+      [nzShowPagination] = "false"
+      [nzLoading]="loading"
+      [nzData]="dataLists"
+    >
+      <thead>
+      <tr>
+        <th
+          nzShowCheckbox
+          [(nzChecked)]="isAllChecked"
+          (nzCheckedChange)="checkAll($event)"
+        >
+        </th>
+        <th>组件名称</th>
+        <th>组件状态</th>
+        <th>设置日期</th>
+        <th>提醒时长</th>
+        <th>
+          组件周期
+        </th>
+        <th>
+          提醒主题
+        </th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of dataTable.data">
+        <td
+          nzShowCheckbox
+          [(nzChecked)]="data.checked"
+          [nzDisabled]="data.disabled"
+          (nzCheckedChange)="refreshStatus()"
+        ></td>
+        <td> {{data.name}} </td>
+        <td>
+          <div class="maintain_status" *ngIf="data.status">
+            <div class="stat_label stat_warning"></div>
+            正常
+          </div>
+          <div class="maintain_status" *ngIf="!data.status">
+            <div class="stat_label stat_green"></div>
+            异常
+          </div>
+        </td>
+        <td> {{data.location_name}} </td>
+        <td> {{data.user_org}} </td>
+        <td style="display: flex; align-items:center;">
+          <span>
+            {{ data.status*100 | number:'1.0-2' }} %
+          </span>
+
+          <div class="status_bar" [ngClass]="{'green':data.status>0.1, 'yellow':data.status<=0.1 && data.status>0, 'grey':data.status<=0}">
+            <div class="status_bar_in" [ngStyle]="{'background-color': data.status>0.1 ? '#28D094' : '#FFC06A', 'width': data.status*100+'%' }"></div>
+          </div>
+          <span *ngIf="data.status>0.1">
+            正常
+          </span>
+          <span style="color: #FFC06A;" *ngIf="data.status<=0.1 && data.status>0">
+            即将过期
+          </span>
+          <span style="color: #BE1414;" *ngIf="data.status<=0">
+            已经过期
+          </span>
+          <a style="color: #666EE8; text-decoration: underline;" *ngIf="data.status<=0.1">
+            联系厂家
+          </a>
+        </td>
+        <td>
+          A组件质保到期
+        </td>
+        <td>
+          <a class="" (click)="editData(data)" title="设置">
+            <!--设置-->
+            <i class="iconfont iconshezhi1 text_purple"></i>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+
+  <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+
+  <div class="content_b">
+    <nz-pagination nzShowSizeChanger
+                   [nzTotal]="totalItems"
+                   [nzShowTotal]="totalTemplate"
+                   [(nzPageIndex)]="page"
+                   [(nzPageSize)]="pageSize"
+                   (nzPageIndexChange)="pageChange()"
+                   (nzPageSizeChange)="pageSizeChange()"
+                   [nzPageSizeOptions] = "pageSizeList">
+
+    </nz-pagination>
+    <div class="ant-pagination-options-quick-jumper"> 跳至
+      <input type="number" [(ngModel)]="pageNum"> 页 </div>
+    <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
+  </div>
+</div>
+
+
+
+
+
+

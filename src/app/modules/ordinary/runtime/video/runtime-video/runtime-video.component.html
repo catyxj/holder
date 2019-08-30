@@ -1,3 +1,28 @@
-<p>
-  runtime-video works!
-</p>
+
+
+<div>
+  <div nz-row nzGutter="9">
+    <div nz-col nzSpan="8" class="gutter-row" *ngFor="let data of dataList">
+      <div class="v_item ">
+        <div class="v_head">
+          <h6>
+            {{data.name}}
+          </h6>
+          <div>
+            <img src="assets/icons/control.png" alt="" *ngIf="data.console" title="云控制台" style="margin-right: 5px;">
+            <span>
+            {{data.serial_number}}
+          </span>
+          </div>
+        </div>
+        <a class="v_video" [routerLink]="['/video-live', data.uid]" target="_blank">
+          <div>
+            <img src="assets/images/video.jpg" alt="">
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+</div>

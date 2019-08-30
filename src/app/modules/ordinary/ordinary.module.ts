@@ -1,6 +1,6 @@
 
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {LayoutModule} from '@angular/cdk/layout';
 import {RouterModule} from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -50,6 +50,20 @@ import { RuntimeVideoComponent } from './runtime/video/runtime-video/runtime-vid
 import { EqBasicEditComponent } from './runtime/equip/modals/eq-basic-edit/eq-basic-edit.component';
 import { EqAddressEditComponent } from './runtime/equip/modals/eq-address-edit/eq-address-edit.component';
 import { EqChartsComponent } from './runtime/equip/eq-charts/eq-charts.component';
+import { EqChartExComponent } from './runtime/equip/modals/eq-chart-ex/eq-chart-ex.component';
+import {NgxEchartsModule} from "ngx-echarts";
+import { EqHistoryComponent } from './runtime/equip/eq-history/eq-history.component';
+import { AlarmDetailComponent } from './runtime/alarm/modals/alarm-detail/alarm-detail.component';
+import { RuntimeMViewComponent } from './runtime/maintain/modals/runtime-m-view/runtime-m-view.component';
+import { CycleAddComponent } from './runtime/cycle/modals/cycle-add/cycle-add.component';
+import { CycleEditComponent } from './runtime/cycle/modals/cycle-edit/cycle-edit.component';
+import { NoticeListComponent } from './home/notice/notice-list/notice-list.component';
+import { NoticeReportMainComponent } from './home/notice/notice-report-main/notice-report-main.component';
+import { NoticeAlarmComponent } from './home/notice/report/notice-alarm/notice-alarm.component';
+import { NoticeMalfunctionComponent } from './home/notice/report/notice-malfunction/notice-malfunction.component';
+import { NoticeOnlineComponent } from './home/notice/report/notice-online/notice-online.component';
+import { NoticeOfflineComponent } from './home/notice/report/notice-offline/notice-offline.component';
+
 
 
 @NgModule({
@@ -60,6 +74,7 @@ import { EqChartsComponent } from './runtime/equip/eq-charts/eq-charts.component
     RouterModule.forChild( OrdinaryRoutingModule ),
     NgbModule,
     NgZorroAntdModule,
+    NgxEchartsModule,
   ],
   declarations: [
     MainOrdComponent,
@@ -104,6 +119,18 @@ import { EqChartsComponent } from './runtime/equip/eq-charts/eq-charts.component
     EqBasicEditComponent,
     EqAddressEditComponent,
     EqChartsComponent,
+    EqChartExComponent,
+    EqHistoryComponent,
+    AlarmDetailComponent,
+    RuntimeMViewComponent,
+    CycleAddComponent,
+    CycleEditComponent,
+    NoticeListComponent,
+    NoticeReportMainComponent,
+    NoticeAlarmComponent,
+    NoticeMalfunctionComponent,
+    NoticeOnlineComponent,
+    NoticeOfflineComponent,
 
   ],
   exports: [
@@ -114,6 +141,14 @@ import { EqChartsComponent } from './runtime/equip/eq-charts/eq-charts.component
     CluBasicEditComponent,
     EqBasicEditComponent,
     EqAddressEditComponent,
+    EqChartExComponent,
+    AlarmDetailComponent,
+    RuntimeMViewComponent,
+    CycleAddComponent,
+    CycleEditComponent
+  ],
+  providers: [
+    DatePipe
   ]
 })
 export class OrdinaryModule { }

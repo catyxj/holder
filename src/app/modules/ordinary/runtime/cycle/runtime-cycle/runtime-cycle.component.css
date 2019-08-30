@@ -1,0 +1,51 @@
+
+
+
+
+.stat_label{
+  width:20px;
+  height:16px;
+  border-radius:2px;
+  margin-right: 12px;
+}
+.stat_warning{
+  background-color:#FFC06A;
+}
+.stat_green{
+  background-color: #28D094;
+}
+
+.maintain_status{
+  display: flex;
+  align-items: center;
+}
+
+
+
+
+
+.status_bar{
+  width: 100px;
+  height: 12px;
+  background-color: #efefef;
+  border-radius: 2px;
+  margin: 0 10px;
+}
+.status_bar_in{
+  height: 12px;
+  border-radius: 2px;
+  margin-top: -1px;
+}
+.status_bar.green{
+  background:rgba(40,208,148,0.1);
+  border:1px solid rgba(40,208,148,0.2);
+}
+.status_bar.yellow{
+  background:rgba(255,192,106,0.1);
+  border:1px solid rgba(255,192,106,0.2)
+}
+.status_bar.grey{
+  background:rgba(228,229,236,0.5);
+  border:1px solid rgba(228,229,236,1);
+}
+

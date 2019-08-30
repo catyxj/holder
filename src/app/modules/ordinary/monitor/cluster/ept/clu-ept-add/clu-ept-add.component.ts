@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class CluEptAddComponent implements OnInit {
   public uid;
+  public dataAll = [];
   public dataLists = [];
   public page = 1;
   public pageNum;
@@ -43,6 +44,7 @@ export class CluEptAddComponent implements OnInit {
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;
+        this.dataAll = this.dataLists.slice();
         this.totalItems = data.count;
       }, err => {
         this.loading = false;
@@ -77,9 +79,14 @@ export class CluEptAddComponent implements OnInit {
 
   // 搜索
   searchChange() {
-    console.log(this.search);
+    /*console.log(this.search);
     this.page = 1;
-    this.pageChange();
+    this.pageChange();*/
+    if (!this.value) {
+      this.dataLists = this.dataAll.slice();
+    } else {
+      this.dataLists = this.dataAll.filter(data => data[this.search].indexOf(this.value) !== -1 );
+    }
   }
   searchEnter(event) {
     if (event.keyCode === 13) {
@@ -130,8 +137,8 @@ export class CluEptAddComponent implements OnInit {
         let post = {
           data: checked
         };
-        /*that.loading = true;
-        that.eptService.deleteData(post)
+        that.loading = true;
+        that.clusterService.eptLink(post)
           .subscribe(val => {
             that.loading = false;
             Swal(
@@ -139,7 +146,7 @@ export class CluEptAddComponent implements OnInit {
               '',
               'success'
             );
-            this.pageChange();
+            this.getList();
           }, err => {
             that.loading = false;
             Swal(
@@ -147,7 +154,7 @@ export class CluEptAddComponent implements OnInit {
               err,
               'error'
             );
-          });*/
+          });
       });
     } else {
       this.nzModal.info({

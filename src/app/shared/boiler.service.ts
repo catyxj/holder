@@ -18,115 +18,77 @@ const httpOptions = {
 })
 export class BoilerService {
 
-  private eptUrl = 'assets/server/boiler_list.json';
-  private templatesUrl = 'assets/server/boiler_template_list.json';
-  private boilerUrl = 'assets/server/boiler.json';
-  private templateListUrl = 'assets/server/boiler_template_list.json';
-  private boilerList = 'assets/server/boiler_list.json';
+  // private eptUrl = 'assets/server/boiler_list.json';
+  // private templatesUrl = 'assets/server/boiler_template_list.json';
+  // private eptInfo = 'assets/server/boiler.json';
+  // private templateListUrl = 'assets/server/boiler_template_list.json';
 
-  // private eptUrl = '/api/formal/equipment/list';
-  // private templatesUrl = '/equipment_template';
-  // private boilerUrl = '/equipment_detail';
-  // private templateListUrl = '/equipment_template_list'; // 设备型态列表
-  // private boilerList = '/equipment_show_list'; // 列表模式
+  private eptUrl = '/api/formal/equipment/list'; // 列表模式
+  private eptInfo = '/api/formal/ept/info/detail';  // 设备详情-设备信息
+  private eptTermInfo = '/api/formal/ept/terminal/info/detail';  // 设备详情-终端信息
+
+
+
 
   constructor(private http: HttpClient, private router: Router) { }
 
+
+  // 获取列表模式列表
   getLists(n: number, pageSize: number, search?: string, value?: string, online?: string, run?: string, status?: string  ): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.eptUrl}?page=${n}&pageSize=${pageSize}&search=${search}&value=${value}&online=${online}&run_status=${run}&status=${status}`;
+    const url = `${this.eptUrl}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&online=${online}&run_status=${run}&status=${status}`;
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
       );
   }
 
-  getBoilerLists(n: number, pageSize: number, search?: string, online?: number ): Observable<any> {
-    // TODO: send the message _after_ fetching the heroes
-    // const url = `${this.boilerList}/?pageNum=${n}&pageSize=${pageSize}&search=${search}&status=${online}`;
-    let data = {
-      page: n,
-      pageSize: pageSize,
-      search: search,
-      status: online
-    };
-    return this.http.post<any>(this.boilerList, data, httpOptions)
-      .pipe(
-        catchError(this.handleError) // then handle the error
-      );
-  }
 
-  getBoilerAll(): Observable<any> {
-    const url = '/equipment_list_all';
-    return this.http.get<any>(url)
+  // 获取详情页设备信息
+  getInfo(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `${this.eptInfo}?uid=${uid}`;
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
       );
   }
 
 
-  // 添加
-  addBoiler(boiler): Observable<any> {
+  // 获取详情页终端信息
+  getTermInfo(uid): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/equipment_add', boiler, httpOptions)
+    const url = `${this.eptTermInfo}?uid=${uid}`;
+    return this.http.get<any>(url, httpOptions)
       .pipe(
-        catchError(this.handleError)
+        catchError(this.handleError) // then handle the error
       );
   }
 
 
-  // 删除
-  deleteBoiler(uid): Observable<any> {
+  // 删除设备
+  deleteData(data): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/equipment_delete/', uid, httpOptions)
+    return this.http.post('/api/formal/ept/batch/delete', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  // 添加集群
-  addCluster(boiler): Observable<any> {
+  // 禁用/激活设备
+  disableData(data): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/equipment_batch_cluster', boiler, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  // 获取炉型列表-下拉
-  getTemplates(): Observable<any> {
-    return this.http.get(this.templatesUrl)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-
-  getBoiler(uid: string): Observable<any> {
-    const url = `${this.boilerUrl}/?uid=${uid}`;
-    return this.http.get<any>(url);
-    // return of(BOILERS.find(boiler => boiler.id === id));
-  }
-
-  // 绑定终端
-  terBind(code: any): Observable<any> {
-    return this.http.post('/equipment_bind/', code, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  // 终端解绑
-  unBind(data: any): Observable<any> {
-    return this.http.post('/equipment_unbind/', data, httpOptions)
+    return this.http.post('/api/formal/ept/batch/update/status', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -134,8 +96,11 @@ export class BoilerService {
 
 
   // 更新地址信息
-  updateAddress(boiler: any): Observable<any> {
-    return this.http.post('/equipment_update/?scope=location', boiler, httpOptions)
+  updateAddress(data: any): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/ept/address/update', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -143,54 +108,109 @@ export class BoilerService {
 
 
   // 更新基本信息
-  updateBoiler(address: any): Observable<any> {
-    return this.http.post('/equipment_update/?scope=basic', address, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
+  updateBasic(data: any): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-  // 更新维保信息
-  updateMaintain(data: any): Observable<any> {
-    return this.http.post('/equipment_update/?scope=maintain', data, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  // 获取设备型态列表
-  getTemplateList(n: number, pageSize: number, search?: string): Observable<any> {
-    const url = `${this.templateListUrl}/?page=${n}&pageSize=${pageSize}&search=${search}`;
-    return this.http.get<any>(url)
+    return this.http.post('/api/formal/ept/info/update', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
 
-  // 添加设备型态
-  addTemplate(temp): Observable<any> {
-    return this.http.post('/equipment_template_add', temp, httpOptions)
+
+  // -------------地图模式------------
+  // 获取地图坐标
+  getMapDetail(): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `/api/formal/ept/map/detail`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+
+  // 获取监控数量
+  getMonitor(): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `/api/formal/ept/monitor`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+
+
+  // ---------------------首页---------------------
+
+  // 获取重要提醒
+  getRemind(): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `/api/formal/ept/monitor`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+  // 获取重要提醒列表
+  getRemindList(n: number, pageSize: number, search?: string, value?: string, status?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `/api/formal/ept/remind/list?page=${n}&pageSize=${pageSize}&search=${search}&value=${value}&log_type=${status}`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+  // 获取通知消息
+  getNotice(): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `/api/formal/ept/notice/info`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+  // 获取通知消息列表
+  getNoticeList(n: number, pageSize: number, search?: string, value?: string, status?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `/api/formal/ept/notice/list?page=${n}&pageSize=${pageSize}&search=${search}&value=${value}&log_type=${status}`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+  batchNotice(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `/api/formal/ept/notice/batch`;
+    return this.http.post<any>(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  // 修改设备型态
-  editTemplate(temp): Observable<any> {
-    return this.http.post('/equipment_template_update', temp, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
+  // ----------------------end 首页-----------------------------
 
-  // 删除设备型态
-  deleteTemplate(temp): Observable<any> {
-    return this.http.post('/equipment_template_delete', temp, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
 
 
   private handleError(error: HttpErrorResponse) {

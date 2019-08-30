@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 import {ActivatedRoute} from "@angular/router";
 import {BoilerService} from "../../../../../shared/boiler.service";
+import {ClusterService} from "../../../../../shared/cluster.service";
+
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-clu-batch',
@@ -26,7 +29,7 @@ export class CluBatchComponent implements OnInit {
 
   constructor(private nzModal: NzModalService,
               private route: ActivatedRoute,
-              private eptService: BoilerService) { }
+              private clusterService: ClusterService) { }
 
   ngOnInit() {
     this.getList();
@@ -35,7 +38,7 @@ export class CluBatchComponent implements OnInit {
   // 获取列表
   getList() {
     this.loading = true;
-    this.eptService.getLists(this.page, this.pageSize, this.search, this.value)
+    this.clusterService.getBatchLists(this.page, this.pageSize, this.search, this.value, this.status)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;
@@ -136,26 +139,10 @@ export class CluBatchComponent implements OnInit {
       title = '确认要禁用此设备吗？';
       this.creatModal(title, subtitle, () => {
         let post = {
-          data: checked
+          data: checked,
+          type: 3
         };
-        /*that.loading = true;
-        that.eptService.deleteData(post)
-          .subscribe(val => {
-            that.loading = false;
-            Swal(
-              '操作成功！',
-              '',
-              'success'
-            );
-            this.pageChange();
-          }, err => {
-            that.loading = false;
-            Swal(
-              '操作失败！',
-              err,
-              'error'
-            );
-          });*/
+        this.batch(post);
       });
     } else {
       this.nzModal.info({
@@ -187,26 +174,10 @@ export class CluBatchComponent implements OnInit {
       title = '确认要删除此设备吗？';
       this.creatModal(title, subtitle, () => {
         let post = {
-          data: checked
+          data: checked,
+          type: 1
         };
-        /*that.loading = true;
-        that.eptService.deleteData(post)
-          .subscribe(val => {
-            that.loading = false;
-            Swal(
-              '操作成功！',
-              '',
-              'success'
-            );
-            this.pageChange();
-          }, err => {
-            that.loading = false;
-            Swal(
-              '操作失败！',
-              err,
-              'error'
-            );
-          });*/
+        this.batch(post);
       });
     } else {
       this.nzModal.info({
@@ -238,26 +209,10 @@ export class CluBatchComponent implements OnInit {
       title = '确认要激活设备吗？';
       this.creatModal(title, subtitle, () => {
         let post = {
-          data: checked
+          data: checked,
+          type: 2
         };
-        /*that.loading = true;
-        that.eptService.deleteData(post)
-          .subscribe(val => {
-            that.loading = false;
-            Swal(
-              '操作成功！',
-              '',
-              'success'
-            );
-            this.pageChange();
-          }, err => {
-            that.loading = false;
-            Swal(
-              '操作失败！',
-              err,
-              'error'
-            );
-          });*/
+        this.batch(post);
       });
     } else {
       this.nzModal.info({
@@ -281,6 +236,29 @@ export class CluBatchComponent implements OnInit {
         that.tplModal.destroy();
       }
     });
+  }
+
+  // 批量操作
+  batch(post) {
+    let that = this;
+    that.loading = true;
+    that.clusterService.batchD(post)
+      .subscribe(val => {
+        that.loading = false;
+        Swal(
+          '操作成功！',
+          '',
+          'success'
+        );
+        this.pageChange();
+      }, err => {
+        that.loading = false;
+        Swal(
+          '操作失败！',
+          err.message || err,
+          'error'
+        );
+      });
   }
 
 

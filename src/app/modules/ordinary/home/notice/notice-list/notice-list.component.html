@@ -1,0 +1,161 @@
+
+
+<div class="content">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>
+        通知信息
+      </h6>
+    </div>
+    <div class="li_head_r">
+      <!--刷新-->
+      <!--<button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>-->
+
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/ordinary/home/dashborad']">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="batchDelete(1)">
+        标记已读
+      </button>
+
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="batchDelete(2)">
+        标记删除
+      </button>
+
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="batchDelete(3)">
+        全部已读
+      </button>
+
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="batchDelete(4)">
+        全部删除
+      </button>
+
+    </div>
+  </div>
+
+  <div class="list_content">
+    <div class="content_h">
+      <div class="search_box">
+        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="addOnAfterTemplate">
+          <input type="text" nz-input [(ngModel)]="value" (keyup)="searchEnter($event)" maxlength="20"/>
+        </nz-input-group>
+        <ng-template #addOnBeforeTemplate>
+          <nz-select [(ngModel)]="search">
+            <nz-option [nzLabel]="'标题内容'" [nzValue]="'info'"></nz-option>
+          </nz-select>
+        </ng-template>
+        <ng-template #addOnAfterTemplate>
+          <img src="assets/icons/icon_seach.png" alt="" class="search_icon" (click)="searchChange()">
+        </ng-template>
+
+      </div>
+      <div class="flex">
+
+
+      </div>
+    </div>
+    <div class="content_t">
+      <nz-table
+        #dataTable
+        [nzFrontPagination]="false"
+        [nzShowPagination] = "false"
+        [nzLoading]="loading"
+        [nzData]="dataLists"
+      >
+        <thead>
+        <tr>
+          <th
+            nzShowCheckbox
+            [(nzChecked)]="isAllChecked"
+            (nzCheckedChange)="checkAll($event)"
+          >
+          </th>
+          <th>标题内容</th>
+          <th>提交时间</th>
+          <th>
+            <nz-dropdown [nzTrigger]="'click'">
+              <a nz-dropdown>
+                类型
+                <i nz-icon type="down" style="color: #898EA3;"></i>
+              </a>
+
+              <ul nz-menu>
+                <li nz-menu-item (click)="searchStatus('')">
+                  <a>全部</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('1')">
+                  <a>产品联网情况</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('2')">
+                  <a>产品运行故障</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('3')">
+                  <a>产品运行告警</a>
+                </li>
+
+              </ul>
+            </nz-dropdown>
+          </th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of dataTable.data">
+          <td
+            nzShowCheckbox
+            [(nzChecked)]="data.checked"
+            [nzDisabled]="data.disabled"
+            (nzCheckedChange)="refreshStatus()"
+          ></td>
+          <td style="display: flex; align-items: center;">
+            <span class="h_circle" [class.active]="!data.is_read"></span>
+            {{data.info}}
+          </td>
+          <td> {{data.created_at | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
+          <td>
+            <span *ngIf="data.log_type === 1">
+              产品联网情况
+            </span>
+            <span *ngIf="data.log_type === 2">
+              产品运行故障
+            </span>
+            <span *ngIf="data.log_type === 3">
+              产品运行告警
+            </span>
+          </td>
+          <td class="text_purple">
+            <a class="" [routerLink]="['/admin/ordinary/home/notice-info', data.log_type, data.log_status]">
+              详情
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+
+    <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+
+    <div class="content_b">
+      <nz-pagination nzShowSizeChanger
+                     [nzTotal]="totalItems"
+                     [nzShowTotal]="totalTemplate"
+                     [(nzPageIndex)]="page"
+                     [(nzPageSize)]="pageSize"
+                     (nzPageIndexChange)="pageChange()"
+                     (nzPageSizeChange)="pageSizeChange()"
+                     [nzPageSizeOptions] = "pageSizeList">
+
+      </nz-pagination>
+      <div class="ant-pagination-options-quick-jumper"> 跳至
+        <input type="number" [(ngModel)]="pageNum"> 页 </div>
+      <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
+    </div>
+
+  </div>
+
+</div>
+

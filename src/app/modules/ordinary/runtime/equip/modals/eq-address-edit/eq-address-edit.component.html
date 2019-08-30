@@ -1,3 +1,60 @@
-<p>
-  eq-address-edit works!
-</p>
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    <img src="assets/icons/location.png" alt="" style="margin-right: 19px;">
+    地址信息设置
+  </h4>
+</div>
+
+<div class="modal-body m_form">
+  <div class="m_item">
+    <div class="m_input_l">
+
+        <nz-select style="width: 158px;" [(ngModel)]="selectedProvince" (ngModelChange)="provinceChange($event); changeCity(6);">
+          <nz-option *ngFor="let p of addrList" [nzValue]="p" [nzLabel]="p.Name"></nz-option>
+        </nz-select>
+        <span style="margin-left: 10px; margin-right: 10px;">
+          省
+        </span>
+        <nz-select style="width: 158px;" [(ngModel)]="selectedCity" (ngModelChange)="cityChange($event); changeCity(10);" [nzDisabled]="!selectedProvince || selectedProvince.LocationId===0 ">
+          <nz-option *ngFor="let c of cities" [nzValue]="c" [nzLabel]="c.Name"></nz-option>
+        </nz-select>
+        <span style="margin-left: 10px; margin-right: 10px;">
+          市
+        </span>
+        <nz-select style="width: 158px;" [(ngModel)]="selectedRegion" (ngModelChange)="regionChange($event); changeCity(13);" [nzDisabled]="!selectedCity">
+          <nz-option *ngFor="let r of regions" [nzValue]="r" [nzLabel]="r.Name"></nz-option>
+        </nz-select>
+        <span style="margin-left: 10px;">
+          区/县
+        </span>
+
+
+    </div>
+  </div>
+
+  <div class="m_item">
+    <input type="text" [(ngModel)]="address" class="form-control" placeholder="输入详细地址">
+  </div>
+
+  <div class="m_map">
+    <div id="address" style="width: 100%; height: 380px;"></div>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取 消</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 35px;" (click)="save()">确 定</button>
+</div>
+
+
+
+
+
+
+
+
+
+
+

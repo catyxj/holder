@@ -54,7 +54,10 @@
       "status": {
         "IsBurning": 1
       },
-      "Runtime": null
+      "Runtime": null,
+      "terminal_code": "680001",
+      "location_name": "宁波",
+      "user_org": "ffff"
     },
     {
       "uid": "f2f8ea60-b2cd-4490-9ffe-00e096b110f0",
@@ -67,7 +70,10 @@
       "status": {
         "IsBurning": 0
       },
-      "Runtime": null
+      "Runtime": null,
+      "terminal_code": "680001",
+      "location_name": "宁波",
+      "user_org": "ffasdfaf"
     },
     {
       "uid": "f2f8ea60-b2cd-4490-9ffe-00e096bsdfaf",
@@ -77,7 +83,10 @@
       "status": {
         "IsBurning": 0
       },
-      "Runtime": null
+      "Runtime": null,
+      "terminal_code": "68033",
+      "location_name": "",
+      "user_org": ""
     },
     {
       "uid": "f2f8ea60-b2cd-4490-9ffe-00e0asdfa",
@@ -87,7 +96,10 @@
       "status": {
         "IsBurning": 0
       },
-      "Runtime": null
+      "Runtime": null,
+      "terminal_code": "62221",
+      "location_name": "",
+      "user_org": "asdfasdf"
     }
   ],
   "count":65

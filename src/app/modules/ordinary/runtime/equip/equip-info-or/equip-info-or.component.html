@@ -9,15 +9,20 @@
     </div>
     <div class="li_head_r">
       <!--刷新-->
-      <button class="btn btn_purple-o btn_round bps">
+      <!--<button class="btn btn_purple-o btn_round bps">
         <i class="iconfont iconicon_Refresh"></i>
+      </button>-->
+
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" (click)="goBack()">
+        <i class="iconfont iconicon_comeback1"></i>
       </button>
 
-      <button class="btn btn_purple btn_round bpm ml-1">
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="deleteData()">
         删除
       </button>
 
-      <button class="btn btn_purple btn_round bpm ml-1">
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="disableData()">
         激活/禁用
       </button>
 
@@ -31,7 +36,10 @@
       <div class="eq_h">
         <h6>常规信息</h6>
         <div>
-
+          <!--设置-->
+          <a title="设置" (click)="editBasic()">
+            <span class="iconfont iconedit text_purple"></span>
+          </a>
         </div>
       </div>
 
@@ -42,18 +50,18 @@
               设备名称：
             </div>
             <div class="eq_value">
-              欣丰锅炉厂
+              {{info?.name}}
             </div>
           </div>
 
-          <div class="eq_item">
+          <!--<div class="eq_item">
             <div class="eq_label">
               设备形态：
             </div>
             <div class="eq_value">
               A型锅炉EW1-31型
             </div>
-          </div>
+          </div>-->
 
           <div class="eq_item">
             <div class="eq_label">
@@ -71,7 +79,12 @@
               其他关联单位：
             </div>
             <div class="eq_value">
-              <span>宁波某某某运维公司</span>
+              <span>
+                <nz-tag [nzColor]="'#9DA4FF'">宁波某某某运维公司</nz-tag>
+              </span>
+              <span>
+                <nz-tag [nzColor]="'#9DA4FF'">宁波某某某运维公司</nz-tag>
+              </span>
             </div>
           </div>
         </div>
@@ -81,7 +94,7 @@
         <div class="eq_row c_4">
           <div class="eq_item">
             <div class="eq_label">
-              设备名称：
+              锅炉型号：
             </div>
             <div class="eq_value">
               欣丰锅炉厂
@@ -90,7 +103,7 @@
 
           <div class="eq_item">
             <div class="eq_label">
-              设备形态：
+              额定蒸发量：
             </div>
             <div class="eq_value">
               A型锅炉EW1-31型
@@ -99,7 +112,7 @@
 
           <div class="eq_item">
             <div class="eq_label">
-              使用企业：
+              制造许可证级别：
             </div>
             <div class="eq_value">
               宁波欣丰纺织股份有限公司
@@ -108,7 +121,7 @@
 
           <div class="eq_item">
             <div class="eq_label">
-              使用企业：
+              许可证编号：
             </div>
             <div class="eq_value">
               宁波欣丰纺织股份有限公司
@@ -119,7 +132,7 @@
         <div class="eq_row c_4">
           <div class="eq_item">
             <div class="eq_label">
-              设备名称：
+              产品编号：
             </div>
             <div class="eq_value">
               欣丰锅炉厂
@@ -128,7 +141,7 @@
 
           <div class="eq_item">
             <div class="eq_label">
-              设备形态：
+              制造日期：
             </div>
             <div class="eq_value">
               A型锅炉EW1-31型
@@ -137,7 +150,7 @@
 
           <div class="eq_item">
             <div class="eq_label">
-              使用企业：
+              设备代码：
             </div>
             <div class="eq_value">
               宁波欣丰纺织股份有限公司
@@ -146,7 +159,7 @@
 
           <div class="eq_item">
             <div class="eq_label">
-              使用企业：
+              额定进口水温：
             </div>
             <div class="eq_value">
               宁波欣丰纺织股份有限公司
@@ -159,7 +172,7 @@
 
     <div style="display: flex;">
       <!--关联信息-->
-      <div class="eq_info" style="width: 34%;">
+      <div class="eq_info eq_link" style="width: 34%;">
         <div class="eq_h">
           <h6>关联信息</h6>
           <div>
@@ -170,16 +183,20 @@
         <div class="eq_body">
           <div class="eq_item">
             <div class="eq_label">
-              设备名称：
+              终端编码：
             </div>
             <div class="eq_value">
-              欣丰锅炉厂
+              {{terminal?.terminal_code}}
+
+              <a [routerLink]="['/admin/formal/terminal/info', uid, terminal.terminal_code, '1']" *ngIf="terminal">
+                配置终端
+              </a>
             </div>
           </div>
 
           <div class="eq_item">
             <div class="eq_label">
-              设备形态：
+              固件版本：
             </div>
             <div class="eq_value">
               A型锅炉EW1-31型
@@ -188,7 +205,7 @@
 
           <div class="eq_item">
             <div class="eq_label">
-              使用企业：
+              配置信息：
             </div>
             <div class="eq_value">
               宁波欣丰纺织股份有限公司
@@ -197,7 +214,7 @@
 
           <div class="eq_item">
             <div class="eq_label">
-              设备名称：
+              配置模版：
             </div>
             <div class="eq_value">
               欣丰锅炉厂
@@ -206,16 +223,20 @@
 
           <div class="eq_item">
             <div class="eq_label">
-              设备形态：
+              蓝牙组件：
             </div>
             <div class="eq_value">
               A型锅炉EW1-31型
+
+              <a [routerLink]="['/admin/formal/bluetooth/info', uid, '1']">
+                配置蓝牙
+              </a>
             </div>
           </div>
 
           <div class="eq_item">
             <div class="eq_label">
-              使用企业：
+              MAC地址：
             </div>
             <div class="eq_value">
               宁波欣丰纺织股份有限公司
@@ -230,12 +251,50 @@
           <div class="eq_h">
             <h6>地址信息</h6>
             <div>
-
+              <!--设置-->
+              <a title="设置" (click)="editAddr()">
+                <span class="iconfont iconedit text_purple"></span>
+              </a>
             </div>
           </div>
 
           <div class="eq_body">
-            a
+            <div class="addr_item">
+              <div class="addr_label">
+                设备地址
+              </div>
+            </div>
+            <div class="addr_item area">
+              <div class="addr_value">
+                浙江
+              </div>
+              省
+            </div>
+            <div class="addr_item area">
+              <div class="addr_value">
+                宁波
+              </div>
+              市
+            </div>
+            <div class="addr_item area">
+              <div class="addr_value">
+                浙江
+              </div>
+              区/县
+            </div>
+
+            <div class="addr_item" style="padding-top: 12px;">
+              <div class="addr_label">
+                详细地址
+              </div>
+            </div>
+
+            <div class="addr_item">
+              <div class="addr_value">
+                南部商务区E148号
+              </div>
+            </div>
+
           </div>
         </div>
         <div class="eq_map">

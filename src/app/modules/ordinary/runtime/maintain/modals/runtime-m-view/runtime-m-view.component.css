@@ -1,0 +1,86 @@
+
+
+.record_info{
+  padding: 15px 25px;
+  margin-bottom: 10px;
+}
+
+.mp_row{
+  display: flex;
+}
+
+.r_info_item{
+  display: flex;
+  min-width: 300px;
+  margin-bottom: 8px;
+}
+.mp_a_label{
+  font-size: 16px;
+  color: #464855;
+  font-weight: bold;
+  width: 80px;
+}
+.mp_a_value{
+  font-size: 16px;
+  color: #666EE8;
+  font-weight: bold;
+  margin-left: 8px;
+}
+
+
+.record_table{
+  padding: 0 25px;
+}
+.record_table table th{
+  background-color: #F9FAFD;
+  height: 58px;
+}
+.record_table table td{
+  height: 58px;
+  vertical-align: middle;
+}
+.m-r-img{
+  margin-right: 22px;
+}
+.m-r-img img{
+  width: 28px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.i_row{
+  display: flex;
+  align-items: center;
+}
+.r_circle{
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  border: 1px solid #eeeeee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 8px;
+}
+.r_circle_in{
+  width: 8px;
+  height: 8px;
+  border-radius: 8px;
+  background-color: #eeeeee;
+}
+.r_circle.warning{
+  border: 1px solid #FFC06A;
+}
+.warning .r_circle_in{
+  background-color: #FFC06A;
+}
+
+.r_circle.green{
+  border: 1px solid #28D094;
+}
+.green .r_circle_in{
+  background-color: #28D094;
+}
+
+
+

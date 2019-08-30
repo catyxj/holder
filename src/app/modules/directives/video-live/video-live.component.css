@@ -32,7 +32,7 @@ main{
 
 .vlive_con{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .vlive_play{
@@ -58,6 +58,7 @@ main{
 /*控制台*/
 .vlive_ctrl{
   width: 274px;
+  margin-left: 14px;
 }
 .vc_con{
   height: 539px;

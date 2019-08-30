@@ -1,3 +1,110 @@
-<p>
-  eq-charts works!
-</p>
+
+
+<div class="content charts">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>
+        设备详情
+      </h6>
+    </div>
+    <div class="li_head_r">
+      <!--刷新-->
+      <!--<button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>-->
+
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" (click)="goBack()">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+
+      <div class="btn-group ml-1">
+        <button class="btn btn_purple_o bpm" [class.active]="current" (click)="showCurrent()" style="">
+          实时数据
+        </button>
+        <button class="btn btn_purple_o bpm" [class.active]="!current" (click)="showHistory()" style="">
+          历史数据
+        </button>
+      </div>
+
+
+      <nz-range-picker [(ngModel)]="dateRange" nzShowTime nzFormat="yyyy-MM-dd HH:mm" [nzDisabledDate]="disabledDate"
+                       (ngModelChange)="changeDate()" class="ml-1" [disabled]="current">
+
+      </nz-range-picker>
+
+      <button class="btn btn_purple_dis ml-1" (click)="rangeValue='today'; selectDate()"
+              [disabled]="current" [class.active]="rangeValue==='today'" >
+        今日
+      </button>
+
+      <button class="btn btn_purple_dis ml-1" (click)="rangeValue='week';selectDate()"
+              [disabled]="current" [class.active]="rangeValue==='week'" >
+        本周
+      </button>
+
+      <button class="btn btn_purple_dis ml-1" (click)="rangeValue='month';selectDate()"
+              [disabled]="current" [class.active]="rangeValue==='month'">
+        本月
+      </button>
+
+      <!--<div class="ml-1">
+        <nz-radio-group [(ngModel)]="rangeValue" [nzButtonStyle]="'solid'">
+          <label nz-radio-button nzValue="today" (click)="selectDate()" [nzDisabled]="current">今天</label>
+          <label nz-radio-button nzValue="week" (click)="selectDate()" [nzDisabled]="current">本周</label>
+          <label nz-radio-button nzValue="month" (click)="selectDate()" [nzDisabled]="current">本月</label>
+        </nz-radio-group>
+      </div>-->
+
+      <button class="btn btn_purple bpm ml-1" [routerLink]="['/admin/ordinary/equip-history', uid]" [disabled]="current">
+        历史列表
+      </button>
+
+    </div>
+  </div>
+
+  <div class="list_content">
+    <div class="content_head">
+      <div class="params_h">
+        <h6>运行数据名称</h6>
+      </div>
+      <div class="params_list">
+        <ul style="">
+          <li *ngFor="let data of params; let i = index;" (click)="changeData(data)"
+              [ngClass]="{'active': data.checked === true}" style="white-space: nowrap; ">
+            {{ data.name }}
+          </li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="content_op">
+      <div class="op_cell" *ngFor="let cparam of currentParams; let i = index;">
+        <div class="cell_header">
+          <div class="cell_t">
+            {{cparam.name}}
+          </div>
+          <div class="cell_expand" (click)="expandChart(cparam,i)">
+            <img src="assets/icons/expand.png" alt="">
+          </div>
+
+          <!--<nz-select style="width: 120px;" [(ngModel)]="currentParams[0]" (ngModelChange)="getChartData(currentParams[0], 0)">
+            <nz-option *ngFor="let option of params" [nzValue]="option.Uid" [nzLabel]="option.Name"></nz-option>
+          </nz-select>-->
+        </div>
+        <div class="cell_chart">
+          <div echarts [options] = "chartOption[i]" class="" style="width: 100%; height:213px;"></div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+
+
+
