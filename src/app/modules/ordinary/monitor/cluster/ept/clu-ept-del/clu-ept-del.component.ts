@@ -41,7 +41,7 @@ export class CluEptDelComponent implements OnInit {
   // 获取列表
   getList() {
     this.loading = true;
-    this.clusterService.getClusEquip(this.uid, this.page, this.pageSize, this.search, this.value)
+    this.clusterService.getClusUnbindEquip(this.uid, this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;
@@ -89,6 +89,19 @@ export class CluEptDelComponent implements OnInit {
     }
   }
 
+  searchOnline(n?) {
+    this.online = n;
+    this.searchChange();
+  }
+  searchRun(n?) {
+    this.run = n;
+    this.searchChange();
+  }
+  searchStatus(n?) {
+    this.status = n;
+    this.searchChange();
+  }
+
 
 // 全选
   checkAll(value: boolean): void {
@@ -110,7 +123,7 @@ export class CluEptDelComponent implements OnInit {
     }
   }
 
-  //  批量关联
+  //  批量取消关联
   batchLink() {
     let that = this;
     let title = '';
@@ -130,6 +143,8 @@ export class CluEptDelComponent implements OnInit {
       title = '确认要取消关联此设备吗？';
       this.creatModal(title, subtitle, () => {
         let post = {
+          uid: this.uid,
+          type: 2,
           data: checked
         };
         that.loading = true;
@@ -146,7 +161,7 @@ export class CluEptDelComponent implements OnInit {
             that.loading = false;
             Swal(
               '操作失败！',
-              err,
+              err.message || err,
               'error'
             );
           });

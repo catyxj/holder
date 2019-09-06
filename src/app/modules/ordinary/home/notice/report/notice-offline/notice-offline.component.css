@@ -1,0 +1,36 @@
+
+
+.notice{
+  padding: 12px 20px;
+}
+
+
+.report_content{
+  padding-top: 19px;
+  padding-left: 97px;
+}
+.report_content *{
+  font-size: 13px;
+}
+
+.report_info{
+  padding: 0 160px;
+  margin-top: 10px;
+}
+.report_info .table{
+  margin-top: 30px;
+}
+.table th{
+  background-color: #F9FAFD;
+  text-align: center;
+  color: #464855;
+}
+.table td{
+  text-align: center;
+  color: #464855;
+}
+
+
+
+
+

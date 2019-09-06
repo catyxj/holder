@@ -1,0 +1,51 @@
+
+
+.notice{
+  padding: 12px 20px;
+}
+
+
+.h_item{
+  display: flex;
+}
+.h_label{
+  margin-right: 12px;
+  font-size: 13px;
+}
+.h_value{
+  color: #666EE8;
+  font-size: 13px;
+}
+
+
+.report_content{
+  padding-top: 19px;
+  width: 95%;
+  margin: auto;
+}
+.report_content *{
+  font-size: 13px;
+}
+
+.report_info{
+  padding: 0 160px;
+  margin-top: 10px;
+}
+.report_info .table{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.table th{
+  background-color: #F9FAFD;
+  text-align: center;
+  color: #464855;
+}
+.table td{
+  text-align: center;
+  color: #464855;
+}
+
+
+
+
+

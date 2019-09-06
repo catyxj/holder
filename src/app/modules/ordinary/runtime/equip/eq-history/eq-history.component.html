@@ -34,7 +34,7 @@
       </button>-->
 
       <nz-dropdown [nzTrigger]="'click'">
-        <button nz-dropdown class="btn btn_purple bpm ml-1">
+        <button nz-dropdown class="btn btn_purple bpm ml-1" [disabled]="isLoading">
           导出表格
         </button>
 
@@ -74,10 +74,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let data of dataTable.data; let i = index;">
+        <tr *ngFor="let row of dataTable.data; let i = index;">
           <td> {{ row.date | date:'yyyy-MM-dd HH:mm:ss' }} </td>
-          <td *ngFor="let data of params">
-            {{ row.data[data.id] || '-' }}
+          <td *ngFor="let item of params">
+            {{ row.data[item.id] || '-' }}
           </td>
         </tr>
         </tbody>

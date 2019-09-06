@@ -63,6 +63,9 @@ import { NoticeAlarmComponent } from './home/notice/report/notice-alarm/notice-a
 import { NoticeMalfunctionComponent } from './home/notice/report/notice-malfunction/notice-malfunction.component';
 import { NoticeOnlineComponent } from './home/notice/report/notice-online/notice-online.component';
 import { NoticeOfflineComponent } from './home/notice/report/notice-offline/notice-offline.component';
+import { ServiceInfoOrComponent } from './service/service-info-or/service-info-or.component';
+import { ServiceDetailOrComponent } from './service/service-detail-or/service-detail-or.component';
+import { ServiceAddOrComponent } from './service/modals/service-add-or/service-add-or.component';
 
 
 
@@ -131,6 +134,9 @@ import { NoticeOfflineComponent } from './home/notice/report/notice-offline/noti
     NoticeMalfunctionComponent,
     NoticeOnlineComponent,
     NoticeOfflineComponent,
+    ServiceInfoOrComponent,
+    ServiceDetailOrComponent,
+    ServiceAddOrComponent,
 
   ],
   exports: [
@@ -145,7 +151,8 @@ import { NoticeOfflineComponent } from './home/notice/report/notice-offline/noti
     AlarmDetailComponent,
     RuntimeMViewComponent,
     CycleAddComponent,
-    CycleEditComponent
+    CycleEditComponent,
+    ServiceAddOrComponent
   ],
   providers: [
     DatePipe

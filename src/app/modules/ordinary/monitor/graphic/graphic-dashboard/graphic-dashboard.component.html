@@ -91,7 +91,7 @@
                 <a class="d_label" title="{{data.warning}}"
                    [ngClass]="{'bg_grey':!data.online || data.alarm_count <= 0, 'bg_red':data.online && data.alarm_count > 0 }">
                   <!--{{data.warning}}-->
-                  警告
+                  告警
                 </a>
                 <a class="d_label" title="{{data.malfunction}}"
                    [ngClass]="{'bg_grey':!data.mtStatus, 'bg_warning':data.mtStatus }">

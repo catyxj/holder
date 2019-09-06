@@ -11,6 +11,7 @@
 .m_item{
   display: flex;
   margin-bottom: 10px;
+  align-items: center;
 }
 .m_label{
   width: 72px;
@@ -22,6 +23,7 @@
 .m_item select{
   width: 359px;
   height: 28px;
+  font-size: 12px;
 }
 
 .t_add_b{

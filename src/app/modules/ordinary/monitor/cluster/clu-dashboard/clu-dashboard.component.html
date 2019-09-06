@@ -8,9 +8,9 @@
     </div>
     <div class="li_head_r">
       <!--刷新-->
-      <!--<button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
+      <button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
         <i class="iconfont iconicon_Refresh"></i>
-      </button>-->
+      </button>
 
       <button class="btn btn_purple btn_round bpm ml-1" routerLink="/admin/ordinary/cluster/add">
         新增集群
@@ -63,31 +63,40 @@
                 </div>
 
                 <div class="status_col">
-                  <div class="status_row d_label" [ngClass]="{'bg_blue':data.termOffline > 0}">
+                  <div class="status_row d_label" [ngClass]="{'bg_blue':data.online_count > 0}">
                     <b>联网 : </b>
-                    <span class="">{{data.termOnline}}</span> / <span class="">{{data.termOffline}}</span>
+                    <div>
+                      <span class="">{{data.online_count}}</span> / <span class="">{{data.all_count}}</span>
+                    </div>
                   </div>
-                  <div class="status_row d_label" [ngClass]="{'bg_info':data.eptOnline > 0}">
+                  <div class="status_row d_label" [ngClass]="{'bg_info':data.run_count > 0}">
                     <b>运行 : </b>
-                    <span class="">{{data.eptOnline}}</span> / <span>{{data.eptCounts}}</span>
+                    <div>
+                      <span class="">{{data.run_count}}</span> / <span>{{data.all_count}}</span>
+                    </div>
+
                   </div>
                   <div class="status_row d_label" [ngClass]="{'bg_red':data.alarm_count > 0}">
                     <b>告警 : </b>
-                    <span *ngIf="data.alarm_count <= 0">
+                    <div>
+                      <span *ngIf="data.alarm_count <= 0">
                       无告警
                     </span>
-                    <span *ngIf="data.alarm_count > 0">
+                      <span *ngIf="data.alarm_count > 0">
                       有 {{data.alarm_count}} 条告警
                     </span>
+                    </div>
                   </div>
-                  <div class="status_row d_label" [ngClass]="{'bg_warning':data.mtCounts > 0}">
+                  <div class="status_row d_label" [ngClass]="{'bg_warning':data.malfunction_count > 0}">
                     <b>故障 : </b>
-                    <span *ngIf="!data.mtCounts">
+                    <div>
+                      <span *ngIf="data.malfunction_count <= 0">
                       无故障
                     </span>
-                    <span *ngIf="data.mtCounts > 0">
-                        有 {{data.mtCounts}} 个故障
+                      <span *ngIf="data.malfunction_count > 0">
+                        有 {{data.malfunction_count}} 个故障
                     </span>
+                    </div>
                   </div>
                 </div>
 

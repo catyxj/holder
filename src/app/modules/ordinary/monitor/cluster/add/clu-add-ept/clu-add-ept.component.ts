@@ -27,7 +27,7 @@ export class CluAddEptComponent implements OnInit {
   public selectedRegion;
   public locationId;
   public locationName = '';
-  public address;
+  public address = '';
   public addrList;
   public cities = [];
   public regions = [];
@@ -203,7 +203,7 @@ export class CluAddEptComponent implements OnInit {
           '',
           'success'
         );
-        this.uid = res;
+        this.uid = res.uid;
         this.changeUid.emit(this.uid);
         this.next.emit(1);
       }, err => {
@@ -216,7 +216,7 @@ export class CluAddEptComponent implements OnInit {
       });
 
 
-    this.next.emit(1);
+    // this.next.emit(1);
 
   }
 

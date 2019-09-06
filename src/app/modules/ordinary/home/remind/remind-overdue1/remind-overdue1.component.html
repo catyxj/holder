@@ -1,3 +1,94 @@
-<p>
-  remind-overdue1 works!
-</p>
+
+
+<div class="notice">
+  <div class="info_head">
+    <div class="info_tname">
+      <img src="assets/icons/boiler2.png" alt="">
+
+      XXXXX锅炉终端物联网卡流量不足
+
+    </div>
+    <div class="info_head_r">
+      <!--刷新-->
+      <!--<button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>-->
+
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/ordinary/home/remind']">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+
+
+    </div>
+  </div>
+
+  <div class="report_content">
+    <div>
+      尊敬的18012341234用户：
+    </div>
+
+    <div class="report_info">
+      <p>
+        您有一张物联网流量卡将在2919-07-20 00:00:00正式到期，截至目前仅剩30天。未充值续费的物联网流量卡将在到期后停止服务。为了保证您的服务
+        正常运行，请及时续费。
+      </p>
+
+      <table class="table table-bordered">
+        <tr>
+          <th style="width: 50%;">
+            产品名称
+          </th>
+          <td>
+            XX锅炉
+          </td>
+        </tr>
+
+        <tr>
+          <th>
+            产品终端编码
+          </th>
+          <td>
+            XX锅炉
+          </td>
+        </tr>
+
+        <tr>
+          <th>
+            所属单位
+          </th>
+          <td>
+            A企业
+          </td>
+        </tr>
+
+        <tr>
+          <th>
+            物联网卡号
+          </th>
+          <td>
+            34387 78414 38234 12432
+          </td>
+        </tr>
+
+        <tr>
+          <th>
+            到期时间
+          </th>
+          <td>
+            2019-07-20 00:00:00
+          </td>
+        </tr>
+
+      </table>
+
+      <p>
+        如您要继续使用该服务，请于到期前续费。  <a style="color: #666EE8;">点此续费</a>
+      </p>
+    </div>
+
+
+  </div>
+
+</div>
+

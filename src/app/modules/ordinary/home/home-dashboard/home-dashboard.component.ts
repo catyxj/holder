@@ -48,15 +48,29 @@ export class HomeDashboardComponent implements OnInit {
         log_type: 2,
         is_read: true,
         log_status: false
+      },
+      {
+        created_at: '2018-2-13 12:12:12',
+        info: 'XXXXX锅炉运行周报',
+        log_type: 3,
+        is_read: true,
+        log_status: false
+      },
+      {
+        created_at: '2018-2-13 12:12:12',
+        info: 'XXXXX锅炉运行周报',
+        log_type: 4,
+        is_read: true,
+        log_status: false
       }
     ];
 
-    this.eptService.getRemind()
+    /*this.eptService.getRemind()
       .subscribe(data => {
         this.reminds = data;
       }, err => {
 
-      });
+      });*/
   }
 
   // 获取通知消息

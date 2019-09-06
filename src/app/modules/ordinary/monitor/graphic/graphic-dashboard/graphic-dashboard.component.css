@@ -199,7 +199,7 @@ a.d_label:hover{
   overflow: hidden;
   height: 180px;
   width: 48%;
-  border:1px solid #666EE8;
+  /*border:1px solid #666EE8;*/
 }
 .module .img_content img{
   width: 100%;

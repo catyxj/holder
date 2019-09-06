@@ -38,7 +38,7 @@ export class CluAddCluComponent implements OnInit {
     this.getList();
   }
 
-  // 获取列表
+  // 获取列表--全部
   getList() {
     this.loading = true;
     this.clusterService.getEptAll(this.uid)
@@ -46,7 +46,7 @@ export class CluAddCluComponent implements OnInit {
         this.loading = false;
         this.dataLists = data.data;
         this.dataAll = this.dataLists.slice();
-        this.totalItems = data.count;
+        // this.totalItems = data.count;
       }, err => {
         this.loading = false;
       });
@@ -149,6 +149,8 @@ export class CluAddCluComponent implements OnInit {
       title = '确认要关联此设备吗？';
       this.creatModal(title, subtitle, () => {
         let post = {
+          uid: this.uid,
+          type: 1,
           data: checked
         };
         that.loading = true;
@@ -166,7 +168,7 @@ export class CluAddCluComponent implements OnInit {
             that.loading = false;
             Swal(
               '操作失败！',
-              err,
+              err.message || err,
               'error'
             );
           });

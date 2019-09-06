@@ -21,7 +21,7 @@ export class ClusterService {
   // private clusEquipUrl = 'assets/server/cluster_equip.json';
 
   private clusterUrl = '/api/formal/cluster/list';
-  private clusEquipUrl = '/api/formal/cluster/ept/list';
+  private clusEquipUrl = '/api/formal/cluster/ept/list/all';
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -55,12 +55,25 @@ export class ClusterService {
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
     //  return this.http.get<any>('assets/server/cluster_list.json', httpOptions);
-    return this.http.get<any>(`/api/formal/cluster/bind/ept/list?uid=${uid}`, httpOptions)
+    return this.http.get<any>(`/api/formal/cluster/bind/ept/list/all?uid=${uid}`, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
+  // 获取设备列表-分页（集群外）
+  getEptList(uid, n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    //  return this.http.get<any>('assets/server/cluster_list.json', httpOptions);
+    return this.http.get<any>(`/api/formal/cluster/bind/ept/list?uid=${uid}&page=${n}&rows=${pageSize}&search=${search}&value=${value}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取集群状态信息
   getStatus(uid): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
@@ -72,12 +85,48 @@ export class ClusterService {
       );
   }
 
-  // 获取集群设备列表
-  getClusEquip(uid: string, n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+  // 获取集群信息
+  getInfo(uid): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.clusEquipUrl}?uid=${uid}&page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    const url = `/api/formal/cluster/detail?uid=${uid}`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取集群设备列表--全部
+  getClusEquipAll(uid: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `${this.clusEquipUrl}?uid=${uid}`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+  // 获取集群设备列表--（分页）
+  getClusEquipList(uid: string, n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `/api/formal/cluster/ept/list?uid=${uid}&page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+  // 获取集群设备列表--（分页）批量取消
+  getClusUnbindEquip(uid: string, n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `/api/formal/cluster/unbind/ept/list?uid=${uid}&page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error

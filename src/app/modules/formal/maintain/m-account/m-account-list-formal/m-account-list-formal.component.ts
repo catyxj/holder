@@ -51,7 +51,7 @@ export class MAccountListFormalComponent implements OnInit {
   // 获取列表
   getList() {
     this.loading = true;
-    this.maintainService.getLists(this.page, this.pageSize, this.search, this.value)
+    this.maintainService.getUserLists(this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;
@@ -166,7 +166,24 @@ export class MAccountListFormalComponent implements OnInit {
       // subtitle = '禁用后可到设置内恢复账号状态。';
 
       this.creatModal(title, subtitle, () => {
-        this.checkBatch(checked);
+        let post = {
+          data: checked
+        };
+        this.maintainService.deleteUserData(post)
+          .subscribe(val => {
+            Swal(
+              '操作成功！',
+              '',
+              'success'
+            );
+            this.pageChange();
+          }, err => {
+            Swal(
+              '操作失败！',
+              err,
+              'error'
+            );
+          });
       });
     } else {
       this.nzModal.info({
@@ -202,7 +219,7 @@ export class MAccountListFormalComponent implements OnInit {
         let post = {
           data: checked
         };
-        this.maintainService.deleteData(post)
+        this.maintainService.updateUserStatus(post)
           .subscribe(val => {
             Swal(
               '操作成功！',
@@ -242,28 +259,6 @@ export class MAccountListFormalComponent implements OnInit {
     });
   }
 
-  // 发送批量操作请求
-  checkBatch(checked) {
-    let that = this;
-    let post = {
-      data: checked
-    };
-    this.maintainService.deleteData(post)
-      .subscribe(val => {
-        Swal(
-          '操作成功！',
-          '',
-          'success'
-        );
-        this.pageChange();
-      }, err => {
-        Swal(
-          '操作失败！',
-          err,
-          'error'
-        );
-      });
-  }
 
 
 }

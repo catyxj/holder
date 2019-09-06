@@ -24,9 +24,9 @@ export class CycleEditComponent implements OnInit {
 
   ngOnInit() {
     this.name = this.currentData.name;
-    this.date = this.currentData.date;
-    this.period = this.currentData.period;
-    this.topic = this.currentData.topic;
+    this.date = this.currentData.install_date;
+    this.period = this.currentData.save_month;
+    this.topic = this.currentData.description;
   }
 
   // 选择日期

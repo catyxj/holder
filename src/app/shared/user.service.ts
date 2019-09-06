@@ -37,19 +37,7 @@ export class UserService {
     this.changeUserSource.next(message);
   }
 
-  // 登录
-  login(user): Observable< any > {
-    // TODO: send the message _after_ fetching the heroes
-    // return this.http.post< any >('/user_login/', user, httpOptions)
-    return this.http.post< any >('/api/login', user, httpOptions)
-      .pipe(
-        // retry(3), // retry a failed request up to 3 times
-        tap((val) => {
-          localStorage.setItem('status', 'true');
-        }),
-        catchError(this.handleError) // then handle the error
-      );
-  }
+
 
   // 退出登录
   logout(uid): Observable< any > {
@@ -71,33 +59,34 @@ export class UserService {
     console.log('environment:', environment.production);
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
-
-    console.log('getUser:', token);
-
-    if (!environment.production) {
+    console.log(httpOptions);
+    /*if (!environment.production) {
       return this.http.get< any >('assets/server/user.json');
     } else {
+      console.log('ghhhhhhhhh');
       return this.http.get< any >('/api/user', httpOptions)
         .pipe(
-          // tap((val) => {
-          //   if (!val) {
-          //     sessionStorage.setItem('user', 'false');
-          //   }
-          // }),
+          tap((val) => {
+            // if (!val) {
+            //   sessionStorage.setItem('user', 'false');
+            // }
+            console.log('token:', token);
+          }),
           catchError(this.handleError2)
         );
-    }
+    }*/
 
-    /*return this.http.get< any >('/api/user', httpOptions)
-      .pipe(
-        tap((val) => {
-          if (!val) {
-            // this.isLoggedIn = 'false';
-            sessionStorage.setItem('user', 'false');
-          }
-        }),
-        catchError(this.handleError2)
-      );*/
+    // return this.http.get< any >('assets/server/user.json');
+    return this.http.get< any >('/api/user', httpOptions)
+        .pipe(
+          tap((val) => {
+            // if (!val) {
+            //   sessionStorage.setItem('user', 'false');
+            // }
+            console.log('token:', token);
+          }),
+          catchError(this.handleError2)
+        );
 
 
   }
@@ -162,7 +151,8 @@ export class UserService {
         `body was: ${error.error}`);
     }
     if (error.status === 550) {
-      localStorage.setItem('user', 'false');
+      localStorage.user = 'false';
+      sessionStorage.removeItem('currentUser');
       localStorage.removeItem('authToken');
       alert(error.error);
     }
@@ -181,7 +171,8 @@ export class UserService {
         `body was: ${error.error}`);
     }
     if (error.status === 550) {
-      sessionStorage.setItem('user', 'false');
+      localStorage.user = 'false';
+      sessionStorage.removeItem('currentUser');
       localStorage.removeItem('authToken');
       alert(error.error);
     }

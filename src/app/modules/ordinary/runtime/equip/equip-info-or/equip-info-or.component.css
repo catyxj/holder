@@ -34,6 +34,7 @@ h6{
 }
 .eq_row{
   display: flex;
+  flex-wrap: wrap;
 }
 .eq_item{
   display: flex;
@@ -56,7 +57,7 @@ h6{
   flex: auto;
   color: #666EE8;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 .eq_link .eq_value{
   justify-content: space-between;

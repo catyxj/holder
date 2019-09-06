@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {BoilerService} from "../../../../../../shared/boiler.service";
 
 @Component({
   selector: 'app-notice-online',
@@ -6,10 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notice-online.component.css']
 })
 export class NoticeOnlineComponent implements OnInit {
+  @Input()
+  uid;
+  public info;
 
-  constructor() { }
+  constructor(private eptService: BoilerService) { }
 
   ngOnInit() {
+    this.getData();
+  }
+
+  getData() {
+    this.eptService.getNoticeInfo()
+      .subscribe(data => {
+          this.info = data;
+      }, err => {
+
+      });
   }
 
 }

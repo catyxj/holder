@@ -14,6 +14,8 @@ import Swal from 'sweetalert2';
 export class CluBasicEditComponent implements OnInit {
   @Input()
   uid;
+  @Input()
+  currentData;
 
 
   public info;
@@ -41,19 +43,26 @@ export class CluBasicEditComponent implements OnInit {
       'Authorization': token
     };
 
-    this.info = {
+    this.getInfo();
+  }
+
+  getInfo() {
+    /*this.info = {
       id: 'hdahk',
       verify: 'asdf',
       use_org_name: 'asdfa',
       name: 'asdf',
       location_id: 120101
-    };
+    };*/
+
+    this.info = this.currentData;
+
     this.name = this.info.name;
-    this.locationId = this.info.location_id;
+    this.locationId = this.info.location;
+    this.address = this.info.address;
     this.getAddress();
 
   }
-
 
   getAddress() {
     this.addressService.getAddress()
@@ -64,7 +73,7 @@ export class CluBasicEditComponent implements OnInit {
   }
 
   initLocation() {
-    let location = this.info.location_id;
+    let location = this.info.location;
     // console.log(location);
     if (location && location !== 0) {
       if (location < 100) {
@@ -194,11 +203,19 @@ export class CluBasicEditComponent implements OnInit {
     if (this.img) {
       post = {
         uid: this.uid,
+        name: this.name,
+        location: this.locationId,
+        location_name: this.locationName + this.address,
+        address: this.address,
         img: this.img.response.id
       };
     } else {
       post = {
-        uid: this.uid
+        uid: this.uid,
+        name: this.name,
+        location: this.locationId,
+        location_name: this.locationName + this.address,
+        address: this.address,
       };
     }
 

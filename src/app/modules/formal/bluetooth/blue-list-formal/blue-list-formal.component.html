@@ -86,8 +86,12 @@
           <td> {{data.ept_name || '空'}} ({{data.terminal_code || '空'}}) </td>
           <td> {{data.org_name || '空'}} </td>
           <td>
-            <a class="btn btn_purple btn-sm" [routerLink]="['/admin/formal/bluetooth/info', data.uid, page]">
+            <!--<a class="btn btn_purple btn-sm" [routerLink]="['/admin/formal/bluetooth/info', data.uid, page]">
               设置
+            </a>-->
+            <a class="" [routerLink]="['/admin/formal/bluetooth/info', data.uid, page]" title="设置">
+              <!--设置-->
+              <i class="iconfont iconshezhi1 text_purple"></i>
             </a>
           </td>
         </tr>

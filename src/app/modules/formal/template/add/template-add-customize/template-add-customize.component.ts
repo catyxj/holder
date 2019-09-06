@@ -6,6 +6,7 @@ import {NzModalService} from "ng-zorro-antd/modal";
 import Swal from 'sweetalert2';
 import {TerminalAddImgFormalComponent} from "../../../terminal/modals/terminal-add-img-formal/terminal-add-img-formal.component";
 import {TerminalDeleteImgComponent} from "../../../terminal/modals/terminal-delete-img/terminal-delete-img.component";
+import {TemplateService} from "../../../../../shared/template.service";
 
 @Component({
   selector: 'app-template-add-customize',
@@ -56,8 +57,16 @@ export class TemplateAddCustomizeComponent implements OnInit {
   public curAddress; // 当前选中组件寄存器地址
 
 
+  isVisible = false;
+  public ztName;
+  public imgT;
+  public dataT;
+  public contentT;
+
+
   constructor(private route: ActivatedRoute,
               private terminalService: TerminalService,
+              private templateService: TemplateService,
               public el: ElementRef,
               private modalService: NzModalService) { }
 
@@ -162,7 +171,8 @@ export class TemplateAddCustomizeComponent implements OnInit {
 
   // 获取通道
   getChans() {
-    /*this.chans1 = [
+
+    /*this.chans = [
       {
         channel_type: 10,
         channel_number: 3,
@@ -176,29 +186,34 @@ export class TemplateAddCustomizeComponent implements OnInit {
       {
         channel_type: 10,
         channel_number: 5,
-        name: 'hhhhhhh'
-      }
-    ];
-    this.chans2 = [
+        name: '模拟hhhhhhh'
+      },
       {
         channel_type: 11,
         channel_number: 3,
-        name: '排烟温度'
+        name: '开关排烟温度'
       },
-    ];
-    this.chans3 = [
       {
         channel_type: 12,
         channel_number: 5,
-        name: 'hhhhhhh'
+        name: '状态hhhhhhh'
       }
     ];
-    this.chans = [...this.chans1, ...this.chans2, ...this.chans3];
-
-
     for (let i = 0; i < this.chans.length; i++) {
       const ch = this.chans[i];
       ch.id = ch.channel_type + '_' + ch.channel_number + '_' + ch.name;
+      switch (ch.channel_type) {
+        case 10:
+          this.chans1.push(ch);
+          break;
+        case 11:
+          this.chans2.push(ch);
+          this.chans3.push(ch);
+          break;
+        case 12:
+          this.chans3.push(ch);
+          break;
+      }
     }
     console.log(this.chans1, this.chans2, this.chans3);*/
 
@@ -206,12 +221,6 @@ export class TemplateAddCustomizeComponent implements OnInit {
       .subscribe(data => {
 
         this.chans = data.channel;
-
-        /*this.chans1 = data.alalog;
-        this.chans2 = data.switch;
-        this.chans3 = data.range;
-        this.chans = this.chans1.concat(this.chans2, this.chans3);*/
-
 
         for (let i = 0; i < this.chans.length; i++) {
           const ch = this.chans[i];
@@ -222,6 +231,7 @@ export class TemplateAddCustomizeComponent implements OnInit {
               break;
             case 11:
               this.chans2.push(ch);
+              this.chans3.push(ch);
               break;
             case 12:
               this.chans3.push(ch);
@@ -481,7 +491,6 @@ export class TemplateAddCustomizeComponent implements OnInit {
 
   eventDown(e) {
     const that = this;
-
     that.dragImg(e, that);
   }
 
@@ -494,6 +503,7 @@ export class TemplateAddCustomizeComponent implements OnInit {
 
   // 点击移动
   dragImg(event, that) {
+    // console.log(event);
     event.preventDefault();
     that.moving = true;
     that.z = that.z + 1;
@@ -503,6 +513,7 @@ export class TemplateAddCustomizeComponent implements OnInit {
     let tgt = event.target;
     let dataS = false;
     let isBtn = false;
+    // console.log(tgt);
     if (tgt.className === 'dataComponent') {
       dataS = true;
     }
@@ -757,22 +768,41 @@ export class TemplateAddCustomizeComponent implements OnInit {
   select3(d) {
     const that = this;
     this.selected = d;
-    this.ctrl0 = false;
+    this.ctrl0 = true;
     this.ctrl1 = false;
     this.ctrl2 = false;
     this.ctrl3 = false;
-    this.ctrl4 = true;
+    this.ctrl4 = false;
+
 
     if (this.selected) {
-      // this.showCh = 3;
+      const chType = this.selected.chanType;
+      const chNum = this.selected.chanNum;
+      const chName = this.selected.chanName;
+
+      this.showCh = 2;
       this.cName = this.selected.cName;
       this.cType = this.selected.cType;
-      this.curAddress = this.selected.address;
+      this.dataValue = chType + '_' + chNum + '_' + chName;
+      // this.curAddress = this.selected.address;
+
     } else {
-      this.ctrl4 = false;
+      this.ctrl0 = false;
+      this.showCh = 0;
     }
   }
 
+
+
+  // 改变宽度
+  changeH(h) {
+    this.selected.style.height = h + 'px';
+  }
+
+  // 改变高度
+  changeW(w) {
+    this.selected.style.width = w + 'px';
+  }
 
   // 选择通道
   chooseValue(val) {
@@ -891,13 +921,13 @@ export class TemplateAddCustomizeComponent implements OnInit {
 
     // con.removeChild(this.selected);
     this.selected = null;
+    this.cName = '';
+    this.cType = '';
     this.ctrl0 = false;
     this.ctrl1 = false;
     this.ctrl2 = false;
     this.ctrl3 = false;
   }
-
-
 
 
 
@@ -1154,8 +1184,8 @@ export class TemplateAddCustomizeComponent implements OnInit {
       }
     }
 
-    this.devices = {
-      terminal_id: this.uid,
+    /*this.devices = {
+      uid: this.uid,
       img: img3,
       data: da2,
       content:  {
@@ -1166,19 +1196,62 @@ export class TemplateAddCustomizeComponent implements OnInit {
         data2: that.dataLists2,
         // data3: that.dataLists3,
         btns: that.btnLists
-      }
+      },
+    };*/
+
+    this.imgT = img3;
+    this.dataT = da2;
+    this.contentT = {
+      imgs1: that.imgLists1,
+      imgs2: that.imgLists2,
+      imgs3: that.imgLists3,
+      data1: that.dataLists1,
+      data2: that.dataLists2,
+      // data3: that.dataLists3,
+      btns: that.btnLists
     };
-    console.log(this.devices);
 
-    this.next.emit(1);
+    // console.log(this.devices);
+    // this.next.emit(1);
 
-    /*this.terminalService.saveZ(this.devices)
+    this.showModal();
+
+  }
+
+
+  pre() {
+    this.next.emit(-1);
+  }
+
+
+  // 打开输入名字对话框
+  showModal(): void {
+    this.isVisible = true;
+  }
+
+  handleOk(): void {
+    if (!this.ztName) {
+      this.modalService.info({
+        nzTitle: '请输入模板名称',
+        nzContent: '',
+        nzOnOk: () => console.log('Info OK')
+      });
+      return;
+    }
+    this.devices = {
+      uid: this.uid,
+      img: this.imgT,
+      data: this.dataT,
+      content:  this.contentT,
+      name: this.ztName
+    };
+    this.templateService.addZt(this.devices)
       .subscribe(val => {
-        /!*Swal(
+        Swal(
           '保存成功',
           '',
           'success'
-        );*!/
+        );
         this.next.emit(1);
       }, err => {
         Swal(
@@ -1186,14 +1259,12 @@ export class TemplateAddCustomizeComponent implements OnInit {
           err.message || err,
           'error'
         );
-      });*/
-
-
+      });
+    this.isVisible = false;
   }
 
-
-  pre() {
-    this.next.emit(-1);
+  handleCancel(): void {
+    this.isVisible = false;
   }
 
 

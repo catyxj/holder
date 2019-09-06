@@ -36,7 +36,7 @@
                 账号
               </div>
               <div class="f_info_item_value">
-                {{user?.username}}
+                {{info?.username}}
               </div>
             </li>
             <li class="f_info_item">
@@ -44,10 +44,10 @@
                 账号状态
               </div>
               <div class="f_info_item_value">
-                <span class="text_danger" *ngIf="user&&user.status===0">
+                <span class="text_danger" *ngIf="info&&info.status===0">
                   禁用
                 </span>
-                <span class="" *ngIf="user&&user.status===1">
+                <span class="" *ngIf="info&&info.status===1">
                   正常
                 </span>
               </div>
@@ -57,19 +57,19 @@
                 账号类型
               </div>
               <div class="f_info_item_value">
-                <span *ngIf="user&&user.role_id===1">
+                <span *ngIf="info&&info.role_id===1">
                   系统用户
                 </span>
-                <span class="" *ngIf="user&&user.role_id===10">
+                <span class="" *ngIf="info&&info.role_id===10">
                   正式用户
                 </span>
-                <span class="" *ngIf="user&&user.role_id===11">
+                <span class="" *ngIf="info&&info.role_id===11">
                   普通用户
                 </span>
-                <span class="" *ngIf="user&&user.role_id===15">
+                <span class="" *ngIf="info&&info.role_id===15">
                   维保用户
                 </span>
-                <span class="" *ngIf="user&&user.role_id===20">
+                <span class="" *ngIf="info&&info.role_id===20">
                   测试用户
                 </span>
 
@@ -99,7 +99,7 @@
                 用户名
               </div>
               <div class="f_info_item_value">
-                {{user?.name}}
+                {{info?.name}}
               </div>
             </li>
 
@@ -108,7 +108,7 @@
                 所属单位
               </div>
               <div class="f_info_item_value">
-                {{user?.org_name}}
+                {{info?.org_name}}
               </div>
             </li>
             <li class="f_info_item">
@@ -116,19 +116,19 @@
                 单位类型
               </div>
               <div class="f_info_item_value">
-                <span *ngIf="user&&user.org_tag === 1">
+                <span *ngIf="info&&info.org_tag === 1">
                   产品使用
                 </span>
-                <span *ngIf="user&&user.org_tag === 2">
+                <span *ngIf="info&&info.org_tag === 2">
                   产品制造
                 </span>
-                <span *ngIf="user&&user.org_tag === 3">
+                <span *ngIf="info&&info.org_tag === 3">
                   产品运维
                 </span>
-                <span *ngIf="user&&user.org_tag === 4">
+                <span *ngIf="info&&info.org_tag === 4">
                   组件供应
                 </span>
-                <span *ngIf="user&&user.org_tag === 5">
+                <span *ngIf="info&&info.org_tag === 5">
                   监管机构
                 </span>
               </div>
@@ -138,7 +138,7 @@
                 地域地址
               </div>
               <div class="f_info_item_value">
-                {{user?.location_name}}
+                {{info?.location_name}}
               </div>
             </li>
             <li class="f_info_item">
@@ -146,7 +146,7 @@
                 邮箱
               </div>
               <div class="f_info_item_value">
-                {{user?.email}}
+                {{info?.email}}
               </div>
             </li>
           </ul>

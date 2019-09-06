@@ -46,9 +46,18 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    let token = localStorage.getItem('authToken');
+    let roleId = localStorage.getItem('roleId');
+    if (!token) {
+      localStorage.user = 'false';
+      sessionStorage.removeItem('currentUser');
+      localStorage.removeItem('authToken');
+      alert('token错误，请刷新页面重试');
+      this.router.navigate(['/login']);
+    }
     this.getSide();
     this.getUser();
-    let roleId = localStorage.getItem('roleId');
+
 
     // console.log(this.location.hash);
     if (this.location.hash === '#/admin') {
@@ -83,6 +92,7 @@ export class MainComponent implements OnInit, OnDestroy {
           localStorage.removeItem('authToken');
           this.router.navigate(['/login']);
         }
+        console.log(this.user);
       }, err => {
         /*console.log(err);
         if (err.status === 550) {
@@ -93,6 +103,7 @@ export class MainComponent implements OnInit, OnDestroy {
             nzOnOk: () => {this.router.navigate(['/login']); }
           });
         }*/
+
         this.router.navigate(['/login']);
 
       });

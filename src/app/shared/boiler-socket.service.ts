@@ -34,11 +34,22 @@ export class BoilerSocketService {
   }
 
   closeSocket() {
-    this.ws.close();
+    console.log('ws close');
+    this.ws.onopen = () => {
+      console.log('ws is close');
+      this.ws.close();
+    };
+
   }
 
   sendMessage(message) {
     this.ws.send(JSON.stringify(message));
+  }
+
+  sendText(text) {
+    if (this.ws) {
+      this.ws.send(JSON.stringify(text));
+    }
   }
 
   retrieveData() {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {Observable, throwError} from "rxjs/index";
-import {catchError} from "rxjs/internal/operators";
+import {catchError, tap} from "rxjs/internal/operators";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,6 +16,20 @@ const httpOptions = {
 export class RegisterService {
 
   constructor(private http: HttpClient) { }
+
+  // 登录
+  login(user): Observable< any > {
+    // TODO: send the message _after_ fetching the heroes
+    // return this.http.post< any >('/user_login/', user, httpOptions)
+    return this.http.post< any >('/api/login', user, httpOptions)
+      .pipe(
+        // retry(3), // retry a failed request up to 3 times
+        tap((val) => {
+          localStorage.setItem('status', 'true');
+        }),
+        catchError(this.handleError) // then handle the error
+      );
+  }
 
   // 获取验证码
   getCode(data): Observable< any > {

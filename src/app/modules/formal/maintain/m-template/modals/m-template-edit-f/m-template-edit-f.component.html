@@ -49,10 +49,10 @@
           {{ i+1 }}
         </td>
         <td>
-          <span *ngIf="!edit" class="text_purple">{{ item.info }}</span>
+          <span *ngIf="!edit" class="text_purple">{{ item}}</span>
 
-          <input type="text" class="form-control" [(ngModel)]="item.info"
-                 *ngIf="edit"
+          <input type="text" class="form-control" [(ngModel)]="item"
+                 *ngIf="edit" (change)="changeItem(item, i)"
                  placeholder="50个汉字以内" maxlength="50">
         </td>
       </tr>

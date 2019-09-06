@@ -78,6 +78,7 @@ export class RuntimeService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
+    // return this.http.get('/assets/server/boiler.json');
     return this.http.get(`/api/formal/ept/runtime/history?uid=${uid}&page=${page}&rows=${pageSize}`, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -90,7 +91,11 @@ export class RuntimeService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.get(`/api/formal/ept/runtime/history/export?uid=${uid}&type=${type}`, httpOptions)
+    let data = {
+      uid: uid,
+      type: type
+    };
+    return this.http.post(`/api/formal/ept/runtime/history/export`, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

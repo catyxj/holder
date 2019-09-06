@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TerminalService} from "../../../../../shared/terminal.service";
 import {TemplateService} from "../../../../../shared/template.service";
 
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-template-add-cmt',
   templateUrl: './template-add-cmt.component.html',
@@ -64,7 +66,8 @@ export class TemplateAddCmtComponent implements OnInit {
   save() {
     let that = this;
     let post;
-    /*post = {
+    post = {
+      uid: this.uid,
       baud_rate: parseInt(this.baudRate),
       data_bit: parseInt(this.dataBit),
       stop_bit: parseInt(this.stopBit),
@@ -72,11 +75,11 @@ export class TemplateAddCmtComponent implements OnInit {
       heart_beat: parseInt(this.heartbeat),
       cmt_type: parseInt(this.correspond),
       data_type: parseInt(this.dataType)
-    };*/
+    };
     console.log(post);
-    this.next.emit(1);
+    // this.next.emit(1);
 
-    /*this.templateService.updateBasic(post)
+    this.templateService.addCmt(post)
       .subscribe(val => {
         Swal(
           '操作成功！',
@@ -86,11 +89,13 @@ export class TemplateAddCmtComponent implements OnInit {
         this.next.emit(1);
       }, err => {
         Swal(
-          err.message,
+          err.message || err,
           '',
           'error'
         );
-      });*/
+      });
+
+    this.next.emit(1);
 
 
   }

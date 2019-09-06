@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 import {ServiceService} from "../../../../shared/service.service";
-import {ComfirmComponent} from "../../../directives/alert/comfirm/comfirm.component";
-
-import Swal from 'sweetalert2';
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {switchMap} from "rxjs/internal/operators";
+
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-service-list-formal',

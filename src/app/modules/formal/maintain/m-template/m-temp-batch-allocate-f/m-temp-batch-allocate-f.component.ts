@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import Swal from 'sweetalert2';
 import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 import {MaintainService} from "../../../../../shared/maintain.service";
 import {ActivatedRoute} from "@angular/router";
-import {ComfirmComponent} from "../../../../directives/alert/comfirm/comfirm.component";
+
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-m-temp-batch-allocate-f',
@@ -15,7 +16,7 @@ export class MTempBatchAllocateFComponent implements OnInit {
   public page = 1;
   public pageNum;
   public pageSize = 15;
-  public search = 'id';
+  public search = 'temp_label';
   public value;
   public status = '';
   public online = '';
@@ -39,10 +40,10 @@ export class MTempBatchAllocateFComponent implements OnInit {
 
   // 获取模板下拉列表
   getTemplates() {
-    /*this.maintainService.getTemplateAll()
+    this.maintainService.getTempListAll()
       .subscribe(data => {
         this.templateList = data;
-      });*/
+      });
   }
 
   // 获取设备列表
@@ -53,15 +54,16 @@ export class MTempBatchAllocateFComponent implements OnInit {
         name : 'asdfa'
       }
     ];
-    /*this.loading = true;
-    this.maintainService.getLists(this.page, this.pageSize, this.status, this.search, this.value, this.online)
+
+    this.loading = true;
+    this.maintainService.tempEptlist(this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;
         this.totalItems = data.count;
       }, err => {
         this.loading = false;
-      });*/
+      });
   }
 
 
@@ -131,6 +133,15 @@ export class MTempBatchAllocateFComponent implements OnInit {
     let title = '';
     let subtitle = '';
 
+    if (!this.selectedTemplate) {
+      this.nzModal.info({
+        nzTitle: '请选择模板',
+        nzContent: '',
+        nzOnOk: () => console.log('Info OK')
+      });
+      return;
+    }
+
     let checked = [];
     if (!this.dataLists || this.dataLists.length <= 0 ) {
       this.dataLists = [];
@@ -149,17 +160,12 @@ export class MTempBatchAllocateFComponent implements OnInit {
         this.checkBatch(checked);
       });
     } else {
-      title = '请选择模板';
       this.nzModal.info({
-        nzTitle: '请选择模板',
+        nzTitle: '请选择设备',
         nzContent: '',
         nzOnOk: () => console.log('Info OK')
       });
 
-
-      /*this.creatModal(title, subtitle, () => {
-
-      });*/
     }
   }
 
@@ -181,10 +187,11 @@ export class MTempBatchAllocateFComponent implements OnInit {
   checkBatch(checked) {
     let that = this;
     let post = {
+      id: this.selectedTemplate,
       data: checked
     };
-    /*this.loading = true;
-    this.maintainService.batchIssued(post)
+    this.loading = true;
+    this.maintainService.tempEptBatch(post)
       .subscribe(val => {
         that.loading = false;
         Swal(
@@ -200,7 +207,7 @@ export class MTempBatchAllocateFComponent implements OnInit {
           '',
           'error'
         );
-      });*/
+      });
   }
 
   goBack() {

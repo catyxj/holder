@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TerminalService} from "../../../../shared/terminal.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {TemplateService} from "../../../../shared/template.service";
 import {TemplateCmtEditFComponent} from "../modals/template-cmt-edit-f/template-cmt-edit-f.component";
 import {TemplateBasicEditFComponent} from "../modals/template-basic-edit-f/template-basic-edit-f.component";
+import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 
 import Swal from 'sweetalert2';
-import {ComfirmComponent} from "../../../directives/alert/comfirm/comfirm.component";
-import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 
 @Component({
   selector: 'app-template-config-formal',
@@ -40,7 +39,8 @@ export class TemplateConfigFormalComponent implements OnInit {
               private terminalService: TerminalService,
               private templateService: TemplateService,
               private route: ActivatedRoute,
-              private nzModal: NzModalService) { }
+              private nzModal: NzModalService,
+              private router: Router) { }
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
@@ -71,7 +71,7 @@ export class TemplateConfigFormalComponent implements OnInit {
 
   // 获取通信参数
   getCommunication() {
-    this.terminalService.getCmt(this.uid)
+    this.templateService.getCmt(this.uid)
       .subscribe(data => {
         this.communication = data;
 
@@ -141,7 +141,7 @@ export class TemplateConfigFormalComponent implements OnInit {
 
   // 获取通道信息
   getChannel() {
-    this.terminalService.getChannelBrief(this.uid)
+    this.templateService.getChannelBrief(this.uid)
       .subscribe(data => {
         this.channels = data;
       }, err => {
@@ -151,7 +151,7 @@ export class TemplateConfigFormalComponent implements OnInit {
 
   // 获取组态信息
   getZT() {
-    this.terminalService.getzZTBrief(this.uid)
+    this.templateService.getzZTBrief(this.uid)
       .subscribe(data => {
         this.zutai = data;
       }, err => {
@@ -161,7 +161,7 @@ export class TemplateConfigFormalComponent implements OnInit {
 
   // 获取模板基本信息
   getBasic() {
-    this.terminalService.getEpt(this.uid)
+    this.templateService.getEpt(this.uid)
       .subscribe(data => {
         this.basic = data;
         if (this.basic && this.basic.ept_img) {
@@ -215,10 +215,29 @@ export class TemplateConfigFormalComponent implements OnInit {
 
   // 删除
   deleteData() {
+    let that = this;
     const title = '确认要删除此模板吗？';
     const subtitle = '';
     this.creatModal(title, subtitle, () => {
-      this.checkBatch( [this.uid]);
+      const post = {
+        data: [this.uid]
+      };
+
+      this.templateService.deleteData(post)
+        .subscribe(val => {
+          Swal(
+            '操作成功！',
+            '',
+            'success'
+          );
+          that.router.navigate(['/admin/ad/template/list']);
+        }, err => {
+          Swal(
+            err.message || err,
+            '',
+            'error'
+          );
+        });
     });
   }
 
@@ -236,29 +255,6 @@ export class TemplateConfigFormalComponent implements OnInit {
     });
   }
 
-  // 发送批量操作请求
-  checkBatch( checked) {
-    const that = this;
-    const post = {
-      data: checked
-    };
-
-    /*this.templateService.deleteData(post)
-      .subscribe(val => {
-        Swal(
-          '操作成功！',
-          '',
-          'success'
-        );
-        that.router.navigate(['/admin/ad/template/list']);
-      }, err => {
-        Swal(
-          err.message || err,
-          '',
-          'error'
-        );
-      });*/
-  }
 
 
   goBack() {

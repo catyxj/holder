@@ -24,6 +24,7 @@ export class EqHistoryComponent implements OnInit {
   public dateRange = [];
   public name;
   public isSpinning = false;
+  public isLoading = false;
 
   constructor(private runtimeService: RuntimeService,
               private datePipe: DatePipe,
@@ -82,13 +83,13 @@ export class EqHistoryComponent implements OnInit {
       .subscribe( data => {
         // console.log(data);
         this.isSpinning = false;
-        this.totalItems = data.counts;
-        let runtimes = data.data;
+        this.totalItems = data.count;
+        let runtimes = data.history;
 
         this.params = [];
         this.history = [];
-        let param = runtimes.channel;
-        let lists = runtimes.history;
+        let param = data.channels;
+        // let lists = runtimes.slice();
 
         // 通道列表
         for ( let i = 0; i < param.length; i++) {
@@ -105,17 +106,18 @@ export class EqHistoryComponent implements OnInit {
         }
 
         // 历史数据列表
-        if (lists) {
-          for (let i = 0; i < lists.length; i++) {
-            let li = JSON.parse(lists[i].data);
+        if (runtimes) {
+          for (let i = 0; i < runtimes.length; i++) {
+            console.log(typeof runtimes[i].json_data);
+            let li = JSON.parse(runtimes[i].json_data);
             let his = {
               date: '',
               data: {}
             };
-            his.date = lists[i].date;
+            his.date = runtimes[i].receive_time;
             for (let j = 0; j < li.length; j++) {
               let dat = li[j];
-              let id = dat.type + '_' + dat.number;
+              let id = dat.channel_type + '_' + dat.channel_number;
               his.data[id] = dat.value.toString();
             }
             this.history.push(his);
@@ -159,15 +161,16 @@ export class EqHistoryComponent implements OnInit {
     //   startDate: this.dateRange[0],
     //   endDate: this.dateRange[1]
     // };
+    this.isLoading = true;
     this.rangeValue = data;
     this.runtimeService.getHistoryExport(this.uid, data)
       .subscribe( data => {
-        let totalItems = data.count;
-        let runtimes = data.data;
+        // let totalItems = data.count;
+        let runtimes = data;
 
         let params = [];
         let history = [];
-        let param = runtimes.channel;
+        let param = runtimes.channels;
         let lists = runtimes.history;
 
 
@@ -186,14 +189,14 @@ export class EqHistoryComponent implements OnInit {
         // 历史数据列表
         if (lists) {
           for (let i = 0; i < lists.length; i++) {
-            let li = JSON.parse(lists[i].data);
+            let li = JSON.parse(lists[i].json_data);
             let his = {
-              date: lists[i].date,
+              date: lists[i].receive_time,
               data: {}
             };
             for (let j = 0; j < li.length; j++) {
               let dat = li[j];
-              let id = dat.type + '_' + dat.number;
+              let id = dat.channel_type + '_' + dat.channel_number;
               his.data[id] = dat.value.toString();
             }
             history.push(his);
@@ -203,10 +206,23 @@ export class EqHistoryComponent implements OnInit {
         // console.log(history);
 
         // 导出表格
-        let start = this.datePipe.transform(this.dateRange[0], 'yyyy.MM.dd');
-        let end = this.datePipe.transform(this.dateRange[1], 'yyyy.MM.dd');
+        // let start = this.datePipe.transform(this.dateRange[0], 'yyyy.MM.dd');
+        // let end = this.datePipe.transform(this.dateRange[1], 'yyyy.MM.dd');
 
-        let table = `<table><tr><td>设备：${this.name}</td><td></td><td>时间： ${start}-${end}</td> </tr><tr><td>采样时间</td>`;
+        let time = '';
+        switch (this.rangeValue) {
+          case 'day':
+            time = '今日';
+            break;
+          case 'week':
+            time = '一周';
+            break;
+          case 'month':
+            time = '一月';
+        }
+        let name = '历史数据';
+
+        let table = `<table><tr><td>${name}</td><td></td><td>时间： ${time}</td> </tr><tr><td>采样时间</td>`;
 
         // headers
         for (let i = 0; i < params.length; i++) {
@@ -228,7 +244,7 @@ export class EqHistoryComponent implements OnInit {
 
         const blob = new Blob([html], {type: 'application/vnd.ms-excel'});
 
-        const fileName = `${this.name}(${this.rangeValue}).xlsx`;
+        const fileName = `${name}(${this.rangeValue}).xlsx`;
 
         if (window.navigator.msSaveOrOpenBlob) { // IE浏览器
           navigator.msSaveOrOpenBlob(blob,  fileName);
@@ -244,6 +260,8 @@ export class EqHistoryComponent implements OnInit {
           // 释放URL地址
           URL.revokeObjectURL(objectUrl);
         }
+
+        this.isLoading = false;
 
       });
 

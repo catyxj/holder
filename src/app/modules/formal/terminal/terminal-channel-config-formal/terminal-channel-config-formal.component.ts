@@ -505,7 +505,7 @@ export class TerminalChannelConfigFormalComponent implements OnInit {
             });
             return false;
           }
-        } else if (!this.analogueList[i].Func || !this.analogueList[i].Byte || !this.analogueList[i].Modbus || !this.analogueList[i].Parameter.Scale || !this.analogueList[i].Parameter.Unit || !this.analogueList[i].slaveAddress) {
+        } else if (!this.analogueList[i].Func || !this.analogueList[i].Byte || !this.analogueList[i].Modbus || !this.analogueList[i].Parameter.Scale || !this.analogueList[i].Parameter.Unit) {
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
             nzContent: `模拟通道[ ${i + 1} ]配置信息不全 ，参数不能为0 `
@@ -513,7 +513,7 @@ export class TerminalChannelConfigFormalComponent implements OnInit {
           return false;
         }
 
-        if (this.analogueList[i].slaveAddress > 255 || this.analogueList[i].slaveAddress < 1) {
+        if (parseInt(this.analogueList[i].Func) !== 99 && (!this.analogueList[i].slaveAddress || this.analogueList[i].slaveAddress > 255 || this.analogueList[i].slaveAddress < 1)) {
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
             nzContent: `模拟通道[ ${i + 1} ]从机地址错误 `
@@ -569,7 +569,7 @@ export class TerminalChannelConfigFormalComponent implements OnInit {
 
     for (let i = 0; i < this.switchList.length; i++) {
       if (this.switchList[i].Parameter.Name) {
-        if ((parseInt(this.switchList[i].Func) !== 99) && (!this.switchList[i].Func || !this.switchList[i].BitAddress || !this.switchList[i].Modbus || !this.switchList[i].slaveAddress)) {
+        if ((parseInt(this.switchList[i].Func) !== 99) && (!this.switchList[i].Func || !this.switchList[i].BitAddress || !this.switchList[i].Modbus)) {
 
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
@@ -577,14 +577,14 @@ export class TerminalChannelConfigFormalComponent implements OnInit {
           });
           return false;
         }
-        if (this.switchList[i].slaveAddress > 255 || this.switchList[i].slaveAddress < 1) {
+        if (parseInt(this.switchList[i].Func) !== 99 && (!this.switchList[i].slaveAddress || this.switchList[i].slaveAddress > 255 || this.switchList[i].slaveAddress < 1)) {
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
             nzContent: `开关通道[ ${i + 1} ]从机地址错误 `
           });
           return false;
         }
-        if (parseInt(this.switchList[i].Func) === 1 || parseInt(this.switchList[i].Func) === 3) {
+        if ((parseInt(this.switchList[i].Func) !== 99) && (parseInt(this.switchList[i].Func) === 1 || parseInt(this.switchList[i].Func) === 3)) {
           if (this.switchList[i].writeRule !== '0') {
             if (!this.switchList[i].writeValue1 || !this.switchList[i].writeValue2 ) {
               this.nzmodalService.error({
@@ -670,7 +670,7 @@ export class TerminalChannelConfigFormalComponent implements OnInit {
           return false;
         }
 
-        if (this.rangeList[i].slaveAddress > 255 || this.rangeList[i].slaveAddress < 1) {
+        if ((parseInt(this.rangeList[i].Func) !== 99) && (this.rangeList[i].slaveAddress > 255 || this.rangeList[i].slaveAddress < 1)) {
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
             nzContent: `状态通道[ ${i + 1} ]从机地址错误 `

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {MaintainService} from "../../../../../shared/maintain.service";
 
 @Component({
   selector: 'app-m-record-info-formal',
@@ -16,10 +17,7 @@ export class MRecordInfoFormalComponent implements OnInit {
       description: '通风口是否正常',
       status: false,
       remark: '',
-      imgList: [
-        'assets/images/no_img.jpg',
-        'assets/images/no_img.jpg'
-      ]
+      imgList: []
     },
     {
       description: '点火器是否正常',
@@ -52,13 +50,22 @@ export class MRecordInfoFormalComponent implements OnInit {
 
   public listPage;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,
+              private maintainService: MaintainService) { }
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
     this.listPage = this.route.snapshot.paramMap.get('page');
   }
 
+  getInfo() {
+    this.maintainService.getLogInfo(this.uid)
+      .subscribe(data => {
+
+      }, err => {
+
+      });
+  }
 
 
   // 缩略图

@@ -49,6 +49,7 @@ export class AccountInfoFormalComponent implements OnInit {
 
 
   refresh() {
+    this.userService.ChangeMission('changed');
     this.user = JSON.parse(sessionStorage.getItem('currentUser'));
     this.getOperate();
   }

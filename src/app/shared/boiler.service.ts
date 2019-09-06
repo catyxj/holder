@@ -198,12 +198,24 @@ export class BoilerService {
       );
   }
 
+  // 通知批量操作
   batchNotice(data): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
     const url = `/api/formal/ept/notice/batch`;
     return this.http.post<any>(url, data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getNoticeInfo(): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `/api/formal/ept/notice/detail`;
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

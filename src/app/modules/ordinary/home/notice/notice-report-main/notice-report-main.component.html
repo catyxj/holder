@@ -1,11 +1,11 @@
 
 <div class="content">
 
-  <div *ngIf="type==='1'&&status==='true'">
-    <app-notice-online></app-notice-online>
+  <div *ngIf="type==='1'&&status==='1'">
+    <app-notice-online [uid]="uid"></app-notice-online>
   </div>
 
-  <div *ngIf="type==='1'&&status==='false'">
+  <div *ngIf="type==='1'&&status==='2'">
     <app-notice-offline></app-notice-offline>
   </div>
 

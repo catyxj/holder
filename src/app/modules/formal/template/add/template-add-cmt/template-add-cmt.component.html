@@ -85,8 +85,8 @@
     <button class="btn btn_purple bpm" (click)="pre()">
       上一步
     </button>
-    <!--[disabled]="!baudRate || !dataBit || !stopBit || !parity || !correspond || !dataType || !heartbeat"-->
     <button class="btn btn_purple bpm" (click)="save()"
+            [disabled]="!baudRate || !dataBit || !stopBit || !parity || !correspond || !dataType || !heartbeat"
             style="margin-left: 1px;">
       下一步
     </button>

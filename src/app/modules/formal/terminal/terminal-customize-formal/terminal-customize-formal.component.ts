@@ -16,7 +16,7 @@ export class TerminalCustomizeFormalComponent implements OnInit {
   public uid;
   public code;
   public name;
-  public id;
+  public label;
 
   public devices = {}; // 所有控件属性
   public imgLists1 = []; // 公共图片控件
@@ -250,7 +250,7 @@ export class TerminalCustomizeFormalComponent implements OnInit {
     this.terminalService.getContent(this.uid)
       .subscribe(data => {
         let content = JSON.parse(data.content);
-        this.id = data.id;
+        this.label = data.label;
         this.name = data.name;
         if (!content) {
           return;
@@ -1158,8 +1158,8 @@ export class TerminalCustomizeFormalComponent implements OnInit {
         return;
       }
       img3.push({
-        chanType: parseInt(im.chanType),
-        chanNum: parseInt(im.chanNum)
+        channel_type: parseInt(im.chanType),
+        channel_number: parseInt(im.chanNum)
       });
     }
 
@@ -1189,8 +1189,8 @@ export class TerminalCustomizeFormalComponent implements OnInit {
       }
       // 提出数据通道
       da2.push({
-        chanType: parseInt(d2.chanType),
-        chanNum: parseInt(d2.chanNum)
+        channel_type: parseInt(d2.chanType),
+        channel_number: parseInt(d2.chanNum)
       });
     }
     /*for (let n = 0; n < that.dataLists3.length; n++) {
@@ -1218,8 +1218,8 @@ export class TerminalCustomizeFormalComponent implements OnInit {
       }
       // 提出数据通道
       btn.push({
-        chanType: parseInt(bt.chanType),
-        chanNum: parseInt(bt.chanNum)
+        channel_type: parseInt(bt.chanType),
+        channel_number: parseInt(bt.chanNum)
       });
     }
 

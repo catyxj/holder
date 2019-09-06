@@ -1,4 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {TemplateService} from "../../../../../shared/template.service";
+import {TempAddCalc1Component} from "../modals/temp-add-calc1/temp-add-calc1.component";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-template-add-calculate',
@@ -11,10 +15,29 @@ export class TemplateAddCalculateComponent implements OnInit {
   @Input()
   uid;
 
-  constructor() { }
+  constructor(private modalService: NgbModal,
+              private templateService: TemplateService) { }
 
   ngOnInit() {
   }
+
+
+  calc1() {
+    let that = this;
+    const modalRef = this.modalService.open(TempAddCalc1Component, {windowClass: 'modal_md', centered: true});
+    // modalRef.componentInstance.currentData = this.basic;
+    modalRef.componentInstance.uid = this.uid;
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+
+      }
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(reason);
+    });
+  }
+
+
 
   pre() {
     this.next.emit(-1);
@@ -27,19 +50,13 @@ export class TemplateAddCalculateComponent implements OnInit {
   save() {
     let that = this;
     let post;
-    /*post = {
-      baud_rate: parseInt(this.baudRate),
-      data_bit: parseInt(this.dataBit),
-      stop_bit: parseInt(this.stopBit),
-      parity_bit: parseInt(this.parity),
-      heart_beat: parseInt(this.heartbeat),
-      cmt_type: parseInt(this.correspond),
-      data_type: parseInt(this.dataType)
-    };*/
-    console.log(post);
-    this.next.emit(1);
+    post = {
 
-    /*this.templateService.updateBasic(post)
+    };
+    console.log(post);
+    // this.next.emit(1);
+
+    this.templateService.addCalc(post)
       .subscribe(val => {
         Swal(
           '操作成功！',
@@ -53,7 +70,7 @@ export class TemplateAddCalculateComponent implements OnInit {
           '',
           'error'
         );
-      });*/
+      });
 
 
   }

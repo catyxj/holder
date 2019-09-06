@@ -17,25 +17,24 @@ export class MTemplateAddFComponent implements OnInit {
               public activeModal: NgbActiveModal) { }
 
   ngOnInit() {
-    this.tList = [
-      {
-        info: ''
-      }
-    ];
+    this.tList = [''];
   }
 
   addItem() {
-    this.tList.push({
-      info: ''
-    });
+    this.tList.push('');
+  }
+
+  changeItem(data, i) {
+    this.tList[i] = data;
   }
 
   save() {
     let that = this;
     let post = {
-
+      name: this.name,
+      info: this.tList
     };
-    /*this.maintainService.addData(post)
+    this.maintainService.addTempData(post)
       .subscribe(val => {
         Swal(
           '操作成功！',
@@ -49,7 +48,7 @@ export class MTemplateAddFComponent implements OnInit {
           '',
           'error'
         );
-      });*/
+      });
   }
 
 }

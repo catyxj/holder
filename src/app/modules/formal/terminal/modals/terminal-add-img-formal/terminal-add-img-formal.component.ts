@@ -75,7 +75,7 @@ export class TerminalAddImgFormalComponent implements OnInit {
     const isLt2M = file.size / 1024  < 200;
     if (!isLt2M) {
       Swal(
-        '图片大小不能超过2M',
+        '图片大小不能超过200k',
         '',
         'error'
       );

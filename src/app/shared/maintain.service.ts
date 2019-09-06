@@ -15,14 +15,17 @@ const httpOptions = {
 })
 export class MaintainService {
 
-  // private dataListUrl = '/api/admin/maintain/list';
 
-  private dataListUrl = 'assets/server/cluster_list.json';
+  private dataListUrl = '/api/formal/mt/user/list';
+
+  // private dataListUrl = 'assets/server/cluster_list.json';
 
   constructor(private http: HttpClient) { }
 
-  // 获取列表
-  getLists(n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+
+  // -------------------维保账号-------------------
+  // 获取维保账号列表
+  getUserLists(n: number, pageSize: number, search?: string, value?: string): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
@@ -33,16 +36,246 @@ export class MaintainService {
       );
   }
 
-  // 新增
-  addData(data): Observable<any> {
+  // 获取维保账号详情
+  getUserInfo(uid): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/admin/maintain/add', data, httpOptions)
+    const url = `/api/formal/mt/user/detail?uid=${uid}`;
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
+
+  // 新增维保账号
+  addUserData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/mt/user/create', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 修改维保账号状态
+  updateUserStatus(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/mt/user/update/status', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 删除维保账号
+  deleteUserData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/mt/user/delete', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取维保账号设备信息
+  getUserMtInfo(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get(`/api/formal/mt/user/mt/info?uid=${uid}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取维保账号设备详情
+  getUserMtDetail(uid, n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get(`/api/formal/mt/user/mt/detail?uid=${uid}&page=${n}&rows=${pageSize}&search=${search}&value=${value}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+  // 修改维保账号
+  updateUser(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/mt/user/update', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+
+  // 维保账号未绑定设备列表
+  UserEptUnbindlist(uid, n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get(`/api/formal/mt/user/unbind/ept/list?uid=${uid}&page=${n}&rows=${pageSize}&search=${search}&value=${value}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 维保账号绑定设备
+  UserEptBind(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post(`/api/formal/mt/user/bind/ept`, data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+
+  // ---------------维保模板-----------------------
+  // 获取维保模板列表
+  getTempLists(n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `/api/formal/mt/temp/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取维保模板详情
+  getTempInfo(id): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `/api/formal/mt/temp/detail?id=${id}`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 新增维保模板
+  addTempData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/mt/temp/add', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 修改维保模板
+  updateTemp(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/mt/temp/update', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 删除维保模板
+  deleteTempData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/mt/temp/delete', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取维保模板列表-全部
+  getTempListAll(): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `/api/formal/mt/temp/name/list/all`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+  // 维保模板-设备列表
+  tempEptlist(n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get(`/api/formal/mt/temp/ept/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+  // 维保模板批量设置
+  tempEptBatch(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post(`/api/formal/mt/temp/batch/set`, data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+  // -------------维保记录------------------
+  // 获取维保记录列表
+  getLogLists(n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `/api/formal/mt/log/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取维保记录详情
+  getLogInfo(id): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `/api/formal/mt/log/detail?id=${id}`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 删除维保记录
+  deleteLogData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/mt/log/delete', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+
+
+
 
   // 删除
   deleteData(data): Observable<any> {
@@ -61,6 +294,30 @@ export class MaintainService {
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
     return this.http.post('/api/admin/formal/maintain/add', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+  // 获取维保列表
+  getLists(n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `${this.dataListUrl}?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 新增维保
+  addData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/mt/create', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

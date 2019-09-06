@@ -40,11 +40,11 @@ export class CluEptAddComponent implements OnInit {
   // 获取列表
   getList() {
     this.loading = true;
-    this.clusterService.getLists(this.page, this.pageSize, this.search, this.value)
+    this.clusterService.getEptList(this.uid, this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;
-        this.dataAll = this.dataLists.slice();
+        // this.dataAll = this.dataLists.slice();
         this.totalItems = data.count;
       }, err => {
         this.loading = false;
@@ -79,19 +79,32 @@ export class CluEptAddComponent implements OnInit {
 
   // 搜索
   searchChange() {
-    /*console.log(this.search);
+    // console.log(this.search);
     this.page = 1;
-    this.pageChange();*/
-    if (!this.value) {
+    this.pageChange();
+    /*if (!this.value) {
       this.dataLists = this.dataAll.slice();
     } else {
       this.dataLists = this.dataAll.filter(data => data[this.search].indexOf(this.value) !== -1 );
-    }
+    }*/
   }
   searchEnter(event) {
     if (event.keyCode === 13) {
       this.searchChange();
     }
+  }
+
+  searchOnline(n?) {
+    this.online = n;
+    this.searchChange();
+  }
+  searchRun(n?) {
+    this.run = n;
+    this.searchChange();
+  }
+  searchStatus(n?) {
+    this.status = n;
+    this.searchChange();
   }
 
 
@@ -135,6 +148,8 @@ export class CluEptAddComponent implements OnInit {
       title = '确认要关联此设备吗？';
       this.creatModal(title, subtitle, () => {
         let post = {
+          uid: this.uid,
+          type: 1,
           data: checked
         };
         that.loading = true;
@@ -151,7 +166,7 @@ export class CluEptAddComponent implements OnInit {
             that.loading = false;
             Swal(
               '操作失败！',
-              err,
+              err.message || err,
               'error'
             );
           });

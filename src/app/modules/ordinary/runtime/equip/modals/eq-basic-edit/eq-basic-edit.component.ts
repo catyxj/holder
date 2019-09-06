@@ -30,6 +30,8 @@ export class EqBasicEditComponent implements OnInit {
 
   ngOnInit() {
     this.name = this.currentData.name;
+    this.imgUrl = this.currentData.img;
+    this.infoList = JSON.parse(JSON.stringify(this.currentData.info));
 
     let token = localStorage.getItem('authToken');
     this.headOption = {
@@ -38,7 +40,7 @@ export class EqBasicEditComponent implements OnInit {
 
     /*this.infoList = [
       {
-        label: 'aaaa',
+        name: 'aaaa',
         value: 'aaa111'
       }
     ];*/
@@ -47,7 +49,7 @@ export class EqBasicEditComponent implements OnInit {
 
   addData() {
     this.infoList.push({
-      label: '',
+      name: '',
       value: ''
     });
   }
@@ -108,19 +110,39 @@ export class EqBasicEditComponent implements OnInit {
 
   save() {
     let that = this;
-    if (!this.img) {
+    /*if (!this.imgUrl) {
       Swal(
         '请上传图片',
         '',
         'info'
       );
       return;
+    }*/
+
+    let infoL = [];
+    for (let i = 0 ; i < this.infoList.length; i++) {
+      let inf = this.infoList[i];
+      if (inf.name) {
+        infoL.push(inf);
+      }
     }
 
-    let post = {
-      uid: this.uid,
-      img: this.img.response.id
-    };
+    let post;
+    if (this.img) {
+      post = {
+        uid: this.uid,
+        name: this.name,
+        info: infoL,
+        img: this.img.response.id
+      };
+    } else {
+      post = {
+        uid: this.uid,
+        name: this.name,
+        info: infoL
+      };
+    }
+
     this.eptService.updateBasic(post)
       .subscribe(val => {
         Swal(

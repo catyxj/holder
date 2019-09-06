@@ -39,7 +39,7 @@ export class MAcBatchAddComponent implements OnInit {
   // 获取列表
   getList() {
     this.loading = true;
-    this.maintainService.getLists(this.page, this.pageSize, this.search, this.value)
+    this.maintainService.UserEptUnbindlist(this.uid, this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;
@@ -134,7 +134,7 @@ export class MAcBatchAddComponent implements OnInit {
         const post = {
           data: checked
         };
-        this.maintainService.batchAddP(post)
+        this.maintainService.UserEptBind(post)
           .subscribe(val => {
             Swal(
               '操作成功！',

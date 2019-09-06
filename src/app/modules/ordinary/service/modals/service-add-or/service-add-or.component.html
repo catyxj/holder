@@ -1,0 +1,68 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    <img src="assets/icons/ser_add.png" alt="" style="margin-right: 19px;">
+    创建表单
+  </h4>
+</div>
+
+<div class="modal-body m_form">
+  <div class="m_item">
+    <div class="m_label">
+      表单分类：
+    </div>
+    <div class="m_input">
+      B类，系统问题
+      <!--<select [(ngModel)]="type" class="form-control">
+        <option *ngFor="let tp of typeList" [value]="tp.id" >{{tp.name}}</option>
+      </select>-->
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      <span>*</span> 表单主题：
+    </div>
+    <div class="m_content">
+      <!--<textarea [(ngModel)]="content" class="form-control" style="width: 100%; height: 50px;">
+
+      </textarea>-->
+      <input type="text" class="form-control" [(ngModel)]="content">
+    </div>
+  </div>
+
+  <div class="m_item" style="align-items: flex-start;">
+    <div class="m_label">
+      <!--其他附件：-->
+    </div>
+    <div class="m_content">
+      <nz-upload nzAction="/api/dialogue/attach/upload"
+                 [nzBeforeUpload]="beforeUpload"
+                 [nzDisabled]="fileList.length >= 3"
+                 [nzHeaders]="headOption"
+                 [nzFileList]="fileList" (nzChange)="handleChange($event)">
+        <button class="btn btn_purple btn_round bpm" *ngIf="fileList.length < 3">
+          <i class="iconfont iconicon_Enclosure"></i>
+          <span style="font-size: 10px;">上传附件</span>
+          <!--<i class="fa fa-plus"></i>-->
+        </button>
+      </nz-upload>
+
+      <div class="m_tip">
+        最多一次性上传3个附件
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取消</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 30px;" (click)="save()" [disabled]="!content">确定</button>
+</div>
+
+
+
+
+

@@ -38,11 +38,14 @@ export class MAcBatchDeleteComponent implements OnInit {
   // 获取列表
   getList() {
     this.loading = true;
-    this.maintainService.getLists(this.page, this.pageSize, this.search, this.value)
+    this.maintainService.getUserMtDetail(this.uid, this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;
         this.totalItems = data.count;
+        if (!this.dataLists) {
+          this.dataLists = [];
+        }
       }, err => {
         this.loading = false;
       });
@@ -134,7 +137,7 @@ export class MAcBatchDeleteComponent implements OnInit {
         let post = {
           data: checked
         };
-        this.maintainService.deleteData(post)
+        this.maintainService.UserEptBind(post)
           .subscribe(val => {
             Swal(
               '操作成功！',

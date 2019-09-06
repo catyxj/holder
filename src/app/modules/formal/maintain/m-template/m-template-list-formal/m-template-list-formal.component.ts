@@ -19,7 +19,7 @@ export class MTemplateListFormalComponent implements OnInit {
   public page = 1;
   public pageNum;
   public pageSize = 15;
-  public search = 'id';
+  public search = 'label';
   public value;
   public status = '';
   public online = '';
@@ -58,15 +58,15 @@ export class MTemplateListFormalComponent implements OnInit {
     ];
     this.totalItems = 12;
 
-    /*this.loading = true;
-    this.maintainService.getLists(this.page, this.pageSize, this.search, this.value)
+    this.loading = true;
+    this.maintainService.getTempLists(this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;
         this.totalItems = data.count;
       }, err => {
         this.loading = false;
-      });*/
+      });
   }
 
 

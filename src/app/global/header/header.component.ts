@@ -50,13 +50,14 @@ export class HeaderComponent implements OnInit {
       this.picture = 'assets/icons/anticon_user.png';
     }
 
-    console.log(this.user);
+    // console.log(this.user);
     // this.getAlarm();
     // this.getUser();
 
   }
 
 
+  // 权限
   checkAuth(data) {
     if (!this.auth) {
       return false;
@@ -64,6 +65,7 @@ export class HeaderComponent implements OnInit {
     return this.auth.indexOf(data) !== -1;
   }
 
+  // 告警提醒数量
   getAlarm() {
     this.alarmService.getAlarmNum()
       .subscribe( data => {
@@ -74,7 +76,7 @@ export class HeaderComponent implements OnInit {
       });
   }
 
-
+  // 侧边栏显示隐藏
   onClick() {
     this.toggle.emit();
   }
@@ -92,6 +94,19 @@ export class HeaderComponent implements OnInit {
       });
     }*/
 
+  viewAccount() {
+    switch (this.roleId) {
+      case '1':
+        this.router.navigate(['/admin/ad/account']);
+        break;
+      case '10':
+        this.router.navigate(['/admin/formal/account']);
+        break;
+    }
+
+  }
+
+  // 退出登录
   logout() {
     this.userService.logout(this.user.Uid)
       .subscribe( val => {

@@ -16,7 +16,7 @@ import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 export class MAccountInfoFormalComponent implements OnInit {
   public uid;
   public listPage;
-  public user;
+  public info;
   public operate;
   tplModal: NzModalRef;
 
@@ -32,9 +32,9 @@ export class MAccountInfoFormalComponent implements OnInit {
     this.getOperate();
   }
 
-
+  // 获取维保账号信息
   getInfo() {
-    this.user = {
+    /*this.info = {
       username: 'aaaaa',
       status: 1,
       role_id: 10,
@@ -43,8 +43,16 @@ export class MAccountInfoFormalComponent implements OnInit {
       org_tag: 1,
       location_id: 110101,
       location_name: '某省某市某区县 某某某街道',
-      email: 'zhangsan@123.com'
-    };
+      email: 'zhangsan@123.com',
+      address: 'asdfahhhhhh'
+    };*/
+
+    this.maintainService.getUserInfo(this.uid)
+      .subscribe(data => {
+        this.info = data;
+      }, err => {
+
+      });
   }
 
   refresh() {
@@ -53,9 +61,9 @@ export class MAccountInfoFormalComponent implements OnInit {
   }
 
 
-  // 获取记录信息
+  // 获取产品信息
   getOperate() {
-    this.operate = [
+   /* this.operate = [
       {
         uid: 'asdf',
         name: 'aaa',
@@ -72,22 +80,28 @@ export class MAccountInfoFormalComponent implements OnInit {
         created_at: '2016-5-10',
         count: 12
       }
-    ];
-    // this.accountService.getOperate(this.uid)
-    //   .subscribe(data => {
-    //     this.operate = data;
-    //   }, err => {
-    //
-    //   });
+    ];*/
+
+
+    this.maintainService.getUserMtInfo(this.uid)
+      .subscribe(data => {
+        this.operate = data.data;
+        if (!this.operate) {
+          this.operate = [];
+        }
+      }, err => {
+
+      });
   }
 
   // 编辑配置信息模态框
   editConfig() {
     let that = this;
     const modalRef = this.modalService.open(MAccountBasicFComponent, {windowClass: 'modal_m', centered: true});
-    modalRef.componentInstance.currentData = this.user;
+    modalRef.componentInstance.currentData = this.info;
     modalRef.result.then((result) => {
       if (result === 'ok') {
+        that.getInfo();
         that.getOperate();
       }
     }, (reason) => {
@@ -106,7 +120,7 @@ export class MAccountInfoFormalComponent implements OnInit {
       let post = {
         data: [this.uid]
       };
-      this.maintainService.deleteData(post)
+      this.maintainService.updateUserStatus(post)
         .subscribe(val => {
           Swal(
             '操作成功！',

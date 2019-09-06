@@ -3,6 +3,7 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {AdressService} from "../../../../../../shared/adress.service";
 
 import Swal from 'sweetalert2';
+import {MaintainService} from "../../../../../../shared/maintain.service";
 
 @Component({
   selector: 'app-m-account-add-f',
@@ -22,13 +23,14 @@ export class MAccountAddFComponent implements OnInit {
   public selectedRegion;
   public locationId;
   public locationName = '';
-  public address;
+  public address = '';
   public addrList;
   public cities = [];
   public regions = [];
 
   constructor(public activeModal: NgbActiveModal,
-              private addressService: AdressService) { }
+              private addressService: AdressService,
+              private mtService: MaintainService) { }
 
   ngOnInit() {
     this.getAddress();
@@ -118,16 +120,17 @@ export class MAccountAddFComponent implements OnInit {
     let that = this;
     // console.log(this.locationId, this.selectedCity, this.selectedRegion);
     let post = {
+      username: this.username,
       name: this.name,
       org_name: this.orgName,
       org_tag: parseInt(this.orgType),
-      location_id: this.locationId,
+      location: this.locationId,
       location_name: this.locationName + this.address,
       address: this.address,
       email: this.email
     };
     console.log(post);
-    /*this.accountService.updateConfigF(post)
+    this.mtService.addUserData(post)
       .subscribe(val => {
         Swal(
           '操作成功！',
@@ -141,7 +144,7 @@ export class MAccountAddFComponent implements OnInit {
           '',
           'error'
         );
-      });*/
+      });
   }
 
 }

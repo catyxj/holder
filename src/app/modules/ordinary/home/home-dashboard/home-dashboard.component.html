@@ -9,7 +9,7 @@
         </div>
         <div class="hc_content">
 
-          <div class="hc_f1">
+          <div class="hc_f1" routerLink="/admin/ordinary/equip-list/list">
             <img src="assets/icons/monitor_1.png" alt="">
             <h6>监控设备总数</h6>
             <div class="hc_f1_value" style="color: #666EE8;">
@@ -18,7 +18,7 @@
           </div>
           <div class="h_divide"></div>
 
-          <div class="hc_f1">
+          <div class="hc_f1" [routerLink]="['/admin/ordinary/equip-list/list', {online:'true'}]">
             <img src="assets/icons/monitor_2.png" alt="">
             <h6>在线设备</h6>
             <div class="hc_f1_value" style="color: #1E9FF2;">
@@ -27,7 +27,7 @@
           </div>
           <div class="h_divide"></div>
 
-          <div class="hc_f1">
+          <div class="hc_f1" [routerLink]="['/admin/ordinary/equip-list/list', {run:'run'}]">
             <img src="assets/icons/monitor_3.png" alt="">
             <h6>运行设备</h6>
             <div class="hc_f1_value" style="color: #28D094;">
@@ -36,7 +36,7 @@
           </div>
           <div class="h_divide"></div>
 
-          <div class="hc_f1">
+          <div class="hc_f1" [routerLink]="['/admin/ordinary/equip-list/list', {run:'malfunction'}]">
             <img src="assets/icons/monitor_4.png" alt="">
             <h6>故障设备</h6>
             <div class="hc_f1_value" style="color: #FFC06A;">
@@ -45,16 +45,16 @@
           </div>
           <div class="h_divide"></div>
 
-          <div class="hc_f1">
+          <div class="hc_f1" [routerLink]="['/admin/ordinary/equip-list/list', {run:'alarm'}]">
             <img src="assets/icons/monitor_5.png" alt="">
-            <h6>警告设备</h6>
+            <h6>告警设备</h6>
             <div class="hc_f1_value" style="color: #FF4961;">
               {{monitor?.alarm_count}}
             </div>
           </div>
           <div class="h_divide"></div>
 
-          <div class="hc_f1">
+          <div class="hc_f1"  [routerLink]="['/admin/ordinary/equip-list/list', {online:'false'}]">
             <img src="assets/icons/monitor_6.png" alt="">
             <h6>离线设备</h6>
             <div class="hc_f1_value" style="color: #A7ABBE;">
@@ -91,7 +91,7 @@
               </button>
             </div>
             <div class="hc_content">
-              <img src="assets/images/video.jpg" alt="">
+              <img src="assets/images/photo2.png" alt="">
               <!--<button class="gen_btn">
                 关联设备
               </button>-->
@@ -108,7 +108,7 @@
         </div>
         <div class="hc_content2">
           <ul>
-            <li class="h_item" *ngFor="let item of reminds" [routerLink]="['/admin/ordinary/home/remind-info', item.log_type]">
+            <li class="h_item" *ngFor="let item of reminds" [routerLink]="['/admin/ordinary/home/remind-info', item.uid, item.log_type, item.log_status]">
               <a>
                 <div class="h_date">
                   <span class="h_circle" [class.active]="!item.is_read"></span>
@@ -136,7 +136,7 @@
         </div>
         <div class="hc_content2">
           <ul>
-            <li class="h_item" *ngFor="let item of reminds" [routerLink]="['/admin/ordinary/home/notice-info', item.log_type, item.log_status]">
+            <li class="h_item" *ngFor="let item of notice" [routerLink]="['/admin/ordinary/home/notice-info', item.id, item.log_type, item.log_status]">
               <a>
                 <div class="h_date">
                   <span class="h_circle" [class.active]="!item.is_read"></span>

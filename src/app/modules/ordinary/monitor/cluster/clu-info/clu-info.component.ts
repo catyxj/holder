@@ -25,6 +25,7 @@ export class CluInfoComponent implements OnInit {
   public value = '';
   public status;
   public pageSizeList = [15, 30, 50, 100];
+  public info;
 
 
   constructor(private route: ActivatedRoute,
@@ -33,7 +34,19 @@ export class CluInfoComponent implements OnInit {
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
+    this.getInfo();
+    this.getStatus();
     this.getList();
+  }
+
+  // 获取集群信息
+  getInfo() {
+    this.clusterService.getInfo(this.uid)
+      .subscribe(data => {
+        this.info = data;
+      }, err => {
+
+      });
   }
 
   // 获取状态
@@ -183,10 +196,10 @@ export class CluInfoComponent implements OnInit {
 
     }*/
 
-    this.clusterService.getClusEquip(this.uid, this.page, this.pageSize, this.search, this.value)
+    this.clusterService.getClusEquipAll(this.uid)
       .subscribe(data => {
-        this.dataLists = data.data;
-        this.totalItems = data.count;
+        this.dataLists = data;
+        // this.totalItems = data.count;
         for (let i = 0; i < this.dataLists.length; i++) {
           let item = this.dataLists[i];
           if (item.status === 0) {
@@ -234,6 +247,12 @@ export class CluInfoComponent implements OnInit {
     // console.log(this.search);
     // this.page = 1;
     this.getList();
+
+    /*if (!this.value) {
+      this.dataLists = this.dataAll.slice();
+    } else {
+      this.dataLists = this.dataAll.filter(data => data[this.search].indexOf(this.value) !== -1 );
+    }*/
   }
   searchEnter(event) {
     if (event.keyCode === 13) {
@@ -242,15 +261,16 @@ export class CluInfoComponent implements OnInit {
   }
 
 
-  // 新增模态框
+  // 基本设置模态框
   addData() {
     let that = this;
     const modalRef = this.modalService.open(CluBasicEditComponent, {windowClass: 'modal_m', centered: true});
-    // modalRef.componentInstance.currentData = this.config;
+    modalRef.componentInstance.currentData = this.info;
     modalRef.componentInstance.uid = this.uid;
     modalRef.result.then((result) => {
       if (result === 'ok') {
-        that.getList();
+        that.getInfo();
+        // that.getList();
       }
     }, (reason) => {
       console.log(reason);

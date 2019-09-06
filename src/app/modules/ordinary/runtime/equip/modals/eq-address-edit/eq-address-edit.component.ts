@@ -40,6 +40,7 @@ export class EqAddressEditComponent implements OnInit {
               private eptService: BoilerService) { }
 
   ngOnInit() {
+    this.address = this.currentData.address;
     this.getAddress();
     this.initMap();
   }
@@ -53,7 +54,7 @@ export class EqAddressEditComponent implements OnInit {
   }
 
   initLocation() {
-    let location = this.currentData ? this.currentData.location_id : 0;
+    let location = this.currentData ? this.currentData.location : 0;
     console.log(location);
     if (location && location !== 0) {
       if (location < 100) {
@@ -126,16 +127,15 @@ export class EqAddressEditComponent implements OnInit {
 
   // 地图
   initMap() {
-
+    let that = this;
     // 创建地图实例
     let map = new BMap.Map('address');
     this.map = map;
-    let that = this;
+
 
     // 创建点坐标
 
-    if ( !this.currentData || (this.currentData.Longitude === 0 || this.currentData.Latitude === 0)) {
-      let that = this;
+    if ( !this.currentData || (this.currentData.longitude === 0 || this.currentData.latitude === 0)) {
       // 获取当前定位
       let geolocation = new BMap.Geolocation();
       geolocation.getCurrentPosition(function(r) {
@@ -150,12 +150,13 @@ export class EqAddressEditComponent implements OnInit {
             fillOpacity: 1
           })
           });
-          this.marker = mk;
+          that.marker = mk;
           that.lng = r.point.lng;
           that.lat = r.point.lat;
-          map.addOverlay(mk);
+
           // map.panTo(r.point);
-          map.centerAndZoom(r.point, 11);
+          map.centerAndZoom(r.point, 6);
+          map.addOverlay(mk);
           mk.enableDragging();           // 可拖拽
           map.setMapStyleV2({
             styleId: 'cf1b221650f5b1e206f6f4ef215edd5a'
@@ -171,33 +172,34 @@ export class EqAddressEditComponent implements OnInit {
             fillOpacity: 1
           })
           });
-          this.marker = mk;
+          that.marker = mk;
           map.addOverlay(mk);
           map.centerAndZoom(point0, 6);
-          mk.enableDragging();           // 可拖拽
           map.setMapStyleV2({
             styleId: 'cf1b221650f5b1e206f6f4ef215edd5a'
           });
+          mk.enableDragging();           // 可拖拽
         }
       }, {enableHighAccuracy: true});
     } else {
-      let point = new BMap.Point(this.currentData.Longitude, this.currentData.Latitude);
-      let mk = new BMap.Marker(point, {icon: new BMap.Symbol(BMap_Symbol_SHAPE_CIRCLE, {
-        scale: 5,
-        strokeWeight: 2.5,
-        strokeColor: '#ffffff',
-        rotation: 0, // 顺时针旋转30度
-        fillColor: '#369BFF',
-        fillOpacity: 1
-      })
+      const point = new BMap.Point(this.currentData.longitude, this.currentData.latitude);
+      const mk = new BMap.Marker(point, {icon: new BMap.Symbol(BMap_Symbol_SHAPE_CIRCLE, {
+          scale: 5,
+          strokeWeight: 2.5,
+          strokeColor: '#ffffff',
+          rotation: 0, // 顺时针旋转30度
+          fillColor: '#369BFF',
+          fillOpacity: 1
+        })
       });
-      this.marker = mk;
+      that.marker = mk;
       map.addOverlay(mk);
-      map.centerAndZoom(point, 15);
-      mk.enableDragging();           // 可拖拽
+      map.centerAndZoom(point, 10);
       map.setMapStyleV2({
         styleId: 'cf1b221650f5b1e206f6f4ef215edd5a'
       });
+
+      mk.enableDragging();           // 可拖拽
     }
 
 
@@ -276,10 +278,10 @@ export class EqAddressEditComponent implements OnInit {
     console.log(point, this.locationId, this.locationName, this.address);
 
     let addr = {
-      uid: this.currentData.Uid,
+      uid: this.uid,
       address: this.address,
-      location_id: this.locationId,
-      location_name: this.locationName,
+      location: this.locationId,
+      location_name: this.locationName + this.address,
       longitude: this.lng,
       latitude: this.lat
     };

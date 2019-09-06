@@ -26,7 +26,7 @@
     </div>
     <div class="m_input">
       <input type="number" class="form-control" [(ngModel)]="cameraNum" placeholder="请输入摄像头通道号"
-             pattern="^[0-9]$" #caNum="ngModel" required>
+             pattern="^[1-9]$" #caNum="ngModel" required>
       <div class="sign_tip">
         <span class="text_danger" *ngIf="caNum.invalid && (caNum.dirty || caNum.touched)">请输入正确1位视频设备通道号</span>
       </div>

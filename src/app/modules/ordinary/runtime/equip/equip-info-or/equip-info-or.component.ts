@@ -8,6 +8,7 @@ import {EqAddressEditComponent} from '../modals/eq-address-edit/eq-address-edit.
 import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
 
 import Swal from 'sweetalert2';
+import {add} from "ngx-bootstrap/chronos";
 
 declare var BMap: any;
 declare var BMAP_STATUS_SUCCESS: any;
@@ -24,6 +25,13 @@ export class EquipInfoOrComponent implements OnInit {
   private map;
   public info;
   public terminal;
+  public province = '';
+  public city = '';
+  public region = '';
+  public orgList = [];
+  public infoList = [];
+
+
   tplModal: NzModalRef;
 
 
@@ -45,8 +53,10 @@ export class EquipInfoOrComponent implements OnInit {
   getInfo() {
     this.eptService.getInfo(this.uid)
       .subscribe(data => {
-        this.info = data.info;
-        this.address = data.address;
+        this.info = data;
+        this.orgList = this.info.org_link ? this.info.org_link : [];
+        this.infoList = this.info.info ? this.info.info : [];
+        this.initLocation();
         this.initMap();
       }, err => {
 
@@ -61,14 +71,62 @@ export class EquipInfoOrComponent implements OnInit {
       });
 
     /*this.info = {
-      terminal_code: '123351'
+      name: '123351',
+      location: 330101,
+      longitude: 121.55740307253974,
+      latitude: 29.86572070836559
+    }*/
+
+    this.initMap();
+  }
+
+  initLocation() {
+    let loc = this.info.location;
+    if (loc === 0) {
+      this.province = '全国';
+      return;
     }
-    this.address = {
-      location_id: 150101,
-      Longitude: 116,
-      Latitude: 38
-    };
-    this.initMap();*/
+
+    this.addrService.getAddress()
+      .subscribe(data => {
+        let addrList = data;
+        loc = loc.toString();
+        let prov = loc.slice(0, 2);
+        for (let i = 0; i < addrList.length; i++) {
+          let ad = addrList[i];
+          if (parseInt(prov) === ad.LocationId) {
+            this.province = ad.Name;
+            let cities = ad.cities;
+            let city = loc.slice(0, 4);
+            console.log(city);
+            if (city.length >= 4) {
+              for (let j = 0; j < cities.length; j++) {
+                let ct = cities[j];
+                if (parseInt(city) === ct.LocationId) {
+                  this.city = ct.Name;
+                  let regions = ct.regions;
+                  let region = loc;
+                  if (region.length >= 6) {
+                    for (let n = 0; n < regions.length; n++) {
+                      if(parseInt(region) === regions[n].LocationId) {
+                        this.region = regions[n].Name;
+                        break;
+                      }
+                    }
+                  }
+                  break;
+                }
+              }
+            }
+            break;
+          }
+        }
+
+
+      });
+
+
+
   }
 
 
@@ -83,7 +141,7 @@ export class EquipInfoOrComponent implements OnInit {
 
 
 
-    if (!this.address || this.address.Longitude === 0 || this.address.Latitude === 0 ) {
+    if (!this.info || this.info.longitude === 0 || this.info.latitude === 0 ) {
       const that = this;
       // 获取当前定位
       const geolocation = new BMap.Geolocation();
@@ -98,19 +156,25 @@ export class EquipInfoOrComponent implements OnInit {
             fillOpacity: 1
           })
           });
-          that.address.lng = r.point.lng;
-          that.address.lat = r.point.lat;
+          that.info.lng = r.point.lng;
+          that.info.lat = r.point.lat;
           map.addOverlay(mk);
           map.centerAndZoom(r.point, 6);
+          map.setMapStyleV2({
+            styleId: 'cf1b221650f5b1e206f6f4ef215edd5a'
+          });
         } else {
           const point0 = new BMap.Point(118, 39.897445);
           map.centerAndZoom(point0, 6);
+          map.setMapStyleV2({
+            styleId: 'cf1b221650f5b1e206f6f4ef215edd5a'
+          });
           // alert('failed' + this.getStatus());
         }
       }, {enableHighAccuracy: true});
     } else {
       // 创建点坐标
-      const point = new BMap.Point(this.address.Longitude, this.address.Latitude);
+      const point = new BMap.Point(this.info.longitude, this.info.latitude);
       const mk = new BMap.Marker(point, {icon: new BMap.Symbol(BMap_Symbol_SHAPE_CIRCLE, {
           scale: 5,
           strokeWeight: 2.5,
@@ -122,12 +186,13 @@ export class EquipInfoOrComponent implements OnInit {
       });
       map.addOverlay(mk);
       map.centerAndZoom(point, 6);
+      map.setMapStyleV2({
+        styleId: 'cf1b221650f5b1e206f6f4ef215edd5a'
+      });
     }
 
     map.enableScrollWheelZoom(true);     // 开启鼠标滚轮缩放
-    map.setMapStyleV2({
-      styleId: 'cf1b221650f5b1e206f6f4ef215edd5a'
-    });
+
 
     /*map.addControl(new BMap.NavigationControl());
     map.addControl(new BMap.ScaleControl());
@@ -177,7 +242,7 @@ export class EquipInfoOrComponent implements OnInit {
   editAddr() {
     const that = this;
     const modalRef = this.modalService.open(EqAddressEditComponent, {windowClass: 'modal_m2', centered: true});
-    modalRef.componentInstance.currentData = this.address;
+    modalRef.componentInstance.currentData = this.info;
     modalRef.componentInstance.uid = this.uid;
     modalRef.result.then((result) => {
       if (result === 'ok') {
@@ -207,7 +272,7 @@ export class EquipInfoOrComponent implements OnInit {
             '',
             'success'
           );
-         that.goBack();
+         that.router.navigate(['/admin/ordinary/graphic/dashborad']);
         }, err => {
           Swal(
             err.message || err,
@@ -218,7 +283,7 @@ export class EquipInfoOrComponent implements OnInit {
     });
   }
 
-  // 禁用
+  // 禁用/激活
   disableData() {
     const that = this;
     let title = '';
@@ -251,7 +316,7 @@ export class EquipInfoOrComponent implements OnInit {
             '',
             'success'
           );
-          that.goBack();
+          that.getInfo();
         }, err => {
           Swal(
             err.message || err,

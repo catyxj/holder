@@ -67,20 +67,20 @@
       </div>
 
       <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="animated fadeInDown dropdown_content">
-        <a class="dropdown-item" routerLink="/admin/alarm">
+        <a class="dropdown-item">
           <div class="tip_item">
             告警信息 &nbsp;
             {{alarmNum}} 条
           </div>
         </a>
 
-        <a class="dropdown-item" routerLink="/admin/malfunction">
+        <a class="dropdown-item">
           <div class="tip_item">
             故障信息 &nbsp;
             {{malNum}} 条
           </div>
         </a>
-        <a class="dropdown-item" routerLink="/admin/alarm">
+        <a class="dropdown-item" [routerLink]="['/admin']">
           <div class="tip_item">
             提醒信息 &nbsp;
             {{noticeNum}} 条
@@ -125,8 +125,8 @@
       </div>
 
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="animated fadeInDown dropdown_content">
-        <a class="dropdown-item" routerLink="/admin/profile">用户信息</a>
-        <button class="dropdown-item" (click)="logout()">退出</button>
+        <a class="dropdown-item" (click)="viewAccount()">用户信息</a>
+        <a class="dropdown-item" (click)="logout()">退出</a>
       </div>
     </div>
 

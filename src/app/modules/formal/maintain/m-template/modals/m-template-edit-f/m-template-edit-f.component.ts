@@ -3,6 +3,8 @@ import {MaintainService} from "../../../../../../shared/maintain.service";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-m-template-edit-f',
   templateUrl: './m-template-edit-f.component.html',
@@ -24,29 +26,40 @@ export class MTemplateEditFComponent implements OnInit {
 
   ngOnInit() {
 
-    this.name = 'aaaaa';
+    this.name = this.currentData.name;
     this.getInfo();
   }
 
 
   getInfo() {
-    this.tList = [
-      {
-        info: 'aaa'
-      },
-      {
-        info: 'vvv'
-      },
-      {
-        info: 'bbb'
-      }
-    ];
+    // this.tList = [
+    //   {
+    //     info: 'aaa'
+    //   },
+    //   {
+    //     info: 'vvv'
+    //   },
+    //   {
+    //     info: 'bbb'
+    //   }
+    // ];
+
+    this.maintainService.getTempInfo(this.currentData.id)
+      .subscribe(data => {
+        // this.name = data.name;
+        this.tList = data.info;
+      }, err => {
+
+      });
+
   }
 
   addItem() {
-    this.tList.push({
-      info: ''
-    });
+    this.tList.push('');
+  }
+
+  changeItem(data, i) {
+    this.tList[i] = data;
   }
 
   editD() {
@@ -60,8 +73,29 @@ export class MTemplateEditFComponent implements OnInit {
       nzContent: '',
       nzIconType: 'fill:question-circle',
       nzOnOk: () => {
-        console.log('aa');
         that.tplModal.destroy();
+        let post = {
+          data: [this.currentData.id]
+        };
+        // that.loading = true;
+        that.maintainService.deleteTempData(post)
+          .subscribe(val => {
+            // that.loading = false;
+            Swal(
+              '操作成功！',
+              '',
+              'success'
+            );
+            that.activeModal.close('ok');
+          }, err => {
+            // that.loading = false;
+            Swal(
+              err.message || err,
+              '',
+              'error'
+            );
+          });
+
       }
 
     });
@@ -70,9 +104,11 @@ export class MTemplateEditFComponent implements OnInit {
   save() {
     let that = this;
     let post = {
-
+      id: this.currentData.id,
+      name: this.name,
+      info: this.tList
     };
-    /*this.maintainService.addData(post)
+    this.maintainService.updateTemp(post)
       .subscribe(val => {
         Swal(
           '操作成功！',
@@ -86,7 +122,7 @@ export class MTemplateEditFComponent implements OnInit {
           '',
           'error'
         );
-      });*/
+      });
   }
 
 

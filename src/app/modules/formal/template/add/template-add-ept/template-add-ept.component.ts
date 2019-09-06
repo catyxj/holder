@@ -97,35 +97,37 @@ export class TemplateAddEptComponent implements OnInit, OnChanges {
     let post;
     if (this.img) {
       post = {
-        ept_name: this.equip,
+        name: this.equip,
         img: this.img.response.id
       };
     } else {
       post = {
-        ept_name: this.equip
+        name: this.equip
       };
     }
 
     console.log(post);
-    this.uid = 'aaaas';
-    this.changeUid.emit(this.uid);
-    this.next.emit(1);
+    // this.next.emit(1);
 
-    /*this.templateService.updateBasic(post)
+    this.templateService.addEpt(post)
       .subscribe(val => {
         Swal(
           '操作成功！',
           '',
           'success'
         );
-        that.activeModal.close('ok');
+        this.uid = val.uid;
+        this.changeUid.emit(this.uid);
+        this.next.emit(1);
       }, err => {
         Swal(
-          err.message,
+          err.message || err,
           '',
           'error'
         );
-      });*/
+      });
+
+    this.next.emit(1);
 
 
   }

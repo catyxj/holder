@@ -100,7 +100,7 @@
                 </mat-menu>-->
               </div>
 
-              <input type="text" [(ngModel)]="data.Parameter.Name" (change)="dataChanged(data);"
+              <input type="text" [(ngModel)]="data.Parameter.Name" (change)="dataChanged(data);" maxlength="10"
                      class="form-control" placeholder="{{data.Parameter.Name||'未配置'}}">
             </div>
 
@@ -144,7 +144,7 @@
             <div *ngIf="data.Func == 99" class="input99">
               无
             </div>
-            <input type="number" [(ngModel)]="data.slaveAddress" placeholder="未配置"
+            <input type="number" [(ngModel)]="data.slaveAddress" placeholder="未配置" min="1" max="255"
                    [disabled]="!data.Parameter||!data.Parameter.Name" *ngIf="data.Func != 99"
                    class="form-control">
           </td>
@@ -155,6 +155,7 @@
               无
             </div>
             <select [(ngModel)]="data.writeRule" [disabled]="!data.Parameter||!data.Parameter.Name"
+                    (change)="data.writeValue = ''"
                     class="form-control" *ngIf="data.Func && data.Func != 2 && data.Func != 4 && data.Func != 99">
               <option value="1">16位</option>
               <option value="2" *ngIf="data.Func == 3">32位</option>
@@ -179,12 +180,7 @@
 
           <td class="t_btn">
             <div class="t_btn_g">
-              <!--<button type="button" class="btn btn_green btn-sm"
-                      [disabled]="!data.Parameter||!data.Parameter.Name"
-                      title="能效">
-                <i class="iconfont iconnengyuanguanli"></i>
-                能效
-              </button>-->
+
               <button type="button" class="btn btn_red btn-sm"
                       [disabled]="!data.Parameter||!data.Parameter.Name"
                       title="编辑告警规则" (click)="addAlarmRule(data)">
@@ -233,7 +229,7 @@
         <thead class="t_head">
         <tr>
           <th style="width: 80px;">通道</th>
-          <th>参数名称</th>
+          <th>通道显示名称</th>
           <th>功能码</th>
           <th>
             <span nz-popover [nzContent]="modbusTips2" nzTrigger="hover" nzTitle="范围说明">MODBUS地址</span>
@@ -303,7 +299,7 @@
                 </mat-menu>-->
               </div>
 
-              <input type="text" [(ngModel)]="data.Parameter.Name" (change)="dataChanged(data);"
+              <input type="text" [(ngModel)]="data.Parameter.Name" (change)="dataChanged(data);" maxlength="10"
                      class="form-control" placeholder="{{data.Parameter.Name||'未配置'}}">
             </div>
 
@@ -352,7 +348,7 @@
                  class="input99">
               无
             </div>
-            <input type="number" [(ngModel)]="data.slaveAddress" placeholder="未配置"
+            <input type="number" [(ngModel)]="data.slaveAddress" placeholder="未配置" min="1" max="255"
                    [disabled]="!data.Parameter||!data.Parameter.Name" *ngIf="data.Func != 99"
                    class="form-control">
           </td>
@@ -363,9 +359,10 @@
               无
             </div>
             <select [(ngModel)]="data.writeRule" [disabled]="!data.Parameter||!data.Parameter.Name"
+                    (change)="data.writeValue = ''"
                     class="form-control" *ngIf="data.Func && data.Func != 2 && data.Func != 4 && data.Func != 99">
               <option value="1">16位</option>
-              <option value="2" *ngIf="data.Func == 3">32位</option>
+              <!--<option value="2" *ngIf="data.Func == 3">32位</option>-->
               <option value="0">不写</option>
             </select>
           </td>
@@ -444,7 +441,7 @@
         <thead class="t_head">
         <tr>
           <th style="width: 80px;">通道</th>
-          <th>参数名称</th>
+          <th>通道显示名称</th>
           <th style="width: 10%;">功能码</th>
           <th style="width: 12%;">高低字节</th>
           <th>
@@ -512,7 +509,7 @@
                  </mat-menu>-->
               </div>
 
-              <input type="text" [(ngModel)]="data.Parameter.Name" (change)="dataChanged(data);"
+              <input type="text" [(ngModel)]="data.Parameter.Name" (change)="dataChanged(data);" maxlength="10"
                      class="form-control" placeholder="{{data.Parameter.Name||'未配置'}}">
             </div>
 
@@ -559,7 +556,7 @@
                  class="input99">
               无
             </div>
-            <input type="number" [(ngModel)]="data.slaveAddress" placeholder="未配置"
+            <input type="number" [(ngModel)]="data.slaveAddress" placeholder="未配置" min="1" max="255"
                    [disabled]="!data.Parameter||!data.Parameter.Name" *ngIf="data.Func != 99"
                    class="form-control">
           </td>
@@ -570,6 +567,7 @@
               无
             </div>
             <select [(ngModel)]="data.writeRule" [disabled]="!data.Parameter||!data.Parameter.Name"
+                    (change)="data.writeValue = ''"
                     class="form-control" *ngIf="data.Func && data.Func != 2 && data.Func != 4 && data.Func != 99">
               <option value="1">16位</option>
               <option value="2" *ngIf="data.Func == 3">32位</option>

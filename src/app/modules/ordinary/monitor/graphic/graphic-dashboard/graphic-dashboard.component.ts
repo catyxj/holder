@@ -117,7 +117,7 @@ export class GraphicDashboardComponent implements OnInit, OnDestroy {
         bo.malfunction = '未知';
       }
     }
-    console.log(this.dataLists);
+    // console.log(this.dataLists);
   }
 
 
@@ -194,7 +194,7 @@ export class GraphicDashboardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // console.log('page close');
-
+    this.boilerWsService.sendText('close');
     this.socket.unsubscribe();
     this.boilerWsService.closeSocket();
   }

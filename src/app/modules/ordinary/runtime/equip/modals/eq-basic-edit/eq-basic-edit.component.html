@@ -10,14 +10,14 @@
   <div class="eq_item">
     <div class="input_group">
       <input type="text" class="input_label" [ngModel]="'设备名称'" disabled style="background-color: #ffffff;">
-      <input type="text" class="input_value" [(ngModel)]="name" placeholder="请输入">
+      <input type="text" class="input_value" [(ngModel)]="name" placeholder="请输入3-15个字符" maxlength="15" minlength="3" #ename="ngModel">
     </div>
   </div>
 
   <div class="eq_item" *ngFor="let data of infoList; let i = index;">
     <div class="input_group">
-      <input type="text" class="input_label" [ngModel]="data.label">
-      <input type="text" class="input_value" [(ngModel)]="data.value" placeholder="请输入">
+      <input type="text" class="input_label" [(ngModel)]="data.name" maxlength="10">
+      <input type="text" class="input_value" [(ngModel)]="data.value" placeholder="请输入" maxlength="15">
     </div>
 
     <a (click)="delData(i)">
@@ -61,7 +61,7 @@
 
 <div class="modal-footer">
   <button type="button" class="btn" (click)="activeModal.dismiss('close')">取 消</button>
-  <button type="button" class="btn btn_purple" style="margin-left: 35px;" (click)="save()" [disabled]="!name">确 定</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 35px;" (click)="save()" [disabled]="ename.invalid">确 定</button>
 </div>
 
 

@@ -145,8 +145,12 @@
             <nz-tag [nzColor]="'#C0C4D2'" *ngIf="data.status===0">关闭</nz-tag>
           </td>
           <td>
-            <a class="btn btn_purple btn-sm" [routerLink]="['/admin/formal/service/detail', data.uid, page]">
+            <!--<a class="btn btn_purple btn-sm" [routerLink]="['/admin/formal/service/detail', data.uid, page]">
               查看
+            </a>-->
+
+            <a [routerLink]="['/admin/formal/service/detail', data.uid, page]" class="text_purple">
+              详情
             </a>
           </td>
         </tr>

@@ -104,10 +104,10 @@
                 <li nz-menu-item (click)="searchStatus('')">
                   <a>全部</a>
                 </li>
-                <li nz-menu-item (click)="searchStatus('1')">
+                <li nz-menu-item (click)="searchStatus('0')">
                   <a>正常</a>
                 </li>
-                <li nz-menu-item (click)="searchStatus('2')">
+                <li nz-menu-item (click)="searchStatus('1')">
                   <a>禁用</a>
                 </li>
               </ul>
@@ -149,16 +149,16 @@
               <img src="assets/icons/group_1.png" alt="">
               告警
             </span>
-            <span *ngIf="!data.run" class="ml-2">
+            <span *ngIf="data.online && data.malfunction" class="ml-2">
               <img src="assets/icons/group_3.png" alt="">
               故障
             </span>
           </td>
           <td>
-            <span *ngIf="data.status === 1">
+            <span *ngIf="data.status === 0">
               正常
             </span>
-            <span *ngIf="data.status === 2" style="color: #BE1414;">
+            <span *ngIf="data.status === 1" style="color: #BE1414;">
               禁用
             </span>
           </td>

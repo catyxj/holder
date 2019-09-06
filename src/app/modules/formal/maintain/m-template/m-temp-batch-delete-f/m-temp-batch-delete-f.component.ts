@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 import {MaintainService} from "../../../../../shared/maintain.service";
 import {ActivatedRoute} from "@angular/router";
-import {ComfirmComponent} from "../../../../directives/alert/comfirm/comfirm.component";
 
 import Swal from 'sweetalert2';
 
@@ -16,7 +15,7 @@ export class MTempBatchDeleteFComponent implements OnInit {
   public page = 1;
   public pageNum;
   public pageSize = 15;
-  public search = 'id';
+  public search = 'label';
   public value;
   public status = '';
   public online = '';
@@ -36,23 +35,23 @@ export class MTempBatchDeleteFComponent implements OnInit {
 
   // 获取列表
   getList() {
-    this.dataLists = [
+    /*this.dataLists = [
       {
         uid: 'adsfafsd',
         name: 'asdfassfd'
       }
-    ];
+    ];*/
     this.totalItems = 12;
 
-    /*this.loading = true;
-    this.maintainService.getLists(this.page, this.pageSize, this.search, this.value)
+    this.loading = true;
+    this.maintainService.getTempLists(this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;
         this.totalItems = data.count;
       }, err => {
         this.loading = false;
-      });*/
+      });
   }
 
 
@@ -136,7 +135,7 @@ export class MTempBatchDeleteFComponent implements OnInit {
     for (let i = 0; i < this.dataLists.length; i++) {
       let ac = this.dataLists[i];
       if (ac.checked) {
-        checked.push(ac.uid);
+        checked.push(ac.id);
       }
     }
     if (checked.length > 0) {
@@ -155,9 +154,6 @@ export class MTempBatchDeleteFComponent implements OnInit {
       });
 
 
-      /*this.creatModal(title, subtitle, () => {
-
-      });*/
     }
   }
 
@@ -181,8 +177,8 @@ export class MTempBatchDeleteFComponent implements OnInit {
     let post = {
       data: checked
     };
-    /*this.loading = true;
-    this.maintainService.deleteData(post)
+    this.loading = true;
+    this.maintainService.deleteTempData(post)
       .subscribe(val => {
         that.loading = false;
         Swal(
@@ -198,7 +194,7 @@ export class MTempBatchDeleteFComponent implements OnInit {
           '',
           'error'
         );
-      });*/
+      });
   }
 
 

@@ -1,3 +1,184 @@
-<p>
-  service-list-ord works!
-</p>
+
+<div class="content">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>服务支持</h6>
+    </div>
+    <div class="li_head_r">
+      <button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>
+
+      <a class="btn btn_purple btn_round bpm ml-1" [routerLink]="['/admin/ordinary/service/info']">
+        新增表单
+      </a>
+
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="batchClose()">
+        批量关闭
+      </button>
+
+    </div>
+  </div>
+
+  <div class="list_content">
+    <div class="content_h">
+      <div class="search_box">
+        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="addOnAfterTemplate">
+          <input type="text" nz-input [(ngModel)]="value" (keyup)="searchEnter($event)" maxlength="15"/>
+        </nz-input-group>
+        <ng-template #addOnBeforeTemplate>
+          <nz-select [(ngModel)]="search">
+            <nz-option [nzLabel]="'表单编号'" [nzValue]="'uid'"></nz-option>
+            <nz-option [nzLabel]="'主题内容'" [nzValue]="'value'"></nz-option>
+            <nz-option [nzLabel]="'提交账号'" [nzValue]="'username'"></nz-option>
+            <nz-option [nzLabel]="'所属单位'" [nzValue]="'org_name'"></nz-option>
+          </nz-select>
+        </ng-template>
+        <ng-template #addOnAfterTemplate>
+          <img src="assets/icons/icon_seach.png" alt="" class="search_icon" (click)="searchChange()">
+        </ng-template>
+
+      </div>
+      <div class="flex">
+
+
+      </div>
+    </div>
+    <div class="content_t">
+      <nz-table
+        #dataList
+        [nzFrontPagination]="false"
+        [nzShowPagination] = "false"
+        [nzLoading]="loading"
+        [nzData]="serviceList"
+      >
+        <thead>
+        <tr>
+          <th
+            nzShowCheckbox
+            [(nzChecked)]="isAllChecked"
+            (nzCheckedChange)="checkAll($event)"
+          >
+          </th>
+          <th>表单编号</th>
+          <th>主题内容</th>
+          <th>
+            <!--主题分类-->
+
+            <nz-dropdown [nzTrigger]="'click'">
+              <a nz-dropdown>
+                主题分类
+                <i nz-icon type="down" style="color: #898EA3;"></i>
+              </a>
+
+              <ul nz-menu>
+                <li nz-menu-item (click)="searchType('')">
+                  <a>全部</a>
+                </li>
+                <li nz-menu-item (click)="searchType('1')">
+                  <a>A类，帮助文档</a>
+                </li>
+                <li nz-menu-item (click)="searchType('2')">
+                  <a>B类，系统问题</a>
+                </li>
+                <li nz-menu-item (click)="searchType('3')">
+                  <a>C类，售后维保</a>
+                </li>
+              </ul>
+            </nz-dropdown>
+          </th>
+          <th>提交账号</th>
+          <th>所属单位</th>
+          <th>提交时间</th>
+          <th>
+            <!--当前状态-->
+            <nz-dropdown [nzTrigger]="'click'">
+              <a nz-dropdown>
+                当前状态
+                <i nz-icon type="down" style="color: #898EA3;"></i>
+              </a>
+
+              <ul nz-menu>
+                <li nz-menu-item (click)="searchStatus('')">
+                  <a>全部</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('1')">
+                  <a>待回复</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('2')">
+                  <a>已回复</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('0')">
+                  <a>关闭</a>
+                </li>
+              </ul>
+            </nz-dropdown>
+          </th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of dataList.data">
+          <td
+            nzShowCheckbox
+            [(nzChecked)]="data.checked"
+            [nzDisabled]="data.disabled"
+            (nzCheckedChange)="refreshStatus()"
+          ></td>
+          <td> {{data.uid}} </td>
+          <td>
+            <div style="max-width: 150px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+              {{data.name}}
+            </div>
+          </td>
+          <td>
+            <span *ngIf="data.type === 1">帮助文档</span>
+            <span *ngIf="data.type === 2">系统问题</span>
+            <span *ngIf="data.type === 3">售后维保</span>
+          </td>
+          <td> {{data.username || '空'}} ({{data.account_name ||'空'}}) </td>
+          <td> {{data.org_name}} </td>
+          <td> {{data.created_at | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
+          <td>
+            <nz-tag [nzColor]="'#1E9FF2'" *ngIf="data.status===2">已回复</nz-tag>
+            <nz-tag [nzColor]="'#FFC06A'" *ngIf="data.status===1">待回复</nz-tag>
+            <nz-tag [nzColor]="'#C0C4D2'" *ngIf="data.status===0">关闭</nz-tag>
+          </td>
+          <td>
+            <!--<a class="btn btn_purple btn-sm" [routerLink]="['/admin/formal/service/detail', data.uid, page]">
+              查看
+            </a>-->
+
+            <a [routerLink]="['/admin/ordinary/service/detail', data.uid, page]" class="text_purple">
+              详情
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
+
+    </div>
+
+    <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+
+    <div class="content_b">
+      <nz-pagination nzShowSizeChanger
+                     [nzTotal]="totalItems"
+                     [nzShowTotal]="totalTemplate"
+                     [(nzPageIndex)]="page"
+                     [(nzPageSize)]="pageSize"
+                     (nzPageIndexChange)="pageChange()"
+                     (nzPageSizeChange)="pageSizeChange()"
+                     [nzPageSizeOptions] = "pageSizeList">
+
+      </nz-pagination>
+      <div class="ant-pagination-options-quick-jumper"> 跳至
+        <input type="number" [(ngModel)]="pageNum"> 页 </div>
+      <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
+    </div>
+
+  </div>
+
+</div>
+
+

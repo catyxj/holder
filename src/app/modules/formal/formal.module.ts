@@ -91,6 +91,7 @@ import { MTempBatchAllocateFComponent } from './maintain/m-template/m-temp-batch
 import { MTemplateEditFComponent } from './maintain/m-template/modals/m-template-edit-f/m-template-edit-f.component';
 import { MAcBatchAddComponent } from './maintain/m-account/product/m-ac-batch-add/m-ac-batch-add.component';
 import { MAcBatchDeleteComponent } from './maintain/m-account/product/m-ac-batch-delete/m-ac-batch-delete.component';
+import { TempAddCalc1Component } from './template/add/modals/temp-add-calc1/temp-add-calc1.component';
 
 @NgModule({
   imports: [
@@ -187,6 +188,7 @@ import { MAcBatchDeleteComponent } from './maintain/m-account/product/m-ac-batch
     MTemplateEditFComponent,
     MAcBatchAddComponent,
     MAcBatchDeleteComponent,
+    TempAddCalc1Component,
   ],
   exports: [],
   entryComponents: [
@@ -209,7 +211,8 @@ import { MAcBatchDeleteComponent } from './maintain/m-account/product/m-ac-batch
     MAccountAddFComponent,
     MAccountBasicFComponent,
     MTemplateAddFComponent,
-    MTemplateEditFComponent
+    MTemplateEditFComponent,
+    TempAddCalc1Component
   ]
 })
 export class FormalModule { }

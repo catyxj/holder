@@ -32,19 +32,20 @@ export class AlarmDetailComponent implements OnInit {
 
     this.alarmService.getDetail(this.currentData.uid)
       .subscribe(data => {
-        this.runtimes = data.runtime[0].data;
-        this.AlarmMax = data.alarmMax;
-        this.AlarmMin = data.alarmMin;
+        this.runtimes = data;
+        // this.AlarmMax = data.alarmMax;
+        // this.AlarmMin = data.alarmMin;
 
         // console.log(this.currentData, this.AlarmMax);
         let runtimeValue = {
           min: 0,
           max: 0
         };
+        let unit = '';
         let runtimeList = [];
         for (let i = 0; i < this.runtimes.length; i++) {
           let rt = this.runtimes[i];
-          rt.created_date = this.datePipe.transform(new Date(rt.created_date), 'MM/dd HH:mm:ss');
+          rt.receive_time = this.datePipe.transform(new Date(rt.receive_time), 'MM/dd HH:mm:ss');
           // rt.Value = rt.Value;
           runtimeList.push(rt.value);
         }
@@ -62,7 +63,7 @@ export class AlarmDetailComponent implements OnInit {
             formatter: function (params) {
               params = params[0];
               // console.log(params);
-              return params.value.value.toString() + data.unit;
+              return params.value.value.toString() + unit;
             },
           },
           legend: {
@@ -92,7 +93,7 @@ export class AlarmDetailComponent implements OnInit {
           ],
           yAxis: [
             {
-              name: data.unit,
+              name: unit,
               nameTextStyle: {
                 color: '#666EE8',
                 align: 'left',
@@ -136,7 +137,7 @@ export class AlarmDetailComponent implements OnInit {
             }
           ],
           dataset: {
-            dimensions: ['created_date', 'value'],
+            dimensions: ['receive_time', 'value'],
             source: this.runtimes
           },
 

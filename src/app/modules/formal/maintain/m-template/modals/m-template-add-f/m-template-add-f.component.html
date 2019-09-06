@@ -37,7 +37,8 @@
             {{ i+1 }}
           </td>
           <td>
-            <input type="text" class="form-control" [(ngModel)]="item.info" placeholder="50个汉字以内" maxlength="50">
+            <input type="text" class="form-control" [(ngModel)]="item" (change)="changeItem(item, i)"
+                   placeholder="50个汉字以内" maxlength="50">
           </td>
         </tr>
       </tbody>

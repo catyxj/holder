@@ -49,6 +49,7 @@ export class NoticeListComponent implements OnInit {
   getList() {
     this.dataLists = [
       {
+        id: 'asdfsa',
         created_at: '2018-2-13 12:12:12',
         info: 'XXXXX锅炉运行周报',
         log_type: 1,
@@ -56,6 +57,7 @@ export class NoticeListComponent implements OnInit {
         log_status: true
       },
       {
+        id: 'asdfddddsa',
         created_at: '2018-2-13 12:12:12',
         info: 'XXXXX锅炉运行周报',
         log_type: 2,
@@ -151,7 +153,7 @@ export class NoticeListComponent implements OnInit {
     for (let i = 0; i < this.dataLists.length; i++) {
       let ac = this.dataLists[i];
       if (ac.checked) {
-        checked.push(ac.uid);
+        checked.push(ac.id);
       }
     }
 

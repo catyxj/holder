@@ -38,7 +38,7 @@
         <ng-template #addOnBeforeTemplate>
           <nz-select [(ngModel)]="search">
             <nz-option [nzLabel]="'模板名称'" [nzValue]="'name'"></nz-option>
-            <nz-option [nzLabel]="'模板编号'" [nzValue]="'id'"></nz-option>
+            <nz-option [nzLabel]="'模板编号'" [nzValue]="'label'"></nz-option>
           </nz-select>
         </ng-template>
         <ng-template #addOnAfterTemplate>
@@ -83,13 +83,13 @@
             [nzDisabled]="data.disabled"
             (nzCheckedChange)="refreshStatus()"
           ></td>-->
-          <td> {{data.terminal_code}} </td>
-          <td> 自定义模版一 </td>
+          <td> {{data.label}} </td>
+          <td> {{data.name}} </td>
           <td>
-            2019-02-02 19:12:12
+            {{data.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}
           </td>
           <td>
-            2019-02-02 19:12:12
+            {{data.updated_at | date: 'yyyy-MM-dd HH:mm:ss'}}
           </td>
 
           <td>

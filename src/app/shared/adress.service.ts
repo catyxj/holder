@@ -18,7 +18,7 @@ export class AdressService {
 
   constructor(private http: HttpClient) { }
 
-  getAddress() {
+  getAddress(): Observable<any> {
     return this.http.get('assets/server/location_list.json');
     // return this.http.get('/location_list')
     //   .pipe(

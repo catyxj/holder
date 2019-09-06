@@ -23,7 +23,7 @@
         nzPlaceHolder="请选择需要分配的模版"
         [(ngModel)]="selectedTemplate"
       >
-        <nz-option *ngFor="let data of templateList" [nzLabel]="data.text" [nzValue]="data.value"></nz-option>
+        <nz-option *ngFor="let data of templateList" [nzLabel]="data.name" [nzValue]="data.id"></nz-option>
       </nz-select>
 
       <button class="btn btn_purple btn_round bpm ml-1" (click)="batchAllocate()">
@@ -41,7 +41,7 @@
         </nz-input-group>
         <ng-template #addOnBeforeTemplate>
           <nz-select [(ngModel)]="search">
-            <nz-option [nzLabel]="'模板编号'" [nzValue]="'id'"></nz-option>
+            <nz-option [nzLabel]="'模板编号'" [nzValue]="'temp_label'"></nz-option>
           </nz-select>
         </ng-template>
         <ng-template #addOnAfterTemplate>
@@ -86,10 +86,10 @@
             [nzDisabled]="data.disabled"
             (nzCheckedChange)="refreshStatus()"
           ></td>
-          <td> {{data.terminal_code}} </td>
           <td> {{data.name}} </td>
+          <td> {{data.use_org_name}} </td>
           <td>
-            {{data.org_name || '空'}}
+            {{data.terminal_code || '空'}}
           </td>
           <td> {{data.temp_name || '默认模板'}} </td>
 

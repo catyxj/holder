@@ -4,6 +4,7 @@ import {BoilerSocketService} from "../../../../shared/boiler-socket.service";
 import {RuntimeService} from "../../../../shared/runtime.service";
 
 import Swal from 'sweetalert2';
+import {BoilerService} from "../../../../shared/boiler.service";
 
 @Component({
   selector: 'app-runtime-dashboard',
@@ -19,6 +20,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
   public malfunction;
   private token;
   public date;
+  public info;
 
 
   // 组态元素
@@ -34,12 +36,23 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
   public btnChans = [];
 
   constructor(private boilerWsService: BoilerSocketService,
-              private runtimeService: RuntimeService) { }
+              private runtimeService: RuntimeService,
+              private eptService: BoilerService) { }
 
   ngOnInit() {
     this.uid = sessionStorage.getItem('runtimeUid');
     this.token = localStorage.getItem('authToken');
+    this.getInfo();
     this.getContent();
+  }
+
+  getInfo() {
+    this.eptService.getInfo(this.uid)
+      .subscribe(data => {
+        this.info = data;
+      }, err => {
+
+      });
   }
 
   // 获取页面内容
@@ -47,9 +60,10 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
     let that = this;
     this.runtimeService.getContent(this.uid)
       .subscribe(data => {
-        that.elements = data.content;
+        that.elements = JSON.parse(data.content);
         that.imgs1 = [];
         that.imgs2 = [];
+        that.imgs3 = [];
         that.btns = [];
         that.dataLists1 = [];
         that.dataLists2 = [];
@@ -112,7 +126,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
       .subscribe(
         data => {
           let equips = JSON.parse(data);
-          console.log(equips);
+          // console.log(equips);
           this.online = equips.online;
           this.run = equips.run;
           this.alarm = equips.alarm_count > 0;
@@ -170,11 +184,10 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
         if (parseInt(el.chanType) === ch.channel_type && parseInt(el.chanNum) === ch.channel_number) {
           el.name = ch.name;
           el.value = ch.value;
-
           for (let k = 0; k < el.imgs.imgs.length; k++) {
             let eig = el.imgs.imgs[k];
             if (el.value >= eig.min && el.value <= eig.max) {
-              el.src = eig.imgUrl;
+              el.src = eig.img;
               break;
             }
           }
@@ -198,7 +211,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
       }
     }
 
-    console.log(this.imgs1, this.imgs2, this.imgs3, this.btns);
+    // console.log(this.imgs1, this.imgs2, this.imgs3, this.btns);
   }
 
   /*sendMes(n, data) {
@@ -251,7 +264,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
             err.message || err,
             'error'
           );
-        })
+        });
       /*setTimeout(() => {
         btn.loading = false;
         Swal(
@@ -264,14 +277,22 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
     }
   }
 
+  sendMessage(message) {
+    this.boilerWsService.sendText(message);
+  }
+
+  trackByUid(index, item) {
+    return item.id;
+  }
 
   ngOnDestroy() {
-
+    console.log('close');
     if (this.socket) {
+      console.log('socket end');
+      this.sendMessage('close');
       this.socket.unsubscribe();
       this.boilerWsService.closeSocket();
     }
-
   }
 
 }

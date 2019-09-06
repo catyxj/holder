@@ -4,7 +4,6 @@ import {TemplateService} from "../../../../shared/template.service";
 import {ActivatedRoute} from "@angular/router";
 
 import Swal from 'sweetalert2';
-import {ComfirmComponent} from "../../../directives/alert/comfirm/comfirm.component";
 
 @Component({
   selector: 'app-template-batch-delete-f',
@@ -124,21 +123,6 @@ export class TemplateBatchDeleteFComponent implements OnInit {
   }
 
 
-  // 新增模态框
-  /* addTerm() {
-     let that = this;
-     const modalRef = this.modalService.open(TerminalAddFormalComponent, {windowClass: 'modal_md', centered: true});
-     // modalRef.componentInstance.currentData = this.config;
-     // modalRef.componentInstance.uid = this.uid;
-     modalRef.result.then((result) => {
-       if (result === 'ok') {
-         that.pageChange();
-       }
-     }, (reason) => {
-       console.log(reason);
-     });
-   }*/
-
 
   //  批量删除
   batchDelete() {
@@ -171,10 +155,6 @@ export class TemplateBatchDeleteFComponent implements OnInit {
         nzOnOk: () => console.log('Info OK')
       });
 
-
-      /*this.creatModal(title, subtitle, () => {
-
-      });*/
     }
   }
 

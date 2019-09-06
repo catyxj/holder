@@ -5,7 +5,7 @@ import {MaintainService} from "../../../../../shared/maintain.service";
 import {ActivatedRoute} from "@angular/router";
 
 import Swal from 'sweetalert2';
-import {ComfirmComponent} from "../../../../directives/alert/comfirm/comfirm.component";
+
 
 @Component({
   selector: 'app-m-account-product-f',
@@ -41,11 +41,14 @@ export class MAccountProductFComponent implements OnInit {
   // 获取列表
   getList() {
     this.loading = true;
-    this.maintainService.getLists(this.page, this.pageSize, this.search, this.value)
+    this.maintainService.getUserMtDetail(this.uid, this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;
         this.totalItems = data.count;
+        if (!this.dataLists) {
+          this.dataLists = [];
+        }
       }, err => {
         this.loading = false;
       });
@@ -121,8 +124,8 @@ export class MAccountProductFComponent implements OnInit {
 
 
   // 新增
-  addData() {
-    /*let that = this;
+  /*addData() {
+    let that = this;
     const modalRef = this.modalService.open(MAccountAddFComponent, {windowClass: 'modal_m', centered: true});
     // modalRef.componentInstance.currentData = this.config;
     // modalRef.componentInstance.uid = this.uid;
@@ -132,11 +135,11 @@ export class MAccountProductFComponent implements OnInit {
       }
     }, (reason) => {
       console.log(reason);
-    });*/
-  }
+    });
+  }*/
 
 //  批量删除
-  batchDelete() {
+  /*batchDelete() {
     let that = this;
     let title = '';
     let subtitle = '';
@@ -203,7 +206,7 @@ export class MAccountProductFComponent implements OnInit {
           'error'
         );
       });
-  }
+  }*/
 
 
   goBack() {

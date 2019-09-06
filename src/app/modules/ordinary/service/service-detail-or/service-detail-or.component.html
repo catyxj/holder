@@ -1,0 +1,217 @@
+
+<!--<div class="bread">
+  信息维护 <span> / </span>服务支持
+</div>-->
+
+
+<div class="content">
+  <div class="info_head">
+    <div class="info_tname">
+      <img src="assets/icons/icon_list_setting.png" alt="">
+      表单详情
+    </div>
+    <div>
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/ordinary/service/list', {page: listPage}]">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="info_content">
+    <div class="info_ser_1">
+      <div class="info_title">
+        <h6>
+          基础信息
+        </h6>
+      </div>
+      <div class="info_body">
+        <div class="ser_h_r row">
+          <div class="ser_h_col col-3">
+            <div class="ser_h_label">
+              表单分类：
+            </div>
+            <div class="ser_h_text">
+              <span *ngIf="basic&&basic.type === 1">帮助文档 </span>
+              <span *ngIf="basic&&basic.type === 2">系统问题</span>
+              <span *ngIf="basic&&basic.type === 3">售后维保</span>
+            </div>
+          </div>
+
+          <div class="ser_h_col col-3">
+            <div class="ser_h_label">
+              表单编号：
+            </div>
+            <div class="ser_h_text">
+              {{basic?.uid}}
+            </div>
+          </div>
+
+          <div class="ser_h_col col-3">
+            <div class="ser_h_label">
+              表单状态：
+            </div>
+            <div class="ser_h_text">
+              <span style="color: #1E9FF2;" *ngIf="basic&&basic.status===2">
+                已回复
+              </span>
+              <span style="color: #FFC06A;" *ngIf="basic&&basic.status===1">
+                未回复
+              </span>
+              <span style="color: #A7ABBE;" *ngIf="basic&&basic.status===0">
+                关闭
+              </span>
+            </div>
+          </div>
+
+          <div class="ser_h_col col-3">
+            <div class="ser_h_label" style="color: #A7ABBE">
+              创建时间：
+            </div>
+            <div class="ser_h_text" style="color: #A7ABBE">
+              {{basic?.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}
+            </div>
+          </div>
+        </div>
+
+        <div class="ser_h_r">
+          <div class="ser_h_col">
+            <div class="ser_h_label">
+              表单主题：
+            </div>
+            <div class="text_content">
+              {{basic?.value}}
+            </div>
+          </div>
+        </div>
+
+        <div class="ser_h_r row">
+          <div class="ser_h_col col-3">
+            <div class="ser_h_label">
+              提交账号：
+            </div>
+            <div class="ser_h_text">
+              {{account || '空'}} ({{basic?.account_name || '空'}})
+            </div>
+          </div>
+          <div class="ser_h_col col-3">
+            <div class="ser_h_label">
+              所属单位：
+            </div>
+            <div class="ser_h_text">
+              {{basic?.org_name}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info_ser_2">
+      <div class="info_title">
+        <h6>
+          沟通记录
+        </h6>
+      </div>
+      <div class="info_body">
+        <ul>
+          <li class="sinfo_item" *ngFor="let data of comments">
+            <div class="flex">
+              <div class="ser_h_label">
+                <div class="sinfo_item_img">
+                  <img src="assets/icons/icon_chat.png" alt="">
+                </div>
+                <div class="sinfo_item_name">
+                  {{data.account_name || '空'}}
+                  <div style="font-weight: normal; font-size: 12px; text-align: left;" class="text_grey">
+                    {{data.username2}}
+                  </div>
+                </div>
+              </div>
+              <div class="text_content">
+                {{data.value}}
+              </div>
+            </div>
+            <div class="flex sinfo_item_bottom">
+              <div class="sinfo_item_down">
+                <div *ngFor="let file of data.attach; let n = index;" title="{{file.name}}">
+                  <a class="text_purple" href="{{file.oss_path}}" download="{{file.name}}">附件{{n+1}}</a>
+                </div>
+              </div>
+              <div class="sinfo_item_date">
+                {{data.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}
+              </div>
+
+
+            </div>
+
+          </li>
+        </ul>
+
+        <div class="info_page">
+          <nz-pagination [(nzPageIndex)]="page" [nzTotal]="totalItems" [nzPageSize]="pageSize"
+                         (nzPageIndexChange)="getComments()">
+
+          </nz-pagination>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="info_ser_3">
+      <div class="info_title">
+        <h6>
+          我要反馈
+        </h6>
+      </div>
+      <div class="info_body">
+        <div class="sinfo_message">
+          <div class="flex">
+            <div class="ser_h_label">
+              留言
+            </div>
+            <div style="width: 100%; margin-left: 12px;">
+              <textarea style="width: 100%; height: 72px; padding: 4px 13px; word-break:break-all; " [(ngModel)]="message" [disabled]="!basic || basic.status===0"
+                        placeholder="此处限定600字符" maxlength="600">
+
+              </textarea>
+            </div>
+          </div>
+          <div class="flex justify-content-between">
+            <div class="sinfo_upload">
+              <nz-upload nzAction="/api/dialogue/attach/upload"
+                         [nzBeforeUpload]="beforeUpload"
+                         [nzDisabled]="fileList.length >= 5 || !basic || basic.status===0"
+                         [nzHeaders]="headOption"
+                         [nzFileList]="fileList" (nzChange)="handleChange($event)">
+                <button class="btn btn_purple bpm" [disabled]="fileList.length >= 5 || !basic || basic.status===0">
+                  <!--<img src="assets/icons/icon_Enclosure.png" alt="">-->
+                  <i class="iconfont iconicon_Enclosure"></i>
+                  <span style="font-size: 10px;">上传附件</span>
+                </button>
+              </nz-upload>
+              <span style="margin-left: 19px; font-size: 10px; color: #A7ABBE;">
+                最多可上传5个附件，每个附件大小不超过2MB。
+              </span>
+            </div>
+            <div>
+              <button class="btn btn_purple" (click)="save()" [disabled]="!message || !basic || basic.status===0">提交</button>
+            </div>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+

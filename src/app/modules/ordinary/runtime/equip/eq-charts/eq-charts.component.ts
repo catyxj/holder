@@ -47,7 +47,7 @@ export class EqChartsComponent implements OnInit {
     this.runtimeService.getRuntimeList(this.uid)
       .subscribe( data => {
         // console.log(data);
-        this.params = data;
+        this.params = data.channels;
         // this.runtimes = data.data;
         let n = 4;
         if (this.params.length > 4) {
@@ -213,108 +213,23 @@ export class EqChartsComponent implements OnInit {
 
 
   // 多个图表初始化
-  /*initCharts() {
+  initCharts() {
     if (!this.runtimes) {
       return;
     }
     for (let i = 0; i < this.runtimes.length; i++) {
       let rts = this.runtimes[i];
-      /!*if (!this.runtimes[i] || this.runtimes[i].length <= 0) {
+      /*if (!this.runtimes[i] || this.runtimes[i].length <= 0) {
         rts = null;
-      }*!/
+      }*/
       this.initChart(rts, i);
     }
-  }*/
+  }
 
   // 获取图表数据
   getChartData() {
 
-    /*this.runtimes = [
-      {
-        data:[
-          {
-            created_date: '2018-11-6 11:20:10',
-            value: 333
-          },
-          {
-            created_date: '2018-11-6 11:20:20',
-            value: 343
-          },
-          {
-            created_date: '2018-11-6 11:20:30',
-            value: 355
-          },
-          {
-            created_date: '2018-11-6 11:20:40',
-            value: 311
-          }
-        ],
-        unit: 'aa'
-      },
-      {
-        data: [
-          {
-            created_date: '2018-11-6 11:20:10' ,
-            value: 333
-          },
-          {
-            created_date: '2018-11-6 11:20:20',
-            value: 343
-          },
-          {
-            created_date: '2018-11-6 11:20:30',
-            value: 355
-          },
-          {
-            created_date: '2018-11-6 11:20:40',
-            value: 311
-          }
-        ],
-        unit: '℃'
-      },
-      {
-        data: [
-          {
-            created_date: '2018-11-6 11:20:10' ,
-            value: 333
-          },
-          {
-            created_date: '2018-11-6 11:20:20',
-            value: 343
-          },
-          {
-            created_date: '2018-11-6 11:20:30',
-            value: 355
-          },
-          {
-            created_date: '2018-11-6 11:20:40',
-            value: 311
-          }
-        ],
-        unit: '℃'
-      },
-      {
-        data: [
-          {
-            created_date: '2018-11-6 11:20:10' ,
-            value: 388
-          },
-          {
-            created_date: '2018-11-6 11:20:20',
-            value: 355
-          },
-          {
-            created_date: '2018-11-6 11:20:30',
-            value: 433
-          },
-          {
-            created_date: '2018-11-6 11:20:40',
-            value: 431
-          }
-        ],
-        unit: 'dd'
-      }
-    ];
+    /*this.runtimes = [[{"value":0,"receive_time":"2019-09-04T16:21:10+08:00"}],[{"value":0,"receive_time":"2019-09-04T16:21:10+08:00"}],[{"value":1,"receive_time":"2019-09-04T16:21:10+08:00"}],[{"value":1,"receive_time":"2019-09-04T16:21:10+08:00"}]]
     for (let i = 0; i < this.runtimes.length; i++) {
       let rts = this.runtimes[i];
       this.initChart(rts, i);
@@ -337,7 +252,7 @@ export class EqChartsComponent implements OnInit {
     this.runtimeService.getRuntimeData(postData)
       .subscribe( data => {
         console.log(data);
-        this.runtimes = data.instant;
+        this.runtimes = data.data;
         for (let i = 0; i < this.runtimes.length; i++) {
           let rts = this.runtimes[i];
           this.initChart(rts, i);
@@ -347,20 +262,18 @@ export class EqChartsComponent implements OnInit {
 
   // 单个图表初始化
   initChart(data, n) {
-    if (!data || !data.data) {
-      data = {
-        data: [
-          {
-            created_date: new Date(),
-            value: 0
-          }
-        ],
-        unit: ''
-      };
+    if (!data) {
+      data = [
+        {
+          receive_time: new Date(),
+          value: 0
+        }
+      ];
     }
-    for (let i = 0; i < data.data.length; i++) {
-      let rt = data.data[i];
-      rt.created_date = this.datePipe.transform(new Date(rt.created_date), 'MM/dd HH:mm:ss');
+    let unit = this.currentParams[n].unit;
+    for (let i = 0; i < data.length; i++) {
+      let rt = data[i];
+      rt.receive_time = this.datePipe.transform(new Date(rt.receive_time), 'MM/dd HH:mm:ss');
     }
     // console.log(data);
     this.chartOption[n] = {
@@ -374,7 +287,7 @@ export class EqChartsComponent implements OnInit {
         formatter: function (params) {
           params = params[0];
           // console.log(params);
-          return params.value.value + data.unit;
+          return params.value.value + unit;
         },
       },
       legend: {
@@ -405,7 +318,7 @@ export class EqChartsComponent implements OnInit {
       ],
       yAxis: [
         {
-          name: data.unit,
+          name: unit,
           nameTextStyle: {
             color: '#666EE8',
             align: 'left',
@@ -438,8 +351,8 @@ export class EqChartsComponent implements OnInit {
         }
       ],
       dataset: {
-        dimensions: ['created_date', 'value'],
-        source: data.data
+        dimensions: ['receive_time', 'value'],
+        source: data
       },
 
     };
@@ -477,7 +390,7 @@ export class EqChartsComponent implements OnInit {
     if (data.checked === true) {
       data.checked = false;
       for (let i = 0; i < this.currentParams.length; i++) {
-        if (data.Uid === this.currentParams[i].Uid) {
+        if (data.id === this.currentParams[i].id) {
           this.currentParams.splice(i, 1);
           this.runtimes.splice(i, 1);
         }
@@ -510,7 +423,7 @@ export class EqChartsComponent implements OnInit {
   showHistory() {
     this.current = false;
     this.selectDate();
-    this.getChartData();
+    // this.getChartData();
   }
 
 

@@ -1,3 +1,147 @@
-<p>
-  remind-report works!
-</p>
+
+
+<div class="notice">
+  <div class="info_head">
+    <div class="info_tname">
+      <img src="assets/icons/boiler2.png" alt="">
+
+      XXXXX锅炉运行周报
+
+    </div>
+    <div class="info_head_r">
+      <!--刷新-->
+      <!--<button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>-->
+
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/ordinary/home/notice']">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+
+
+    </div>
+  </div>
+
+  <div class="report_content">
+    <div class="row">
+      <div class="col-3 h_item">
+        <div class="h_label">
+          产品名称：
+        </div>
+        <div class="h_value">
+          某某某锅炉
+        </div>
+      </div>
+
+      <div class="col-3 h_item">
+        <div class="h_label">
+          产品终端编码：
+        </div>
+        <div class="h_value">
+          某某某锅炉
+        </div>
+      </div>
+
+      <div class="col-3 h_item">
+        <div class="h_label">
+          所属单位：
+        </div>
+        <div class="h_value">
+          某某某锅炉
+        </div>
+      </div>
+
+      <div class="col-3 h_item">
+        <div class="h_label">
+          统计时间：
+        </div>
+        <div class="h_value">
+          2019-01-02至2019-01-09
+        </div>
+      </div>
+    </div>
+
+    <div class="report_info">
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th style="width: 50%;">统计项目</th>
+            <th>数值</th>
+          </tr>
+        </thead>
+
+        <tr>
+          <td>
+            本周总计运行时长
+          </td>
+          <td>
+            76.5 小时
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            日平均运行效率
+          </td>
+          <td>
+            78 %
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            能耗数据统计（天然气）
+          </td>
+          <td>
+            74.6 m³
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            耗电量统计
+          </td>
+          <td>
+            21.7 度
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            告警累计次数
+          </td>
+          <td>
+            21 次
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            最多次数告警
+          </td>
+          <td>
+            12次（蒸汽温度过高）
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            故障次数
+          </td>
+          <td>
+            0 次
+          </td>
+        </tr>
+
+      </table>
+
+
+    </div>
+
+
+  </div>
+
+</div>
+

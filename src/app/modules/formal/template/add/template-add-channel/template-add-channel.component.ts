@@ -5,6 +5,9 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {AlarmRuleComponent} from "../../../terminal/modals/alarm-rule/alarm-rule.component";
 import {RangeConfigComponent} from "../../../terminal/modals/range-config/range-config.component";
+import {TemplateService} from "../../../../../shared/template.service";
+
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-template-add-channel',
@@ -31,7 +34,8 @@ export class TemplateAddChannelComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private terminalService: TerminalService,
               private modalService: NgbModal,
-              private nzmodalService: NzModalService) { }
+              private nzmodalService: NzModalService,
+              private templateService: TemplateService) { }
 
   ngOnInit() {
     if (this.uid) {
@@ -77,7 +81,7 @@ export class TemplateAddChannelComponent implements OnInit {
               Status: chan.show <= 0 ? 0 : 1,
               SequenceNumber: chan.show > 0 ? chan.show : 0,
               slaveAddress: chan.slave_address,
-              writeRule: chan.write_rule,
+              writeRule: chan.write_rule.toString(),
               writeValue: chan.write_value
             });
           }
@@ -99,7 +103,7 @@ export class TemplateAddChannelComponent implements OnInit {
               Status: chan.show <= 0 ? 0 : 1,
               SequenceNumber: chan.show > 0 ? chan.show : 0,
               slaveAddress: chan.slave_address,
-              writeRule: chan.write_rule,
+              writeRule: chan.write_rule.toString(),
               writeValue1: wv[0],
               writeValue2: wv[1]
               // SwitchStatus: chan.SwitchStatus,
@@ -121,7 +125,7 @@ export class TemplateAddChannelComponent implements OnInit {
               Status: chan.show <= 0 ? 0 : 1,
               SequenceNumber: chan.show > 0 ? chan.show : 0,
               slaveAddress: chan.slave_address,
-              writeRule: chan.write_rule,
+              writeRule: chan.write_rule.toString(),
               writeValue: chan.write_value
             });
           }
@@ -391,6 +395,9 @@ export class TemplateAddChannelComponent implements OnInit {
 
   // 设置位置
   setStatus(data, status, sn?) {
+    if (sn && sn.disabled) {
+      return;
+    }
     data.Status = status;
     if (status === 1) {
       data.SequenceNumber = sn.name;
@@ -501,10 +508,18 @@ export class TemplateAddChannelComponent implements OnInit {
             });
             return false;
           }
-        } else if (!this.analogueList[i].Func || !this.analogueList[i].Byte || !this.analogueList[i].Modbus || !this.analogueList[i].Parameter.Scale || !this.analogueList[i].Parameter.Unit || !this.analogueList[i].slaveAddress) {
+        } else if (!this.analogueList[i].Func || !this.analogueList[i].Byte || !this.analogueList[i].Modbus || !this.analogueList[i].Parameter.Scale || !this.analogueList[i].Parameter.Unit) {
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
             nzContent: `模拟通道[ ${i + 1} ]配置信息不全 ，参数不能为0 `
+          });
+          return false;
+        }
+
+        if (parseInt(this.analogueList[i].Func) !== 99 && (!this.analogueList[i].slaveAddress || this.analogueList[i].slaveAddress > 255 || this.analogueList[i].slaveAddress < 1)) {
+          this.nzmodalService.error({
+            nzTitle: '通道配置更新失败',
+            nzContent: `模拟通道[ ${i + 1} ]从机地址错误 `
           });
           return false;
         }
@@ -557,7 +572,7 @@ export class TemplateAddChannelComponent implements OnInit {
 
     for (let i = 0; i < this.switchList.length; i++) {
       if (this.switchList[i].Parameter.Name) {
-        if ((parseInt(this.switchList[i].Func) !== 99) && (!this.switchList[i].Func || !this.switchList[i].BitAddress || !this.switchList[i].Modbus || !this.switchList[i].slaveAddress)) {
+        if ((parseInt(this.switchList[i].Func) !== 99) && (!this.switchList[i].Func || !this.switchList[i].BitAddress || !this.switchList[i].Modbus)) {
 
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
@@ -565,7 +580,14 @@ export class TemplateAddChannelComponent implements OnInit {
           });
           return false;
         }
-        if (parseInt(this.switchList[i].Func) === 1 || parseInt(this.switchList[i].Func) === 3) {
+        if (parseInt(this.switchList[i].Func) !== 99 && (!this.switchList[i].slaveAddress || this.switchList[i].slaveAddress > 255 || this.switchList[i].slaveAddress < 1)) {
+          this.nzmodalService.error({
+            nzTitle: '通道配置更新失败',
+            nzContent: `开关通道[ ${i + 1} ]从机地址错误 `
+          });
+          return false;
+        }
+        if ((parseInt(this.switchList[i].Func) !== 99) && (parseInt(this.switchList[i].Func) === 1 || parseInt(this.switchList[i].Func) === 3)) {
           if (this.switchList[i].writeRule !== '0') {
             if (!this.switchList[i].writeValue1 || !this.switchList[i].writeValue2 ) {
               this.nzmodalService.error({
@@ -643,10 +665,18 @@ export class TemplateAddChannelComponent implements OnInit {
 
     for (let i = 0; i < this.rangeList.length; i++) {
       if (this.rangeList[i].Parameter.Name) {
-        if ((parseInt(this.rangeList[i].Func) !== 99) && (!this.rangeList[i].Func || !this.rangeList[i].Byte || !this.rangeList[i].Modbus || !this.rangeList[i].slaveAddress)) {
+        if ((parseInt(this.rangeList[i].Func) !== 99) && (!this.rangeList[i].Func || !this.rangeList[i].Byte || !this.rangeList[i].Modbus)) {
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
             nzContent: `状态通道[${i + 1}]配置信息不全 ，参数不能为0 `
+          });
+          return false;
+        }
+
+        if ((parseInt(this.rangeList[i].Func) !== 99) && (!this.rangeList[i].slaveAddress || this.rangeList[i].slaveAddress > 255 || this.rangeList[i].slaveAddress < 1)) {
+          this.nzmodalService.error({
+            nzTitle: '通道配置更新失败',
+            nzContent: `状态通道[ ${i + 1} ]从机地址错误 `
           });
           return false;
         }
@@ -704,21 +734,18 @@ export class TemplateAddChannelComponent implements OnInit {
       }
     }
 
-
-
-
     const data = {
       analogue: analogueList,
       switch: switchList,
       range: rangeList,
-      terminal_id: this.uid
+      uid: this.uid
     };
 
     console.log(data);
-    this.next.emit(1);
+    // this.next.emit(1);
 
-    // this.isSpinning = true;
-    /*this.terminalService.saveChannel(data)
+    this.isSpinning = true;
+    this.templateService.addChannel(data)
       .subscribe(val => {
         this.isSpinning = false;
         Swal({
@@ -726,6 +753,7 @@ export class TemplateAddChannelComponent implements OnInit {
           text: '',
           type: 'success'
         });
+        this.next.emit(1);
       }, err => {
         this.isSpinning = false;
         Swal({
@@ -733,11 +761,14 @@ export class TemplateAddChannelComponent implements OnInit {
           text: err.message || err,
           type: 'error'
         });
-      });*/
+      });
+
+    this.next.emit(1);
 
 
 
   }
+
 
   pre() {
     this.next.emit(-1);

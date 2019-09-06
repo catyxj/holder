@@ -66,40 +66,40 @@
         ></td>
         <td> {{data.name}} </td>
         <td>
-          <div class="maintain_status" *ngIf="data.status">
+          <div class="maintain_status" *ngIf="data.life_cycle<=0">
             <div class="stat_label stat_warning"></div>
-            正常
-          </div>
-          <div class="maintain_status" *ngIf="!data.status">
-            <div class="stat_label stat_green"></div>
             异常
           </div>
+          <div class="maintain_status" *ngIf="data.life_cycle>0">
+            <div class="stat_label stat_green"></div>
+            正常
+          </div>
         </td>
-        <td> {{data.location_name}} </td>
-        <td> {{data.user_org}} </td>
+        <td> {{data.install_date | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
+        <td> {{data.save_month}} 个月 </td>
         <td style="display: flex; align-items:center;">
           <span>
-            {{ data.status*100 | number:'1.0-2' }} %
+            {{ data.life_cycle*100 | number:'1.0-2' }} %
           </span>
 
-          <div class="status_bar" [ngClass]="{'green':data.status>0.1, 'yellow':data.status<=0.1 && data.status>0, 'grey':data.status<=0}">
-            <div class="status_bar_in" [ngStyle]="{'background-color': data.status>0.1 ? '#28D094' : '#FFC06A', 'width': data.status*100+'%' }"></div>
+          <div class="status_bar" [ngClass]="{'green':data.life_cycle>0.1, 'yellow':data.life_cycle<=0.1 && data.life_cycle>0, 'grey':data.life_cycle<=0}">
+            <div class="status_bar_in" [ngStyle]="{'background-color': data.life_cycle>0.1 ? '#28D094' : '#FFC06A', 'width': data.life_cycle>0 ? data.life_cycle*100+'%': '0%' }"></div>
           </div>
-          <span *ngIf="data.status>0.1">
+          <span *ngIf="data.life_cycle>0.1">
             正常
           </span>
-          <span style="color: #FFC06A;" *ngIf="data.status<=0.1 && data.status>0">
+          <span style="color: #FFC06A;" *ngIf="data.life_cycle<=0.1 && data.life_cycle>0">
             即将过期
           </span>
-          <span style="color: #BE1414;" *ngIf="data.status<=0">
+          <span style="color: #BE1414;" *ngIf="data.life_cycle<=0">
             已经过期
           </span>
-          <a style="color: #666EE8; text-decoration: underline;" *ngIf="data.status<=0.1">
+          <a style="color: #666EE8; text-decoration: underline;" *ngIf="data.life_cycle<=0.1">
             联系厂家
           </a>
         </td>
         <td>
-          A组件质保到期
+          {{data.description}}
         </td>
         <td>
           <a class="" (click)="editData(data)" title="设置">

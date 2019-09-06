@@ -19,7 +19,7 @@ export class TemplateService {
   private channelUrl = 'assets/server/chan_config_list.json';
   private templateAllUrl = 'assets/server/template_list.json';
 
-  // private templatesUrl = '/api/formal/template/list';
+  // private templatesUrl = '/api/formal/terminal/temp/list';
   // private channelUrl = '/api/formal/template/detail';
   // private templateAllUrl = '/api/formal/template/list/all';
 
@@ -30,12 +30,180 @@ export class TemplateService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.templatesUrl}/?page=${n}&pageSize=${pageSize}&search=${search}&value=${value}`;
+    const url = `${this.templatesUrl}?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
       );
   }
+
+  // ---------------------新增模板-----------------------
+  // 新增设备信息
+  addEpt(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/terminal/temp/create/ept', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 新增通信参数
+  addCmt(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/terminal/temp/create/cmt', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 新增数据点位
+  addChannel(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/terminal/temp/create/channel', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 新增能效计算
+  addCalc(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/terminal/temp/create/calc', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 新增组态
+  addZt(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/terminal/temp/create/zt', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 新增模板名称
+  addName(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/terminal/temp/create/name', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // ----------------end 新增模板---------------------------------
+
+  // 删除
+  deleteData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/terminal/temp/delete', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 批量设置
+  batchSet(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/terminal/temp/batch/set', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取通信参数信息
+  getCmt(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get<any>(`/api/formal/terminal/temp/cmt/brief?uid=${uid}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取模板配置基本信息
+  getEpt(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get<any>(`/api/formal/terminal/temp/ept/brief?uid=${uid}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取通道基本信息
+  getChannelBrief(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get<any>(`/api/formal/terminal/temp/channel/brief?uid=${uid}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取组态基本信息
+  getzZTBrief(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get<any>(`/api/formal/terminal/temp/zt/brief?uid=${uid}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取通道具体信息
+  getChannelInfo(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    // return this.http.get('assets/server/chan_config_list.json');
+    return this.http.get<any>(`/api/formal/terminal/temp/channel/detail?uid=${uid}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取组态内容
+  getContent(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    // return this.http.get('assets/server/device.json', httpOptions);
+    return this.http.get<any>(`/api/formal/terminal/temp/zt/detail?uid=${uid}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+
+  }
+
+
+
+
+
+
+
+
 
   // 获取模板列表--下拉列表
   getTemplateAll(): Observable<any> {
@@ -48,16 +216,7 @@ export class TemplateService {
       );
   }
 
-  // 删除
-  deleteData(data): Observable<any> {
-    let token = localStorage.getItem('authToken');
-    httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/formal/template/delete', data, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
 
 
   // 获取模板通道数据

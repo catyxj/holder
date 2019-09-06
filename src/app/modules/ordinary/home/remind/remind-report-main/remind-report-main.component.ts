@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-remind-report-main',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./remind-report-main.component.css']
 })
 export class RemindReportMainComponent implements OnInit {
+  public type;
+  public status;
+  public uid;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.uid = this.route.snapshot.paramMap.get('uid');
+    this.type = this.route.snapshot.paramMap.get('type');
+    this.status = this.route.snapshot.paramMap.get('status');
   }
 
 }

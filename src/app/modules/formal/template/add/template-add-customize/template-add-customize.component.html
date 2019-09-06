@@ -21,6 +21,8 @@
                  draggable="true" (dragstart)="dragstart($event, img2);" id="imgB{{n}}">
           </div>
 
+          <hr style="margin: 0;">
+
           <!--多形态-->
           <div class="imgBox">
             <img *ngFor="let img3 of imgComponents3; let n = index;" src="{{img3.imgs[0].img}}" title="{{img3.name}}"
@@ -42,8 +44,9 @@
           </div>
 
           <div class="btnBox">
-            <button class="btn btn_dark btn-sm" id="btn1" draggable="true" (dragstart)="dragstart($event, '交互按钮');">
-              交互按钮
+            <!--<nz-switch [ngModel]="true" id="btn1" draggable="true" (dragstart)="dragstart($event, '交互按钮');"></nz-switch>-->
+            <button class="b_switch" id="btn1" draggable="true" (dragstart)="dragstart($event, '交互按钮');">
+              <!--交互按钮-->
             </button>
           </div>
 
@@ -102,9 +105,11 @@
           <!--按钮-->
           <div class="btnComponent" *ngFor="let btn of btnLists" id="{{btn.id}}" (click)="select3(btn)" [class.selected]="selected === btn"
                [ngStyle]="btn.style" (mousedown)="eventDown($event);select3(btn)" (mouseup)="eventUp($event)">
-            <button class="btn btn_dark btn-sm">
-              {{btn.cName}}
+            <button class="b_switch">
+              <!--{{btn.cName}}-->
+              <!--<img src="assets/images/customize/switch.png" alt="">-->
             </button>
+            <!--<nz-switch [ngModel]="true"></nz-switch>-->
           </div>
 
         </div>
@@ -188,7 +193,7 @@
               文本内容：
             </div>
             <div class="ct_input">
-              <input type="text" [(ngModel)]="curText" (change)="changeText(curText)" placeholder="10个汉字以内">
+              <input type="text" [(ngModel)]="curText" (change)="changeText(curText)" placeholder="10个汉字以内" maxlength="10">
             </div>
           </div>
         </div>
@@ -268,7 +273,7 @@
               保存
             </button>
           </div>-->
-          <div class="ct_btn">
+          <div class="ct_btn" *ngIf="selected">
             <button class="btn btn_purple bpm" (click)="deleteD()">
               删除
             </button>
@@ -290,6 +295,10 @@
       下一步
     </button>
   </div>
+
+  <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+    <input type="text" [(ngModel)]="ztName">
+  </nz-modal>
 
 </div>
 

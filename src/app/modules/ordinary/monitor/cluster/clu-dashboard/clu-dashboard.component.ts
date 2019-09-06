@@ -87,6 +87,9 @@ export class CluDashboardComponent implements OnInit, OnDestroy {
   }
 
   refreshData() {
+    if (!this.dataLists) {
+      return;
+    }
     for (let i = 0; i < this.dataLists.length; i++) {
       let bo = this.dataLists[i];
       if (!bo.img) {

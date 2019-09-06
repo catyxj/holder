@@ -1,4 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {TemplateService} from "../../../../../shared/template.service";
+import {Router} from "@angular/router";
+
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-template-add-finish',
@@ -13,7 +17,8 @@ export class TemplateAddFinishComponent implements OnInit {
 
   public name;
 
-  constructor() { }
+  constructor(private templateService: TemplateService,
+              private router: Router) { }
 
   ngOnInit() {
   }
@@ -25,25 +30,30 @@ export class TemplateAddFinishComponent implements OnInit {
   save() {
     let that = this;
     let post;
+    post = {
+      uid: this.uid,
+      name: this.name
+    };
 
     console.log(post);
-    this.next.emit(0);
+    // this.next.emit(0);
 
-    /*this.templateService.updateBasic(post)
+    this.templateService.addName(post)
       .subscribe(val => {
         Swal(
-          '操作成功！',
+          '保存成功！',
           '',
           'success'
         );
-        this.next.emit(1);
+        that.router.navigate(['admin/formal/template/list']);
+        // this.next.emit(0);
       }, err => {
         Swal(
-          err.message,
+          err.message || err,
           '',
           'error'
         );
-      });*/
+      });
 
 
   }

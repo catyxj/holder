@@ -115,6 +115,9 @@
                 <li nz-menu-item (click)="searchStatus('3')">
                   <a>未配置</a>
                 </li>
+                <li nz-menu-item (click)="searchStatus('4')">
+                  <a>未下发</a>
+                </li>
               </ul>
             </nz-dropdown>
           </th>
@@ -166,8 +169,12 @@
           </td>
           <td> {{data.temp_name || '默认模板'}} </td>
           <td>
-            <a class="btn btn_purple btn-sm" [routerLink]="['/admin/formal/terminal/info', data.uid, data.terminal_code, page]">
+            <!--<a class="btn btn_purple btn-sm" [routerLink]="['/admin/formal/terminal/info', data.uid, data.terminal_code, page]">
               设置
+            </a>-->
+            <a class="" [routerLink]="['/admin/formal/terminal/info', data.uid, data.terminal_code, page]" title="设置">
+              <!--设置-->
+              <i class="iconfont iconshezhi1 text_purple"></i>
             </a>
           </td>
         </tr>

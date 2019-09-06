@@ -539,7 +539,7 @@ export class TerminalService {
   }
 
 
-
+/*
   // 获取bin文件
   getBin(): Observable<any> {
     return this.http.get<any>('/bin_file_list_all')
@@ -563,6 +563,7 @@ export class TerminalService {
         catchError(this.handleError)
       );
   }
+*/
 
 
 

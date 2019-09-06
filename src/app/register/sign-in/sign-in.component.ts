@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {UserService} from "../../shared/user.service";
 import {VerifyCodeService} from "../../shared/verify-code.service";
 import Swal from 'sweetalert2';
+import {RegisterService} from "../../shared/register.service";
 
 @Component({
   selector: 'app-sign-in',
@@ -20,7 +21,7 @@ export class SignInComponent implements OnInit {
   public codeId;
 
   constructor(public router: Router,
-              private userService: UserService,
+              private registerService: RegisterService,
               private vCodeService: VerifyCodeService) { }
 
   ngOnInit() {
@@ -49,7 +50,7 @@ export class SignInComponent implements OnInit {
       localStorage.removeItem('holderUser');
     }
 
-    this.userService.login(this.user)
+    this.registerService.login(this.user)
       .subscribe(
         res => {
           localStorage.setItem('user', 'true');
@@ -152,7 +153,8 @@ export class SignInComponent implements OnInit {
         this.router.navigate(['/admin/ad']);
         break;
       case '10':
-        this.router.navigate(['/admin/formal']);
+      case '11':
+        this.router.navigate(['/admin/ordinary']);
         break;
       case '15':
         this.router.navigate(['/admin/service']);

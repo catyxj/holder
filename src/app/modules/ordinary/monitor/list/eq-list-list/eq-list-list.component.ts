@@ -35,6 +35,8 @@ export class EqListListComponent implements OnInit {
       switchMap((params: ParamMap) => {
         // console.log('param', params.get('status'));
         this.page = parseInt(params.get('page'));
+        this.online = params.get('online') ? params.get('online') : '';
+        this.run = params.get('run') ? params.get('run') : '';
         if (!this.page) {
           this.page = 1;
         }

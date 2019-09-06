@@ -33,6 +33,8 @@ import {EqChartsComponent} from "./runtime/equip/eq-charts/eq-charts.component";
 import {EqHistoryComponent} from "./runtime/equip/eq-history/eq-history.component";
 import {NoticeListComponent} from "./home/notice/notice-list/notice-list.component";
 import {NoticeReportMainComponent} from "./home/notice/notice-report-main/notice-report-main.component";
+import {ServiceInfoOrComponent} from "./service/service-info-or/service-info-or.component";
+import {ServiceDetailOrComponent} from "./service/service-detail-or/service-detail-or.component";
 
 export const OrdinaryRoutingModule = [
   {
@@ -54,7 +56,7 @@ export const OrdinaryRoutingModule = [
             component: RemindListComponent
           },
           {
-            path: 'remind-info/:type',
+            path: 'remind-info/:uid/:type/:status',
             component: RemindReportMainComponent
           },
           {
@@ -62,7 +64,7 @@ export const OrdinaryRoutingModule = [
             component: NoticeListComponent
           },
           {
-            path: 'notice-info/:type/:status',
+            path: 'notice-info/:uid/:type/:status',
             component: NoticeReportMainComponent
           }
         ]
@@ -193,6 +195,14 @@ export const OrdinaryRoutingModule = [
           {
             path: 'list',
             component: ServiceListOrdComponent,
+          },
+          {
+            path: 'info',
+            component: ServiceInfoOrComponent
+          },
+          {
+            path: 'detail/:uid/:page',
+            component: ServiceDetailOrComponent
           }
         ]
       }

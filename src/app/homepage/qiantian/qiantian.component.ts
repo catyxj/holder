@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../../shared/user.service";
 import {HttpClient} from "@angular/common/http";
+import {RegisterService} from "../../shared/register.service";
 
 @Component({
   selector: 'app-qiantian',
@@ -17,7 +18,7 @@ export class QiantianComponent implements OnInit {
 
 
   constructor(public router: Router,
-              private userService: UserService,
+              private registerService: RegisterService,
               private http: HttpClient) { }
 
   ngOnInit() {
@@ -70,7 +71,7 @@ export class QiantianComponent implements OnInit {
       localStorage.removeItem('holderUser');
     }
 
-    this.userService.login(this.user)
+    this.registerService.login(this.user)
       .subscribe(
         user => {
           this.user = user;

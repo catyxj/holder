@@ -25,7 +25,7 @@
         </nz-input-group>
         <ng-template #addOnBeforeTemplate>
           <nz-select [(ngModel)]="search">
-            <nz-option [nzLabel]="'维保编号'" [nzValue]="'id'"></nz-option>
+            <nz-option [nzLabel]="'维保编号'" [nzValue]="'label'"></nz-option>
             <nz-option [nzLabel]="'上传账号'" [nzValue]="'username'"></nz-option>
             <nz-option [nzLabel]="'上传人员'" [nzValue]="'account_name'"></nz-option>
           </nz-select>
@@ -93,12 +93,12 @@
           <td> {{data.number}} </td>
           <td> {{data.name}} </td>
           <td>
-            <div class="maintain_status" *ngIf="data.status">
-              <div class="stat_label stat_warning"></div>
+            <div class="maintain_status" *ngIf="data.status === 1">
+              <div class="stat_label stat_green"></div>
               正常
             </div>
-            <div class="maintain_status" *ngIf="!data.status">
-              <div class="stat_label stat_green"></div>
+            <div class="maintain_status" *ngIf="data.status === 0">
+              <div class="stat_label stat_warning"></div>
               异常
             </div>
 
@@ -107,8 +107,12 @@
           <td> 11 </td>
           <td> {{data.created_at | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
           <td>
-            <a class="btn btn_purple btn-sm" [routerLink]="['/admin/formal/maintenance-record/info', data.uid, page]">
+            <!--<a class="btn btn_purple btn-sm" [routerLink]="['/admin/formal/maintenance-record/info', data.id, page]">
               查看
+            </a>-->
+            <a class="" [routerLink]="['/admin/formal/maintenance-record/info', data.id, page]" title="查看">
+              <!--设置-->
+              <i class="iconfont iconshezhi1 text_purple"></i>
             </a>
           </td>
         </tr>

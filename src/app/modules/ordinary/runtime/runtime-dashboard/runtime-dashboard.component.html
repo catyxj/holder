@@ -2,7 +2,7 @@
 <div>
   <div class="r_dashbord_h">
     <div class="h_date">
-      数据更新于2019年01月02日12时21分
+      数据更新于 {{date | date: 'yyyy年MM月dd日HH时mm分'}} <!--2019年01月02日12时21分-->
     </div>
     <button class="btn btn_purple bpm" [routerLink]="['/admin/ordinary/equip-charts', uid]">
       数据详情
@@ -12,7 +12,7 @@
   <div class="r_dashboard_c">
     <div class="d_head">
       <h6>
-        某某某某某某某某某某某智能设备
+        {{info?.name}}
       </h6>
       <div class="flex">
         <div class="tag" [class.blue]="online">
@@ -32,16 +32,16 @@
 
     <div>
       <div class="" style="position: relative; width: 60%; height: 500px; margin: auto;">
-        <div *ngFor="let img of imgs1">
+        <div *ngFor="let img of imgs1; trackBy: trackByUid;">
           <img src="{{img.imgs.src}}" alt="" [ngStyle]="img.style">
         </div>
-        <div *ngFor="let img of imgs2">
+        <div *ngFor="let img of imgs2; trackBy: trackByUid;">
           <img src="{{img.imgs.img}}" alt="" [ngStyle]="img.style">
         </div>
-        <div *ngFor="let img of imgs3">
+        <div *ngFor="let img of imgs3; trackBy: trackByUid;">
           <img src="{{img.src}}" alt="" [ngStyle]="img.style">
         </div>
-        <div *ngFor="let btn of btns">
+        <div *ngFor="let btn of btns; trackBy: trackByUid;">
           <!--<button *ngIf="!status" class="btn btn-sm btn-success" [ngStyle]="btn.style" (click)="sendMes(1,btn)">
             启动
           </button>
@@ -54,23 +54,23 @@
           </nz-switch>
         </div>
 
-        <div *ngFor="let data of dataLists1" class="dataC" [ngStyle]="data.style">
+        <div *ngFor="let data of dataLists1; trackBy: trackByUid;" class="dataC" [ngStyle]="data.style">
           <span>
             {{data.text}}
           </span>
         </div>
 
-        <div *ngFor="let data of dataLists2" class="dataC" [ngStyle]="data.style">
+        <div *ngFor="let data of dataLists2; trackBy: trackByUid;" class="dataC" [ngStyle]="data.style">
           <span>
             {{data.name}}
           </span>
-          <span *ngIf="data.chanNum === '10' || data.chanNum === '12'">
+          <span *ngIf="data.chanType === '10' || data.chanType === '12'">
             ：
           </span>
-          <span *ngIf="data.chanNum === '10'">
+          <span *ngIf="data.chanType === '10'">
             {{data.value}} {{data.unit}}
           </span>
-          <span *ngIf="data.chanNum === '12'">
+          <span *ngIf="data.chanType === '12'">
             {{data.remark}}
           </span>
         </div>

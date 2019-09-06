@@ -18,7 +18,7 @@ export class MRecordListFormalComponent implements OnInit {
   public page = 1;
   public pageNum;
   public pageSize = 15;
-  public search = 'id';
+  public search = 'label';
   public value;
   public status;
   public totalItems;
@@ -52,7 +52,7 @@ export class MRecordListFormalComponent implements OnInit {
   // 获取列表
   getList() {
     this.loading = true;
-    this.maintainService.getLists(this.page, this.pageSize, this.search, this.value)
+    this.maintainService.getLogLists(this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;
@@ -142,7 +142,7 @@ export class MRecordListFormalComponent implements OnInit {
     for (let i = 0; i < this.dataLists.length; i++) {
       let ac = this.dataLists[i];
       if (ac.checked) {
-        checked.push(ac.uid);
+        checked.push(ac.id);
       }
     }
     if (checked.length > 0) {
@@ -182,7 +182,7 @@ export class MRecordListFormalComponent implements OnInit {
     let post = {
       data: checked
     };
-    this.maintainService.deleteData(post)
+    this.maintainService.deleteLogData(post)
       .subscribe(val => {
         Swal(
           '操作成功！',
