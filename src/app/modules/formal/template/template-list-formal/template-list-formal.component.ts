@@ -7,6 +7,7 @@ import {ComfirmComponent} from "../../../directives/alert/comfirm/comfirm.compon
 import {TemplateService} from "../../../../shared/template.service";
 
 import Swal from 'sweetalert2';
+import {TerminalService} from "../../../../shared/terminal.service";
 
 
 @Component({
@@ -29,7 +30,10 @@ export class TemplateListFormalComponent implements OnInit {
   public pageSizeList = [15, 30, 50, 100];
   tplModal: NzModalRef;
 
+  private heartbeatList = [];
+
   constructor(private templateService: TemplateService,
+              private terminalService: TerminalService,
               private nzModal: NzModalService,
               private modalService: NgbModal,
               private route: ActivatedRoute) { }
@@ -41,12 +45,22 @@ export class TemplateListFormalComponent implements OnInit {
         if (!this.page) {
           this.page = 1;
         }
-        this.getList();
+        this.getCmtList();
         return (params.get('status') || []);
       })
     ).subscribe();
   }
 
+
+  // 获取通信参数下拉列表
+  getCmtList() {
+    this.terminalService.getCmtParam()
+      .subscribe(data => {
+        this.heartbeatList = data.heart_beat;  // 心跳包频率
+
+        this.getList();
+      });
+  }
 
   // 获取列表
   getList() {
@@ -64,6 +78,18 @@ export class TemplateListFormalComponent implements OnInit {
         this.loading = false;
         this.dataLists = data.data;
         this.totalItems = data.count;
+
+        for (let i = 0; i < this.dataLists.length; i++) {
+          let da = this.dataLists[i];
+          // 心跳包频率
+          for (let j = 0; j < this.heartbeatList.length; j++) {
+            if (da.heart_beat === this.heartbeatList[j].value) {
+              da.heart_beat = this.heartbeatList[j].name;
+              break;
+            }
+          }
+        }
+
       }, err => {
         this.loading = false;
       });

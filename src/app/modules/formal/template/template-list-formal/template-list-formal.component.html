@@ -70,7 +70,7 @@
           </th>-->
           <th>模板编号</th>
           <th>模板名称</th>
-          <th>创建者</th>
+          <!--<th>创建者</th>-->
           <th>
             点位数量
             <!--<nz-dropdown [nzTrigger]="'click'">
@@ -107,23 +107,20 @@
             [nzDisabled]="data.disabled"
             (nzCheckedChange)="refreshStatus()"
           ></td>-->
-          <td> {{data.terminal_code}} </td>
-          <td> {{data.zt_name}} </td>
+          <td> {{data.label}} </td>
+          <td> {{data.name || '默认模板'}} </td>
+          <!--<td>-->
+            <!--<div style="max-width: 160px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">-->
+              <!--{{data.org_name || '空'}}-->
+            <!--</div>-->
+          <!--</td>-->
           <td>
-            <div style="max-width: 160px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-              {{data.org_name || '空'}}
-            </div>
+            {{data.channel_count}}
           </td>
           <td>
-            <!--<nz-tag [nzColor]="'#1E9FF2'" *ngIf="data.online">已联网</nz-tag>
-            <nz-tag [nzColor]="'#C0C4D2'" *ngIf="!data.online">未联网</nz-tag>-->
+            {{data.heart_beat}}
           </td>
-          <td>
-            <!--<nz-tag [nzColor]="'#1E9FF2'" *ngIf="data.term_plat !== 0 && data.term_plat === data.term_ver">配置成功</nz-tag>
-            <nz-tag [nzColor]="'#FF4961'" *ngIf="data.term_plat !== 0 && data.term_plat !== data.term_ver">配置失败</nz-tag>
-            <nz-tag [nzColor]="'#C0C4D2'" *ngIf="data.term_plat === 0">未配置</nz-tag>-->
-          </td>
-          <td> {{data.temp_name || '默认模板'}} </td>
+          <td> {{data.zt_name }} </td>
           <td>
             <a class="" [routerLink]="['/admin/formal/template/config', data.uid,  page]" title="设置">
               <!--设置-->

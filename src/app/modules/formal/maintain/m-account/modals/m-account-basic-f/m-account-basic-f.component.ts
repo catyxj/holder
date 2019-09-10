@@ -12,6 +12,8 @@ import Swal from 'sweetalert2';
 export class MAccountBasicFComponent implements OnInit {
   @Input()
   currentData;
+  @Input()
+  uid;
 
   public username;
   public name;
@@ -51,7 +53,7 @@ export class MAccountBasicFComponent implements OnInit {
   }
 
   initLocation() {
-    let location = this.currentData.location_id;
+    let location = this.currentData.location;
     console.log(location);
     if (location && location !== 0) {
       if (location < 100) {
@@ -126,6 +128,7 @@ export class MAccountBasicFComponent implements OnInit {
     let that = this;
     // console.log(this.locationId, this.selectedCity, this.selectedRegion);
     let post = {
+      uid: this.uid,
       username: this.username,
       name: this.name,
       org_name: this.orgName,

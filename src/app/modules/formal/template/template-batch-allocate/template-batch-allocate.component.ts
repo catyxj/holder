@@ -161,10 +161,6 @@ export class TemplateBatchAllocateComponent implements OnInit {
         nzOnOk: () => console.log('Info OK')
       });
 
-
-      /*this.creatModal(title, subtitle, () => {
-
-      });*/
     }
   }
 
@@ -186,10 +182,11 @@ export class TemplateBatchAllocateComponent implements OnInit {
   checkBatch(checked) {
     let that = this;
     let post = {
+      uid: this.selectedTemplate,
       data: checked
     };
     this.loading = true;
-    this.terminalService.batchIssued(post)
+    this.templateService.batchSet(post)
       .subscribe(val => {
         that.loading = false;
         Swal(

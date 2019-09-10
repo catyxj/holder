@@ -217,10 +217,10 @@ export class TemplateAddCustomizeComponent implements OnInit {
     }
     console.log(this.chans1, this.chans2, this.chans3);*/
 
-    this.terminalService.getChannelName(this.uid)
+    this.templateService.getChannelName(this.uid)
       .subscribe(data => {
 
-        this.chans = data.channel;
+        this.chans = data;
 
         for (let i = 0; i < this.chans.length; i++) {
           const ch = this.chans[i];
@@ -248,7 +248,7 @@ export class TemplateAddCustomizeComponent implements OnInit {
   // ----获取组态内容---------
   getContent() {
     let that = this;
-    this.terminalService.getContent(this.uid)
+    this.templateService.getContent(this.uid)
       .subscribe(data => {
         let content = JSON.parse(data.content);
         if (!content) {

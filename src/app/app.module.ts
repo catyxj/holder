@@ -34,12 +34,15 @@ import { DirMainComponent } from './modules/directives/dir-main/dir-main.compone
 import { SignInComponent } from './register/sign-in/sign-in.component';
 import { VideoLiveComponent } from './modules/directives/video-live/video-live.component';
 
-// import {AdminModule} from './modules/admin/admin.module';
 
 import { ComfirmComponent } from './modules/directives/alert/comfirm/comfirm.component';
 import { ErrorComponent } from './modules/directives/alert/error/error.component';
-import {FormalModule} from './modules/formal/formal.module';
 import { Err404Component } from './global/error/err404/err404.component';
+import {ChargeMainDirComponent} from "./modules/directives/charge/charge-main-dir/charge-main-dir.component";
+import {ChargeOverviewDirComponent} from "./modules/directives/charge/overview/charge-overview-dir/charge-overview-dir.component";
+import {BillMainDirComponent} from "./modules/directives/charge/bill/bill-main-dir/bill-main-dir.component";
+import {BillGeneralDirComponent} from "./modules/directives/charge/bill/bill-general-dir/bill-general-dir.component";
+import {BillDetailDirComponent} from "./modules/directives/charge/bill/bill-detail-dir/bill-detail-dir.component";
 
 
 
@@ -65,6 +68,11 @@ registerLocaleData(zh);
     ErrorComponent,
     VideoLiveComponent,
     Err404Component,
+    ChargeMainDirComponent,
+    ChargeOverviewDirComponent,
+    BillMainDirComponent,
+    BillGeneralDirComponent,
+    BillDetailDirComponent,
   ],
   imports: [
     BrowserModule,

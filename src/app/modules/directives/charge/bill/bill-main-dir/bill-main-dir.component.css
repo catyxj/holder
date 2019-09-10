@@ -1,0 +1,27 @@
+
+
+.c_tab{
+  display: flex;
+  border-bottom: 1px solid #DCDEE3;
+}
+.tab1{
+  width: 85px;
+  font-size:18px;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 8px;
+  text-align: center;
+  margin-bottom: -1px;
+  cursor: pointer;
+  outline: none;
+}
+.tab1.active{
+  color: #666EE8;
+  border-bottom: 2px solid #666EE8;
+}
+
+
+
+
+
+
+

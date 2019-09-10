@@ -33,7 +33,23 @@ export class TemplateAddEptComponent implements OnInit, OnChanges {
 
     if (this.uid) {
       console.log(this.uid);
+      this.getBasic();
     }
+  }
+
+
+  // 获取模板基本信息
+  getBasic() {
+    this.templateService.getEpt(this.uid)
+      .subscribe(data => {
+        let basic = data;
+        this.equip = data.ept_name;
+        if (basic && basic.ept_img) {
+          this.imgUrl = basic.ept_img;
+        }
+      }, err => {
+
+      });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -54,7 +70,7 @@ export class TemplateAddEptComponent implements OnInit, OnChanges {
     const isLt2M = file.size / 1024  < 200;
     if (!isLt2M) {
       Swal(
-        '图片大小不能超过2M',
+        '图片大小不能超过200k',
         '',
         'error'
       );
@@ -98,11 +114,13 @@ export class TemplateAddEptComponent implements OnInit, OnChanges {
     if (this.img) {
       post = {
         name: this.equip,
-        img: this.img.response.id
+        img: this.img.response.id,
+        uid: this.uid
       };
     } else {
       post = {
-        name: this.equip
+        name: this.equip,
+        uid: this.uid
       };
     }
 
@@ -117,6 +135,7 @@ export class TemplateAddEptComponent implements OnInit, OnChanges {
           'success'
         );
         this.uid = val.uid;
+        console.log(this.uid);
         this.changeUid.emit(this.uid);
         this.next.emit(1);
       }, err => {
@@ -127,7 +146,7 @@ export class TemplateAddEptComponent implements OnInit, OnChanges {
         );
       });
 
-    this.next.emit(1);
+    // this.next.emit(1);
 
 
   }

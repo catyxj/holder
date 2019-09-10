@@ -92,10 +92,15 @@ mat-toolbar{
   padding: 0;
   overflow: hidden;
 }
+.dropdown_content.dropdown-menu{
+  min-width: 6rem;
+}
 .dropdown_content .dropdown-item{
   border-top: 1px solid #E4E5EC;
-  padding: 10px 32px;
+  /*padding: 7px 20px;*/
+  padding: 0 1.25rem;
   color: #666EE8;
+  font-size: 12px;
 }
 
 .dropdown_content .dropdown-item.active, .dropdown_content .dropdown-item:active{
@@ -107,6 +112,11 @@ mat-toolbar{
   text-decoration: none;
   background-color: #9DA4FF;
 }
+
+.tip_item{
+  font-size: 12px;
+}
+
 
 button:focus {
   outline: none;

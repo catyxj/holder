@@ -6,6 +6,7 @@ import {TerminalService} from "../../../../shared/terminal.service";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {TerminalAddImgFormalComponent} from "../../terminal/modals/terminal-add-img-formal/terminal-add-img-formal.component";
 import {TerminalDeleteImgComponent} from "../../terminal/modals/terminal-delete-img/terminal-delete-img.component";
+import {TemplateService} from "../../../../shared/template.service";
 
 @Component({
   selector: 'app-template-customize-formal',
@@ -56,6 +57,7 @@ export class TemplateCustomizeFormalComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private terminalService: TerminalService,
+              private templateService: TemplateService,
               public el: ElementRef,
               private modalService: NzModalService) { }
 
@@ -208,10 +210,10 @@ export class TemplateCustomizeFormalComponent implements OnInit {
     console.log(this.chans1, this.chans2, this.chans3);*/
 
 
-    this.terminalService.getChannelName(this.uid)
+    this.templateService.getChannelName(this.uid)
       .subscribe(data => {
 
-        this.chans = data.channel;
+        this.chans = data;
 
         /*this.chans1 = data.alalog;
         this.chans2 = data.switch;
@@ -247,7 +249,7 @@ export class TemplateCustomizeFormalComponent implements OnInit {
     this.terminalService.getContent(this.uid)
       .subscribe(data => {
         let content = JSON.parse(data.content);
-        this.id = data.id;
+        this.id = data.label;
         this.name = data.name;
         if (!content) {
           return;

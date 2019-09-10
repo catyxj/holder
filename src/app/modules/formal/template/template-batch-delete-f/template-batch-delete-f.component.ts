@@ -4,6 +4,7 @@ import {TemplateService} from "../../../../shared/template.service";
 import {ActivatedRoute} from "@angular/router";
 
 import Swal from 'sweetalert2';
+import {TerminalService} from "../../../../shared/terminal.service";
 
 @Component({
   selector: 'app-template-batch-delete-f',
@@ -25,12 +26,25 @@ export class TemplateBatchDeleteFComponent implements OnInit {
   public pageSizeList = [15, 30, 50, 100];
   tplModal: NzModalRef;
 
+  public heartbeatList = [];
+
   constructor(private templateService: TemplateService,
+              private terminalService: TerminalService,
               private nzModal: NzModalService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getList();
+  }
+
+  // 获取通信参数下拉列表
+  getCmtList() {
+    this.terminalService.getCmtParam()
+      .subscribe(data => {
+        this.heartbeatList = data.heart_beat;  // 心跳包频率
+
+        this.getList();
+      });
   }
 
   // 获取列表
@@ -49,6 +63,18 @@ export class TemplateBatchDeleteFComponent implements OnInit {
         this.loading = false;
         this.dataLists = data.data;
         this.totalItems = data.count;
+
+        for (let i = 0; i < this.dataLists.length; i++) {
+          let da = this.dataLists[i];
+          // 心跳包频率
+          for (let j = 0; j < this.heartbeatList.length; j++) {
+            if (da.heart_beat === this.heartbeatList[j].value) {
+              da.heart_beat = this.heartbeatList[j].name;
+              break;
+            }
+          }
+        }
+
       }, err => {
         this.loading = false;
       });

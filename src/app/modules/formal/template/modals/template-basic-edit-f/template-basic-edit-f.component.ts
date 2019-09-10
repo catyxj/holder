@@ -95,21 +95,21 @@ export class TemplateBasicEditFComponent implements OnInit {
     let post;
     if (this.img) {
       post = {
-        terminal_id: this.uid,
-        template_name: this.name,
+        uid: this.uid,
+        name: this.name,
         ept_name: this.equip,
         img: this.img.response.id
       };
     } else {
       post = {
-        terminal_id: this.uid,
-        template_name: this.name,
+        uid: this.uid,
+        name: this.name,
         ept_name: this.equip
       };
     }
 
     console.log(post);
-    /*this.templateService.updateBasic(post)
+    this.templateService.updateData(post)
       .subscribe(val => {
         Swal(
           '操作成功！',
@@ -123,7 +123,7 @@ export class TemplateBasicEditFComponent implements OnInit {
           '',
           'error'
         );
-      });*/
+      });
 
 
   }

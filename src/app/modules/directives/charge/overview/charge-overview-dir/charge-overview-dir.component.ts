@@ -1,0 +1,72 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-charge-overview-dir',
+  templateUrl: './charge-overview-dir.component.html',
+  styleUrls: ['./charge-overview-dir.component.css']
+})
+export class ChargeOverviewDirComponent implements OnInit {
+  public chartOption;
+
+  constructor() { }
+
+  ngOnInit() {
+    this.initChart();
+  }
+
+  initChart() {
+    this.chartOption = {
+      title: {
+        text: ''
+      },
+      color: '#5B8FF9',
+      legend: {
+        data: []
+      },
+      toolbox: {
+        feature: {
+          // saveAsImage: {},
+          // dataView: {}
+        },
+        right: 50
+      },
+      grid: {
+        left: 60,
+        right: 50,
+        top: 40,
+        bottom: 30
+      },
+      xAxis: [
+        {
+          type: 'category'
+        }
+      ],
+      yAxis: [
+        {
+          type: 'value',
+          // min: function(value) {  // 'dataMin'
+          //   return value.min;
+          // }
+        }
+      ],
+      series: [
+        {
+          type: 'bar',
+          label: {
+            normal: {
+              show: true,
+              position: 'top',
+              color: '#000'
+            }
+          },
+        }
+      ],
+      dataset: {
+        dimensions: ['receive_time', 'value'],
+        source: [{receive_time: 22 , value: 21}, {receive_time: 23 , value: 23}, {receive_time: 24 , value: 21},{receive_time: 25 , value: 21}, {receive_time: 26 , value: 33}, {receive_time: 27 , value: 21}]
+      },
+
+    };
+  }
+
+}

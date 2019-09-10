@@ -99,6 +99,7 @@ export class MAccountInfoFormalComponent implements OnInit {
     let that = this;
     const modalRef = this.modalService.open(MAccountBasicFComponent, {windowClass: 'modal_m', centered: true});
     modalRef.componentInstance.currentData = this.info;
+    modalRef.componentInstance.uid = this.uid;
     modalRef.result.then((result) => {
       if (result === 'ok') {
         that.getInfo();

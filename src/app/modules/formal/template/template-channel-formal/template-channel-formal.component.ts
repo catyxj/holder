@@ -6,6 +6,7 @@ import {NzModalService} from "ng-zorro-antd/modal";
 import {AlarmRuleComponent} from "../../terminal/modals/alarm-rule/alarm-rule.component";
 import {RangeConfigComponent} from "../../terminal/modals/range-config/range-config.component";
 import Swal from 'sweetalert2';
+import {TemplateService} from "../../../../shared/template.service";
 
 @Component({
   selector: 'app-template-channel-formal',
@@ -28,6 +29,7 @@ export class TemplateChannelFormalComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private terminalService: TerminalService,
+              private templateService: TemplateService,
               private modalService: NgbModal,
               private nzmodalService: NzModalService) { }
 
@@ -37,6 +39,7 @@ export class TemplateChannelFormalComponent implements OnInit {
     this.initPriorities();
     this.getTerminal();
     this.initLists();
+    this.getBasic();
   }
 
 
@@ -49,14 +52,13 @@ export class TemplateChannelFormalComponent implements OnInit {
     }
   }
 
+
   // 获取终端信息
   getTerminal() {
 
-    this.terminalService.getChannelInfo(this.uid)
+    this.templateService.getChannelInfo(this.uid)
       .subscribe(data => {
-        const channels = data.list;
-        this.name = data.template_name;
-
+        const channels = data;
 
         //
         for (let i = 0; i < channels.length; i++) {
@@ -77,7 +79,7 @@ export class TemplateChannelFormalComponent implements OnInit {
               Status: chan.show <= 0 ? 0 : 1,
               SequenceNumber: chan.show > 0 ? chan.show : 0,
               slaveAddress: chan.slave_address,
-              writeRule: chan.write_rule,
+              writeRule: chan.write_rule.toString(),
               writeValue: chan.write_value
             });
           }
@@ -99,7 +101,7 @@ export class TemplateChannelFormalComponent implements OnInit {
               Status: chan.show <= 0 ? 0 : 1,
               SequenceNumber: chan.show > 0 ? chan.show : 0,
               slaveAddress: chan.slave_address,
-              writeRule: chan.write_rule,
+              writeRule: chan.write_rule.toString(),
               writeValue1: wv[0],
               writeValue2: wv[1]
               // SwitchStatus: chan.SwitchStatus,
@@ -121,7 +123,7 @@ export class TemplateChannelFormalComponent implements OnInit {
               Status: chan.show <= 0 ? 0 : 1,
               SequenceNumber: chan.show > 0 ? chan.show : 0,
               slaveAddress: chan.slave_address,
-              writeRule: chan.write_rule,
+              writeRule: chan.write_rule.toString(),
               writeValue: chan.write_value
             });
           }
@@ -391,6 +393,9 @@ export class TemplateChannelFormalComponent implements OnInit {
 
   // 设置位置
   setStatus(data, status, sn?) {
+    if (sn && sn.disabled) {
+      return;
+    }
     data.Status = status;
     if (status === 1) {
       data.SequenceNumber = sn.name;
@@ -446,6 +451,11 @@ export class TemplateChannelFormalComponent implements OnInit {
   }
 
 
+  // 状态设置
+  setSwitchStatus(outerIndex, status) {
+    this.switchList[outerIndex].SwitchStatus = status;
+  }
+
 
   // 状态量配置
   openRange(data) {
@@ -488,10 +498,18 @@ export class TemplateChannelFormalComponent implements OnInit {
             });
             return false;
           }
-        } else if (!this.analogueList[i].Func || !this.analogueList[i].Byte || !this.analogueList[i].Modbus || !this.analogueList[i].Parameter.Scale || !this.analogueList[i].Parameter.Unit || !this.analogueList[i].slaveAddress) {
+        } else if (!this.analogueList[i].Func || !this.analogueList[i].Byte || !this.analogueList[i].Modbus || !this.analogueList[i].Parameter.Scale || !this.analogueList[i].Parameter.Unit) {
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
             nzContent: `模拟通道[ ${i + 1} ]配置信息不全 ，参数不能为0 `
+          });
+          return false;
+        }
+
+        if (parseInt(this.analogueList[i].Func) !== 99 && (!this.analogueList[i].slaveAddress || this.analogueList[i].slaveAddress > 255 || this.analogueList[i].slaveAddress < 1)) {
+          this.nzmodalService.error({
+            nzTitle: '通道配置更新失败',
+            nzContent: `模拟通道[ ${i + 1} ]从机地址错误 `
           });
           return false;
         }
@@ -544,7 +562,7 @@ export class TemplateChannelFormalComponent implements OnInit {
 
     for (let i = 0; i < this.switchList.length; i++) {
       if (this.switchList[i].Parameter.Name) {
-        if ((parseInt(this.switchList[i].Func) !== 99) && (!this.switchList[i].Func || !this.switchList[i].BitAddress || !this.switchList[i].Modbus || !this.switchList[i].slaveAddress)) {
+        if ((parseInt(this.switchList[i].Func) !== 99) && (!this.switchList[i].Func || !this.switchList[i].BitAddress || !this.switchList[i].Modbus)) {
 
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
@@ -552,7 +570,14 @@ export class TemplateChannelFormalComponent implements OnInit {
           });
           return false;
         }
-        if (parseInt(this.switchList[i].Func) === 1 || parseInt(this.switchList[i].Func) === 3) {
+        if (parseInt(this.switchList[i].Func) !== 99 && (!this.switchList[i].slaveAddress || this.switchList[i].slaveAddress > 255 || this.switchList[i].slaveAddress < 1)) {
+          this.nzmodalService.error({
+            nzTitle: '通道配置更新失败',
+            nzContent: `开关通道[ ${i + 1} ]从机地址错误 `
+          });
+          return false;
+        }
+        if ((parseInt(this.switchList[i].Func) !== 99) && (parseInt(this.switchList[i].Func) === 1 || parseInt(this.switchList[i].Func) === 3)) {
           if (this.switchList[i].writeRule !== '0') {
             if (!this.switchList[i].writeValue1 || !this.switchList[i].writeValue2 ) {
               this.nzmodalService.error({
@@ -630,10 +655,18 @@ export class TemplateChannelFormalComponent implements OnInit {
 
     for (let i = 0; i < this.rangeList.length; i++) {
       if (this.rangeList[i].Parameter.Name) {
-        if ((parseInt(this.rangeList[i].Func) !== 99) && (!this.rangeList[i].Func || !this.rangeList[i].Byte || !this.rangeList[i].Modbus || !this.rangeList[i].slaveAddress)) {
+        if ((parseInt(this.rangeList[i].Func) !== 99) && (!this.rangeList[i].Func || !this.rangeList[i].Byte || !this.rangeList[i].Modbus)) {
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
             nzContent: `状态通道[${i + 1}]配置信息不全 ，参数不能为0 `
+          });
+          return false;
+        }
+
+        if ((parseInt(this.rangeList[i].Func) !== 99) && (!this.rangeList[i].slaveAddress || this.rangeList[i].slaveAddress > 255 || this.rangeList[i].slaveAddress < 1)) {
+          this.nzmodalService.error({
+            nzTitle: '通道配置更新失败',
+            nzContent: `状态通道[ ${i + 1} ]从机地址错误 `
           });
           return false;
         }
@@ -698,12 +731,12 @@ export class TemplateChannelFormalComponent implements OnInit {
       analogue: analogueList,
       switch: switchList,
       range: rangeList,
-      terminal_id: this.uid
+      uid: this.uid
     };
 
     this.isSpinning = true;
 
-    this.terminalService.saveChannel(data)
+    this.templateService.addChannel(data)
       .subscribe(val => {
         this.isSpinning = false;
         Swal({
@@ -720,43 +753,6 @@ export class TemplateChannelFormalComponent implements OnInit {
         });
       });
 
-    /*this.terminalService.saveZ(data)
-      .subscribe(val => {
-        this.isSpinning = false;
-        Swal({
-          title: '通道配置更新成功，是否立刻下发？',
-          showCancelButton: true,
-          confirmButtonText: '确定下发',
-          cancelButtonText: '取消',
-          showLoaderOnConfirm: true
-        }).then((result) => {
-          if (result.value) {
-            that.terminalService.issued(that.code)
-              .subscribe(res => {
-                Swal(
-                  '下发成功！',
-                  '',
-                  'success'
-                );
-              }, err => {
-                Swal(
-                  '下发失败！',
-                  err,
-                  'error'
-                );
-              });
-          }
-        });
-
-
-      }, err => {
-        this.isSpinning = false;
-        Swal({
-          title: '通道配置更新失败',
-          text: err,
-          type: 'error'
-        });
-      });*/
 
   }
 

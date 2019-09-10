@@ -58,9 +58,9 @@ export class TemplateAddChannelComponent implements OnInit {
   // 获取终端信息
   getTerminal() {
 
-    this.terminalService.getChannelInfo(this.uid)
+    this.templateService.getChannelInfo(this.uid)
       .subscribe(data => {
-        const channels = data.list;
+        const channels = data;
 
         //
         for (let i = 0; i < channels.length; i++) {
@@ -763,7 +763,7 @@ export class TemplateAddChannelComponent implements OnInit {
         });
       });
 
-    this.next.emit(1);
+    // this.next.emit(1);
 
 
 

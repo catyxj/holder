@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {TerminalService} from "../../../../../shared/terminal.service";
 import Swal from 'sweetalert2';
+import {TemplateService} from "../../../../../shared/template.service";
 
 @Component({
   selector: 'app-template-cmt-edit-f',
@@ -31,7 +32,8 @@ export class TemplateCmtEditFComponent implements OnInit {
   public dataTypeList = []; // 包类型下拉列表
 
   constructor(public activeModal: NgbActiveModal,
-              private terminalService: TerminalService) { }
+              private terminalService: TerminalService,
+              private templateService: TemplateService) { }
 
   ngOnInit() {
     this.getLists();
@@ -67,7 +69,7 @@ export class TemplateCmtEditFComponent implements OnInit {
   save() {
     const that = this;
     const post = {
-      terminal_id: this.uid,
+      uid: this.uid,
       baud_rate: parseInt(this.baudRate),
       data_bit: parseInt(this.dataBit),
       stop_bit: parseInt(this.stopBit),
@@ -76,7 +78,7 @@ export class TemplateCmtEditFComponent implements OnInit {
       cmt_type: parseInt(this.correspond),
       data_type: parseInt(this.dataType)
     };
-    this.terminalService.saveCmt(post)
+    this.templateService.addCmt(post)
       .subscribe(val => {
         Swal(
           '提交成功',

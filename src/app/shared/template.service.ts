@@ -15,13 +15,13 @@ const httpOptions = {
 })
 export class TemplateService {
 
-  private templatesUrl = 'assets/server/template_lists.json';
-  private channelUrl = 'assets/server/chan_config_list.json';
-  private templateAllUrl = 'assets/server/template_list.json';
+  // private templatesUrl = 'assets/server/template_lists.json';
+  // private channelUrl = 'assets/server/chan_config_list.json';
+  // private templateAllUrl = 'assets/server/template_list.json';
 
-  // private templatesUrl = '/api/formal/terminal/temp/list';
-  // private channelUrl = '/api/formal/template/detail';
-  // private templateAllUrl = '/api/formal/template/list/all';
+  private templatesUrl = '/api/formal/terminal/temp/list';
+  private channelUrl = '/api/formal/template/detail';
+  private templateAllUrl = '/api/formal/template/list/all';
 
   constructor(private http: HttpClient) { }
 
@@ -117,6 +117,17 @@ export class TemplateService {
       );
   }
 
+  // 获取模板列表--下拉列表
+  getTemplateAll(): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get<any>('/api/formal/terminal/temp/name/list/all', httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   // 批量设置
   batchSet(data): Observable<any> {
     let token = localStorage.getItem('authToken');
@@ -198,23 +209,31 @@ export class TemplateService {
   }
 
 
-
-
-
-
-
-
-
-  // 获取模板列表--下拉列表
-  getTemplateAll(): Observable<any> {
+  // 获取组态-通道列表
+  getChannelName(uid): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.get<any>(this.templateAllUrl, httpOptions)
+    return this.http.get<any>(`/api/formal/terminal/temp/channel/name/list?uid=${uid}`, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
+
+
+
+  updateData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/formal/terminal/temp/ept/update', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+
 
 
 

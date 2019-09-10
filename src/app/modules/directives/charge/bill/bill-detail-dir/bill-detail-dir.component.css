@@ -1,0 +1,24 @@
+
+
+.c_head{
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.bill .table th{
+  background-color: #EBECF0;
+  font-size: 12px;
+}
+.bill .table th *{
+  font-size: 12px !important;
+}
+.bill .table td{
+  border-bottom: 1px solid #DCDEE3;
+  font-size: 12px;
+}
+
+
+
+

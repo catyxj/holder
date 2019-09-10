@@ -23,7 +23,7 @@
         nzPlaceHolder="请选择需要分配的模版"
         [(ngModel)]="selectedTemplate"
       >
-        <nz-option *ngFor="let data of templateList" [nzLabel]="data.text" [nzValue]="data.value"></nz-option>
+        <nz-option *ngFor="let data of templateList" [nzLabel]="data.name" [nzValue]="data.uid"></nz-option>
       </nz-select>
 
       <button class="btn btn_purple btn_round bpm ml-1" (click)="batchAllocate()">

@@ -14,7 +14,7 @@
       "code": "sub2",
       "icon": "fa-home",
       "img": "assets/icons/icon_Monitor.png",
-      "checked": true,
+      "checked": false,
       "children": [
         { "name": "图文模式", "router": "/admin/ordinary/graphic","icon": ""},
         { "name": "列表模式", "router": "/admin/ordinary/equip-list","icon": ""},
@@ -40,7 +40,7 @@
       "code": "sub3",
       "icon": "fa-file-text-o",
       "img": "assets/icons/info.svg",
-      "checked": true,
+      "checked": false,
       "children": [
         { "name": "用户管理", "router": "/admin/formal/users"},
         { "name": "账号信息", "router": "/admin/formal/account"},
@@ -52,7 +52,7 @@
       "code": "sub3",
       "icon": "fa-file-text-o",
       "img": "assets/icons/maintain.svg",
-      "checked": true,
+      "checked": false,
       "children": [
         { "name": "维保记录", "router": "/admin/formal/maintenance-record"},
         { "name": "维保账号", "router": "/admin/formal/maintenance-account"},

@@ -230,7 +230,7 @@ export class TemplateConfigFormalComponent implements OnInit {
             '',
             'success'
           );
-          that.router.navigate(['/admin/ad/template/list']);
+          that.router.navigate(['/admin/formal/template/list']);
         }, err => {
           Swal(
             err.message || err,

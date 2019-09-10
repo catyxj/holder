@@ -38,8 +38,25 @@ export class TemplateAddCmtComponent implements OnInit {
   ngOnInit() {
     if (this.uid) {
       console.log(this.uid);
+      this.getInfo();
     }
     this.getLists();
+  }
+
+  getInfo() {
+    this.templateService.getCmt(this.uid)
+      .subscribe(data => {
+        this.baudRate = data.baud_rate;
+        this.dataBit = data.data_bit;
+        this.stopBit = data.stop_bit;
+        this.parity = data.parity_bit;
+        this.heartbeat = data.heart_beat;
+        this.correspond = data.cmt_type;
+        this.dataType = data.data_type;
+
+      }, err => {
+
+      });
   }
 
   // 获取下拉列表
@@ -95,7 +112,7 @@ export class TemplateAddCmtComponent implements OnInit {
         );
       });
 
-    this.next.emit(1);
+    // this.next.emit(1);
 
 
   }

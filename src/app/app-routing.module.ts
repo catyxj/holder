@@ -12,6 +12,11 @@ import {DirMainComponent} from "./modules/directives/dir-main/dir-main.component
 import {SignInComponent} from "./register/sign-in/sign-in.component";
 import {VideoLiveComponent} from "./modules/directives/video-live/video-live.component";
 import {Err404Component} from "./global/error/err404/err404.component";
+import {ChargeMainDirComponent} from "./modules/directives/charge/charge-main-dir/charge-main-dir.component";
+import {ChargeOverviewDirComponent} from "./modules/directives/charge/overview/charge-overview-dir/charge-overview-dir.component";
+import {BillMainDirComponent} from "./modules/directives/charge/bill/bill-main-dir/bill-main-dir.component";
+import {BillDetailDirComponent} from "./modules/directives/charge/bill/bill-detail-dir/bill-detail-dir.component";
+import {BillGeneralDirComponent} from "./modules/directives/charge/bill/bill-general-dir/bill-general-dir.component";
 
 
 
@@ -121,6 +126,32 @@ const routes: Routes = [
       //   component: OrderInfoAdComponent
       // },
 
+    ]
+  },
+  {
+    path: 'charge',
+    component: ChargeMainDirComponent,
+    children: [
+      { path: '', redirectTo: 'overview', pathMatch: 'full' },
+      {
+        path: 'overview',
+        component: ChargeOverviewDirComponent
+      },
+      {
+        path: 'bill',
+        component: BillMainDirComponent,
+        children: [
+          { path: '', redirectTo: 'general', pathMatch: 'full' },
+          {
+            path: 'general',
+            component: BillGeneralDirComponent
+          },
+          {
+            path: 'detail',
+            component: BillDetailDirComponent
+          }
+        ]
+      }
     ]
   },
   {

@@ -91,6 +91,44 @@
     </div>
 
 
+    <!--费用-->
+    <div ngbDropdown class="alarm_tip_box" placement="bottom" *ngIf="roleId === '10'">
+      <div class="alarm_tip_btn" style="position: relative; margin-left: 20px;" id="dropdownBasic3" ngbDropdownToggle>
+        <img src="assets/icons/charge.png" alt="">
+      </div>
+
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic3" class="animated fadeInDown dropdown_content">
+        <a class="dropdown-item" routerLink="/charge/overview" target="_blank">
+          <div class="tip_item">
+            账户总览
+          </div>
+        </a>
+
+        <a class="dropdown-item" routerLink="/charge/bill" target="_blank">
+          <div class="tip_item">
+            费用帐单
+          </div>
+        </a>
+        <a class="dropdown-item">
+          <div class="tip_item">
+            我的订单
+          </div>
+        </a>
+        <a class="dropdown-item">
+          <div class="tip_item">
+            续费管理
+          </div>
+        </a>
+        <a class="dropdown-item">
+          <div class="tip_item">
+            发票管理
+          </div>
+        </a>
+      </div>
+
+    </div>
+
+
     <div style="width:1px; height:38px; background-color: #2D2E4F; margin-left: 20px; margin-right: 20px;"></div>
 
     <!--<i class="fa fa-envelope-o"></i>-->

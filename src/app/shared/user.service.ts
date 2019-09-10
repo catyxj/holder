@@ -59,7 +59,8 @@ export class UserService {
     console.log('environment:', environment.production);
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
-    console.log(httpOptions);
+    // console.log(httpOptions);
+
     /*if (!environment.production) {
       return this.http.get< any >('assets/server/user.json');
     } else {
@@ -138,7 +139,21 @@ export class UserService {
 
   }
 
+  // 费用侧边栏
+  getSideC(): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
+    return this.http.get< any >('assets/server/sidenav_charge.json')
+      .pipe(
+        catchError(this.handleError)
+      );
+
+
+
+
+
+  }
 
 
   private handleError(error: HttpErrorResponse) {
