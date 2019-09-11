@@ -7,7 +7,7 @@
     </app-header>
   </header>
 
-  <main class="directive" [class.formal]="roleId==='10' || roleId==='11'">
+  <main class="charge" [class.formal]="roleId==='10' || roleId==='11'">
     <mat-sidenav-container class="sidenav-container">
       <mat-sidenav class="sidenav bg_light_default"  [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches" #sidenav>
         <app-sidebar [user]="user" [sideList]="sideList"></app-sidebar>

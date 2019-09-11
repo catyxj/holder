@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {MaintainService} from "../../../../../shared/maintain.service";
 import {UploadFile} from "ng-zorro-antd/upload";
@@ -15,39 +15,15 @@ import Swal from 'sweetalert2';
 export class MaintainProdAddSerComponent implements OnInit {
   // public img;
   // public imgUrl;
+  @Input()
+  uid;
 
-  public dataList = [
-    {
-      description: '通风口是否正常',
-      status: false,
-      remark: '',
-      imgList: []
-    },
-    {
-      description: '点火器是否正常',
-      status: false,
-      remark: '',
-      imgList: []
-    },
-    {
-      description: '排风机是否正常',
-      status: false,
-      remark: '',
-      imgList: []
-    },
-    {
-      description: '风口是否干净',
-      status: false,
-      remark: '',
-      imgList: []
-    },
-    {
-      description: '炉排速度是否正常',
-      status: false,
-      remark: '',
-      imgList: []
-    }
-  ];
+  public dataList = [];
+  public termCode;
+  public name;
+  public tempLabel;
+  public tempName;
+  public headOption;
 
   showUploadList = {
     showPreviewIcon: true,
@@ -62,6 +38,71 @@ export class MaintainProdAddSerComponent implements OnInit {
               private maintainService: MaintainService) { }
 
   ngOnInit() {
+    let token = localStorage.getItem('authToken');
+    this.headOption = {
+      'Authorization': token
+    };
+
+    this.getInfo();
+  }
+
+  getInfo() {
+    /*this.dataList = [
+      {
+        name: '通风口是否正常',
+        result: 'false',
+        remark: '',
+        imgList: []
+      },
+      {
+        name: '点火器是否正常',
+        result: 'false',
+        remark: '',
+        imgList: []
+      },
+      {
+        name: '排风机是否正常',
+        result: 'false',
+        remark: '',
+        imgList: []
+      },
+      {
+        name: '风口是否干净',
+        result: 'false',
+        remark: '',
+        imgList: []
+      },
+      {
+        name: '炉排速度是否正常',
+        result: 'false',
+        remark: '',
+        imgList: []
+      }
+    ];*/
+
+    this.maintainService.getProdInfo(this.uid)
+      .subscribe(data => {
+          this.termCode = data.terminal_code;
+          this.name = data.name;
+          this.tempLabel = data.template_label;
+          this.tempName = data.template_name;
+
+          this.dataList = [];
+          let info = data.info;
+          for (let i = 0; i < info.length; i++) {
+            this.dataList.push({
+              name: info[i],
+              result: 'false',
+              remark: '',
+              imgList: []
+            });
+          }
+
+
+      }, err => {
+
+      });
+
   }
 
 
@@ -110,10 +151,10 @@ export class MaintainProdAddSerComponent implements OnInit {
       );
       return false;
     }
-    const isLt2M = file.size / 1024 / 1024 < 2;
+    const isLt2M = file.size / 1024 < 200;
     if (!isLt2M) {
       Swal(
-        '图片大小不能超过2M',
+        '图片大小不能超过200KB',
         '',
         'error'
       );
@@ -153,12 +194,34 @@ export class MaintainProdAddSerComponent implements OnInit {
   save() {
     console.log(this.dataList);
 
-
     let that = this;
-    let post = {
+    let info = [];
+    for (let i = 0; i < this.dataList.length; i++) {
+      let da = this.dataList[i];
+      let img = [];
+      for (let j = 0; j < da.imgList.length; j++) {
+        let im = da.imgList[j];
+        if (im.status === 'done') {
+          img.push(im.response.id.toString());
+        }
+      }
+      info.push({
+        name: da.name,
+        result: da.result === 'true',
+        remark: da.remark,
+        img: img
+      });
+    }
 
+    let post = {
+      template_name:  this.tempName,
+      template_label: this.tempLabel,
+      ept_id: this.uid,
+      ept_name: this.name,
+      terminal_code: this.termCode,
+      info: info
     };
-    /*this.maintainService.addData(post)
+    this.maintainService.addProdData(post)
       .subscribe(val => {
         Swal(
           '操作成功！',
@@ -172,7 +235,7 @@ export class MaintainProdAddSerComponent implements OnInit {
           '',
           'error'
         );
-      });*/
+      });
   }
 
 }

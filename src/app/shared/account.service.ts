@@ -129,23 +129,23 @@ export class AccountService {
       );
   }
 
-  /*-------维保-------------------------------------------------*/
-  getInfo() {
+  /*--------------运维用户------------------------------------------*/
+  getMInfo() {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = '/account';
+    const url = '/api/maintenance/user/info';
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  setInfo(data) {
+  setMInfo(data) {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post<any>('/account/set', data, httpOptions)
+    return this.http.post<any>('/api/maintenance/user/info/update', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

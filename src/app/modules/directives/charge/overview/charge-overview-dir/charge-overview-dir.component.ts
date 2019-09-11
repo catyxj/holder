@@ -31,18 +31,24 @@ export class ChargeOverviewDirComponent implements OnInit {
         right: 50
       },
       grid: {
-        left: 60,
-        right: 50,
+        left: 50,
+        right: 40,
         top: 40,
-        bottom: 30
+        bottom: 50,
       },
       xAxis: [
         {
+          name: '日期',
+          nameLocation: 'center',
+          nameGap: 19,
           type: 'category'
         }
       ],
       yAxis: [
         {
+          name: 'RMB',
+          nameLocation: 'center',
+          nameGap: 26,
           type: 'value',
           // min: function(value) {  // 'dataMin'
           //   return value.min;
@@ -59,11 +65,12 @@ export class ChargeOverviewDirComponent implements OnInit {
               color: '#000'
             }
           },
+          barCategoryGap: '50%'
         }
       ],
       dataset: {
         dimensions: ['receive_time', 'value'],
-        source: [{receive_time: 22 , value: 21}, {receive_time: 23 , value: 23}, {receive_time: 24 , value: 21},{receive_time: 25 , value: 21}, {receive_time: 26 , value: 33}, {receive_time: 27 , value: 21}]
+        source: [{receive_time: 22 , value: 21}, {receive_time: 23 , value: 23}, {receive_time: 24 , value: 21}, {receive_time: 25 , value: 21}, {receive_time: 26 , value: 33}, {receive_time: 27 , value: 21}, {receive_time: 28 , value: 33}, {receive_time: 29 , value: 21}]
       },
 
     };

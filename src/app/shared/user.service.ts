@@ -77,8 +77,8 @@ export class UserService {
         );
     }*/
 
-    // return this.http.get< any >('assets/server/user.json');
-    return this.http.get< any >('/api/user', httpOptions)
+    return this.http.get< any >('assets/server/user.json');
+    /*return this.http.get< any >('/api/user', httpOptions)
         .pipe(
           tap((val) => {
             // if (!val) {
@@ -87,7 +87,7 @@ export class UserService {
             console.log('token:', token);
           }),
           catchError(this.handleError2)
-        );
+        );*/
 
 
   }

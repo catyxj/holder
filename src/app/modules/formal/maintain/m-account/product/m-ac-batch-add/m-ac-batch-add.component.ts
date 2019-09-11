@@ -132,6 +132,7 @@ export class MAcBatchAddComponent implements OnInit {
       title = '确认要添加此产品吗？';
       this.creatModal(title, subtitle, () => {
         const post = {
+          uid: this.uid,
           data: checked
         };
         this.maintainService.UserEptBind(post)

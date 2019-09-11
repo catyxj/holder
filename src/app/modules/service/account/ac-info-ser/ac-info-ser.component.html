@@ -1,67 +1,69 @@
 
 <div class="content">
-  <div class="info_head">
-    <div class="info_tname">
-      <img src="assets/icons/icon_Personal.png" alt="">
-      个人信息
+  <div class="list_head">
+    <div class="li_head_l">
+      <!--<img src="assets/icons/icon_Personal.png" alt="">-->
+      <h6>
+        个人信息
+      </h6>
     </div>
-    <div>
+    <div class="li_head_r">
       <!--刷新-->
-      <button class="btn btn_purple-o btn_round bps">
+      <button class="btn btn_purple-o btn_round bps" (click)="getInfo()">
         <i class="iconfont iconicon_Refresh"></i>
       </button>
     </div>
   </div>
 
-  <div class="info_content flex">
-    <div class="info_l">
-      <div class="info_basic">
-        <div class="info_title">
+  <div class="info_content">
+    <div class="f_info_l" style="width: 50%;">
+      <div class="f_info_basic">
+        <div class="f_info_title">
           <h6>
             账号信息
           </h6>
         </div>
-        <div class="info_body" style="height: 625px;">
+        <div class="f_info_body">
           <ul>
-            <li class="info_item">
-              <div class="info_item_title">
+            <li class="f_info_item">
+              <div class="f_info_item_title">
                 账号
               </div>
-              <div class="info_item_value">
+              <div class="f_info_item_value">
                 {{basic?.username}}
               </div>
             </li>
-            <li class="info_item">
-              <div class="info_item_title">
+            <li class="f_info_item">
+              <div class="f_info_item_title">
                 账号状态
               </div>
-              <div class="info_item_value">
-                <span class="text_danger" *ngIf="basic&&basic.account_status===0">
+              <div class="f_info_item_value">
+                <span class="text_danger" *ngIf="basic&&basic.status===1">
                   禁用
                 </span>
-                <span class="" *ngIf="basic&&basic.account_status===1">
+                <span class="" *ngIf="basic&&basic.status===0">
                   正常
                 </span>
               </div>
             </li>
-            <li class="info_item">
-              <div class="info_item_title">
+            <li class="f_info_item">
+              <div class="f_info_item_title">
                 账号类型
               </div>
-              <div class="info_item_value">
-                <span *ngIf="basic&&basic.account_type===1">
+              <div class="f_info_item_value">
+                <span *ngIf="basic&&basic.role_id===1">
                   系统用户
                 </span>
-                <span class="" *ngIf="basic&&basic.account_type===10">
+                <span class="" *ngIf="basic&&basic.role_id===10">
                   正式用户
                 </span>
-                <span class="" *ngIf="basic&&basic.account_type===11">
+                <span class="" *ngIf="basic&&basic.role_id===11">
                   普通用户
                 </span>
-                <span class="" *ngIf="basic&&basic.account_type===15">
+                <span class="" *ngIf="basic&&basic.role_id===15">
                   维保用户
                 </span>
-                <span class="" *ngIf="basic&&basic.account_type===20">
+                <span class="" *ngIf="basic&&basic.role_id===20">
                   测试用户
                 </span>
 
@@ -73,59 +75,76 @@
         </div>
       </div>
 
-    </div>
 
-    <div class="info_r">
-      <div class="">
-        <div class="info_title">
+      <div class="f_info_config mt-3">
+        <div class="f_info_title">
           <h6>
             基础信息
           </h6>
-          <button class="btn btn_purple btn_round bpm" (click)="editConfig()">
+
+          <!--设置-->
+          <a (click)="editConfig()" title="设置">
+            <span class="iconfont iconedit text_purple"></span>
+          </a>
+          <!--<button class="btn btn_purple btn_round bpm" (click)="editConfig()">
             设置
-          </button>
+          </button>-->
         </div>
-        <div class="info_body">
+        <div class="f_info_body">
           <ul>
 
-            <li class="info_item">
-              <div class="info_item_title">
+            <li class="f_info_item">
+              <div class="f_info_item_title">
                 用户名
               </div>
-              <div class="info_item_value">
+              <div class="f_info_item_value">
                 {{basic?.name}}
               </div>
             </li>
 
-            <li class="info_item">
-              <div class="info_item_title">
+            <li class="f_info_item">
+              <div class="f_info_item_title">
                 单位名称
               </div>
-              <div class="info_item_value">
+              <div class="f_info_item_value">
                 {{basic?.org_name}}
               </div>
             </li>
-            <li class="info_item">
-              <div class="info_item_title">
+            <li class="f_info_item">
+              <div class="f_info_item_title">
                 单位类型
               </div>
-              <div class="info_item_value">
-                {{basic?.org_tag}}
+              <div class="f_info_item_value">
+                <span *ngIf="basic&&basic.org_tag === 1">
+                  产品使用
+                </span>
+                <span *ngIf="basic&&basic.org_tag === 2">
+                  产品制造
+                </span>
+                <span *ngIf="basic&&basic.org_tag === 3">
+                  产品运维
+                </span>
+                <span *ngIf="basic&&basic.org_tag === 4">
+                  组件供应
+                </span>
+                <span *ngIf="basic&&basic.org_tag === 5">
+                  监管机构
+                </span>
               </div>
             </li>
-            <li class="info_item">
-              <div class="info_item_title">
+            <li class="f_info_item">
+              <div class="f_info_item_title">
                 地域地址
               </div>
-              <div class="info_item_value">
+              <div class="f_info_item_value">
                 {{basic?.location_name}}
               </div>
             </li>
-            <li class="info_item">
-              <div class="info_item_title">
+            <li class="f_info_item">
+              <div class="f_info_item_title">
                 邮箱
               </div>
-              <div class="info_item_value">
+              <div class="f_info_item_value">
                 {{basic?.email}}
               </div>
             </li>
@@ -133,6 +152,10 @@
         </div>
 
       </div>
+    </div>
+
+    <div class="info_r">
+
 
     </div>
   </div>

@@ -8,32 +8,10 @@
       "checked": true,
       "children": [
         { "name": "账户总览", "router": "/charge/overview","icon": ""},
-        { "name": "费用账单", "router": "/charge/bill","icon": ""}
-      ]
-    },
-    {
-      "name": "设备管理",
-      "code": "sub2",
-      "icon": "fa-home",
-      "img": "assets/icons/equip.svg",
-      "checked": true,
-      "children": [
-        { "name": "终端设备", "router": "/admin/ad/terminal","icon": ""},
-        { "name": "视频设备", "router": "/admin/ad/video","icon": ""},
-        { "name": "蓝牙设备", "router": "/admin/ad/bluetooth","icon": ""}
-      ]
-    },
-    {
-      "name": "信息维护",
-      "code": "sub3",
-      "icon": "fa-file-text-o",
-      "img": "assets/icons/icon_Information.png",
-      "checked": true,
-      "children": [
-        { "name": "账号管理", "router": "/admin/ad/account"},
-        { "name": "服务支持", "router": "/admin/ad/service"},
-        { "name": "订单管理", "router": "/admin/ad/order"},
-        { "name": "流量卡管理", "router": "/admin/ad/flow"}
+        { "name": "费用账单", "router": "/charge/bill","icon": ""},
+        { "name": "我的订单", "router": "/charge/bill","icon": ""},
+        { "name": "续费管理", "router": "/charge/bill","icon": ""},
+        { "name": "发票管理", "router": "/charge/bill","icon": ""}
       ]
     }
   ],

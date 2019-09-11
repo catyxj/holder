@@ -25,10 +25,10 @@ export class AcConfigSerComponent implements OnInit {
   save() {
     let that = this;
     let post = {
-      username: this.username,
+      name: this.username,
       email: this.email
     };
-    this.accountService.setInfo(post)
+    this.accountService.setMInfo(post)
       .subscribe(val => {
         Swal(
           '操作成功！',
@@ -38,7 +38,7 @@ export class AcConfigSerComponent implements OnInit {
         that.activeModal.close('ok');
       }, err => {
         Swal(
-          err.message,
+          err.message || err,
           '',
           'error'
         );

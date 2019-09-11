@@ -242,7 +242,16 @@ export class MaintainService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `/api/formal/mt/log/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/mt/log/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    }
+    if (roleId === '15') {
+      url = `/api/maintenance/ept/mt/log/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -254,7 +263,15 @@ export class MaintainService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `/api/formal/mt/log/detail?id=${id}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/mt/log/detail?id=${id}`;
+    }
+    if (roleId === '15') {
+      url = `/api/maintenance/ept/mt/log/detail?uid=${id}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -266,7 +283,16 @@ export class MaintainService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/formal/mt/log/delete', data, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = '/api/formal/mt/log/delete';
+    }
+    if (roleId === '15') {
+      url = '/api/maintenance/ept/mt/log/batch';
+    }
+
+    return this.http.post(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -274,6 +300,45 @@ export class MaintainService {
 
 
 
+
+
+  // ---------------------运维用户----------------------------
+  // 维保产品
+  // 获取维保产品列表
+  getProdLists(n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `/api/maintenance/ept/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取维保产品信息
+  getProdInfo(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `/api/maintenance/ept/detail?uid=${uid}`;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+  // 新增维保产品
+  addProdData(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/maintenance/ept/mt/create', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
 
 

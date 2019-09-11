@@ -19,7 +19,7 @@ export class AcInfoSerComponent implements OnInit {
   }
 
   getInfo() {
-    this.accountService.getInfo()
+    this.accountService.getMInfo()
       .subscribe(data => {
         this.basic = data;
       }, err => {

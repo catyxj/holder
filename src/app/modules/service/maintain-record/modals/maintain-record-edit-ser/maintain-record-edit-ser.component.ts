@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {MaintainService} from "../../../../../shared/maintain.service";
 import {UploadFile} from "ng-zorro-antd/upload";
@@ -11,38 +11,16 @@ import Swal from 'sweetalert2';
   styleUrls: ['./maintain-record-edit-ser.component.css']
 })
 export class MaintainRecordEditSerComponent implements OnInit {
-  public dataList = [
-    {
-      description: '通风口是否正常',
-      status: false,
-      remark: '',
-      imgList: []
-    },
-    {
-      description: '点火器是否正常',
-      status: false,
-      remark: '',
-      imgList: []
-    },
-    {
-      description: '排风机是否正常',
-      status: false,
-      remark: '',
-      imgList: []
-    },
-    {
-      description: '风口是否干净',
-      status: false,
-      remark: '',
-      imgList: []
-    },
-    {
-      description: '炉排速度是否正常',
-      status: false,
-      remark: '',
-      imgList: []
-    }
-  ];
+  @Input()
+  uid;
+
+
+  public dataList = [];
+  public termCode;
+  public name;
+  public tempLabel;
+  public tempName;
+  public headOption;
 
   previewImage: string | undefined = '';
   previewVisible = false;
@@ -51,10 +29,88 @@ export class MaintainRecordEditSerComponent implements OnInit {
               private maintainService: MaintainService) { }
 
   ngOnInit() {
+    let token = localStorage.getItem('authToken');
+    this.headOption = {
+      'Authorization': token
+    };
+
+    this.getInfo();
 
   }
 
   getInfo() {
+    this.dataList = [
+      {
+        name: '通风口是否正常',
+        result: 'false',
+        remark: '',
+        imgList: [
+          {
+            uid: -1,
+            name: 'xxx.png',
+            status: 'done',
+            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+          }
+        ]
+      },
+      {
+        name: '点火器是否正常',
+        result: 'false',
+        remark: '',
+        imgList: []
+      },
+      {
+        name: '排风机是否正常',
+        result: 'false',
+        remark: '',
+        imgList: []
+      },
+      {
+        name: '风口是否干净',
+        result: 'false',
+        remark: '',
+        imgList: []
+      },
+      {
+        description: '炉排速度是否正常',
+        result: 'false',
+        remark: '',
+        imgList: []
+      }
+    ];
+
+    this.maintainService.getLogInfo(this.uid)
+      .subscribe(data => {
+        this.termCode = data.terminal_code;
+        this.name = data.ept_name;
+        this.tempLabel = data.template_label;
+        this.tempName = data.template_name;
+
+        this.dataList = [];
+        let info = data.info;
+        for (let i = 0; i < info.length; i++) {
+          let imgList = [];
+          for (let j = 0; j < info[i].img.length; j++) {
+            let im = info[i].img[j];
+            imgList.push({
+              uid: im.id,
+              name: im.name,
+              status: 'done',
+              url: im.oss_path
+            });
+          }
+          this.dataList.push({
+            name: info[i].name,
+            result: info[i].result,
+            remark: info[i].remark,
+            imgList: imgList
+          });
+
+        }
+
+      }, err => {
+
+      });
 
   }
 
@@ -114,7 +170,7 @@ export class MaintainRecordEditSerComponent implements OnInit {
     let post = {
 
     };
-    /*this.maintainService.addData(post)
+    this.maintainService.addData(post)
       .subscribe(val => {
         Swal(
           '操作成功！',
@@ -128,7 +184,7 @@ export class MaintainRecordEditSerComponent implements OnInit {
           '',
           'error'
         );
-      });*/
+      });
   }
 
 

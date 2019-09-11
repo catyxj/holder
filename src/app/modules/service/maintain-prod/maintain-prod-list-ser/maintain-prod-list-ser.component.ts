@@ -29,8 +29,15 @@ export class MaintainProdListSerComponent implements OnInit {
 
   // 获取列表
   getList() {
+    /*this.dataLists = [
+      {
+        name: 'aaa',
+        terminal_code: '111132'
+      }
+    ];*/
+
     this.loading = true;
-    this.maintainService.getLists(this.page, this.pageSize, this.search, this.value)
+    this.maintainService.getProdLists(this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;
@@ -79,9 +86,10 @@ export class MaintainProdListSerComponent implements OnInit {
   }
 
 // 新增维保
-  addData() {
+  addData(data) {
     let that = this;
     const modalRef = this.modalService.open(MaintainProdAddSerComponent, {windowClass: 'modal_lg', centered: true});
+    modalRef.componentInstance.uid = data.uid;
     modalRef.result.then((result) => {
       if (result === 'ok') {
         that.pageChange();

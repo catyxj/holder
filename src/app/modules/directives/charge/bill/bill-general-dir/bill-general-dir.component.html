@@ -60,6 +60,25 @@
     </div>
 
 
+    <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+
+    <div class="content_b">
+      <nz-pagination nzShowSizeChanger
+                     [nzTotal]="totalItems"
+                     [nzShowTotal]="totalTemplate"
+                     [(nzPageIndex)]="page"
+                     [(nzPageSize)]="pageSize"
+                     (nzPageIndexChange)="pageChange()"
+                     (nzPageSizeChange)="pageSizeChange()"
+                     [nzPageSizeOptions] = "pageSizeList">
+
+      </nz-pagination>
+      <div class="ant-pagination-options-quick-jumper"> 跳至
+        <input type="number" [(ngModel)]="pageNum"> 页 </div>
+      <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
+    </div>
+
+
   </div>
 
 </div>

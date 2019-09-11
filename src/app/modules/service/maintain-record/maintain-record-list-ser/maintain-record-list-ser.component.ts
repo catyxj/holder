@@ -17,7 +17,7 @@ export class MaintainRecordListSerComponent implements OnInit {
   public page = 1;
   public pageNum;
   public pageSize = 15;
-  public search = 'name';
+  public search = 'label';
   public value;
   public status;
   public totalItems;
@@ -36,8 +36,15 @@ export class MaintainRecordListSerComponent implements OnInit {
 
   // 获取列表
   getList() {
+    this.dataLists = [
+      {
+        label: 'adsf223a',
+        ept_name: 'aaaa'
+      }
+    ]
+
     this.loading = true;
-    this.maintainService.getLists(this.page, this.pageSize, this.search, this.value)
+    this.maintainService.getLogLists(this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;
@@ -120,6 +127,7 @@ export class MaintainRecordListSerComponent implements OnInit {
   editData() {
     let that = this;
     const modalRef = this.modalService.open(MaintainRecordEditSerComponent, {windowClass: 'modal_lg', centered: true});
+    modalRef.componentInstance.uid = data.uid;
     modalRef.result.then((result) => {
       if (result === 'ok') {
         that.pageChange();
@@ -202,7 +210,7 @@ export class MaintainRecordListSerComponent implements OnInit {
     let post = {
       data: checked
     };
-    this.maintainService.deleteData(post)
+    this.maintainService.deleteLogData(post)
       .subscribe(val => {
         Swal(
           '操作成功！',

@@ -17,6 +17,7 @@ import {ChargeOverviewDirComponent} from "./modules/directives/charge/overview/c
 import {BillMainDirComponent} from "./modules/directives/charge/bill/bill-main-dir/bill-main-dir.component";
 import {BillDetailDirComponent} from "./modules/directives/charge/bill/bill-detail-dir/bill-detail-dir.component";
 import {BillGeneralDirComponent} from "./modules/directives/charge/bill/bill-general-dir/bill-general-dir.component";
+import {OrderMainDirComponent} from "./modules/directives/charge/order/order-main-dir/order-main-dir.component";
 
 
 
@@ -151,7 +152,11 @@ const routes: Routes = [
             component: BillDetailDirComponent
           }
         ]
-      }
+      },
+      {
+        path: 'order',
+        component: OrderMainDirComponent
+      },
     ]
   },
   {
