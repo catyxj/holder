@@ -162,7 +162,27 @@ export class ServiceListOrdComponent implements OnInit {
       title = '确认要关闭此表单吗？';
       subtitle = '';
       this.creatModal(title, subtitle,  () => {
-        this.checkBatch(checked);
+        let post = {
+          data: checked
+        };
+        this.loading = true;
+        this.serviceService.closeDataF(post)
+          .subscribe(val => {
+            that.loading = false;
+            Swal(
+              '操作成功！',
+              '',
+              'success'
+            );
+            this.pageChange();
+          }, err => {
+            that.loading = false;
+            Swal(
+              '操作失败！',
+              err,
+              'error'
+            );
+          });
       });
     } else {
       title = '请选择表单';
@@ -173,11 +193,63 @@ export class ServiceListOrdComponent implements OnInit {
       });
     }
 
-    /*this.modalService.confirm({
-      nzTitle: '<b class="confirm_modal_title">确认要禁用此账号吗？</b>',
-      nzContent: '<div class="text-muted">禁用后可到设置内恢复账号状态。</div>',
-      nzOnOk: () => {check(); }
-    });*/
+
+
+  }
+
+
+  // 批量删除
+  batchDel() {
+    let that = this;
+    let title = '';
+    let subtitle = '';
+
+    let checked = [];
+    if (!this.serviceList || this.serviceList.length <= 0 ) {
+      this.serviceList = [];
+    }
+    for (let i = 0; i < this.serviceList.length; i++) {
+      let ac = this.serviceList[i];
+      if (ac.checked) {
+        checked.push(ac.uid);
+      }
+    }
+    if (checked.length > 0) {
+      title = '确认要删除此表单吗？';
+      subtitle = '';
+      this.creatModal(title, subtitle,  () => {
+        let post = {
+          data: checked
+        };
+        this.loading = true;
+        this.serviceService.deleteDataO(post)
+          .subscribe(val => {
+            that.loading = false;
+            Swal(
+              '操作成功！',
+              '',
+              'success'
+            );
+            this.pageChange();
+          }, err => {
+            that.loading = false;
+            Swal(
+              '操作失败！',
+              err,
+              'error'
+            );
+          });
+      });
+    } else {
+      title = '请选择表单';
+      this.nzModal.info({
+        nzTitle: '请选择表单',
+        nzContent: '',
+        nzOnOk: () => console.log('Info OK')
+      });
+    }
+
+
 
   }
 
@@ -194,30 +266,6 @@ export class ServiceListOrdComponent implements OnInit {
     });
   }
 
-  // 发送批量操作请求
-  checkBatch(checked) {
-    let that = this;
-    let post = {
-      data: checked
-    };
-    this.loading = true;
-    this.serviceService.closeDataF(post)
-      .subscribe(val => {
-        that.loading = false;
-        Swal(
-          '操作成功！',
-          '',
-          'success'
-        );
-        this.pageChange();
-      }, err => {
-        that.loading = false;
-        Swal(
-          '操作失败！',
-          err,
-          'error'
-        );
-      });
-  }
+
 
 }

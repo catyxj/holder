@@ -3,11 +3,11 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {BoilerService} from "../../../../../shared/boiler.service";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {switchMap} from "rxjs/internal/operators";
-import {EqListAddComponent} from "../../list/modals/eq-list-add/eq-list-add.component";
 import {BoilerSocketService} from "../../../../../shared/boiler-socket.service";
 
 import Swal from 'sweetalert2';
 import {ClusterService} from "../../../../../shared/cluster.service";
+import {CluAddComponent} from "../modals/clu-add/clu-add.component";
 
 @Component({
   selector: 'app-clu-dashboard',
@@ -26,13 +26,14 @@ export class CluDashboardComponent implements OnInit, OnDestroy {
   public isAllChecked = false;
   public loading;
   public pageSizeList = [15, 30, 50, 100];
+  public roleId;
 
   constructor(private modalService: NgbModal,
               private clusterService: ClusterService,
-              private boilerWsService: BoilerSocketService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.roleId = localStorage.getItem('roleId');
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         // console.log('param', params.get('status'));
@@ -145,9 +146,9 @@ export class CluDashboardComponent implements OnInit, OnDestroy {
 
 
   // 新增模态框
-  /*addData() {
+  addData() {
     let that = this;
-    const modalRef = this.modalService.open(EqListAddComponent, {windowClass: 'modal_md', centered: true});
+    const modalRef = this.modalService.open(CluAddComponent, {windowClass: 'modal_md', centered: true});
     // modalRef.componentInstance.currentData = this.config;
     // modalRef.componentInstance.uid = this.uid;
     modalRef.result.then((result) => {
@@ -157,7 +158,7 @@ export class CluDashboardComponent implements OnInit, OnDestroy {
     }, (reason) => {
       console.log(reason);
     });
-  }*/
+  }
 
   trackByUid(index, item) {
     return item.uid;

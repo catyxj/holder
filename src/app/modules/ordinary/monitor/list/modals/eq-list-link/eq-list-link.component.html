@@ -1,0 +1,53 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    <img src="assets/icons/eq_connect.png" alt="" style="margin-right: 19px;">
+    新增产品关联
+  </h4>
+</div>
+
+<div class="modal-body m_form">
+  <div class="m_item">
+    <div class="m_label">
+      产品终端编码 <span>*</span>：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="code" placeholder="请输入产品终端编码" #tCode="ngModel"
+             pattern="^[A-Za-z0-9]{6}$" required>
+      <div class="sign_tip">
+        <span class="text_danger" *ngIf="tCode.invalid && (tCode.dirty || tCode.touched)">请输入正确6位终端编码</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      产品验证码 <span>*</span>：
+    </div>
+    <div class="m_input">
+      <input type="text" class="form-control" [(ngModel)]="verify" placeholder="请输入产品验证码" #tVerify="ngModel"
+             required>
+      <div class="sign_tip">
+        <!--<span class="text_danger" *ngIf="tVerify.invalid && (tVerify.dirty || tVerify.touched)">请输入6位正确固件版本号</span>-->
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取 消</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 35px;" [disabled]="tCode.invalid || tVerify.invalid" (click)="save()">
+    确 定
+  </button>
+</div>
+
+
+
+
+
+
+
+

@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {TerminalService} from "../../../../shared/terminal.service";
 import {BoilerSocketService} from "../../../../shared/boiler-socket.service";
 import {RuntimeService} from "../../../../shared/runtime.service";
 
@@ -121,7 +120,17 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
     let message = {
       uid: this.uid
     };
-    const wsUrl = `api/formal/ept/instant/ws?token=${this.token}`;
+
+
+    let roleId = localStorage.getItem('roleId');
+    let wsUrl;
+    if (roleId === '10') {
+      wsUrl = `api/formal/ept/instant/ws?token=${this.token}`;
+    }
+    if (roleId === '11') {
+      wsUrl = `api/general/ept/instant/ws?token=${this.token}`;
+    }
+
     this.socket = this.boilerWsService.creatSocket(wsUrl, message)
       .subscribe(
         data => {

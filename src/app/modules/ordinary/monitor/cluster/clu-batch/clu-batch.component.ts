@@ -27,11 +27,14 @@ export class CluBatchComponent implements OnInit {
   public pageSizeList = [15, 30, 50, 100];
   tplModal: NzModalRef;
 
+  public roleId;
+
   constructor(private nzModal: NzModalService,
               private route: ActivatedRoute,
               private clusterService: ClusterService) { }
 
   ngOnInit() {
+    this.roleId = localStorage.getItem('roleId');
     this.getList();
   }
 
@@ -173,10 +176,17 @@ export class CluBatchComponent implements OnInit {
     if (checked.length > 0) {
       title = '确认要删除此设备吗？';
       this.creatModal(title, subtitle, () => {
-        let post = {
-          data: checked,
-          type: 1
-        };
+        let post;
+        if (this.roleId === '10') {
+          post = {
+            data: checked,
+            type: 1
+          };
+        } else {
+          post = {
+            data: checked
+          };
+        }
         this.batch(post);
       });
     } else {

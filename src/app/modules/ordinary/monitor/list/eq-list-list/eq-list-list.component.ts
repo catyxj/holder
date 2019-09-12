@@ -5,6 +5,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {BoilerService} from "../../../../../shared/boiler.service";
 import Swal from 'sweetalert2';
 import {EqListAddComponent} from "../modals/eq-list-add/eq-list-add.component";
+import {EqListLinkComponent} from "../modals/eq-list-link/eq-list-link.component";
 
 @Component({
   selector: 'app-eq-list-list',
@@ -26,11 +27,15 @@ export class EqListListComponent implements OnInit {
   public loading;
   public pageSizeList = [15, 30, 50, 100];
 
+  public roleId;
+
   constructor(private modalService: NgbModal,
               private route: ActivatedRoute,
               private eptService: BoilerService) { }
 
   ngOnInit() {
+    this.roleId = localStorage.getItem('roleId');
+
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         // console.log('param', params.get('status'));
@@ -118,6 +123,21 @@ export class EqListListComponent implements OnInit {
   addData() {
     let that = this;
     const modalRef = this.modalService.open(EqListAddComponent, {windowClass: 'modal_md', centered: true});
+    // modalRef.componentInstance.currentData = this.config;
+    // modalRef.componentInstance.uid = this.uid;
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+        that.pageChange();
+      }
+    }, (reason) => {
+      console.log(reason);
+    });
+  }
+
+  // 新增关联模态框
+  addData2() {
+    let that = this;
+    const modalRef = this.modalService.open(EqListLinkComponent, {windowClass: 'modal_md', centered: true});
     // modalRef.componentInstance.currentData = this.config;
     // modalRef.componentInstance.uid = this.uid;
     modalRef.result.then((result) => {

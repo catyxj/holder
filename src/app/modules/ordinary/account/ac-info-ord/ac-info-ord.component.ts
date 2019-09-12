@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {AccountService} from "../../../../shared/account.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {UserService} from "../../../../shared/user.service";
-import {AccountEditFormalComponent} from "../../../formal/account/modals/account-edit-formal/account-edit-formal.component";
-import {AccountPasswordFormalComponent} from "../../../formal/account/modals/account-password-formal/account-password-formal.component";
+import {AcEditOrdComponent} from "../modals/ac-edit-ord/ac-edit-ord.component";
+import {AcPasswordOrdComponent} from "../modals/ac-password-ord/ac-password-ord.component";
 
 @Component({
   selector: 'app-ac-info-ord',
@@ -66,7 +66,7 @@ export class AcInfoOrdComponent implements OnInit {
   // 编辑配置信息模态框
   editConfig() {
     let that = this;
-    const modalRef = this.modalService.open(AccountEditFormalComponent, {windowClass: 'modal_m', centered: true});
+    const modalRef = this.modalService.open(AcEditOrdComponent, {windowClass: 'modal_m', centered: true});
     modalRef.componentInstance.currentData = this.user;
     modalRef.result.then((result) => {
       if (result === 'ok') {
@@ -81,7 +81,7 @@ export class AcInfoOrdComponent implements OnInit {
 
   changePass() {
     let that = this;
-    const modalRef = this.modalService.open(AccountPasswordFormalComponent, {windowClass: 'modal_md', centered: true});
+    const modalRef = this.modalService.open(AcPasswordOrdComponent, {windowClass: 'modal_md', centered: true});
     // modalRef.componentInstance.currentData = this.user;
     modalRef.result.then((result) => {
       if (result === 'ok') {

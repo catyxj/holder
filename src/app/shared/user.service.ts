@@ -61,10 +61,9 @@ export class UserService {
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
     // console.log(httpOptions);
 
-    /*if (!environment.production) {
+    if (!environment.production) {
       return this.http.get< any >('assets/server/user.json');
     } else {
-      console.log('ghhhhhhhhh');
       return this.http.get< any >('/api/user', httpOptions)
         .pipe(
           tap((val) => {
@@ -75,9 +74,9 @@ export class UserService {
           }),
           catchError(this.handleError2)
         );
-    }*/
+    }
 
-    return this.http.get< any >('assets/server/user.json');
+    // return this.http.get< any >('assets/server/user.json');
     /*return this.http.get< any >('/api/user', httpOptions)
         .pipe(
           tap((val) => {
@@ -164,6 +163,9 @@ export class UserService {
         'error:', error,
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
+    }
+    if (!error.status) {
+      window.location.reload();
     }
     if (error.status === 550) {
       localStorage.user = 'false';

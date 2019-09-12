@@ -20,7 +20,11 @@
       邮箱：
     </div>
     <div class="m_input">
-      <input type="text" class="form-control" [(ngModel)]="email" placeholder="请输入邮箱">
+      <input type="text" class="form-control" [(ngModel)]="email" placeholder="请输入邮箱" maxlength="30"
+             pattern="^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" #mail="ngModel">
+      <div class="sign_tip">
+        <span class="text_danger" *ngIf="mail.invalid && (mail.dirty || mail.touched)">请输入邮箱格式</span>
+      </div>
     </div>
   </div>
 
@@ -28,7 +32,7 @@
 
 <div class="modal-footer">
   <button type="button" class="btn" (click)="activeModal.dismiss('close')">取消</button>
-  <button type="button" class="btn btn_purple" style="margin-left: 30px;" (click)="save()" [disabled]="!username">确定</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 30px;" (click)="save()" [disabled]="!username || mail.invalid">确定</button>
 </div>
 
 

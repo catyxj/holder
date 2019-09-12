@@ -12,7 +12,10 @@
         <i class="iconfont iconicon_Refresh"></i>
       </button>
 
-      <button class="btn btn_purple btn_round bpm ml-1" routerLink="/admin/ordinary/cluster/add">
+      <button *ngIf="roleId === '10'" class="btn btn_purple btn_round bpm ml-1" routerLink="/admin/ordinary/cluster/add">
+        新增集群
+      </button>
+      <button *ngIf="roleId === '11'" class="btn btn_purple btn_round bpm ml-1" (click)="addData()">
         新增集群
       </button>
 

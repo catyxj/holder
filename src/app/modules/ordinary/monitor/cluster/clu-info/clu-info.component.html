@@ -21,11 +21,11 @@
         基本设置
       </button>
 
-      <button class="btn btn_purple btn_round bpm ml-1" [routerLink]="['/admin/ordinary/cluster/ept-add', uid]">
+      <button class="btn btn_purple btn_round bpm ml-1" [routerLink]="['/admin/ordinary/cluster/ept-add', uid]" *ngIf="roleId === '10'">
         新增设备
       </button>
 
-      <button class="btn btn_purple btn_round bpm ml-1" [routerLink]="['/admin/ordinary/cluster/ept-del', uid]">
+      <button class="btn btn_purple btn_round bpm ml-1" [routerLink]="['/admin/ordinary/cluster/ept-del', uid]" *ngIf="roleId === '10'">
         批量操作
       </button>
 

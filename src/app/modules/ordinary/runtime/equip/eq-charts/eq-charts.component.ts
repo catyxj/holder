@@ -262,14 +262,15 @@ export class EqChartsComponent implements OnInit {
 
   // 单个图表初始化
   initChart(data, n) {
-    if (!data) {
+    if (!data || data.length === 0) {
       data = [
         {
-          receive_time: new Date(),
+          receive_time: this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss'),
           value: 0
         }
       ];
     }
+    // console.log('aa', data);
     let unit = this.currentParams[n].unit;
     for (let i = 0; i < data.length; i++) {
       let rt = data[i];

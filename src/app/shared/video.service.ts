@@ -30,6 +30,10 @@ export class VideoService {
   private dataOperateMoreUrlF = '/api/formal/camera/log/info/more';
   private eptListUrl = '/api/formal/ept/camera/list'; // 设备详情页-视频列表
 
+
+  // 普通用户
+  private eptListUrlO = '/api/general/ept/camera/list'; // 设备详情页-视频列表
+
   // private token = 'authtoken';
   // private dataListUrl = 'assets/server/cluster_list.json';
 
@@ -287,7 +291,16 @@ export class VideoService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.get(`${this.eptListUrl}?uid=${data}`, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `${this.eptListUrl}?uid=${data}`;
+    }
+    if (roleId === '11') {
+      url = `${this.eptListUrlO}?uid=${data}`;
+    }
+
+    return this.http.get(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

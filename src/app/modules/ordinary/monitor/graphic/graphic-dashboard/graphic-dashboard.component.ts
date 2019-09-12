@@ -7,6 +7,7 @@ import {EqListAddComponent} from "../../list/modals/eq-list-add/eq-list-add.comp
 import {BoilerSocketService} from "../../../../../shared/boiler-socket.service";
 
 import Swal from 'sweetalert2';
+import {EqListLinkComponent} from "../../list/modals/eq-list-link/eq-list-link.component";
 
 @Component({
   selector: 'app-graphic-dashboard',
@@ -27,6 +28,7 @@ export class GraphicDashboardComponent implements OnInit, OnDestroy {
   public socket: any;
   public run = '';
   private token;
+  public roleId;
 
   constructor(private modalService: NgbModal,
               private eptService: BoilerService,
@@ -34,6 +36,7 @@ export class GraphicDashboardComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.roleId = localStorage.getItem('roleId');
     this.token = localStorage.getItem('authToken');
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
@@ -70,7 +73,16 @@ export class GraphicDashboardComponent implements OnInit, OnDestroy {
       search: this.search,
       value: this.value
     };
-    const wsUrl = `api/formal/ept/list/ws?token=${this.token}`;
+
+    let roleId = localStorage.getItem('roleId');
+    let wsUrl;
+    if (roleId === '10') {
+      wsUrl = `api/formal/ept/list/ws?token=${this.token}`;
+    }
+    if (roleId === '11') {
+      wsUrl = `api/general/ept/list/ws?token=${this.token}`;
+    }
+
     this.socket = this.boilerWsService.creatSocket(wsUrl, message)
       .subscribe(
         data => {
@@ -175,6 +187,21 @@ export class GraphicDashboardComponent implements OnInit, OnDestroy {
   addData() {
     let that = this;
     const modalRef = this.modalService.open(EqListAddComponent, {windowClass: 'modal_md', centered: true});
+    // modalRef.componentInstance.currentData = this.config;
+    // modalRef.componentInstance.uid = this.uid;
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+        that.pageChange();
+      }
+    }, (reason) => {
+      console.log(reason);
+    });
+  }
+
+  // 新增关联模态框
+  addData2() {
+    let that = this;
+    const modalRef = this.modalService.open(EqListLinkComponent, {windowClass: 'modal_md', centered: true});
     // modalRef.componentInstance.currentData = this.config;
     // modalRef.componentInstance.uid = this.uid;
     modalRef.result.then((result) => {

@@ -66,6 +66,10 @@ import { NoticeOfflineComponent } from './home/notice/report/notice-offline/noti
 import { ServiceInfoOrComponent } from './service/service-info-or/service-info-or.component';
 import { ServiceDetailOrComponent } from './service/service-detail-or/service-detail-or.component';
 import { ServiceAddOrComponent } from './service/modals/service-add-or/service-add-or.component';
+import { CluAddComponent } from './monitor/cluster/modals/clu-add/clu-add.component';
+import { EqListLinkComponent } from './monitor/list/modals/eq-list-link/eq-list-link.component';
+import { AcEditOrdComponent } from './account/modals/ac-edit-ord/ac-edit-ord.component';
+import { AcPasswordOrdComponent } from './account/modals/ac-password-ord/ac-password-ord.component';
 
 
 
@@ -137,6 +141,10 @@ import { ServiceAddOrComponent } from './service/modals/service-add-or/service-a
     ServiceInfoOrComponent,
     ServiceDetailOrComponent,
     ServiceAddOrComponent,
+    CluAddComponent,
+    EqListLinkComponent,
+    AcEditOrdComponent,
+    AcPasswordOrdComponent,
 
   ],
   exports: [
@@ -152,7 +160,11 @@ import { ServiceAddOrComponent } from './service/modals/service-add-or/service-a
     RuntimeMViewComponent,
     CycleAddComponent,
     CycleEditComponent,
-    ServiceAddOrComponent
+    ServiceAddOrComponent,
+    CluAddComponent,
+    EqListLinkComponent,
+    AcEditOrdComponent,
+    AcPasswordOrdComponent,
   ],
   providers: [
     DatePipe

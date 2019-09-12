@@ -21,7 +21,6 @@ export class AlarmService {
   // private detailUrl = 'assets/server/boiler_alarm_detail.json';
 
 
-  private detailUrl = '/api/formal/ept/alarm/detail';
   private alarmNumUrl = '/alarm_new_count';
 
   private alarmSource = new Subject<any>();
@@ -40,7 +39,17 @@ export class AlarmService {
   getAlarm(uid, page, pageSize, search, value): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
-    return this.http.get(`/api/formal/ept/alarm/list?uid=${uid}&page=${page}&rows=${pageSize}&search=${search}&value=${value}`, httpOptions)
+
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/ept/alarm/list?uid=${uid}&page=${page}&rows=${pageSize}&search=${search}&value=${value}`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/ept/alarm/list?uid=${uid}&page=${page}&rows=${pageSize}&search=${search}&value=${value}`;
+    }
+
+    return this.http.get(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -52,7 +61,15 @@ export class AlarmService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.detailUrl}/?uid=${uid}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/ept/alarm/detail?uid=${uid}`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/ept/alarm/detail?uid=${uid}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error

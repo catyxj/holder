@@ -18,7 +18,7 @@
         <i class="iconfont iconicon_comeback1"></i>
       </button>
 
-      <button class="btn btn_purple btn_round bpm ml-1" (click)="batchDisable()">
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="batchDisable()" *ngIf="roleId === '10'">
         批量禁用
       </button>
 
@@ -26,7 +26,7 @@
         批量删除
       </button>
 
-      <button class="btn btn_purple btn_round bpm ml-1" (click)="batchAble()">
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="batchAble()" *ngIf="roleId === '10'">
         批量激活
       </button>
 

@@ -175,6 +175,29 @@ export class AccountService {
   }
 
 
+  /*--------普通用户--------------------------------------------------*/
+  // 修改配置信息
+  updateConfigO(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/general/user/info/update', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  changePassO(data) {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/general/user/password/update', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
 
 
 

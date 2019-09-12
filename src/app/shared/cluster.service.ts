@@ -20,8 +20,7 @@ export class ClusterService {
   // private clustersUrl = 'assets/server/cluster_list_all.json';
   // private clusEquipUrl = 'assets/server/cluster_equip.json';
 
-  private clusterUrl = '/api/formal/cluster/list';
-  private clusEquipUrl = '/api/formal/cluster/ept/list/all';
+
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -30,7 +29,16 @@ export class ClusterService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.clusterUrl}?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/cluster/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/cluster/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -78,7 +86,15 @@ export class ClusterService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `/api/formal/cluster/status/detail?uid=${uid}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/cluster/status/detail?uid=${uid}`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/cluster/status/detail?uid=${uid}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -90,7 +106,15 @@ export class ClusterService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `/api/formal/cluster/detail?uid=${uid}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/cluster/detail?uid=${uid}`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/cluster/detail?uid=${uid}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -102,7 +126,15 @@ export class ClusterService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.clusEquipUrl}?uid=${uid}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/cluster/ept/list/all?uid=${uid}`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/cluster/ept/list/all?uid=${uid}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -121,7 +153,7 @@ export class ClusterService {
       );
   }
 
-  // 获取集群设备列表--（分页）批量取消
+  // 获取集群设备列表--（分页）批量取消关联
   getClusUnbindEquip(uid: string, n: number, pageSize: number, search?: string, value?: string): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
@@ -139,7 +171,15 @@ export class ClusterService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `/api/formal/cluster/batch`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/cluster/batch`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/cluster/batch`;
+    }
+
     return this.http.post<any>(url, data, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -174,27 +214,33 @@ export class ClusterService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/formal/cluster/update', data, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = '/api/formal/cluster/update';
+    }
+    if (roleId === '11') {
+      url = `/api/general/cluster/update`;
+    }
+
+    return this.http.post(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
 
-  // 从集群中移除设备
-  deleteEquip(data): Observable<any> {
+
+  // ---------普通用户-----------
+  addClu(data): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/cluster_equipment_remove/', data, httpOptions)
+    return this.http.post('/api/general/cluster/bind', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
-
-
-
-
 
 
 

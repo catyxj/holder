@@ -54,6 +54,7 @@ export class MainComponent implements OnInit, OnDestroy {
       localStorage.removeItem('authToken');
       alert('token错误，请刷新页面重试');
       this.router.navigate(['/login']);
+      // window.location.reload();
     }
     this.getSide();
     this.getUser();

@@ -23,9 +23,8 @@ export class BoilerService {
   // private eptInfo = 'assets/server/boiler.json';
   // private templateListUrl = 'assets/server/boiler_template_list.json';
 
-  private eptUrl = '/api/formal/equipment/list'; // 列表模式
-  private eptInfo = '/api/formal/ept/info/detail';  // 设备详情-设备信息
-  private eptTermInfo = '/api/formal/ept/terminal/info/detail';  // 设备详情-终端信息
+
+
 
 
 
@@ -38,7 +37,15 @@ export class BoilerService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.eptUrl}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&online=${online}&run_status=${run}&status=${status}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/equipment/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}&online=${online}&run_status=${run}&status=${status}`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/equipment/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}&online=${online}&run_status=${run}&status=${status}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -51,7 +58,15 @@ export class BoilerService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.eptInfo}?uid=${uid}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/ept/info/detail?uid=${uid}`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/ept/info/detail?uid=${uid}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -64,7 +79,15 @@ export class BoilerService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.eptTermInfo}?uid=${uid}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/ept/terminal/info/detail?uid=${uid}`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/ept/terminal/info/detail?uid=${uid}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -77,7 +100,15 @@ export class BoilerService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/formal/ept/batch/delete', data, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/ept/batch/delete`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/ept/batch/delete`;
+    }
+    return this.http.post(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -88,7 +119,16 @@ export class BoilerService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/formal/ept/batch/update/status', data, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/ept/batch/update/status`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/ept/batch/update/status`;
+    }
+
+    return this.http.post(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -100,7 +140,16 @@ export class BoilerService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/formal/ept/address/update', data, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/ept/address/update`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/ept/address/update`;
+    }
+
+    return this.http.post(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -112,7 +161,16 @@ export class BoilerService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/formal/ept/info/update', data, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/ept/info/update`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/ept/info/update`;
+    }
+
+    return this.http.post(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -126,7 +184,15 @@ export class BoilerService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `/api/formal/ept/map/detail`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = '/api/formal/ept/map/detail';
+    }
+    if (roleId === '11') {
+      url = '/api/general/ept/map/detail';
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -139,7 +205,16 @@ export class BoilerService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `/api/formal/ept/monitor`;
+
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = '/api/formal/ept/monitor';
+    }
+    if (roleId === '11') {
+      url = '/api/general/ept/monitor';
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -155,7 +230,7 @@ export class BoilerService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `/api/formal/ept/monitor`;
+    const url = `/api/formal/ept/remind`;
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -179,7 +254,16 @@ export class BoilerService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `/api/formal/ept/notice/info`;
+
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = '/api/formal/ept/notice/info';
+    }
+    if (roleId === '11') {
+      url = '/api/general/ept/notice/info';
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -191,7 +275,15 @@ export class BoilerService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `/api/formal/ept/notice/list?page=${n}&pageSize=${pageSize}&search=${search}&value=${value}&log_type=${status}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/ept/notice/list?page=${n}&pageSize=${pageSize}&search=${search}&value=${value}&log_type=${status}`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/ept/notice/list?page=${n}&pageSize=${pageSize}&search=${search}&value=${value}&log_type=${status}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -203,7 +295,15 @@ export class BoilerService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `/api/formal/ept/notice/batch`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = '/api/formal/ept/notice/batch';
+    }
+    if (roleId === '11') {
+      url = '/api/general/ept/notice/batch';
+    }
+
     return this.http.post<any>(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -214,7 +314,15 @@ export class BoilerService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `/api/formal/ept/notice/detail`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = '/api/formal/ept/notice/detail';
+    }
+    if (roleId === '11') {
+      url = '/api/general/ept/notice/detail';
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -222,6 +330,20 @@ export class BoilerService {
   }
 
   // ----------------------end 首页-----------------------------
+
+
+
+  // -----------------普通用户----------------
+  // 新增设备关联
+  addEptLink(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/general/ept/bind', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
 
 

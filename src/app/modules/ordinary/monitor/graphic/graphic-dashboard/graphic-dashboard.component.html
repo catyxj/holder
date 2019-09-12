@@ -12,7 +12,11 @@
         <i class="iconfont iconicon_Refresh"></i>
       </button>-->
 
-      <button class="btn btn_purple btn_round bpm ml-1" (click)="addData()">
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="addData()" *ngIf="roleId === '10'">
+        新增设备
+      </button>
+
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="addData2()" *ngIf="roleId === '11'">
         新增设备
       </button>
 

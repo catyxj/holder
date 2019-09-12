@@ -39,7 +39,7 @@ export class MaintainRecordEditSerComponent implements OnInit {
   }
 
   getInfo() {
-    this.dataList = [
+    /*this.dataList = [
       {
         name: '通风口是否正常',
         result: 'false',
@@ -49,6 +49,7 @@ export class MaintainRecordEditSerComponent implements OnInit {
             uid: -1,
             name: 'xxx.png',
             status: 'done',
+            response: {id: 101},
             url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
           }
         ]
@@ -58,26 +59,8 @@ export class MaintainRecordEditSerComponent implements OnInit {
         result: 'false',
         remark: '',
         imgList: []
-      },
-      {
-        name: '排风机是否正常',
-        result: 'false',
-        remark: '',
-        imgList: []
-      },
-      {
-        name: '风口是否干净',
-        result: 'false',
-        remark: '',
-        imgList: []
-      },
-      {
-        description: '炉排速度是否正常',
-        result: 'false',
-        remark: '',
-        imgList: []
       }
-    ];
+    ];*/
 
     this.maintainService.getLogInfo(this.uid)
       .subscribe(data => {
@@ -96,12 +79,13 @@ export class MaintainRecordEditSerComponent implements OnInit {
               uid: im.id,
               name: im.name,
               status: 'done',
+              response: {id: im.id},
               url: im.oss_path
             });
           }
           this.dataList.push({
             name: info[i].name,
-            result: info[i].result,
+            result: info[i].result.toString(),
             remark: info[i].remark,
             imgList: imgList
           });
@@ -167,10 +151,34 @@ export class MaintainRecordEditSerComponent implements OnInit {
 
 
     let that = this;
-    let post = {
+    let info = [];
+    for (let i = 0; i < this.dataList.length; i++) {
+      let da = this.dataList[i];
+      let img = [];
+      for (let j = 0; j < da.imgList.length; j++) {
+        let im = da.imgList[j];
+        if (im.status === 'done') {
+          img.push(im.response.id.toString());
+        }
+      }
+      info.push({
+        name: da.name,
+        result: da.result === 'true',
+        remark: da.remark,
+        img: img
+      });
+    }
 
+    let post = {
+      id: this.uid,
+      template_name:  this.tempName,
+      template_label: this.tempLabel,
+      ept_id: this.uid,
+      ept_name: this.name,
+      terminal_code: this.termCode,
+      info: info
     };
-    this.maintainService.addData(post)
+    this.maintainService.addProdData(post)
       .subscribe(val => {
         Swal(
           '操作成功！',

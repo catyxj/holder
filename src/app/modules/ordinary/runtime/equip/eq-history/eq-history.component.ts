@@ -161,7 +161,7 @@ export class EqHistoryComponent implements OnInit {
     //   startDate: this.dateRange[0],
     //   endDate: this.dateRange[1]
     // };
-    this.isLoading = true;
+    /*this.isLoading = true;
     this.rangeValue = data;
     this.runtimeService.getHistoryExport(this.uid, data)
       .subscribe( data => {
@@ -263,11 +263,27 @@ export class EqHistoryComponent implements OnInit {
 
         this.isLoading = false;
 
-      });
+      });*/
 
+    let token = localStorage.getItem('authToken');
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/ept/runtime/history/export`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/ept/runtime/history/export`;
+    }
 
-
-
+    const objectUrl = `${url}?uid=${this.uid}&type=${data}`;
+    const link = document.createElement('a');
+    document.body.appendChild(link);
+    link.setAttribute('style', 'display:none');
+    link.setAttribute('href', objectUrl);
+    // link.setAttribute('download', '历史数据');
+    link.target = '_blank';
+    link.click();
+    document.body.removeChild(link);
 
   }
 

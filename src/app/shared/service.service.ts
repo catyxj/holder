@@ -27,6 +27,11 @@ export class ServiceService {
   private questionUrl_f = '/api/dialogue/problem/list';
   private questionDetailUrl_f = '/api/dialogue/problem/detail';
 
+  // 普通用户
+  private dataListUrl_o = '/api/general/dialogue/list';  // 服务支持列表
+  private dataBasicUrl_o = '/api/general/dialogue/detail';
+  private commentUrl_o = '/api/general/dialogue/comment/list';
+
   // private token = 'authtoken';
   // private dataListUrl = 'assets/server/terminal_list.json';
 
@@ -105,7 +110,15 @@ export class ServiceService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.dataListUrl_f}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&type=${type}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `${this.dataListUrl_f}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&type=${type}`;
+    }
+    if (roleId === '11') {
+      url = `${this.dataListUrl_o}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&type=${type}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -117,7 +130,15 @@ export class ServiceService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.dataBasicUrl_f}?uid=${uid}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `${this.dataBasicUrl_f}?uid=${uid}`;
+    }
+    if (roleId === '11') {
+      url = `${this.dataBasicUrl_o}?uid=${uid}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -129,7 +150,15 @@ export class ServiceService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.commentUrl_f}?uid=${uid}&page=${page}&rows=${pageSize}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `${this.commentUrl_f}?uid=${uid}&page=${page}&rows=${pageSize}`;
+    }
+    if (roleId === '11') {
+      url = `${this.commentUrl_o}?uid=${uid}&page=${page}&rows=${pageSize}`;
+    }
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -167,7 +196,15 @@ export class ServiceService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/formal/dialogue/close', data, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = '/api/formal/dialogue/close';
+    }
+    if (roleId === '11') {
+      url = '/api/general/dialogue/close';
+    }
+    return this.http.post(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -178,7 +215,16 @@ export class ServiceService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/formal/dialogue/commit', data, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = '/api/formal/dialogue/commit';
+    }
+    if (roleId === '11') {
+      url = '/api/general/dialogue/commit';
+    }
+
+    return this.http.post(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -189,11 +235,32 @@ export class ServiceService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/formal/dialogue/create', data, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = '/api/formal/dialogue/create';
+    }
+    if (roleId === '11') {
+      url = '/api/general/dialogue/create';
+    }
+
+    return this.http.post(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
+
+  // 批量关闭
+  deleteDataO(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post('/api/general/dialogue/delete', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
 
 
 

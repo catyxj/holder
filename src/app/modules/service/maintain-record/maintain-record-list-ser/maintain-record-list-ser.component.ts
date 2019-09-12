@@ -36,12 +36,12 @@ export class MaintainRecordListSerComponent implements OnInit {
 
   // 获取列表
   getList() {
-    this.dataLists = [
+    /*this.dataLists = [
       {
         label: 'adsf223a',
         ept_name: 'aaaa'
       }
-    ]
+    ]*/
 
     this.loading = true;
     this.maintainService.getLogLists(this.page, this.pageSize, this.search, this.value)
@@ -124,7 +124,7 @@ export class MaintainRecordListSerComponent implements OnInit {
 
 
   // 编辑
-  editData() {
+  editData(data) {
     let that = this;
     const modalRef = this.modalService.open(MaintainRecordEditSerComponent, {windowClass: 'modal_lg', centered: true});
     modalRef.componentInstance.uid = data.uid;

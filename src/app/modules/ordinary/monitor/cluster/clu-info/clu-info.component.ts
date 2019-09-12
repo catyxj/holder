@@ -27,12 +27,15 @@ export class CluInfoComponent implements OnInit {
   public pageSizeList = [15, 30, 50, 100];
   public info;
 
+  public roleId;
+
 
   constructor(private route: ActivatedRoute,
               private modalService: NgbModal,
               private clusterService: ClusterService) { }
 
   ngOnInit() {
+    this.roleId = localStorage.getItem('roleId');
     this.uid = this.route.snapshot.paramMap.get('uid');
     this.getInfo();
     this.getStatus();

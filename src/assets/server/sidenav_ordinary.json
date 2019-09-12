@@ -4,8 +4,9 @@
       "name": "首页",
       "code": "sub2",
       "icon": "fa-home",
-      "img": "assets/icons/icon_Monitor.png",
-      "router": "/admin/ordinary/home"
+      "img": "assets/icons/home.png",
+      "router": "/admin/ordinary/home",
+      "index": true
     },
     {
       "name": "主监控台",
@@ -24,7 +25,7 @@
       "name": "信息维护",
       "code": "sub3",
       "icon": "fa-file-text-o",
-      "img": "assets/icons/icon_Information.png",
+      "img": "assets/icons/info.png",
       "checked": true,
       "children": [
         { "name": "账号信息", "router": "/admin/ordinary/account"},
