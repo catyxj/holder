@@ -109,7 +109,7 @@
                 <span class="text_grey" *ngIf="basic && basic.plat_ver === 0">
                   未配置
                 </span>
-                <span class="text_grey" *ngIf="basic && basic.term_ver === 0">
+                <span class="text_grey" *ngIf="basic && basic.plat_ver !== 0 && basic.term_ver === 0">
                   未下发
                 </span>
                 &nbsp;

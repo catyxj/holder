@@ -115,9 +115,7 @@ export class UserDetailFormalComponent implements OnInit {
   }
 
 
-  enter() {
 
-  }
 
 
 }

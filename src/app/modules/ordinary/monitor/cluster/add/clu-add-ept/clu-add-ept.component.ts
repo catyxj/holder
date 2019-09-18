@@ -32,6 +32,8 @@ export class CluAddEptComponent implements OnInit {
   public cities = [];
   public regions = [];
 
+  public info;
+
   constructor(private addressService: AdressService,
               private clusterService: ClusterService) { }
 
@@ -42,19 +44,36 @@ export class CluAddEptComponent implements OnInit {
     };
 
     this.getAddress();
+    if (this.uid) {
+      this.getInfo();
+    }
   }
 
+
+  getInfo() {
+    this.clusterService.getInfo(this.uid)
+      .subscribe(data => {
+        this.info = data;
+        this.name = data.name;
+        this.address = data.address;
+        this.imgUrl = data.img;
+      }, err => {
+
+      });
+  }
 
   getAddress() {
     this.addressService.getAddress()
       .subscribe(data => {
         this.addrList = data;
-        // this.initLocation();
+        if (this.uid) {
+          this.initLocation();
+        }
       });
   }
 
-  /*initLocation() {
-    let location = this.currentData.location_id;
+  initLocation() {
+    let location = this.info.location;
     console.log(location);
     if (location && location !== 0) {
       if (location < 100) {
@@ -104,7 +123,7 @@ export class CluAddEptComponent implements OnInit {
       }
     }
 
-  }*/
+  }
 
   provinceChange(value): void {
     console.log(value);
@@ -181,6 +200,7 @@ export class CluAddEptComponent implements OnInit {
     let post;
     if (this.img) {
       post = {
+        uid: this.uid,
         name: this.name,
         location: this.locationId,
         location_name: this.locationName,
@@ -189,6 +209,7 @@ export class CluAddEptComponent implements OnInit {
       };
     } else {
       post = {
+        uid: this.uid,
         name: this.name,
         location: this.locationId,
         location_name: this.locationName,

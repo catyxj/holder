@@ -9,7 +9,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import {
+  MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule,
+  MatInputModule
+} from '@angular/material';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -46,6 +49,24 @@ import {BillDetailDirComponent} from "./modules/directives/charge/bill/bill-deta
 import { OrderMainDirComponent } from './modules/directives/charge/order/order-main-dir/order-main-dir.component';
 import { RenewalMainDirComponent } from './modules/directives/charge/renewal/renewal-main-dir/renewal-main-dir.component';
 import { InvoiceMainDirComponent } from './modules/directives/charge/invoice/invoice-main-dir/invoice-main-dir.component';
+import { OrderListDirComponent } from './modules/directives/charge/order/order-list-dir/order-list-dir.component';
+import { OrderInfoDirComponent } from './modules/directives/charge/order/order-info-dir/order-info-dir.component';
+import { RenewalListDirComponent } from './modules/directives/charge/renewal/renewal-list-dir/renewal-list-dir.component';
+import { InvoiceListDirComponent } from './modules/directives/charge/invoice/invoice-list-dir/invoice-list-dir.component';
+import { InvoiceInfoDirComponent } from './modules/directives/charge/invoice/invoice-info-dir/invoice-info-dir.component';
+import { OrderServiceMainDirComponent } from './modules/directives/charge/order-service/order-service-main-dir/order-service-main-dir.component';
+import { OrderServiceDashboardDirComponent } from './modules/directives/charge/order-service/order-service-dashboard-dir/order-service-dashboard-dir.component';
+import { BluetoothOrderServiceDirComponent } from './modules/directives/charge/order-service/add/bluetooth-order-service-dir/bluetooth-order-service-dir.component';
+import { TerminalOrderServiceDirComponent } from './modules/directives/charge/order-service/add/terminal-order-service-dir/terminal-order-service-dir.component';
+import { VideoOrderServiceDirComponent } from './modules/directives/charge/order-service/add/video-order-service-dir/video-order-service-dir.component';
+import { SensorOrderServiceDirComponent } from './modules/directives/charge/order-service/add/sensor-order-service-dir/sensor-order-service-dir.component';
+import { LogoOrderServiceDirComponent } from './modules/directives/charge/order-service/upgrade/logo-order-service-dir/logo-order-service-dir.component';
+import { VideoUpgradeOrderServiceDirComponent } from './modules/directives/charge/order-service/upgrade/video-upgrade-order-service-dir/video-upgrade-order-service-dir.component';
+import { StorageOrderServiceDirComponent } from './modules/directives/charge/order-service/service/storage-order-service-dir/storage-order-service-dir.component';
+import { PaymentOrderServiceDirComponent } from './modules/directives/charge/order-service/payment-order-service-dir/payment-order-service-dir.component';
+import { TrafficOrderServiceDirComponent } from './modules/directives/charge/order-service/traffic-order-service-dir/traffic-order-service-dir.component';
+import { AddressAddPurchaseDirComponent } from './modules/directives/charge/order-service/modals/address-add-purchase-dir/address-add-purchase-dir.component';
+import { AddressEditInvioceDirComponent } from './modules/directives/charge/invoice/modals/address-edit-invioce-dir/address-edit-invioce-dir.component';
 
 
 
@@ -79,6 +100,24 @@ registerLocaleData(zh);
     OrderMainDirComponent,
     RenewalMainDirComponent,
     InvoiceMainDirComponent,
+    OrderListDirComponent,
+    OrderInfoDirComponent,
+    RenewalListDirComponent,
+    InvoiceListDirComponent,
+    InvoiceInfoDirComponent,
+    OrderServiceMainDirComponent,
+    OrderServiceDashboardDirComponent,
+    BluetoothOrderServiceDirComponent,
+    TerminalOrderServiceDirComponent,
+    VideoOrderServiceDirComponent,
+    SensorOrderServiceDirComponent,
+    LogoOrderServiceDirComponent,
+    VideoUpgradeOrderServiceDirComponent,
+    StorageOrderServiceDirComponent,
+    PaymentOrderServiceDirComponent,
+    TrafficOrderServiceDirComponent,
+    AddressAddPurchaseDirComponent,
+    AddressEditInvioceDirComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,6 +133,7 @@ registerLocaleData(zh);
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatInputModule,
     AngularFontAwesomeModule,
     NgZorroAntdModule,
     NgxEchartsModule,
@@ -101,7 +141,9 @@ registerLocaleData(zh);
     // FormalModule
   ],
   entryComponents: [
-    ComfirmComponent
+    ComfirmComponent,
+    AddressAddPurchaseDirComponent,
+    AddressEditInvioceDirComponent
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},

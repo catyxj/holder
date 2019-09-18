@@ -142,11 +142,11 @@ export class ClusterService {
   }
 
   // 获取集群设备列表--（分页）
-  getClusEquipList(uid: string, n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+  getClusEquipList(uid: string, n: number, pageSize: number, search?: string, value?: string, online?, run?, status?): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `/api/formal/cluster/ept/list?uid=${uid}&page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    const url = `/api/formal/cluster/ept/list?uid=${uid}&page=${n}&rows=${pageSize}&search=${search}&value=${value}&online=${online}&run_status=${run}&status=${status}`;
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error

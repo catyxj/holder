@@ -18,6 +18,23 @@ import {BillMainDirComponent} from "./modules/directives/charge/bill/bill-main-d
 import {BillDetailDirComponent} from "./modules/directives/charge/bill/bill-detail-dir/bill-detail-dir.component";
 import {BillGeneralDirComponent} from "./modules/directives/charge/bill/bill-general-dir/bill-general-dir.component";
 import {OrderMainDirComponent} from "./modules/directives/charge/order/order-main-dir/order-main-dir.component";
+import {RenewalMainDirComponent} from "./modules/directives/charge/renewal/renewal-main-dir/renewal-main-dir.component";
+import {InvoiceMainDirComponent} from "./modules/directives/charge/invoice/invoice-main-dir/invoice-main-dir.component";
+import {OrderInfoDirComponent} from "./modules/directives/charge/order/order-info-dir/order-info-dir.component";
+import {OrderListDirComponent} from "./modules/directives/charge/order/order-list-dir/order-list-dir.component";
+import {RenewalListDirComponent} from "./modules/directives/charge/renewal/renewal-list-dir/renewal-list-dir.component";
+import {InvoiceListDirComponent} from "./modules/directives/charge/invoice/invoice-list-dir/invoice-list-dir.component";
+import {InvoiceInfoDirComponent} from "./modules/directives/charge/invoice/invoice-info-dir/invoice-info-dir.component";
+import {OrderServiceMainDirComponent} from "./modules/directives/charge/order-service/order-service-main-dir/order-service-main-dir.component";
+import {OrderServiceDashboardDirComponent} from "./modules/directives/charge/order-service/order-service-dashboard-dir/order-service-dashboard-dir.component";
+import {BluetoothOrderServiceDirComponent} from "./modules/directives/charge/order-service/add/bluetooth-order-service-dir/bluetooth-order-service-dir.component";
+import {TerminalOrderServiceDirComponent} from "./modules/directives/charge/order-service/add/terminal-order-service-dir/terminal-order-service-dir.component";
+import {VideoOrderServiceDirComponent} from "./modules/directives/charge/order-service/add/video-order-service-dir/video-order-service-dir.component";
+import {SensorOrderServiceDirComponent} from "./modules/directives/charge/order-service/add/sensor-order-service-dir/sensor-order-service-dir.component";
+import {LogoOrderServiceDirComponent} from "./modules/directives/charge/order-service/upgrade/logo-order-service-dir/logo-order-service-dir.component";
+import {StorageOrderServiceDirComponent} from "./modules/directives/charge/order-service/service/storage-order-service-dir/storage-order-service-dir.component";
+import {PaymentOrderServiceDirComponent} from "./modules/directives/charge/order-service/payment-order-service-dir/payment-order-service-dir.component";
+import {TrafficOrderServiceDirComponent} from "./modules/directives/charge/order-service/traffic-order-service-dir/traffic-order-service-dir.component";
 
 
 
@@ -77,6 +94,43 @@ const routes: Routes = [
     path: 'dir',
     component: DirMainComponent,
     children: [
+      {
+        path: 'charge/invoice/info/:amount',
+        component: InvoiceInfoDirComponent
+      },
+      {
+        path: 'charge/purchase/order/bluetooth',
+        component: BluetoothOrderServiceDirComponent
+      },
+      {
+        path: 'charge/purchase/order/terminal',
+        component: TerminalOrderServiceDirComponent
+      },
+      {
+        path: 'charge/purchase/order/video',
+        component: VideoOrderServiceDirComponent
+      },
+      {
+        path: 'charge/purchase/order/sensor',
+        component: SensorOrderServiceDirComponent
+      },
+      {
+        path: 'charge/purchase/upgrade/:type',
+        component: LogoOrderServiceDirComponent
+      },
+      {
+        path: 'charge/purchase/storage',
+        component: StorageOrderServiceDirComponent
+      },
+      {
+        path: 'charge/purchase/traffic',
+        component: TrafficOrderServiceDirComponent
+      },
+      {
+        path: 'charge/purchase/payment',
+        component: PaymentOrderServiceDirComponent
+      },
+
       // 管理员
       // {
       //   path: 'ad/account-info/:uid',
@@ -155,8 +209,84 @@ const routes: Routes = [
       },
       {
         path: 'order',
-        component: OrderMainDirComponent
+        component: OrderMainDirComponent,
+        children: [
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
+          {
+            path: 'list',
+            component: OrderListDirComponent
+          },
+          {
+            path: 'info/:uid/:page',
+            component: OrderInfoDirComponent
+          }
+        ]
       },
+      {
+        path: 'renewal',
+        component: RenewalMainDirComponent,
+        children: [
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
+          {
+            path: 'list',
+            component: RenewalListDirComponent
+          }
+        ]
+      },
+      {
+        path: 'invoice',
+        component: InvoiceMainDirComponent,
+        children: [
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
+          {
+            path: 'list',
+            component: InvoiceListDirComponent
+          },
+          {
+            path: 'info/:amount',
+            component: InvoiceInfoDirComponent
+          }
+        ]
+      },
+      {
+        path: 'purchase',
+        component: OrderServiceMainDirComponent,
+        children: [
+          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+          {
+            path: 'dashboard',
+            component: OrderServiceDashboardDirComponent
+          },
+          {
+            path: 'order/bluetooth',
+            component: BluetoothOrderServiceDirComponent
+          },
+          {
+            path: 'order/terminal',
+            component: TerminalOrderServiceDirComponent
+          },
+          {
+            path: 'order/video',
+            component: VideoOrderServiceDirComponent
+          },
+          {
+            path: 'order/sensor',
+            component: SensorOrderServiceDirComponent
+          },
+          {
+            path: 'upgrade/:type',
+            component: LogoOrderServiceDirComponent
+          },
+          {
+            path: 'storage',
+            component: StorageOrderServiceDirComponent
+          },
+          {
+            path: 'payment',
+            component: PaymentOrderServiceDirComponent
+          },
+        ]
+      }
     ]
   },
   {

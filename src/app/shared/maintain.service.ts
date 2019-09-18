@@ -238,7 +238,7 @@ export class MaintainService {
 
   // -------------维保记录------------------
   // 获取维保记录列表
-  getLogLists(n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+  getLogLists(n: number, pageSize: number, search?: string, value?: string, status?): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
@@ -249,7 +249,7 @@ export class MaintainService {
       url = `/api/formal/mt/log/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
     }
     if (roleId === '15') {
-      url = `/api/maintenance/ept/mt/log/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+      url = `/api/maintenance/ept/mt/log/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}&status=${status}`;
     }
 
     return this.http.get<any>(url, httpOptions)
@@ -269,7 +269,7 @@ export class MaintainService {
       url = `/api/formal/mt/log/detail?id=${id}`;
     }
     if (roleId === '15') {
-      url = `/api/maintenance/ept/mt/log/detail?uid=${id}`;
+      url = `/api/maintenance/ept/mt/log/detail?id=${id}`;
     }
 
     return this.http.get<any>(url, httpOptions)

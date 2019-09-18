@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {BoilerService} from "../../../../../../shared/boiler.service";
 
 @Component({
   selector: 'app-notice-malfunction',
@@ -6,10 +7,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notice-malfunction.component.css']
 })
 export class NoticeMalfunctionComponent implements OnInit {
+  @Input()
+  uid;
+  public info;
+  public user;
 
-  constructor() { }
+  constructor(private eptService: BoilerService) { }
 
   ngOnInit() {
+    this.user = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.getData();
+  }
+
+  getData() {
+    this.eptService.getNoticeInfo(this.uid)
+      .subscribe(data => {
+        this.info = data;
+      }, err => {
+
+      });
   }
 
 }

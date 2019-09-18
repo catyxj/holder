@@ -72,7 +72,7 @@
 
 <div class="modal-footer">
   <button type="button" class="btn" (click)="activeModal.dismiss('close')">取 消</button>
-  <button type="button" class="btn btn_purple" style="margin-left: 35px;" (click)="save()" [disabled]="per.invalid">确 定</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 35px;" (click)="save()" [disabled]="!name || per.invalid">确 定</button>
 </div>
 
 

@@ -1,0 +1,159 @@
+
+<div class="content charge">
+  <div class="charge_info_head">
+    <div class="c_head_l">
+      <h5>开具发票</h5>
+    </div>
+    <div class="c_head_r" style="color: #414B92; font-size: 12px; text-decoration: underline;">
+      开票总金额：
+      {{amount | currency: '￥'}}
+    </div>
+  </div>
+
+  <div class="c_info">
+    <h6>选择地址：</h6>
+
+    <!--添加地址-->
+    <div *ngIf="!addressList || addressList.length === 0;">
+      <div class="add_btn">
+        添加地址
+      </div>
+    </div>
+
+    <!--地址列表-->
+    <div *ngIf="addressList && addressList.length > 0" style="padding-bottom: 17px;">
+      <!--默认地址-->
+      <div class="def_con">
+        <div class="addr_item">
+          <div class="addr_l">
+            <div class="addr_name">
+              <b>陈 宁</b>
+              <span>
+                13486661360
+              </span>
+            </div>
+            <div class="addr_addr">
+              {{defaultAddress.address}}
+            </div>
+          </div>
+          <div class="addr_r">
+            默认地址
+          </div>
+
+        </div>
+
+        <div class="def_btn">
+          <a (click)="editAddr(defaultAddress)">修改地址</a>
+          <a (click)="showAll = !showAll" class="ml-3">所有地址</a>
+        </div>
+      </div>
+
+      <!--其他地址-->
+      <div *ngIf="showAll" class="other_con">
+        <div *ngFor="let data of otherAddress" class="addr_ot_con">
+          <div class="addr_item">
+            <div class="addr_l">
+              <div class="addr_name">
+                <b>陈 宁</b>
+                <span>
+                13486661360
+              </span>
+              </div>
+              <div class="addr_addr">
+                {{data.address}}
+              </div>
+            </div>
+            <div class="addr_r">
+              设为默认
+            </div>
+          </div>
+          <div class="ot_edit">
+            <img src="assets/images/charge/invoice_edit.png" alt="" >
+            <img src="assets/images/charge/invoice_del.png" alt="">
+          </div>
+        </div>
+      </div>
+
+
+      <div class="add_btn">
+        使用新地址
+      </div>
+    </div>
+
+
+
+
+    <h6>发票信息：</h6>
+
+    <div class="flex">
+      <div>
+        <!--添加信息-->
+        <div *ngIf="!infoList || infoList.length === 0;">
+          <div class="add_btn">
+            增值税专用发票
+          </div>
+        </div>
+
+        <!--信息列表-->
+        <div *ngIf="infoList && infoList.length > 0">
+          <!--默认信息-->
+          <div class="def_con">
+            <div class="addr_item">
+              <div class="info_item_l">
+                {{defaultInfo.name}}
+              </div>
+              <div class="addr_r">
+                默认信息
+              </div>
+
+            </div>
+
+            <div class="def_btn">
+              <a>修改信息</a>
+              <a (click)="showAllInfo = !showAllInfo" class="ml-3">所有信息</a>
+            </div>
+          </div>
+
+          <!--其他信息-->
+          <div *ngIf="showAllInfo" class="other_con">
+            dddd
+          </div>
+
+
+          <div class="add_btn">
+            新增增值税专用发票
+          </div>
+
+          <!--<mat-form-field class="invoice_input">
+            <input matInput placeholder="Favorite food">
+          </mat-form-field>-->
+        </div>
+      </div>
+
+
+      <div style="margin-left: 40px; font-size: 12px; color: #000000; width: 386px;">
+        注意事项：<br>
+        电子发票与纸质发票具有同等法律效力，可支持报销入账；同时根据增值税管理办法要求，如需为企业开具增值税发票，需提供纳税人识别号或统一社会信用代码，否则该发票无法作为税收凭证。
+      </div>
+    </div>
+
+
+
+
+    <!--提交按钮-->
+    <div style="padding-top: 29px;">
+      <button class="btn btn_i btn_default" style="margin-right: 58px;">返回</button>
+      <button class="btn btn_i btn_purple">提交</button>
+    </div>
+
+
+  </div>
+</div>
+
+
+
+
+
+
+
+

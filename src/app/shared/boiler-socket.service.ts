@@ -25,7 +25,7 @@ export class BoilerSocketService {
         this.ws.onmessage = (event) => observer.next(event.data);
         this.ws.onerror = (event) => observer.error(event);
         this.ws.onclose = (event) => observer.complete();
-        return () => this.ws.close();
+        return () => {/*this.ws.close();*/ console.log('ws断了？'); };
       }
     ).pipe(
       // map(message => JSON.parse(message))
@@ -43,12 +43,24 @@ export class BoilerSocketService {
   }
 
   sendMessage(message) {
+    console.log(this.ws.readyState);
     this.ws.send(JSON.stringify(message));
+    /*if (this.ws) {
+      this.ws.send(JSON.stringify(message));
+    } else {
+      // socket可能还没连接成功，那么延迟一秒再发送消息
+      setTimeout(function () {
+        this.ws.send(JSON.stringify(message));
+      }, 1000);
+    }*/
   }
 
   sendText(text) {
-    if (this.ws) {
+    console.log(this.ws.readyState);
+    if (this.ws.readyState === 1) {
       this.ws.send(JSON.stringify(text));
+    } else {
+      this.ws.close();
     }
   }
 

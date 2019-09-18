@@ -274,20 +274,7 @@ export class MapDashboardComponent implements OnInit, OnDestroy {
       }
     });*/
 
-    // 添加带有定位的导航控件
-    /*let navigationControl = new BMap.NavigationControl({
-      // 靠左上角位置
-      // anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
-      // LARGE类型
-      // type: BMAP_NAVIGATION_CONTROL_ZOOM,
-      // 启用显示定位
-      enableGeolocation: true,
-      // offset: {
-      //   width: 50,
-      //   height: 100
-      // }
-    });
-    map.addControl(navigationControl);*/
+
 
   }
 

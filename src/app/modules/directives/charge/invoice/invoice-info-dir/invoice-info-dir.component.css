@@ -1,0 +1,166 @@
+
+.charge_info_head{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 27px;
+  border-bottom: 1px solid #DCDEE3;
+}
+.c_head_l{
+  display: flex;
+  align-items: center;
+}
+.c_head_l h5{
+  margin-bottom: 0;
+  font-size:20px;
+  color:#333333;
+  margin-right: 10px;
+}
+.c_head_l span{
+  font-size: 12px;
+  color: #00A0F9;
+}
+
+
+
+.c_info{
+  padding: 0 10%;
+}
+.c_info h6{
+  font-size:20px;
+  font-weight:bold;
+  color: #333333;
+  margin-bottom: 32px;
+  margin-top: 48px;
+}
+
+.cinfo_info{
+  display: flex;
+}
+
+
+
+.def_con{
+  padding-bottom: 30px;
+}
+
+
+
+
+.add_btn{
+  width:476px;
+  height:85px;
+  line-height: 85px;
+  border-radius:3px;
+  border:1px solid #C4C6CF;
+  box-sizing: border-box;
+  padding: 0 20px;
+  font-size:16px;
+  font-weight:bold;
+  color: #000000;
+  cursor: pointer;
+}
+
+.addr_item{
+  width:476px;
+  height:85px;
+  border-radius:3px;
+  border:1px solid #C4C6CF;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  color: #000000;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 默认地址*/
+.def_btn{
+  margin-top: 6px;
+}
+.def_btn a{
+  color: #414B92;
+  font-size: 12px;
+  text-decoration: underline;
+}
+.addr_name{
+  margin-bottom: 12px;
+}
+.addr_name b{
+  font-size: 16px;
+  font-weight: bold;
+  color: #000000;
+}
+.addr_name span{
+  font-size: 11px;
+  color: #666666;
+}
+.addr_addr{
+  font-size: 12px;
+  color: #000000;
+}
+.addr_r{
+  font-size: 16px;
+  color: #000000;
+}
+.addr_l{
+  width: 290px;
+}
+
+/*其他地址*/
+.other_con{
+  margin-bottom: 26px;
+}
+.addr_ot_con{
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 12px;
+}
+.ot_edit img{
+  margin-left: 14px;
+  cursor: pointer;
+}
+
+.other_con .addr_r{
+  color: #414B92;
+  text-decoration: underline;
+}
+
+
+
+/*发票信息*/
+
+.info_item_l{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+
+
+
+
+
+.invoice_input{
+  width: 476px;
+  margin-top: 12px;
+}
+
+.btn_i{
+  width:88px;
+  height:41px;
+  border-radius:3px;
+}
+.btn_default{
+  border:1px solid #C4C6CF;
+  background-color: #ffffff;
+}
+.btn_default:hover{
+  border:1px solid #666EE8;
+  color: #666EE8;
+}
+
+
+
+

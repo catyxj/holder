@@ -219,39 +219,39 @@
             <nz-tag [nzColor]="'#C0C4D2'" *ngIf="!data.online">未联网</nz-tag>
           </td>
           <td>
-            <span *ngIf="data.run === 0">
+            <span *ngIf="!data.online">
               <img src="assets/icons/group_0.png" alt="">
               未知
             </span>
-            <span *ngIf="data.run === 1">
+            <span *ngIf="data.online && !data.run">
               <img src="assets/icons/group_4.png" alt="">
               未运行
             </span>
-            <span *ngIf="data.run === 2">
+            <span *ngIf="data.online && data.run">
               <img src="assets/icons/group_2.png" alt="">
               运行
             </span>
-            <span *ngIf="data.run === 3">
+            <span *ngIf="data.online && data.alarm_count>0" class="ml-2">
               <img src="assets/icons/group_1.png" alt="">
               告警
             </span>
-            <span *ngIf="data.run === 4">
+            <span *ngIf="data.malfunction" class="ml-2">
               <img src="assets/icons/group_3.png" alt="">
               故障
             </span>
           </td>
           <td>
-            <span *ngIf="data.status === 1">
+            <span *ngIf="data.status === 0">
               正常
             </span>
-            <span *ngIf="data.status === 2" class="text_danger">
+            <span *ngIf="data.status === 1" style="color: #BE1414;">
               禁用
             </span>
           </td>
           <td>
-            <button class="btn btn_purple btn-sm" (click)="enter()">
+            <a class="btn btn_purple btn-sm" [routerLink]="['/admin/ordinary/runtime', data.uid]" target="_blank" >
               进入
-            </button>
+            </a>
           </td>
         </tr>
         </tbody>

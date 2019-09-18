@@ -163,9 +163,10 @@
             </span>
           </td>
           <td>
-            <nz-tag [nzColor]="'#1E9FF2'" *ngIf="data.term_plat !== 0 && data.term_plat === data.term_ver">配置成功</nz-tag>
-            <nz-tag [nzColor]="'#FF4961'" *ngIf="data.term_plat !== 0 && data.term_plat !== data.term_ver">配置失败</nz-tag>
+            <nz-tag [nzColor]="'#1E9FF2'" *ngIf="data.term_plat !== 0 && data.term_ver !== 0 && data.term_plat === data.term_ver">配置成功</nz-tag>
+            <nz-tag [nzColor]="'#FF4961'" *ngIf="data.term_plat !== 0 && data.term_ver !== 0 && data.term_plat !== data.term_ver">配置失败</nz-tag>
             <nz-tag [nzColor]="'#C0C4D2'" *ngIf="data.term_plat === 0">未配置</nz-tag>
+            <nz-tag [nzColor]="'#C0C4D2'" *ngIf="data.term_plat !== 0 && data.term_ver === 0">未配置</nz-tag>
           </td>
           <td> {{data.temp_name || '默认模板'}} </td>
           <td>

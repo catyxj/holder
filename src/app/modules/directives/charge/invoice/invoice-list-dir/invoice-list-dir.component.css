@@ -1,0 +1,40 @@
+
+.list_head{
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #DCDEE3;
+  box-sizing: border-box;
+}
+.li_head_l h5{
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+
+
+.charge_list{
+  padding: 0 15px;
+}
+
+.c_head{
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.bill .table th{
+  background-color: #EBECF0;
+  font-size: 12px;
+}
+.bill .table th *{
+  font-size: 12px;
+}
+.bill .table td{
+  border-bottom: 1px solid #DCDEE3;
+  font-size: 12px;
+}
+
+
+
+

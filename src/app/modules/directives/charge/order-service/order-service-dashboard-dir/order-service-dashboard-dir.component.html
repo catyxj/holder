@@ -1,0 +1,261 @@
+
+
+<div class="mb-3">
+  <!--产品购买-->
+  <div class="content1">
+    <div class="purchase_h">
+      <h6>产品购买</h6>
+    </div>
+
+    <div class="product">
+      <a class="col_4" routerLink="/dir/charge/purchase/order/terminal" target="_blank">
+        <img src="assets/images/charge/terminal_b.png" alt="">
+        NK物联网终端
+      </a>
+
+      <a class="col_4" routerLink="/dir/charge/purchase/order/video" target="_blank">
+        <img src="assets/images/charge/video_b.png" alt="">
+        视频模组
+      </a>
+
+       <a class="col_4" routerLink="/dir/charge/purchase/order/bluetooth" target="_blank">
+         <img src="assets/images/charge/bluetooth_b.png" alt="">
+         蓝牙模组
+       </a>
+
+      <div class="col_4" routerLink="/dir/charge/purchase/order/sensor" target="_blank">
+        <img src="assets/images/charge/sensor_b.png" alt="">
+        传感器
+      </div>
+
+    </div>
+
+  </div>
+
+  <!--功能升级-->
+  <div class="content1">
+    <div class="purchase_h">
+      <h6>功能升级</h6>
+    </div>
+
+    <div class="upgrade">
+      <!--已开通-->
+        <div class="col_8 active" *ngIf="true">
+          <div class="round">
+            <i class="iconfont iconup_video"></i>
+          </div>
+          <div>视频监控</div>
+          <div>
+            （已开通）
+          </div>
+        </div>
+
+        <div class="col_8 active" *ngIf="false">
+          <div class="round">
+            <i class="iconfont iconup_logo"></i>
+          </div>
+          <div>
+            logo定制
+          </div>
+          <div>
+            （已开通）
+          </div>
+        </div>
+
+        <div class="col_8 active" *ngIf="false">
+          <div class="round">
+            <i class="iconfont iconup_cluster"></i>
+          </div>
+          <div>
+            集群服务
+          </div>
+          <div>
+            （已开通）
+          </div>
+        </div>
+
+        <div class="col_8 active" *ngIf="false">
+          <div class="round">
+            <i class="iconfont iconup_bluetooth"></i>
+          </div>
+          <div>
+            蓝牙支持
+          </div>
+          <div>
+            （已开通）
+          </div>
+        </div>
+
+        <div class="col_8 active" *ngIf="false">
+          <div class="round">
+            <i class="iconfont iconup_calculate"></i>
+          </div>
+          <div>
+            参数计算
+          </div>
+          <div>
+            （已开通）
+          </div>
+        </div>
+
+        <div class="col_8 active" *ngIf="false">
+          <div class="round">
+            <i class="iconfont iconup_ept"></i>
+          </div>
+          <div>
+            设备控制
+          </div>
+          <div>
+            （已开通）
+          </div>
+        </div>
+
+        <div class="col_8 active" *ngIf="false">
+          <div class="round">
+            <i class="iconfont iconup_control"></i>
+          </div>
+          <div>
+            云台监控
+          </div>
+          <div>
+            （已开通）
+          </div>
+        </div>
+
+        <div class="col_8 active" *ngIf="false">
+          <div class="round">
+            <i class="iconfont iconup_maintain"></i>
+          </div>
+          <div>
+            维保服务
+          </div>
+          <div>
+            （已开通）
+          </div>
+        </div>
+
+
+
+      <div class="divide">
+
+      </div>
+
+
+      <!-- 未开通-->
+
+        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 1]" target="_blank">
+          <div class="round">
+            <i class="iconfont iconup_video"></i>
+          </div>
+          <div>视频监控</div>
+        </a>
+
+        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 2]" target="_blank">
+          <div class="round">
+            <i class="iconfont iconup_logo"></i>
+          </div>
+          <div>
+            logo定制
+          </div>
+        </a>
+
+        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 3]" target="_blank">
+          <div class="round">
+            <i class="iconfont iconup_cluster"></i>
+          </div>
+          <div>
+            集群服务
+          </div>
+        </a>
+
+        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 4]" target="_blank">
+          <div class="round">
+            <i class="iconfont iconup_bluetooth"></i>
+          </div>
+          <div>
+            蓝牙支持
+          </div>
+        </a>
+
+        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 5]" target="_blank">
+          <div class="round">
+            <i class="iconfont iconup_calculate"></i>
+          </div>
+          <div>
+            参数计算
+          </div>
+        </a>
+
+        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 6]" target="_blank">
+          <div class="round">
+            <i class="iconfont iconup_ept"></i>
+          </div>
+          <div>
+            设备控制
+          </div>
+
+        </a>
+
+        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 7]" target="_blank">
+          <div class="round">
+            <i class="iconfont iconup_control"></i>
+          </div>
+          <div>
+            云台监控
+          </div>
+        </a>
+
+        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 8]" target="_blank">
+          <div class="round">
+            <i class="iconfont iconup_maintain"></i>
+          </div>
+          <div>
+            维保服务
+          </div>
+        </a>
+
+
+    </div>
+  </div>
+
+  <!--服务购买-->
+  <div class="content1">
+    <div class="purchase_h">
+      <h6>服务购买</h6>
+    </div>
+
+    <div class="upgrade">
+      <a class="col" routerLink="/dir/charge/purchase/storage" target="_blank">
+        <div class="storage_round">
+          <img src="assets/images/charge/storage.png" alt="">
+        </div>
+        <div>
+          数据存储服务
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!--数据流量-->
+  <div class="content1">
+    <div class="purchase_h">
+      <h6>数据流量</h6>
+    </div>
+
+    <div class="upgrade">
+
+      <a class="col_traffic" routerLink="/dir/charge/purchase/traffic" target="_blank">
+        <img src="assets/images/charge/traffic_recharge.png" alt="">
+        物联网卡流量充值
+      </a>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+

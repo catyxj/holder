@@ -242,7 +242,7 @@ export class BoilerService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `/api/formal/ept/remind/list?page=${n}&pageSize=${pageSize}&search=${search}&value=${value}&log_type=${status}`;
+    const url = `/api/formal/ept/remind/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}&log_type=${status}`;
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -278,7 +278,7 @@ export class BoilerService {
     let roleId = localStorage.getItem('roleId');
     let url;
     if (roleId === '10') {
-      url = `/api/formal/ept/notice/list?page=${n}&pageSize=${pageSize}&search=${search}&value=${value}&log_type=${status}`;
+      url = `/api/formal/ept/notice/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}&log_type=${status}`;
     }
     if (roleId === '11') {
       url = `/api/general/ept/notice/list?page=${n}&pageSize=${pageSize}&search=${search}&value=${value}&log_type=${status}`;
@@ -310,17 +310,17 @@ export class BoilerService {
       );
   }
 
-  getNoticeInfo(): Observable<any> {
+  getNoticeInfo(id): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
     let roleId = localStorage.getItem('roleId');
     let url;
     if (roleId === '10') {
-      url = '/api/formal/ept/notice/detail';
+      url = `/api/formal/ept/notice/detail?id=${id}`;
     }
     if (roleId === '11') {
-      url = '/api/general/ept/notice/detail';
+      url = `/api/general/ept/notice/detail?id=${id}`;
     }
 
     return this.http.get<any>(url, httpOptions)

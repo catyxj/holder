@@ -21,7 +21,6 @@ export class AlarmService {
   // private detailUrl = 'assets/server/boiler_alarm_detail.json';
 
 
-  private alarmNumUrl = '/alarm_new_count';
 
   private alarmSource = new Subject<any>();
   alarmStatus$ = this.alarmSource.asObservable(); // 父组件监测子组件alarm
@@ -82,7 +81,7 @@ export class AlarmService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.get<any>(this.alarmNumUrl, httpOptions)
+    return this.http.get<any>('/api/formal/ept/notice/count', httpOptions)
       .pipe(
         catchError(this.handleError)
       );

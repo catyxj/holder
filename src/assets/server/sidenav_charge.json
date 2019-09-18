@@ -9,9 +9,10 @@
       "children": [
         { "name": "账户总览", "router": "/charge/overview","icon": ""},
         { "name": "费用账单", "router": "/charge/bill","icon": ""},
-        { "name": "我的订单", "router": "/charge/bill","icon": ""},
-        { "name": "续费管理", "router": "/charge/bill","icon": ""},
-        { "name": "发票管理", "router": "/charge/bill","icon": ""}
+        { "name": "我的订单", "router": "/charge/order","icon": ""},
+        { "name": "续费管理", "router": "/charge/renewal","icon": ""},
+        { "name": "发票管理", "router": "/charge/invoice","icon": ""},
+        { "name": "订购服务", "router": "/charge/purchase","icon": ""}
       ]
     }
   ],

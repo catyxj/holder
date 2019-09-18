@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import { UserService } from '../../shared/user.service';
 import {Router} from '@angular/router';
 import {Subscription} from "rxjs/index";
@@ -11,7 +11,7 @@ import {AlarmService} from "../../shared/alarm.service";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   @Output() toggle = new EventEmitter<void>();
 
@@ -24,13 +24,13 @@ export class HeaderComponent implements OnInit {
   @Input()
   auth: any;
 
-  public alarmNum = 0;
-  public malNum = 0;
+  public remindNum = 0;
   public noticeNum = 0;
   public totalNum = 0;
   public subscription: Subscription;
   public roleId;
   public picture = '';
+  private status;
 
 
   constructor(private userService: UserService,
@@ -50,8 +50,10 @@ export class HeaderComponent implements OnInit {
       this.picture = 'assets/icons/anticon_user.png';
     }
 
+
+    this.status = setInterval(() => { this.getAlarm(); }, 60000);
     // console.log(this.user);
-    // this.getAlarm();
+    this.getAlarm();
     // this.getUser();
 
   }
@@ -69,10 +71,9 @@ export class HeaderComponent implements OnInit {
   getAlarm() {
     this.alarmService.getAlarmNum()
       .subscribe( data => {
-        this.alarmNum = data.alarmCount;
-        this.malNum = data.mtCount;
-        this.noticeNum = data.ntCount;
-        this.totalNum = this.alarmNum + this.malNum + this.noticeNum;
+        this.remindNum = data.import_alarm;
+        this.noticeNum = data.notice_alarm;
+        this.totalNum = this.remindNum + this.noticeNum;
       });
   }
 
@@ -114,6 +115,10 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/login']);
       });
 
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.status);
   }
 
 }

@@ -1,0 +1,72 @@
+
+
+<div class="content" style="min-height: 550px;">
+  <div class="charge_info_head">
+    <div class="c_head_l">
+      <h5>支付</h5>
+    </div>
+    <div class="c_head_r" style="font-size: 12px; color:#414B92;">
+      总金额：¥20000,00
+    </div>
+  </div>
+
+  <div class="c_info">
+    <div class="c_content">
+
+      <div class="c_title">
+        <div class="c_t_id">
+          订单号：23134123415521
+        </div>
+        <div class="text_purple" style="font-size: 18px;">
+          ¥ 10000.00
+        </div>
+      </div>
+      <div class="c_text">
+        NK物联网终端订购  版本A  数量1
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="pay_type">
+      <div style="font-size: 20px; font-weight: bold; margin-right: 10px; color: #000000;">
+        支付方式：
+      </div>
+      <div>
+        <div class="pay_item">
+          <div class="c_c1" (click)="selectPay(1)" [class.active]="type === 1">对公转账</div>
+        </div>
+        <div class="pay_item">
+          <div class="c_c1" (click)="selectPay(2)" [class.active]="type === 2">支付宝</div>
+          <img src="assets/images/charge/alipay.png" alt="">
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cf_bottom">
+    <!--<div class="cost">
+      <div class="cost_label">
+        费用小计：
+      </div>
+      <div class="cost_value">
+        ¥ 9000.00
+      </div>
+    </div>-->
+
+    <div>
+      <button class="btn btn_purple">
+        确认支付
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {BoilerService} from "../../../../shared/boiler.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {EqListAddComponent} from "../../monitor/list/modals/eq-list-add/eq-list-add.component";
 
 @Component({
   selector: 'app-home-dashboard',
@@ -14,7 +16,8 @@ export class HomeDashboardComponent implements OnInit {
   public notice = [];
 
   constructor(private router: Router,
-              private eptService: BoilerService) { }
+              private eptService: BoilerService,
+              private modalService: NgbModal) { }
 
   ngOnInit() {
     this.roleId = localStorage.getItem('roleId');
@@ -97,6 +100,22 @@ export class HomeDashboardComponent implements OnInit {
 
       });
   }
+
+
+  // 关联设备
+  addTerm() {
+    let that = this;
+    const modalRef = this.modalService.open(EqListAddComponent, {windowClass: 'modal_md', centered: true});
+    // modalRef.componentInstance.currentData = this.config;
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+        that.router.navigate(['/admin/formal/terminal/list']);
+      }
+    }, (reason) => {
+      console.log(reason);
+    });
+  }
+
 
 
 

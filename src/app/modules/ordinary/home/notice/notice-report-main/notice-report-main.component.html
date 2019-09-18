@@ -6,15 +6,15 @@
   </div>
 
   <div *ngIf="type==='1'&&status==='2'">
-    <app-notice-offline></app-notice-offline>
+    <app-notice-offline [uid]="uid"></app-notice-offline>
   </div>
 
   <div *ngIf="type==='2'">
-    <app-notice-malfunction></app-notice-malfunction>
+    <app-notice-malfunction [uid]="uid"></app-notice-malfunction>
   </div>
 
   <div *ngIf="type==='3'">
-    <app-notice-alarm></app-notice-alarm>
+    <app-notice-alarm [uid]="uid"></app-notice-alarm>
   </div>
 
 </div>

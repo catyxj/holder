@@ -37,7 +37,7 @@ export class CycleEditComponent implements OnInit {
   save() {
     let that = this;
     let post = {
-      id: this.currentData.uid,
+      id: this.currentData.id,
       ept_id: this.uid,
       name: this.name,
       install_date: this.date,

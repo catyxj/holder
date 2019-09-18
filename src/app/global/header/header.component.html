@@ -67,25 +67,25 @@
       </div>
 
       <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="animated fadeInDown dropdown_content">
-        <a class="dropdown-item">
+        <a class="dropdown-item" [routerLink]="['/admin/ordinary/home/remind']">
           <div class="tip_item">
-            告警信息 &nbsp;
-            {{alarmNum}} 条
+            重要提醒 &nbsp;
+            {{remindNum}} 条
           </div>
         </a>
 
-        <a class="dropdown-item">
+        <a class="dropdown-item" [routerLink]="['/admin/ordinary/home/notice']">
           <div class="tip_item">
-            故障信息 &nbsp;
-            {{malNum}} 条
+            通知消息 &nbsp;
+            {{noticeNum}} 条
           </div>
         </a>
-        <a class="dropdown-item" [routerLink]="['/admin']">
+        <!--<a class="dropdown-item" [routerLink]="['/admin']">
           <div class="tip_item">
             提醒信息 &nbsp;
             {{noticeNum}} 条
           </div>
-        </a>
+        </a>-->
       </div>
 
     </div>

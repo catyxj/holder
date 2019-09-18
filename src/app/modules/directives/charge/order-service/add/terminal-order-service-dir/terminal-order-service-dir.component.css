@@ -1,0 +1,99 @@
+
+.charge_info_head{
+  display: flex;
+  padding: 10px 27px;
+  border-bottom: 1px solid #DCDEE3;
+}
+.c_head_l{
+  display: flex;
+  align-items: center;
+}
+.c_head_l h5{
+  margin-bottom: 0;
+  font-size:20px;
+  color:#333333;
+  margin-right: 10px;
+}
+.c_head_l span{
+  font-size: 12px;
+  color: #00A0F9;
+}
+
+
+
+.c_info{
+  padding: 46px 69px;
+}
+
+.c_content{
+  width: 100%;
+  padding: 43px 47px 43px 0;
+  background-color: #F3F5F6;
+  margin-bottom: 32px;
+  display: flex;
+}
+.cf_label{
+  width: 145px;
+  text-align: right;
+  font-size:20px;
+  font-weight:bold;
+  color: #333333;
+  margin-right: 20px;
+}
+.c_c1{
+  min-width:87px;
+  height:28px;
+  padding: 0 24px;
+  line-height: 28px;
+  text-align: center;
+  background-color: #EBECF0;
+  border-radius: 3px;
+  margin-right: 9px;
+  position: relative;
+  border: 1px solid #EBECF0;
+  cursor: pointer;
+}
+.c_c1.active{
+  background-color: #FFFFFF;
+  border: 1px solid #666EE8;
+  color: #666EE8;
+}
+.c_c1.active:after{
+  content: url("/assets/images/charge/check2.png");
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  height: 21px;
+}
+
+[nz-radio] {
+  display: block;
+  margin-bottom: 14px;
+  color: #333333;
+}
+
+.cf_bottom{
+  padding-top: 60px;
+  padding-left: 117px;
+}
+.cost{
+  display: flex;
+  margin-bottom: 14px;
+  align-items: center;
+}
+.cost_label{
+  font-weight: bold;
+  color: #333333;
+  margin-right: 5px;
+}
+.cost_value{
+  font-weight: bold;
+  color: #666EE8;
+  font-size: 20px;
+}
+
+
+
+
+
+

@@ -1,0 +1,56 @@
+
+.list_head{
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #DCDEE3;
+  box-sizing: border-box;
+}
+.li_head_l h5{
+  font-size: 18px;
+  margin-bottom: 0;
+}
+.charge_list .btn {
+  padding: 0.32rem 0.75rem;
+  background-color: #EBECF0;
+}
+.charge_list .btn.active{
+  background-color: #FFFFFF;
+  border: 1px solid #666EE8;
+  color: #666EE8;
+  position: relative;
+}
+.charge_list .btn.active:after{
+  content: url("/assets/images/charge/check2.png");
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  height: 21px;
+}
+
+
+.charge_list{
+  padding: 0 15px;
+}
+
+.c_head{
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.bill .table th{
+  background-color: #EBECF0;
+  font-size: 12px;
+}
+.bill .table th *{
+  font-size: 12px;
+}
+.bill .table td{
+  border-bottom: 1px solid #DCDEE3;
+  font-size: 12px;
+}
+
+
+
+

@@ -1,0 +1,128 @@
+
+
+<div class="content">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h5 class="text_purple">
+        续费管理
+      </h5>
+    </div>
+    <div class="li_head_r">
+      <!--刷新-->
+      <!--<button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>-->
+
+    </div>
+  </div>
+
+  <div class="charge_list">
+    <div class="c_head">
+      <div class="h_l flex">
+        <div class="search_box">
+          <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="addOnAfterTemplate">
+            <input type="text" nz-input [(ngModel)]="value" (keyup)="searchEnter($event)" maxlength="20"/>
+          </nz-input-group>
+          <ng-template #addOnBeforeTemplate>
+            <nz-select [(ngModel)]="search">
+              <nz-option [nzLabel]="'订单编号'" [nzValue]="'id'"></nz-option>
+              <nz-option [nzLabel]="'订购产品'" [nzValue]="'name'"></nz-option>
+              <nz-option [nzLabel]="'所属单位'" [nzValue]="'org_name'"></nz-option>
+            </nz-select>
+          </ng-template>
+          <ng-template #addOnAfterTemplate>
+            <!--<img src="assets/icons/icon_seach.png" alt="" class="search_icon" (click)="searchChange()">-->
+            <!--<i class="fa fa-search" (click)="searchChange()" style="color: #999999;"></i>-->
+            <i nz-icon nzType="search" nzTheme="outline" style="color: #999999;"></i>
+          </ng-template>
+
+        </div>
+
+        <button nz-button nzType="default" class="ml-3">重置</button>
+
+        <button class="btn ml-3" [class.active]="checkTime === 0" (click)="selectTime(0)">全部</button>
+
+        <button class="btn ml-1" [class.active]="checkTime === 1" (click)="selectTime(1)">7天内到期</button>
+
+        <button class="btn ml-1" [class.active]="checkTime === 2" (click)="selectTime(2)">15天内到期</button>
+
+        <button class="btn ml-1" [class.active]="checkTime === 3" (click)="selectTime(3)">30天内到期</button>
+
+
+      </div>
+
+
+      <div class="h_r">
+
+      </div>
+
+    </div>
+
+
+    <div style="margin-top: 10px;" class="bill">
+      <nz-spin [nzSpinning]="isSpinning">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>产品</th>
+            <th>产品明细</th>
+            <th>倒计时</th>
+            <th>付费方式</th>
+            <th>开始时间</th>
+            <th>结束时间</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of dataLists">
+            <td>数据存储服务</td>
+            <td>{{data.name}}</td>
+            <td>18012341234（张三）</td>
+            <td>A企业</td>
+            <td>2019-01-03 13:11:12</td>
+            <td>2019-01-03 13:12:00</td>
+            <td>
+              <a style="color: #5584FF; font-size: 12px;">续费</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </nz-spin>
+
+      <div *ngIf="!dataLists || dataLists.length <= 0">
+        <nz-empty></nz-empty>
+      </div>
+
+
+      <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+
+      <div class="content_b">
+        <nz-pagination nzShowSizeChanger
+                       [nzTotal]="totalItems"
+                       [nzShowTotal]="totalTemplate"
+                       [(nzPageIndex)]="page"
+                       [(nzPageSize)]="pageSize"
+                       (nzPageIndexChange)="pageChange()"
+                       (nzPageSizeChange)="pageSizeChange()"
+                       [nzPageSizeOptions] = "pageSizeList">
+
+        </nz-pagination>
+        <div class="ant-pagination-options-quick-jumper"> 跳至
+          <input type="number" [(ngModel)]="pageNum"> 页 </div>
+        <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
+      </div>
+
+
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+

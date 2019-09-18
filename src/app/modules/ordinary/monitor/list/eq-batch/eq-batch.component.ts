@@ -5,6 +5,8 @@ import {BoilerService} from "../../../../../shared/boiler.service";
 import {switchMap} from "rxjs/internal/operators";
 import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-eq-batch',
   templateUrl: './eq-batch.component.html',
@@ -148,10 +150,11 @@ export class EqBatchComponent implements OnInit {
       title = '确认要禁用此设备吗？';
       this.creatModal(title, subtitle, () => {
         let post = {
+          type: 1,
           data: checked
         };
-        /*that.loading = true;
-        that.eptService.deleteData(post)
+        that.loading = true;
+        that.eptService.disableData(post)
           .subscribe(val => {
             that.loading = false;
             Swal(
@@ -167,7 +170,7 @@ export class EqBatchComponent implements OnInit {
               err,
               'error'
             );
-          });*/
+          });
       });
     } else {
       this.nzModal.info({
@@ -201,7 +204,7 @@ export class EqBatchComponent implements OnInit {
         let post = {
           data: checked
         };
-        /*that.loading = true;
+        that.loading = true;
         that.eptService.deleteData(post)
           .subscribe(val => {
             that.loading = false;
@@ -218,7 +221,7 @@ export class EqBatchComponent implements OnInit {
               err,
               'error'
             );
-          });*/
+          });
       });
     } else {
       this.nzModal.info({
@@ -250,10 +253,11 @@ export class EqBatchComponent implements OnInit {
       title = '确认要激活设备吗？';
       this.creatModal(title, subtitle, () => {
         let post = {
+          type: 0,
           data: checked
         };
-        /*that.loading = true;
-        that.eptService.deleteData(post)
+        that.loading = true;
+        that.eptService.disableData(post)
           .subscribe(val => {
             that.loading = false;
             Swal(
@@ -269,7 +273,7 @@ export class EqBatchComponent implements OnInit {
               err,
               'error'
             );
-          });*/
+          });
       });
     } else {
       this.nzModal.info({

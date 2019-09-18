@@ -1,0 +1,132 @@
+
+a{
+  text-decoration: none;
+}
+
+.content1{
+  margin: 12px 12px 0 12px;
+  padding: 21px 26px;
+  background-color: #ffffff;
+  border-radius:6px;
+}
+
+
+.purchase_h{
+  margin-bottom: 30px;
+}
+.purchase_h h6{
+  color: #464855;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.product{
+  padding: 0 19px 10px 19px;
+  display: flex;
+  justify-content: space-between;
+}
+.col_4{
+  width: 19.2%;
+  height: 70px;
+  border: 1px solid #E9EFF4;
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-weight: bold;
+  color: #1A173B;
+}
+.col_4 img{
+  margin-right: 20px;
+}
+
+.upgrade{
+  padding: 5px 19px 10px 19px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.col_8{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: #333333;
+}
+
+.round{
+  width:70px;
+  height:70px;
+  border-radius: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+.active .round i{
+  font-size: 30px;
+  color: #3080FE;
+}
+.active .round{
+  background-color: #E9F1FF;
+  border: 1px solid #E9F1FF;
+}
+
+.inactive .round i{
+  font-size: 30px;
+  color: #959EAF;
+}
+.inactive .round{
+  background-color: #FFFFFF;
+  border: 1px solid #959EAF;
+  cursor: pointer;
+}
+
+.divide{
+  width: 1px;
+  height:71px;
+  background-color: #D8D8D8;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.col{
+  height: 70px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-weight: bold;
+  color: #1A173B;
+}
+
+.storage_round{
+  width:39px;
+  height:39px;
+  background:#798EA9;
+  text-align: center;
+  line-height: 39px;
+  margin-right: 16px;
+  border-radius: 39px;
+}
+
+.col_traffic{
+  width:183px;
+  height:46px;
+  border-radius:4px;
+  border:1px solid #0077FF;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding-left: 13px;
+  font-weight: bold;
+  color: #1A173B;
+  cursor: pointer;
+}
+.col_traffic img{
+  margin-right: 10px;
+}
+
+

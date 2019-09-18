@@ -1,0 +1,95 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    <!--<img src="assets/icons/icon_bluetooth.png" alt="" style="margin-right: 19px;">-->
+    添加新地址
+  </h4>
+</div>
+
+<div class="modal-body m_form">
+  <div class="m_item">
+    <div class="m_label">
+      <span>*</span>姓名：
+    </div>
+    <div class="m_input_l">
+      <input type="text" class="form-control" [(ngModel)]="name" placeholder="请输入姓名" #macAddr="ngModel"
+             required>
+      <div class="sign_tip">
+        <!--<span class="text_danger" *ngIf="macAddr.invalid && (macAddr.dirty || macAddr.touched)">
+          MAC地址错误，例:FA:58:D6:E4:0F:36
+        </span>-->
+      </div>
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      <span>*</span>地址：
+    </div>
+    <div class="m_input_l">
+      <div>
+        <nz-select style="width: 138px;" [(ngModel)]="selectedProvince" (ngModelChange)="provinceChange($event)">
+          <nz-option *ngFor="let p of addrList" [nzValue]="p" [nzLabel]="p.Name"></nz-option>
+        </nz-select>
+        <span style="padding: 0 8px;">
+          省
+        </span>
+        <nz-select style="width: 138px;" [(ngModel)]="selectedCity" (ngModelChange)="cityChange($event)" [nzDisabled]="!selectedProvince || selectedProvince.LocationId===0 ">
+          <nz-option *ngFor="let c of cities" [nzValue]="c" [nzLabel]="c.Name"></nz-option>
+        </nz-select>
+        <span style="padding: 0 8px;">
+          市
+        </span>
+        <nz-select style="width: 138px;" [(ngModel)]="selectedRegion" (ngModelChange)="regionChange($event)" [nzDisabled]="!selectedCity">
+          <nz-option *ngFor="let r of regions" [nzValue]="r" [nzLabel]="r.Name"></nz-option>
+        </nz-select>
+        <span style="padding-left: 8px;">
+          区/县
+        </span>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      <span>*</span>详细地址：
+    </div>
+    <div class="m_input" style="width: 358px;">
+      <input type="text" class="form-control" [(ngModel)]="address">
+    </div>
+  </div>
+
+  <div class="m_item">
+    <div class="m_label">
+      <span>*</span>联系方式：
+    </div>
+    <div class="m_input_l">
+      <input type="text" class="form-control" [(ngModel)]="contact">
+    </div>
+  </div>
+
+
+  <div class="m_bottom">
+    <button class="btn btn_purple bpm" style="margin-right: 9px;" [disabled]="!name || !locationId || !address || !contact">
+      保存更改
+    </button>
+    <div class="checkbox c-checkbox">
+      <label>
+        <input type="checkbox" [(ngModel)]="checkRemember" name="checkR">
+        <span class="fa fa-check"></span>
+        将该地址保存到我的地址簿。
+      </label>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <!--<button type="button" class="btn" (click)="activeModal.dismiss('close')">取 消</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 35px;" (click)="save()" [disabled]="macAddr.invalid || !verify">确 定</button>-->
+</div>
+
+
+

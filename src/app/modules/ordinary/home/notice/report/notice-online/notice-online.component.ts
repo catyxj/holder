@@ -10,15 +10,17 @@ export class NoticeOnlineComponent implements OnInit {
   @Input()
   uid;
   public info;
+  public user;
 
   constructor(private eptService: BoilerService) { }
 
   ngOnInit() {
+    this.user = JSON.parse(sessionStorage.getItem('currentUser'));
     this.getData();
   }
 
   getData() {
-    this.eptService.getNoticeInfo()
+    this.eptService.getNoticeInfo(this.uid)
       .subscribe(data => {
           this.info = data;
       }, err => {

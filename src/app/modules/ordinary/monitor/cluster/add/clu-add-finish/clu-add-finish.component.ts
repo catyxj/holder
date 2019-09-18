@@ -37,7 +37,7 @@ export class CluAddFinishComponent implements OnInit {
   // 获取列表
   getList() {
     this.loading = true;
-    this.clusterService.getClusEquipList(this.uid, this.page, this.pageSize, this.search, this.value)
+    this.clusterService.getClusEquipList(this.uid, this.page, this.pageSize, this.search, this.value, this.online, this.run, this.status)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;

@@ -8,6 +8,8 @@ import {MAccountAddFComponent} from "../modals/m-account-add-f/m-account-add-f.c
 import {ComfirmComponent} from "../../../../directives/alert/comfirm/comfirm.component";
 
 import Swal from 'sweetalert2';
+import {MAccountDisabledFComponent} from "../modals/m-account-disabled-f/m-account-disabled-f.component";
+import {MAccountActiveFComponent} from "../modals/m-account-active-f/m-account-active-f.component";
 
 @Component({
   selector: 'app-m-account-list-formal',
@@ -196,7 +198,7 @@ export class MAccountListFormalComponent implements OnInit {
   }
 
   // 批量禁用
-  batchDisable() {
+  batch(n) {
     let that = this;
     let title = '';
     let subtitle = '';
@@ -212,7 +214,14 @@ export class MAccountListFormalComponent implements OnInit {
       }
     }
     if (checked.length > 0) {
-      title = '确认要禁用此账号吗？';
+      if (n === 1) {
+        this.batchActive(checked);
+      } else if (n === 0) {
+        this.batchDisable(checked);
+      }
+
+
+      /*title = '确认要禁用此账号吗？';
       // subtitle = '禁用后可到设置内恢复账号状态。';
 
       this.creatModal(title, subtitle, () => {
@@ -234,7 +243,7 @@ export class MAccountListFormalComponent implements OnInit {
               'error'
             );
           });
-      });
+      });*/
     } else {
       this.nzModal.info({
         nzTitle: '请选择记录',
@@ -243,6 +252,37 @@ export class MAccountListFormalComponent implements OnInit {
       });
 
     }
+  }
+
+
+  // 批量禁用模态框
+  batchDisable(checked) {
+    let that = this;
+    const modalRef = this.modalService.open(MAccountDisabledFComponent, {windowClass: 'modal_md', centered: true});
+    modalRef.componentInstance.currentData = checked;
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+        that.pageChange();
+      }
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(reason);
+    });
+  }
+
+  // 批量启用模态框
+  batchActive(checked) {
+    let that = this;
+    const modalRef = this.modalService.open(MAccountActiveFComponent, {windowClass: 'modal_md', centered: true});
+    modalRef.componentInstance.currentData = checked;
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+        that.pageChange();
+      }
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(reason);
+    });
   }
 
 
