@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./traffic-order-service-dir.component.css']
 })
 export class TrafficOrderServiceDirComponent implements OnInit {
+  public time;
 
   constructor() { }
 

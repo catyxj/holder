@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {ChargeService} from "../../../../../../shared/charge.service";
 import {AdressService} from "../../../../../../shared/adress.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-address-edit-invioce-dir',

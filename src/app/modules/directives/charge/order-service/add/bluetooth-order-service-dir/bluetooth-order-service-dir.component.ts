@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bluetooth-order-service-dir.component.css']
 })
 export class BluetoothOrderServiceDirComponent implements OnInit {
+  public count;
+  public type;
 
   constructor() { }
 

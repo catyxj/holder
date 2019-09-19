@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TerminalOrderServiceDirComponent implements OnInit {
   public count;
+  public type;
 
   constructor() { }
 

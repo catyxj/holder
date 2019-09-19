@@ -1159,22 +1159,28 @@ span.iconfont.iconedit{
 .invoice_input .mat-form-field-label-wrapper {
   top: -1.2em;
 }
-
-.invoice_input .mat-form-field-appearance-legacy .mat-form-field-label {
-  top: 1.8em;
+.mat-form-field-appearance-legacy .mat-form-field-wrapper {
+   padding-bottom: 0;
 }
-
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  display: none;
+}
 .invoice_input .mat-form-field-appearance-legacy .mat-form-field-label {
   top: 1em;
-}
-.mat-form-field-appearance-legacy .mat-form-field-label {
-  top: 1.8em;
-}
-
-.mat-form-field-appearance-legacy .mat-form-field-label {
   color: rgba(0,0,0,.54);
 }
-/*animate---------------*/
+
+
+
+
+
+
+
+
+
+
+
+/*---------------------animate--------------------------*/
 
 .animated {
   -webkit-animation-duration: 0.5s;
