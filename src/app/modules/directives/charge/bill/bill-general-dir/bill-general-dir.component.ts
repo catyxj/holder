@@ -7,8 +7,8 @@ import {ChargeService} from "../../../../../shared/charge.service";
   styleUrls: ['./bill-general-dir.component.css']
 })
 export class BillGeneralDirComponent implements OnInit {
-  public year;
-  public selectedValue;
+  public year = '';
+  public selectedValue = '';
   public dataLists = [];
   public page = 1;
   public pageNum;

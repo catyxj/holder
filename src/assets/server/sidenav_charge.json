@@ -4,7 +4,7 @@
       "name": "费用",
       "code": "sub2",
       "icon": "fa-home",
-      "img": "assets/icons/icon_statistics.png",
+      "img": "assets/images/charge/charge2.png",
       "checked": true,
       "children": [
         { "name": "账户总览", "router": "/charge/overview","icon": ""},

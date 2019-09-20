@@ -1,0 +1,114 @@
+
+
+<div class="content">
+  <div class="list_head">
+    <div class="li_head_l">
+      <h6>
+        发票信息
+      </h6>
+    </div>
+    <div class="li_head_r">
+      <!--刷新-->
+      <button class="btn btn_purple-o btn_round bps" (click)="searchChange()">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>
+
+      <button class="btn btn_purple btn_round bpm ml-1">
+        <i class="iconfont icondaochu" style="font-size: 12px;"></i>
+        导出
+      </button>
+
+
+    </div>
+  </div>
+
+  <div class="list_content">
+    <div class="content_h">
+      <div class="search_box">
+        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="addOnAfterTemplate">
+          <input type="text" nz-input [(ngModel)]="value" (keyup)="searchEnter($event)" maxlength="20"/>
+        </nz-input-group>
+        <ng-template #addOnBeforeTemplate>
+          <nz-select [(ngModel)]="search">
+            <nz-option [nzLabel]="'订单编号'" [nzValue]="'id'"></nz-option>
+            <nz-option [nzLabel]="'账号'" [nzValue]="'username'"></nz-option>
+            <nz-option [nzLabel]="'单位名称'" [nzValue]="'org_name'"></nz-option>
+          </nz-select>
+        </ng-template>
+        <ng-template #addOnAfterTemplate>
+          <img src="assets/icons/icon_seach.png" alt="" class="search_icon" (click)="searchChange()">
+        </ng-template>
+
+      </div>
+      <div class="flex">
+
+
+      </div>
+    </div>
+    <div class="content_t">
+      <nz-table
+        #dataTable
+        [nzFrontPagination]="false"
+        [nzShowPagination] = "false"
+        [nzLoading]="loading"
+        [nzData]="dataLists"
+      >
+        <thead>
+        <tr>
+          <th>订单编号</th>
+          <th>账号</th>
+          <th>单位名称</th>
+          <th>订单支付时间</th>
+          <th>订单实付金额</th>
+          <th>可开票金额</th>
+          <th>当前状态</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of dataTable.data">
+          <td> {{data.id}} </td>
+          <td> 18012341234 </td>
+          <td> A企业</td>
+          <td> 2019-09-21 09:12:21 </td>
+          <td> ¥460.00 </td>
+          <td> ¥460.00 </td>
+          <td>
+            <nz-tag [nzColor]="'#1E9FF2'" *ngIf="data.status">已完成</nz-tag>
+            <nz-tag [nzColor]="'#FFC06A'" *ngIf="!data.status">未完成</nz-tag>
+          </td>
+          <td>
+            <a style="color: #5584FF;" [routerLink]="['/admin/finance/invoice/info', data.uid, page]">
+              详情
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+
+    <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+
+    <div class="content_b">
+      <nz-pagination nzShowSizeChanger
+                     [nzTotal]="totalItems"
+                     [nzShowTotal]="totalTemplate"
+                     [(nzPageIndex)]="page"
+                     [(nzPageSize)]="pageSize"
+                     (nzPageIndexChange)="pageChange()"
+                     (nzPageSizeChange)="pageSizeChange()"
+                     [nzPageSizeOptions] = "pageSizeList">
+
+      </nz-pagination>
+      <div class="ant-pagination-options-quick-jumper"> 跳至
+        <input type="number" [(ngModel)]="pageNum"> 页 </div>
+      <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+

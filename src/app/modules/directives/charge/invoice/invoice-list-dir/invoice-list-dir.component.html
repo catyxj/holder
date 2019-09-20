@@ -20,7 +20,8 @@
     <div class="c_head">
       <div class="h_l flex">
         <div >
-          <a class="btn btn_purple bpm" (click)="addInvoice()" [routerLink]="['/dir/charge/invoice/info', totalAmount]" target="_blank">
+          <a class="btn btn_purple bpm" (click)="addInvoice()" >
+            <!--[routerLink]="['/dir/charge/invoice/info', totalAmount]" target="_blank"-->
             索取发票
           </a>
         </div>
@@ -127,9 +128,10 @@
 </div>
 
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="是否完成开票申请" [nzFooter]="null" [nzClosable]="false">
+<nz-modal [(nzVisible)]="isVisible" nzTitle="是否完成开票申请" [nzFooter]="null" [nzClosable]="false"
+          style="display: flex; justify-content: center;">
   <button nz-button nzType="default" (click)="handleCancel()">未完成开票</button>
-  <button nz-button nzType="primary" (click)="handleOk()">已完成开票</button>
+  <button nz-button nzType="primary" (click)="handleOk()" class="ml-3">已完成开票</button>
 </nz-modal>
 
 

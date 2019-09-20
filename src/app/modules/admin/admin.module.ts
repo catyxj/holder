@@ -55,6 +55,7 @@ import { OvMainAdComponent } from './overview/ov-main-ad/ov-main-ad.component';
 import { OvDashboardAdComponent } from './overview/ov-dashboard-ad/ov-dashboard-ad.component';
 import { AcBatchDisabledAdComponent } from './account/modals/ac-batch-disabled-ad/ac-batch-disabled-ad.component';
 import { AcBatchActiveAdComponent } from './account/modals/ac-batch-active-ad/ac-batch-active-ad.component';
+import { TerMessageAdComponent } from './terminal/ter-message-ad/ter-message-ad.component';
 
 
 
@@ -117,6 +118,7 @@ import { AcBatchActiveAdComponent } from './account/modals/ac-batch-active-ad/ac
     OvDashboardAdComponent,
     AcBatchDisabledAdComponent,
     AcBatchActiveAdComponent,
+    TerMessageAdComponent,
   ],
   exports: [
     AcInfoAdComponent,

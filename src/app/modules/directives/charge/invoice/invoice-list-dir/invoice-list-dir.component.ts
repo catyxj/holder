@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ChargeService} from "../../../../../shared/charge.service";
+import {NzModalService} from "ng-zorro-antd/modal";
 
 
 @Component({
@@ -21,7 +22,8 @@ export class InvoiceListDirComponent implements OnInit {
   public totalAmount = 0;
   public isVisible = false;
 
-  constructor(private chargeService: ChargeService) { }
+  constructor(private chargeService: ChargeService,
+              private nzModal: NzModalService) { }
 
   ngOnInit() {
     this.getList();
@@ -141,19 +143,29 @@ export class InvoiceListDirComponent implements OnInit {
   }
 
   addInvoice() {
+    if (!this.totalAmount) {
+      this.nzModal.info({
+        nzTitle: '请选择需要开票的订单',
+        nzContent: '',
+        nzOnOk: () => console.log('Info OK')
+      });
+      return;
+    }
     this.isVisible = true;
 
-    // window.open(`http://${window.location.host}/#/charge/invoice/info`);
+    window.open(`./#/dir/charge/invoice/info/${this.totalAmount}`);
   }
 
   handleOk(): void {
     this.isVisible = false;
     console.log('refresh');
+    this.pageChange();
   }
 
   handleCancel(): void {
     this.isVisible = false;
     console.log('refresh');
+    this.pageChange();
   }
 
 

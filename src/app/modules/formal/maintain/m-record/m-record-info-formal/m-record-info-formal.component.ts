@@ -12,38 +12,8 @@ export class MRecordInfoFormalComponent implements OnInit {
   currentData;
 
   public uid;
-  public dataList = [
-    {
-      description: '通风口是否正常',
-      status: false,
-      remark: '',
-      imgList: []
-    },
-    {
-      description: '点火器是否正常',
-      status: true,
-      remark: '',
-      imgList: []
-    },
-    {
-      description: '排风机是否正常',
-      status: true,
-      remark: '',
-      imgList: []
-    },
-    {
-      description: '风口是否干净',
-      status: false,
-      remark: '',
-      imgList: []
-    },
-    {
-      description: '炉排速度是否正常',
-      status: false,
-      remark: '',
-      imgList: []
-    }
-  ];
+  public info;
+  public dataList = [ ];
 
   previewImage: string | undefined = '';
   previewVisible = false;
@@ -56,11 +26,36 @@ export class MRecordInfoFormalComponent implements OnInit {
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
     this.listPage = this.route.snapshot.paramMap.get('page');
+    this.getInfo();
   }
 
   getInfo() {
+    /*this.dataList = [
+      {
+        description: '通风口是否正常',
+        status: false,
+        remark: '',
+        imgList: []
+      },
+      {
+        description: '点火器是否正常',
+        status: true,
+        remark: '',
+        imgList: []
+      },
+      {
+        description: '排风机是否正常',
+        status: true,
+        remark: '',
+        imgList: []
+      }
+    ];*/
+
+
     this.maintainService.getLogInfo(this.uid)
       .subscribe(data => {
+        this.info = data;
+        this.dataList = data.info;
 
       }, err => {
 

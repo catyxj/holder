@@ -1,0 +1,15 @@
+.t_info_head{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.info_title h6{
+  margin-bottom: 0;
+}
+
+
+.content_t{
+  margin-top: 12px;
+}
+

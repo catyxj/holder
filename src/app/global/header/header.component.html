@@ -61,7 +61,7 @@
       <div class="alarm_tip_btn" style="position: relative;" id="dropdownBasic2" ngbDropdownToggle>
         <img src="assets/icons/remind0.png" alt="">
         <span class="badge badge-pill badge-danger" *ngIf="totalNum && totalNum !== 0"
-              style="position: absolute; top: -5px; right: -12px;">
+              style="position: absolute; top: 12px; right: -12px;">
         {{totalNum}}
         </span>
       </div>
@@ -109,17 +109,17 @@
             费用帐单
           </div>
         </a>
-        <a class="dropdown-item">
+        <a class="dropdown-item" routerLink="/charge/order" target="_blank">
           <div class="tip_item">
             我的订单
           </div>
         </a>
-        <a class="dropdown-item">
+        <a class="dropdown-item" routerLink="/charge/renewal" target="_blank">
           <div class="tip_item">
             续费管理
           </div>
         </a>
-        <a class="dropdown-item">
+        <a class="dropdown-item" routerLink="/charge/invoice" target="_blank">
           <div class="tip_item">
             发票管理
           </div>

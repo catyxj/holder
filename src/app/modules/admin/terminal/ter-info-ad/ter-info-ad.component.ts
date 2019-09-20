@@ -26,6 +26,7 @@ export class TerInfoAdComponent implements OnInit {
   tplModal: NzModalRef;
 
   public listPage;
+  public roleId;
 
   constructor(private terminalService: TerminalService,
               private route: ActivatedRoute,
@@ -36,6 +37,7 @@ export class TerInfoAdComponent implements OnInit {
   ngOnInit() {
     // this.uid = this.route.snapshot.paramMap.get('uid');
     // this.listPage = this.route.snapshot.paramMap.get('page');
+    this.roleId = localStorage.getItem('roleId');
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         console.log(params);

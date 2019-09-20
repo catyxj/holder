@@ -3,7 +3,7 @@
 <div class="content">
   <div class="charge_info_head">
     <div class="c_head_l">
-      <h5>视频设备订购</h5>
+      <h5>{{title}}</h5>
     </div>
     <div class="c_head_r"></div>
   </div>
@@ -14,7 +14,7 @@
         型号：
       </div>
       <div class="c_c0">
-        <div class="c_c1" *ngFor="let data of typeList" (click)="type = data.type" [class.active]="type === data.type">
+        <div class="c_c1" *ngFor="let data of typeList" (click)="type = data.id" [class.active]="type === data.id">
           <div class="c_c1_h">
             型号A
           </div>

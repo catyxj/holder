@@ -27,7 +27,7 @@
             维保编号：
           </div>
           <div class="r_info_value">
-            asdfa
+            {{info?.label}}
           </div>
         </div>
 
@@ -36,7 +36,7 @@
             设备名称：
           </div>
           <div class="r_info_value">
-            asdfa
+            {{info?.ept_name}}
           </div>
         </div>
 
@@ -45,7 +45,7 @@
             维保人员：
           </div>
           <div class="r_info_value">
-            asdfa
+            {{info?.upload_name}}
           </div>
         </div>
       </div>
@@ -56,7 +56,7 @@
             维保模板：
           </div>
           <div class="r_info_value">
-            ESE12345432（A型锅炉巡检模版）
+            {{info?.template_label}}（{{info?.template_name}}）
           </div>
         </div>
 
@@ -65,7 +65,7 @@
             终端编码：
           </div>
           <div class="r_info_value">
-            asdfa
+            {{info?.terminal_code}}
           </div>
         </div>
 
@@ -74,7 +74,7 @@
             提交时间：
           </div>
           <div class="r_info_value">
-            asdfa
+            {{info?.created_at}}
           </div>
         </div>
       </div>
@@ -105,15 +105,15 @@
         <tbody>
         <tr *ngFor="let item of dataList; let n = index;">
           <td> {{ n+1 }} </td>
-          <td style="font-weight: bold; color:#666EE8;"> {{ item.description }} </td>
+          <td style="font-weight: bold; color:#666EE8;"> {{ item.name }} </td>
           <td>
-            <div *ngIf="item.status" class="i_row">
+            <div *ngIf="!item.result" class="i_row">
               <div class="r_circle green">
                 <div class="r_circle_in"></div>
               </div>
               正常
             </div>
-            <div *ngIf="!item.status" class="i_row">
+            <div *ngIf="item.result" class="i_row">
               <div class="r_circle warning">
                 <div class="r_circle_in"></div>
               </div>
@@ -124,12 +124,12 @@
             {{item.remark || '无'}}
           </td>
           <td>
-            <span *ngIf="!item.imgList || item.imgList.length <= 0">无</span>
+            <span *ngIf="!item.img || item.img.length <= 0">无</span>
             <!--<span *ngFor="let img of item.imgList; let n = index;">
               <a href="{{img}}" download="图片{{ n+1 }}">图片{{ n+1 }}</a>
             </span>-->
-            <span *ngFor="let img of item.imgList; let n = index;" (click)="preview(img)" class="m-r-img">
-              <img src="{{img}}" alt="">
+            <span *ngFor="let img of item.img; let n = index;" (click)="preview(img.oss_path)" class="m-r-img">
+              <img src="{{img.oss_path}}" alt="">
               <!--<a>图片{{ n+1 }}</a>-->
             </span>
           </td>

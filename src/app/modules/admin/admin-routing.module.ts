@@ -30,6 +30,7 @@ import {SerInfoAdComponent} from "./service/ser-info-ad/ser-info-ad.component";
 import {FlowInfoAdComponent} from "./flow/flow-info-ad/flow-info-ad.component";
 import {FlowOperateAdComponent} from "./flow/flow-operate-ad/flow-operate-ad.component";
 import {OrderInfoAdComponent} from "./order/order-info-ad/order-info-ad.component";
+import {TerMessageAdComponent} from "./terminal/ter-message-ad/ter-message-ad.component";
 
 export const AdminRoutingModule = [
   {
@@ -64,6 +65,10 @@ export const AdminRoutingModule = [
           {
             path: 'operate/:uid',
             component: TerOperateAdComponent
+          },
+          {
+            path: 'messages/:uid/:code',
+            component: TerMessageAdComponent
           }
         ]
       },

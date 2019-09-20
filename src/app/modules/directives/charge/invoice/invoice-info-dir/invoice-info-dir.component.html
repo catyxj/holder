@@ -15,8 +15,85 @@
 
     <!--添加地址-->
     <div *ngIf="!addressList || addressList.length === 0;">
-      <div class="add_btn">
+      <div class="add_btn" (click)="showAddAddr=!showAddAddr">
         添加地址
+      </div>
+
+      <div *ngIf="showAddAddr" class="m_form">
+        <div class="m_item">
+          <div class="m_label">
+            <span>*</span>姓名：
+          </div>
+          <div class="m_input_l">
+            <input type="text" class="form-control" [(ngModel)]="newAddress.name" placeholder="请输入姓名" #macAddr="ngModel"
+                   required>
+            <div class="sign_tip">
+              <!--<span class="text_danger" *ngIf="macAddr.invalid && (macAddr.dirty || macAddr.touched)">
+                MAC地址错误，例:FA:58:D6:E4:0F:36
+              </span>-->
+            </div>
+          </div>
+        </div>
+
+        <div class="m_item">
+          <div class="m_label">
+            <span>*</span>地址：
+          </div>
+          <div class="m_input_l">
+            <div>
+              <nz-select style="width: 138px;" [(ngModel)]="selectedProvince" (ngModelChange)="provinceChange($event)">
+                <nz-option *ngFor="let p of addrList" [nzValue]="p" [nzLabel]="p.Name"></nz-option>
+              </nz-select>
+              <span style="padding: 0 8px;">
+          省
+        </span>
+              <nz-select style="width: 138px;" [(ngModel)]="selectedCity" (ngModelChange)="cityChange($event)" [nzDisabled]="!selectedProvince || selectedProvince.LocationId===0 ">
+                <nz-option *ngFor="let c of cities" [nzValue]="c" [nzLabel]="c.Name"></nz-option>
+              </nz-select>
+              <span style="padding: 0 8px;">
+          市
+        </span>
+              <nz-select style="width: 138px;" [(ngModel)]="selectedRegion" (ngModelChange)="regionChange($event)" [nzDisabled]="!selectedCity">
+                <nz-option *ngFor="let r of regions" [nzValue]="r" [nzLabel]="r.Name"></nz-option>
+              </nz-select>
+              <span style="padding-left: 8px;">
+          区/县
+        </span>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="m_item">
+          <div class="m_label">
+            <span>*</span>详细地址：
+          </div>
+          <div class="m_input" style="width: 358px;">
+            <input type="text" class="form-control" [(ngModel)]="newAddress.address">
+          </div>
+        </div>
+
+        <div class="m_item">
+          <div class="m_label">
+            <span>*</span>联系方式：
+          </div>
+          <div class="m_input_l">
+            <input type="text" class="form-control" [(ngModel)]="newAddress.contact">
+          </div>
+        </div>
+
+
+        <div class="m_bottom">
+
+          <div class="checkbox c-checkbox">
+            <label>
+              <input type="checkbox" [(ngModel)]="checkAddr" name="checkR">
+              <span class="fa fa-check"></span>
+              将该地址保存到我的地址簿。
+            </label>
+          </div>
+
+        </div>
       </div>
     </div>
 
@@ -24,7 +101,7 @@
     <div *ngIf="addressList && addressList.length > 0" style="padding-bottom: 17px;">
       <!--默认地址-->
       <div class="def_con">
-        <div class="addr_item" [class.active]="selectedAddr.uid === defaultAddress.uid">
+        <div class="addr_item" [class.active]="selectedAddr.uid === defaultAddress.uid" (click)="selectAddr(defaultAddress)">
           <div class="addr_l">
             <div class="addr_name">
               <b>陈 宁</b>
@@ -76,7 +153,7 @@
 
 
       <div>
-        <div class="add_btn" (click)="newAddr=!newAddr" [class.active]="newAddr">
+        <div class="add_btn" (click)="selectNewAddr()" [class.active]="newAddr">
           使用新地址
         </div>
         <div *ngIf="newAddr" class="m_form">
@@ -165,10 +242,10 @@
     <h6>发票信息：</h6>
 
     <div class="flex">
-      <div style="width: 540px;">
+      <div style="width: 550px;">
         <!--添加信息-->
         <div *ngIf="!infoList || infoList.length === 0;">
-          <div class="add_btn">
+          <div class="add_btn" (click)="selectNewInfo()" [class.active]="showNewInfo">
             增值税专用发票
           </div>
         </div>
@@ -177,7 +254,7 @@
         <div *ngIf="infoList && infoList.length > 0">
           <!--默认信息-->
           <div class="def_con">
-            <div class="addr_item">
+            <div class="addr_item"  [class.active]="selectedInfo.uid === defaultInfo.uid" (click)="selectInfo(defaultInfo)">
               <div class="info_item_l">
                 {{defaultInfo.name}}
               </div>
@@ -194,27 +271,27 @@
 
             <div *ngIf="showDefInfo">
               <mat-form-field class="invoice_input">
-                <input matInput placeholder="公司注册名称">
+                <input matInput placeholder="公司注册名称" [(ngModel)]="selectedInfo.name">
               </mat-form-field>
 
               <mat-form-field class="invoice_input">
-                <input matInput placeholder="纳税人识编号">
+                <input matInput placeholder="纳税人识编号" [(ngModel)]="selectedInfo.id">
               </mat-form-field>
 
               <mat-form-field class="invoice_input">
-                <input matInput placeholder="开户银行名称">
+                <input matInput placeholder="开户银行名称" [(ngModel)]="selectedInfo.bank">
               </mat-form-field>
 
               <mat-form-field class="invoice_input">
-                <input matInput placeholder="基本开户账号">
+                <input matInput placeholder="基本开户账号" [(ngModel)]="selectedInfo.account">
               </mat-form-field>
 
               <mat-form-field class="invoice_input">
-                <input matInput placeholder="注册场地">
+                <input matInput placeholder="注册场地" [(ngModel)]="selectedInfo.address">
               </mat-form-field>
 
               <mat-form-field class="invoice_input">
-                <input matInput placeholder="注册固定电弧">
+                <input matInput placeholder="注册固定电话" [(ngModel)]="selectedInfo.name">
               </mat-form-field>
             </div>
           </div>
@@ -225,7 +302,7 @@
           <div *ngIf="showAllInfo" class="other_con">
             <div *ngFor="let data of otherInfo" >
               <div class="addr_ot_con">
-                <div class="addr_item">
+                <div class="addr_item" [class.active]="selectedInfo.uid === data.uid" (click)="selectInfo(data)">
                   <div class="info_item_l">
                     {{data.name}}
                   </div>
@@ -233,78 +310,72 @@
                     设为默认
                   </div>
                 </div>
-                <div class="ot_edit">
+                <div class="ot_edit" *ngIf="selectedInfo.uid === data.uid">
                   <img src="assets/images/charge/invoice_edit.png" alt="" (click)="data.showInfo = !data.showInfo">
                   <img src="assets/images/charge/invoice_del.png" alt="" (click)="deleteInfo(data)">
                 </div>
               </div>
 
-              <div *ngIf="data.showInfo">
-                <mat-form-field class="invoice_input">
-                  <input matInput placeholder="公司注册名称">
-                </mat-form-field>
+              <div *ngIf="selectedInfo.uid === data.uid">
+                <div *ngIf="data.showInfo">
+                  <mat-form-field class="invoice_input">
+                    <input matInput placeholder="公司注册名称" [(ngModel)]="selectedInfo.id">
+                  </mat-form-field>
 
-                <mat-form-field class="invoice_input">
-                  <input matInput placeholder="纳税人识编号">
-                </mat-form-field>
+                  <mat-form-field class="invoice_input">
+                    <input matInput placeholder="纳税人识编号" [(ngModel)]="selectedInfo.id">
+                  </mat-form-field>
 
-                <mat-form-field class="invoice_input">
-                  <input matInput placeholder="开户银行名称">
-                </mat-form-field>
+                  <mat-form-field class="invoice_input">
+                    <input matInput placeholder="开户银行名称" [(ngModel)]="selectedInfo.id">
+                  </mat-form-field>
 
-                <mat-form-field class="invoice_input">
-                  <input matInput placeholder="基本开户账号">
-                </mat-form-field>
+                  <mat-form-field class="invoice_input">
+                    <input matInput placeholder="基本开户账号" [(ngModel)]="selectedInfo.id">
+                  </mat-form-field>
 
-                <mat-form-field class="invoice_input">
-                  <input matInput placeholder="注册场地">
-                </mat-form-field>
+                  <mat-form-field class="invoice_input">
+                    <input matInput placeholder="注册场地" [(ngModel)]="selectedInfo.id">
+                  </mat-form-field>
 
-                <mat-form-field class="invoice_input">
-                  <input matInput placeholder="注册固定电弧">
-                </mat-form-field>
+                  <mat-form-field class="invoice_input">
+                    <input matInput placeholder="注册固定电弧" [(ngModel)]="selectedInfo.id">
+                  </mat-form-field>
 
-                <div class="m_bottom">
-                  <div class="checkbox c-checkbox">
-                    <label>
-                      <input type="checkbox" [(ngModel)]="checkInfo">
-                      <span class="fa fa-check"></span>
-                      将该信息保存到常用信息
-                    </label>
-                  </div>
                 </div>
               </div>
+
             </div>
           </div>
 
 
-          <div class="add_btn" (click)="showNewInfo = !showNewInfo" [class.active]="showNewInfo">
+          <div class="add_btn" (click)="selectNewInfo()" [class.active]="showNewInfo">
             新增增值税专用发票
           </div>
 
-          <div *ngIf="showNewInfo">
+          <!--<div *ngIf="showNewInfo">
             <mat-form-field class="invoice_input">
-              <input matInput placeholder="公司注册名称">
+              <input matInput placeholder="公司注册名称" [(ngModel)]="newInfo.name">
             </mat-form-field>
 
             <mat-form-field class="invoice_input">
-              <input matInput placeholder="纳税人识编号">
+              <input matInput placeholder="纳税人识编号" [(ngModel)]="newInfo.id">
             </mat-form-field>
 
             <mat-form-field class="invoice_input">
-              <input matInput placeholder="开户银行名称">
+              <input matInput placeholder="开户银行名称" [(ngModel)]="newInfo.bank">
             </mat-form-field>
 
             <mat-form-field class="invoice_input">
-              <input matInput placeholder="基本开户账号">
+              <input matInput placeholder="基本开户账号" [(ngModel)]="newInfo.account">
             </mat-form-field>
 
             <mat-form-field class="invoice_input">
-              <input matInput placeholder="注册场地">
+              <input matInput placeholder="注册场地" [(ngModel)]="newInfo.address">
             </mat-form-field>
 
             <mat-form-field class="invoice_input">
-              <input matInput placeholder="注册固定电弧">
+              <input matInput placeholder="注册固定电话" [(ngModel)]="newInfo.phone">
             </mat-form-field>
 
             <div class="m_bottom">
@@ -316,13 +387,51 @@
                 </label>
               </div>
             </div>
-          </div>
+          </div>-->
 
 
 
           <!--<mat-form-field class="invoice_input">
             <input matInput placeholder="Favorite food">
           </mat-form-field>-->
+        </div>
+
+
+
+        <div *ngIf="showNewInfo">
+          <mat-form-field class="invoice_input">
+            <input matInput placeholder="公司注册名称" [(ngModel)]="newInfo.name">
+          </mat-form-field>
+
+          <mat-form-field class="invoice_input">
+            <input matInput placeholder="纳税人识编号" [(ngModel)]="newInfo.id">
+          </mat-form-field>
+
+          <mat-form-field class="invoice_input">
+            <input matInput placeholder="开户银行名称" [(ngModel)]="newInfo.bank">
+          </mat-form-field>
+
+          <mat-form-field class="invoice_input">
+            <input matInput placeholder="基本开户账号" [(ngModel)]="newInfo.account">
+          </mat-form-field>
+
+          <mat-form-field class="invoice_input">
+            <input matInput placeholder="注册场地" [(ngModel)]="newInfo.address">
+          </mat-form-field>
+
+          <mat-form-field class="invoice_input">
+            <input matInput placeholder="注册固定电话" [(ngModel)]="newInfo.phone">
+          </mat-form-field>
+
+          <div class="m_bottom">
+            <div class="checkbox c-checkbox">
+              <label>
+                <input type="checkbox" [(ngModel)]="checkInfo">
+                <span class="fa fa-check"></span>
+                将该信息保存到常用信息
+              </label>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -338,8 +447,8 @@
 
     <!--提交按钮-->
     <div style="padding-top: 29px;">
-      <button class="btn btn_i btn_default" style="margin-right: 58px;">返回</button>
-      <button class="btn btn_i btn_purple">提交</button>
+      <button class="btn btn_i btn_default" style="margin-right: 58px;" (click)="closeW()">返回</button>
+      <button class="btn btn_i btn_purple" (click)="save()">提交</button>
     </div>
 
 

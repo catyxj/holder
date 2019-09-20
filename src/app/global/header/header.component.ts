@@ -51,9 +51,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
 
-    this.status = setInterval(() => { this.getAlarm(); }, 60000);
+    if (this.roleId === '10') {
+      this.status = setInterval(() => { this.getAlarm(); }, 60000);
+      this.getAlarm();
+    }
+
     // console.log(this.user);
-    this.getAlarm();
     // this.getUser();
 
   }
@@ -118,7 +121,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    clearInterval(this.status);
+    if (this.status) {
+      clearInterval(this.status);
+    }
   }
 
 }

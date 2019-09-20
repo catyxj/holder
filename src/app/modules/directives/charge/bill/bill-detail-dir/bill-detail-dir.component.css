@@ -6,6 +6,9 @@
   justify-content: space-between;
 }
 
+.h_l{
+  display: flex;
+}
 
 .bill .table th{
   background-color: #EBECF0;

@@ -1153,21 +1153,38 @@ span.iconfont.iconedit{
   padding: 10px 20px 0px 20px;
   border-radius:3px;
 }
+.invoice_input.mat-focused .mat-form-field-flex{
+  border: 1px solid #5584FF;
+}
 .invoice_input .mat-form-field-flex input{
   height: 22px;
 }
 .invoice_input .mat-form-field-label-wrapper {
   top: -1.2em;
 }
-.mat-form-field-appearance-legacy .mat-form-field-wrapper {
-   padding-bottom: 0;
+.invoice_input.mat-form-field-appearance-legacy .mat-form-field-wrapper {
+  padding-bottom: 0;
 }
-.mat-form-field-appearance-legacy .mat-form-field-underline {
+.invoice_input.mat-form-field-appearance-legacy .mat-form-field-underline {
   display: none;
 }
-.invoice_input .mat-form-field-appearance-legacy .mat-form-field-label {
+.invoice_input.mat-form-field-appearance-legacy .mat-form-field-label {
   top: 1em;
-  color: rgba(0,0,0,.54);
+  color: rgba(0,0,0,1);
+  font-weight: bold;
+}
+.invoice_input.mat-form-field-appearance-legacy.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label, .invoice_input.mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+  -webkit-transform: translateY(-.8em) scale(.75) perspective(100px) translateZ(.001px);
+  transform: translateY(-.8em) scale(.75) perspective(100px) translateZ(.001px);
+  -ms-transform: translateY(-.8em) scale(.75);
+  color: #666EE8;
+  font-weight: normal;
+}
+
+.mat-form-field-appearance-legacy.mat-form-field-can-float .mat-form-field-autofill-control:-webkit-autofill+.mat-form-field-label-wrapper .mat-form-field-label {
+  -webkit-transform: translateY(-.8em) scale(.75) perspective(100px) translateZ(.00101px);
+  transform: translateY(-.8em) scale(.75) perspective(100px) translateZ(.00101px);
+  -ms-transform: translateY(-.8em) scale(.75);
 }
 
 

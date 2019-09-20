@@ -127,7 +127,7 @@ export class MaintainRecordListSerComponent implements OnInit {
   editData(data) {
     let that = this;
     const modalRef = this.modalService.open(MaintainRecordEditSerComponent, {windowClass: 'modal_lg', centered: true});
-    modalRef.componentInstance.uid = data.uid;
+    modalRef.componentInstance.uid = data.id;
     modalRef.result.then((result) => {
       if (result === 'ok') {
         that.pageChange();

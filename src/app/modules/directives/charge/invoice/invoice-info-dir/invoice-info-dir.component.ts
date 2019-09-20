@@ -21,7 +21,9 @@ export class InvoiceInfoDirComponent implements OnInit {
   public defaultInfo; // 默认信息
   public otherInfo = []; // 其他信息
   public showAllInfo = false; // 显示所有信息
+  public showAddAddr = false; // 选中添加新地址
   public selectedAddr; // 当前选中地址
+  public selectedInfo; // 当前选中信息
 
   public newAddr = false; // 是否使用新地址
   public newAddress; // 新地址信息
@@ -36,8 +38,10 @@ export class InvoiceInfoDirComponent implements OnInit {
   public checkAddr;
   public checkInfo;
 
-  public showDefInfo;
-  public showNewInfo;
+  public showDefInfo; // 显示修改信息
+  public showNewInfo; // 使用新信息
+  public newInfo; // 新发票信息
+
 
   constructor(private route: ActivatedRoute,
               private modalService: NgbModal,
@@ -49,7 +53,16 @@ export class InvoiceInfoDirComponent implements OnInit {
     this.newAddress = {
       name: '',
       address: '',
-      contact: ''
+      contact: '',
+      location: 0
+    };
+    this.newInfo = {
+      name: '',
+      id: '',
+      bank: '',
+      account: '',
+      address: '',
+      phone: ''
     };
     this.getAddressInfo();
     this.getInfo();
@@ -61,20 +74,23 @@ export class InvoiceInfoDirComponent implements OnInit {
       {
         uid: '11111',
         def: false,
+        name: 'aaaaa',
         location_id: 330201,
-        address: '浙江 宁波 鄞州区 首南街道 泰康中路558号宁波商会国贸中心A座2508xxxxxxxxxxx'
+        address: '浙江 宁波 鄞州区 首南街道 泰康中路558号宁波商会国贸中心A座2508x11111111'
       },
       {
         uid: '22222',
         def: false,
+        name: 'bbbbb',
         location_id: 330203,
-        address: '浙江 宁波 鄞州区 首南街道 泰康中路558号宁波商会国贸中心A座2508xxxxxxxxxxx'
+        address: '浙江 宁波 鄞州区 首南街道 泰康中路558号宁波商会国贸中心A座2508xx2222222'
       },
       {
         uid: '33333',
         def: true,
+        name: 'aaaaa',
         location_id: 330101,
-        address: '浙江 宁波 鄞州区 首南街道 泰康中路558号宁波商会国贸中心A座2508xxxxxxxxxxx'
+        address: '浙江 宁波 鄞州区 首南街道 泰康中路558号宁波商会国贸中心A座2508xxx3333333'
       }
     ];
 
@@ -96,16 +112,31 @@ export class InvoiceInfoDirComponent implements OnInit {
   getInfo() {
     this.infoList = [
       {
+        uid: 'adsfas',
         def: true,
-        name: '宁波厚德能源科技有限公司1'
+        name: '宁波厚德能源科技有限公司1',
+        id: 'aaaa',
+        bank: 'aaaaaaaa',
+        account: '1224444',
+        phone: '12345'
       },
       {
+        uid: 'adsfas111',
         def: false,
-        name: '宁波厚德能源科技有限公司'
+        name: '宁波厚德能源科技有限公司',
+        id: 'bbbb',
+        bank: 'bbbbbbbbbbb',
+        account: '1224dasf',
+        phone: '12345222'
       },
       {
+        uid: 'adsfas222',
         def: false,
-        name: '宁波厚德能源科技有限公司'
+        name: '宁波厚德能源科技有限公司',
+        id: 'dddda',
+        bank: 'aadddd',
+        account: '122444dd',
+        phone: '1234225'
       }
     ];
 
@@ -118,6 +149,7 @@ export class InvoiceInfoDirComponent implements OnInit {
           this.otherInfo.push(this.infoList[i]);
         }
       }
+      this.selectedInfo = this.defaultInfo;
     }
 
   }
@@ -206,8 +238,43 @@ export class InvoiceInfoDirComponent implements OnInit {
 
   // 选中地址
   selectAddr(data) {
-    this.selectedAddr = data;
+    this.selectedAddr = {
+      uid: data.uid,
+      name: data.name,
+      address: data.address,
+      contact: '',
+      location: data.location_id
+    };
+    this.newAddr = false;
   }
+
+  // 使用新地址
+  selectNewAddr() {
+    this.newAddr = true;
+    this.selectedAddr = this.newAddress;
+  }
+
+
+  // 选中信息
+  selectInfo(data) {
+    this.selectedInfo = {
+      uid: data.uid,
+      name: data.name,
+      id: data.id,
+      bank: data.bank,
+      account: data.account,
+      address: data.address,
+      phone: data.phone
+    };
+    this.showNewInfo = false;
+  }
+
+  // 使用新信息
+  selectNewInfo() {
+    this.showNewInfo = true;
+    this.selectedInfo = this.newInfo;
+  }
+
 
   // 修改地址
   editAddr(data) {
@@ -232,6 +299,31 @@ export class InvoiceInfoDirComponent implements OnInit {
   // 删除信息
   deleteInfo(data) {
 
+  }
+
+
+  save() {
+
+    if (!this.selectedInfo) {
+      Swal('请填写发票信息');
+    }
+
+    if (this.showAddAddr || this.newAddr) {
+      this.newAddress.location = this.locationId;
+    }
+
+    let post = {
+      showAddAddr: this.showAddAddr, // 添加新地址（无默认地址）
+      showNewInfo: this.showNewInfo, // 显示新信息
+      newAddr: this.newAddr, // 使用新地址（有默认地址）
+      selectedAddr: this.selectedAddr,
+      selectedInfo: this.selectedInfo
+    };
+    console.log(post);
+  }
+
+  closeW() {
+    window.close();
   }
 
 }

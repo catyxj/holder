@@ -26,7 +26,6 @@ export class ChargeService {
     // let roleId = localStorage.getItem('roleId');
     let url = `/api/formal/charge/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
 
-
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -82,6 +81,34 @@ export class ChargeService {
     let url = `/api/formal/charge/address`;
 
     return this.http.post<any>(url, data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // ---------------订购服务------------------
+
+  // 产品订购列表
+  getProductList(): Observable<any>  {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let url = `/api/formal/product/list`;
+
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 订购产品信息列表
+  getProductInfo(): Observable<any>  {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let url = `/api/formal/product/list`;
+
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

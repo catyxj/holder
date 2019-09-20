@@ -67,6 +67,10 @@ import { PaymentOrderServiceDirComponent } from './modules/directives/charge/ord
 import { TrafficOrderServiceDirComponent } from './modules/directives/charge/order-service/traffic-order-service-dir/traffic-order-service-dir.component';
 import { AddressAddPurchaseDirComponent } from './modules/directives/charge/order-service/modals/address-add-purchase-dir/address-add-purchase-dir.component';
 import { AddressEditInvioceDirComponent } from './modules/directives/charge/invoice/modals/address-edit-invioce-dir/address-edit-invioce-dir.component';
+import { DeliveryMainComponent } from './modules/directives/operator/delivery/delivery-main/delivery-main.component';
+import { DeliveryListComponent } from './modules/directives/operator/delivery/delivery-list/delivery-list.component';
+import { DeliveryInfoComponent } from './modules/directives/operator/delivery/delivery-info/delivery-info.component';
+import { DeliverySetComponent } from './modules/directives/operator/delivery/modals/delivery-set/delivery-set.component';
 
 
 
@@ -118,6 +122,10 @@ registerLocaleData(zh);
     TrafficOrderServiceDirComponent,
     AddressAddPurchaseDirComponent,
     AddressEditInvioceDirComponent,
+    DeliveryMainComponent,
+    DeliveryListComponent,
+    DeliveryInfoComponent,
+    DeliverySetComponent,
   ],
   imports: [
     BrowserModule,
@@ -143,11 +151,12 @@ registerLocaleData(zh);
   entryComponents: [
     ComfirmComponent,
     AddressAddPurchaseDirComponent,
-    AddressEditInvioceDirComponent
+    AddressEditInvioceDirComponent,
+    DeliverySetComponent,
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},
-    { provide: NZ_I18N, useValue: zh_CN },
+    { provide: NZ_I18N, useValue: zh_CN }
   ],
   bootstrap: [AppComponent]
 })

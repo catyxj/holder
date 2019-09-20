@@ -1,0 +1,121 @@
+
+<!--<div class="bread">
+  设备管理 <span> / </span>终端管理
+</div>-->
+
+
+<div class="content">
+  <div class="t_info_head">
+    <div class="info_title">
+      <h6>
+        {{code}}
+      </h6>
+    </div>
+    <div>
+      <!--返回-->
+      <button class="btn btn_purple-o btn_round bps ml-1" (click)="goBack()">
+        <i class="iconfont iconicon_comeback1"></i>
+      </button>
+      <!--刷新-->
+      <button class="btn btn_purple-o btn_round bps ml-1" (click)="getList()">
+        <i class="iconfont iconicon_Refresh"></i>
+      </button>
+    </div>
+  </div>
+
+  <div style="text-align: right;">
+     <span style="font-size: 12px; color:#666EE8; ">
+        数据更新于 {{ updateDate | date:'yyyy年MM月dd日HH时mm分' }}
+      </span>
+  </div>
+
+
+  <div class="info_content">
+    <div class="content_t">
+      <nz-table
+        #dataTable
+        [nzFrontPagination]="false"
+        [nzShowPagination] = "false"
+        [nzLoading]="loading"
+        [nzData]="dataLists"
+      >
+        <thead>
+        <tr>
+          <th>序号</th>
+          <th>采样时间</th>
+          <th>版本号</th>
+          <th colspan="24">模拟量通道</th>
+          <th colspan="3">开关量通道</th>
+          <th colspan="12">状态量通道</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+          <td></td>
+          <td> - </td>
+          <td> - </td>
+          <td width="3%" class="num"
+              *ngFor="let col of temperCols; let i = index">
+            {{ i + 1 }}
+          </td>
+
+          <td width="3%" class="num"
+              *ngFor="let col of switchCols; let i = index">
+            {{ i + 1 }}
+          </td>
+          <td width="3%" class="num"
+              *ngFor="let col of calcCols; let i = index">
+            {{ i + 1 }}
+          </td>
+        </tr>
+
+        <tr *ngFor="let data of dataTable.data; trackBy: trackByUid; let i = index">
+          <td> {{ i + 1 }} </td>
+          <td style="white-space: nowrap;"> {{ data.receive_time | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
+          <td> {{ data.term_ver }} </td>
+          <td *ngFor="let col of temperCols">
+            {{ data[col] }}
+          </td>
+          <td *ngFor="let col of switchCols">
+            {{ data[col] }}
+          </td>
+          <td *ngFor="let col of calcCols">
+            {{ data[col] | number }}
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+
+    <!--<ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+
+    <div class="content_b">
+      <nz-pagination nzShowSizeChanger
+                     [nzTotal]="totalItems"
+                     [nzShowTotal]="totalTemplate"
+                     [(nzPageIndex)]="page"
+                     [(nzPageSize)]="pageSize"
+                     (nzPageIndexChange)="pageChange()"
+                     (nzPageSizeChange)="pageSizeChange()"
+                     [nzPageSizeOptions] = "pageSizeList">
+
+      </nz-pagination>
+      <div class="ant-pagination-options-quick-jumper"> 跳至
+        <input type="number" [(ngModel)]="pageNum"> 页 </div>
+      <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
+    </div>-->
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+

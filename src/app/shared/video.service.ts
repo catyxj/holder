@@ -53,6 +53,10 @@ export class VideoService {
     if (roleId === '10') {
       url = `${this.dataListUrlF}?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
     }
+    if (roleId === '16') {
+      url = `/api/operaator/camera/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    }
+
 
     return this.http.get<any>(url, httpOptions)
       .pipe(
@@ -313,6 +317,7 @@ export class VideoService {
       console.error('An error occurred:', error.error.message);
     } else {
       console.error(
+        `error: ${error}` +
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
     }

@@ -1,0 +1,14 @@
+{
+  "sidenav": [
+    {
+      "name": "发票信息",
+      "code": "sub2",
+      "icon": "fa-home",
+      "img": "assets/icons/menu/operator.png",
+      "router": "/admin/finance/invoice",
+      "index": true,
+      "checked": false
+    }
+  ],
+  "authority": ""
+}

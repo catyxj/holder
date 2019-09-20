@@ -21,6 +21,7 @@ export class MaintainRecordEditSerComponent implements OnInit {
   public tempLabel;
   public tempName;
   public headOption;
+  public eptId;
 
   previewImage: string | undefined = '';
   previewVisible = false;
@@ -68,20 +69,23 @@ export class MaintainRecordEditSerComponent implements OnInit {
         this.name = data.ept_name;
         this.tempLabel = data.template_label;
         this.tempName = data.template_name;
+        this.eptId = data.ept_id;
 
         this.dataList = [];
         let info = data.info;
         for (let i = 0; i < info.length; i++) {
           let imgList = [];
-          for (let j = 0; j < info[i].img.length; j++) {
-            let im = info[i].img[j];
-            imgList.push({
-              uid: im.id,
-              name: im.name,
-              status: 'done',
-              response: {id: im.id},
-              url: im.oss_path
-            });
+          if (info[i].img) {
+            for (let j = 0; j < info[i].img.length; j++) {
+              let im = info[i].img[j];
+              imgList.push({
+                uid: im.id,
+                name: im.name,
+                status: 'done',
+                response: {id: im.id},
+                url: im.oss_path
+              });
+            }
           }
           this.dataList.push({
             name: info[i].name,
@@ -173,7 +177,7 @@ export class MaintainRecordEditSerComponent implements OnInit {
       id: this.uid,
       template_name:  this.tempName,
       template_label: this.tempLabel,
-      ept_id: this.uid,
+      ept_id: this.eptId,
       ept_name: this.name,
       terminal_code: this.termCode,
       info: info

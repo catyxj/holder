@@ -35,6 +35,9 @@ import {LogoOrderServiceDirComponent} from "./modules/directives/charge/order-se
 import {StorageOrderServiceDirComponent} from "./modules/directives/charge/order-service/service/storage-order-service-dir/storage-order-service-dir.component";
 import {PaymentOrderServiceDirComponent} from "./modules/directives/charge/order-service/payment-order-service-dir/payment-order-service-dir.component";
 import {TrafficOrderServiceDirComponent} from "./modules/directives/charge/order-service/traffic-order-service-dir/traffic-order-service-dir.component";
+import {DeliveryMainComponent} from "./modules/directives/operator/delivery/delivery-main/delivery-main.component";
+import {DeliveryListComponent} from "./modules/directives/operator/delivery/delivery-list/delivery-list.component";
+import {DeliveryInfoComponent} from "./modules/directives/operator/delivery/delivery-info/delivery-info.component";
 
 
 
@@ -87,6 +90,27 @@ const routes: Routes = [
         loadChildren: './modules/service/service.module#ServiceModule',
         canActivate: [UserloginGuard]
       },
+      {
+        path: 'finance',
+        loadChildren: './modules/finance/finance.module#FinanceModule',
+        canActivate: [UserloginGuard]
+      },
+      {
+        path: 'operator/delivery',
+        component: DeliveryMainComponent,
+        children: [
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
+          {
+            path: 'list',
+            component: DeliveryListComponent
+          },
+          {
+            path: 'info/:uid/:page',
+            component: DeliveryInfoComponent
+          },
+        ],
+        canActivate: [UserloginGuard]
+      },
     ]
     // loadChildren: './modules/modules.module#ModulesModule'
   },
@@ -107,7 +131,7 @@ const routes: Routes = [
         component: TerminalOrderServiceDirComponent
       },
       {
-        path: 'charge/purchase/order/video',
+        path: 'charge/purchase/order/:type',
         component: VideoOrderServiceDirComponent
       },
       {

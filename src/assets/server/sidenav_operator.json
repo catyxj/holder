@@ -1,0 +1,26 @@
+{
+  "sidenav": [
+    {
+      "name": "发货信息",
+      "code": "sub2",
+      "icon": "fa-home",
+      "img": "assets/icons/menu/operator.png",
+      "router": "/admin/operator/delivery",
+      "index": true,
+      "checked": false
+    },
+    {
+      "name": "设备管理",
+      "code": "sub2",
+      "icon": "fa-home",
+      "img": "assets/icons/equip.svg",
+      "checked": true,
+      "children": [
+        { "name": "终端设备", "router": "/admin/ad/terminal","icon": ""},
+        { "name": "视频设备", "router": "/admin/ad/video","icon": ""},
+        { "name": "蓝牙设备", "router": "/admin/ad/bluetooth","icon": ""}
+      ]
+    }
+  ],
+  "authority": ""
+}

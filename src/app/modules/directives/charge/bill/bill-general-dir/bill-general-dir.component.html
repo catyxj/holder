@@ -2,16 +2,26 @@
 <div>
   <div class="c_head">
     <div class="h_l">
-      <nz-select style="width: 90px;" [(ngModel)]="year" nzAllowClear nzPlaceHolder="Choose">
-        <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-        <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-        <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+      <nz-select style="width: 90px;" [(ngModel)]="year" nzAllowClear>
+        <nz-option nzValue="2019" nzLabel="2019"></nz-option>
+        <nz-option nzValue="2018" nzLabel="2018"></nz-option>
+        <nz-option nzValue="" nzLabel="Disabled" nzDisabled></nz-option>
       </nz-select>
 
-      <nz-select style="width: 90px;" class="ml-1" [(ngModel)]="selectedValue" nzAllowClear nzPlaceHolder="Choose">
-        <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-        <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-        <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+      <nz-select style="width: 90px;" class="ml-1" [(ngModel)]="selectedValue" nzAllowClear>
+        <nz-option nzValue="1" nzLabel="1月"></nz-option>
+        <nz-option nzValue="2" nzLabel="2月"></nz-option>
+        <nz-option nzValue="3" nzLabel="3月" nzDisabled></nz-option>
+        <nz-option nzValue="4" nzLabel="4月"></nz-option>
+        <nz-option nzValue="5" nzLabel="5月"></nz-option>
+        <nz-option nzValue="6" nzLabel="6月"></nz-option>
+        <nz-option nzValue="7" nzLabel="7月"></nz-option>
+        <nz-option nzValue="8" nzLabel="8月"></nz-option>
+        <nz-option nzValue="9" nzLabel="9月"></nz-option>
+        <nz-option nzValue="10" nzLabel="10月"></nz-option>
+        <nz-option nzValue="11" nzLabel="11月"></nz-option>
+        <nz-option nzValue="12" nzLabel="12月"></nz-option>
+        <nz-option nzValue="" nzLabel="不限"></nz-option>
       </nz-select>
 
       <button nz-button nzType="primary" class="ml-3">查询</button>

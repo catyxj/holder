@@ -133,6 +133,22 @@ export class UserService {
         );
     }
 
+    // 运维
+    if (roleId === '16') {
+      return this.http.get< any >('assets/server/sidenav_operator.json')
+        .pipe(
+          catchError(this.handleError)
+        );
+    }
+
+    // 财务
+    if (roleId === '17') {
+      return this.http.get< any >('assets/server/sidenav_finance.json')
+        .pipe(
+          catchError(this.handleError)
+        );
+    }
+
 
 
 

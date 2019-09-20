@@ -1,3 +1,126 @@
-<p>
-  sensor-order-service-dir works!
-</p>
+
+
+<div class="content">
+  <div class="charge_info_head">
+    <div class="c_head_l">
+      <h5>传感器订购</h5>
+    </div>
+    <div class="c_head_r"></div>
+  </div>
+
+  <div class="c_info">
+    <div class="c_content">
+      <div class="cf_label">
+        型号：
+      </div>
+      <div class="c_c0">
+        <div class="c_c1" *ngFor="let data of typeList" (click)="type = data.type" [class.active]="type === data.type">
+          <div class="c_c1_h">
+            型号A
+          </div>
+          <div class="c_c1_amount">
+            <span style="font-size: 18px;">￥</span>
+            <span class="c1_amount_v">
+              999
+            </span>
+          </div>
+
+          <hr>
+
+          <div class="c_v_con">
+            <div>
+              <h6>摄像机</h6>
+              <div style="padding: 0 13px;">
+                <table class="table table-bordered">
+                  <tr>
+                    <td style="width: 90px;">
+                      最小照度
+                    </td>
+                    <td style="word-break: break-all;">
+                      0.005lux@(f1.2,agc)
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      最小照度
+                    </td>
+                    <td>
+                      0.005lux@(f1.2,agc)
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      最小照度
+                    </td>
+                    <td>
+                      0.005lux@(f1.2,agc)
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="c_content">
+      <div class="cf_label">
+        购买数量：
+      </div>
+      <div>
+        <input type="number" [(ngModel)]="count"
+               style="width:286px; height:28px; border:1px solid #979797;">
+      </div>
+    </div>
+
+    <div class="c_content">
+      <div class="cf_label">
+        收货地址：
+      </div>
+      <div>
+
+        <nz-radio-group [(ngModel)]="address" [nzButtonStyle]="'solid'">
+          <label nz-radio [nzValue]="data.uid" *ngFor="let data of addrList">
+            {{data.info}}
+          </label>
+        </nz-radio-group>
+
+        <div (click)="addAddr()" style="color: #414B92; cursor: pointer;">
+          添加新地址
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cf_bottom">
+    <div class="cost">
+      <div class="cost_label">
+        费用小计：
+      </div>
+      <div class="cost_value">
+        ¥ 9000.00
+      </div>
+    </div>
+
+    <div>
+      <button class="btn btn_purple bpm" (click)="save()">
+        提交
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+

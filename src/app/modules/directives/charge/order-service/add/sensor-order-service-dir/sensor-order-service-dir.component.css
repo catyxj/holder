@@ -1,0 +1,155 @@
+
+.charge_info_head{
+  display: flex;
+  padding: 10px 27px;
+  border-bottom: 1px solid #DCDEE3;
+}
+.c_head_l{
+  display: flex;
+  align-items: center;
+}
+.c_head_l h5{
+  margin-bottom: 0;
+  font-size:20px;
+  color:#333333;
+  margin-right: 10px;
+}
+.c_head_l span{
+  font-size: 12px;
+  color: #00A0F9;
+}
+
+
+
+.c_info{
+  padding: 46px 69px;
+}
+
+.c_content{
+  width: 100%;
+  padding: 43px 47px 43px 0;
+  background-color: #F3F5F6;
+  margin-bottom: 32px;
+  display: flex;
+}
+.cf_label{
+  width: 145px;
+  text-align: right;
+  font-size:20px;
+  font-weight:bold;
+  color: #333333;
+  margin-right: 20px;
+}
+.c_c0{
+  flex: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+.c_c1{
+  width:32%;
+  padding: 23px 20px;
+  background-color: #FFFFFF;
+  border-radius: 3px;
+  margin-right: 1%;
+  margin-bottom: 10px;
+  position: relative;
+  cursor: pointer;
+  border: 1px solid #ffffff;
+}
+.c_c1.active{
+  background-color: #FFFFFF;
+  border: 1px solid #666EE8;
+}
+.c_c1.active:after{
+  content: url("/assets/images/charge/selected.png");
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  height: 32px;
+}
+
+[nz-radio] {
+  display: block;
+  margin-bottom: 14px;
+  color: #333333;
+}
+
+.cf_bottom{
+  padding-top: 30px;
+  padding-left: 117px;
+}
+.cost{
+  display: flex;
+  margin-bottom: 14px;
+  align-items: center;
+}
+.cost_label{
+  font-weight: bold;
+  color: #333333;
+  margin-right: 5px;
+}
+.cost_value{
+  font-weight: bold;
+  color: #666EE8;
+  font-size: 20px;
+}
+
+
+.c_v_con{
+  height: 386px;
+  overflow: auto;
+}
+.c_v_con::-webkit-scrollbar{
+  width: 6px;
+  height: 6px;
+}
+.c_v_con::-webkit-scrollbar-track{
+
+}
+.c_v_con::-webkit-scrollbar-thumb{
+  border-radius: 4px;
+  background-color: #7A7A7A;
+}
+
+.c_v_con h6{
+  margin-top: 6px;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+.c_c1_h{
+  font-size:18px;
+  font-weight:bold;
+  color: #333333;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.c_c1_amount{
+  color:#666EE8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.c1_amount_v{
+  margin-right: 5px;
+  font-size:30px;
+}
+
+.table th, .table td {
+  padding: 2px 5px;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+  font-size: 12px;
+}
+
+
+
+
+hr{
+  margin: 0;
+}
+
+

@@ -93,6 +93,9 @@
           <h6>
             状态信息
           </h6>
+          <a class="btn btn_purple btn_round bpm ml-1" [routerLink]="['/admin/ad/terminal/messages', uid, code]" *ngIf="roleId==='17'">
+            调试报文
+          </a>
         </div>
         <div class="info_body">
           <ul>
