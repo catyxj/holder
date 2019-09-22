@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {InvoiceSetFiComponent} from "../modals/invoice-set-fi/invoice-set-fi.component";
 import Swal from 'sweetalert2';
+import {InvoiceService} from "../../../../shared/invoice.service";
 
 @Component({
   selector: 'app-invoice-info-fi',
@@ -16,7 +17,8 @@ export class InvoiceInfoFiComponent implements OnInit {
   public listPage;
 
   constructor(private route: ActivatedRoute,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal,
+              private invoiceService: InvoiceService) { }
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
@@ -31,12 +33,12 @@ export class InvoiceInfoFiComponent implements OnInit {
 
   // 获取基础信息
   getBasic() {
-    /*this.deliveryService.getDeliveryBasic(this.uid)
+    this.invoiceService.getInvoiceInfo(this.uid)
       .subscribe(data => {
         this.basic = data;
       }, err => {
 
-      });*/
+      });
   }
 
   // 状态设置模态框

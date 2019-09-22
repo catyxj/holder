@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {switchMap} from "rxjs/internal/operators";
+import {InvoiceService} from "../../../../shared/invoice.service";
 
 @Component({
   selector: 'app-invoice-list-fi',
@@ -18,7 +19,8 @@ export class InvoiceListFiComponent implements OnInit {
   public loading;
   public pageSizeList = [15, 30, 50, 100];
 
-  constructor(private route: ActivatedRoute,) { }
+  constructor(private route: ActivatedRoute,
+              private invoiceService: InvoiceService) { }
 
   ngOnInit() {
     this.route.paramMap.pipe(
@@ -42,15 +44,15 @@ export class InvoiceListFiComponent implements OnInit {
       }
     ];
 
-    /*this.loading = true;
-    this.deliveryService.getLists(this.page, this.pageSize, this.search, this.value)
+    this.loading = true;
+    this.invoiceService.getInvoiceList(this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;
         this.totalItems = data.count;
       }, err => {
         this.loading = false;
-      });*/
+      });
   }
 
 

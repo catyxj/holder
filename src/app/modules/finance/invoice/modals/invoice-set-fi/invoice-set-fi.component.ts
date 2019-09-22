@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import Swal from 'sweetalert2';
+import {InvoiceService} from "../../../../../shared/invoice.service";
 
 @Component({
   selector: 'app-invoice-set-fi',
@@ -15,14 +16,19 @@ export class InvoiceSetFiComponent implements OnInit {
 
   public status;
 
-  constructor(public activeModal: NgbActiveModal,) { }
+  constructor(public activeModal: NgbActiveModal,
+              private invoiceService: InvoiceService) { }
 
   ngOnInit() {
   }
 
   save() {
     let that = this;
-    /*this.deliveryService.scrap(this.uid)
+    let post = {
+      uid: this.uid,
+      status: this.status
+    };
+    this.invoiceService.invoiceStatusSet(post)
       .subscribe(val => {
         Swal(
           '操作成功！',
@@ -36,7 +42,7 @@ export class InvoiceSetFiComponent implements OnInit {
           '',
           'error'
         );
-      });*/
+      });
   }
 
 }
