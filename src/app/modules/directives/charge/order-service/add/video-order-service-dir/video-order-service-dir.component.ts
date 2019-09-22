@@ -56,7 +56,7 @@ export class VideoOrderServiceDirComponent implements OnInit {
         type: 2
       }
     ];*/
-    
+
     this.chargeService.getProductInfo()
       .subscribe(data => {
         this.typeList = data;
@@ -87,6 +87,13 @@ export class VideoOrderServiceDirComponent implements OnInit {
         info: '浙江省 宁波市 鄞州区 新明街道 XXX'
       }
     ];
+
+    this.chargeService.getAddressList()
+      .subscribe(data => {
+        this.addrList = data;
+      }, err => {
+
+      });
   }
 
 
@@ -113,7 +120,18 @@ export class VideoOrderServiceDirComponent implements OnInit {
       address: this.address
     };
     console.log(post);
-    that.router.navigate(['/dir/charge/purchase/payment']);
+    this.chargeService.submitOrder(post)
+      .subscribe(val => {
+
+        that.router.navigate(['/dir/charge/purchase/payment']);
+      }, err => {
+        Swal(
+          err.message || err,
+          '',
+          'error'
+        );
+      });
+
   }
 
 }

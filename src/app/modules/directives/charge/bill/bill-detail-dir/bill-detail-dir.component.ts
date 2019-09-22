@@ -48,7 +48,7 @@ export class BillDetailDirComponent implements OnInit {
       }
     ];
 
-    /*this.isSpinning = true;
+    this.isSpinning = true;
     this.chargeService.getDetailLists(this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.isSpinning = false;
@@ -56,7 +56,7 @@ export class BillDetailDirComponent implements OnInit {
         this.totalItems = data.count;
       }, err => {
         this.isSpinning = false;
-      });*/
+      });
 
   }
 

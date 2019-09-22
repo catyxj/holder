@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {ChargeService} from "../../../../../../shared/charge.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-logo-order-service-dir',
@@ -9,8 +11,10 @@ import {ActivatedRoute} from "@angular/router";
 export class LogoOrderServiceDirComponent implements OnInit {
   public title;
   public type;
+  public info;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,
+              private chargeService: ChargeService) { }
 
   ngOnInit() {
     this.type = this.route.snapshot.paramMap.get('type');
@@ -40,6 +44,36 @@ export class LogoOrderServiceDirComponent implements OnInit {
         this.title = '维保服务';
         break;
     }
+
+    this.getInfo();
   }
+
+  getInfo() {
+    this.chargeService.getProductInfo()
+      .subscribe(data => {
+        this.info = data;
+      }, err => {
+
+      });
+  }
+
+  save() {
+    let post = {
+
+    };
+    this.chargeService.submitOrder(post)
+      .subscribe(val => {
+
+      }, err => {
+        Swal(
+          err.message || err,
+          '',
+          'error'
+        );
+      });
+  }
+
+
+
 
 }

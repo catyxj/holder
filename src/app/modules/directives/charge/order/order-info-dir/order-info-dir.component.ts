@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {ChargeService} from "../../../../../shared/charge.service";
 
 @Component({
   selector: 'app-order-info-dir',
@@ -12,16 +13,30 @@ export class OrderInfoDirComponent implements OnInit {
   public products;
   public listPage;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,
+              private chargeService: ChargeService) { }
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
     this.listPage = this.route.snapshot.paramMap.get('page');
 
-    this.basic = {
+
+    this.getInfo();
+  }
+
+
+  getInfo() {
+    /*this.basic = {
       amount: 300,
       pay_account: 'asdfa@123.com'
-    };
+    };*/
+
+    this.chargeService.getOrderInfo(this.uid)
+      .subscribe(data => {
+        this.basic = data;
+      }, err => {
+
+      });
   }
 
 

@@ -58,15 +58,15 @@ export class InvoiceListDirComponent implements OnInit {
       }
     ];
 
-    /*this.isSpinning = true;
-    this.chargeService.getDetailLists(this.page, this.pageSize, this.search, this.value)
+    this.isSpinning = true;
+    this.chargeService.getInvoiceLists(this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.isSpinning = false;
         this.dataLists = data.data;
         this.totalItems = data.count;
       }, err => {
         this.isSpinning = false;
-      });*/
+      });
 
   }
 

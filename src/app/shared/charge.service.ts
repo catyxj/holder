@@ -17,6 +17,37 @@ export class ChargeService {
 
   constructor(private http: HttpClient) { }
 
+
+  // -------账户总览------------------
+  // 获取消费趋势图表数据
+  getConsumption(): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    // let roleId = localStorage.getItem('roleId');
+    let url = `/api/formal/consumption/chart`;
+
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取财务提醒和账号信息
+  getConsumerInfo(): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    // let roleId = localStorage.getItem('roleId');
+    let url = `/api/formal/consumer/status`;
+
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
   // --------费用账单 ----------
   // 获取账单总览列表
   getGeneralLists(n: number, pageSize: number, search?: string, value?: string): Observable<any> {
@@ -24,7 +55,7 @@ export class ChargeService {
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
     // let roleId = localStorage.getItem('roleId');
-    let url = `/api/formal/charge/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    let url = `/api/formal/bill/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
 
     return this.http.get<any>(url, httpOptions)
       .pipe(
@@ -39,7 +70,7 @@ export class ChargeService {
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
     // let roleId = localStorage.getItem('roleId');
-    let url = `/api/formal/charge/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    let url = `/api/formal/bill/detail/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
 
 
     return this.http.get<any>(url, httpOptions)
@@ -56,7 +87,22 @@ export class ChargeService {
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
     // let roleId = localStorage.getItem('roleId');
-    let url = `/api/formal/charge/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    let url = `/api/formal/order/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+
+
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取订单详情
+  getOrderInfo(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    // let roleId = localStorage.getItem('roleId');
+    let url = `/api/formal/order/detail?uid=${uid}`;
 
 
     return this.http.get<any>(url, httpOptions)
@@ -67,18 +113,120 @@ export class ChargeService {
 
 
   // ---------续费管理-----------
-
-
-  // ----------发票管理-----------
-
-
-
-  addAddress(data): Observable<any> {
+  // 获取续费列表
+  getRenewalLists(n: number, pageSize: number, search?: string, value?: string): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
     // let roleId = localStorage.getItem('roleId');
-    let url = `/api/formal/charge/address`;
+    let url = `/api/formal/storage/service/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // ----------发票管理-----------
+
+  // 获取发票列表
+  getInvoiceLists(n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let url = `/api/formal/wait/invoiced/list?page=${n}&rows=${pageSize}`;
+
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+  // 添加新地址
+  addAddress(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let url = `/api/formal/customer/address/create`;
+
+    return this.http.post<any>(url, data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取地址列表
+  getAddressList(): Observable<any>  {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let url = `/api/formal/customer/address/list`;
+
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 修改地址
+  editAddress(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let url = `/api/formal/customer/address/update`;
+
+    return this.http.post<any>(url, data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 删除地址
+  deleteAddress(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let url = `/api/formal/customer/address/delete`;
+
+    return this.http.post<any>(url, data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取发票信息列表
+  getInvoiceInfoList(): Observable<any>  {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let url = `/api/formal/invoiced/info/list`;
+
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 删除发票信息
+  deleteInvoiceInfo(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let url = `/api/formal/invoiced/info/delete`;
+
+    return this.http.post<any>(url, data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 提交发票信息
+  submitInvoice(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let url = `/api/formal/invoiced/submit`;
 
     return this.http.post<any>(url, data, httpOptions)
       .pipe(
@@ -106,13 +254,42 @@ export class ChargeService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    let url = `/api/formal/product/list`;
+    let url = `/api/formal/product/item/list`;
 
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
+
+
+  // 订单提交
+  submitOrder(data): Observable<any>  {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let url = `/api/formal/order/submit`;
+
+    return this.http.post<any>(url, data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 订单支付
+  payOrder(data): Observable<any>  {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let url = `/api/formal/order/pay`;
+
+    return this.http.post<any>(url, data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
 
 
   private handleError(error: HttpErrorResponse) {

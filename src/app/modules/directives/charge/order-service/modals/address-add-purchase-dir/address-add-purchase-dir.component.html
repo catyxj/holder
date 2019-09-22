@@ -71,7 +71,8 @@
 
 
   <div class="m_bottom">
-    <button class="btn btn_purple bpm" style="margin-right: 9px;" [disabled]="!name || !locationId || !address || !contact">
+    <button class="btn btn_purple bpm" (click)="save()"
+            style="margin-right: 9px;" [disabled]="!name || !locationId || !address || !contact">
       保存更改
     </button>
     <div class="checkbox c-checkbox">

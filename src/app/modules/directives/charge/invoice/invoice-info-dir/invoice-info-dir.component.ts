@@ -69,8 +69,9 @@ export class InvoiceInfoDirComponent implements OnInit {
     this.getAddress();
   }
 
+  // 获取地址信息
   getAddressInfo() {
-    this.addressList = [
+    /*this.addressList = [
       {
         uid: '11111',
         def: false,
@@ -93,8 +94,18 @@ export class InvoiceInfoDirComponent implements OnInit {
         address: '浙江 宁波 鄞州区 首南街道 泰康中路558号宁波商会国贸中心A座2508xxx3333333'
       }
     ];
+    this.initAddress();*/
 
+    this.chargeService.getAddressList()
+      .subscribe(data => {
+        this.addressList = data;
+        this.initAddress();
+      }, err => {
 
+      });
+  }
+
+  initAddress() {
     if (this.addressList && this.addressList.length > 0) {
       this.otherAddress = [];
       for (let i = 0; i < this.addressList.length; i++) {
@@ -109,8 +120,9 @@ export class InvoiceInfoDirComponent implements OnInit {
   }
 
 
+
   getInfo() {
-    this.infoList = [
+    /*this.infoList = [
       {
         uid: 'adsfas',
         def: true,
@@ -139,7 +151,6 @@ export class InvoiceInfoDirComponent implements OnInit {
         phone: '1234225'
       }
     ];
-
     if (this.infoList && this.infoList.length > 0) {
       this.otherInfo = [];
       for (let i = 0; i < this.infoList.length; i++) {
@@ -150,11 +161,28 @@ export class InvoiceInfoDirComponent implements OnInit {
         }
       }
       this.selectedInfo = this.defaultInfo;
-    }
+    }*/
+
+    this.chargeService.getInvoiceInfoList()
+      .subscribe(data => {
+        this.infoList = data;
+      }, err => {
+        if (this.infoList && this.infoList.length > 0) {
+          this.otherInfo = [];
+          for (let i = 0; i < this.infoList.length; i++) {
+            if (this.infoList[i].def) {
+              this.defaultInfo = this.infoList[i];
+            } else {
+              this.otherInfo.push(this.infoList[i]);
+            }
+          }
+          this.selectedInfo = this.defaultInfo;
+        }
+      });
 
   }
 
-
+  // 获取地区下拉列表
   getAddress() {
     this.addressService.getAddress()
       .subscribe(data => {
@@ -293,17 +321,48 @@ export class InvoiceInfoDirComponent implements OnInit {
 
   // 删除地址
   deleteAddr(data) {
-
+    let that = this;
+    this.chargeService.deleteAddress(data)
+      .subscribe(val => {
+        Swal(
+          '操作成功！',
+          '',
+          'success'
+        );
+        that.getAddressInfo();
+      }, err => {
+        Swal(
+          err.message || err,
+          '',
+          'error'
+        );
+      });
   }
 
   // 删除信息
   deleteInfo(data) {
-
+    let that = this;
+    this.chargeService.deleteInvoiceInfo(data)
+      .subscribe(val => {
+        Swal(
+          '操作成功！',
+          '',
+          'success'
+        );
+        that.getInfo();
+      }, err => {
+        Swal(
+          err.message || err,
+          '',
+          'error'
+        );
+      });
   }
 
 
   save() {
 
+    let that = this;
     if (!this.selectedInfo) {
       Swal('请填写发票信息');
     }
@@ -320,6 +379,21 @@ export class InvoiceInfoDirComponent implements OnInit {
       selectedInfo: this.selectedInfo
     };
     console.log(post);
+    this.chargeService.submitInvoice(post)
+      .subscribe(val => {
+        Swal(
+          '操作成功！',
+          '',
+          'success'
+        );
+        that.closeW();
+      }, err => {
+        Swal(
+          err.message || err,
+          '',
+          'error'
+        );
+      });
   }
 
   closeW() {

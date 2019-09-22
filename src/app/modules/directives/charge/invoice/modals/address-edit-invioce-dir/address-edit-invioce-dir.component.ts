@@ -119,9 +119,12 @@ export class AddressEditInvioceDirComponent implements OnInit {
   save() {
     let that = this;
     let post = {
-
+      name: this.name,
+      address: this.address,
+      location: this.locationId,
+      contact: this.contact
     };
-    this.chargeService.addAddress(post)
+    this.chargeService.editAddress(post)
       .subscribe(val => {
         Swal(
           '操作成功！',

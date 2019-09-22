@@ -25,7 +25,7 @@ export class OrderListDirComponent implements OnInit {
 
   // 获取列表
   getList() {
-    this.dataLists = [
+    /*this.dataLists = [
       {
         uid: '1',
         name: '物联网终端采购',
@@ -47,17 +47,17 @@ export class OrderListDirComponent implements OnInit {
         address: 'Sidney No. 1 Lake Park',
         status: -1
       }
-    ];
+    ];*/
 
-    /*this.isSpinning = true;
-    this.chargeService.getDetailLists(this.page, this.pageSize, this.search, this.value)
+    this.isSpinning = true;
+    this.chargeService.getOrderLists(this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.isSpinning = false;
         this.dataLists = data.data;
         this.totalItems = data.count;
       }, err => {
         this.isSpinning = false;
-      });*/
+      });
 
   }
 

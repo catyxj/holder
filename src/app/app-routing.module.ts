@@ -122,22 +122,22 @@ const routes: Routes = [
         path: 'charge/invoice/info/:amount',
         component: InvoiceInfoDirComponent
       },
-      {
+      /*{
         path: 'charge/purchase/order/bluetooth',
         component: BluetoothOrderServiceDirComponent
       },
       {
         path: 'charge/purchase/order/terminal',
         component: TerminalOrderServiceDirComponent
-      },
+      },*/
       {
         path: 'charge/purchase/order/:type',
         component: VideoOrderServiceDirComponent
       },
-      {
+      /*{
         path: 'charge/purchase/order/sensor',
         component: SensorOrderServiceDirComponent
-      },
+      },*/
       {
         path: 'charge/purchase/upgrade/:type',
         component: LogoOrderServiceDirComponent

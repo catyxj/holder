@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ChargeService} from "../../../../../shared/charge.service";
 
+
 @Component({
   selector: 'app-charge-overview-dir',
   templateUrl: './charge-overview-dir.component.html',
@@ -14,19 +15,35 @@ export class ChargeOverviewDirComponent implements OnInit {
   constructor(private chargeService: ChargeService) { }
 
   ngOnInit() {
+
+    this.getInfo();
     this.getCostData();
   }
 
+  // 获取财务及账号信息
   getInfo() {
-    this.info = [
 
-    ];
+    this.chargeService.getConsumerInfo()
+      .subscribe(data => {
+        this.info = data;
+      }, err => {
+
+      });
 
   }
 
   getCostData() {
-    this.costData = [{receive_time: '2019-01' , value: 21}, {receive_time: '2019-02' , value: 23}, {receive_time: '2019-03' , value: 21}, {receive_time: '2019-04' , value: 21}, {receive_time: '2019-05' , value: 33}, {receive_time: '2019-06' , value: 21}, {receive_time: '2019-07' , value: 33}, {receive_time: '2019-08' , value: 21}, {receive_time: '2019-09' , value: 33}, {receive_time: '2019-10' , value: 24}];
-    this.initChart();
+
+    // this.costData = [{receive_time: '2019-01' , value: 21}, {receive_time: '2019-02' , value: 23}, {receive_time: '2019-03' , value: 21}, {receive_time: '2019-04' , value: 21}, {receive_time: '2019-05' , value: 33}, {receive_time: '2019-06' , value: 21}, {receive_time: '2019-07' , value: 33}, {receive_time: '2019-08' , value: 21}, {receive_time: '2019-09' , value: 33}, {receive_time: '2019-10' , value: 24}];
+
+    this.chargeService.getConsumption()
+      .subscribe(data => {
+        this.costData = data;
+        this.initChart();
+      }, err => {
+
+      });
+
   }
 
   initChart() {

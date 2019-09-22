@@ -16,12 +16,12 @@
       <div class="c_c0">
         <div class="c_c1" *ngFor="let data of typeList" (click)="type = data.id" [class.active]="type === data.id">
           <div class="c_c1_h">
-            型号A
+            {{data.name}}
           </div>
           <div class="c_c1_amount">
             <span style="font-size: 18px;">￥</span>
             <span class="c1_amount_v">
-              999
+              {{data.price}}
             </span>
           </div>
 
