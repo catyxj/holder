@@ -30,6 +30,10 @@ export class AddressEditInvioceDirComponent implements OnInit {
               private addressService: AdressService) { }
 
   ngOnInit() {
+    console.log(this.currentData);
+    this.name = this.currentData.name;
+    this.address = this.currentData.address;
+    this.contact = this.currentData.telephone;
     this.getAddress();
   }
 
@@ -119,10 +123,14 @@ export class AddressEditInvioceDirComponent implements OnInit {
   save() {
     let that = this;
     let post = {
+      uid: this.currentData.uid,
       name: this.name,
       address: this.address,
-      location: this.locationId,
-      contact: this.contact
+      location_id: this.locationId,
+      location_name: this.locationName + this.address,
+      type: 2,
+      tel: this.contact,
+      is_default: this.currentData.is_default
     };
     this.chargeService.editAddress(post)
       .subscribe(val => {

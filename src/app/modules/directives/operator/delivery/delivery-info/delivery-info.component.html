@@ -26,14 +26,14 @@
         发货编号：
       </div>
       <div class="text_purple">
-        1234541268685
+        {{basic?.order_sn}}
       </div>
     </div>
 
     <div>
       当前状态：
-      <span style="color: #1E9FF2;">已发货</span>
-      <span style="color: #FFC06A;">未发货</span>
+      <span style="color: #1E9FF2;" *ngIf="basic && basic.ship_status">已发货</span>
+      <span style="color: #FFC06A;" *ngIf="basic && !basic.ship_status">未发货</span>
     </div>
 
   </div>
@@ -52,7 +52,7 @@
               订单编号
             </div>
             <div class="item_c1_value">
-              2341235342345676
+              {{basic?.order_sn}}
             </div>
           </div>
 
@@ -61,7 +61,7 @@
               订单创建时间
             </div>
             <div class="item_c1_value">
-              2019-02-23 12:12:12
+              {{basic?.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}
             </div>
           </div>
 
@@ -70,7 +70,7 @@
               预计发货时间
             </div>
             <div class="item_c1_value">
-              2019-02-23
+              {{basic?.ship_expect_at | date: 'yyyy-MM-dd'}}
             </div>
           </div>
 
@@ -83,13 +83,13 @@
           </div>
           <div class="item_c2_value">
             <div style="margin-bottom: 15px;">
-              <b style="font-size: 18px; color: #000000;">陈 宁</b>
+              <b style="font-size: 18px; color: #000000;">{{basic?.shipping_user}}</b>
               <span style="font-size: 12px; color: #666666;">
-                13486661360
+                {{basic?.shipping_tel}}
               </span>
             </div>
             <div style="font-size: 16px; color: #000000;">
-              浙江 宁波 鄞州区 首南街道 泰康中路558号宁波商会国贸中心A座2508xxxxxxxxxxx
+              {{basic?.shipping_addr}}
             </div>
           </div>
 
@@ -103,6 +103,8 @@
         <h6>
           设备清单
         </h6>
+
+        <button class="btn btn_purple bpm" (click)="addData()">添 加</button>
       </div>
       <div class="info_body">
         <div style="overflow: auto; height: 320px; width: 100%;">
@@ -122,9 +124,19 @@
             </thead>
             <tbody>
             <tr *ngFor="let data of dataTable.data">
-              <td> {{data.id}} </td>
-              <td> {{data.name}} </td>
-              <td> {{data.ver}} </td>
+              <td> {{data.item_code}} </td>
+              <td>
+                <span *ngIf="data.item_type === 1">
+                  终端
+                </span>
+                <span *ngIf="data.item_type === 2">
+                  蓝牙
+                </span>
+                <span *ngIf="data.item_type === 3">
+                  视频
+                </span>
+              </td>
+              <td> {{data.remark}} </td>
             </tr>
             </tbody>
           </nz-table>

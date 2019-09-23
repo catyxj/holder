@@ -14,7 +14,7 @@
         资费标准：
       </div>
       <div class="standard">
-        <span class="text_purple">¥10000.00 </span>
+        <span class="text_purple">{{info?.price | currency: '￥'}} </span>
         <span style="color: #333333;"> 永久 </span>
       </div>
     </div>
@@ -22,7 +22,7 @@
     <div class="c_intro">
       <div>功能说明：</div>
       <p>
-        这是一条说明说明说明说明这是一条说明说明说明说明这是一条说明说明说明说明这是一条说明说明说明说明这是一条说明说明说明说明这是一条说明说明说明说明这是一条说明说明说明说明这是一条说明说明说明说明这是一条说明说明说明说明这是一条说明说明说明说明。
+        {{info?.name}}
       </p>
 
     </div>
@@ -37,7 +37,7 @@
         费用小计：
       </div>
       <div class="cost_value">
-        ¥ 9000.00
+        {{info?.price | currency: '￥'}}
       </div>
     </div>
 

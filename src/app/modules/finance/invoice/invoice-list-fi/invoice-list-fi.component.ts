@@ -13,7 +13,7 @@ export class InvoiceListFiComponent implements OnInit {
   public page = 1;
   public pageNum;
   public pageSize = 15;
-  public search = 'name';
+  public search = 'order_sn';
   public value;
   public totalItems;
   public loading;
@@ -38,11 +38,16 @@ export class InvoiceListFiComponent implements OnInit {
 
   // 获取列表
   getList() {
-    this.dataLists = [
+    /*this.dataLists = [
       {
-        uid: 'daf'
+        order_sn: 'daf11111111',
+        created_username: 'aaaa',
+        created_org: 'aaaaa',
+        pay_at: '2019-10-1',
+        pay_money: 300,
+        invoice_status: true
       }
-    ];
+    ];*/
 
     this.loading = true;
     this.invoiceService.getInvoiceList(this.page, this.pageSize, this.search, this.value)

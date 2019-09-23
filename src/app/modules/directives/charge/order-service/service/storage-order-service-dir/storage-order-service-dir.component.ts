@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ChargeService} from "../../../../../../shared/charge.service";
 import Swal from 'sweetalert2';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -9,32 +10,57 @@ import Swal from 'sweetalert2';
   styleUrls: ['./storage-order-service-dir.component.css']
 })
 export class StorageOrderServiceDirComponent implements OnInit {
-  public time;
-  public info;
+  public type;
+  public id;
+  public timeList;
+  public currentData;
 
-  constructor(private chargeService: ChargeService) { }
+  constructor(private chargeService: ChargeService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getInfo();
   }
 
   getInfo() {
-    this.chargeService.getProductInfo()
+    /*this.timeList = [
+      {
+        name: 'aaaa',
+        id: 1,
+        price: 300,
+        description: 'aaaaaa'
+      },
+      {
+        name: 'bbbb',
+        id: 2,
+        price: 400,
+        description: 'bbbbb'
+      },
+    ];
+    this.type = this.timeList[0];*/
+
+    this.id = 1;
+    this.chargeService.getProductInfo(this.id)
       .subscribe(data => {
-        this.info = data;
+        this.timeList = data;
+        this.type = this.timeList[0];
       }, err => {
 
       });
   }
 
+
+
   save() {
     let that = this;
     let post = {
-
-    }
+      item_id: this.type.id,
+      number: 1
+    };
     this.chargeService.submitOrder(post)
       .subscribe(val => {
-
+        let uid = val.order_sn;
+        that.router.navigate(['/dir/charge/purchase/payment', uid]);
       }, err => {
         Swal(
           err.message || err,

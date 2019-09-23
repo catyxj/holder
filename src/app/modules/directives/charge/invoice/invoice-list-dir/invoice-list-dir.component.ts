@@ -33,28 +33,20 @@ export class InvoiceListDirComponent implements OnInit {
   getList() {
     this.dataLists = [
       {
-        uid: '1',
-        name: '物联网终端采购',
+        order_sn: '11',
+        item_name: '物联网终端采购',
         age: 32,
-        invoice_amount: 800,
+        pay_money: 800,
         address: 'New York No. 1 Lake Park',
         status: 1
       },
       {
-        uid: '2',
-        name: '物联网终端采购',
-        age: 42,
-        invoice_amount: 5000,
-        address: 'London No. 1 Lake Park',
-        status: 0
-      },
-      {
-        uid: '3',
-        name: 'Joe Black',
+        order_sn: '12',
+        item_name: '物联网终端采购',
         age: 32,
-        invoice_amount: 1133.55,
-        address: 'Sidney No. 1 Lake Park',
-        status: -1
+        pay_money: 800,
+        address: 'New York No. 1 Lake Park',
+        status: 1
       }
     ];
 
@@ -122,7 +114,7 @@ export class InvoiceListDirComponent implements OnInit {
     this.dataLists.forEach(item => {
       item.checked = value;
       if (value) {
-        this.totalAmount += item.invoice_amount;
+        this.totalAmount += item.pay_money;
       }
     });
   }
@@ -137,7 +129,7 @@ export class InvoiceListDirComponent implements OnInit {
         this.isAllChecked = false;
       }
       if (ac.checked) {
-        this.totalAmount += ac.invoice_amount;
+        this.totalAmount += ac.pay_money;
       }
     }
   }
@@ -153,7 +145,18 @@ export class InvoiceListDirComponent implements OnInit {
     }
     this.isVisible = true;
 
-    window.open(`./#/dir/charge/invoice/info/${this.totalAmount}`);
+    let checked = [];
+    if (!this.dataLists || this.dataLists.length <= 0 ) {
+      this.dataLists = [];
+    }
+    for (let i = 0; i < this.dataLists.length; i++) {
+      let ac = this.dataLists[i];
+      if (ac.checked) {
+        checked.push(ac.order_sn);
+      }
+    }
+    let sn = JSON.stringify(checked);
+    window.open(`./#/dir/charge/invoice/info/${this.totalAmount}/${sn}`);
   }
 
   handleOk(): void {

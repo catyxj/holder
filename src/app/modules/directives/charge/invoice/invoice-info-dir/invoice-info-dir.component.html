@@ -15,11 +15,11 @@
 
     <!--添加地址-->
     <div *ngIf="!addressList || addressList.length === 0;">
-      <div class="add_btn" (click)="showAddAddr=!showAddAddr">
+      <div class="add_btn" (click)="selectNewAddr()" [class.active]="newAddr">
         添加地址
       </div>
 
-      <div *ngIf="showAddAddr" class="m_form">
+      <!--<div *ngIf="showAddAddr" class="m_form">
         <div class="m_item">
           <div class="m_label">
             <span>*</span>姓名：
@@ -28,9 +28,9 @@
             <input type="text" class="form-control" [(ngModel)]="newAddress.name" placeholder="请输入姓名" #macAddr="ngModel"
                    required>
             <div class="sign_tip">
-              <!--<span class="text_danger" *ngIf="macAddr.invalid && (macAddr.dirty || macAddr.touched)">
+              &lt;!&ndash;<span class="text_danger" *ngIf="macAddr.invalid && (macAddr.dirty || macAddr.touched)">
                 MAC地址错误，例:FA:58:D6:E4:0F:36
-              </span>-->
+              </span>&ndash;&gt;
             </div>
           </div>
         </div>
@@ -94,7 +94,7 @@
           </div>
 
         </div>
-      </div>
+      </div>-->
     </div>
 
     <!--地址列表-->
@@ -104,13 +104,13 @@
         <div class="addr_item" [class.active]="selectedAddr.uid === defaultAddress.uid" (click)="selectAddr(defaultAddress)">
           <div class="addr_l">
             <div class="addr_name">
-              <b>陈 宁</b>
+              <b>{{defaultAddress?.name}}</b>
               <span>
-                13486661360
+                {{defaultAddress?.telephone}}
               </span>
             </div>
             <div class="addr_addr">
-              {{defaultAddress.address}}
+              {{defaultAddress?.location_name}}
             </div>
           </div>
           <div class="addr_r">
@@ -131,16 +131,16 @@
           <div class="addr_item" [class.active]="selectedAddr.uid === data.uid">
             <div class="addr_l">
               <div class="addr_name">
-                <b>陈 宁</b>
+                <b>{{data.name}}</b>
                 <span>
-                13486661360
+                {{data.telephone}}
               </span>
               </div>
               <div class="addr_addr">
-                {{data.address}}
+                {{data.location_name}}
               </div>
             </div>
-            <div class="addr_r">
+            <div class="addr_r" (click)="setDefaultAddr(data)">
               设为默认
             </div>
           </div>
@@ -156,87 +156,87 @@
         <div class="add_btn" (click)="selectNewAddr()" [class.active]="newAddr">
           使用新地址
         </div>
-        <div *ngIf="newAddr" class="m_form">
-          <div class="m_item">
-            <div class="m_label">
-              <span>*</span>姓名：
-            </div>
-            <div class="m_input_l">
-              <input type="text" class="form-control" [(ngModel)]="newAddress.name" placeholder="请输入姓名" #macAddr="ngModel"
-                     required>
-              <div class="sign_tip">
-                <!--<span class="text_danger" *ngIf="macAddr.invalid && (macAddr.dirty || macAddr.touched)">
-                  MAC地址错误，例:FA:58:D6:E4:0F:36
-                </span>-->
-              </div>
-            </div>
-          </div>
 
-          <div class="m_item">
-            <div class="m_label">
-              <span>*</span>地址：
-            </div>
-            <div class="m_input_l">
-              <div>
-                <nz-select style="width: 138px;" [(ngModel)]="selectedProvince" (ngModelChange)="provinceChange($event)">
-                  <nz-option *ngFor="let p of addrList" [nzValue]="p" [nzLabel]="p.Name"></nz-option>
-                </nz-select>
-                <span style="padding: 0 8px;">
-          省
-        </span>
-                <nz-select style="width: 138px;" [(ngModel)]="selectedCity" (ngModelChange)="cityChange($event)" [nzDisabled]="!selectedProvince || selectedProvince.LocationId===0 ">
-                  <nz-option *ngFor="let c of cities" [nzValue]="c" [nzLabel]="c.Name"></nz-option>
-                </nz-select>
-                <span style="padding: 0 8px;">
-          市
-        </span>
-                <nz-select style="width: 138px;" [(ngModel)]="selectedRegion" (ngModelChange)="regionChange($event)" [nzDisabled]="!selectedCity">
-                  <nz-option *ngFor="let r of regions" [nzValue]="r" [nzLabel]="r.Name"></nz-option>
-                </nz-select>
-                <span style="padding-left: 8px;">
-          区/县
-        </span>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="m_item">
-            <div class="m_label">
-              <span>*</span>详细地址：
-            </div>
-            <div class="m_input" style="width: 358px;">
-              <input type="text" class="form-control" [(ngModel)]="newAddress.address">
-            </div>
-          </div>
-
-          <div class="m_item">
-            <div class="m_label">
-              <span>*</span>联系方式：
-            </div>
-            <div class="m_input_l">
-              <input type="text" class="form-control" [(ngModel)]="newAddress.contact">
-            </div>
-          </div>
-
-
-          <div class="m_bottom">
-
-             <div class="checkbox c-checkbox">
-               <label>
-                 <input type="checkbox" [(ngModel)]="checkAddr" name="checkR">
-                 <span class="fa fa-check"></span>
-                 将该地址保存到我的地址簿。
-               </label>
-             </div>
-
-          </div>
-        </div>
       </div>
 
     </div>
 
+    <div *ngIf="newAddr" class="m_form">
+      <div class="m_item">
+        <div class="m_label">
+          <span>*</span>姓名：
+        </div>
+        <div class="m_input_l">
+          <input type="text" class="form-control" [(ngModel)]="newAddress.name" placeholder="请输入姓名" #macAddr="ngModel"
+                 required>
+          <div class="sign_tip">
+            <!--<span class="text_danger" *ngIf="macAddr.invalid && (macAddr.dirty || macAddr.touched)">
+              MAC地址错误，例:FA:58:D6:E4:0F:36
+            </span>-->
+          </div>
+        </div>
+      </div>
 
+      <div class="m_item">
+        <div class="m_label">
+          <span>*</span>地址：
+        </div>
+        <div class="m_input_l">
+          <div>
+            <nz-select style="width: 138px;" [(ngModel)]="selectedProvince" (ngModelChange)="provinceChange($event)">
+              <nz-option *ngFor="let p of addrList" [nzValue]="p" [nzLabel]="p.Name"></nz-option>
+            </nz-select>
+            <span style="padding: 0 8px;">
+          省
+        </span>
+            <nz-select style="width: 138px;" [(ngModel)]="selectedCity" (ngModelChange)="cityChange($event)" [nzDisabled]="!selectedProvince || selectedProvince.LocationId===0 ">
+              <nz-option *ngFor="let c of cities" [nzValue]="c" [nzLabel]="c.Name"></nz-option>
+            </nz-select>
+            <span style="padding: 0 8px;">
+          市
+        </span>
+            <nz-select style="width: 138px;" [(ngModel)]="selectedRegion" (ngModelChange)="regionChange($event)" [nzDisabled]="!selectedCity">
+              <nz-option *ngFor="let r of regions" [nzValue]="r" [nzLabel]="r.Name"></nz-option>
+            </nz-select>
+            <span style="padding-left: 8px;">
+          区/县
+        </span>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="m_item">
+        <div class="m_label">
+          <span>*</span>详细地址：
+        </div>
+        <div class="m_input" style="width: 358px;">
+          <input type="text" class="form-control" [(ngModel)]="newAddress.address">
+        </div>
+      </div>
+
+      <div class="m_item">
+        <div class="m_label">
+          <span>*</span>联系方式：
+        </div>
+        <div class="m_input_l">
+          <input type="text" class="form-control" [(ngModel)]="newAddress.telephone">
+        </div>
+      </div>
+
+
+      <div class="m_bottom">
+
+        <div class="checkbox c-checkbox">
+          <label>
+            <input type="checkbox" [(ngModel)]="checkAddr" name="checkR">
+            <span class="fa fa-check"></span>
+            将该地址保存到我的地址簿。
+          </label>
+        </div>
+
+      </div>
+    </div>
 
 
     <h6>发票信息：</h6>
@@ -253,10 +253,10 @@
         <!--信息列表-->
         <div *ngIf="infoList && infoList.length > 0">
           <!--默认信息-->
-          <div class="def_con">
-            <div class="addr_item"  [class.active]="selectedInfo.uid === defaultInfo.uid" (click)="selectInfo(defaultInfo)">
+          <div class="def_con" (click)="selectInfo(defaultInfo)">
+            <div class="addr_item"  [class.active]="selectedInfo.id === defaultInfo.id">
               <div class="info_item_l">
-                {{defaultInfo.name}}
+                {{defaultInfo.company}}
               </div>
               <div class="addr_r">
                 默认信息
@@ -275,7 +275,7 @@
               </mat-form-field>
 
               <mat-form-field class="invoice_input">
-                <input matInput placeholder="纳税人识编号" [(ngModel)]="selectedInfo.id">
+                <input matInput placeholder="纳税人识别号" [(ngModel)]="selectedInfo.taxpayer">
               </mat-form-field>
 
               <mat-form-field class="invoice_input">
@@ -291,7 +291,7 @@
               </mat-form-field>
 
               <mat-form-field class="invoice_input">
-                <input matInput placeholder="注册固定电话" [(ngModel)]="selectedInfo.name">
+                <input matInput placeholder="注册固定电话" [(ngModel)]="selectedInfo.phone">
               </mat-form-field>
             </div>
           </div>
@@ -302,44 +302,44 @@
           <div *ngIf="showAllInfo" class="other_con">
             <div *ngFor="let data of otherInfo" >
               <div class="addr_ot_con">
-                <div class="addr_item" [class.active]="selectedInfo.uid === data.uid" (click)="selectInfo(data)">
+                <div class="addr_item" [class.active]="selectedInfo.id === data.id" (click)="selectInfo(data)">
                   <div class="info_item_l">
-                    {{data.name}}
+                    {{data.company}}
                   </div>
-                  <div class="addr_r">
+                  <div class="addr_r" (click)="setDefaultInfo(data)">
                     设为默认
                   </div>
                 </div>
-                <div class="ot_edit" *ngIf="selectedInfo.uid === data.uid">
+                <div class="ot_edit" *ngIf="selectedInfo.id === data.id">
                   <img src="assets/images/charge/invoice_edit.png" alt="" (click)="data.showInfo = !data.showInfo">
                   <img src="assets/images/charge/invoice_del.png" alt="" (click)="deleteInfo(data)">
                 </div>
               </div>
 
-              <div *ngIf="selectedInfo.uid === data.uid">
+              <div *ngIf="selectedInfo.id === data.id">
                 <div *ngIf="data.showInfo">
                   <mat-form-field class="invoice_input">
-                    <input matInput placeholder="公司注册名称" [(ngModel)]="selectedInfo.id">
+                    <input matInput placeholder="公司注册名称" [(ngModel)]="selectedInfo.name">
                   </mat-form-field>
 
                   <mat-form-field class="invoice_input">
-                    <input matInput placeholder="纳税人识编号" [(ngModel)]="selectedInfo.id">
+                    <input matInput placeholder="纳税人识别号" [(ngModel)]="selectedInfo.taxpayer">
                   </mat-form-field>
 
                   <mat-form-field class="invoice_input">
-                    <input matInput placeholder="开户银行名称" [(ngModel)]="selectedInfo.id">
+                    <input matInput placeholder="开户银行名称" [(ngModel)]="selectedInfo.address">
                   </mat-form-field>
 
                   <mat-form-field class="invoice_input">
-                    <input matInput placeholder="基本开户账号" [(ngModel)]="selectedInfo.id">
+                    <input matInput placeholder="基本开户账号" [(ngModel)]="selectedInfo.account">
                   </mat-form-field>
 
                   <mat-form-field class="invoice_input">
-                    <input matInput placeholder="注册场地" [(ngModel)]="selectedInfo.id">
+                    <input matInput placeholder="注册场地" [(ngModel)]="selectedInfo.address">
                   </mat-form-field>
 
                   <mat-form-field class="invoice_input">
-                    <input matInput placeholder="注册固定电弧" [(ngModel)]="selectedInfo.id">
+                    <input matInput placeholder="注册固定电话" [(ngModel)]="selectedInfo.phone">
                   </mat-form-field>
 
                 </div>
@@ -404,7 +404,7 @@
           </mat-form-field>
 
           <mat-form-field class="invoice_input">
-            <input matInput placeholder="纳税人识编号" [(ngModel)]="newInfo.id">
+            <input matInput placeholder="纳税人识编号" [(ngModel)]="newInfo.taxpayer">
           </mat-form-field>
 
           <mat-form-field class="invoice_input">

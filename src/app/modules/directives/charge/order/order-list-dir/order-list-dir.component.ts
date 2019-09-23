@@ -25,29 +25,15 @@ export class OrderListDirComponent implements OnInit {
 
   // 获取列表
   getList() {
-    /*this.dataLists = [
+    this.dataLists = [
       {
         uid: '1',
         name: '物联网终端采购',
         age: 32,
         address: 'New York No. 1 Lake Park',
         status: 1
-      },
-      {
-        uid: '2',
-        name: '物联网终端采购',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        status: 0
-      },
-      {
-        uid: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        status: -1
       }
-    ];*/
+    ];
 
     this.isSpinning = true;
     this.chargeService.getOrderLists(this.page, this.pageSize, this.search, this.value)

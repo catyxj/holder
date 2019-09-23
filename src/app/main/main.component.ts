@@ -66,6 +66,12 @@ export class MainComponent implements OnInit, OnDestroy {
         case '1':
           this.router.navigate(['/admin/ad']);
           break;
+        case '5':
+          this.router.navigate(['/admin/operator/delivery']);
+          break;
+        case '6':
+          this.router.navigate(['/admin/finance']);
+          break;
         case '10':
           this.router.navigate(['/admin/ordinary']);
           break;

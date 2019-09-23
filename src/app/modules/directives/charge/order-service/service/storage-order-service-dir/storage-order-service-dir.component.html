@@ -14,8 +14,8 @@
         充值时间：
       </div>
       <div class="">
-        <nz-select style="width: 120px;" [(ngModel)]="time" nzAllowClear>
-          <nz-option nzValue="12" nzLabel="12个月"></nz-option>
+        <nz-select style="width: 120px;" [(ngModel)]="type" nzAllowClear>
+          <nz-option *ngFor="let item of timeList" [nzValue]="item" [nzLabel]="item.name"></nz-option>
         </nz-select>
       </div>
     </div>
@@ -25,7 +25,7 @@
         资费标准：
       </div>
       <div class="standard">
-        <span class="text_purple">¥10000.00 </span>
+        <span class="text_purple">{{type?.price | currency: '￥'}} </span>
         <span style="color: #333333;"> 定期 </span>
       </div>
     </div>
@@ -42,7 +42,7 @@
     <div class="c_intro">
       <div>功能说明：</div>
       <p>
-        这是一条说明说明说明说明这是一条说明说明说明说明这是一条说明说明说明说明这是一条说明说明说明说明这是一条说明说明说明说明这是一条说明说明说明说明这是一条说明说明说明说明这是一条说明说明说明说明这是一条说明说明说明说明这是一条说明说明说明说明。
+        {{type?.description}}
       </p>
 
     </div>
@@ -57,7 +57,7 @@
         费用小计：
       </div>
       <div class="cost_value">
-        ¥ 9000.00
+        {{type?.price | currency: '￥'}}
       </div>
     </div>
 

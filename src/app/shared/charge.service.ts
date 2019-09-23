@@ -24,7 +24,6 @@ export class ChargeService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    // let roleId = localStorage.getItem('roleId');
     let url = `/api/formal/consumption/chart`;
 
     return this.http.get<any>(url, httpOptions)
@@ -38,7 +37,6 @@ export class ChargeService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    // let roleId = localStorage.getItem('roleId');
     let url = `/api/formal/consumer/status`;
 
     return this.http.get<any>(url, httpOptions)
@@ -101,9 +99,7 @@ export class ChargeService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    // let roleId = localStorage.getItem('roleId');
-    let url = `/api/formal/order/detail?uid=${uid}`;
-
+    let url = `/api/formal/order/detail?order_sn=${uid}`;
 
     return this.http.get<any>(url, httpOptions)
       .pipe(
@@ -157,11 +153,11 @@ export class ChargeService {
   }
 
   // 获取地址列表
-  getAddressList(): Observable<any>  {
+  getAddressList(type): Observable<any>  {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    let url = `/api/formal/customer/address/list`;
+    let url = `/api/formal/customer/address/list?type=${type}`;
 
     return this.http.get<any>(url, httpOptions)
       .pipe(
@@ -250,11 +246,11 @@ export class ChargeService {
   }
 
   // 订购产品信息列表
-  getProductInfo(): Observable<any>  {
+  getProductInfo(id): Observable<any>  {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    let url = `/api/formal/product/item/list`;
+    let url = `/api/formal/product/item/list?id=${id}`;
 
     return this.http.get<any>(url, httpOptions)
       .pipe(
@@ -271,6 +267,20 @@ export class ChargeService {
     let url = `/api/formal/order/submit`;
 
     return this.http.post<any>(url, data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+  // 获取订单支付详情
+  getPayInfo(id): Observable<any>  {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let url = `/api/formal/order/detail?order_sn=${id}`;
+
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

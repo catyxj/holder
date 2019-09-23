@@ -13,6 +13,8 @@ import Swal from 'sweetalert2';
 })
 export class InvoiceInfoDirComponent implements OnInit {
   public amount; // 开票金额
+  public sn; // 开票订单号
+
   public addressList = []; // 地址列表
   public showAll = false; // 显示所有地址
   public defaultAddress; // 默认地址
@@ -50,15 +52,19 @@ export class InvoiceInfoDirComponent implements OnInit {
 
   ngOnInit() {
     this.amount = this.route.snapshot.paramMap.get('amount');
+    this.sn = JSON.parse(this.route.snapshot.paramMap.get('sn'));
+    // console.log(this.sn);
+
     this.newAddress = {
       name: '',
       address: '',
-      contact: '',
-      location: 0
+      telephone: '',
+      location_id: 0,
+      location_name: ''
     };
     this.newInfo = {
       name: '',
-      id: '',
+      taxpayer: '',
       bank: '',
       account: '',
       address: '',
@@ -71,32 +77,39 @@ export class InvoiceInfoDirComponent implements OnInit {
 
   // 获取地址信息
   getAddressInfo() {
-    /*this.addressList = [
+    this.addressList = [
       {
         uid: '11111',
-        def: false,
+        is_default: false,
         name: 'aaaaa',
         location_id: 330201,
-        address: '浙江 宁波 鄞州区 首南街道 泰康中路558号宁波商会国贸中心A座2508x11111111'
+        location_name: '浙江 宁波 鄞州区 首南街道 泰康中路558号宁波商会国贸中心A座2508x1',
+        telephone: '11111111',
+        address: '浙江 宁波 鄞州区'
       },
       {
         uid: '22222',
-        def: false,
+        is_default: false,
         name: 'bbbbb',
         location_id: 330203,
-        address: '浙江 宁波 鄞州区 首南街道 泰康中路558号宁波商会国贸中心A座2508xx2222222'
+        telephone: '11111111',
+        location_name: '浙江 宁波 鄞州区 首南街道 泰康中路558号宁波商会国贸中心A座2508x',
+        address: '首南街道 泰康中路558号宁波商会国贸中心A座2508xx2222222'
       },
       {
         uid: '33333',
-        def: true,
+        is_default: true,
         name: 'aaaaa',
+        location_name: '浙江 宁波 鄞州区 首南街道 泰康中路558号宁波商会国贸中心A座2508xx22',
+        telephone: '11111111',
         location_id: 330101,
-        address: '浙江 宁波 鄞州区 首南街道 泰康中路558号宁波商会国贸中心A座2508xxx3333333'
+        address: '首南街道 泰康中路558号宁波商会国贸中心A座2508xxx3333333'
       }
     ];
-    this.initAddress();*/
+    this.initAddress();
 
-    this.chargeService.getAddressList()
+    let type = 1;
+    this.chargeService.getAddressList(type)
       .subscribe(data => {
         this.addressList = data;
         this.initAddress();
@@ -109,7 +122,7 @@ export class InvoiceInfoDirComponent implements OnInit {
     if (this.addressList && this.addressList.length > 0) {
       this.otherAddress = [];
       for (let i = 0; i < this.addressList.length; i++) {
-        if (this.addressList[i].def) {
+        if (this.addressList[i].is_default) {
           this.defaultAddress = this.addressList[i];
         } else {
           this.otherAddress.push(this.addressList[i]);
@@ -122,62 +135,72 @@ export class InvoiceInfoDirComponent implements OnInit {
 
 
   getInfo() {
-    /*this.infoList = [
+    this.infoList = [
       {
-        uid: 'adsfas',
-        def: true,
-        name: '宁波厚德能源科技有限公司1',
-        id: 'aaaa',
-        bank: 'aaaaaaaa',
-        account: '1224444',
-        phone: '12345'
+        id: 'adsfas',
+        is_default: true,
+        company: '宁波厚德能源科技有限公司1',
+        taxpayer_id: 'aaaa',
+        bank_account: 'aaaaaaaa',
+        open_account: '1224444',
+        register_place: '浙江省宁波市海曙区',
+        register_tel: '12345'
       },
       {
-        uid: 'adsfas111',
-        def: false,
-        name: '宁波厚德能源科技有限公司',
-        id: 'bbbb',
-        bank: 'bbbbbbbbbbb',
-        account: '1224dasf',
-        phone: '12345222'
-      },
-      {
-        uid: 'adsfas222',
-        def: false,
-        name: '宁波厚德能源科技有限公司',
-        id: 'dddda',
-        bank: 'aadddd',
-        account: '122444dd',
-        phone: '1234225'
+        id: 'adsfas111',
+        is_default: false,
+        company: '宁波厚德能源科技有限公司',
+        taxpayer_id: 'bbbb',
+        bank_account: 'bbbbbbbbbbb',
+        open_account: '1224dasf',
+        register_place: '浙江省宁波市鄞州区',
+        register_tel: '12345222'
       }
     ];
     if (this.infoList && this.infoList.length > 0) {
       this.otherInfo = [];
       for (let i = 0; i < this.infoList.length; i++) {
-        if (this.infoList[i].def) {
+        if (this.infoList[i].is_default) {
           this.defaultInfo = this.infoList[i];
         } else {
           this.otherInfo.push(this.infoList[i]);
         }
       }
-      this.selectedInfo = this.defaultInfo;
-    }*/
+      this.selectedInfo = {
+        id: this.defaultInfo.id,
+        name: this.defaultInfo.company,
+        taxpayer: this.defaultInfo.taxpayer_id,
+        bank: this.defaultInfo.bank_account,
+        account: this.defaultInfo.open_account,
+        address: this.defaultInfo.register_place,
+        phone: this.defaultInfo.register_tel
+      };
+    }
 
     this.chargeService.getInvoiceInfoList()
       .subscribe(data => {
         this.infoList = data;
-      }, err => {
         if (this.infoList && this.infoList.length > 0) {
           this.otherInfo = [];
           for (let i = 0; i < this.infoList.length; i++) {
-            if (this.infoList[i].def) {
+            if (this.infoList[i].is_default) {
               this.defaultInfo = this.infoList[i];
             } else {
               this.otherInfo.push(this.infoList[i]);
             }
           }
-          this.selectedInfo = this.defaultInfo;
+          this.selectedInfo = {
+            id: this.defaultInfo.id,
+            name: this.defaultInfo.company,
+            taxpayer: this.defaultInfo.taxpayer_id,
+            bank: this.defaultInfo.bank_account,
+            account: this.defaultInfo.open_account,
+            address: this.defaultInfo.register_place,
+            phone: this.defaultInfo.register_tel
+          };
         }
+      }, err => {
+
       });
 
   }
@@ -266,14 +289,9 @@ export class InvoiceInfoDirComponent implements OnInit {
 
   // 选中地址
   selectAddr(data) {
-    this.selectedAddr = {
-      uid: data.uid,
-      name: data.name,
-      address: data.address,
-      contact: '',
-      location: data.location_id
-    };
+    this.selectedAddr = data;
     this.newAddr = false;
+    this.checkAddr = false;
   }
 
   // 使用新地址
@@ -286,20 +304,25 @@ export class InvoiceInfoDirComponent implements OnInit {
   // 选中信息
   selectInfo(data) {
     this.selectedInfo = {
-      uid: data.uid,
-      name: data.name,
       id: data.id,
-      bank: data.bank,
-      account: data.account,
-      address: data.address,
-      phone: data.phone
+      name: data.company,
+      taxpayer: data.taxpayer_id,
+      bank: data.bank_account,
+      account: data.open_account,
+      address: data.register_place,
+      phone: data.register_tel
     };
     this.showNewInfo = false;
+    this.checkInfo = false;
+    if (!data.is_default) {
+      this.showDefInfo = false;
+    }
   }
 
   // 使用新信息
   selectNewInfo() {
     this.showNewInfo = true;
+    this.showDefInfo = false;
     this.selectedInfo = this.newInfo;
   }
 
@@ -322,7 +345,7 @@ export class InvoiceInfoDirComponent implements OnInit {
   // 删除地址
   deleteAddr(data) {
     let that = this;
-    this.chargeService.deleteAddress(data)
+    this.chargeService.deleteAddress({data: [data.uid]})
       .subscribe(val => {
         Swal(
           '操作成功！',
@@ -339,10 +362,16 @@ export class InvoiceInfoDirComponent implements OnInit {
       });
   }
 
+  // 设为默认地址
+  setDefaultAddr(data) {
+    let that = this;
+    that.getAddressInfo();
+  }
+
   // 删除信息
   deleteInfo(data) {
     let that = this;
-    this.chargeService.deleteInvoiceInfo(data)
+    this.chargeService.deleteInvoiceInfo(data.id)
       .subscribe(val => {
         Swal(
           '操作成功！',
@@ -359,24 +388,50 @@ export class InvoiceInfoDirComponent implements OnInit {
       });
   }
 
+  // 设为默认信息
+  setDefaultInfo(data) {
+    let that = this;
+    that.getInfo();
+  }
 
+
+  // 提交
   save() {
 
     let that = this;
-    if (!this.selectedInfo) {
-      Swal('请填写发票信息');
+    if (!this.selectedInfo || !this.selectedInfo.name || !this.selectedInfo.taxpayer || !this.selectedInfo.bank
+      || !this.selectedInfo.account || !this.selectedInfo.address || !this.selectedInfo.phone) {
+      Swal('请填写完整发票信息');
+      return;
     }
 
     if (this.showAddAddr || this.newAddr) {
-      this.newAddress.location = this.locationId;
+      this.newAddress.location_id = this.locationId;
+      this.newAddress.location_name = this.locationName  + this.newAddress.address;
     }
 
+
+    // name: this.defaultInfo.company,
+    //   taxpayer: this.defaultInfo.taxpayer_id,
+    //   bank: this.defaultInfo.bank_account,
+    //   account: this.defaultInfo.open_account,
+    //   address: this.defaultInfo.register_place,
+    //   phone: this.defaultInfo.register_tel
     let post = {
-      showAddAddr: this.showAddAddr, // 添加新地址（无默认地址）
-      showNewInfo: this.showNewInfo, // 显示新信息
-      newAddr: this.newAddr, // 使用新地址（有默认地址）
-      selectedAddr: this.selectedAddr,
-      selectedInfo: this.selectedInfo
+      order_sn: this.sn,
+      name: this.selectedAddr.name,
+      location_id: this.selectedAddr.location_id,
+      location_name: this.selectedAddr.location_name,
+      address: this.selectedAddr.address,
+      tel: this.selectedAddr.telephone,
+      address_add: this.checkAddr,
+      company: this.selectedInfo.name,
+      taxpayer_id: this.selectedInfo.taxpayer,
+      bank_account: this.selectedInfo.bank,
+      open_account: this.selectedInfo.account,
+      register_place: this.selectedInfo.address,
+      register_tel: this.selectedInfo.phone,
+      invoiced_add: this.checkInfo
     };
     console.log(post);
     this.chargeService.submitInvoice(post)

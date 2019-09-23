@@ -27,7 +27,7 @@ export class BillDetailDirComponent implements OnInit {
 
   // 获取列表
   getList() {
-    this.dataLists = [
+    /*this.dataLists = [
       {
         key: '1',
         name: '物联网终端采购',
@@ -46,7 +46,7 @@ export class BillDetailDirComponent implements OnInit {
         age: 32,
         address: 'Sidney No. 1 Lake Park'
       }
-    ];
+    ];*/
 
     this.isSpinning = true;
     this.chargeService.getDetailLists(this.page, this.pageSize, this.search, this.value)

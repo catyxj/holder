@@ -120,9 +120,13 @@
           <td> {{data.create_date | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
           <td> {{data.active_date | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
           <td>
-            <a class="btn btn_purple btn-sm" [routerLink]="['/admin/ad/flow/info', data.iccid, page]">
-              详情
+            <a class="" [routerLink]="['/admin/ad/flow/info', data.iccid, page]" title="设置">
+              <!--设置-->
+              <i class="iconfont iconshezhi1 text_purple"></i>
             </a>
+            <!--<a class="btn btn_purple btn-sm" [routerLink]="['/admin/ad/flow/info', data.iccid, page]">
+              详情
+            </a>-->
           </td>
         </tr>
         </tbody>

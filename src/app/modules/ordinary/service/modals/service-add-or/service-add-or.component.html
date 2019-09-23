@@ -11,10 +11,25 @@
       表单分类：
     </div>
     <div class="m_input">
-      B类，系统问题
+      <!--B类，系统问题-->
       <!--<select [(ngModel)]="type" class="form-control">
         <option *ngFor="let tp of typeList" [value]="tp.id" >{{tp.name}}</option>
       </select>-->
+
+      <nz-select [(ngModel)]="type" style="width: 240px;">
+        <nz-option *ngFor="let tp of typeList" [nzLabel]="tp.name" [nzValue]="tp.id"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+
+  <div class="m_item" *ngIf="type === '3'">
+    <div class="m_label">
+      选择产品：
+    </div>
+    <div class="m_input">
+      <nz-select [(ngModel)]="product"  style="width: 240px;">
+        <nz-option *ngFor="let tp of proList" [nzLabel]="tp.name" [nzValue]="tp.uid"></nz-option>
+      </nz-select>
     </div>
   </div>
 

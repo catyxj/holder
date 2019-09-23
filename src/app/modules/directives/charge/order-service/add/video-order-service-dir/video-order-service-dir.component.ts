@@ -15,11 +15,13 @@ import Swal from 'sweetalert2';
 export class VideoOrderServiceDirComponent implements OnInit {
   public count;
   public typeList = [];
-  public type = 1;
+  public type = 1; // 选择类型
   public addrList = [];
-  public address;
+  public addressId;
   public orderType;
   public title;
+  public id;
+  public cost;
 
   constructor(private chargeService: ChargeService,
               private modalService: NgbModal,
@@ -31,15 +33,19 @@ export class VideoOrderServiceDirComponent implements OnInit {
     switch (this.orderType) {
       case 'terminal':
         this.title = 'NK物联网终端订购';
+        this.id = 1;
         break;
       case 'video':
         this.title = '视频设备订购';
+        this.id = 2;
         break;
       case 'bluetooth':
         this.title = '蓝牙模组订购';
+        this.id = 3;
         break;
       case 'sensor':
         this.title = '传感器订购';
+        this.id = 4;
         break;
     }
     this.getTypeList();
@@ -50,14 +56,18 @@ export class VideoOrderServiceDirComponent implements OnInit {
   getTypeList() {
     /*this.typeList = [
       {
-        type: 1
+        id: 1,
+        name: 'aaa',
+        price: 222
       },
       {
-        type: 2
+        id: 2,
+        name: 'bbb',
+        price: 111
       }
     ];*/
 
-    this.chargeService.getProductInfo()
+    this.chargeService.getProductInfo(this.id)
       .subscribe(data => {
         this.typeList = data;
       }, err => {
@@ -69,26 +79,35 @@ export class VideoOrderServiceDirComponent implements OnInit {
 
   // 获取地址信息
   getAddrList() {
-    this.addrList = [
+    /*this.addrList = [
       {
         uid: 'aaaa',
-        info: '浙江省 宁波市 鄞州区 新明街道 XXX'
+        name: 'aaaaaaa',
+        telephone: '122334',
+        location_name: '浙江省 宁波市 鄞州区 新明街道 XXX'
       },
       {
         uid: 'bbb',
-        info: '浙江省 宁波市 鄞州区 新明街道 XXX'
+        name: 'bbbbbb',
+        telephone: '122334',
+        location_name: '浙江省 宁波市 鄞州区 新明街道 XXX'
       },
       {
         uid: 'acc',
-        info: '浙江省 宁波市 鄞州区 南部商务区 sssssss'
+        name: 'cccccc',
+        telephone: '122334',
+        location_name: '浙江省 宁波市 鄞州区 南部商务区 sssssss'
       },
       {
-        uid: 'add',
-        info: '浙江省 宁波市 鄞州区 新明街道 XXX'
+        uid: 'adad',
+        name: 'dddddd',
+        telephone: '122334',
+        location_name: '浙江省 宁波市 鄞州区 新明街道 XXX'
       }
-    ];
+    ];*/
 
-    this.chargeService.getAddressList()
+    let type = 1;
+    this.chargeService.getAddressList(type)
       .subscribe(data => {
         this.addrList = data;
       }, err => {
@@ -114,16 +133,36 @@ export class VideoOrderServiceDirComponent implements OnInit {
 
   save() {
     let that = this;
+    if (!this.addrList || this.addrList.length <= 0 || !this.addressId) {
+      Swal(
+        '请选择地址或添加新地址',
+        '',
+        'info'
+      );
+      return;
+    }
+
+    let addr;
+    for (let i = 0; i < this.addrList.length; i++) {
+      if (this.addressId === this.addrList[i].uid) {
+        addr = this.addrList[i];
+        break;
+      }
+    }
+
+    console.log(addr);
     let post = {
-      type: this.type,
-      count: this.count,
-      address: this.address
+      item_id: this.type,
+      number: this.count,
+      ship_name: addr.name,
+      ship_tel: addr.telephone,
+      ship_address: addr.location_name
     };
     console.log(post);
     this.chargeService.submitOrder(post)
       .subscribe(val => {
-
-        that.router.navigate(['/dir/charge/purchase/payment']);
+        let uid = val.order_sn;
+        that.router.navigate(['/dir/charge/purchase/payment', uid]);
       }, err => {
         Swal(
           err.message || err,
@@ -131,6 +170,8 @@ export class VideoOrderServiceDirComponent implements OnInit {
           'error'
         );
       });
+
+    that.router.navigate(['/dir/charge/purchase/payment', 'aaaa']);
 
   }
 

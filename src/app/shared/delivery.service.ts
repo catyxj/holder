@@ -22,7 +22,7 @@ export class DeliveryService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    let url = `/api/operator/delivery/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    let url = `/api/operation/order/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
 
     return this.http.get<any>(url, httpOptions)
       .pipe(
@@ -35,9 +35,44 @@ export class DeliveryService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    let url = `/api/operator/delivery/info?uid=${uid}`;
+    let url = `/api/operation/order/detail?order_sn=${uid}`;
 
     return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取发货产品列表
+  getDeliveryList(uid, page, pageSize): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let url = `/api/operation/order/sale/list?order_sn=${uid}&page=${page}&rows=${pageSize}`;
+
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 修改发货状态
+  editDeliveryStatus(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post<any>('/api/operation/order/status/update', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 添加发货项目
+  addDelivery(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post<any>('/api/operation/order/sale/add', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

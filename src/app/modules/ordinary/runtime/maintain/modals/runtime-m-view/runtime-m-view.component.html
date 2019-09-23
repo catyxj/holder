@@ -14,7 +14,7 @@
           设备终端：
         </b>
         <div class="mp_a_value">
-          681004（某某某锅炉）
+          {{info?.terminal_code}}（{{info?.ept_name}}）
         </div>
       </div>
 
@@ -23,7 +23,7 @@
           维保模版：
         </b>
         <div class="mp_a_value">
-          ESE47441477（A型锅炉巡检模版）
+          {{info?.template_label}}（{{info?.template_name}}）
         </div>
       </div>
     </div>
@@ -34,7 +34,7 @@
           维保人员：
         </b>
         <div class="mp_a_value">
-          张三
+          {{info?.upload_name}}
         </div>
       </div>
 
@@ -43,7 +43,7 @@
           提交时间：
         </b>
         <div class="mp_a_value">
-          2019-02-12 12:12:12
+          {{info?.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}
         </div>
       </div>
     </div>
@@ -77,13 +77,13 @@
         <td> {{ n+1 }} </td>
         <td style=" color:#666EE8;"> {{ item.description }} </td>
         <td>
-          <div *ngIf="item.status" class="i_row">
+          <div *ngIf="!item.result" class="i_row">
             <div class="r_circle green">
               <div class="r_circle_in"></div>
             </div>
             正常
           </div>
-          <div *ngIf="!item.status" class="i_row">
+          <div *ngIf="item.result" class="i_row">
             <div class="r_circle warning">
               <div class="r_circle_in"></div>
             </div>
@@ -98,8 +98,8 @@
           <!--<span *ngFor="let img of item.imgList; let n = index;">
             <a href="{{img}}" download="图片{{ n+1 }}">图片{{ n+1 }}</a>
           </span>-->
-          <span *ngFor="let img of item.imgList; let n = index;" (click)="preview(img)" class="m-r-img">
-              <img src="{{img}}" alt="">
+          <span *ngFor="let img of item.img; let n = index;" (click)="preview(img.oss_path)" class="m-r-img">
+              <img src="{{img.oss_path}}" alt="">
             <!--<a>图片{{ n+1 }}</a>-->
             </span>
         </td>

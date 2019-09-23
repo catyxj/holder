@@ -11,7 +11,7 @@
       <nz-select style="width: 90px;" class="ml-1" [(ngModel)]="selectedValue" nzAllowClear>
         <nz-option nzValue="1" nzLabel="1月"></nz-option>
         <nz-option nzValue="2" nzLabel="2月"></nz-option>
-        <nz-option nzValue="3" nzLabel="3月" nzDisabled></nz-option>
+        <nz-option nzValue="3" nzLabel="3月"></nz-option>
         <nz-option nzValue="4" nzLabel="4月"></nz-option>
         <nz-option nzValue="5" nzLabel="5月"></nz-option>
         <nz-option nzValue="6" nzLabel="6月"></nz-option>
@@ -54,12 +54,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let data of dataLists">
-          <td>18012341234</td>
-          <td>{{data.name}}</td>
+          <td>{{data.created_username}}</td>
+          <td>{{data.item_name}}</td>
           <td>终端设备购买</td>
-          <td>新购</td>
-          <td>¥5000,00</td>
-          <td>¥5000,00</td>
+          <td>{{data.item_type}}</td>
+          <td>{{data.order_money | currency: '￥'}}</td>
+          <td>{{data.pay_money | currency: '￥'}}</td>
         </tr>
       </tbody>
     </table>

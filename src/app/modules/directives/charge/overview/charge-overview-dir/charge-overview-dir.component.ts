@@ -34,7 +34,8 @@ export class ChargeOverviewDirComponent implements OnInit {
 
   getCostData() {
 
-    // this.costData = [{receive_time: '2019-01' , value: 21}, {receive_time: '2019-02' , value: 23}, {receive_time: '2019-03' , value: 21}, {receive_time: '2019-04' , value: 21}, {receive_time: '2019-05' , value: 33}, {receive_time: '2019-06' , value: 21}, {receive_time: '2019-07' , value: 33}, {receive_time: '2019-08' , value: 21}, {receive_time: '2019-09' , value: 33}, {receive_time: '2019-10' , value: 24}];
+    /*this.costData = [{date: '2019-01' , sum: 21}, {date: '2019-02' , sum: 23}, {date: '2019-03' , sum: 21}, {date: '2019-04' , sum: 21}, {date: '2019-05' , sum: 33}, {date: '2019-06' , sum: 21}, {date: '2019-07' , sum: 33}, {date: '2019-08' , sum: 21}, {date: '2019-09' , sum: 33}, {date: '2019-10' , sum: 24}];
+    this.initChart();*/
 
     this.chargeService.getConsumption()
       .subscribe(data => {
@@ -101,7 +102,7 @@ export class ChargeOverviewDirComponent implements OnInit {
         }
       ],
       dataset: {
-        dimensions: ['receive_time', 'value'],
+        dimensions: ['date', 'sum'],
         source: this.costData
       },
 

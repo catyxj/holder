@@ -121,9 +121,13 @@
           </td>
           <td> {{data.created_at | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
           <td>
-            <a class="btn btn_purple btn-sm" [routerLink]="['/admin/ad/bluetooth/info', data.uid, page]">
-              设置
+            <a class="" [routerLink]="['/admin/ad/bluetooth/info', data.uid, page]" title="设置">
+              <!--设置-->
+              <i class="iconfont iconshezhi1 text_purple"></i>
             </a>
+            <!--<a class="btn btn_purple btn-sm" [routerLink]="['/admin/ad/bluetooth/info', data.uid, page]">
+              设置
+            </a>-->
           </td>
         </tr>
         </tbody>

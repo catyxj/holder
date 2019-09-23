@@ -119,7 +119,7 @@ const routes: Routes = [
     component: DirMainComponent,
     children: [
       {
-        path: 'charge/invoice/info/:amount',
+        path: 'charge/invoice/info/:amount/:sn',
         component: InvoiceInfoDirComponent
       },
       /*{
@@ -151,7 +151,7 @@ const routes: Routes = [
         component: TrafficOrderServiceDirComponent
       },
       {
-        path: 'charge/purchase/payment',
+        path: 'charge/purchase/payment/:uid',
         component: PaymentOrderServiceDirComponent
       },
 

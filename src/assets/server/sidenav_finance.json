@@ -4,7 +4,7 @@
       "name": "发票信息",
       "code": "sub2",
       "icon": "fa-home",
-      "img": "assets/icons/menu/operator.png",
+      "img": "assets/icons/menu/invoice0.png",
       "router": "/admin/finance/invoice",
       "index": true,
       "checked": false

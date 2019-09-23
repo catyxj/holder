@@ -20,11 +20,16 @@ export class DeliverySetComponent implements OnInit {
               private deliveryService: DeliveryService) { }
 
   ngOnInit() {
+    this.status = this.currentData.ship_status ? 'true' : 'false';
   }
 
   save() {
     let that = this;
-    /*this.deliveryService.scrap(this.uid)
+    let post = {
+      order_sn: this.uid,
+      status: this.status === 'true'
+    };
+    this.deliveryService.editDeliveryStatus(post)
       .subscribe(val => {
         Swal(
           '操作成功！',
@@ -34,11 +39,11 @@ export class DeliverySetComponent implements OnInit {
         that.activeModal.close('ok');
       }, err => {
         Swal(
-          err.message,
+          err.message || err,
           '',
           'error'
         );
-      });*/
+      });
   }
 
 }

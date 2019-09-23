@@ -30,9 +30,9 @@
         </nz-input-group>
         <ng-template #addOnBeforeTemplate>
           <nz-select [(ngModel)]="search">
-            <nz-option [nzLabel]="'订单编号'" [nzValue]="'id'"></nz-option>
-            <nz-option [nzLabel]="'账号'" [nzValue]="'username'"></nz-option>
-            <nz-option [nzLabel]="'单位名称'" [nzValue]="'org_name'"></nz-option>
+            <nz-option [nzLabel]="'订单编号'" [nzValue]="'order_sn'"></nz-option>
+            <nz-option [nzLabel]="'账号'" [nzValue]="'created_username'"></nz-option>
+            <nz-option [nzLabel]="'单位名称'" [nzValue]="'created_org'"></nz-option>
           </nz-select>
         </ng-template>
         <ng-template #addOnAfterTemplate>
@@ -67,18 +67,18 @@
         </thead>
         <tbody>
         <tr *ngFor="let data of dataTable.data">
-          <td> {{data.id}} </td>
-          <td> 18012341234 </td>
-          <td> A企业</td>
-          <td> 2019-09-21 09:12:21 </td>
-          <td> ¥460.00 </td>
-          <td> ¥460.00 </td>
+          <td> {{data.order_sn}} </td>
+          <td> {{data.created_username}} </td>
+          <td> {{data.created_org}}</td>
+          <td> {{data.pay_at | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
+          <td> {{data.pay_money | currency: '￥'}} </td>
+          <td> {{data.pay_money | currency: '￥'}} </td>
           <td>
-            <nz-tag [nzColor]="'#1E9FF2'" *ngIf="data.status">已完成</nz-tag>
-            <nz-tag [nzColor]="'#FFC06A'" *ngIf="!data.status">未完成</nz-tag>
+            <nz-tag [nzColor]="'#1E9FF2'" *ngIf="data.invoice_status">已完成</nz-tag>
+            <nz-tag [nzColor]="'#FFC06A'" *ngIf="!data.invoice_status">未完成</nz-tag>
           </td>
           <td>
-            <a style="color: #5584FF;" [routerLink]="['/admin/finance/invoice/info', data.uid, page]">
+            <a style="color: #5584FF;" [routerLink]="['/admin/finance/invoice/info', data.order_sn, page]">
               详情
             </a>
           </td>

@@ -24,7 +24,7 @@
           可索取发票
         </div>
         <div class="t_info_value">
-          ¥2000,00
+          {{info?.invoiced_amount | currency: '￥'}}
         </div>
       </div>
 
@@ -59,7 +59,7 @@
           账号
         </div>
         <div class="t_info_value">
-          18023411234
+          {{info?.username}}
         </div>
       </div>
 
@@ -86,8 +86,8 @@
           扩展应用
         </div>
         <div class="t_info_value">
-          <div class="expand">
-            <span class="ex_item">
+          <div class="expand" *ngIf="info">
+            <span class="ex_item" *ngFor="let item of info.service">
               LOGO定制
             </span>
             <span class="ex_item">

@@ -61,7 +61,6 @@ import { TerminalOrderServiceDirComponent } from './modules/directives/charge/or
 import { VideoOrderServiceDirComponent } from './modules/directives/charge/order-service/add/video-order-service-dir/video-order-service-dir.component';
 import { SensorOrderServiceDirComponent } from './modules/directives/charge/order-service/add/sensor-order-service-dir/sensor-order-service-dir.component';
 import { LogoOrderServiceDirComponent } from './modules/directives/charge/order-service/upgrade/logo-order-service-dir/logo-order-service-dir.component';
-import { VideoUpgradeOrderServiceDirComponent } from './modules/directives/charge/order-service/upgrade/video-upgrade-order-service-dir/video-upgrade-order-service-dir.component';
 import { StorageOrderServiceDirComponent } from './modules/directives/charge/order-service/service/storage-order-service-dir/storage-order-service-dir.component';
 import { PaymentOrderServiceDirComponent } from './modules/directives/charge/order-service/payment-order-service-dir/payment-order-service-dir.component';
 import { TrafficOrderServiceDirComponent } from './modules/directives/charge/order-service/traffic-order-service-dir/traffic-order-service-dir.component';
@@ -71,6 +70,7 @@ import { DeliveryMainComponent } from './modules/directives/operator/delivery/de
 import { DeliveryListComponent } from './modules/directives/operator/delivery/delivery-list/delivery-list.component';
 import { DeliveryInfoComponent } from './modules/directives/operator/delivery/delivery-info/delivery-info.component';
 import { DeliverySetComponent } from './modules/directives/operator/delivery/modals/delivery-set/delivery-set.component';
+import { AddDeliveryItemComponent } from './modules/directives/operator/delivery/modals/add-delivery-item/add-delivery-item.component';
 
 
 
@@ -116,7 +116,6 @@ registerLocaleData(zh);
     VideoOrderServiceDirComponent,
     SensorOrderServiceDirComponent,
     LogoOrderServiceDirComponent,
-    VideoUpgradeOrderServiceDirComponent,
     StorageOrderServiceDirComponent,
     PaymentOrderServiceDirComponent,
     TrafficOrderServiceDirComponent,
@@ -126,6 +125,7 @@ registerLocaleData(zh);
     DeliveryListComponent,
     DeliveryInfoComponent,
     DeliverySetComponent,
+    AddDeliveryItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -153,6 +153,7 @@ registerLocaleData(zh);
     AddressAddPurchaseDirComponent,
     AddressEditInvioceDirComponent,
     DeliverySetComponent,
+    AddDeliveryItemComponent
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},

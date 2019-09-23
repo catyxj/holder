@@ -13,7 +13,7 @@ import {InvoiceService} from "../../../../shared/invoice.service";
 export class InvoiceInfoFiComponent implements OnInit {
   public uid;
   public basic;
-  public products;
+  public invoice;
   public listPage;
 
   constructor(private route: ActivatedRoute,
@@ -23,19 +23,47 @@ export class InvoiceInfoFiComponent implements OnInit {
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
     this.listPage = this.route.snapshot.paramMap.get('page');
-    this.basic = {
-      amount: 300,
-      pay_account: 'asdfa@123.com'
-    };
+
 
     this.getBasic();
   }
 
   // 获取基础信息
   getBasic() {
+    /*this.basic = {
+      created_username: '112333',
+      created_name: 'aaaaa',
+      created_org: 'aaaadsf',
+      created_at: '2019-4-4',
+      order_status: false,
+      pay_at: '2019-9-9',
+      pay_money: 300,
+      buyer_account: 'asdfa@123.com'
+    };
+    if (this.basic && this.basic.buyer_account) {
+      this.basic.buyer_account = this.hideEmailInfo(this.basic.buyer_account);
+    }
+    this.invoice = {
+      company: 'qqqq',
+      taxpayer_id: '122334',
+      bank_account: 'adfa',
+      open_account: 'asdfasdf',
+      register_place: '浙江省宁波市',
+      register_tel: '1234654',
+      invoiced_type: 1,
+      name: 'asdfasdf',
+      tel: '1234549798',
+      location_name: '浙江省宁波市海曙区哒哒哒哒哒哒'
+    };*/
+
+
     this.invoiceService.getInvoiceInfo(this.uid)
       .subscribe(data => {
-        this.basic = data;
+        this.basic = data.order;
+        this.invoice = data.invoiced;
+        if (this.basic && this.basic.buyer_account) {
+          this.basic.buyer_account = this.hideEmailInfo(this.basic.buyer_account);
+        }
       }, err => {
 
       });

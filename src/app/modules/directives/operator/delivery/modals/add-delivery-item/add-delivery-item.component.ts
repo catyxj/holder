@@ -1,23 +1,23 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {DeliveryService} from "../../../../../../shared/delivery.service";
 import Swal from 'sweetalert2';
-import {InvoiceService} from "../../../../../shared/invoice.service";
 
 @Component({
-  selector: 'app-invoice-set-fi',
-  templateUrl: './invoice-set-fi.component.html',
-  styleUrls: ['./invoice-set-fi.component.css']
+  selector: 'app-add-delivery-item',
+  templateUrl: './add-delivery-item.component.html',
+  styleUrls: ['./add-delivery-item.component.css']
 })
-export class InvoiceSetFiComponent implements OnInit {
-  @Input()
-  currentData;
+export class AddDeliveryItemComponent implements OnInit {
   @Input()
   uid;
 
-  public status;
+  public code;
+  public type;
+  public ver;
 
   constructor(public activeModal: NgbActiveModal,
-              private invoiceService: InvoiceService) { }
+              private deliveryService: DeliveryService) { }
 
   ngOnInit() {
   }
@@ -25,10 +25,12 @@ export class InvoiceSetFiComponent implements OnInit {
   save() {
     let that = this;
     let post = {
-      order_sn: this.uid,
-      status: this.status === 'true'
-    };
-    this.invoiceService.invoiceStatusSet(post)
+      item_code: this.code,
+      item_type: parseInt(this.type),
+      remark: this.ver,
+      order_sn: this.uid
+    }
+    this.deliveryService.addDelivery(post)
       .subscribe(val => {
         Swal(
           '操作成功！',

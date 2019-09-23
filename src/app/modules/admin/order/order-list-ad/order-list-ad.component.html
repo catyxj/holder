@@ -142,6 +142,11 @@
           </td>
           <td style="color: #666EE8;"> {{data.amount | currency: '￥'}} </td>
           <td>
+
+            <!--<a class="" [routerLink]="['/admin/ad/flow/info', data.iccid, page]" title="设置">
+              &lt;!&ndash;设置&ndash;&gt;
+              <i class="iconfont iconshezhi1 text_purple"></i>
+            </a>-->
             <a class="btn btn_purple btn-sm" [routerLink]="['/admin/ad/order/info', data.uid, page]">
               详情
             </a>

@@ -6,7 +6,7 @@
       <h5>支付</h5>
     </div>
     <div class="c_head_r" style="font-size: 12px; color:#414B92;">
-      总金额：¥20000,00
+      总金额： {{info?.pay_money | currency: '￥'}}
     </div>
   </div>
 
@@ -18,11 +18,14 @@
           订单号：23134123415521
         </div>
         <div class="text_purple" style="font-size: 18px;">
-          ¥ 10000.00
+          {{info?.pay_money | currency: '￥'}}
         </div>
       </div>
       <div class="c_text">
-        NK物联网终端订购  版本A  数量1
+        {{info?.item_name}}  版本{{info?.item_type}}  数量{{info?.item_number}}
+        <div *ngIf="info&&info.shipping_user">
+          {{info?.shipping_user}} {{info?.shipping_addr}} {{info?.shipping_tel}}
+        </div>
       </div>
     </div>
 

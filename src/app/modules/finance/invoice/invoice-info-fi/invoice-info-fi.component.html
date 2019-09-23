@@ -11,7 +11,7 @@
     </div>
     <div style="text-align: right;">
       <!--返回-->
-      <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/operator/delivery/list', {page: listPage}]">
+      <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/finance/invoice/list', {page: listPage}]">
         <i class="iconfont iconicon_comeback1"></i>
       </button>
       <button class="btn btn_purple btn_round bpm ml-1" (click)="statusSet()">
@@ -26,14 +26,14 @@
         订单编号：
       </div>
       <div class="text_purple">
-        1234541268685
+        {{uid}}
       </div>
     </div>
 
     <div>
-      当前状态：
-      <span style="color: #1E9FF2;">已发货</span>
-      <span style="color: #FFC06A;">未发货</span>
+      开票状态：
+      <span style="color: #1E9FF2;" *ngIf="basic && basic.order_status">已完成</span>
+      <span style="color: #FFC06A;" *ngIf="basic && !basic.order_status">未完成</span>
     </div>
 
   </div>
@@ -53,7 +53,7 @@
                 订单编号
               </div>
               <div class="or_item_text">
-                203861209130361
+                {{uid}}
               </div>
             </div>
 
@@ -71,7 +71,7 @@
                 订单创建账号
               </div>
               <div class="or_item_text">
-                {{basic?.username || '空'}} ({{basic?.username || '空'}})
+                {{basic?.created_username || '空'}} ({{basic?.created_name || '空'}})
               </div>
             </div>
 
@@ -80,7 +80,7 @@
                 所属单位
               </div>
               <div class="or_item_text">
-                {{basic?.org_name}}
+                {{basic?.created_org}}
               </div>
             </div>
 
@@ -89,10 +89,10 @@
                 订单类型
               </div>
               <div class="or_item_text">
-                <span *ngIf="basic&&basic.type === 1">
+                <span *ngIf="basic&&basic.item_type === 1">
                   定期
                 </span>
-                <span *ngIf="basic&&basic.type === 2">
+                <span *ngIf="basic&&basic.item_type === 2">
                   永久
                 </span>
               </div>
@@ -107,10 +107,10 @@
                 支付状态
               </div>
               <div class="or_item_text">
-                <span *ngIf="basic&&basic.status === 1">
+                <span *ngIf="basic && !basic.order_status" style="color: #B20000;">
                   待支付
                 </span>
-                <span *ngIf="basic&&basic.status === 2">
+                <span *ngIf="basic && basic.order_status">
                   支付完成
                 </span>
               </div>
@@ -130,7 +130,7 @@
                 支付金额
               </div>
               <div class="or_item_text">
-                {{basic?.amount | currency: '￥'}}
+                {{basic?.pay_money | currency: '￥'}}
               </div>
             </div>
 
@@ -139,10 +139,10 @@
                 支付方式
               </div>
               <div class="or_item_text">
-                <span *ngIf="basic&&basic.status === 1">
+                <span *ngIf="basic&&basic.pay_method === 1">
                   <img src="assets/images/alipay2.png" alt="">
                 </span>
-                <span *ngIf="basic&&basic.status === 2">
+                <span *ngIf="basic&&basic.pay_method === 2">
                   对公转账
                 </span>
               </div>
@@ -153,7 +153,7 @@
                 支付账号
               </div>
               <div class="or_item_text">
-                {{basic?.pay_account}}
+                {{basic?.buyer_account}}
               </div>
             </div>
           </div>
@@ -186,7 +186,7 @@
                 公司名称
               </div>
               <div class="item_c1_value">
-                A有限公司
+                {{invoice?.company}}
               </div>
             </div>
           </div>
@@ -197,7 +197,7 @@
                 纳税人识别号
               </div>
               <div class="item_c1_value">
-                Q231FSDF31234
+                {{invoice?.taxpayer_id}}
               </div>
             </div>
 
@@ -206,7 +206,7 @@
                 开户银行名称
               </div>
               <div class="item_c1_value">
-                中国银行高新分行
+                {{invoice?.bank_account}}
               </div>
             </div>
 
@@ -215,7 +215,7 @@
                 基本开户账号
               </div>
               <div class="item_c1_value">
-                12343567898765433456
+                {{invoice?.open_account}}
               </div>
             </div>
 
@@ -224,7 +224,7 @@
                 注册场所地址
               </div>
               <div class="item_c1_value">
-                浙江省宁波市xXXXXXXX
+                {{invoice?.register_place}}
               </div>
             </div>
 
@@ -233,7 +233,7 @@
                 注册固定电话
               </div>
               <div class="item_c1_value">
-                0574-12341234
+                {{invoice?.register_tel}}
               </div>
             </div>
 
@@ -250,13 +250,13 @@
           </div>
           <div class="item_c2_value">
             <div style="margin-bottom: 15px;">
-              <b style="font-size: 18px; color: #000000;">陈 宁</b>
+              <b style="font-size: 18px; color: #000000;">{{invoice?.name}}</b>
               <span style="font-size: 12px; color: #666666;">
-                13486661360
+                {{invoice?.tel}}
               </span>
             </div>
             <div style="font-size: 16px; color: #000000;">
-              浙江 宁波 鄞州区 首南街道 泰康中路558号宁波商会国贸中心A座2508xxxxxxxxxxx
+              {{invoice?.location_name}}
             </div>
           </div>
 

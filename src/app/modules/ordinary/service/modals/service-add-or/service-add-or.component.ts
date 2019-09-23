@@ -14,6 +14,8 @@ export class ServiceAddOrComponent implements OnInit {
   public fileList = [];
   public typeList = [{id: '1', name: 'A类，帮助文档'}, {id: '2', name: 'B类，系统问题'}, {id: '3', name: 'C类，售后维保'}];
   public headOption;
+  public product;
+  public proList = [];
 
   constructor(public activeModal: NgbActiveModal,
               private serviceService: ServiceService ) { }
@@ -23,6 +25,18 @@ export class ServiceAddOrComponent implements OnInit {
     this.headOption = {
       'Authorization': token
     };
+
+    this.getProList();
+  }
+
+  // 获取产品下拉列表
+  getProList() {
+    this.serviceService.getEptList()
+      .subscribe(data => {
+        this.proList = data;
+      }, err => {
+
+      });
   }
 
   // 文件上传前
@@ -84,6 +98,7 @@ export class ServiceAddOrComponent implements OnInit {
     const post = {
       type: parseInt(this.type),
       value: this.content,
+      ept_id: this.product,
       attach: files
     };
     this.serviceService.addDataF(post)

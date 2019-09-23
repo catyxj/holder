@@ -25,9 +25,9 @@
           </nz-input-group>
           <ng-template #addOnBeforeTemplate>
             <nz-select [(ngModel)]="search">
-              <nz-option [nzLabel]="'订单编号'" [nzValue]="'id'"></nz-option>
-              <nz-option [nzLabel]="'订购产品'" [nzValue]="'name'"></nz-option>
-              <nz-option [nzLabel]="'所属单位'" [nzValue]="'org_name'"></nz-option>
+              <nz-option [nzLabel]="'订单编号'" [nzValue]="'order_sn'"></nz-option>
+              <nz-option [nzLabel]="'订购产品'" [nzValue]="'item_name'"></nz-option>
+              <nz-option [nzLabel]="'所属单位'" [nzValue]="'created_org'"></nz-option>
             </nz-select>
           </ng-template>
           <ng-template #addOnAfterTemplate>
@@ -65,20 +65,21 @@
           </thead>
           <tbody>
           <tr *ngFor="let data of dataLists">
-            <td>201945678911663</td>
-            <td>{{data.name}}</td>
-            <td>18012341234（张三）</td>
-            <td>A企业</td>
-            <td>2019-01-03 13:11:12</td>
-            <td>2019-01-03 13:12:00</td>
+            <td>{{data.order_sn}}</td>
+            <td>{{data.item_name}}</td>
+            <td>{{data.created_username}}（{{data.created_name}}）</td>
+            <td>{{data.created_org}}</td>
+            <td>{{data.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td>{{data.pay_at | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
             <td>
-              <nz-tag [nzColor]="'#1E9FF2'" *ngIf="data.status === 1">已支付</nz-tag>
-              <nz-tag [nzColor]="'#FFC06A'" *ngIf="data.status === 0">待支付</nz-tag>
-              <nz-tag [nzColor]="'#C0C4D2'" *ngIf="data.status === -1"> 作 废 </nz-tag>
+              <nz-tag [nzColor]="'#1E9FF2'" *ngIf="data.order_status === 3">已支付</nz-tag>
+              <nz-tag [nzColor]="'#FFC06A'" *ngIf="data.order_status === 1">待支付</nz-tag>
+              <nz-tag [nzColor]="'#C0C4D2'" *ngIf="data.order_status === 2"> 作 废 </nz-tag>
+              <nz-tag [nzColor]="'#C0C4D2'" *ngIf="data.order_status === 0"> 已取消</nz-tag>
             </td>
-            <td>¥5000,00</td>
+            <td>{{data.pay_money | currency: '￥'}}</td>
             <td>
-              <a [routerLink]="['/charge/order/info', data.uid, page]" style="color: #5584FF; font-size: 12px;">详情</a>
+              <a [routerLink]="['/charge/order/info', data.order_sn, page]" style="color: #5584FF; font-size: 12px;">详情</a>
             </td>
           </tr>
           </tbody>

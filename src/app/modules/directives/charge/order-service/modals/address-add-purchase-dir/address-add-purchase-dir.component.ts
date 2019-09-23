@@ -116,7 +116,13 @@ export class AddressAddPurchaseDirComponent implements OnInit {
   save() {
     let that = this;
     let post = {
-
+      name: this.name,
+      tel: this.contact,
+      location_id: this.locationId,
+      location_name: this.locationName + this.address,
+      address: this.address,
+      type: 1,
+      is_default: this.checkRemember
     };
     this.chargeService.addAddress(post)
       .subscribe(val => {

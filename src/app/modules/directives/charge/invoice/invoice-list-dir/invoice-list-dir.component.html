@@ -87,12 +87,12 @@
               [nzDisabled]="data.disabled"
               (nzCheckedChange)="refreshStatus()"
             ></td>
-            <td>201945678911663</td>
-            <td>{{data.name}}</td>
-            <td>18012341234（张三）</td>
-            <td>2019-01-03 13:11:12</td>
-            <td>¥460.00</td>
-            <td>{{data.invoice_amount | currency: '￥'}}</td>
+            <td>{{data.order_sn}}</td>
+            <td>{{data.item_name}}</td>
+            <td>{{data.item_type}}</td>
+            <td>{{data.pay_at | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td>{{data.pay_money | currency: '￥'}}</td>
+            <td>{{data.pay_money | currency: '￥'}}</td>
           </tr>
           </tbody>
         </table>

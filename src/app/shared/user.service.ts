@@ -61,7 +61,7 @@ export class UserService {
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
     // console.log(httpOptions);
 
-    if (!environment.production) {
+    /*if (!environment.production) {
       return this.http.get< any >('assets/server/user.json');
     } else {
       return this.http.get< any >('/api/user', httpOptions)
@@ -74,10 +74,10 @@ export class UserService {
           }),
           catchError(this.handleError2)
         );
-    }
+    }*/
 
     // return this.http.get< any >('assets/server/user.json');
-    /*return this.http.get< any >('/api/user', httpOptions)
+    return this.http.get< any >('/api/user', httpOptions)
         .pipe(
           tap((val) => {
             // if (!val) {
@@ -86,7 +86,7 @@ export class UserService {
             console.log('token:', token);
           }),
           catchError(this.handleError2)
-        );*/
+        );
 
 
   }
@@ -133,8 +133,8 @@ export class UserService {
         );
     }
 
-    // 运维
-    if (roleId === '16') {
+    // 运营
+    if (roleId === '5') {
       return this.http.get< any >('assets/server/sidenav_operator.json')
         .pipe(
           catchError(this.handleError)
@@ -142,7 +142,7 @@ export class UserService {
     }
 
     // 财务
-    if (roleId === '17') {
+    if (roleId === '6') {
       return this.http.get< any >('assets/server/sidenav_finance.json')
         .pipe(
           catchError(this.handleError)

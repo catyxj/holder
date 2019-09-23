@@ -35,7 +35,7 @@ export class InvoiceService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    let url = `/api/financial/invoiced/detail?uid=${uid}`;
+    let url = `/api/financial/invoiced/detail?order_sn=${uid}`;
 
     return this.http.get<any>(url, httpOptions)
       .pipe(

@@ -40,13 +40,6 @@ export class RenewalListDirComponent implements OnInit {
         age: 42,
         address: 'London No. 1 Lake Park',
         status: 0
-      },
-      {
-        uid: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        status: -1
       }
     ];
 

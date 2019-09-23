@@ -9,7 +9,7 @@ import {ChargeService} from "../../../../../shared/charge.service";
 })
 export class OrderInfoDirComponent implements OnInit {
   public uid;
-  public basic;
+  public info;
   public products;
   public listPage;
 
@@ -26,14 +26,16 @@ export class OrderInfoDirComponent implements OnInit {
 
 
   getInfo() {
-    /*this.basic = {
+    /*this.info = {
       amount: 300,
       pay_account: 'asdfa@123.com'
     };*/
 
     this.chargeService.getOrderInfo(this.uid)
       .subscribe(data => {
-        this.basic = data;
+        this.info = data;
+
+
       }, err => {
 
       });

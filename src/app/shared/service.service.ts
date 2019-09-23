@@ -262,6 +262,16 @@ export class ServiceService {
   }
 
 
+  // 获取设备下拉列表
+  getEptList(): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get('/api/general/dialogue/ept/list', httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
 
 

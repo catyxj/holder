@@ -4,8 +4,11 @@
     <div class="c_head_l">
       <h5>订单详情</h5>
       <div>
-        <span>
+        <span *ngIf="info && info.order_status">
           已支付
+        </span>
+        <span *ngIf="info && !info.order_status">
+          未支付
         </span>
       </div>
     </div>
@@ -27,21 +30,21 @@
             <li class="cinfo_item">
               <div class="cinfo_label">订单编号：</div>
               <div class="cinfo_value">
-                203861209130361
+                {{info?.order_sn}}
               </div>
             </li>
 
             <li class="cinfo_item">
               <div class="cinfo_label">创建时间：</div>
               <div class="cinfo_value">
-                2019-12-21 12:12:12
+                {{info?.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}
               </div>
             </li>
 
             <li class="cinfo_item">
               <div class="cinfo_label">订单创建账号：</div>
               <div class="cinfo_value">
-                18012341234（张三）
+                {{info?.created_username}} ({{info?.created_name}})
               </div>
             </li>
 
@@ -49,7 +52,7 @@
             <li class="cinfo_item">
               <div class="cinfo_label">所属单位：</div>
               <div class="cinfo_value">
-                A企业
+                {{info?.created_org}}
               </div>
             </li>
 
@@ -57,8 +60,9 @@
             <li class="cinfo_item">
               <div class="cinfo_label">订单类型：</div>
               <div class="cinfo_value">
-                <span style="color: #5584FF;">定期</span>
-                <span class="text_purple">永久</span>
+                <!--<span style="color: #5584FF;" *ngIf="info&&info.item_type">定期</span>
+                <span class="text_purple">永久</span>-->
+                <span style="color: #5584FF;">{{info?.item_type}}</span>
               </div>
             </li>
 
@@ -71,37 +75,37 @@
             <li class="cinfo_item">
               <div class="cinfo_label">支付状态：</div>
               <div class="cinfo_value">
-                <span class="text_purple">支付完成</span>
-                <span style="color: #B20000;">待支付</span>
+                <span class="text_purple" *ngIf="info && info.order_status">支付完成</span>
+                <span style="color: #B20000;" *ngIf="info && !info.order_status">待支付</span>
               </div>
             </li>
 
             <li class="cinfo_item">
               <div class="cinfo_label">支付完成时间：</div>
               <div class="cinfo_value">
-                2019-12-21 12:12:12
+                {{info?.pay_at | date: 'yyyy-MM-dd HH:mm:ss'}}
               </div>
             </li>
 
             <li class="cinfo_item">
               <div class="cinfo_label">支付金额：</div>
               <div class="cinfo_value">
-                ¥1000.00
+                {{info?.pay_money | currency: '￥'}}
               </div>
             </li>
 
             <li class="cinfo_item">
               <div class="cinfo_label">支付方式：</div>
               <div class="cinfo_value">
-                <span>对公转账</span>
-                <span><img src="assets/images/charge/alipay.png" alt=""></span>
+                <span *ngIf="info && info.pay_method">对公转账</span>
+                <span *ngIf="info && info.pay_method"><img src="assets/images/charge/alipay.png" alt=""></span>
               </div>
             </li>
 
             <li class="cinfo_item">
               <div class="cinfo_label">支付账号：</div>
               <div class="cinfo_value">
-                **********@162.com
+                **********@162.com ???
               </div>
             </li>
           </ul>
@@ -135,7 +139,7 @@
           <li class="cinfo_item">
             <div class="cinfo_label">收货地址：</div>
             <div class="cinfo_value">
-              浙江省 宁波市 鄞州区 新明街道 XXXXXXXX  某某 13801231234
+              {{info?.shipping_addr}}  {{info?.shipping_user}} {{info?.shipping_tel}}
             </div>
           </li>
         </ul>

@@ -30,7 +30,7 @@ export class TemplateBasicEditFComponent implements OnInit {
       'Authorization': token
     };
 
-    this.name = this.currentData ? this.currentData.template_name : '';
+    this.name = this.currentData ? this.currentData.name : '';
     this.equip = this.currentData ? this.currentData.ept_name : '';
     this.imgUrl = this.currentData && this.currentData.ept_img ? this.currentData.ept_img : '';
   }

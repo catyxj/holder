@@ -13,7 +13,7 @@ export class DeliveryListComponent implements OnInit {
   public page = 1;
   public pageNum;
   public pageSize = 15;
-  public search = 'name';
+  public search = 'order_sn';
   public value;
   public totalItems;
   public loading;
@@ -39,11 +39,18 @@ export class DeliveryListComponent implements OnInit {
 
   // 获取列表
   getList() {
-    this.dataLists = [
+    /*this.dataLists = [
       {
-        uid: 'daf'
+        order_sn: 'a23465565461',
+        item_name: 'asdfasfa',
+        created_at: '2019-4-5',
+        created_username: '1446543',
+        created_name: 'aaaa',
+        created_org: '',
+        ship_expect_at: '2019-8-8',
+        ship_status: true
       }
-    ];
+    ];*/
 
     this.loading = true;
     this.deliveryService.getLists(this.page, this.pageSize, this.search, this.value)

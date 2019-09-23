@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 import Swal from 'sweetalert2';
+import {MaintainService} from "../../../../../../shared/maintain.service";
 
 @Component({
   selector: 'app-runtime-m-view',
@@ -10,51 +11,53 @@ import Swal from 'sweetalert2';
 })
 export class RuntimeMViewComponent implements OnInit {
   public uid;
+  public info;
 
-  public dataList = [
-    {
-      description: '通风口是否正常',
-      status: false,
-      remark: '',
-      imgList: [
-        'assets/images/no_img.jpg',
-        'assets/images/no_img.jpg'
-      ]
-    },
-    {
-      description: '点火器是否正常',
-      status: true,
-      remark: '',
-      imgList: []
-    },
-    {
-      description: '排风机是否正常',
-      status: true,
-      remark: '',
-      imgList: []
-    },
-    {
-      description: '风口是否干净',
-      status: false,
-      remark: '',
-      imgList: []
-    },
-    {
-      description: '炉排速度是否正常',
-      status: false,
-      remark: '',
-      imgList: []
-    }
-  ];
+  public dataList = [];
 
   previewImage: string | undefined = '';
   previewVisible = false;
 
   public listPage;
 
-  constructor(public activeModal: NgbActiveModal,) { }
+  constructor(public activeModal: NgbActiveModal,
+              private maintainService: MaintainService) { }
 
   ngOnInit() {
+    this.getInfo();
+  }
+
+  getInfo() {
+    /*this.dataList = [
+      {
+        description: '通风口是否正常',
+        status: false,
+        remark: '',
+        imgList: []
+      },
+      {
+        description: '点火器是否正常',
+        status: true,
+        remark: '',
+        imgList: []
+      },
+      {
+        description: '排风机是否正常',
+        status: true,
+        remark: '',
+        imgList: []
+      }
+    ];*/
+
+
+    this.maintainService.getLogInfo(this.uid)
+      .subscribe(data => {
+        this.info = data;
+        this.dataList = data.info;
+
+      }, err => {
+
+      });
   }
 
   // 缩略图

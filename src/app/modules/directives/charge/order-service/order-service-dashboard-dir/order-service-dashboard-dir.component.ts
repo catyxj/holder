@@ -8,6 +8,7 @@ import {ChargeService} from "../../../../../shared/charge.service";
 })
 export class OrderServiceDashboardDirComponent implements OnInit {
   public upgrade;
+  public info;
 
   constructor(private chargeService: ChargeService) { }
 
@@ -15,10 +16,16 @@ export class OrderServiceDashboardDirComponent implements OnInit {
     this.getList();
   }
 
-  // 获取
+  // 获取信息
   getList () {
     this.chargeService.getProductList()
       .subscribe(data => {
+        this.info = data;
+
+        for (let i = 0; i < this.info.length; i++) {
+          let inf = this.info[i];
+
+        }
 
       }, err => {
 
