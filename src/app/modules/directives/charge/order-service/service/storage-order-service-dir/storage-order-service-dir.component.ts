@@ -14,12 +14,15 @@ export class StorageOrderServiceDirComponent implements OnInit {
   public id;
   public timeList;
   public currentData;
+  public start;
+  public end;
 
   constructor(private chargeService: ChargeService,
               private router: Router) { }
 
   ngOnInit() {
     this.getInfo();
+    this.getDate();
   }
 
   getInfo() {
@@ -44,6 +47,16 @@ export class StorageOrderServiceDirComponent implements OnInit {
       .subscribe(data => {
         this.timeList = data;
         this.type = this.timeList[0];
+      }, err => {
+
+      });
+  }
+
+  getDate() {
+    this.chargeService.getProductDate()
+      .subscribe(data => {
+        this.start = data.begin;
+        this.end = data.end;
       }, err => {
 
       });

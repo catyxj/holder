@@ -297,6 +297,19 @@ export class ChargeService {
       );
   }
 
+  // 数据存储信息时长
+  getProductDate(): Observable<any>  {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let url = `/api/formal/storage/expire`;
+
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
 
   // 订单提交
   submitOrder(data): Observable<any>  {

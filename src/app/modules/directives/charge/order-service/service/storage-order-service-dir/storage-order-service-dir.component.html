@@ -11,7 +11,7 @@
   <div class="c_info">
     <div class="c_content">
       <div class="cf_label">
-        充值时间：
+        存储时间：
       </div>
       <div class="">
         <nz-select style="width: 120px;" [(ngModel)]="type">
@@ -35,7 +35,7 @@
         有效期：
       </div>
       <div class="standard" style="color: #333333;">
-        2019-01-20至2019-07-29
+        {{start | date: 'yyyy-MM-dd'}}至{{end | date: 'yyyy-MM-dd'}}
       </div>
     </div>
 
