@@ -5,7 +5,7 @@
     <div class="info_tname">
       <img src="assets/icons/boiler2.png" alt="">
 
-      XXXXX锅炉运行周报
+      {{info?.ept_name}}运行周报
 
     </div>
     <div class="info_head_r">
@@ -15,7 +15,7 @@
       </button>-->
 
       <!--返回-->
-      <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/ordinary/home/notice']">
+      <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/ordinary/home/remind']">
         <i class="iconfont iconicon_comeback1"></i>
       </button>
 
@@ -30,7 +30,7 @@
           产品名称：
         </div>
         <div class="h_value">
-          某某某锅炉
+          {{info?.ept_name}}
         </div>
       </div>
 
@@ -39,25 +39,25 @@
           产品终端编码：
         </div>
         <div class="h_value">
-          某某某锅炉
+          {{info?.terminal_code}}
         </div>
       </div>
 
-      <div class="col-3 h_item">
+      <!--<div class="col-3 h_item">
         <div class="h_label">
           所属单位：
         </div>
         <div class="h_value">
-          某某某锅炉
+          {{info?.org_name}}
         </div>
-      </div>
+      </div>-->
 
       <div class="col-3 h_item">
         <div class="h_label">
           统计时间：
         </div>
         <div class="h_value">
-          2019-01-02至2019-01-09
+          {{info?.begin_time | date: 'yyyy-MM-dd'}}至{{info?.end_time | date: 'yyyy-MM-dd'}}
         </div>
       </div>
     </div>
@@ -77,7 +77,7 @@
             本周总计运行时长
           </td>
           <td>
-            76.5 小时
+            {{info?.ept_run}} 小时
           </td>
         </tr>
 
@@ -86,7 +86,7 @@
             日平均运行效率
           </td>
           <td>
-            78 %
+            <!--78 %-->
           </td>
         </tr>
 
@@ -95,7 +95,7 @@
             能耗数据统计（天然气）
           </td>
           <td>
-            74.6 m³
+            <!--74.6 m³-->
           </td>
         </tr>
 
@@ -104,7 +104,7 @@
             耗电量统计
           </td>
           <td>
-            21.7 度
+            <!--21.7 度-->
           </td>
         </tr>
 
@@ -113,7 +113,7 @@
             告警累计次数
           </td>
           <td>
-            21 次
+            {{info?.alarm_count}} 次
           </td>
         </tr>
 
@@ -122,7 +122,7 @@
             最多次数告警
           </td>
           <td>
-            12次（蒸汽温度过高）
+            {{info?.alarm_max}}次 <span *ngIf="info&&info.alarm_max > 0">（{{info?.max_desc}}）</span>
           </td>
         </tr>
 
@@ -131,7 +131,7 @@
             故障次数
           </td>
           <td>
-            0 次
+            {{info?.mt_count}} 次
           </td>
         </tr>
 

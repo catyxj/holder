@@ -158,7 +158,11 @@
           ></td>
           <td> {{data.name}} </td>
           <td> {{data.label}} </td>
-          <td> {{data.location_name}} </td>
+          <td>
+            <div style="max-width: 250px; overflow: hidden; white-space: nowrap; -ms-text-overflow: ellipsis;text-overflow: ellipsis;">
+              {{data.location_name}}
+            </div>
+          </td>
           <td> {{data.user_org_name}} </td>
           <!--<td>
 

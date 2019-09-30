@@ -65,6 +65,48 @@
       </button>
     </div>
 
+    <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" nzClosable="false" [nzFooter]="null">
+      <ng-template #modalTitle>
+        <div style="font-size: 20px; padding: 10px 0;">
+          对公转账
+        </div>
+      </ng-template>
+      <ng-template #modalContent>
+        <div style="padding: 15px 55px;">
+          <div class="mo_text">
+          <span class="mo_text_label">
+            企业开户名称：
+          </span>
+            <span class="mo_text_value">
+            宁波厚德能源科技有限公司
+          </span>
+          </div>
+          <div class="mo_text">
+          <span class="mo_text_label">
+            企业开户银行：
+          </span>
+            <span class="mo_text_value">
+            中国银行宁波鄞州投资创业支行
+          </span>
+          </div>
+          <div class="mo_text">
+          <span class="mo_text_label">
+            企业银行账号：
+          </span>
+            <span class="mo_text_value">
+            375370325182
+          </span>
+          </div>
+        </div>
+
+        <div style="padding: 60px 55px 30px 55px; display: flex; align-items: flex-end;">
+          <button class="btn btn_purple bpm" (click)="handleOk()">确认</button>
+          <span style="margin-left: 15px; font-size: 12px;">转账成功后请联系管理员确认完成订单支付。</span>
+        </div>
+      </ng-template>
+
+    </nz-modal>
+
   </div>
 </div>
 

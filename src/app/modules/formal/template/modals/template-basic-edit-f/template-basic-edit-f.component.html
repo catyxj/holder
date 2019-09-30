@@ -13,9 +13,9 @@
     </div>
     <div class="m_input">
       <input type="text" class="form-control" [(ngModel)]="name" placeholder="请输入模板名称" #tName="ngModel"
-             required>
+             required pattern="^\S{3,10}$" maxlength="10">
       <div class="sign_tip">
-        <!--<span class="text_danger" *ngIf="tCode.invalid && (tCode.dirty || tCode.touched)">请输入正确模板名称</span>-->
+        <span class="text_danger" *ngIf="tName.invalid && (tName.dirty || tName.touched)">请输入3-10个字符</span>
       </div>
     </div>
   </div>
@@ -26,9 +26,9 @@
     </div>
     <div class="m_input">
       <input type="text" class="form-control" [(ngModel)]="equip" placeholder="请输入设备名称" #eName="ngModel"
-             required>
+             required pattern="^\S{3,15}$" maxlength="15">
       <div class="sign_tip">
-        <!--<span class="text_danger" *ngIf="tVersion.invalid && (tVersion.dirty || tVersion.touched)">请输入6位正确固件版本号</span>-->
+        <span class="text_danger" *ngIf="eName.invalid && (eName.dirty || eName.touched)">请输入3-15个字符</span>
       </div>
     </div>
   </div>

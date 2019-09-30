@@ -4,15 +4,15 @@
 
     <!--企业标识-->
     <a class="navbar-brand" routerLink="/admin"
-       *ngIf="user && !checkAuth('1001')">
+       *ngIf="user && !checkAuth('1002')">
       <img src="assets/images/global/head_logo.png"  height="38" style="margin-top: 9px;" alt="">
       <!--<h2 style="color: #ffffff;"> LUKEEP</h2>-->
     </a>
 
     <!--显示企业标识-->
-    <a class="navbar-brand" routerLink="/admin" *ngIf="user && checkAuth('1001')">
+    <a class="navbar-brand" routerLink="/admin" *ngIf="user && checkAuth('1002')">
       <h3 *ngIf="!user.brand_image" style="color: #ffffff; line-height: 63px;">
-        {{user.brand_name}}
+        {{user?.brand_name}}
       </h3>
       <span *ngIf="user.brand_image">
         <img src="{{user.brand_image}}" alt="" height="30">
@@ -57,7 +57,7 @@
 
     <!--告警-->
     <!--<mat-icon> email </mat-icon>-->
-    <div ngbDropdown class="alarm_tip_box" placement="bottom">
+    <div ngbDropdown class="alarm_tip_box" placement="bottom" *ngIf="roleId === '10' || roleId === '11'">
       <div class="alarm_tip_btn" style="position: relative;" id="dropdownBasic2" ngbDropdownToggle>
         <img src="assets/icons/remind0.png" alt="">
         <span class="badge badge-pill badge-danger" *ngIf="totalNum && totalNum !== 0"
@@ -124,6 +124,11 @@
             发票管理
           </div>
         </a>
+        <a class="dropdown-item" routerLink="/charge/purchase" target="_blank">
+          <div class="tip_item">
+            订购服务
+          </div>
+        </a>
       </div>
 
     </div>
@@ -142,6 +147,12 @@
           </div>
           <span *ngIf="user && user.role_id === 1">
               系统用户
+          </span>
+          <span *ngIf="user && user.role_id === 5">
+              运营用户
+          </span>
+          <span *ngIf="user && user.role_id === 6">
+              财务用户
           </span>
           <span *ngIf="user && user.role_id === 10">
               正式用户
@@ -163,7 +174,7 @@
       </div>
 
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="animated fadeInDown dropdown_content">
-        <a class="dropdown-item" (click)="viewAccount()">用户信息</a>
+        <a class="dropdown-item" (click)="viewAccount()" *ngIf="user && user.role_id !== 1 && user.role_id !== 5 && user.role_id !== 6">用户信息</a>
         <a class="dropdown-item" (click)="logout()">退出</a>
       </div>
     </div>

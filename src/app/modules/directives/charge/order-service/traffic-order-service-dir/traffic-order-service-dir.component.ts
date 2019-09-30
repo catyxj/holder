@@ -18,7 +18,7 @@ export class TrafficOrderServiceDirComponent implements OnInit {
               public router: Router) { }
 
   ngOnInit() {
-    this.id = 1;
+    this.id = 14;
     this.getInfo();
   }
 

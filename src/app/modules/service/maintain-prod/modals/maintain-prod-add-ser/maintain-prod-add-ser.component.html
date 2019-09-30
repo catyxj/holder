@@ -73,6 +73,7 @@
                 [(nzFileList)]="item.imgList"
                 [nzShowButton]="item.imgList.length < 3"
                 [nzPreview]="handlePreview"
+                [nzShowUploadList]="showUploadList"
                 [nzBeforeUpload]="beforeUpload"
                 (nzChange)="handleChange($event)"
                 style="display: flex; align-items: center;"
@@ -100,7 +101,9 @@
     [nzVisible]="previewVisible"
     [nzContent]="modalContent"
     [nzFooter]="null"
+    nzClassName="maintain_p"
     (nzOnCancel)="previewVisible = false"
+    [nzClosable]="false"
   >
     <ng-template #modalContent>
       <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />

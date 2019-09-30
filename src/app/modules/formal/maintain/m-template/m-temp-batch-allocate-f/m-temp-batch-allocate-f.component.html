@@ -41,7 +41,10 @@
         </nz-input-group>
         <ng-template #addOnBeforeTemplate>
           <nz-select [(ngModel)]="search">
-            <nz-option [nzLabel]="'模板编号'" [nzValue]="'temp_label'"></nz-option>
+            <nz-option [nzLabel]="'设备名称'" [nzValue]="'ept_name'"></nz-option>
+            <nz-option [nzLabel]="'关联单位'" [nzValue]="'use_org_name'"></nz-option>
+            <nz-option [nzLabel]="'关联终端编码'" [nzValue]="'terminal_code'"></nz-option>
+            <nz-option [nzLabel]="'模板名称'" [nzValue]="'temp_name'"></nz-option>
           </nz-select>
         </ng-template>
         <ng-template #addOnAfterTemplate>

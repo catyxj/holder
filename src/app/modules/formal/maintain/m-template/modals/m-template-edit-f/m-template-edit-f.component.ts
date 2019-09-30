@@ -103,10 +103,18 @@ export class MTemplateEditFComponent implements OnInit {
 
   save() {
     let that = this;
+
+    let tL = [];
+    for (let i = 0; i < this.tList.length; i++) {
+      if (this.tList[i]) {
+        tL.push(this.tList[i]);
+      }
+    }
+
     let post = {
       id: this.currentData.id,
       name: this.name,
-      info: this.tList
+      info: tL
     };
     this.maintainService.updateTemp(post)
       .subscribe(val => {

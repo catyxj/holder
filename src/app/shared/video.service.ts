@@ -22,6 +22,13 @@ export class VideoService {
   private dataOperateUrl = '/api/admin/camera/log/info';
   private dataOperateMoreUrl = '/api/admin/camera/log/list';
 
+  // 运营用户
+  private dataListUrlOp = '/api/operation/camera/list';
+  private dataBasicUrlOp = '/api/operation/camera/detail';
+  private dataExpandUrlOp = '/api/operation/camera/capacity/get';
+  private dataOperateUrlOp = '/api/operation/camera/log/info';
+  private dataOperateMoreUrlOp = '/api/operation/camera/log/list';
+
   // 正式用户
   private dataListUrlF = '/api/formal/camera/list';
   private dataBasicUrlF = '/api/formal/camera/detail';
@@ -50,11 +57,11 @@ export class VideoService {
     if (roleId === '1') {
       url = `${this.dataListUrl}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&status=${status}`;
     }
+    if (roleId === '5') {
+      url = `${this.dataListUrlOp}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&status=${status}`;
+    }
     if (roleId === '10') {
       url = `${this.dataListUrlF}?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
-    }
-    if (roleId === '16') {
-      url = `/api/operaator/camera/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
     }
 
 
@@ -74,6 +81,9 @@ export class VideoService {
     if (roleId === '1') {
       url = `${this.dataBasicUrl}?uid=${uid}`;
     }
+    if (roleId === '5') {
+      url = `${this.dataBasicUrlOp}?uid=${uid}`;
+    }
     if (roleId === '10') {
       url = `${this.dataBasicUrlF}?uid=${uid}`;
     }
@@ -92,6 +102,9 @@ export class VideoService {
     let url;
     if (roleId === '1') {
       url = `${this.dataExpandUrl}?uid=${uid}`;
+    }
+    if (roleId === '5') {
+      url = `${this.dataExpandUrlOp}?uid=${uid}`;
     }
     if (roleId === '10') {
       url = `${this.dataExpandUrlF}?uid=${uid}`;
@@ -113,6 +126,9 @@ export class VideoService {
     if (roleId === '1') {
       url = `${this.dataOperateUrl}?uid=${uid}`;
     }
+    if (roleId === '5') {
+      url = `${this.dataOperateUrlOp}?uid=${uid}`;
+    }
     if (roleId === '10') {
       url = `${this.dataOperateUrlF}?uid=${uid}`;
     }
@@ -132,6 +148,9 @@ export class VideoService {
     let url;
     if (roleId === '1') {
       url = `${this.dataOperateMoreUrl}?uid=${uid}&page=${n}&rows=${pageSize}`;
+    }
+    if (roleId === '5') {
+      url = `${this.dataOperateMoreUrlOp}?uid=${uid}&page=${n}&rows=${pageSize}`;
     }
     if (roleId === '10') {
       url = `${this.dataOperateMoreUrlF}?uid=${uid}&page=${n}&rows=${pageSize}`;
@@ -154,6 +173,9 @@ export class VideoService {
     if (roleId === '1') {
       url = '/api/admin/camera/add';
     }
+    if (roleId === '5') {
+      url = '/api/operation/camera/add';
+    }
     if (roleId === '10') {
       url = '/api/formal/camera/create';
     }
@@ -173,6 +195,9 @@ export class VideoService {
     let url;
     if (roleId === '1') {
       url = '/api/admin/camera/batch/delete';
+    }
+    if (roleId === '5') {
+      url = '/api/operation/camera/batch/delete';
     }
     if (roleId === '10') {
       url = '/api/formal/camera/batch/delete';
@@ -194,6 +219,9 @@ export class VideoService {
     if (roleId === '1') {
       url = '/api/admin/camera/update';
     }
+    if (roleId === '5') {
+      url = '/api/operation/camera/update';
+    }
     if (roleId === '10') {
       url = '/api/formal/camera/update';
     }
@@ -208,7 +236,15 @@ export class VideoService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.get(`/api/admin/camera/scrapped?uid=${uid}`, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = `/api/admin/camera/scrapped?uid=${uid}`;
+    }
+    if (roleId === '5') {
+      url = `/api/operation/camera/scrapped?uid=${uid}`;
+    }
+    return this.http.get(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -224,6 +260,9 @@ export class VideoService {
     let url;
     if (roleId === '1') {
       url = `/api/admin/camera/live/address?uid=${uid}`;
+    }
+    if (roleId === '5') {
+      url = `/api/operation/camera/live/address?uid=${uid}`;
     }
     if (roleId === '10') {
       url = `/api/formal/camera/live/address?uid=${uid}`;
@@ -246,6 +285,9 @@ export class VideoService {
     if (roleId === '1') {
       url = `/api/admin/camera/console/start`;
     }
+    if (roleId === '5') {
+      url = `/api/operation/camera/console/start`;
+    }
     if (roleId === '10') {
       url = `/api/formal/camera/console/start`;
     }
@@ -266,6 +308,9 @@ export class VideoService {
     let url;
     if (roleId === '1') {
       url = `/api/admin/camera/console/stop`;
+    }
+    if (roleId === '5') {
+      url = `/api/operation/camera/console/stop`;
     }
     if (roleId === '10') {
       url = `/api/formal/camera/console/stop`;

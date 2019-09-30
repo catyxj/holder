@@ -115,7 +115,7 @@ export class GraphicDashboardComponent implements OnInit, OnDestroy {
         bo.malfunction = '故障';
       }*/
       if (bo.online) {
-        bo.online = '已联网';
+        bo.Online = '已联网';
         if (bo.run === true) {
           bo.isBurning = '运行';
         }
@@ -123,7 +123,7 @@ export class GraphicDashboardComponent implements OnInit, OnDestroy {
           bo.warning = '告警';
         }
       } else {
-        bo.online = '未联网';
+        bo.Online = '未联网';
         bo.isBurning = '未知';
         bo.warning = '未知';
         bo.malfunction = '未知';

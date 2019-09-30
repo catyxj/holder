@@ -21,6 +21,7 @@ export class RuntimeCycleComponent implements OnInit {
   public pageSize = 15;
   public search = 'name';
   public value = '';
+  public status;
   public totalItems;
   public isAllChecked = false;
   public loading;
@@ -48,7 +49,7 @@ export class RuntimeCycleComponent implements OnInit {
     ];*/
 
     this.loading = true;
-    this.runtimeService.getCompLists(this.uid, this.page, this.pageSize, this.search, this.value)
+    this.runtimeService.getCompLists(this.uid, this.page, this.pageSize, this.search, this.value, this.status)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;
@@ -94,6 +95,11 @@ export class RuntimeCycleComponent implements OnInit {
     if (event.keyCode === 13) {
       this.searchChange();
     }
+  }
+
+  searchStatus(n?) {
+    this.status = n;
+    this.searchChange();
   }
 
 

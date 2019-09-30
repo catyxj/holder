@@ -71,12 +71,11 @@
           <a class="module" [routerLink]="['/admin/ordinary/runtime', data.uid]" target="_blank">
             <div class="status_name">
               <div class="sn_l">
-                <a class="status_param0" *ngIf="data.online">
-                  <img src="assets/icons/graphic_1.png" alt="">
+                <a class="status_param0">
+                  <img src="assets/icons/graphic_1.png" alt="" *ngIf="data.online">
+                  <img src="assets/icons/graphic_0.png" alt="" *ngIf="!data.online">
                 </a>
-                <a class="status_param0" *ngIf="!data.online">
-                  <img src="assets/icons/graphic_0.png" alt="">
-                </a>
+                
                 <a class="sn_title">
                   <h6 class="">
                     {{data.name}}

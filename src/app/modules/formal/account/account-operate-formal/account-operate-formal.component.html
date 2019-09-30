@@ -8,7 +8,7 @@
     <div class="li_head_l">
       <h6>
         订单记录
-        [{{uid}}]
+        [{{name}}]
       </h6>
     </div>
     <div class="li_head_r">
@@ -42,21 +42,22 @@
         </thead>
         <tbody>
         <tr *ngFor="let data of dataList.data">
-          <td> {{data.uid}} </td>
+          <td> {{data.order_sn}} </td>
           <td>
-            设备采购服务
+            {{data.item_name}}
           </td>
-          <td> {{data.name}} </td>
-          <td> {{data.created_at | date: 'yyyy-MM-dd, HH:mm:ss'}}</td>
-          <td> {{data.created_at | date: 'yyyy-MM-dd, HH:mm:ss'}} </td>
+          <td> {{data.created_username}}（{{data.created_name}}） </td>
+          <td> {{data.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+          <td> {{data.pay_at | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
           <td>
-            <nz-tag [nzColor]="'#1E9FF2'" *ngIf="data.status===2">已支付</nz-tag>
-            <nz-tag [nzColor]="'#FFC06A'" *ngIf="data.status===1">待支付</nz-tag>
-            <nz-tag [nzColor]="'#C0C4D2'" *ngIf="data.status===0">作废</nz-tag>
+            <nz-tag [nzColor]="'#1E9FF2'" *ngIf="data.order_status === 3">已支付</nz-tag>
+            <nz-tag [nzColor]="'#FFC06A'" *ngIf="data.order_status === 1">待支付</nz-tag>
+            <nz-tag [nzColor]="'#C0C4D2'" *ngIf="data.order_status === 2"> 作 废 </nz-tag>
+            <nz-tag [nzColor]="'#C0C4D2'" *ngIf="data.order_status === 0"> 已取消</nz-tag>
           </td>
-          <td class="text_purple"> {{data.amount | currency: '￥'}} </td>
+          <td class="text_purple"> {{data.pay_money | currency: '￥'}}</td>
           <td>
-            <a class="btn btn_purple btn-sm" [routerLink]="['/admin/formal/account/order-detail', data.uid]">
+            <a class="text_purple" [routerLink]="['/admin/formal/account/order-detail', data.order_sn]">
               详情
             </a>
           </td>

@@ -373,7 +373,7 @@ export class EqChartsComponent implements OnInit {
         start.setHours(0, 0, 0, 0);
         break;
       case 'week':
-        let d1 = start.getDate() - 7;
+        let d1 = start.getDate() + 1 - (start.getDay() || 7);
         start.setDate(d1);
         start.setHours(0, 0, 0, 0);
         break;

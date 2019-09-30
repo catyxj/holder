@@ -87,39 +87,7 @@ export class AlarmService {
       );
   }
 
-  // 获取当前告警列表
-  getCurrents(n: number, pageSize: number, search?: string, uid?: string): Observable<any> {
-    const url = `${this.currentUrl}/?page=${n}&pageSize=${pageSize}&search=${search}&uid=${uid}`;
-    return this.http.get<any>(url, httpOptions)
-      .pipe(
-        catchError(this.handleError) // then handle the error
-      );
-  }
 
-  // 获取历史告警列表
-  getHistories(n: number, pageSize: number, search?: string, uid?: string): Observable<any> {
-    const url = `${this.historyUrl}/?page=${n}&pageSize=${pageSize}&search=${search}&uid=${uid}`;
-    return this.http.get<any>(url, httpOptions)
-      .pipe(
-        catchError(this.handleError) // then handle the error
-      );
-  }
-
-
-
-  getSubscribe(uid): Observable<any> {
-    return this.http.get(`/alarm_subscribe?uid=${uid}`, httpOptions)
-      .pipe(
-        catchError(this.handleError) // then handle the error
-      );
-  }
-
-  setsubscribe(uid): Observable<any> {
-    return this.http.post('/alarm_set_subscribe', uid, httpOptions)
-      .pipe(
-        catchError(this.handleError) // then handle the error
-      );
-  }
 
 
   private handleError(error: HttpErrorResponse) {

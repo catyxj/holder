@@ -86,7 +86,7 @@ export const FormalRoutingModule = [
             component: AccountInfoFormalComponent
           },
           {
-            path: 'operate/:uid/:name',
+            path: 'operate/:name',
             component: AccountOperateFormalComponent
           },
           {

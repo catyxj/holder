@@ -16,7 +16,7 @@ export class BoilerSocketService {
 
   creatSocket(url: string, data: any): Observable<any> {
 
-    this.ws = new WebSocket(`ws://${window.location.host}/${url}`);
+    this.ws = new WebSocket(`wss://${window.location.host}/${url}`);
     this.ws.onopen = () => {
       this.sendMessage(data);
     };

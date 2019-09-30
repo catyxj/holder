@@ -61,6 +61,7 @@
   overflow: hidden;
   text-overflow: ellipsis;*/
   text-align: left;
+  word-break: break-all;
 }
 .sinfo_item_bottom{
   display: flex;

@@ -95,7 +95,7 @@
             <nz-option [nzLabel]="'设备名称'" [nzValue]="'name'"></nz-option>
             <nz-option [nzLabel]="'终端编码'" [nzValue]="'terminal_code'"></nz-option>
             <nz-option [nzLabel]="'地域地址'" [nzValue]="'address'"></nz-option>
-            <nz-option [nzLabel]="'使用单位'" [nzValue]="'user_org'"></nz-option>
+            <nz-option [nzLabel]="'使用单位'" [nzValue]="'use_org'"></nz-option>
           </nz-select>
         </ng-template>
         <ng-template #addOnAfterTemplate>
@@ -161,19 +161,19 @@
                 <li nz-menu-item (click)="searchRun('')">
                   <a>全部</a>
                 </li>
-                <li nz-menu-item (click)="searchRun('0')">
+                <!--<li nz-menu-item (click)="searchRun('0')">
                   <a>未知</a>
-                </li>
-                <li nz-menu-item (click)="searchRun('1')">
+                </li>-->
+                <li nz-menu-item (click)="searchRun('stop')">
                   <a>未运行</a>
                 </li>
-                <li nz-menu-item (click)="searchRun('2')">
+                <li nz-menu-item (click)="searchRun('run')">
                   <a>运行</a>
                 </li>
-                <li nz-menu-item (click)="searchRun('3')">
+                <li nz-menu-item (click)="searchRun('alarm')">
                   <a>告警</a>
                 </li>
-                <li nz-menu-item (click)="searchRun('4')">
+                <li nz-menu-item (click)="searchRun('malfunction')">
                   <a>故障</a>
                 </li>
               </ul>
@@ -212,8 +212,12 @@
           ></td>-->
           <td> {{data.name}} </td>
           <td> {{data.terminal_code}} </td>
-          <td> {{data.location_name}} </td>
-          <td> {{data.user_org}} </td>
+          <td>
+            <div style="width: 230px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+              {{data.location_name}}
+            </div>
+          </td>
+          <td> {{data.use_org}} </td>
           <td>
             <nz-tag [nzColor]="'#1E9FF2'" *ngIf="data.online">已联网</nz-tag>
             <nz-tag [nzColor]="'#C0C4D2'" *ngIf="!data.online">未联网</nz-tag>

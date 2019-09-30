@@ -15,7 +15,7 @@ export class RuntimeMaintainComponent implements OnInit {
   public page = 1;
   public pageNum;
   public pageSize = 15;
-  public search = 'id';
+  public search = 'label';
   public value;
   public status;
   public totalItems;
@@ -33,7 +33,7 @@ export class RuntimeMaintainComponent implements OnInit {
   // 获取列表
   getList() {
     this.loading = true;
-    this.maintainService.getLists(this.page, this.pageSize, this.search, this.value)
+    this.maintainService.getLogLists(this.page, this.pageSize, this.search, this.value, this.status, this.uid)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;

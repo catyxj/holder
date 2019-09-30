@@ -165,8 +165,8 @@
         <h6>
           关联记录
         </h6>
-        <!--[routerLink]="['/admin/formal/account/operate', user?.uid, user?.username]"-->
-        <a class="btn btn_purple btn_round bpm" >
+
+        <a class="btn btn_purple btn_round bpm" [routerLink]="['/admin/ordinary/account/operate', user?.uid]">
           查看更多
         </a>
       </div>
@@ -177,9 +177,7 @@
               {{data.created_at | date: 'yyyy-MM-dd'}}
             </div>
             <div class="f_info_item_op" >
-              <a [routerLink]="['/admin/formal/account/order-detail', data.uid]">
-                {{data.info}}
-              </a>
+              {{data.info}}
             </div>
           </li>
         </ul>

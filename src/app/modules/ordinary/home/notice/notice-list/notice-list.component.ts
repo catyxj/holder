@@ -6,6 +6,7 @@ import {BoilerService} from "../../../../../shared/boiler.service";
 import {switchMap} from "rxjs/internal/operators";
 
 import Swal from 'sweetalert2';
+import {AlarmService} from "../../../../../shared/alarm.service";
 
 @Component({
   selector: 'app-notice-list',
@@ -29,7 +30,8 @@ export class NoticeListComponent implements OnInit {
   constructor(private nzModal: NzModalService,
               private modalService: NgbModal,
               private route: ActivatedRoute,
-              private eptService: BoilerService) { }
+              private eptService: BoilerService,
+              private alarmService: AlarmService) { }
 
   ngOnInit() {
     this.route.paramMap.pipe(
@@ -47,7 +49,7 @@ export class NoticeListComponent implements OnInit {
 
   // 获取列表
   getList() {
-    this.dataLists = [
+    /*this.dataLists = [
       {
         id: 'asdfsa',
         created_at: '2018-2-13 12:12:12',
@@ -64,7 +66,7 @@ export class NoticeListComponent implements OnInit {
         is_read: true,
         log_status: false
       }
-    ];
+    ];*/
 
     this.loading = true;
     this.eptService.getNoticeList(this.page, this.pageSize, this.search, this.value, this.status)
@@ -202,7 +204,7 @@ export class NoticeListComponent implements OnInit {
         post = {
           type: n
         };
-        title = '确认要删除此通知吗？';
+        title = '确认要删除全部通知吗？';
         this.creatModal(title, subtitle, () => {
           this.checkBatch(post);
         });
@@ -236,7 +238,8 @@ export class NoticeListComponent implements OnInit {
           '',
           'success'
         );
-        this.pageChange();
+        that.pageChange();
+        that.alarmService.AlarmMission('a');
       }, err => {
         that.loading = false;
         Swal(

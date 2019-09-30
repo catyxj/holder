@@ -5,7 +5,8 @@
     <div class="info_tname">
       <img src="assets/icons/boiler2.png" alt="">
 
-      XXXXX锅炉A组件到期提醒
+      <!--组件到期提醒-->
+      {{info?.ept_name}} {{info?.comp_name}}到期提醒
 
     </div>
     <div class="info_head_r">
@@ -25,12 +26,12 @@
 
   <div class="report_content">
     <div>
-      尊敬的18012341234用户：
+      尊敬的{{user?.username}}用户：
     </div>
 
     <div class="report_info">
       <p>
-        您所属下XX锅炉A组件质保期将在2919-07-20 00:00:00正式到期，截至目前仅剩30天。未充值续费的A组件质保服务将在到期后停止服务。为了保证
+        您所属下{{info?.ept_name}} {{info?.comp_name}}质保期将在{{info?.expire_date | date: 'yyyy-MM-dd HH:mm:ss'}}正式到期，截至目前仅剩30天。未充值续费的{{info?.comp_name}}质保服务将在到期后停止服务。为了保证
         您的服务正常运行，请及时续费。
       </p>
 
@@ -40,7 +41,7 @@
             产品名称
           </th>
           <td>
-            XX锅炉
+            {{info?.ept_name}}
           </td>
         </tr>
 
@@ -49,34 +50,34 @@
             组件名称
           </th>
           <td>
-            A组件
+            {{info?.comp_name}}
           </td>
         </tr>
 
-        <tr>
+        <!--<tr>
           <th>
             产品终端编码
           </th>
           <td>
             XX锅炉
           </td>
-        </tr>
+        </tr>-->
 
-        <tr>
+        <!--<tr>
           <th>
             所属单位
           </th>
           <td>
             A企业
           </td>
-        </tr>
+        </tr>-->
 
         <tr>
           <th>
             到期时间
           </th>
           <td>
-            2019-07-20 00:00:00
+            {{info?.expire_date | date: 'yyyy-MM-dd HH:mm:ss'}}
           </td>
         </tr>
 

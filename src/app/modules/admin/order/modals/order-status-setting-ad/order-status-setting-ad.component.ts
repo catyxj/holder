@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {OrderService} from "../../../../../shared/order.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-order-status-setting-ad',
@@ -19,11 +20,17 @@ export class OrderStatusSettingAdComponent implements OnInit {
               private orderService: OrderService) { }
 
   ngOnInit() {
+    // this.status = this.currentData.order_status;
+    this.status = '1';
   }
 
   save() {
     let that = this;
-    /*this.orderService.scrap(this.uid)
+    let post = {
+      order_sn: this.uid,
+      status: this.status
+    };
+    this.orderService.setStatus(this.uid)
       .subscribe(val => {
         Swal(
           '操作成功！',
@@ -37,7 +44,7 @@ export class OrderStatusSettingAdComponent implements OnInit {
           '',
           'error'
         );
-      });*/
+      });
   }
 
 }

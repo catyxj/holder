@@ -363,7 +363,7 @@ export class MapDashboardComponent implements OnInit, OnDestroy {
     });*/
     marker.addEventListener('click', function(e) {
       // console.log(mark);
-      that.router.navigate(['/admin/runtime', mark.uid]);
+      that.router.navigate(['/admin/ordinary/runtime', mark.uid]);
     });
   }
 
@@ -392,6 +392,8 @@ export class MapDashboardComponent implements OnInit, OnDestroy {
   resetData() {
     this.search = 'name';
     this.value = '';
+    const point = new BMap.Point(105.000, 38.000);
+    this.map.centerAndZoom(point, 6);
     this.markers = this.markList.slice();
     this.map.clearOverlays();
     this.markerClusterer.clearMarkers();

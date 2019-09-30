@@ -100,7 +100,7 @@
           <td> {{data.name}} </td>
           <td> {{data.secret_key}} </td>
           <td> {{data.username || '空'}} ({{data.org_name || '空'}}) </td>
-          <td> {{data.terminal_code || '空'}} ({{'空'}}) </td>
+          <td> {{data.terminal_code || '空'}} ({{data.ept_name || '空'}}) </td>
           <td>
             <span *ngIf="data.status === 1" class="text_grey">
               <img src="assets/icons/icon_active2.png" alt="" style="margin-right: 6px;">

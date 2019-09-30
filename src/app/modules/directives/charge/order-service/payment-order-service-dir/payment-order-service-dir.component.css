@@ -104,8 +104,17 @@
   font-size: 20px;
 }
 
-
-
+.mo_text{
+  margin-bottom: 12px;
+}
+.mo_text_label{
+  font-size: 12px;
+  color: #666666;
+}
+.mo_text_value{
+  font-size: 12px;
+  color: #333333;
+}
 
 
 

@@ -30,6 +30,7 @@ export class EquipInfoOrComponent implements OnInit {
   public region = '';
   public orgList = [];
   public infoList = [];
+  public roleId;
 
 
   tplModal: NzModalRef;
@@ -43,6 +44,7 @@ export class EquipInfoOrComponent implements OnInit {
               private nzModal: NzModalService) { }
 
   ngOnInit() {
+    this.roleId = localStorage.getItem('roleId');
     this.uid = this.route.snapshot.paramMap.get('uid');
     this.getInfo();
 
@@ -82,6 +84,9 @@ export class EquipInfoOrComponent implements OnInit {
 
   initLocation() {
     let loc = this.info.location;
+    this.province = '';
+    this.city = '';
+    this.region = '';
     if (loc === 0) {
       this.province = '全国';
       return;
@@ -108,7 +113,7 @@ export class EquipInfoOrComponent implements OnInit {
                   let region = loc;
                   if (region.length >= 6) {
                     for (let n = 0; n < regions.length; n++) {
-                      if(parseInt(region) === regions[n].LocationId) {
+                      if (parseInt(region) === regions[n].LocationId) {
                         this.region = regions[n].Name;
                         break;
                       }

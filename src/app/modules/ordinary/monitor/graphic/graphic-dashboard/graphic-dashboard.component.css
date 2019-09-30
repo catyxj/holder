@@ -101,9 +101,13 @@ a {
   font-size: 12px;
 }
 .module .status_name p{
+  width: 100%;
   margin-bottom: 0;
   color: #666EE8;
   font-size: 12px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .d_label{
   display: block;

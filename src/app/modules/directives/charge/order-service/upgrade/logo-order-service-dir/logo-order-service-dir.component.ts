@@ -53,6 +53,14 @@ export class LogoOrderServiceDirComponent implements OnInit {
         this.title = '维保服务';
         this.id = 12;
         break;
+      case '9':
+        this.title = '人脸识别';
+        this.id = 16;
+        break;
+      case '10':
+        this.title = '考勤签到';
+        this.id = 15;
+        break;
     }
 
     this.getInfo();

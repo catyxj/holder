@@ -59,9 +59,13 @@ export class TerminalService {
     if (roleId === '1') {
       url = `${this.dataListUrl}?page=${n}&rows=${pageSize}&status=${status}&search=${search}&value=${value}&online=${online}`;
     }
+    if (roleId === '5') {
+      url = `/api/operation/terminal/list?page=${n}&rows=${pageSize}&status=${status}&search=${search}&value=${value}&online=${online}`;
+    }
     if (roleId === '10') {
       url = `${this.dataListUrlF}?page=${n}&rows=${pageSize}&config_status=${status}&search=${search}&value=${value}&online=${online}`;
     }
+
 
     return this.http.get<any>(url, httpOptions)
       .pipe(
@@ -79,6 +83,9 @@ export class TerminalService {
     let url;
     if (roleId === '1') {
       url = `${this.dataBasicUrl}?uid=${uid}`;
+    }
+    if (roleId === '5') {
+      url = `/api/operation/terminal/detail?uid=${uid}`;
     }
     if (roleId === '10') {
       url = `${this.dataBasicUrlF}?uid=${uid}`;
@@ -102,6 +109,9 @@ export class TerminalService {
     if (roleId === '1') {
       url = `${this.dataOperateUrl}?uid=${uid}`;
     }
+    if (roleId === '5') {
+      url = `/api/operation/terminal/log/info?uid=${uid}`;
+    }
     if (roleId === '10') {
       url = `${this.dataOperateUrlF}?uid=${uid}`;
     }
@@ -121,6 +131,9 @@ export class TerminalService {
     let url;
     if (roleId === '1') {
       url = `${this.dataOperateMoreUrl}?uid=${uid}&page=${n}&rows=${pageSize}`;
+    }
+    if (roleId === '5') {
+      url = `/api/operation/terminal/log/list?uid=${uid}&page=${n}&rows=${pageSize}`;
     }
     if (roleId === '10') {
       url = `${this.dataOperateMoreUrlF}?uid=${uid}&page=${n}&rows=${pageSize}`;
@@ -143,6 +156,9 @@ export class TerminalService {
     if (roleId === '1') {
       url = '/api/admin/terminal/add';
     }
+    if (roleId === '5') {
+      url = '/api/operation/terminal/add';
+    }
     if (roleId === '10') {
       url = '/api/formal/terminal/create';
     }
@@ -158,7 +174,15 @@ export class TerminalService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/admin/terminal/batch/add', data, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = '/api/admin/terminal/batch/add';
+    }
+    if (roleId === '5') {
+      url = '/api/operation/terminal/batch/add';
+    }
+    return this.http.post(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -174,6 +198,9 @@ export class TerminalService {
     let url;
     if (roleId === '1') {
       url = '/api/admin/terminal/batch/delete';
+    }
+    if (roleId === '5') {
+      url = '/api/operation/terminal/batch/delete';
     }
     if (roleId === '10') {
       url = '/api/formal/terminal/batch/delete';
@@ -191,7 +218,15 @@ export class TerminalService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.get(`/api/admin/terminal/scrapped?uid=${data}`, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = `/api/admin/terminal/scrapped?uid=${data}`;
+    }
+    if (roleId === '5') {
+      url = `/api/operation/terminal/scrapped?uid=${data}`;
+    }
+    return this.http.get(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -206,6 +241,9 @@ export class TerminalService {
     let url;
     if (roleId === '1') {
       url = '/api/admin/terminal/update';
+    }
+    if (roleId === '5') {
+      url = '/api/operation/terminal/update';
     }
     if (roleId === '10') {
       url = '/api/formal/terminal/ept/update';
@@ -223,7 +261,15 @@ export class TerminalService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.get<any>(`/api/admin/terminal/traffic/card/query?iccid=${iccid}`, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = `/api/admin/terminal/traffic/card/query?iccid=${iccid}`;
+    }
+    if (roleId === '5') {
+      url = `/api/operation/terminal/traffic/card/query?iccid=${iccid}`;
+    }
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

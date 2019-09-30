@@ -139,7 +139,7 @@ export class CluBatchComponent implements OnInit {
       }
     }
     if (checked.length > 0) {
-      title = '确认要禁用此设备吗？';
+      title = '确认要禁用此集群吗？';
       this.creatModal(title, subtitle, () => {
         let post = {
           data: checked,
@@ -149,7 +149,7 @@ export class CluBatchComponent implements OnInit {
       });
     } else {
       this.nzModal.info({
-        nzTitle: '请选择设备',
+        nzTitle: '请选择集群',
         nzContent: '',
         nzOnOk: () => console.log('Info OK')
       });
@@ -174,7 +174,7 @@ export class CluBatchComponent implements OnInit {
       }
     }
     if (checked.length > 0) {
-      title = '确认要删除此设备吗？';
+      title = '确认要删除此集群吗？';
       this.creatModal(title, subtitle, () => {
         let post;
         if (this.roleId === '10') {
@@ -191,7 +191,7 @@ export class CluBatchComponent implements OnInit {
       });
     } else {
       this.nzModal.info({
-        nzTitle: '请选择设备',
+        nzTitle: '请选择集群',
         nzContent: '',
         nzOnOk: () => console.log('Info OK')
       });
@@ -216,7 +216,7 @@ export class CluBatchComponent implements OnInit {
       }
     }
     if (checked.length > 0) {
-      title = '确认要激活设备吗？';
+      title = '确认要激活集群吗？';
       this.creatModal(title, subtitle, () => {
         let post = {
           data: checked,
@@ -226,7 +226,7 @@ export class CluBatchComponent implements OnInit {
       });
     } else {
       this.nzModal.info({
-        nzTitle: '请选择设备',
+        nzTitle: '请选择集群',
         nzContent: '',
         nzOnOk: () => console.log('Info OK')
       });

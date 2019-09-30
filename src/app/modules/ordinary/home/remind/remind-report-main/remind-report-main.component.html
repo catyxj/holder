@@ -3,19 +3,19 @@
 <div class="content">
 
   <div *ngIf="type==='1'">
-    <app-remind-report></app-remind-report>
-  </div>
-
-  <div *ngIf="type==='2'">
-    <app-remind-overdue1></app-remind-overdue1>
-  </div>
-
-  <div *ngIf="type==='3'">
-    <app-remind-overdue2></app-remind-overdue2>
+    <app-remind-report [uid]="uid"></app-remind-report>
   </div>
 
   <div *ngIf="type==='4'">
-    <app-remind-overdue3></app-remind-overdue3>
+    <app-remind-overdue1 [uid]="uid"></app-remind-overdue1>
+  </div>
+
+  <div *ngIf="type==='3'">
+    <app-remind-overdue2 [uid]="uid"></app-remind-overdue2>
+  </div>
+
+  <div *ngIf="type==='2'">
+    <app-remind-overdue3 [uid]="uid"></app-remind-overdue3>
   </div>
 
 </div>

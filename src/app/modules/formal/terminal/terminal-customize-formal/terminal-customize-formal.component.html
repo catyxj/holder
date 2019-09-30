@@ -32,7 +32,19 @@
           组态名称：
         </div>
         <div class="lc_head_value">
-          {{name}}
+          <div>
+            <div *ngIf="!editName" style="display: flex; align-items: center;">
+              <span>{{name}}</span>
+              <i class="iconfont iconedit1" (click)="editName=true" title="修改"></i>
+            </div>
+            <div *ngIf="editName" style="display: flex; align-items: center;">
+              <input type="text" [(ngModel)]="newName" style="border: 1px solid #dddddd; padding: 0 10px;" maxlength="10">
+              <i class="iconfont iconundo" (click)="editName=false; newName=name;" title="撤销"></i>
+              <i class="iconfont iconconfirm" (click)="editName=false; name=newName;" title="确定"></i>
+            </div>
+
+          </div>
+
         </div>
       </div>
     </div>

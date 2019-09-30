@@ -27,18 +27,18 @@
 
           <hr>
 
-          <div class="c_v_con" *ngFor="let item of data.description">
+          <div class="c_v_con" *ngFor="let item of data.des">
             <div>
-              <h6>{{item.name}}</h6>
+              <h6>{{item.title}}</h6>
               <div style="padding: 0 13px;">
                 <table class="table table-bordered">
-                  <tr>
-                    <!--<td style="width: 90px;">
-                      最小照度
+                  <tr *ngFor="let item1 of item.data">
+                    <td style="width: 90px;">
+                      {{item1.name}}
                     </td>
                     <td style="word-break: break-all;">
-                      0.005lux@(f1.2,agc)
-                    </td>-->
+                      {{item1.value}}
+                    </td>
                   </tr>
                 </table>
               </div>
@@ -70,6 +70,10 @@
         <nz-radio-group [(ngModel)]="addressId" [nzButtonStyle]="'solid'">
           <label nz-radio [nzValue]="data.uid" *ngFor="let data of addrList">
             {{data.location_name}} {{data.name}} {{data.telephone}}
+            <span>
+              <img src="assets/images/charge/purchase_edit.png" alt=""  style="margin-left: 20px;" (click)="editAddr(data)">
+              <img src="assets/images/charge/purchase_del.png" alt="" style="margin-left: 10px;" nz-popconfirm nzTitle="确认删除该地址？" (nzOnConfirm)="delAddr(data)">
+            </span>
           </label>
         </nz-radio-group>
 
@@ -88,7 +92,7 @@
         费用小计：
       </div>
       <div class="cost_value">
-        {{cost | currency: '￥'}}
+        {{cost*count | currency: '￥'}}
       </div>
     </div>
 

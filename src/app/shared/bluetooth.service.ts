@@ -22,6 +22,12 @@ export class BluetoothService {
   private dataOperateUrl = '/api/admin/bluetooth/log/info';
   private dataOperateMoreUrl = '/api/admin/bluetooth/log/list';
 
+  //  运营用户
+  private dataListUrlOp = '/api/operation/bluetooth/list';
+  private dataBasicUrlOp = '/api/operation/bluetooth/detail';
+  private dataOperateUrlOp = '/api/operation/bluetooth/log/info';
+  private dataOperateMoreUrlOp = '/api/operation/bluetooth/log/list';
+
   // 正式用户
   private dataListUrlF = '/api/formal/bluetooth/list';
   private dataBasicUrlF = '/api/formal/bluetooth/detail';
@@ -43,6 +49,9 @@ export class BluetoothService {
     let url;
     if (roleId === '1') {
       url = `${this.dataListUrl}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&status=${status}`;
+    }
+    if (roleId === '5') {
+      url = `${this.dataListUrlOp}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&status=${status}`;
     }
     if (roleId === '10') {
       url = `${this.dataListUrlF}?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
@@ -66,6 +75,9 @@ export class BluetoothService {
     if (roleId === '1') {
       url = `${this.dataBasicUrl}?uid=${uid}`;
     }
+    if (roleId === '5') {
+      url = `${this.dataBasicUrlOp}?uid=${uid}`;
+    }
     if (roleId === '10') {
       url = `${this.dataBasicUrlF}?uid=${uid}`;
     }
@@ -87,6 +99,9 @@ export class BluetoothService {
     if (roleId === '1') {
       url = `${this.dataOperateUrl}?uid=${uid}`;
     }
+    if (roleId === '5') {
+      url = `${this.dataOperateUrlOp}?uid=${uid}`;
+    }
     if (roleId === '10') {
       url = `${this.dataOperateUrlF}?uid=${uid}`;
     }
@@ -106,6 +121,9 @@ export class BluetoothService {
     let url;
     if (roleId === '1') {
       url = `${this.dataOperateMoreUrl}?uid=${uid}&page=${n}&rows=${pageSize}`;
+    }
+    if (roleId === '5') {
+      url = `${this.dataOperateMoreUrlOp}?uid=${uid}&page=${n}&rows=${pageSize}`;
     }
     if (roleId === '10') {
       url = `${this.dataOperateMoreUrlF}?uid=${uid}&page=${n}&rows=${pageSize}`;
@@ -129,6 +147,9 @@ export class BluetoothService {
     if (roleId === '1') {
       url = '/api/admin/bluetooth/add';
     }
+    if (roleId === '5') {
+      url = '/api/operation/bluetooth/add';
+    }
     if (roleId === '10') {
       url = '/api/formal/bluetooth/create';
     }
@@ -148,6 +169,9 @@ export class BluetoothService {
     let url;
     if (roleId === '1') {
       url = '/api/admin/bluetooth/batch/delete';
+    }
+    if (roleId === '5') {
+      url = '/api/operation/bluetooth/batch/delete';
     }
     if (roleId === '10') {
       url = '/api/formal/bluetooth/batch/delete';
@@ -169,6 +193,9 @@ export class BluetoothService {
     if (roleId === '1') {
       url = '/api/admin/bluetooth/update';
     }
+    if (roleId === '5') {
+      url = '/api/operation/bluetooth/update';
+    }
     if (roleId === '10') {
       url = '/api/formal/bluetooth/update';
     }
@@ -184,7 +211,15 @@ export class BluetoothService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.get(`/api/admin/bluetooth/scrapped?uid=${uid}`, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '1') {
+      url = `/api/admin/bluetooth/scrapped?uid=${uid}`;
+    }
+    if (roleId === '5') {
+      url = `/api/operation/bluetooth/scrapped?uid=${uid}`;
+    }
+    return this.http.get(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

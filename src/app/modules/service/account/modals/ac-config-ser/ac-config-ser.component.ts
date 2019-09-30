@@ -20,6 +20,8 @@ export class AcConfigSerComponent implements OnInit {
               private accountService: AccountService) { }
 
   ngOnInit() {
+    this.username = this.currentData.name;
+    this.email = this.currentData.email;
   }
 
   save() {

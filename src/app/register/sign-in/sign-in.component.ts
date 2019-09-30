@@ -57,7 +57,6 @@ export class SignInComponent implements OnInit {
           localStorage.setItem('authToken', res.Auth);
           localStorage.setItem('roleId', res.roleId);
 
-
           let timerInterval;
           Swal({
             title: '',
@@ -97,7 +96,7 @@ export class SignInComponent implements OnInit {
           Swal({
             title: '',
             html: '<div class="success_tip"> <img src="assets/icons/icon_fail.png"> 登录失败!</div>' +
-            `<div class="success_tip_mes"> ${error.message || error} </div> <div class="success_tip_time"><a><span>3</span>秒后自动关闭</a></div>`,
+            `<div class="success_tip_mes"> ${error.message || '网络错误，请检查网络'} </div> <div class="success_tip_time"><a><span>3</span>秒后自动关闭</a></div>`,
             showConfirmButton: false,
             timer: 3000,
             onBeforeOpen: () => {
@@ -151,6 +150,12 @@ export class SignInComponent implements OnInit {
     switch (roleId) {
       case '1':
         this.router.navigate(['/admin/ad']);
+        break;
+      case '5':
+        this.router.navigate(['/admin/operator/delivery']);
+        break;
+      case '6':
+        this.router.navigate(['/admin/finance']);
         break;
       case '10':
       case '11':

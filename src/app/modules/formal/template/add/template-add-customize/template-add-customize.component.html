@@ -296,8 +296,8 @@
     </button>
   </div>
 
-  <nz-modal [(nzVisible)]="isVisible" nzTitle="模板名称" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-    <input type="text" [(ngModel)]="ztName">
+  <nz-modal [(nzVisible)]="isVisible" nzTitle="组态名称" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzClosable="false">
+    <input type="text" [(ngModel)]="ztName" maxlength="10" class="form-control" placeholder="请输入组态名称">
   </nz-modal>
 
 </div>

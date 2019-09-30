@@ -6,10 +6,11 @@
         <input type="text" nz-input [(ngModel)]="value" (keyup)="searchEnter($event)" maxlength="20"/>
       </nz-input-group>
       <ng-template #addOnBeforeTemplate>
-        <nz-select [(ngModel)]="search">
+        组件名称
+        <!--<nz-select [(ngModel)]="search">
           <nz-option [nzLabel]="'组件名称'" [nzValue]="'name'"></nz-option>
           <nz-option [nzLabel]="'组件状态'" [nzValue]="'status'"></nz-option>
-        </nz-select>
+        </nz-select>-->
       </ng-template>
       <ng-template #addOnAfterTemplate>
         <img src="assets/icons/icon_seach.png" alt="" class="search_icon" (click)="searchChange()">
@@ -44,7 +45,27 @@
         >
         </th>
         <th>组件名称</th>
-        <th>组件状态</th>
+        <th>
+          <!--组件状态-->
+          <nz-dropdown [nzTrigger]="'click'">
+            <a nz-dropdown>
+              组件状态
+              <i nz-icon type="down" style="color: #898EA3;"></i>
+            </a>
+
+            <ul nz-menu>
+              <li nz-menu-item (click)="searchStatus('')">
+                <a>全部</a>
+              </li>
+              <li nz-menu-item (click)="searchStatus('normal')">
+                <a>正常</a>
+              </li>
+              <li nz-menu-item (click)="searchStatus('abnormal')">
+                <a>异常</a>
+              </li>
+            </ul>
+          </nz-dropdown>
+        </th>
         <th>设置日期</th>
         <th>提醒时长</th>
         <th>
@@ -77,26 +98,32 @@
         </td>
         <td> {{data.install_date | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
         <td> {{data.save_month}} 个月 </td>
-        <td style="display: flex; align-items:center;">
-          <span>
-            {{ data.life_cycle*100 | number:'1.0-2' }} %
-          </span>
+        <td>
+          <div style="display: flex; align-items:center;">
+            <span *ngIf="data.life_cycle >= 0">
+              {{ data.life_cycle*100 | number:'1.0-2' }} %
+            </span>
+            <span *ngIf="data.life_cycle < 0">
+              0 %
+            </span>
 
-          <div class="status_bar" [ngClass]="{'green':data.life_cycle>0.1, 'yellow':data.life_cycle<=0.1 && data.life_cycle>0, 'grey':data.life_cycle<=0}">
-            <div class="status_bar_in" [ngStyle]="{'background-color': data.life_cycle>0.1 ? '#28D094' : '#FFC06A', 'width': data.life_cycle>0 ? data.life_cycle*100+'%': '0%' }"></div>
-          </div>
-          <span *ngIf="data.life_cycle>0.1">
+            <div class="status_bar" [ngClass]="{'green':data.life_cycle>0.1, 'yellow':data.life_cycle<=0.1 && data.life_cycle>0, 'grey':data.life_cycle<=0}">
+              <div class="status_bar_in" [ngStyle]="{'background-color': data.life_cycle>0.1 ? '#28D094' : '#FFC06A', 'width': data.life_cycle>0 ? data.life_cycle*100+'%': '0%' }"></div>
+            </div>
+            <span *ngIf="data.life_cycle>0.1">
             正常
           </span>
-          <span style="color: #FFC06A;" *ngIf="data.life_cycle<=0.1 && data.life_cycle>0">
+            <span style="color: #FFC06A;" *ngIf="data.life_cycle<=0.1 && data.life_cycle>0">
             即将过期
           </span>
-          <span style="color: #BE1414;" *ngIf="data.life_cycle<=0">
+            <span style="color: #BE1414;" *ngIf="data.life_cycle<=0">
             已经过期
           </span>
-          <a style="color: #666EE8; text-decoration: underline;" *ngIf="data.life_cycle<=0.1">
-            联系厂家
-          </a>
+            <a style="color: #666EE8; text-decoration: underline;" *ngIf="data.life_cycle<=0.1">
+              联系厂家
+            </a>
+          </div>
+
         </td>
         <td>
           {{data.description}}

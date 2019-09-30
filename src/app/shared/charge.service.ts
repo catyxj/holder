@@ -87,7 +87,6 @@ export class ChargeService {
     // let roleId = localStorage.getItem('roleId');
     let url = `/api/formal/order/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
 
-
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)

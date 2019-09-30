@@ -59,7 +59,7 @@
               设备形态：
             </div>
             <div class="eq_value">
-              {{info?.zt_name}}
+              {{terminal?.zt_name}}
             </div>
           </div>
 
@@ -122,7 +122,7 @@
             <div class="eq_value">
               {{terminal?.terminal_code}}
 
-              <a *ngIf="terminal&&terminal.terminal_id" [routerLink]="['/admin/formal/terminal/info', terminal.terminal_id, terminal.terminal_code, '1']">
+              <a *ngIf="terminal&&terminal.terminal_id && roleId==='10'" [routerLink]="['/admin/formal/terminal/info', terminal.terminal_id, terminal.terminal_code, '1']">
                 配置终端
               </a>
             </div>
@@ -177,13 +177,13 @@
             </div>
             <div class="eq_value">
               <div>
-                <span class="text-blue" *ngIf="terminal && terminal.bt_id">已关联</span>
-                <span class="text-grey" *ngIf="!terminal || !terminal.bt_id">未关联</span>
+                <span class="text_blue" *ngIf="terminal && terminal.bt_id">已关联</span>
+                <span class="text_grey" *ngIf="!terminal || !terminal.bt_id">未关联</span>
               </div>
 
-              <a *ngIf="terminal&&terminal.bt_id" [routerLink]="['/admin/formal/bluetooth/info', terminal?.bt_id, '1']">
+              <!--<a *ngIf="terminal&&terminal.bt_id && roleId==='10'" [routerLink]="['/admin/formal/bluetooth/info', terminal?.bt_id, '1']">
                 配置蓝牙
-              </a>
+              </a>-->
             </div>
           </div>
 

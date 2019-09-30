@@ -52,7 +52,7 @@ export class InvoiceInfoDirComponent implements OnInit {
 
   ngOnInit() {
     this.amount = this.route.snapshot.paramMap.get('amount');
-    this.sn = JSON.parse(this.route.snapshot.paramMap.get('sn'));
+    this.sn = this.route.snapshot.paramMap.get('sn');
     // console.log(this.sn);
 
     this.newAddress = {
@@ -77,7 +77,7 @@ export class InvoiceInfoDirComponent implements OnInit {
 
   // 获取地址信息
   getAddressInfo() {
-    this.addressList = [
+    /*this.addressList = [
       {
         uid: '11111',
         is_default: false,
@@ -106,9 +106,9 @@ export class InvoiceInfoDirComponent implements OnInit {
         address: '首南街道 泰康中路558号宁波商会国贸中心A座2508xxx3333333'
       }
     ];
-    this.initAddress();
+    this.initAddress();*/
 
-    let type = 1;
+    let type = 2;
     this.chargeService.getAddressList(type)
       .subscribe(data => {
         this.addressList = data;
@@ -129,13 +129,15 @@ export class InvoiceInfoDirComponent implements OnInit {
         }
       }
       this.selectedAddr = this.defaultAddress;
+
+      console.log(this.defaultAddress, this.otherAddress);
     }
   }
 
 
 
   getInfo() {
-    this.infoList = [
+    /*this.infoList = [
       {
         id: 'adsfas',
         is_default: true,
@@ -175,7 +177,7 @@ export class InvoiceInfoDirComponent implements OnInit {
         address: this.defaultInfo.register_place,
         phone: this.defaultInfo.register_tel
       };
-    }
+    }*/
 
     this.chargeService.getInvoiceInfoList()
       .subscribe(data => {
@@ -399,16 +401,24 @@ export class InvoiceInfoDirComponent implements OnInit {
   save() {
 
     let that = this;
+    if (this.showAddAddr || this.newAddr) {
+      this.newAddress.location_id = this.locationId;
+      this.newAddress.location_name = this.locationName  + this.newAddress.address;
+    }
+
+    console.log(this.selectedAddr);
+    if (!this.selectedAddr || !this.selectedAddr.name || !this.selectedAddr.location_id || !this.selectedAddr.address
+      || !this.selectedAddr.telephone) {
+      Swal('请填写完整地址信息');
+      return;
+    }
     if (!this.selectedInfo || !this.selectedInfo.name || !this.selectedInfo.taxpayer || !this.selectedInfo.bank
       || !this.selectedInfo.account || !this.selectedInfo.address || !this.selectedInfo.phone) {
       Swal('请填写完整发票信息');
       return;
     }
 
-    if (this.showAddAddr || this.newAddr) {
-      this.newAddress.location_id = this.locationId;
-      this.newAddress.location_name = this.locationName  + this.newAddress.address;
-    }
+
 
 
     // name: this.defaultInfo.company,
@@ -418,7 +428,7 @@ export class InvoiceInfoDirComponent implements OnInit {
     //   address: this.defaultInfo.register_place,
     //   phone: this.defaultInfo.register_tel
     let post = {
-      order_sn: this.sn,
+      order_sn: [this.sn],
       name: this.selectedAddr.name,
       location_id: this.selectedAddr.location_id,
       location_name: this.selectedAddr.location_name,
@@ -440,8 +450,10 @@ export class InvoiceInfoDirComponent implements OnInit {
           '操作成功！',
           '',
           'success'
-        );
-        that.closeW();
+        ).then(() => {
+          that.closeW();
+        });
+
       }, err => {
         Swal(
           err.message || err,

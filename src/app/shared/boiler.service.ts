@@ -230,7 +230,14 @@ export class BoilerService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `/api/formal/ept/remind`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = '/api/formal/ept/import/info';
+    }
+    if (roleId === '11') {
+      url = '/api/general/ept/import/info';
+    }
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
@@ -242,12 +249,61 @@ export class BoilerService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `/api/formal/ept/remind/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}&log_type=${status}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/ept/import/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}&log_type=${status}`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/ept/import/list?page=${n}&pageSize=${pageSize}&search=${search}&value=${value}&log_type=${status}`;
+    }
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error
       );
   }
+
+  // 重要提醒批量操作
+  batchRemind(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = '/api/formal/ept/import/batch';
+    }
+    if (roleId === '11') {
+      url = '/api/general/ept/import/batch';
+    }
+
+    return this.http.post<any>(url, data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取重要提醒详情
+  getRemindInfo(id): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/ept/import/detail?id=${id}`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/ept/import/detail?id=${id}`;
+    }
+
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
 
   // 获取通知消息
   getNotice(): Observable<any> {
@@ -310,6 +366,7 @@ export class BoilerService {
       );
   }
 
+  // 获取通知详情
   getNoticeInfo(id): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);

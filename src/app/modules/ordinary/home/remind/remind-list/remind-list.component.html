@@ -18,15 +18,19 @@
         <i class="iconfont iconicon_comeback1"></i>
       </button>
 
-      <button class="btn btn_purple btn_round bpm ml-1">
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="batchDelete(1)">
         标记已读
       </button>
 
-      <button class="btn btn_purple btn_round bpm ml-1">
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="batchDelete(2)">
+        标记删除
+      </button>
+
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="batchDelete(3)">
         全部已读
       </button>
 
-      <button class="btn btn_purple btn_round bpm ml-1">
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="batchDelete(4)">
         全部删除
       </button>
 
@@ -84,10 +88,10 @@
                   <a>全部</a>
                 </li>
                 <li nz-menu-item (click)="searchStatus('1')">
-                  <a>1</a>
+                  <a>产品运行报告</a>
                 </li>
                 <li nz-menu-item (click)="searchStatus('2')">
-                  <a>2</a>
+                  <a>产品服务提醒</a>
                 </li>
 
               </ul>
@@ -104,18 +108,21 @@
             [nzDisabled]="data.disabled"
             (nzCheckedChange)="refreshStatus()"
           ></td>
-          <td> {{data.name}} </td>
-          <td> {{data.terminal_code}} </td>
+          <td style="display: flex; align-items: center;">
+            <span class="h_circle" [class.active]="!data.is_read"></span>
+            {{data.description}}
+          </td>
+          <td> {{data.created_at | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
           <td>
-            <span *ngIf="data.status === 0">
-              正常
+            <span *ngIf="data.import_type === 1">
+              产品运行报告
             </span>
-            <span *ngIf="data.status === 1" style="color: #BE1414;">
-              禁用
+            <span *ngIf="data.import_type === 2 || data.import_type === 3 || data.import_type === 4">
+              产品服务提醒
             </span>
           </td>
           <td>
-            <a class="btn btn_purple btn-sm" [routerLink]="['/admin/ordinary/runtime', data.uid]">
+            <a class="text_purple" [routerLink]="['/admin/ordinary/home/remind-info', data.id, data.import_type]">
               详情
             </a>
           </td>

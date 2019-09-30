@@ -32,9 +32,14 @@
           <h6>
             基础信息
           </h6>
-          <button class="btn btn_purple btn_round bpm" (click)="editBasic()" [disabled]="!basic || basic.status === 4">
+
+          <!--设置-->
+          <a (click)="editBasic()" title="编辑" *ngIf="basic && basic.status !== 4">
+            <span class="iconfont iconedit text_purple"></span>
+          </a>
+          <!--<button class="btn btn_purple btn_round bpm" (click)="editBasic()" [disabled]="!basic || basic.status === 4">
             编辑
-          </button>
+          </button>-->
         </div>
         <div class="info_body">
           <ul>
@@ -93,7 +98,7 @@
           <h6>
             状态信息
           </h6>
-          <a class="btn btn_purple btn_round bpm ml-1" [routerLink]="['/admin/ad/terminal/messages', uid, code]" *ngIf="roleId==='17'">
+          <a class="btn btn_purple btn_round bpm ml-1" [routerLink]="['/admin/ad/terminal/messages', uid, code]" *ngIf="roleId==='5'">
             调试报文
           </a>
         </div>

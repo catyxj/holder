@@ -2,16 +2,25 @@
 <div>
   <div class="c_head">
     <div class="h_l">
-      <nz-select style="width: 90px;" [(ngModel)]="year" nzAllowClear>
-        <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-        <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-        <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+      <nz-select style="width: 90px;" [(ngModel)]="year">
+        <nz-option nzValue="2019" nzLabel="2019"></nz-option>
+        <nz-option nzValue="2018" nzLabel="2018"></nz-option>
       </nz-select>
 
-      <nz-select style="width: 90px;" class="ml-1" [(ngModel)]="selectedValue" nzAllowClear>
-        <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-        <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-        <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+      <nz-select style="width: 90px;" class="ml-1" [(ngModel)]="selectedValue">
+        <nz-option nzValue="1" nzLabel="1月"></nz-option>
+        <nz-option nzValue="2" nzLabel="2月"></nz-option>
+        <nz-option nzValue="3" nzLabel="3月"></nz-option>
+        <nz-option nzValue="4" nzLabel="4月"></nz-option>
+        <nz-option nzValue="5" nzLabel="5月"></nz-option>
+        <nz-option nzValue="6" nzLabel="6月"></nz-option>
+        <nz-option nzValue="7" nzLabel="7月"></nz-option>
+        <nz-option nzValue="8" nzLabel="8月"></nz-option>
+        <nz-option nzValue="9" nzLabel="9月"></nz-option>
+        <nz-option nzValue="10" nzLabel="10月"></nz-option>
+        <nz-option nzValue="11" nzLabel="11月"></nz-option>
+        <nz-option nzValue="12" nzLabel="12月"></nz-option>
+        <nz-option nzValue="" nzLabel="不限"></nz-option>
       </nz-select>
 
       <div class="search_box ml-2">
@@ -24,18 +33,18 @@
         <ng-template #addOnAfterTemplate>
           <!--<img src="assets/icons/icon_seach.png" alt="" class="search_icon" (click)="searchChange()">-->
           <!--<i class="fa fa-search" (click)="searchChange()" style="color: #999999;"></i>-->
-          <i nz-icon nzType="search" nzTheme="outline" style="color: #999999;"></i>
+          <i nz-icon nzType="search" nzTheme="outline" style="color: #999999;" (click)="searchChange()"></i>
         </ng-template>
 
       </div>
 
-      <button nz-button nzType="primary" class="ml-3">查询</button>
-      <button nz-button nzType="default" class="ml-2">重置</button>
+      <button nz-button nzType="primary" class="ml-3" (click)="searchChange()">查询</button>
+      <button nz-button nzType="default" class="ml-2" (click)="resetData()">重置</button>
     </div>
 
 
     <div class="h_r">
-      <button nz-button nzType="primary">
+      <button nz-button nzType="primary" (click)="exportData()">
         <i class="iconfont icondaochu"></i>
         导出
       </button>
@@ -44,7 +53,7 @@
   </div>
 
 
-  <div style="margin-top: 10px;" class="bill">
+  <div style="margin-top: 10px; min-height: 450px; overflow: auto;" class="bill">
     <nz-spin [nzSpinning]="isSpinning">
       <table class="table">
         <thead>
@@ -65,7 +74,21 @@
           <td>{{data.created_username}}</td>
           <td>{{data.item_name}}</td>
           <td>终端设备购买</td>
-          <td>{{data.item_type}}</td>
+          <td>
+            <span *ngIf="data.item_type === 1">
+              产品购买
+            </span>
+            <span *ngIf="data.item_type === 2">
+              功能升级
+            </span>
+            <span *ngIf="data.item_type === 3">
+              服务购买
+            </span>
+            <span *ngIf="data.item_type === 4">
+              数据流量
+            </span>
+
+          </td>
           <td>{{data.order_money | currency: '￥'}}</td>
           <td>{{data.discount_money | currency: '￥'}}</td>
           <td>{{data.pay_money | currency: '￥'}}</td>
@@ -76,6 +99,24 @@
 
     <div *ngIf="!dataLists || dataLists.length <= 0">
       <nz-empty></nz-empty>
+    </div>
+
+    <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+
+    <div class="content_b">
+      <nz-pagination nzShowSizeChanger
+                     [nzTotal]="totalItems"
+                     [nzShowTotal]="totalTemplate"
+                     [(nzPageIndex)]="page"
+                     [(nzPageSize)]="pageSize"
+                     (nzPageIndexChange)="pageChange()"
+                     (nzPageSizeChange)="pageSizeChange()"
+                     [nzPageSizeOptions] = "pageSizeList">
+
+      </nz-pagination>
+      <div class="ant-pagination-options-quick-jumper"> 跳至
+        <input type="number" [(ngModel)]="pageNum"> 页 </div>
+      <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
     </div>
 
 

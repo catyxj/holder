@@ -22,6 +22,9 @@
   color: #666666;
   line-height: 30px;
 }
+.m_form .m_item .m_input_l{
+  position: relative;
+}
 .m_form .m_item .m_input_l input{
   width: 138px;
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {OrderService} from "../../../../shared/order.service";
+import {ChargeService} from "../../../../shared/charge.service";
 
 @Component({
   selector: 'app-account-order-detail-formal',
@@ -9,44 +10,50 @@ import {OrderService} from "../../../../shared/order.service";
 })
 export class AccountOrderDetailFormalComponent implements OnInit {
   public uid;
-  public basic;
+  public info;
   public products;
 
   constructor(private route: ActivatedRoute,
               public router: Router,
-              private orderService: OrderService) { }
+              private orderService: OrderService,
+              private chargeService: ChargeService) { }
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
-    this.basic = {
-      amount: 300,
-      pay_account: 'asdfa@123.com'
-    };
-    this.basic.pay_account = this.hideEmailInfo(this.basic.pay_account);
-
     this.getBasic();
   }
 
 
   // 获取基础信息
   getBasic() {
-    this.orderService.getBasic(this.uid)
+    /*this.basic = {
+      amount: 300,
+      pay_account: 'asdfa@123.com'
+    };
+    this.basic.pay_account = this.hideEmailInfo(this.basic.pay_account);*/
+
+
+    this.chargeService.getOrderInfo(this.uid)
       .subscribe(data => {
-        this.basic = data;
+        this.info = data;
+        this.info.buyer_account = this.hideEmailInfo(this.info.buyer_account);
+        if (this.info && this.info.item_type === 1) {
+          this.info.des = JSON.parse(this.info.item_desc);
+        }
       }, err => {
 
       });
   }
 
   // 获取产品信息
-  getProducts() {
+  /*getProducts() {
     this.orderService.getProducts(this.uid)
       .subscribe(data => {
         this.products = data;
       }, err => {
 
       });
-  }
+  }*/
 
 
 

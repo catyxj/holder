@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BoilerService} from "../../../../../../shared/boiler.service";
 import {ClusterService} from "../../../../../../shared/cluster.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-clu-add-finish',
@@ -28,7 +29,8 @@ export class CluAddFinishComponent implements OnInit {
   public pageSizeList = [15, 30, 50, 100];
 
 
-  constructor(private clusterService: ClusterService) { }
+  constructor(private clusterService: ClusterService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getList();
@@ -103,7 +105,8 @@ export class CluAddFinishComponent implements OnInit {
   }
 
   save() {
-    this.next.emit(0);
+    // this.next.emit(0);
+    this.router.navigate(['/admin/ordinary/cluster/dashboard']);
   }
 
 

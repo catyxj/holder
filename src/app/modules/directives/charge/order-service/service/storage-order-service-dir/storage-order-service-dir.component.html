@@ -14,7 +14,7 @@
         充值时间：
       </div>
       <div class="">
-        <nz-select style="width: 120px;" [(ngModel)]="type" nzAllowClear>
+        <nz-select style="width: 120px;" [(ngModel)]="type">
           <nz-option *ngFor="let item of timeList" [nzValue]="item" [nzLabel]="item.name"></nz-option>
         </nz-select>
       </div>
@@ -35,7 +35,7 @@
         有效期：
       </div>
       <div class="standard" style="color: #333333;">
-        2019-01-20至2019-07029
+        2019-01-20至2019-07-29
       </div>
     </div>
 

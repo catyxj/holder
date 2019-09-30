@@ -89,11 +89,20 @@
                 <li nz-menu-item (click)="searchRoleId()">
                   <a>全部</a>
                 </li>
+                <li nz-menu-item (click)="searchRoleId('5')">
+                  <a>运营用户</a>
+                </li>
+                <li nz-menu-item (click)="searchRoleId('6')">
+                  <a>财务用户</a>
+                </li>
                 <li nz-menu-item (click)="searchRoleId('10')">
                   <a>正式用户</a>
                 </li>
                 <li nz-menu-item (click)="searchRoleId('11')">
                   <a>普通用户</a>
+                </li>
+                <li nz-menu-item (click)="searchRoleId('15')">
+                  <a>维保用户</a>
                 </li>
                 <li nz-menu-item (click)="searchRoleId('20')">
                   <a>测试用户</a>
@@ -124,6 +133,12 @@
           <td>
             <span *ngIf="data.role_id === 1">
               系统用户
+            </span>
+            <span *ngIf="data.role_id === 5">
+              运营用户
+            </span>
+            <span *ngIf="data.role_id === 6">
+              财务用户
             </span>
             <span *ngIf="data.role_id === 10">
               正式用户

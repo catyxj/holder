@@ -8,8 +8,6 @@ import {MaintainService} from "../../../../../shared/maintain.service";
   styleUrls: ['./m-record-info-formal.component.css']
 })
 export class MRecordInfoFormalComponent implements OnInit {
-  @Input()
-  currentData;
 
   public uid;
   public info;

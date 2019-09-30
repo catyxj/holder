@@ -174,13 +174,13 @@ export class CluAddCluComponent implements OnInit {
           });
       });
     } else {
-      /*this.nzModal.info({
+      this.nzModal.info({
         nzTitle: '请选择设备',
         nzContent: '',
         nzOnOk: () => console.log('Info OK')
-      });*/
+      });
 
-      this.next.emit(1);
+      // this.next.emit(1);
     }
   }
 

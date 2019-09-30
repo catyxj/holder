@@ -30,9 +30,25 @@ export class MTemplateAddFComponent implements OnInit {
 
   save() {
     let that = this;
+
+    let tL = [];
+    for (let i = 0; i < this.tList.length; i++) {
+      if (this.tList[i]) {
+        tL.push(this.tList[i]);
+      }
+    }
+    if (tL.length <= 0) {
+      Swal(
+        '请添加维保条目',
+        '',
+        'error'
+      );
+      return;
+    }
+
     let post = {
       name: this.name,
-      info: this.tList
+      info: tL
     };
     this.maintainService.addTempData(post)
       .subscribe(val => {

@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./service-add-or.component.css']
 })
 export class ServiceAddOrComponent implements OnInit {
-  public type = '2';
+  public type = '3';
   public content;
   public fileList = [];
   public typeList = [{id: '1', name: 'A类，帮助文档'}, {id: '2', name: 'B类，系统问题'}, {id: '3', name: 'C类，售后维保'}];

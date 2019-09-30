@@ -6,6 +6,7 @@
   display: flex;
   min-width: 20%;
   margin-right: 50px;
+  align-items: center;
 }
 .lc_head_lable{
   font-size: 12px;
@@ -13,10 +14,14 @@
   font-weight: bold;
   margin-right: 10px;
 }
-.lc_head_value{
+.lc_head_value, .lc_head_value span{
   font-size: 12px;
   color: #666EE8;
   font-weight: bold;
+}
+.lc_head_value i{
+  margin-left: 5px;
+  cursor: pointer;
 }
 
 .zutai{
@@ -94,7 +99,7 @@
   height: 500px;
   border: 1px solid #E4E5EC;
   border-radius:2px;
-  overflow: hidden;
+  overflow: auto;
   position: relative;
 }
 #scale {

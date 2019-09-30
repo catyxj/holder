@@ -2,13 +2,12 @@
 <div>
   <div class="c_head">
     <div class="h_l">
-      <nz-select style="width: 90px;" [(ngModel)]="year" nzAllowClear>
+      <nz-select style="width: 90px;" [(ngModel)]="year">
         <nz-option nzValue="2019" nzLabel="2019"></nz-option>
         <nz-option nzValue="2018" nzLabel="2018"></nz-option>
-        <nz-option nzValue="" nzLabel="Disabled" nzDisabled></nz-option>
       </nz-select>
 
-      <nz-select style="width: 90px;" class="ml-1" [(ngModel)]="selectedValue" nzAllowClear>
+      <nz-select style="width: 90px;" class="ml-1" [(ngModel)]="selectedValue">
         <nz-option nzValue="1" nzLabel="1月"></nz-option>
         <nz-option nzValue="2" nzLabel="2月"></nz-option>
         <nz-option nzValue="3" nzLabel="3月"></nz-option>
@@ -24,13 +23,13 @@
         <nz-option nzValue="" nzLabel="不限"></nz-option>
       </nz-select>
 
-      <button nz-button nzType="primary" class="ml-3">查询</button>
-      <button nz-button nzType="default" class="ml-2">重置</button>
+      <button nz-button nzType="primary" class="ml-3" (click)="searchChange()">查询</button>
+      <button nz-button nzType="default" class="ml-2" (click)="resetData()">重置</button>
     </div>
 
 
     <div class="h_r">
-      <button nz-button nzType="primary">
+      <button nz-button nzType="primary" (click)="exportData()">
         <i class="iconfont icondaochu"></i>
         导出
       </button>
@@ -39,7 +38,7 @@
   </div>
 
 
-  <div style="margin-top: 10px;" class="bill">
+  <div style="margin-top: 10px; min-height: 450px;" class="bill">
     <nz-spin [nzSpinning]="isSpinning">
     <table class="table">
       <thead>
@@ -57,7 +56,20 @@
           <td>{{data.created_username}}</td>
           <td>{{data.item_name}}</td>
           <td>终端设备购买</td>
-          <td>{{data.item_type}}</td>
+          <td>
+            <span *ngIf="data.item_type === 1">
+              产品购买
+            </span>
+            <span *ngIf="data.item_type === 2">
+              功能升级
+            </span>
+            <span *ngIf="data.item_type === 3">
+              服务购买
+            </span>
+            <span *ngIf="data.item_type === 4">
+              数据流量
+            </span>
+          </td>
           <td>{{data.order_money | currency: '￥'}}</td>
           <td>{{data.pay_money | currency: '￥'}}</td>
         </tr>
@@ -70,7 +82,7 @@
     </div>
 
 
-    <ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
+    <!--<ng-template #totalTemplate let-total> 共计 {{ totalItems }} 项 </ng-template>
 
     <div class="content_b">
       <nz-pagination nzShowSizeChanger
@@ -86,7 +98,7 @@
       <div class="ant-pagination-options-quick-jumper"> 跳至
         <input type="number" [(ngModel)]="pageNum"> 页 </div>
       <button (click)="goPage()" nz-button class="btn_purple ml-3">跳转</button>
-    </div>
+    </div>-->
 
 
   </div>

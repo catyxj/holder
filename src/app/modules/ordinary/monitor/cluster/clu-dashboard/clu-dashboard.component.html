@@ -51,7 +51,7 @@
     <div class="content_d">
       <div class="grid">
         <div *ngFor="let data of dataLists; trackBy: trackByUid" class="d_col">
-          <a class="module" [routerLink]="['/admin/ordinary/cluster/info', data.uid, page]">
+          <a class="module" (click)="viewInfo(data)">
             <div class="status_box">
               <div class="status_content">
                 <div class="status_name">

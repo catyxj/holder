@@ -58,8 +58,15 @@ export class UserService {
   getUser(): Observable< any > {
     console.log('environment:', environment.production);
     let token = localStorage.getItem('authToken');
-    httpOptions.headers = httpOptions.headers.set('Authorization', token);
-    // console.log(httpOptions);
+    // httpOptions.headers = httpOptions.headers.set('Authorization', token);
+    let options = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': token
+      })
+    };
+
+    console.log(options);
 
     /*if (!environment.production) {
       return this.http.get< any >('assets/server/user.json');
@@ -75,9 +82,8 @@ export class UserService {
           catchError(this.handleError2)
         );
     }*/
-
     // return this.http.get< any >('assets/server/user.json');
-    return this.http.get< any >('/api/user', httpOptions)
+    return this.http.get< any >('/api/user', options)
         .pipe(
           tap((val) => {
             // if (!val) {
@@ -96,14 +102,23 @@ export class UserService {
   // 获取侧边栏，权限
   getSide(): Observable<any> {
     let token = localStorage.getItem('authToken');
-    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+    // httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    /*return this.http.get< any >('/api/user/menutree', httpOptions)
+    let options = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': token
+      })
+    };
+
+    console.log(options);
+
+    return this.http.get< any >('/api/user/menutree', options)
       .pipe(
         catchError(this.handleError)
-      );*/
+      );
 
-    let roleId = localStorage.getItem('roleId');
+    /*let roleId = localStorage.getItem('roleId');
     // 管理员
     if (roleId === '1') {
       return this.http.get< any >('assets/server/sidenav_admin.json')
@@ -147,10 +162,7 @@ export class UserService {
         .pipe(
           catchError(this.handleError)
         );
-    }
-
-
-
+    }*/
 
   }
 
@@ -165,9 +177,6 @@ export class UserService {
       );
 
 
-
-
-
   }
 
 
@@ -180,15 +189,12 @@ export class UserService {
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
     }
-    if (!error.status) {
-      window.location.reload();
-    }
-    if (error.status === 550) {
+    /*if (error.status === 550) {
       localStorage.user = 'false';
       sessionStorage.removeItem('currentUser');
       localStorage.removeItem('authToken');
       alert(error.error);
-    }
+    }*/
     return throwError(
       error.error
     );
@@ -208,6 +214,9 @@ export class UserService {
       sessionStorage.removeItem('currentUser');
       localStorage.removeItem('authToken');
       alert(error.error);
+    }
+    if (!error.status) {
+      alert('获取用户信息失败，请刷新页面重试');
     }
     return throwError(
       error

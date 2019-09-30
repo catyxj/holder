@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {BoilerService} from "../../../../../shared/boiler.service";
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {switchMap} from "rxjs/internal/operators";
 import {BoilerSocketService} from "../../../../../shared/boiler-socket.service";
 
@@ -30,7 +30,8 @@ export class CluDashboardComponent implements OnInit, OnDestroy {
 
   constructor(private modalService: NgbModal,
               private clusterService: ClusterService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
     this.roleId = localStorage.getItem('roleId');
@@ -141,6 +142,15 @@ export class CluDashboardComponent implements OnInit, OnDestroy {
   searchEnter(event) {
     if (event.keyCode === 13) {
       this.searchChange();
+    }
+  }
+
+
+  viewInfo(data) {
+    if (this.roleId === '11' && data.status === 1) {
+      return;
+    } else {
+      this.router.navigate(['/admin/ordinary/cluster/info', data.uid, this.page]);
     }
   }
 

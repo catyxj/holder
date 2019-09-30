@@ -32,9 +32,15 @@
           <h6>
             基础信息
           </h6>
-          <button class="btn btn_purple btn_round bpm" (click)="editBasic()" [disabled]="!basic || basic.status === 4">
+
+          <!--设置-->
+          <a (click)="editBasic()" title="编辑" *ngIf="basic && basic.status !== 4">
+            <span class="iconfont iconedit text_purple"></span>
+          </a>
+
+          <!--<button class="btn btn_purple btn_round bpm" (click)="editBasic()" [disabled]="!basic || basic.status === 4">
             编辑
-          </button>
+          </button>-->
         </div>
         <div class="info_body">
           <ul>
@@ -67,7 +73,7 @@
                 关联产品
               </div>
               <div class="info_item_value">
-                {{basic?.terminal_code || '空'}} (空)
+                {{basic?.terminal_code || '空'}} ({{basic?.ept_name || '空'}})
               </div>
             </li>
             <li class="info_item">

@@ -122,7 +122,23 @@ export class EqBasicEditComponent implements OnInit {
     let infoL = [];
     for (let i = 0 ; i < this.infoList.length; i++) {
       let inf = this.infoList[i];
-      if (inf.name) {
+      if (!inf.name) {
+        Swal(
+          '信息类型不能为空',
+          '',
+          'info'
+        );
+        return;
+      }
+      if (!inf.value) {
+        Swal(
+          '信息内容不能为空',
+          '',
+          'info'
+        );
+        return;
+      }
+      if (inf.name && inf.value) {
         infoL.push(inf);
       }
     }
@@ -153,7 +169,7 @@ export class EqBasicEditComponent implements OnInit {
         that.activeModal.close('ok');
       }, err => {
         Swal(
-          err.message,
+          err.message || err,
           '',
           'error'
         );

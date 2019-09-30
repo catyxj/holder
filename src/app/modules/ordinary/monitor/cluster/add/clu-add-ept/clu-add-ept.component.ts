@@ -44,9 +44,6 @@ export class CluAddEptComponent implements OnInit {
     };
 
     this.getAddress();
-    if (this.uid) {
-      this.getInfo();
-    }
   }
 
 
@@ -57,6 +54,7 @@ export class CluAddEptComponent implements OnInit {
         this.name = data.name;
         this.address = data.address;
         this.imgUrl = data.img;
+        this.initLocation();
       }, err => {
 
       });
@@ -67,7 +65,7 @@ export class CluAddEptComponent implements OnInit {
       .subscribe(data => {
         this.addrList = data;
         if (this.uid) {
-          this.initLocation();
+          this.getInfo();
         }
       });
   }

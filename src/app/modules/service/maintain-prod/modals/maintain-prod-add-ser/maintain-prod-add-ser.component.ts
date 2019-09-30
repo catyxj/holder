@@ -32,6 +32,7 @@ export class MaintainProdAddSerComponent implements OnInit {
   };
   previewImage: string | undefined = '';
   previewVisible = false;
+  public currentFile;
 
 
   constructor(public activeModal: NgbActiveModal,
@@ -62,18 +63,6 @@ export class MaintainProdAddSerComponent implements OnInit {
       },
       {
         name: '排风机是否正常',
-        result: 'false',
-        remark: '',
-        imgList: []
-      },
-      {
-        name: '风口是否干净',
-        result: 'false',
-        remark: '',
-        imgList: []
-      },
-      {
-        name: '炉排速度是否正常',
         result: 'false',
         remark: '',
         imgList: []
@@ -185,9 +174,16 @@ export class MaintainProdAddSerComponent implements OnInit {
 
   // 缩略图
   handlePreview = (file: UploadFile) => {
+    console.log(file);
     this.previewImage = file.url || file.thumbUrl;
+    this.currentFile = file;
     this.previewVisible = true;
   }
+
+  deleteImg() {
+
+  }
+
 
 
 

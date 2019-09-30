@@ -165,7 +165,7 @@
         <h6>
           订单记录
         </h6>
-        <a class="btn btn_purple btn_round bpm" [routerLink]="['/admin/formal/account/operate', user?.uid, user?.username]">
+        <a class="btn btn_purple btn_round bpm" [routerLink]="['/admin/formal/account/operate', user?.username]">
           查看更多
         </a>
       </div>
@@ -173,10 +173,10 @@
         <ul class="f_info_op">
           <li class="f_info_op_item" *ngFor="let data of operate">
             <div class="f_info_item_date">
-              {{data.created_at | date: 'yyyy-MM-dd'}}
+              {{data.order_sn}}
             </div>
             <div class="f_info_item_op" >
-              <a [routerLink]="['/admin/formal/account/order-detail', data.uid]">
+              <a [routerLink]="['/admin/formal/account/order-detail', data.order_sn]">
                 {{data.info}}
               </a>
             </div>

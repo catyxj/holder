@@ -139,6 +139,17 @@ export class MaintainService {
       );
   }
 
+  // 维保账号解绑设备
+  UserEptUnbind(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post(`/api/formal/mt/user/unbind/batch`, data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
 
 
   // ---------------维保模板-----------------------
@@ -238,7 +249,7 @@ export class MaintainService {
 
   // -------------维保记录------------------
   // 获取维保记录列表
-  getLogLists(n: number, pageSize: number, search?: string, value?: string, status?): Observable<any> {
+  getLogLists(n: number, pageSize: number, search?: string, value?: string, status?, eptId?): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
@@ -246,7 +257,7 @@ export class MaintainService {
     let roleId = localStorage.getItem('roleId');
     let url;
     if (roleId === '10') {
-      url = `/api/formal/mt/log/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+      url = `/api/formal/mt/log/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}&status=${status}&ept_id=${eptId}`;
     }
     if (roleId === '15') {
       url = `/api/maintenance/ept/mt/log/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}&status=${status}`;

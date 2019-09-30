@@ -113,10 +113,10 @@ export class ServiceService {
     let roleId = localStorage.getItem('roleId');
     let url;
     if (roleId === '10') {
-      url = `${this.dataListUrl_f}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&type=${type}`;
+      url = `${this.dataListUrl_f}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&type=${type}&status=${status}`;
     }
     if (roleId === '11') {
-      url = `${this.dataListUrl_o}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&type=${type}`;
+      url = `${this.dataListUrl_o}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&type=${type}&status=${status}`;
     }
 
     return this.http.get<any>(url, httpOptions)

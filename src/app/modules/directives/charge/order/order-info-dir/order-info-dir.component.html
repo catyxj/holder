@@ -4,12 +4,10 @@
     <div class="c_head_l">
       <h5>订单详情</h5>
       <div>
-        <span *ngIf="info && info.order_status">
-          已支付
-        </span>
-        <span *ngIf="info && !info.order_status">
-          未支付
-        </span>
+        <span style="color: #1E9FF2;" *ngIf="info && info.order_status === 3">已支付</span>
+        <span style="color: #FFC06A;" *ngIf="info && info.order_status === 1">未支付</span>
+        <span style="color: #A7ABBE;" *ngIf="info && info.order_status === 2">作废</span>
+        <span style="color: #A7ABBE;" *ngIf="info && info.order_status === 0">已取消</span>
       </div>
     </div>
     <div class="c_head_r">
@@ -62,7 +60,11 @@
               <div class="cinfo_value">
                 <!--<span style="color: #5584FF;" *ngIf="info&&info.item_type">定期</span>
                 <span class="text_purple">永久</span>-->
-                <span style="color: #5584FF;">{{info?.item_type}}</span>
+
+                <span *ngIf="info&&info?.item_type === 1">产品购买</span>
+                <span *ngIf="info&&info?.item_type === 2">功能升级</span>
+                <span *ngIf="info&&info?.item_type === 3">服务购买</span>
+                <span *ngIf="info&&info?.item_type === 4">数据流量</span>
               </div>
             </li>
 
@@ -75,8 +77,10 @@
             <li class="cinfo_item">
               <div class="cinfo_label">支付状态：</div>
               <div class="cinfo_value">
-                <span class="text_purple" *ngIf="info && info.order_status">支付完成</span>
-                <span style="color: #B20000;" *ngIf="info && !info.order_status">待支付</span>
+                <span class="text_purple" *ngIf="info && info.order_status === 3">支付完成</span>
+                <span style="color: #B20000;" *ngIf="info && info.order_status === 1">待支付</span>
+                <span style="color: #A7ABBE;" *ngIf="info && info.order_status === 2">作废</span>
+                <span style="color: #A7ABBE;" *ngIf="info && info.order_status === 0">已取消</span>
               </div>
             </li>
 
@@ -97,15 +101,15 @@
             <li class="cinfo_item">
               <div class="cinfo_label">支付方式：</div>
               <div class="cinfo_value">
-                <span *ngIf="info && info.pay_method">对公转账</span>
-                <span *ngIf="info && info.pay_method"><img src="assets/images/charge/alipay.png" alt=""></span>
+                <span *ngIf="info && info.pay_method === 1">对公转账</span>
+                <span *ngIf="info && info.pay_method === 2"><img src="assets/images/charge/alipay.png" alt=""></span>
               </div>
             </li>
 
             <li class="cinfo_item">
               <div class="cinfo_label">支付账号：</div>
               <div class="cinfo_value">
-                **********@162.com ???
+                {{info?.buyer_account}}
               </div>
             </li>
           </ul>
@@ -123,7 +127,7 @@
           <li class="cinfo_item">
             <div class="cinfo_label">订购产品：</div>
             <div class="cinfo_value">
-              集群服务
+              {{info?.item_name}}
             </div>
           </li>
 
@@ -131,12 +135,33 @@
             <div class="cinfo_label">产品说明：</div>
             <div class="cinfo_value">
               <div class="cinfo_content">
-                开通服务集群功能
+                <div *ngIf="info&&info.item_type!==1">
+                  {{info?.item_desc}}
+                </div>
+
+                <div class="c_v_con" *ngIf="info&&info.item_type===1">
+                  <div *ngFor="let item of info.des">
+                    <h6>{{item.title}}</h6>
+                    <div style="padding: 0 13px;">
+                      <table class="table table-bordered">
+                        <tr *ngFor="let item1 of item.data">
+                          <td style="width: 90px;">
+                            {{item1.name}}
+                          </td>
+                          <td style="word-break: break-all;">
+                            {{item1.value}}
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
               </div>
             </div>
           </li>
 
-          <li class="cinfo_item">
+          <li class="cinfo_item" *ngIf="info&&info?.item_type === 1">
             <div class="cinfo_label">收货地址：</div>
             <div class="cinfo_value">
               {{info?.shipping_addr}}  {{info?.shipping_user}} {{info?.shipping_tel}}

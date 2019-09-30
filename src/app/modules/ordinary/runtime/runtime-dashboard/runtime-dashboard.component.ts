@@ -248,15 +248,18 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
       let n;
       switch (btn.switchValue) {
         case true:
-          n = 0; // 关闭
+          n = false; // 关闭
           break;
         case false:
-          n = 1; // 开启
+          n = true; // 开启
           break;
       }
       let post = {
-
-      }
+        ept_id: this.uid,
+        channel_type: btn.chanType,
+        channel_number: btn.chanNum,
+        console_type: n
+      };
 
       this.runtimeService.equipControl(post)
         .subscribe( res => {

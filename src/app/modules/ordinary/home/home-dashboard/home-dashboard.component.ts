@@ -37,7 +37,7 @@ export class HomeDashboardComponent implements OnInit {
 
   // 获取重要提醒
   getRemind() {
-    this.reminds = [
+    /*this.reminds = [
       {
         created_at: '2018-2-13 12:12:12',
         info: 'XXXXX锅炉运行周报',
@@ -66,14 +66,14 @@ export class HomeDashboardComponent implements OnInit {
         is_read: true,
         log_status: false
       }
-    ];
+    ];*/
 
-    /*this.eptService.getRemind()
+    this.eptService.getRemind()
       .subscribe(data => {
         this.reminds = data;
       }, err => {
 
-      });*/
+      });
   }
 
   // 获取通知消息

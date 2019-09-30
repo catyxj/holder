@@ -103,6 +103,19 @@
             </div>
           </div>
         </div>
+
+        <div class="ser_h_r" *ngIf="basic&&basic.attach">
+          <div class="ser_h_col">
+            <div class="ser_h_label">
+              附件：
+            </div>
+            <div class="ser_h_text flex">
+              <div *ngFor="let file of basic.attach; let n = index;" title="{{file.name}}" style="margin-right: 10px;">
+                <a class="" href="{{file.oss_path}}" download="{{file.name}}" target="_blank">附件{{n+1}}</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

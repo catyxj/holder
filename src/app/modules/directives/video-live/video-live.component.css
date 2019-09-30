@@ -73,6 +73,33 @@ main{
 }
 
 /*控制按钮*/
+.ctrl_1{
+  width: 226px;
+  margin: auto;
+}
+.ctrl_11{
+  display: flex;
+  justify-content: space-between;
+}
+.btn_ctrl{
+  width:59px;
+  height:31px;
+  border-radius:8px;
+  border:1px solid #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+}
+.btn_ctrl:active{
+  background-color: #666EE8;
+  border: 1px solid #666EE8;
+}
+
+
+
 .ctrl_0{
   position: relative;
   width: 218px;

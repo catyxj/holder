@@ -17,7 +17,7 @@
 }
 .c_head_l span{
   font-size: 12px;
-  color: #00A0F9;
+  /*color: #00A0F9;*/
 }
 
 
@@ -70,6 +70,59 @@
   box-sizing: border-box;
   padding: 5px 7px;
 }
+
+
+.c_v_con{
+  /*height: 386px;*/
+  overflow: auto;
+}
+.c_v_con::-webkit-scrollbar{
+  width: 6px;
+  height: 6px;
+}
+.c_v_con::-webkit-scrollbar-track{
+
+}
+.c_v_con::-webkit-scrollbar-thumb{
+  border-radius: 4px;
+  background-color: #7A7A7A;
+}
+
+.c_v_con h6{
+  margin-top: 6px;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+.c_c1_h{
+  font-size:18px;
+  font-weight:bold;
+  color: #333333;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.c_c1_amount{
+  color:#666EE8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.c1_amount_v{
+  margin-right: 5px;
+  font-size:30px;
+}
+
+.table th, .table td {
+  padding: 2px 5px;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+  font-size: 12px;
+}
+
+
+
+
 
 
 

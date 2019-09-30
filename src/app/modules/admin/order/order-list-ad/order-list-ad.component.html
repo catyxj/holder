@@ -22,10 +22,10 @@
         </nz-input-group>
         <ng-template #addOnBeforeTemplate>
           <nz-select [(ngModel)]="search">
-            <nz-option [nzLabel]="'订单编号'" [nzValue]="'uid'"></nz-option>
-            <nz-option [nzLabel]="'订购产品'" [nzValue]="'value'"></nz-option>
-            <nz-option [nzLabel]="'主题内容'" [nzValue]="'username'"></nz-option>
-            <nz-option [nzLabel]="'所属单位'" [nzValue]="'username'"></nz-option>
+            <nz-option [nzLabel]="'订单编号'" [nzValue]="'order_sn'"></nz-option>
+            <nz-option [nzLabel]="'订购产品'" [nzValue]="'item_name'"></nz-option>
+            <!--<nz-option [nzLabel]="'主题内容'" [nzValue]="'username'"></nz-option>-->
+            <nz-option [nzLabel]="'所属单位'" [nzValue]="'created_org'"></nz-option>
           </nz-select>
         </ng-template>
         <ng-template #addOnAfterTemplate>
@@ -73,8 +73,11 @@
                 <li nz-menu-item (click)="searchStatus('2')">
                   <a>功能扩展服务</a>
                 </li>
-                <li nz-menu-item (click)="searchStatus('0')">
-                  <a>存储升级服务</a>
+                <li nz-menu-item (click)="searchStatus('3')">
+                  <a>数据存储服务</a>
+                </li>
+                <li nz-menu-item (click)="searchStatus('4')">
+                  <a>流量卡服务</a>
                 </li>
               </ul>
             </nz-dropdown>
@@ -119,9 +122,9 @@
             [nzDisabled]="data.disabled"
             (nzCheckedChange)="refreshStatus()"
           ></td>-->
-          <td> {{data.uid}} </td>
+          <td> {{data.order_sn}} </td>
           <td>
-            <span>
+            <!--<span>
               设备采购服务
             </span>
             <span>
@@ -129,25 +132,27 @@
             </span>
             <span>
               存储升级服务
-            </span>
+            </span>-->
+            {{data.item_name}}
           </td>
-          <td> {{data.username || '空'}}({{data.account_name || '空'}}) </td>
-          <td> {{data.org_name}} </td>
+          <td> {{data.created_username || '空'}}({{data.created_name || '空'}}) </td>
+          <td> {{data.created_org}} </td>
           <td> {{data.created_at | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
           <td> {{data.pay_at | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
           <td>
-            <nz-tag [nzColor]="'#1E9FF2'" *ngIf="data.status===2">已支付</nz-tag>
-            <nz-tag [nzColor]="'#FFC06A'" *ngIf="data.status===1">待支付</nz-tag>
-            <nz-tag [nzColor]="'#C0C4D2'" *ngIf="data.status===0">作废</nz-tag>
+            <nz-tag [nzColor]="'#1E9FF2'" *ngIf="data.order_status === 3">已支付</nz-tag>
+            <nz-tag [nzColor]="'#FFC06A'" *ngIf="data.order_status === 1">待支付</nz-tag>
+            <nz-tag [nzColor]="'#C0C4D2'" *ngIf="data.order_status === 2"> 作 废 </nz-tag>
+            <nz-tag [nzColor]="'#C0C4D2'" *ngIf="data.order_status === 0">已取消</nz-tag>
           </td>
-          <td style="color: #666EE8;"> {{data.amount | currency: '￥'}} </td>
+          <td style="color: #666EE8;"> {{data.pay_money | currency: '￥'}} </td>
           <td>
 
             <!--<a class="" [routerLink]="['/admin/ad/flow/info', data.iccid, page]" title="设置">
               &lt;!&ndash;设置&ndash;&gt;
               <i class="iconfont iconshezhi1 text_purple"></i>
             </a>-->
-            <a class="btn btn_purple btn-sm" [routerLink]="['/admin/ad/order/info', data.uid, page]">
+            <a class="text_purple" [routerLink]="['/admin/ad/order/info', data.order_sn, page]">
               详情
             </a>
           </td>

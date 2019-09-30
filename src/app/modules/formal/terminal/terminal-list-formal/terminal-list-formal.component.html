@@ -38,9 +38,9 @@
         <ng-template #addOnBeforeTemplate>
           <nz-select [(ngModel)]="search">
             <nz-option [nzLabel]="'终端编码'" [nzValue]="'terminal_code'"></nz-option>
-            <!--<nz-option [nzLabel]="'关联设备'" [nzValue]="'equip'"></nz-option>-->
+            <nz-option [nzLabel]="'关联组态'" [nzValue]="'zt_name'"></nz-option>
             <nz-option [nzLabel]="'使用单位'" [nzValue]="'use_user_org'"></nz-option>
-            <nz-option [nzLabel]="'使用账号'" [nzValue]="'use_user'"></nz-option>
+            <!--<nz-option [nzLabel]="'使用账号'" [nzValue]="'use_user'"></nz-option>-->
           </nz-select>
         </ng-template>
         <ng-template #addOnAfterTemplate>
@@ -137,7 +137,7 @@
           <td> {{data.zt_name}} </td>
           <td>
             <div style="max-width: 160px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-              {{data.user_org_name || '空'}}
+              {{data.use_org_name || '空'}}
             </div>
           </td>
           <td>
@@ -166,7 +166,7 @@
             <nz-tag [nzColor]="'#1E9FF2'" *ngIf="data.term_plat !== 0 && data.term_ver !== 0 && data.term_plat === data.term_ver">配置成功</nz-tag>
             <nz-tag [nzColor]="'#FF4961'" *ngIf="data.term_plat !== 0 && data.term_ver !== 0 && data.term_plat !== data.term_ver">配置失败</nz-tag>
             <nz-tag [nzColor]="'#C0C4D2'" *ngIf="data.term_plat === 0">未配置</nz-tag>
-            <nz-tag [nzColor]="'#C0C4D2'" *ngIf="data.term_plat !== 0 && data.term_ver === 0">未配置</nz-tag>
+            <nz-tag [nzColor]="'#C0C4D2'" *ngIf="data.term_plat !== 0 && data.term_ver === 0">未下发</nz-tag>
           </td>
           <td> {{data.temp_name || '默认模板'}} </td>
           <td>

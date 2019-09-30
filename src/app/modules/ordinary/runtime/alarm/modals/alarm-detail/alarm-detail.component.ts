@@ -41,7 +41,7 @@ export class AlarmDetailComponent implements OnInit {
           min: 0,
           max: 0
         };
-        let unit = '';
+        let unit = this.currentData.unit;
         let runtimeList = [];
         for (let i = 0; i < this.runtimes.length; i++) {
           let rt = this.runtimes[i];

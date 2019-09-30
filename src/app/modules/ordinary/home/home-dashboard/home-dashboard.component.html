@@ -108,14 +108,14 @@
         </div>
         <div class="hc_content2">
           <ul>
-            <li class="h_item" *ngFor="let item of reminds" [routerLink]="['/admin/ordinary/home/remind-info', item.uid, item.log_type, item.log_status]">
+            <li class="h_item" *ngFor="let item of reminds" [routerLink]="['/admin/ordinary/home/remind-info', item.id, item.import_type]">
               <a>
                 <div class="h_date">
                   <span class="h_circle" [class.active]="!item.is_read"></span>
                   {{item.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}
                 </div>
                 <div>
-                  {{item.info}}
+                  {{item.description}}
                 </div>
               </a>
             </li>
@@ -142,7 +142,7 @@
                   <span class="h_circle" [class.active]="!item.is_read"></span>
                   {{item.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}
                 </div>
-                <div>
+                <div style="margin-left: 20px;">
                   {{item.info}}
                 </div>
               </a>

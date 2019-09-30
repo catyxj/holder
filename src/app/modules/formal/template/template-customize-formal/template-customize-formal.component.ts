@@ -17,6 +17,8 @@ export class TemplateCustomizeFormalComponent implements OnInit {
   public uid;
   public name;
   public id;
+  public editName;
+  public newName;
 
   public devices = {}; // 所有控件属性
   public imgLists1 = []; // 公共图片控件
@@ -246,11 +248,12 @@ export class TemplateCustomizeFormalComponent implements OnInit {
   // ----获取组态内容---------
   getContent() {
     let that = this;
-    this.terminalService.getContent(this.uid)
+    this.templateService.getContent(this.uid)
       .subscribe(data => {
         let content = JSON.parse(data.content);
         this.id = data.label;
         this.name = data.name;
+        this.newName = this.name;
         if (!content) {
           return;
         }
@@ -1223,7 +1226,8 @@ export class TemplateCustomizeFormalComponent implements OnInit {
     }
 
     this.devices = {
-      terminal_id: this.uid,
+      uid: this.uid,
+      name: this.name,
       img: img3,
       data: da2,
       btn: btn,
@@ -1241,7 +1245,7 @@ export class TemplateCustomizeFormalComponent implements OnInit {
 
 
 
-    this.terminalService.saveZ(this.devices)
+    this.templateService.addZt(this.devices)
       .subscribe(val => {
         Swal(
           '保存成功',

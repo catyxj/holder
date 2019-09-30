@@ -189,7 +189,7 @@ export class MAccountListFormalComponent implements OnInit {
       });
     } else {
       this.nzModal.info({
-        nzTitle: '请选择账号',
+        nzTitle: '请选择维保账号',
         nzContent: '',
         nzOnOk: () => console.log('Info OK')
       });
@@ -246,7 +246,7 @@ export class MAccountListFormalComponent implements OnInit {
       });*/
     } else {
       this.nzModal.info({
-        nzTitle: '请选择记录',
+        nzTitle: '请选择维保账号',
         nzContent: '',
         nzOnOk: () => console.log('Info OK')
       });

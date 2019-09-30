@@ -5,7 +5,7 @@
     <div class="info_tname">
       <img src="assets/icons/boiler2.png" alt="">
 
-      XXXXX锅炉终端物联网卡流量不足
+      {{info?.ept_name}}终端物联网卡流量不足
 
     </div>
     <div class="info_head_r">
@@ -25,7 +25,7 @@
 
   <div class="report_content">
     <div>
-      尊敬的18012341234用户：
+      尊敬的{{user?.username}}用户：
     </div>
 
     <div class="report_info">
@@ -40,7 +40,7 @@
             产品名称
           </th>
           <td>
-            XX锅炉
+            {{info?.ept_name}}
           </td>
         </tr>
 
@@ -49,7 +49,7 @@
             产品终端编码
           </th>
           <td>
-            XX锅炉
+            {{info?.terminal_code}}
           </td>
         </tr>
 
@@ -58,7 +58,7 @@
             所属单位
           </th>
           <td>
-            A企业
+            {{info?.org_name}}
           </td>
         </tr>
 

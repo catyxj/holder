@@ -275,7 +275,7 @@ export class EqHistoryComponent implements OnInit {
       url = `/api/general/ept/runtime/history/export`;
     }
 
-    const objectUrl = `${url}?uid=${this.uid}&type=${data}`;
+    const objectUrl = `${url}?uid=${this.uid}&type=${data}&token=${token}`;
     const link = document.createElement('a');
     document.body.appendChild(link);
     link.setAttribute('style', 'display:none');

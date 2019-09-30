@@ -53,7 +53,7 @@ export class UserListService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.dataEptListUrl}?uid=${uid}&page=${n}&rows=${pageSize}&search=${search}&value=${value}&online=${online}&run=${run}&status=${status}`;
+    const url = `${this.dataEptListUrl}?uid=${uid}&page=${n}&rows=${pageSize}&search=${search}&value=${value}&online=${online}&run_status=${run}&status=${status}`;
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)

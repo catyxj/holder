@@ -26,7 +26,7 @@ export class RenewalListDirComponent implements OnInit {
 
 
   getList() {
-    this.dataLists = [
+    /*this.dataLists = [
       {
         uid: '1',
         name: '物联网终端采购',
@@ -41,7 +41,7 @@ export class RenewalListDirComponent implements OnInit {
         address: 'London No. 1 Lake Park',
         status: 0
       }
-    ];
+    ];*/
 
     this.isSpinning = true;
     this.chargeService.getRenewalLists(this.page, this.pageSize, this.search, this.value)
@@ -102,6 +102,14 @@ export class RenewalListDirComponent implements OnInit {
 
   selectTime(n) {
     this.checkTime = n;
+    this.searchChange();
+  }
+
+  resetData() {
+    this.page = 1;
+    this.pageSize = 15;
+    this.search = 'name';
+    this.value = '';
     this.searchChange();
   }
 

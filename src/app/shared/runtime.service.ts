@@ -161,11 +161,11 @@ export class RuntimeService {
 
 
   // 获取组件列表
-  getCompLists(uid, page, pageSize, search?, value?): Observable<any> {
+  getCompLists(uid, page, pageSize, search?, value?, status?): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.get(`/api/formal/ept/component/list?uid=${uid}&page=${page}&pageSize=${pageSize}&search=${search}&value=${value}`, httpOptions)
+    return this.http.get(`/api/formal/ept/component/list?uid=${uid}&page=${page}&pageSize=${pageSize}&search=${search}&value=${value}&status=${status}`, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

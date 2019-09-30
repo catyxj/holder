@@ -27,6 +27,7 @@ export class TerInfoAdComponent implements OnInit {
 
   public listPage;
   public roleId;
+  public code;
 
   constructor(private terminalService: TerminalService,
               private route: ActivatedRoute,
@@ -80,6 +81,7 @@ export class TerInfoAdComponent implements OnInit {
     this.terminalService.getBasic(this.uid)
       .subscribe(data => {
         this.basic = data;
+        this.code = this.basic.terminal_code;
       }, err => {
 
       });

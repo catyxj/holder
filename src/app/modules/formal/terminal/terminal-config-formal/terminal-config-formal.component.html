@@ -275,7 +275,10 @@
               创建者：
             </div>
             <div class="ts_value">
-              {{basic?.created_by_username || '空'}} ({{basic?.created_by_name || '空'}})
+              {{basic?.created_by_username || '空'}}
+              <span *ngIf="basic && basic.created_by_name">
+                ({{basic?.created_by_name || '空'}})
+              </span>
             </div>
           </div>
 
@@ -295,6 +298,15 @@
             </div>
             <div class="ts_value">
               {{basic?.ept_name}}
+            </div>
+          </div>
+
+          <div class="ts_item_w">
+            <div class="ts_label">
+              关联集群：
+            </div>
+            <div class="ts_value">
+              {{basic?.cluster_name}}
             </div>
           </div>
 

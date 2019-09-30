@@ -40,7 +40,7 @@
 
     <div class="upgrade">
       <!--已开通-->
-        <div class="col_8 active" *ngIf="true">
+        <div class="col_8 active" *ngIf="upgrade.video">
           <div class="round">
             <i class="iconfont iconup_video"></i>
           </div>
@@ -50,7 +50,7 @@
           </div>
         </div>
 
-        <div class="col_8 active" *ngIf="false">
+        <div class="col_8 active" *ngIf="upgrade.logo">
           <div class="round">
             <i class="iconfont iconup_logo"></i>
           </div>
@@ -62,7 +62,7 @@
           </div>
         </div>
 
-        <div class="col_8 active" *ngIf="false">
+        <div class="col_8 active" *ngIf="upgrade.cluster">
           <div class="round">
             <i class="iconfont iconup_cluster"></i>
           </div>
@@ -74,7 +74,7 @@
           </div>
         </div>
 
-        <div class="col_8 active" *ngIf="false">
+        <div class="col_8 active" *ngIf="upgrade.bluetooth">
           <div class="round">
             <i class="iconfont iconup_bluetooth"></i>
           </div>
@@ -86,7 +86,7 @@
           </div>
         </div>
 
-        <div class="col_8 active" *ngIf="false">
+        <div class="col_8 active" *ngIf="upgrade.cal">
           <div class="round">
             <i class="iconfont iconup_calculate"></i>
           </div>
@@ -98,7 +98,7 @@
           </div>
         </div>
 
-        <div class="col_8 active" *ngIf="false">
+        <!--<div class="col_8 active" *ngIf="upgrade.eptCtrl">
           <div class="round">
             <i class="iconfont iconup_ept"></i>
           </div>
@@ -110,7 +110,7 @@
           </div>
         </div>
 
-        <div class="col_8 active" *ngIf="false">
+        <div class="col_8 active" *ngIf="upgrade.vCtrl">
           <div class="round">
             <i class="iconfont iconup_control"></i>
           </div>
@@ -120,9 +120,9 @@
           <div>
             （已开通）
           </div>
-        </div>
+        </div>-->
 
-        <div class="col_8 active" *ngIf="false">
+        <div class="col_8 active" *ngIf="upgrade.maintain">
           <div class="round">
             <i class="iconfont iconup_maintain"></i>
           </div>
@@ -133,6 +133,30 @@
             （已开通）
           </div>
         </div>
+
+        <div class="col_8 active" *ngIf="upgrade.face">
+          <div class="round">
+            <i class="iconfont icon_renlianshibie"></i>
+          </div>
+          <div>
+            人脸识别
+          </div>
+          <div>
+            （已开通）
+          </div>
+        </div>
+
+        <div class="col_8 active" *ngIf="upgrade.attend">
+        <div class="round">
+          <i class="iconfont iconqiandao"></i>
+        </div>
+        <div>
+          考勤签到
+        </div>
+        <div>
+          （已开通）
+        </div>
+      </div>
 
 
 
@@ -143,14 +167,14 @@
 
       <!-- 未开通-->
 
-        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 1]" target="_blank">
+        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 1]" target="_blank"  *ngIf="!upgrade.video">
           <div class="round">
             <i class="iconfont iconup_video"></i>
           </div>
           <div>视频监控</div>
         </a>
 
-        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 2]" target="_blank">
+        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 2]" target="_blank"  *ngIf="!upgrade.logo">
           <div class="round">
             <i class="iconfont iconup_logo"></i>
           </div>
@@ -159,7 +183,7 @@
           </div>
         </a>
 
-        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 3]" target="_blank">
+        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 3]" target="_blank"  *ngIf="!upgrade.cluster">
           <div class="round">
             <i class="iconfont iconup_cluster"></i>
           </div>
@@ -168,7 +192,7 @@
           </div>
         </a>
 
-        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 4]" target="_blank">
+        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 4]" target="_blank"  *ngIf="!upgrade.bluetooth">
           <div class="round">
             <i class="iconfont iconup_bluetooth"></i>
           </div>
@@ -177,7 +201,7 @@
           </div>
         </a>
 
-        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 5]" target="_blank">
+        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 5]" target="_blank" *ngIf="!upgrade.cal">
           <div class="round">
             <i class="iconfont iconup_calculate"></i>
           </div>
@@ -186,7 +210,7 @@
           </div>
         </a>
 
-        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 6]" target="_blank">
+        <!--<a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 6]" target="_blank" *ngIf="!upgrade.eptCtrl">
           <div class="round">
             <i class="iconfont iconup_ept"></i>
           </div>
@@ -196,16 +220,16 @@
 
         </a>
 
-        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 7]" target="_blank">
+        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 7]" target="_blank" *ngIf="!upgrade.vCtrl">
           <div class="round">
             <i class="iconfont iconup_control"></i>
           </div>
           <div>
             云台监控
           </div>
-        </a>
+        </a>-->
 
-        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 8]" target="_blank">
+        <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 8]" target="_blank" *ngIf="!upgrade.maintain">
           <div class="round">
             <i class="iconfont iconup_maintain"></i>
           </div>
@@ -213,6 +237,25 @@
             维保服务
           </div>
         </a>
+
+      <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 9]" target="_blank" *ngIf="!upgrade.face">
+        <div class="round">
+          <i class="iconfont icon_renlianshibie"></i>
+        </div>
+        <div>
+          人脸识别
+        </div>
+      </a>
+
+      <a class="col_8 inactive" [routerLink]="['/dir/charge/purchase/upgrade', 10]" target="_blank" *ngIf="!upgrade.attend">
+        <div class="round">
+          <i class="iconfont iconqiandao"></i>
+        </div>
+        <div>
+          考勤签到
+        </div>
+      </a>
+
 
 
     </div>

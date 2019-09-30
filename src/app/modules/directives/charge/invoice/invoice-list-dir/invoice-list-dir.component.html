@@ -19,18 +19,18 @@
   <div class="charge_list">
     <div class="c_head">
       <div class="h_l flex">
-        <div >
+        <!--<div >
           <a class="btn btn_purple bpm" (click)="addInvoice()" >
-            <!--[routerLink]="['/dir/charge/invoice/info', totalAmount]" target="_blank"-->
+            &lt;!&ndash;[routerLink]="['/dir/charge/invoice/info', totalAmount]" target="_blank"&ndash;&gt;
             索取发票
           </a>
-        </div>
+        </div>-->
 
 
-        <div class="ml-2">
+        <!--<div class="ml-2">
           待开票金额：
           <span>{{totalAmount | currency: '￥'}}</span>
-        </div>
+        </div>-->
 
         <!--<div class="search_box">
           <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="addOnAfterTemplate">
@@ -65,34 +65,53 @@
         <table class="table">
           <thead>
           <tr>
-            <th
+           <!-- <th
               nzShowCheckbox
               [(nzChecked)]="isAllChecked"
               (nzCheckedChange)="checkAll($event)"
             >
-            </th>
+            </th>-->
             <th>订单编号</th>
             <th>订购产品</th>
             <th>产品类型</th>
             <th>订单支付时间</th>
             <th>订单实付金额</th>
             <th>可开票金额</th>
+            <th>操作</th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let data of dataLists">
-            <td
+            <!--<td
               nzShowCheckbox
               [(nzChecked)]="data.checked"
               [nzDisabled]="data.disabled"
               (nzCheckedChange)="refreshStatus()"
-            ></td>
+            ></td>-->
             <td>{{data.order_sn}}</td>
             <td>{{data.item_name}}</td>
-            <td>{{data.item_type}}</td>
+            <td>
+              <span *ngIf="data.item_type === 1">
+              产品购买
+            </span>
+              <span *ngIf="data.item_type === 2">
+              功能升级
+            </span>
+              <span *ngIf="data.item_type === 3">
+              服务购买
+            </span>
+              <span *ngIf="data.item_type === 4">
+              数据流量
+            </span>
+            </td>
             <td>{{data.pay_at | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
             <td>{{data.pay_money | currency: '￥'}}</td>
             <td>{{data.pay_money | currency: '￥'}}</td>
+            <td class="text_purple">
+              <a class="" (click)="addInvoice(data)" style="font-size: 12px;">
+                索取发票
+              </a>
+            </td>
           </tr>
           </tbody>
         </table>

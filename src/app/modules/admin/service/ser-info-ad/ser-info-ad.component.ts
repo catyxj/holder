@@ -207,6 +207,7 @@ export class SerInfoAdComponent implements OnInit {
         );
         that.message = '';
         that.fileList = [];
+        that.getBasic();
         that.getComments();
       }, err => {
         Swal(

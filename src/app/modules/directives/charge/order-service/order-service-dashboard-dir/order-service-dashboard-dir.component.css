@@ -83,6 +83,9 @@ a{
   border: 1px solid #959EAF;
   cursor: pointer;
 }
+.inactive:hover{
+  color: #3080FE;
+}
 
 .divide{
   width: 1px;

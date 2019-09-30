@@ -9,7 +9,7 @@
           <nz-select [(ngModel)]="search">
             <nz-option [nzLabel]="'设备名称'" [nzValue]="'name'"></nz-option>
             <nz-option [nzLabel]="'终端编码'" [nzValue]="'terminal_code'"></nz-option>
-            <nz-option [nzLabel]="'地域位置'" [nzValue]="'location'"></nz-option>
+            <nz-option [nzLabel]="'地域位置'" [nzValue]="'location_name'"></nz-option>
             <nz-option [nzLabel]="'使用单位'" [nzValue]="'org_name'"></nz-option>
           </nz-select>
         </ng-template>
@@ -51,13 +51,13 @@
               </a>
 
               <ul nz-menu>
-                <li nz-menu-item (click)="searchStatus('')">
+                <li nz-menu-item (click)="searchOnline('')">
                   <a>全部</a>
                 </li>
-                <li nz-menu-item (click)="searchStatus('true')">
+                <li nz-menu-item (click)="searchOnline('true')">
                   <a>已连接</a>
                 </li>
-                <li nz-menu-item (click)="searchStatus('false')">
+                <li nz-menu-item (click)="searchOnline('false')">
                   <a>未连接</a>
                 </li>
 
@@ -75,19 +75,19 @@
                 <li nz-menu-item (click)="searchRun('')">
                   <a>全部</a>
                 </li>
-                <li nz-menu-item (click)="searchRun('0')">
+                <!--<li nz-menu-item (click)="searchRun('0')">
                   <a>未知</a>
-                </li>
-                <li nz-menu-item (click)="searchRun('1')">
+                </li>-->
+                <li nz-menu-item (click)="searchRun('stop')">
                   <a>未运行</a>
                 </li>
-                <li nz-menu-item (click)="searchRun('2')">
+                <li nz-menu-item (click)="searchRun('run')">
                   <a>运行</a>
                 </li>
-                <li nz-menu-item (click)="searchRun('3')">
+                <li nz-menu-item (click)="searchRun('alarm')">
                   <a>告警</a>
                 </li>
-                <li nz-menu-item (click)="searchRun('4')">
+                <li nz-menu-item (click)="searchRun('malfunction')">
                   <a>故障</a>
                 </li>
               </ul>
@@ -104,10 +104,10 @@
                 <li nz-menu-item (click)="searchStatus('')">
                   <a>全部</a>
                 </li>
-                <li nz-menu-item (click)="searchStatus('0')">
+                <li nz-menu-item (click)="searchStatus('1')">
                   <a>正常</a>
                 </li>
-                <li nz-menu-item (click)="searchStatus('1')">
+                <li nz-menu-item (click)="searchStatus('2')">
                   <a>禁用</a>
                 </li>
               </ul>

@@ -25,11 +25,12 @@ export class OrderService {
   constructor(private http: HttpClient) { }
 
   // 获取列表
-  getLists(n: number, pageSize: number, search?: string, value?: string, type?: string,): Observable<any> {
+  getLists(n: number, pageSize: number, search?: string, value?: string, type?): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.dataListUrl}?page=${n}&rows=${pageSize}&search=${search}&value=${value}&type=${type}`;
+    let url = `/api/admin/order/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}&type=${type}`;
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -41,12 +42,27 @@ export class OrderService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `${this.dataBasicUrl}?uid=${uid}`;
+    let url = `/api/admin/order/detail?order_sn=${uid}`;
+
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
+
+  setStatus(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let url = `/api/admin/order/status/update?order_sn=${data}`;
+
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
 
   // 获取产品信息
   getProducts(uid): Observable<any> {

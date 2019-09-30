@@ -35,6 +35,10 @@ export class TerminalBasicEditFormalComponent implements OnInit {
     this.name = this.currentData ? this.currentData.template_name : '';
     this.equip = this.currentData ? this.currentData.ept_name : '';
     this.imgUrl = this.currentData && this.currentData.ept_img ? this.currentData.ept_img : '';
+
+    if (!this.name) {
+      this.name = '默认模板';
+    }
   }
 
 

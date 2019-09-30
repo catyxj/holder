@@ -36,13 +36,14 @@ export class AcInfoOrdComponent implements OnInit {
   }
 
   refresh() {
-    this.user = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.userService.ChangeMission('changed');
+    // this.user = JSON.parse(sessionStorage.getItem('currentUser'));
     this.getOperate();
   }
 
   // 获取记录信息
   getOperate() {
-    this.operate = [
+    /*this.operate = [
       {
         uid: 'asdf',
         created_at: '2016-5-10',
@@ -53,14 +54,14 @@ export class AcInfoOrdComponent implements OnInit {
         created_at: '2016-5-10',
         info: 'asdf'
       }
-    ];
+    ];*/
 
-    // this.accountService.getOperate(this.uid)
-    //   .subscribe(data => {
-    //     this.operate = data;
-    //   }, err => {
-    //
-    //   });
+    this.accountService.getOperateO()
+      .subscribe(data => {
+        this.operate = data;
+      }, err => {
+
+      });
   }
 
   // 编辑配置信息模态框

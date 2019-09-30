@@ -71,6 +71,7 @@ import { DeliveryListComponent } from './modules/directives/operator/delivery/de
 import { DeliveryInfoComponent } from './modules/directives/operator/delivery/delivery-info/delivery-info.component';
 import { DeliverySetComponent } from './modules/directives/operator/delivery/modals/delivery-set/delivery-set.component';
 import { AddDeliveryItemComponent } from './modules/directives/operator/delivery/modals/add-delivery-item/add-delivery-item.component';
+import { AddressEditPurchaseDirComponent } from './modules/directives/charge/order-service/modals/address-edit-purchase-dir/address-edit-purchase-dir.component';
 
 
 
@@ -126,6 +127,7 @@ registerLocaleData(zh);
     DeliveryInfoComponent,
     DeliverySetComponent,
     AddDeliveryItemComponent,
+    AddressEditPurchaseDirComponent,
   ],
   imports: [
     BrowserModule,
@@ -153,7 +155,8 @@ registerLocaleData(zh);
     AddressAddPurchaseDirComponent,
     AddressEditInvioceDirComponent,
     DeliverySetComponent,
-    AddDeliveryItemComponent
+    AddDeliveryItemComponent,
+    AddressEditPurchaseDirComponent,
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},

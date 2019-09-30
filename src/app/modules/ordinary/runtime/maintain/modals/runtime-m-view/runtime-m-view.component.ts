@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 import Swal from 'sweetalert2';
@@ -10,6 +10,9 @@ import {MaintainService} from "../../../../../../shared/maintain.service";
   styleUrls: ['./runtime-m-view.component.css']
 })
 export class RuntimeMViewComponent implements OnInit {
+  @Input()
+  currentData;
+
   public uid;
   public info;
 
@@ -24,6 +27,7 @@ export class RuntimeMViewComponent implements OnInit {
               private maintainService: MaintainService) { }
 
   ngOnInit() {
+    this.uid = this.currentData.id;
     this.getInfo();
   }
 

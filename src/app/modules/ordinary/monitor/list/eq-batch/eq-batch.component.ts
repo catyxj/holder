@@ -28,11 +28,14 @@ export class EqBatchComponent implements OnInit {
   public pageSizeList = [15, 30, 50, 100];
   tplModal: NzModalRef;
 
+  public roleId;
+
   constructor(private nzModal: NzModalService,
               private route: ActivatedRoute,
               private eptService: BoilerService) { }
 
   ngOnInit() {
+    this.roleId = localStorage.getItem('roleId');
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         // console.log('param', params.get('status'));
@@ -49,7 +52,7 @@ export class EqBatchComponent implements OnInit {
   // 获取列表
   getList() {
     this.loading = true;
-    this.eptService.getLists(this.page, this.pageSize, this.search, this.value)
+    this.eptService.getLists(this.page, this.pageSize, this.search, this.value, this.online, this.run, this.status)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;

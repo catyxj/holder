@@ -65,14 +65,20 @@
       <span>*</span>联系方式：
     </div>
     <div class="m_input_l">
-      <input type="text" class="form-control" [(ngModel)]="contact">
+      <input type="text" class="form-control" [(ngModel)]="contact"
+             pattern="^(13|14|15|17|18|19)\d{9}$" #telephone="ngModel" required>
+      <div class="sign_tip">
+        <span class="text_danger" *ngIf="telephone.invalid && (telephone.dirty || telephone.touched)">
+          请输入11位手机号
+        </span>
+      </div>
     </div>
   </div>
 
 
   <div class="m_bottom">
     <button class="btn btn_purple bpm" (click)="save()"
-            style="margin-right: 9px;" [disabled]="!name || !locationId || !address || !contact">
+            style="margin-right: 9px;" [disabled]="!name || !locationId || !address || telephone.invalid">
       保存更改
     </button>
     <div class="checkbox c-checkbox">

@@ -526,8 +526,8 @@ app-header .dropdown-toggle::after{
   padding: 0;
 }
 .maintain_modal .ant-upload-list-picture-card .ant-upload-list-item{
-  width: 28px;
-  height: 24px;
+  width: 49px;
+  height: 42px;
   margin-right: 22px;
   margin-bottom: 0;
   border-radius: 0;
@@ -550,6 +550,9 @@ app-header .dropdown-toggle::after{
 
 .cal .ant-select-selection{
   border: none;
+}
+.maintain_p .ant-modal-body{
+  padding: 0;
 }
 
 

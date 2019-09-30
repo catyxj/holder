@@ -52,7 +52,7 @@ export class MRecordListFormalComponent implements OnInit {
   // 获取列表
   getList() {
     this.loading = true;
-    this.maintainService.getLogLists(this.page, this.pageSize, this.search, this.value)
+    this.maintainService.getLogLists(this.page, this.pageSize, this.search, this.value, this.status)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;

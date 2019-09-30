@@ -36,10 +36,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private userService: UserService,
               private alarmService: AlarmService,
               private router: Router) {
-    // this.subscription = this.alarmService.alarmStatus$
-    //   .subscribe( data => {
-    //     this.getAlarm();
-    //   });
+    this.subscription = this.alarmService.alarmStatus$
+      .subscribe( data => {
+        this.getAlarm();
+      });
   }
 
   ngOnInit() {
@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
 
-    if (this.roleId === '10') {
+    if (this.roleId === '10' || this.roleId === '11' ) {
       this.status = setInterval(() => { this.getAlarm(); }, 60000);
       this.getAlarm();
     }
@@ -105,6 +105,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
         break;
       case '10':
         this.router.navigate(['/admin/formal/account']);
+        break;
+      case '11':
+        this.router.navigate(['/admin/ordinary/account']);
+        break;
+      case '15':
+        this.router.navigate(['/admin/service/account']);
         break;
     }
 

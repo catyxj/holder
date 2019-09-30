@@ -152,7 +152,7 @@ export class MaintainRecordListSerComponent implements OnInit {
     for (let i = 0; i < this.dataLists.length; i++) {
       let ac = this.dataLists[i];
       if (ac.checked) {
-        checked.push(ac.uid);
+        checked.push(ac.id);
       }
     }
     if (checked.length > 0) {

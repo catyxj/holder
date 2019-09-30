@@ -70,6 +70,7 @@ import { CluAddComponent } from './monitor/cluster/modals/clu-add/clu-add.compon
 import { EqListLinkComponent } from './monitor/list/modals/eq-list-link/eq-list-link.component';
 import { AcEditOrdComponent } from './account/modals/ac-edit-ord/ac-edit-ord.component';
 import { AcPasswordOrdComponent } from './account/modals/ac-password-ord/ac-password-ord.component';
+import { AcOperateOrdComponent } from './account/ac-operate-ord/ac-operate-ord.component';
 
 
 
@@ -145,6 +146,7 @@ import { AcPasswordOrdComponent } from './account/modals/ac-password-ord/ac-pass
     EqListLinkComponent,
     AcEditOrdComponent,
     AcPasswordOrdComponent,
+    AcOperateOrdComponent,
 
   ],
   exports: [

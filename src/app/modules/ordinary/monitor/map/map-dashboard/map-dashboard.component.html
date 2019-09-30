@@ -8,12 +8,13 @@
           <input type="text" nz-input [(ngModel)]="value" (change)="searchChange()" maxlength="20"/>
         </nz-input-group>
         <ng-template #addOnBeforeTemplate>
-          <nz-select [(ngModel)]="search">
+          设备名称
+          <!--<nz-select [(ngModel)]="search">
             <nz-option [nzLabel]="'设备名称'" [nzValue]="'name'"></nz-option>
-            <!--<nz-option [nzLabel]="'终端编码'" [nzValue]="'terminal_code'"></nz-option>-->
-            <!--<nz-option [nzLabel]="'地域位置'" [nzValue]="'location_name'"></nz-option>-->
-            <!--<nz-option [nzLabel]="'使用单位'" [nzValue]="'user_org'"></nz-option>-->
-          </nz-select>
+            &lt;!&ndash;<nz-option [nzLabel]="'终端编码'" [nzValue]="'terminal_code'"></nz-option>&ndash;&gt;
+            &lt;!&ndash;<nz-option [nzLabel]="'地域位置'" [nzValue]="'location_name'"></nz-option>&ndash;&gt;
+            &lt;!&ndash;<nz-option [nzLabel]="'使用单位'" [nzValue]="'user_org'"></nz-option>&ndash;&gt;
+          </nz-select>-->
         </ng-template>
         <ng-template #addOnAfterTemplate>
           <img src="assets/icons/icon_seach.png" alt="" class="search_icon" (click)="searchChange()">

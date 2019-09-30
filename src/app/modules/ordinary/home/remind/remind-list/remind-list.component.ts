@@ -6,6 +6,7 @@ import {switchMap} from "rxjs/internal/operators";
 import {BoilerService} from "../../../../../shared/boiler.service";
 
 import Swal from 'sweetalert2';
+import {AlarmService} from "../../../../../shared/alarm.service";
 
 @Component({
   selector: 'app-remind-list',
@@ -29,7 +30,8 @@ export class RemindListComponent implements OnInit {
   constructor(private nzModal: NzModalService,
               private modalService: NgbModal,
               private route: ActivatedRoute,
-              private eptService: BoilerService) { }
+              private eptService: BoilerService,
+              private alarmService: AlarmService) { }
 
   ngOnInit() {
     this.route.paramMap.pipe(
@@ -123,7 +125,7 @@ export class RemindListComponent implements OnInit {
 
 
   //  批量删除
-  batchDelete() {
+  batchDelete(n) {
     let that = this;
     let title = '';
     let subtitle = '';
@@ -135,27 +137,61 @@ export class RemindListComponent implements OnInit {
     for (let i = 0; i < this.dataLists.length; i++) {
       let ac = this.dataLists[i];
       if (ac.checked) {
-        checked.push(ac.uid);
+        checked.push(ac.id);
       }
     }
-    if (checked.length > 0) {
-      title = '确认要删除此蓝牙吗？';
-      // subtitle = '禁用后可到设置内恢复账号状态。';
 
-      this.creatModal(title, subtitle, () => {
-        this.checkBatch(checked);
-      });
-    } else {
-      this.nzModal.info({
-        nzTitle: '请选择蓝牙',
-        nzContent: '',
-        nzOnOk: () => console.log('Info OK')
-      });
-      // title = '请选择蓝牙';
-      // this.creatModal(title, subtitle, () => {
-      //   that.tplModal.destroy();
-      // });
+    let post;
+    switch (n) {
+      case 1: // 标记已读
+        post = {
+          data: checked,
+          type: n
+        };
+        if (checked.length > 0) {
+          this.checkBatch(post);
+        } else {
+          this.nzModal.info({
+            nzTitle: '请选择通知',
+            nzContent: '',
+            nzOnOk: () => console.log('Info OK')
+          });
+        }
+        break;
+      case 2: // 标记删除
+        post = {
+          data: checked,
+          type: n
+        };
+        if (checked.length > 0) {
+          title = '确认要删除此通知吗？';
+          this.creatModal(title, subtitle, () => {
+            this.checkBatch(post);
+          });
+        } else {
+          this.nzModal.info({
+            nzTitle: '请选择通知',
+            nzContent: '',
+            nzOnOk: () => console.log('Info OK')
+          });
+        }
+        break;
+      case 3: // 全部已读
+        post = {
+          type: n
+        };
+        this.checkBatch(post);
+        break;
+      case 4: // 全部删除
+        post = {
+          type: n
+        };
+        title = '确认要删除全部通知吗？';
+        this.creatModal(title, subtitle, () => {
+          this.checkBatch(post);
+        });
     }
+
   }
 
 
@@ -173,13 +209,10 @@ export class RemindListComponent implements OnInit {
   }
 
   // 发送批量操作请求
-  checkBatch(checked) {
+  checkBatch(post) {
     let that = this;
-    let post = {
-      data: checked
-    };
     this.loading = true;
-    /*this.eptService.deleteData(post)
+    this.eptService.batchRemind(post)
       .subscribe(val => {
         that.loading = false;
         Swal(
@@ -187,7 +220,8 @@ export class RemindListComponent implements OnInit {
           '',
           'success'
         );
-        this.pageChange();
+        that.pageChange();
+        that.alarmService.AlarmMission('a');
       }, err => {
         that.loading = false;
         Swal(
@@ -195,7 +229,7 @@ export class RemindListComponent implements OnInit {
           err,
           'error'
         );
-      });*/
+      });
   }
 
 }

@@ -205,7 +205,7 @@ export class CluInfoComponent implements OnInit {
         // this.totalItems = data.count;
         for (let i = 0; i < this.dataLists.length; i++) {
           let item = this.dataLists[i];
-          if (item.status === 0) {
+          if (item.status === 1) {
             this.data3.push(item);
           } else if (!item.online) {
             this.data2.push(item);

@@ -11,7 +11,7 @@ export class OrderListDirComponent implements OnInit {
   public page = 1;
   public pageNum;
   public pageSize = 15;
-  public search = 'name';
+  public search = 'order_sn';
   public value;
   public totalItems;
   public isSpinning = false;
@@ -25,7 +25,7 @@ export class OrderListDirComponent implements OnInit {
 
   // 获取列表
   getList() {
-    this.dataLists = [
+    /*this.dataLists = [
       {
         uid: '1',
         name: '物联网终端采购',
@@ -33,7 +33,7 @@ export class OrderListDirComponent implements OnInit {
         address: 'New York No. 1 Lake Park',
         status: 1
       }
-    ];
+    ];*/
 
     this.isSpinning = true;
     this.chargeService.getOrderLists(this.page, this.pageSize, this.search, this.value)

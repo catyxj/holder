@@ -174,6 +174,20 @@ export class AccountService {
       );
   }
 
+  // 获取记录信息
+  getOperateF(): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = '/api/formal/order/info';
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+
 
   /*--------普通用户--------------------------------------------------*/
   // 修改配置信息
@@ -192,6 +206,30 @@ export class AccountService {
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
     return this.http.post('/api/general/user/password/update', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取记录信息
+  getOperateO(): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = '/api/general/user/log/info';
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 获取记录信息列表
+  getOperateMoreO(n, pageSize): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    const url = `/api/general/user/log/info/more?page=${n}&rows=${pageSize}`;
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

@@ -15,7 +15,7 @@ export class RuntimeAlarmMainComponent implements OnInit {
   public page = 1;
   public pageNum;
   public pageSize = 15;
-  public search = 'ept_name';
+  public search = 'channel_name';
   public value = '';
   public totalItems;
   public isAllChecked = false;

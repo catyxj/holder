@@ -35,6 +35,7 @@ import {NoticeListComponent} from "./home/notice/notice-list/notice-list.compone
 import {NoticeReportMainComponent} from "./home/notice/notice-report-main/notice-report-main.component";
 import {ServiceInfoOrComponent} from "./service/service-info-or/service-info-or.component";
 import {ServiceDetailOrComponent} from "./service/service-detail-or/service-detail-or.component";
+import {AcOperateOrdComponent} from "./account/ac-operate-ord/ac-operate-ord.component";
 
 export const OrdinaryRoutingModule = [
   {
@@ -56,7 +57,7 @@ export const OrdinaryRoutingModule = [
             component: RemindListComponent
           },
           {
-            path: 'remind-info/:uid/:type/:status',
+            path: 'remind-info/:uid/:type',
             component: RemindReportMainComponent
           },
           {
@@ -184,6 +185,10 @@ export const OrdinaryRoutingModule = [
           {
             path: 'info',
             component: AcInfoOrdComponent,
+          },
+          {
+            path: 'operate/:uid',
+            component: AcOperateOrdComponent,
           }
         ]
       },

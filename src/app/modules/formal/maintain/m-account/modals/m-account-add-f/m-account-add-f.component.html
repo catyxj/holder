@@ -11,7 +11,14 @@
       账号 <span>*</span>：
     </div>
     <div class="m_input">
-      <input type="text" class="form-control" [(ngModel)]="username" placeholder="请输入账号" maxlength="15">
+      <input type="text" class="form-control" [(ngModel)]="username" placeholder="请输入账号"
+             pattern="^(13|14|15|17|18|19)\d{9}$" required #telephone="ngModel">
+      <div class="sign_tip text_danger">
+         <span *ngIf="telephone.invalid && (telephone.dirty || telephone.touched)">
+           请输入正确的11位手机账号
+         </span>
+      </div>
+
     </div>
   </div>
 
@@ -104,7 +111,7 @@
 
 <div class="modal-footer">
   <button type="button" class="btn" (click)="activeModal.dismiss('close')">取消</button>
-  <button type="button" class="btn btn_purple" style="margin-left: 30px;" (click)="save()" [disabled]="!username">确定</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 30px;" (click)="save()" [disabled]="telephone.invalid">确定</button>
 </div>
 
 

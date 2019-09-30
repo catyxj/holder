@@ -108,9 +108,14 @@
           <h6>
             配置信息
           </h6>
-          <button class="btn btn_purple btn_round bpm" (click)="editConfig()" *ngIf="config&&config.account_type!==1">
+
+          <!--设置-->
+          <a (click)="editConfig()" title="编辑" *ngIf="config&&config.account_type!==1&&config.account_type!==15">
+            <span class="iconfont iconedit text_purple"></span>
+          </a>
+          <!--<button class="btn btn_purple btn_round bpm" (click)="editConfig()" *ngIf="config&&config.account_type!==1&&config.account_type!==15">
             编辑
-          </button>
+          </button>-->
         </div>
         <div class="info_body">
           <ul>
@@ -134,6 +139,12 @@
               <div class="info_item_value">
                 <span *ngIf="config&&config.account_type===1">
                   系统用户
+                </span>
+                <span class="" *ngIf="config&&config.account_type===5">
+                  运营用户
+                </span>
+                <span class="" *ngIf="config&&config.account_type===6">
+                  财务用户
                 </span>
                 <span class="" *ngIf="config&&config.account_type===10">
                   正式用户

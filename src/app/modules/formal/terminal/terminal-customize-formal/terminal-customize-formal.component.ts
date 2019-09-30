@@ -17,6 +17,8 @@ export class TerminalCustomizeFormalComponent implements OnInit {
   public code;
   public name;
   public label;
+  public editName;
+  public newName;
 
   public devices = {}; // 所有控件属性
   public imgLists1 = []; // 公共图片控件
@@ -252,6 +254,7 @@ export class TerminalCustomizeFormalComponent implements OnInit {
         let content = JSON.parse(data.content);
         this.label = data.label;
         this.name = data.name;
+        this.newName = this.name;
         if (!content) {
           return;
         }
@@ -1225,6 +1228,7 @@ export class TerminalCustomizeFormalComponent implements OnInit {
 
     this.devices = {
       terminal_id: this.uid,
+      name: this.name,
       img: img3,
       data: da2,
       btn: btn,

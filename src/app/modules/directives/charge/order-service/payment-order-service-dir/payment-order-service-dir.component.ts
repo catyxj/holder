@@ -13,6 +13,7 @@ export class PaymentOrderServiceDirComponent implements OnInit {
   public type = 1;
   public uid;
   public info;
+  public isVisible = false;
 
   constructor(private chargeService: ChargeService,
               private route: ActivatedRoute) { }
@@ -44,7 +45,19 @@ export class PaymentOrderServiceDirComponent implements OnInit {
     };
     this.chargeService.payOrder(post)
       .subscribe(val => {
-
+        if (this.type === 1) {
+          /*Swal(
+            '订单已提交',
+            '',
+            'success'
+          ).then(() => {
+            window.close();
+          });*/
+          this.isVisible = true;
+        }
+        if (this.type === 2) {
+          window.location.href = val;
+        }
     }, err => {
         Swal(
           err.message || err,
@@ -52,6 +65,12 @@ export class PaymentOrderServiceDirComponent implements OnInit {
           'error'
         );
       });
+  }
+
+
+  handleOk(): void {
+    this.isVisible = false;
+    window.close();
   }
 
 }

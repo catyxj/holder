@@ -23,7 +23,7 @@
           维保模版：
         </b>
         <div class="mp_a_value">
-          {{info?.template_label}}（{{info?.template_name}}）
+          {{info?.template_label || '无'}}（{{info?.template_name || '无'}}）
         </div>
       </div>
     </div>
@@ -124,8 +124,8 @@
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn" (click)="activeModal.dismiss('close')">取 消</button>
-  <button type="button" class="btn btn_purple" style="margin-left: 35px;" (click)="save()">确 定</button>
+  <button type="button" class="btn btn_purple" (click)="activeModal.dismiss('close')">关 闭</button>
+  <!--<button type="button" class="btn btn_purple" style="margin-left: 35px;" (click)="save()">确 定</button>-->
 </div>
 
 

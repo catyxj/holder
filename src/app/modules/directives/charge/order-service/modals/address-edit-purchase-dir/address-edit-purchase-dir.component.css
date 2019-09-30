@@ -1,0 +1,40 @@
+
+.modal-header {
+  display: flex;
+  justify-content: flex-start;
+}
+.modal-header .modal-title{
+  font-weight: normal;
+  font-size: 20px;
+  padding: 6px;
+}
+
+.m_item, .m_item input, .m_item select, .m_item *{
+  font-size: 12px;
+}
+
+.m_form .m_item .m_label {
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 140px;
+  text-align: right;
+  margin-right: 10px;
+  color: #666666;
+  line-height: 30px;
+}
+.m_form .m_item .m_input_l{
+  position: relative;
+}
+.m_form .m_item .m_input_l input{
+  width: 138px;
+}
+
+
+.m_bottom{
+  display: flex;
+  padding-left: 70px;
+  margin-top: 50px;
+  align-items: flex-end;
+}
+
+

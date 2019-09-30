@@ -39,7 +39,7 @@ export class StorageOrderServiceDirComponent implements OnInit {
     ];
     this.type = this.timeList[0];*/
 
-    this.id = 1;
+    this.id = 13;
     this.chargeService.getProductInfo(this.id)
       .subscribe(data => {
         this.timeList = data;

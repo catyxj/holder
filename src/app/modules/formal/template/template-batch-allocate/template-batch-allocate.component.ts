@@ -140,6 +140,15 @@ export class TemplateBatchAllocateComponent implements OnInit {
     if (!this.dataLists || this.dataLists.length <= 0 ) {
       this.dataLists = [];
     }
+    if (!this.selectedTemplate) {
+      this.nzModal.info({
+        nzTitle: '请选择模板',
+        nzContent: '',
+        nzOnOk: () => console.log('Info OK')
+      });
+      return;
+    }
+
     for (let i = 0; i < this.dataLists.length; i++) {
       let ac = this.dataLists[i];
       if (ac.checked) {
@@ -147,16 +156,14 @@ export class TemplateBatchAllocateComponent implements OnInit {
       }
     }
     if (checked.length > 0) {
-      title = '确认要下发此模板吗？';
-      // subtitle = '';
+      title = '确认要分配此模板吗？';
 
       this.creatModal(title, subtitle, () => {
         this.checkBatch(checked);
       });
     } else {
-      title = '请选择模板';
       this.nzModal.info({
-        nzTitle: '请选择模板',
+        nzTitle: '请选择终端',
         nzContent: '',
         nzOnOk: () => console.log('Info OK')
       });

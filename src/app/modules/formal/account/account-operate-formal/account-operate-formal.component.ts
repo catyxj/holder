@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AccountService} from "../../../../shared/account.service";
 import {ActivatedRoute} from "@angular/router";
+import {ChargeService} from "../../../../shared/charge.service";
 
 @Component({
   selector: 'app-account-operate-formal',
@@ -14,19 +15,25 @@ export class AccountOperateFormalComponent implements OnInit {
   public page = 1;
   public pageNum;
   public pageSize = 15;
-  public search = 'name';
+  public search = 'order_sn';
   public value;
   public totalItems;
   public loading;
   public pageSizeList = [15, 30, 50, 100];
 
   constructor(private accountService: AccountService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private chargeService: ChargeService) { }
 
   ngOnInit() {
-    this.uid = this.route.snapshot.paramMap.get('uid');
     this.name = this.route.snapshot.paramMap.get('name');
-    this.operateList = [
+
+    this.getList();
+  }
+
+  // 获取列表
+  getList() {
+    /*this.operateList = [
       {
         uid: 'asdfa',
         name: 'asdfa',
@@ -39,15 +46,10 @@ export class AccountOperateFormalComponent implements OnInit {
         status: 2,
         amount: 111
       }
-    ];
+    ];*/
 
-    this.getList();
-  }
-
-  // 获取列表
-  getList() {
     this.loading = true;
-    this.accountService.getOperateMore(this.uid, this.page, this.pageSize)
+    this.chargeService.getOrderLists(this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.loading = false;
         this.operateList = data.data;

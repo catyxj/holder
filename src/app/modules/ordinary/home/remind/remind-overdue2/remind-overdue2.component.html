@@ -5,8 +5,7 @@
     <div class="info_tname">
       <img src="assets/icons/boiler2.png" alt="">
 
-      XXXXX锅炉购买XXXX产品服务到期提醒
-
+      {{info?.name}}产品服务到期提醒
     </div>
     <div class="info_head_r">
       <!--刷新-->
@@ -25,12 +24,12 @@
 
   <div class="report_content">
     <div>
-      尊敬的18012341234用户：
+      尊敬的{{user?.username}}用户：
     </div>
 
     <div class="report_info">
       <p>
-        您所属下XX锅炉购买的XXXX产品服务将在2919-07-20 00:00:00正式到期，截至目前仅剩30天。未充值续费的XXXX产品将在到期后停止服务。为了
+        您购买的 {{info?.name}} 产品服务将在 {{info?.end_time | date: 'yyyy-MM-dd HH:mm:ss'}} 正式到期，截至目前仅剩30天。未充值续费的{{info?.name}}产品将在到期后停止服务。为了
         保证您的服务正常运行，请及时续费。
       </p>
 
@@ -40,7 +39,7 @@
             产品名称
           </th>
           <td>
-            XX锅炉
+            {{info?.name}}
           </td>
         </tr>
 
@@ -49,34 +48,34 @@
             产品服务名称
           </th>
           <td>
-            XXX产品服务项目
+            {{info?.remark}}
           </td>
         </tr>
 
-        <tr>
+        <!--<tr>
           <th>
             产品终端编码
           </th>
           <td>
             XX锅炉
           </td>
-        </tr>
+        </tr>-->
 
-        <tr>
+        <!--<tr>
           <th>
             所属单位
           </th>
           <td>
             A企业
           </td>
-        </tr>
+        </tr>-->
 
         <tr>
           <th>
             到期时间
           </th>
           <td>
-            2019-07-20 00:00:00
+            {{info?.end_time | date: 'yyyy-MM-dd HH:mm:ss'}}
           </td>
         </tr>
 

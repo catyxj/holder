@@ -6,6 +6,7 @@
       "icon": "fa-home",
       "img": "assets/icons/icon_statistics.png",
       "checked": true,
+      "router": "",
       "children": [
         { "name": "设备概况", "router": "/admin/ad/overview","icon": ""}
       ]
@@ -36,5 +37,5 @@
       ]
     }
   ],
-  "authority": "sub1-authority,sub1-option1-add,sub1-option1-delete,sub1-option1-btn,sub1-option1-else"
+  "authority": ""
 }

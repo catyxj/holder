@@ -120,7 +120,7 @@
           <td> {{data.channel_number}} </td>
           <td> {{data.name}} </td>
           <td> {{data.username || '空'}} ({{data.org_name || '空'}}) </td>
-          <td> {{data.terminal_code || '空'}} (空)  </td>
+          <td> {{data.terminal_code || '空'}} ({{data.ept_name || '空'}})  </td>
           <td>
             <nz-tag [nzColor]="'#1E9FF2'" *ngIf="data.online === 1">已联网</nz-tag>
             <nz-tag [nzColor]="'#C0C4D2'" *ngIf="data.online === 0">未联网</nz-tag>

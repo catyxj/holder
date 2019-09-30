@@ -16,7 +16,7 @@ export class MTempBatchAllocateFComponent implements OnInit {
   public page = 1;
   public pageNum;
   public pageSize = 15;
-  public search = 'temp_label';
+  public search = 'ept_name';
   public value;
   public status = '';
   public online = '';

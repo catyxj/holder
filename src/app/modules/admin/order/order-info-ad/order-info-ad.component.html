@@ -7,21 +7,23 @@
   <div class="info_head">
     <div class="info_tname">
       <img src="assets/icons/icon_Ordersetting.png" alt="">
-      订单编号{{basic?.name}}
+      <!--订单编号{{basic?.name}}-->
+      订单详情
     </div>
     <div style="text-align: right;">
       <!--返回-->
       <button class="btn btn_purple-o btn_round bps" [routerLink]="['/admin/ad/order/list', {page: listPage}]">
         <i class="iconfont iconicon_comeback1"></i>
       </button>
-      <button class="btn btn_purple btn_round bpm ml-1" (click)="statusSet()">
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="statusSet()" [disabled]="!info || info.order_status !== 1">
         状态设置
       </button>
       <div style="margin-top: 15px; font-weight: bold;">
         订单状态：
-        <span style="color: #1E9FF2;">已支付</span>
-        <span style="color: #FFC06A;">未支付</span>
-        <span style="color: #A7ABBE;">作废</span>
+        <span style="color: #1E9FF2;" *ngIf="info && info.order_status === 3">已支付</span>
+        <span style="color: #FFC06A;" *ngIf="info && info.order_status === 1">未支付</span>
+        <span style="color: #A7ABBE;" *ngIf="info && info.order_status === 2">作废</span>
+        <span style="color: #A7ABBE;" *ngIf="info && info.order_status === 0">已取消</span>
       </div>
     </div>
   </div>
@@ -41,7 +43,7 @@
                 订单编号
               </div>
               <div class="or_item_text">
-                203861209130361
+                {{info?.order_sn}}
               </div>
             </div>
 
@@ -50,7 +52,7 @@
                 创建时间
               </div>
               <div class="or_item_text">
-                {{basic?.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}
+                {{info?.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}
               </div>
             </div>
 
@@ -59,7 +61,7 @@
                 订单创建账号
               </div>
               <div class="or_item_text">
-                {{basic?.username || '空'}} ({{basic?.username || '空'}})
+                {{info?.created_username || '空'}} ({{info?.created_name || '空'}})
               </div>
             </div>
 
@@ -68,7 +70,7 @@
                 所属单位
               </div>
               <div class="or_item_text">
-                {{basic?.org_name}}
+                {{info?.created_org}}
               </div>
             </div>
 
@@ -77,12 +79,16 @@
                 订单类型
               </div>
               <div class="or_item_text">
-                <span *ngIf="basic&&basic.type === 1">
+                <span *ngIf="info&&info?.item_type === 1">产品购买</span>
+                <span *ngIf="info&&info?.item_type === 2">功能升级</span>
+                <span *ngIf="info&&info?.item_type === 3">服务购买</span>
+                <span *ngIf="info&&info?.item_type === 4">数据流量</span>
+                <!--<span *ngIf="basic&&basic.type === 1">
                   定期
                 </span>
                 <span *ngIf="basic&&basic.type === 2">
                   永久
-                </span>
+                </span>-->
               </div>
             </div>
           </div>
@@ -95,12 +101,16 @@
                 支付状态
               </div>
               <div class="or_item_text">
-                <span *ngIf="basic&&basic.status === 1">
+                <!--<span *ngIf="info && !info.order_status">
                   待支付
                 </span>
-                <span *ngIf="basic&&basic.status === 2">
+                <span *ngIf="info && info.order_status">
                   支付完成
-                </span>
+                </span>-->
+                <span class="text_purple" *ngIf="info && info.order_status === 3">支付完成</span>
+                <span style="color: #B20000;" *ngIf="info && info.order_status === 1">待支付</span>
+                <span style="color: #A7ABBE;" *ngIf="info && info.order_status === 2">作废</span>
+                <span style="color: #A7ABBE;" *ngIf="info && info.order_status === 0">已取消</span>
               </div>
             </div>
 
@@ -109,7 +119,7 @@
                 支付完成时间
               </div>
               <div class="or_item_text">
-                {{basic?.pay_at | date: 'yyyy-MM-dd HH:mm:ss'}}
+                {{info?.pay_at | date: 'yyyy-MM-dd HH:mm:ss'}}
               </div>
             </div>
 
@@ -118,7 +128,7 @@
                 支付金额
               </div>
               <div class="or_item_text">
-                {{basic?.amount | currency: '￥'}}
+                {{info?.pay_money | currency: '￥'}}
               </div>
             </div>
 
@@ -127,10 +137,11 @@
                 支付方式
               </div>
               <div class="or_item_text">
-                <span *ngIf="basic&&basic.status === 1">
+                <span *ngIf="info && info.pay_method === 2">
                   支付码扫码
+                  <!--<img src="assets/images/charge/alipay.png" alt="">-->
                 </span>
-                <span *ngIf="basic&&basic.status === 2">
+                <span *ngIf="info && info.pay_method === 1">
                   对公转账
                 </span>
               </div>
@@ -141,7 +152,7 @@
                 支付账号
               </div>
               <div class="or_item_text">
-                {{basic?.pay_account}}
+                {{info?.buyer_account}}
               </div>
             </div>
           </div>
@@ -163,14 +174,14 @@
           </div>
           <div class="or2_text">
             <span>
-              设备采购服务
+              {{info?.item_name}}
             </span>
-            <span>
+            <!--<span>
               功能扩展服务
             </span>
             <span>
               存储升级服务
-            </span>
+            </span>-->
           </div>
         </div>
 
@@ -179,7 +190,30 @@
             产品说明：
           </div>
           <div class="text_content">
-            普通账号升级为正式账号（永久性）
+            <div class="cinfo_content">
+              <div *ngIf="info&&info.item_type!==1">
+                {{info?.item_desc}}
+              </div>
+
+              <div class="c_v_con" *ngIf="info&&info.item_type===1">
+                <div *ngFor="let item of info.des">
+                  <h6>{{item.title}}</h6>
+                  <div style="padding: 0 13px;">
+                    <table class="table table-bordered">
+                      <tr *ngFor="let item1 of item.data">
+                        <td style="width: 90px;">
+                          {{item1.name}}
+                        </td>
+                        <td style="word-break: break-all;">
+                          {{item1.value}}
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
           </div>
         </div>
 

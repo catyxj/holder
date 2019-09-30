@@ -78,14 +78,14 @@
 
         <div class="grid_content">
           <a class="grid_col" *ngFor="let data of data1" [routerLink]="['/admin/ordinary/runtime', data.uid]" target="_blank">
-            <div class="grid_col_in"  [ngClass]="{'bg_running': data.online, 'bg_default': !data.online, 'bg_inactive': data.status===0 }">
+            <div class="grid_col_in"  [ngClass]="{'bg_running': data.online, 'bg_default': !data.online }">
               <div class="grid_col_1">
                 <div class="gc_l">
                   <div class="flex" *ngIf="data.online">
-                    <div class="dot bg_default" *ngIf="!data.run"></div>
-                    <div class="dot bg_green" *ngIf="data.run"></div>
-                    <div class="dot bg_danger" *ngIf="data.alarm_count>0"></div>
-                    <div class="dot bg_warning" *ngIf="data.malfunction"></div>
+                    <div class="dot bg_default" *ngIf="!data.run" title="未运行"></div>
+                    <div class="dot bg_green" *ngIf="data.run" title="运行"></div>
+                    <div class="dot bg_danger" *ngIf="data.alarm_count>0" title="有告警"></div>
+                    <div class="dot bg_warning" *ngIf="data.malfunction" title="有故障"></div>
                   </div>
                 </div>
                 <div class="gc_r">
@@ -95,8 +95,6 @@
 
               <div class="grid_col_2">
                 {{data.name}}
-                <span *ngIf="!data.online"> (未连接) </span>
-                <!--<span> (未激活) </span>-->
               </div>
             </div>
           </a>
@@ -104,15 +102,15 @@
 
         <div class="grid_content">
           <a class="grid_col" *ngFor="let data of data2" [routerLink]="['/admin/ordinary/runtime', data.uid]" target="_blank">
-            <div class="grid_col_in"  [ngClass]="{'bg_running': data.online, 'bg_default': !data.online, 'bg_inactive': data.status===0 }">
+            <div class="grid_col_in"  [ngClass]="{'bg_running': data.online, 'bg_default': !data.online, 'bg_inactive': data.status===1 }">
               <div class="grid_col_1">
                 <div class="gc_l">
-                  <div class="flex" *ngIf="data.online">
+                  <!--<div class="flex" *ngIf="data.online">
                     <div class="dot bg_default" *ngIf="!data.run"></div>
                     <div class="dot bg_green" *ngIf="data.run"></div>
                     <div class="dot bg_danger" *ngIf="data.alarm_count>0"></div>
                     <div class="dot bg_warning" *ngIf="data.malfunction"></div>
-                  </div>
+                  </div>-->
                 </div>
                 <div class="gc_r">
                   <img src="assets/images/boiler.png" alt="">
@@ -122,7 +120,6 @@
               <div class="grid_col_2">
                 {{data.name}}
                 <span *ngIf="!data.online"> (未连接) </span>
-                <!--<span> (未激活) </span>-->
               </div>
             </div>
           </a>
@@ -130,15 +127,10 @@
 
         <div class="grid_content">
           <a class="grid_col" *ngFor="let data of data3" [routerLink]="['/admin/ordinary/runtime', data.uid]" target="_blank">
-            <div class="grid_col_in"  [ngClass]="{'bg_running': data.online, 'bg_default': !data.online, 'bg_inactive': data.status===0 }">
+            <div class="grid_col_in"  [ngClass]="{'bg_running': data.online, 'bg_default': !data.online, 'bg_inactive': data.status===1 }">
               <div class="grid_col_1">
                 <div class="gc_l">
-                  <div class="flex" *ngIf="data.online">
-                    <div class="dot bg_default" *ngIf="!data.run"></div>
-                    <div class="dot bg_green" *ngIf="data.run"></div>
-                    <div class="dot bg_danger" *ngIf="data.alarm_count>0"></div>
-                    <div class="dot bg_warning" *ngIf="data.malfunction"></div>
-                  </div>
+
                 </div>
                 <div class="gc_r">
                   <img src="assets/images/boiler.png" alt="">
@@ -147,8 +139,7 @@
 
               <div class="grid_col_2">
                 {{data.name}}
-                <span *ngIf="!data.online"> (未连接) </span>
-                <!--<span> (未激活) </span>-->
+                <span> (未激活) </span>
               </div>
             </div>
           </a>

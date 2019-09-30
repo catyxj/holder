@@ -71,13 +71,14 @@
   margin-bottom: 18px;
 }
 .f_info_item_date{
-  width: 90px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 96px;
   font-size: 12px;
   color: #464855;
+  white-space: nowrap;
 }
 .f_info_item_op{
-
-}
-.f_info_item_op a{
   font-size: 12px;
 }
+

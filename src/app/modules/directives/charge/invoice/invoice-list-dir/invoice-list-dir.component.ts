@@ -31,7 +31,7 @@ export class InvoiceListDirComponent implements OnInit {
 
   // 获取列表
   getList() {
-    this.dataLists = [
+    /*this.dataLists = [
       {
         order_sn: '11',
         item_name: '物联网终端采购',
@@ -48,7 +48,7 @@ export class InvoiceListDirComponent implements OnInit {
         address: 'New York No. 1 Lake Park',
         status: 1
       }
-    ];
+    ];*/
 
     this.isSpinning = true;
     this.chargeService.getInvoiceLists(this.page, this.pageSize, this.search, this.value)
@@ -75,6 +75,7 @@ export class InvoiceListDirComponent implements OnInit {
   // 页码变化
   pageChange(): void {
     this.getList();
+    this.isAllChecked = false;
   }
 
   // 页码跳转
@@ -134,18 +135,18 @@ export class InvoiceListDirComponent implements OnInit {
     }
   }
 
-  addInvoice() {
-    if (!this.totalAmount) {
+  addInvoice(data) {
+    /*if (!this.totalAmount) {
       this.nzModal.info({
         nzTitle: '请选择需要开票的订单',
         nzContent: '',
         nzOnOk: () => console.log('Info OK')
       });
       return;
-    }
-    this.isVisible = true;
+    }*/
+    // this.isVisible = true;
 
-    let checked = [];
+    /*let checked = [];
     if (!this.dataLists || this.dataLists.length <= 0 ) {
       this.dataLists = [];
     }
@@ -154,9 +155,9 @@ export class InvoiceListDirComponent implements OnInit {
       if (ac.checked) {
         checked.push(ac.order_sn);
       }
-    }
-    let sn = JSON.stringify(checked);
-    window.open(`./#/dir/charge/invoice/info/${this.totalAmount}/${sn}`);
+    }*/
+    // let sn = JSON.stringify(checked);
+    window.open(`./#/dir/charge/invoice/info/${data.pay_money}/${data.order_sn}`);
   }
 
   handleOk(): void {

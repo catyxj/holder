@@ -20,7 +20,6 @@ export class OrderInfoDirComponent implements OnInit {
     this.uid = this.route.snapshot.paramMap.get('uid');
     this.listPage = this.route.snapshot.paramMap.get('page');
 
-
     this.getInfo();
   }
 
@@ -34,12 +33,15 @@ export class OrderInfoDirComponent implements OnInit {
     this.chargeService.getOrderInfo(this.uid)
       .subscribe(data => {
         this.info = data;
-
-
+        this.info.buyer_account = this.hideEmailInfo(this.info.buyer_account);
+        if (this.info && this.info.item_type === 1) {
+          this.info.des = JSON.parse(this.info.item_desc);
+        }
       }, err => {
 
       });
   }
+
 
 
   goBack() {

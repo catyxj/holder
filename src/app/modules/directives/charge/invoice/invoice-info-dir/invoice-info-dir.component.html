@@ -101,7 +101,7 @@
     <div *ngIf="addressList && addressList.length > 0" style="padding-bottom: 17px;">
       <!--默认地址-->
       <div class="def_con">
-        <div class="addr_item" [class.active]="selectedAddr.uid === defaultAddress.uid" (click)="selectAddr(defaultAddress)">
+        <div class="addr_item" [class.active]="selectedAddr && selectedAddr.uid === defaultAddress.uid" (click)="selectAddr(defaultAddress)">
           <div class="addr_l">
             <div class="addr_name">
               <b>{{defaultAddress?.name}}</b>
@@ -128,7 +128,7 @@
       <!--其他地址-->
       <div *ngIf="showAll" class="other_con">
         <div *ngFor="let data of otherAddress" class="addr_ot_con" (click)="selectAddr(data)">
-          <div class="addr_item" [class.active]="selectedAddr.uid === data.uid">
+          <div class="addr_item" [class.active]="selectedAddr && selectedAddr.uid === data.uid">
             <div class="addr_l">
               <div class="addr_name">
                 <b>{{data.name}}</b>
@@ -220,7 +220,13 @@
           <span>*</span>联系方式：
         </div>
         <div class="m_input_l">
-          <input type="text" class="form-control" [(ngModel)]="newAddress.telephone">
+          <input type="text" class="form-control" [(ngModel)]="newAddress.telephone" #tel="ngModel"
+                 pattern="^(13|14|15|17|18|19)\d{9}$">
+          <div class="sign_tip">
+            <span class="text_danger" *ngIf="tel.invalid && (tel.dirty || tel.touched)">
+              请填写11位手机号
+            </span>
+          </div>
         </div>
       </div>
 

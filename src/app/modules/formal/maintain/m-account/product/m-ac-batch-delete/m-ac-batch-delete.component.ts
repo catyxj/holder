@@ -135,9 +135,10 @@ export class MAcBatchDeleteComponent implements OnInit {
       // subtitle = '禁用后可到设置内恢复账号状态。';
       this.creatModal(title, subtitle, () => {
         let post = {
+          uid: this.uid,
           data: checked
         };
-        this.maintainService.UserEptBind(post)
+        this.maintainService.UserEptUnbind(post)
           .subscribe(val => {
             Swal(
               '操作成功！',

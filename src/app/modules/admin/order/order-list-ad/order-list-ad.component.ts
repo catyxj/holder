@@ -14,7 +14,7 @@ export class OrderListAdComponent implements OnInit {
   public page = 1;
   public pageNum;
   public pageSize = 15;
-  public search = 'uid';
+  public search = 'order_sn';
   public value;
   public type;
   public status;
@@ -46,7 +46,7 @@ export class OrderListAdComponent implements OnInit {
 
   // 获取列表
   getList() {
-    this.dataLists = [
+    /*this.dataLists = [
       {
         name: 'asdfas',
         amount: 500
@@ -56,10 +56,10 @@ export class OrderListAdComponent implements OnInit {
         amount: 10000
       }
     ];
-    this.totalItems = 22;
+    this.totalItems = 22;*/
 
     this.loading = true;
-    this.orderService.getLists(this.page, this.pageSize, this.status, this.search, this.value)
+    this.orderService.getLists(this.page, this.pageSize, this.search, this.value, this.type)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;
@@ -108,7 +108,7 @@ export class OrderListAdComponent implements OnInit {
   }
 
   searchStatus(n?) {
-    this.status = n;
+    this.type = n;
     // if (!n) {
     //   this.type = '';
     // }

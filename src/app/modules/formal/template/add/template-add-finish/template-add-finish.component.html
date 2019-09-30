@@ -4,7 +4,8 @@
       <span class="text_purple">*</span> 模版保存为：
     </div>
     <div class="tp_input">
-      <input type="text" class="form-control" [(ngModel)]="name">
+      <input type="text" class="form-control" [(ngModel)]="name"
+             maxlength="10" minlength="3" #tName="ngModel" required>
     </div>
 
   </div>
@@ -16,7 +17,7 @@
     <button class="btn btn_purple bpm" (click)="pre()">
       上一步
     </button>
-    <button class="btn btn_purple bpm" (click)="save()" [disabled]="!name" style="margin-left: 1px;">
+    <button class="btn btn_purple bpm" (click)="save()" [disabled]="tName.invalid" style="margin-left: 1px;">
       完成配置
     </button>
   </div>

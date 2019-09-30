@@ -30,7 +30,7 @@ export class AcInfoAdComponent implements OnInit {
 
     let roleId = parseInt(localStorage.getItem('roleId'));
     if (roleId === 10) {
-      this.router.navigate(['/admin/formal']);
+      this.router.navigate(['/admin/ordinary']);
     }
 
     /*this.basic = {

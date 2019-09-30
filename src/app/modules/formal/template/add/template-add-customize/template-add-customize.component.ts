@@ -1232,12 +1232,21 @@ export class TemplateAddCustomizeComponent implements OnInit {
   handleOk(): void {
     if (!this.ztName) {
       this.modalService.info({
-        nzTitle: '请输入模板名称',
+        nzTitle: '请输入组态名称',
         nzContent: '',
         nzOnOk: () => console.log('Info OK')
       });
       return;
     }
+    if (this.ztName.length < 3) {
+      this.modalService.info({
+        nzTitle: '请输入3-10个字符',
+        nzContent: '',
+        nzOnOk: () => console.log('Info OK')
+      });
+      return;
+    }
+
     this.devices = {
       uid: this.uid,
       img: this.imgT,

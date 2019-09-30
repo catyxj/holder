@@ -12,7 +12,7 @@ import {OrderStatusSettingAdComponent} from "../modals/order-status-setting-ad/o
 })
 export class OrderInfoAdComponent implements OnInit {
   public uid;
-  public basic;
+  public info;
   public products;
   public listPage;
 
@@ -24,42 +24,47 @@ export class OrderInfoAdComponent implements OnInit {
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
     this.listPage = this.route.snapshot.paramMap.get('page');
-    this.basic = {
-        amount: 300,
-        pay_account: 'asdfa@123.com'
-    };
 
-    this.basic.pay_account = this.hideEmailInfo(this.basic.pay_account);
 
-    // this.getBasic();
-    this.getProducts();
+    this.getBasic();
+    // this.getProducts();
   }
 
   // 获取基础信息
   getBasic() {
+    /*this.info = {
+      amount: 300,
+      pay_account: 'asdfa@123.com'
+    };
+    this.basic.pay_account = this.hideEmailInfo(this.basic.pay_account);*/
+
     this.orderService.getBasic(this.uid)
       .subscribe(data => {
-        this.basic = data;
+        this.info = data;
+        this.info.buyer_account = this.hideEmailInfo(this.info.buyer_account);
+        if (this.info && this.info.item_type === 1) {
+          this.info.des = JSON.parse(this.info.item_desc);
+        }
       }, err => {
 
       });
   }
 
   // 获取产品信息
-  getProducts() {
+  /*getProducts() {
     this.orderService.getProducts(this.uid)
       .subscribe(data => {
         this.products = data;
       }, err => {
 
       });
-  }
+  }*/
 
   // 状态设置模态框
   statusSet() {
     let that = this;
     const modalRef = this.modalService.open(OrderStatusSettingAdComponent, {windowClass: 'modal_md', centered: true});
-    modalRef.componentInstance.currentData = this.basic;
+    modalRef.componentInstance.currentData = this.info;
     modalRef.componentInstance.uid = this.uid;
     modalRef.result.then((result) => {
       if (result === 'ok') {
