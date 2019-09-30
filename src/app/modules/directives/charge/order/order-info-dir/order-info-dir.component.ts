@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ChargeService} from "../../../../../shared/charge.service";
 
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-order-info-dir',
   templateUrl: './order-info-dir.component.html',
@@ -43,6 +45,25 @@ export class OrderInfoDirComponent implements OnInit {
   }
 
 
+  // 取消订单
+  cancelOrder() {
+    let that = this;
+    this.chargeService.cancelOrder(this.uid)
+      .subscribe(val => {
+        Swal(
+          '操作成功！',
+          '',
+          'success'
+        );
+        that.getInfo();
+      }, err => {
+        Swal(
+          err.message || err,
+          '',
+          'error'
+        );
+      });
+  }
 
   goBack() {
     window.history.go(-1);

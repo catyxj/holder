@@ -72,13 +72,16 @@
   color: #464855;
 }
 .item_c1_value{
-  width: 260px;
+  width: 70%;
   height:44px;
   background:#F3F5F6;
   box-sizing: border-box;
   padding: 0 16px;
-  line-height: 44px;
-  font-size: 16px;
+  /*line-height: 44px;*/
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 15px;
   font-weight: bold;
   color: #464855;
 }

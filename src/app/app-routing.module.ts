@@ -38,6 +38,7 @@ import {TrafficOrderServiceDirComponent} from "./modules/directives/charge/order
 import {DeliveryMainComponent} from "./modules/directives/operator/delivery/delivery-main/delivery-main.component";
 import {DeliveryListComponent} from "./modules/directives/operator/delivery/delivery-list/delivery-list.component";
 import {DeliveryInfoComponent} from "./modules/directives/operator/delivery/delivery-info/delivery-info.component";
+import {AgreementComponent} from "./register/agreement/agreement.component";
 
 
 
@@ -61,6 +62,10 @@ const routes: Routes = [
         component: SignUpComponent
       }
     ]
+  },
+  {
+    path: 'agreement',
+    component: AgreementComponent
   },
   {
     path: 'recover-password',

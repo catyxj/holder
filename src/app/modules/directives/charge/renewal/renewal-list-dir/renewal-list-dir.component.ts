@@ -16,7 +16,7 @@ export class RenewalListDirComponent implements OnInit {
   public totalItems;
   public isSpinning = false;
   public pageSizeList = [15, 30, 50, 100];
-  public checkTime = 0;
+  public checkTime = '';
 
   constructor(private chargeService: ChargeService) { }
 
@@ -44,7 +44,7 @@ export class RenewalListDirComponent implements OnInit {
     ];*/
 
     this.isSpinning = true;
-    this.chargeService.getRenewalLists(this.page, this.pageSize, this.search, this.value)
+    this.chargeService.getRenewalLists(this.page, this.pageSize, this.search, this.value, this.checkTime)
       .subscribe(data => {
         this.isSpinning = false;
         this.dataLists = data.data;

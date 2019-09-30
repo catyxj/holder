@@ -20,6 +20,7 @@ export class InvoiceSetFiComponent implements OnInit {
               private invoiceService: InvoiceService) { }
 
   ngOnInit() {
+    this.status = this.currentData.invoiced_status.toString();
   }
 
   save() {

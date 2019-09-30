@@ -48,12 +48,12 @@ export class ChargeService {
 
   // --------费用账单 ----------
   // 获取账单总览列表
-  getGeneralLists(n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+  getGeneralLists(n: number, pageSize: number, search?: string, value?: string, year?, month?): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
     // let roleId = localStorage.getItem('roleId');
-    let url = `/api/formal/bill/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    let url = `/api/formal/bill/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}&year=${year}&month=${month}`;
 
     return this.http.get<any>(url, httpOptions)
       .pipe(
@@ -63,12 +63,12 @@ export class ChargeService {
 
 
   // 获取账单明细列表
-  getDetailLists(n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+  getDetailLists(n: number, pageSize: number, search?: string, value?: string, year?, month?): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
     // let roleId = localStorage.getItem('roleId');
-    let url = `/api/formal/bill/detail/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    let url = `/api/formal/bill/detail/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}&year=${year}&month=${month}`;
 
 
     return this.http.get<any>(url, httpOptions)
@@ -106,15 +106,28 @@ export class ChargeService {
       );
   }
 
+  // 取消订单
+  cancelOrder(uid): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let url = `/api/formal/order/cancel?order_sn=${uid}`;
+
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
 
   // ---------续费管理-----------
   // 获取续费列表
-  getRenewalLists(n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+  getRenewalLists(n: number, pageSize: number, search?: string, value?: string, expire?): Observable<any> {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
     // let roleId = localStorage.getItem('roleId');
-    let url = `/api/formal/storage/service/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}`;
+    let url = `/api/formal/storage/service/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}&expire=${expire}`;
 
     return this.http.get<any>(url, httpOptions)
       .pipe(
@@ -190,12 +203,39 @@ export class ChargeService {
       );
   }
 
+
+  // 设置默认地址
+  setDefaultAddress(data): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let url = `/api/formal/customer/address/set/default`;
+
+    return this.http.post<any>(url, data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   // 获取发票信息列表
   getInvoiceInfoList(): Observable<any>  {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
     let url = `/api/formal/invoiced/info/list`;
+
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // 设置默认发票信息
+  setDefaultInvoiceInfo(id): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    let url = `/api/formal/invoice/info/set/default?id=${id}`;
 
     return this.http.get<any>(url, httpOptions)
       .pipe(

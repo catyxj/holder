@@ -105,4 +105,21 @@ export class InvoiceListFiComponent implements OnInit {
     this.searchChange();
   }*/
 
+
+  // 导出
+  exportData() {
+    let token = localStorage.getItem('authToken');
+    let url = `/api/financial/invoiced/export`;
+
+    const objectUrl = `${url}?token=${token}`;
+    const link = document.createElement('a');
+    document.body.appendChild(link);
+    link.setAttribute('style', 'display:none');
+    link.setAttribute('href', objectUrl);
+    // link.setAttribute('download', '历史数据');
+    link.target = '_blank';
+    link.click();
+    document.body.removeChild(link);
+  }
+
 }

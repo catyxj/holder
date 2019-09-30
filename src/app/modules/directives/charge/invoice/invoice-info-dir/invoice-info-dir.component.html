@@ -322,7 +322,7 @@
                 </div>
               </div>
 
-              <div *ngIf="selectedInfo.id === data.id">
+              <div *ngIf="selectedInfo.id === data.id" style="margin-bottom: 10px;">
                 <div *ngIf="data.showInfo">
                   <mat-form-field class="invoice_input">
                     <input matInput placeholder="公司注册名称" [(ngModel)]="selectedInfo.name">

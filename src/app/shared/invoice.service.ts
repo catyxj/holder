@@ -49,7 +49,7 @@ export class InvoiceService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    let url = `/api/financial/invoiced/detail`;
+    let url = `/api/financial/invoiced/status/update`;
 
     return this.http.post<any>(url, data, httpOptions)
       .pipe(

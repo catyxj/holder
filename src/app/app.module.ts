@@ -72,6 +72,7 @@ import { DeliveryInfoComponent } from './modules/directives/operator/delivery/de
 import { DeliverySetComponent } from './modules/directives/operator/delivery/modals/delivery-set/delivery-set.component';
 import { AddDeliveryItemComponent } from './modules/directives/operator/delivery/modals/add-delivery-item/add-delivery-item.component';
 import { AddressEditPurchaseDirComponent } from './modules/directives/charge/order-service/modals/address-edit-purchase-dir/address-edit-purchase-dir.component';
+import { AgreementComponent } from './register/agreement/agreement.component';
 
 
 
@@ -128,6 +129,7 @@ registerLocaleData(zh);
     DeliverySetComponent,
     AddDeliveryItemComponent,
     AddressEditPurchaseDirComponent,
+    AgreementComponent,
   ],
   imports: [
     BrowserModule,

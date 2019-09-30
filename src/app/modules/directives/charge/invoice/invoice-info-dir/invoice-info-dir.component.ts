@@ -68,7 +68,8 @@ export class InvoiceInfoDirComponent implements OnInit {
       bank: '',
       account: '',
       address: '',
-      phone: ''
+      phone: '',
+      id: 0
     };
     this.getAddressInfo();
     this.getInfo();
@@ -367,13 +368,32 @@ export class InvoiceInfoDirComponent implements OnInit {
   // 设为默认地址
   setDefaultAddr(data) {
     let that = this;
-    that.getAddressInfo();
+    let post = {
+      type: 2,
+      uid: data.uid
+    };
+    this.chargeService.setDefaultAddress(post)
+      .subscribe(val => {
+        Swal(
+          '操作成功！',
+          '',
+          'success'
+        );
+        that.getAddressInfo();
+      }, err => {
+        Swal(
+          err.message || err,
+          '',
+          'error'
+        );
+      });
+
   }
 
   // 删除信息
   deleteInfo(data) {
     let that = this;
-    this.chargeService.deleteInvoiceInfo(data.id)
+    this.chargeService.deleteInvoiceInfo({id: data.id})
       .subscribe(val => {
         Swal(
           '操作成功！',
@@ -393,7 +413,22 @@ export class InvoiceInfoDirComponent implements OnInit {
   // 设为默认信息
   setDefaultInfo(data) {
     let that = this;
-    that.getInfo();
+    this.chargeService.setDefaultInvoiceInfo(data.id)
+      .subscribe(val => {
+        Swal(
+          '操作成功！',
+          '',
+          'success'
+        );
+        that.getInfo();
+      }, err => {
+        Swal(
+          err.message || err,
+          '',
+          'error'
+        );
+      });
+
   }
 
 
@@ -412,6 +447,14 @@ export class InvoiceInfoDirComponent implements OnInit {
       Swal('请填写完整地址信息');
       return;
     }
+
+    let myreg = /^(13|14|15|17|18|19)\d{9}$/;
+    if (!myreg.test(this.selectedAddr.telephone)) {
+      Swal('请填写正确手机号码');
+      return;
+    }
+
+
     if (!this.selectedInfo || !this.selectedInfo.name || !this.selectedInfo.taxpayer || !this.selectedInfo.bank
       || !this.selectedInfo.account || !this.selectedInfo.address || !this.selectedInfo.phone) {
       Swal('请填写完整发票信息');
@@ -441,7 +484,8 @@ export class InvoiceInfoDirComponent implements OnInit {
       open_account: this.selectedInfo.account,
       register_place: this.selectedInfo.address,
       register_tel: this.selectedInfo.phone,
-      invoiced_add: this.checkInfo
+      invoiced_add: this.checkInfo,
+      invoiced_id: this.selectedInfo.id
     };
     console.log(post);
     this.chargeService.submitInvoice(post)
@@ -451,7 +495,7 @@ export class InvoiceInfoDirComponent implements OnInit {
           '',
           'success'
         ).then(() => {
-          that.closeW();
+          // that.closeW();
         });
 
       }, err => {

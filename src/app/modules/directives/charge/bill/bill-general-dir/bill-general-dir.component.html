@@ -7,7 +7,7 @@
         <nz-option nzValue="2018" nzLabel="2018"></nz-option>
       </nz-select>
 
-      <nz-select style="width: 90px;" class="ml-1" [(ngModel)]="selectedValue">
+      <nz-select style="width: 90px;" class="ml-1" [(ngModel)]="month">
         <nz-option nzValue="1" nzLabel="1月"></nz-option>
         <nz-option nzValue="2" nzLabel="2月"></nz-option>
         <nz-option nzValue="3" nzLabel="3月"></nz-option>
@@ -45,7 +45,7 @@
         <tr>
           <th>账号</th>
           <th>产品</th>
-          <th>产品明细</th>
+          <!--<th>产品明细</th>-->
           <th>消费类型</th>
           <th>原价</th>
           <th>实付金额</th>
@@ -55,7 +55,7 @@
         <tr *ngFor="let data of dataLists">
           <td>{{data.created_username}}</td>
           <td>{{data.item_name}}</td>
-          <td>终端设备购买</td>
+          <!--<td>终端设备购买</td>-->
           <td>
             <span *ngIf="data.item_type === 1">
               产品购买

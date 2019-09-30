@@ -7,8 +7,8 @@ import {ChargeService} from "../../../../../shared/charge.service";
   styleUrls: ['./bill-general-dir.component.css']
 })
 export class BillGeneralDirComponent implements OnInit {
-  public year = '';
-  public selectedValue = '';
+  public year = '2019';
+  public month = '';
   public dataLists = [];
   public page = 1;
   public pageNum;
@@ -51,7 +51,7 @@ export class BillGeneralDirComponent implements OnInit {
     ];*/
 
     this.isSpinning = true;
-    this.chargeService.getGeneralLists(this.page, this.pageSize, this.search, this.value)
+    this.chargeService.getGeneralLists(this.page, this.pageSize, this.search, this.value, this.year, this.month)
       .subscribe(data => {
         this.isSpinning = false;
         this.dataLists = data.data;
@@ -111,15 +111,17 @@ export class BillGeneralDirComponent implements OnInit {
   resetData() {
     this.page = 1;
     this.pageSize = 15;
-    this.search = 'name';
+    // this.search = 'name';
     this.value = '';
+    this.year = '2019';
+    this.month = '';
     this.searchChange();
   }
 
   // 导出
   exportData() {
     let token = localStorage.getItem('authToken');
-    let url = `/api/operation/order/export`;
+    let url = `/api/formal/bill/export`;
 
     const objectUrl = `${url}?token=${token}`;
     const link = document.createElement('a');

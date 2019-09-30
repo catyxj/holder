@@ -32,8 +32,8 @@
 
     <div>
       开票状态：
-      <span style="color: #1E9FF2;" *ngIf="basic && basic.order_status">已完成</span>
-      <span style="color: #FFC06A;" *ngIf="basic && !basic.order_status">未完成</span>
+      <span style="color: #1E9FF2;" *ngIf="basic && basic.invoiced_status">已完成</span>
+      <span style="color: #FFC06A;" *ngIf="basic && !basic.invoiced_status">未完成</span>
     </div>
 
   </div>
@@ -89,12 +89,16 @@
                 订单类型
               </div>
               <div class="or_item_text">
-                <span *ngIf="basic&&basic.item_type === 1">
+                <!--<span *ngIf="basic&&basic.item_type === 1">
                   定期
                 </span>
                 <span *ngIf="basic&&basic.item_type === 2">
                   永久
-                </span>
+                </span>-->
+                <span *ngIf="basic&&basic?.item_type === 1">产品购买</span>
+                <span *ngIf="basic&&basic?.item_type === 2">功能升级</span>
+                <span *ngIf="basic&&basic?.item_type === 3">服务购买</span>
+                <span *ngIf="basic&&basic?.item_type === 4">数据流量</span>
               </div>
             </div>
           </div>
@@ -107,12 +111,17 @@
                 支付状态
               </div>
               <div class="or_item_text">
-                <span *ngIf="basic && !basic.order_status" style="color: #B20000;">
+                <!--<span *ngIf="basic && !basic.order_status" style="color: #B20000;">
                   待支付
                 </span>
                 <span *ngIf="basic && basic.order_status">
                   支付完成
-                </span>
+                </span>-->
+
+                <span class="text_purple" *ngIf="basic && basic.order_status === 3">支付完成</span>
+                <span style="color: #B20000;" *ngIf="basic && basic.order_status === 1">待支付</span>
+                <span style="color: #A7ABBE;" *ngIf="basic && basic.order_status === 2">作废</span>
+                <span style="color: #A7ABBE;" *ngIf="basic && basic.order_status === 0">已取消</span>
               </div>
             </div>
 
@@ -139,10 +148,10 @@
                 支付方式
               </div>
               <div class="or_item_text">
-                <span *ngIf="basic&&basic.pay_method === 1">
+                <span *ngIf="basic&&basic.pay_method === 2">
                   <img src="assets/images/alipay2.png" alt="">
                 </span>
-                <span *ngIf="basic&&basic.pay_method === 2">
+                <span *ngIf="basic&&basic.pay_method === 1">
                   对公转账
                 </span>
               </div>
@@ -255,7 +264,7 @@
                 {{invoice?.tel}}
               </span>
             </div>
-            <div style="font-size: 16px; color: #000000;">
+            <div style="font-size: 15px; color: #000000;">
               {{invoice?.location_name}}
             </div>
           </div>
