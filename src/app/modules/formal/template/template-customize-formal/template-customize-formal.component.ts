@@ -799,11 +799,19 @@ export class TemplateCustomizeFormalComponent implements OnInit {
 
   // 改变宽度
   changeH(h) {
+    if (h < 20) {
+      h = 20;
+      this.i_h = 20;
+    }
     this.selected.style.height = h + 'px';
   }
 
   // 改变高度
   changeW(w) {
+    if (w < 20) {
+      w = 20;
+      this.i_w = 20;
+    }
     this.selected.style.width = w + 'px';
   }
 

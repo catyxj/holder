@@ -32,6 +32,9 @@
   justify-content: space-between;
 }
 
+img{
+  vertical-align: initial;
+}
 
 /*组件*/
 .component_box{
@@ -99,7 +102,7 @@
   height: 500px;
   border: 1px solid #E4E5EC;
   border-radius:2px;
-  overflow: auto;
+  overflow: hidden;
   position: relative;
 }
 #scale {

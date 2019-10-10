@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ChargeService} from "../../../../../shared/charge.service";
 
 import Swal from 'sweetalert2';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-payment-order-service-dir',
@@ -16,7 +16,8 @@ export class PaymentOrderServiceDirComponent implements OnInit {
   public isVisible = false;
 
   constructor(private chargeService: ChargeService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
@@ -70,7 +71,8 @@ export class PaymentOrderServiceDirComponent implements OnInit {
 
   handleOk(): void {
     this.isVisible = false;
-    window.close();
+    // window.close();
+    this.router.navigate(['/charge/purchase/dashboard']);
   }
 
 }

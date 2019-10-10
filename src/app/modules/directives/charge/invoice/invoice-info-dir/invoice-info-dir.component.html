@@ -259,8 +259,8 @@
         <!--信息列表-->
         <div *ngIf="infoList && infoList.length > 0">
           <!--默认信息-->
-          <div class="def_con" (click)="selectInfo(defaultInfo)">
-            <div class="addr_item"  [class.active]="selectedInfo.id === defaultInfo.id">
+          <div class="def_con">
+            <div class="addr_item"  [class.active]="selectedInfo.id === defaultInfo.id" (click)="selectInfo(defaultInfo)">
               <div class="info_item_l">
                 {{defaultInfo.company}}
               </div>
@@ -271,7 +271,7 @@
             </div>
 
             <div class="def_btn">
-              <a (click)="showDefInfo = !showDefInfo">修改信息</a>
+              <a (click)="showDefInfo = !showDefInfo; selectInfo(defaultInfo);">修改信息</a>
               <a (click)="showAllInfo = !showAllInfo" class="ml-3">所有信息</a>
             </div>
 
