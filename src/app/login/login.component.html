@@ -4,7 +4,7 @@
   <div class="login_head">
     <img src="assets/images/login/login_head.png" alt="">
   </div>
-  <div class="login_con">
+  <div class="login_con" *ngIf="!islogged">
     <div class="login_tab">
       <div class="btn-group">
         <button class="btn_tab" [class.active]="currentType === 1" (click)="currentType = 1"
@@ -32,6 +32,53 @@
 
     </div>
   </div>
+
+  <div class="user_info" *ngIf="islogged">
+    <div class="user_img" (click)="goAdmin()">
+      <img src="{{picture}}" alt="">
+    </div>
+    <div class="user_name">
+      {{user?.name}}
+    </div>
+
+    <div class="user_org">
+      {{user?.org_name}} ({{user?.username}})
+    </div>
+
+    <div class="user_role">
+      <span *ngIf="user && user.role_id === 1">
+        系统用户
+      </span>
+      <span *ngIf="user && user.role_id === 5">
+        运营用户
+      </span>
+      <span *ngIf="user && user.role_id === 6">
+        财务用户
+      </span>
+      <span *ngIf="user && user.role_id === 10">
+        正式用户
+      </span>
+      <span *ngIf="user && user.role_id === 11">
+        普通用户
+      </span>
+      <span *ngIf="user && user.role_id === 15">
+        维保用户
+      </span>
+      <span *ngIf="user && user.role_id === 20">
+        测试用户
+      </span>
+    </div>
+
+    <!--<button class="btn btn_purple btn-block" style="margin-top: 150px;" (click)="goAdmin()">-->
+      <!--点击进入-->
+    <!--</button>-->
+    <div class="text_purple" style="margin-top: 150px;">
+      <a style="font-size: 12px;" (click)="goAdmin()">点击头像进入</a>
+    </div>
+
+
+  </div>
+
 </div>
 
 <!--底部-->

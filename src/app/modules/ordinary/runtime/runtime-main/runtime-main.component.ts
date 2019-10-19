@@ -8,11 +8,13 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class RuntimeMainComponent implements OnInit, OnDestroy {
   public uid;
+  public auth;
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('uid');
+    this.auth = JSON.parse(localStorage.getItem('auth'));
     sessionStorage.setItem('runtimeUid', this.uid);
   }
 

@@ -22,7 +22,7 @@
         删除
       </button>
 
-      <button class="btn btn_purple btn_round bpm ml-1" (click)="disableData()">
+      <button class="btn btn_purple btn_round bpm ml-1" (click)="disableData()" *ngIf="roleId === '10'">
         激活/禁用
       </button>
 
@@ -177,8 +177,8 @@
             </div>
             <div class="eq_value">
               <div>
-                <span class="text_blue" *ngIf="terminal && terminal.bt_id">已关联</span>
-                <span class="text_grey" *ngIf="!terminal || !terminal.bt_id">未关联</span>
+                <span class="text_blue" *ngIf="terminal && terminal.bt_mac && terminal.bt_mac.length>0">已关联</span>
+                <span class="text_grey" *ngIf="!terminal || !terminal.bt_mac || terminal.bt_mac.length<=0">未关联</span>
               </div>
 
               <!--<a *ngIf="terminal&&terminal.bt_id && roleId==='10'" [routerLink]="['/admin/formal/bluetooth/info', terminal?.bt_id, '1']">
@@ -192,7 +192,11 @@
               MAC地址：
             </div>
             <div class="eq_value">
-              {{terminal?.bt_mac}}
+              <div *ngIf="terminal&&terminal.bt_mac">
+                <div *ngFor="let item of terminal.bt_mac" style="font-size: 12px;">
+                  {{item}}
+                </div>
+              </div>
             </div>
           </div>
         </div>

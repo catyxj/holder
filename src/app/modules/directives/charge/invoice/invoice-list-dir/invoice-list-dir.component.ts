@@ -144,7 +144,7 @@ export class InvoiceListDirComponent implements OnInit {
       });
       return;
     }*/
-    // this.isVisible = true;
+    this.isVisible = true;
 
     /*let checked = [];
     if (!this.dataLists || this.dataLists.length <= 0 ) {

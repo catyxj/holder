@@ -48,6 +48,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     if (!this.user || !this.user.picture) {
       this.picture = 'assets/icons/anticon_user.png';
+    } else {
+      this.picture = this.user.picture;
     }
 
 

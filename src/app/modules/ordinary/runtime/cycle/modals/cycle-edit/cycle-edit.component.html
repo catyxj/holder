@@ -36,7 +36,10 @@
       设置日期：
     </div>
     <div class="m_input">
-      <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)" style="width: 100%;"></nz-date-picker>
+      <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"
+                      [nzDisabledDate]="disabledDate"
+                      style="width: 100%;">
+      </nz-date-picker>
     </div>
   </div>
 
@@ -47,7 +50,7 @@
     <div class="m_input">
       <div style="display: flex; justify-content: space-between; font-size: 12px; align-items: flex-end;">
         <nz-input-number [(ngModel)]="period" [nzMin]="1" [nzMax]="100" [nzStep]="1"
-                         pattern="^[1-9]\d*$" #per="ngModel" style="width:200px;">
+                         pattern="^[1-9]\d*$" #per="ngModel" style="width:200px;" required>
         </nz-input-number>
         个月
       </div>
@@ -72,7 +75,7 @@
 
 <div class="modal-footer">
   <button type="button" class="btn" (click)="activeModal.dismiss('close')">取 消</button>
-  <button type="button" class="btn btn_purple" style="margin-left: 35px;" (click)="save()" [disabled]="!name || per.invalid">确 定</button>
+  <button type="button" class="btn btn_purple" style="margin-left: 35px;" (click)="save()" [disabled]="!name || !date || per.invalid">确 定</button>
 </div>
 
 

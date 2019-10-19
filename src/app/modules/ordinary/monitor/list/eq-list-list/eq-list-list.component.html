@@ -167,26 +167,28 @@
             <nz-tag [nzColor]="'#C0C4D2'" *ngIf="!data.online">未连接</nz-tag>
           </td>
           <td>
-            <span *ngIf="!data.online">
+            <div style="display: flex; align-items: center; flex-wrap: nowrap;">
+              <span *ngIf="!data.online">
               <img src="assets/icons/group_0.png" alt="">
               未知
             </span>
-            <span *ngIf="data.online && !data.run">
+              <span *ngIf="data.online && !data.run">
               <img src="assets/icons/group_4.png" alt="">
               未运行
             </span>
-            <span *ngIf="data.online && data.run">
+              <span *ngIf="data.online && data.run">
               <img src="assets/icons/group_2.png" alt="">
               运行
             </span>
-            <span *ngIf="data.online && data.alarm_count>0" class="ml-2">
+              <span *ngIf="data.online && data.alarm_count>0" class="ml-2">
               <img src="assets/icons/group_1.png" alt="">
               告警
             </span>
-            <span *ngIf="data.malfunction" class="ml-2">
+              <span *ngIf="data.malfunction" class="ml-2">
               <img src="assets/icons/group_3.png" alt="">
               故障
             </span>
+            </div>
           </td>
           <td>
             <span *ngIf="data.status === 0">
@@ -201,7 +203,7 @@
             <!--<a class="btn btn_purple btn-sm" [routerLink]="['/admin/ordinary/runtime', data.uid]"  target="_blank">
               进入
             </a>-->
-            <a class="text_purple" [routerLink]="['/admin/ordinary/runtime', data.uid]" target="_blank">
+            <a class="text_purple" [routerLink]="['/admin/ordinary/runtime', data.uid]" target="_blank" *ngIf="roleId === '10' || data.status !== 1">
               详情
             </a>
           </td>

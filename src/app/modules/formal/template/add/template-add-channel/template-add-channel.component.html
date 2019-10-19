@@ -35,7 +35,7 @@
               MODBUS地址
             </span>-->
           </th>
-          <th style="width: 96px;">从机地址 <br>(1-255)</th>
+          <th style="width: 96px;">从机地址 <br>(0-247)</th>
           <th>寄存器写入规则</th>
           <th>寄存器写入值</th>
           <th>其他</th>
@@ -144,7 +144,7 @@
             <div *ngIf="data.Func == 99" class="input99">
               无
             </div>
-            <input type="number" [(ngModel)]="data.slaveAddress" placeholder="未配置" min="1" max="255"
+            <input type="number" [(ngModel)]="data.slaveAddress" placeholder="未配置" min="0" max="247"
                    [disabled]="!data.Parameter||!data.Parameter.Name" *ngIf="data.Func != 99"
                    class="form-control">
           </td>
@@ -239,7 +239,7 @@
                 位地址
               </span>
           </th>
-          <th style="width: 96px;">从机地址 <br>(1-255)</th>
+          <th style="width: 96px;">从机地址 <br>(0-247)</th>
           <th>寄存器写入规则</th>
           <th>寄存器写入值</th>
           <th> 其他</th>
@@ -348,7 +348,7 @@
                  class="input99">
               无
             </div>
-            <input type="number" [(ngModel)]="data.slaveAddress" placeholder="未配置" min="1" max="255"
+            <input type="number" [(ngModel)]="data.slaveAddress" placeholder="未配置" min="0" max="247"
                    [disabled]="!data.Parameter||!data.Parameter.Name" *ngIf="data.Func != 99"
                    class="form-control">
           </td>
@@ -449,7 +449,7 @@
                 MODBUS地址
               </span>
           </th>
-          <th style="width: 96px;">从机地址 <br>(1-255)</th>
+          <th style="width: 96px;">从机地址 <br>(0-247)</th>
           <th>寄存器写入规则</th>
           <th>寄存器写入值</th>
           <th>其他</th>
@@ -556,7 +556,7 @@
                  class="input99">
               无
             </div>
-            <input type="number" [(ngModel)]="data.slaveAddress" placeholder="未配置" min="1" max="255"
+            <input type="number" [(ngModel)]="data.slaveAddress" placeholder="未配置" min="0" max="247"
                    [disabled]="!data.Parameter||!data.Parameter.Name" *ngIf="data.Func != 99"
                    class="form-control">
           </td>

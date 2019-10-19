@@ -12,6 +12,8 @@ import Swal from 'sweetalert2';
 export class MAccountDisabledFComponent implements OnInit {
   @Input()
   currentData;
+  @Input()
+  title;
 
   public reason = '非法操作';
 

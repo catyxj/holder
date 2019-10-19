@@ -64,20 +64,45 @@
         </div>
       </div>
 
+      <!--普通用户-->
       <div class="hc_2">
         <div *ngIf="roleId === '11'">
           <div class="general_box">
             <div class="info_title">
               <h6>设备关联</h6>
-              <button class="btn btn_purple bpm">
+              <button class="btn btn_purple bpm" (click)="linkTerm()">
                 关联设备
               </button>
             </div>
             <div class="hc_content">
-              <img src="assets/images/video.jpg" alt="">
-              <!--<button class="gen_btn">
-                关联设备
-              </button>-->
+              <!--<img src="assets/images/photo2.png" alt="">-->
+              <div class="hc_pic2">
+                <div class="hc_pic_img" style="padding-left: 0; margin-bottom: 40px; justify-content: space-between;">
+                  <img src="assets/images/home/hpic0_1.png" alt="">
+
+                  <span class="hpic_circle">
+                    <i class="iconfont iconright1"></i>
+                  </span>
+
+                  <img src="assets/images/home/hpic0_2.png" alt="">
+                </div>
+
+                <div class="hc_pic_text">
+                  <div class="hpic_t" style="padding-left: 23%;">
+                    <b>扫二维码或<br>
+                      手动输入设备信息</b>
+                    <div class="round-line">
+                    </div>
+                  </div>
+
+                  <div class="hpic_t" style="padding-left: 23%;">
+                    <b style="padding-top: 20px;">确认添加设备</b>
+                    <div class="round-line">
+                    </div>
+                  </div>
+
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -91,10 +116,55 @@
               </button>
             </div>
             <div class="hc_content">
-              <img src="assets/images/photo2.png" alt="">
-              <!--<button class="gen_btn">
-                关联设备
-              </button>-->
+              <div class="hc_pic2">
+                <div class="hc_pic_img">
+                  <img src="assets/images/home/hpic_1.png" alt="">
+
+                  <span class="hpic_circle">
+                    <i class="iconfont iconright1"></i>
+                  </span>
+
+                  <img src="assets/images/home/hpic_2.png" alt="">
+
+                  <span class="hpic_circle">
+                    <i class="iconfont iconright1"></i>
+                  </span>
+
+                  <img src="assets/images/home/hpic_3.png" alt="">
+
+                  <span class="hpic_circle">
+                    <i class="iconfont iconright1"></i>
+                  </span>
+
+                  <img src="assets/images/home/hpic_4.png" alt="">
+                </div>
+
+                <div class="hc_pic_text">
+                  <div class="hpic_t">
+                    <b>绑定终端</b>
+                    <div class="round-line">
+                    </div>
+                  </div>
+                  <div class="hpic_t">
+                    <b>配置模版</b>
+                    <div class="round-line">
+
+                    </div>
+                  </div>
+                  <div class="hpic_t">
+                    <b>下发配置</b>
+                    <div class="round-line">
+
+                    </div>
+                  </div>
+                  <div class="hpic_t">
+                    <b>设备监控</b>
+                    <div class="round-line">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -114,7 +184,7 @@
                   <span class="h_circle" [class.active]="!item.is_read"></span>
                   {{item.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}
                 </div>
-                <div>
+                <div style="margin-left: 15px; text-align: right;">
                   {{item.description}}
                 </div>
               </a>
@@ -142,7 +212,7 @@
                   <span class="h_circle" [class.active]="!item.is_read"></span>
                   {{item.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}
                 </div>
-                <div style="margin-left: 20px;">
+                <div style="margin-left: 15px; text-align:right;">
                   {{item.info}}
                 </div>
               </a>

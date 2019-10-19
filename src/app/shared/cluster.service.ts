@@ -50,7 +50,14 @@ export class ClusterService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    const url = `/api/formal/cluster/name/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}&status=${status}`;
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/cluster/name/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}&status=${status}`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/cluster/name/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}&status=${status}`;
+    }
     return this.http.get<any>(url, httpOptions)
       .pipe(
         catchError(this.handleError) // then handle the error

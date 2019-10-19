@@ -34,7 +34,7 @@
             组件状态
           </button>
 
-          <button class="btn btn_purple_o" [routerLink]="['./video']" routerLinkActive="active">
+          <button class="btn btn_purple_o" [routerLink]="['./video']" routerLinkActive="active" *ngIf="auth.video">
             视频监控
           </button>
 

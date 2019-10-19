@@ -38,7 +38,7 @@ export class MAcBatchDeleteComponent implements OnInit {
   // 获取列表
   getList() {
     this.loading = true;
-    this.maintainService.getUserMtDetail(this.uid, this.page, this.pageSize, this.search, this.value)
+    this.maintainService.getUserMtBatchDel(this.uid, this.page, this.pageSize, this.search, this.value)
       .subscribe(data => {
         this.loading = false;
         this.dataLists = data.data;

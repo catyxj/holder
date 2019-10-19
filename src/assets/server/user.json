@@ -1,7 +1,7 @@
 
 {
-  "name": "ad",
-  "role_id": 1,
+  "name": "哈哈哈",
+  "role_id": 10,
   "brand_image": "",
   "brand_name": "",
   "picture": "",
@@ -13,5 +13,6 @@
   "location_name": "全国",
   "address": "啊哇哇哇无",
   "email": "",
-  "status": 1
+  "status": 1,
+  "privilege": "0,1003,1004,1005,1008"
 }

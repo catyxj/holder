@@ -38,6 +38,7 @@ export class TemplateCustomizeFormalComponent implements OnInit {
   public imgComponents1 = []; // 公共图片组件库列表
   public imgComponents2 = []; // 单形态图片组件库列表
   public imgComponents3 = []; // 多形态图片组件库列表
+  public imgComponents4 = []; // 背景图片组件库列表
   public ctrl0 = false; // 关联点位
   public ctrl1 = false; // 宽高
   public ctrl2 = false; // style样式
@@ -56,6 +57,9 @@ export class TemplateCustomizeFormalComponent implements OnInit {
   public fontSize1; // 当前选中组件字体大小
   public curText; // 当前选中组件文本内容
   public curAddress; // 当前选中组件寄存器地址
+
+  public showCtrl = false; // 显示组件或设置面板
+  public bgImg = ''; // 背景图
 
   constructor(private route: ActivatedRoute,
               private terminalService: TerminalService,
@@ -77,6 +81,7 @@ export class TemplateCustomizeFormalComponent implements OnInit {
         console.log(data);
         this.imgComponents2 = data.single;
         this.imgComponents3 = data.multi;
+        this.imgComponents4 = data.back;
       });
 
     this.imgComponents1 = [
@@ -260,6 +265,7 @@ export class TemplateCustomizeFormalComponent implements OnInit {
         that.imgLists1 = content.imgs1;
         that.imgLists2 = content.imgs2;
         that.imgLists3 = content.imgs3;
+        that.bgImg = content.bgImg;
         that.dataLists1 = content.data1;
         that.dataLists2 = content.data2;
         that.btnLists = content.btns;
@@ -312,6 +318,9 @@ export class TemplateCustomizeFormalComponent implements OnInit {
       }
       if (data.indexOf('imgC') !== -1) {
         this.addImg3(aa, styles);
+      }
+      if (data.indexOf('imgD') !== -1) {
+        this.addBg(this.temporary);
       }
 
     } else if (data.indexOf('data') !== -1) {
@@ -428,6 +437,12 @@ export class TemplateCustomizeFormalComponent implements OnInit {
       this.resizeItem(renode); // 添加缩放
     }, 200);*/
 
+  }
+
+  // 添加背景
+  addBg(data) {
+    // console.log(data);
+    this.bgImg = data.img;
   }
 
 
@@ -615,6 +630,7 @@ export class TemplateCustomizeFormalComponent implements OnInit {
   select1(d) {
     const that = this;
     this.selected = d;
+    this.showCtrl = true;
     this.ctrl2 = false;
     this.ctrl3 = false;
     this.ctrl1 = true;
@@ -632,6 +648,7 @@ export class TemplateCustomizeFormalComponent implements OnInit {
   select12(d) {
     const that = this;
     this.selected = d;
+    this.showCtrl = true;
     this.ctrl2 = false;
     this.ctrl3 = false;
     this.ctrl1 = true;
@@ -650,6 +667,7 @@ export class TemplateCustomizeFormalComponent implements OnInit {
   select13(d) {
     const that = this;
     this.selected = d;
+    this.showCtrl = true;
     this.ctrl2 = false;
     this.ctrl3 = false;
     this.ctrl1 = true;
@@ -676,6 +694,7 @@ export class TemplateCustomizeFormalComponent implements OnInit {
   select21(d) {
     const that = this;
     this.selected = d;
+    this.showCtrl = true;
     // console.log(this.selected.style);
     this.ctrl0 = false;
     this.ctrl1 = false;
@@ -722,6 +741,7 @@ export class TemplateCustomizeFormalComponent implements OnInit {
   select22(d) {
     const that = this;
     this.selected = d;
+    this.showCtrl = true;
     // console.log(this.selected.style);
     this.ctrl0 = true;
     this.ctrl1 = false;
@@ -771,6 +791,7 @@ export class TemplateCustomizeFormalComponent implements OnInit {
   select3(d) {
     const that = this;
     this.selected = d;
+    this.showCtrl = true;
     this.ctrl0 = true;
     this.ctrl1 = false;
     this.ctrl2 = false;
@@ -975,60 +996,79 @@ export class TemplateCustomizeFormalComponent implements OnInit {
               );
               return;
             }
-            if (componentInstance.type === '1') {
-              if (!componentInstance.imgFile1) {
-                Swal(
-                  '请上传图片',
-                  '',
-                  'info'
-                );
-                return;
-              } else {
+
+            switch (componentInstance.type) {
+              case '1':
+                if (!componentInstance.imgFile1) {
+                  Swal(
+                    '请上传图片',
+                    '',
+                    'info'
+                  );
+                  return;
+                } else {
+                  post = {
+                    name: componentInstance.name,
+                    type: parseInt(componentInstance.type),
+                    img: componentInstance.imgFile1.response.id
+                  };
+                }
+                break;
+              case '2':
+                if (!componentInstance.isValid) {
+                  Swal(
+                    '请填写正确数值区间',
+                    '',
+                    'info'
+                  );
+                  return;
+                }
+                if (!componentInstance.imgFiles[0] || !componentInstance.imgFiles[1]) {
+                  Swal(
+                    '请上传图片',
+                    '',
+                    'info'
+                  );
+                  return;
+                }
+
                 post = {
                   name: componentInstance.name,
                   type: parseInt(componentInstance.type),
-                  img: componentInstance.imgFile1.response.id
+                  imgs: [
+                    {
+                      img: componentInstance.imgFiles[0].response.id,
+                      min: componentInstance.imgs[0].min,
+                      max: componentInstance.imgs[0].max,
+                      sort: 1
+                    },
+                    {
+                      img: componentInstance.imgFiles[1].response.id,
+                      min: componentInstance.imgs[1].min,
+                      max: componentInstance.imgs[1].max,
+                      sort: 2
+                    }
+                  ]
                 };
-              }
-
-            } else {
-              if (!componentInstance.isValid) {
-                Swal(
-                  '请填写正确数值区间',
-                  '',
-                  'info'
-                );
-                return;
-              }
-              if (!componentInstance.imgFiles[0] || !componentInstance.imgFiles[1]) {
-                Swal(
-                  '请上传图片',
-                  '',
-                  'info'
-                );
-                return;
-              }
-
-              post = {
-                name: componentInstance.name,
-                type: parseInt(componentInstance.type),
-                imgs: [
-                  {
-                    img: componentInstance.imgFiles[0].response.id,
-                    min: componentInstance.imgs[0].min,
-                    max: componentInstance.imgs[0].max,
-                    sort: 1
-                  },
-                  {
-                    img: componentInstance.imgFiles[1].response.id,
-                    min: componentInstance.imgs[1].min,
-                    max: componentInstance.imgs[1].max,
-                    sort: 2
-                  }
-                ]
-              };
-
+                break;
+              case '3':
+                if (!componentInstance.imgFileBg) {
+                  Swal(
+                    '请上传图片',
+                    '',
+                    'info'
+                  );
+                  return;
+                } else {
+                  post = {
+                    name: componentInstance.name,
+                    type: parseInt(componentInstance.type),
+                    img: componentInstance.imgFileBg.response.id
+                  };
+                }
+                break;
             }
+
 
             console.log(post);
             this.terminalService.uploadComponent(post)
@@ -1078,7 +1118,8 @@ export class TemplateCustomizeFormalComponent implements OnInit {
         // title: '',
         // subtitle: 'component sub title，will be changed after 2 sec'
         imgList1: this.imgComponents2,
-        imgList2: this.imgComponents3
+        imgList2: this.imgComponents3,
+        imgList3: this.imgComponents4
       },
       nzFooter: [
         {
@@ -1097,12 +1138,18 @@ export class TemplateCustomizeFormalComponent implements OnInit {
                 let post = [];
                 let img1 = componentInstance.img1;
                 let img2 = componentInstance.img2;
+                let img3 = componentInstance.img3;
                 img1.forEach((item) => {
                   if (item.checked) {
                     post.push(item.id);
                   }
                 });
                 img2.forEach((item) => {
+                  if (item.checked) {
+                    post.push(item.id);
+                  }
+                });
+                img3.forEach((item) => {
                   if (item.checked) {
                     post.push(item.id);
                   }
@@ -1156,7 +1203,7 @@ export class TemplateCustomizeFormalComponent implements OnInit {
     // let da1 = [];
     let da2 = [];
     // let da3 = [];
-    let btn = []
+    let btn = [];
 
 
     // 多形态图片通道
@@ -1243,6 +1290,7 @@ export class TemplateCustomizeFormalComponent implements OnInit {
         imgs1: that.imgLists1,
         imgs2: that.imgLists2,
         imgs3: that.imgLists3,
+        bgImg: that.bgImg,
         data1: that.dataLists1,
         data2: that.dataLists2,
         // data3: that.dataLists3,

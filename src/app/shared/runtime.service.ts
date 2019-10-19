@@ -165,7 +165,15 @@ export class RuntimeService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.get(`/api/formal/ept/component/list?uid=${uid}&page=${page}&pageSize=${pageSize}&search=${search}&value=${value}&status=${status}`, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = `/api/formal/ept/component/list?uid=${uid}&page=${page}&pageSize=${pageSize}&search=${search}&value=${value}&status=${status}`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/ept/component/list?uid=${uid}&page=${page}&pageSize=${pageSize}&search=${search}&value=${value}&status=${status}`;
+    }
+    return this.http.get(url, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -177,7 +185,15 @@ export class RuntimeService {
     let token = localStorage.getItem('authToken');
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post('/api/formal/ept/component/create', data, httpOptions)
+    let roleId = localStorage.getItem('roleId');
+    let url;
+    if (roleId === '10') {
+      url = '/api/formal/ept/component/create';
+    }
+    if (roleId === '11') {
+      url = '/api/general/ept/component/create';
+    }
+    return this.http.post(url, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

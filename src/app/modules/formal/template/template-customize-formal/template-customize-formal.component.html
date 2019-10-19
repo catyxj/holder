@@ -53,10 +53,10 @@
 
       <div class="flex">
         <!--组件-->
-        <div class="component_box">
+        <div class="component_box" *ngIf="!showCtrl">
           <div class="component">
             <!-- 公共组件-->
-            <!--<h6>通用组件</h6>-->
+            <h6>单形态组件</h6>
             <div class="imgBox">
               <img *ngFor="let img1 of imgComponents1; let n = index;" src="{{img1.src}}" title="{{img1.name}}"
                    draggable="true" (dragstart)="dragstart($event,img1);" id="imgA{{n}}">
@@ -69,13 +69,21 @@
                    draggable="true" (dragstart)="dragstart($event, img2);" id="imgB{{n}}">
             </div>
 
+            <hr style="margin: 0;">
+
             <!--多形态-->
+            <h6>多形态组件</h6>
             <div class="imgBox">
               <img *ngFor="let img3 of imgComponents3; let n = index;" src="{{img3.imgs[0].img}}" title="{{img3.name}}"
                    draggable="true" (dragstart)="dragstart($event, img3);" id="imgC{{n}}">
             </div>
 
-
+            <hr style="margin: 0;">
+            <h6>背景组件</h6>
+            <div class="imgBox">
+              <img *ngFor="let img4 of imgComponents4; let n = index;" src="{{img4.img}}" title="{{img4.name}}"
+                   draggable="true" (dragstart)="dragstart($event, img4);" (click)="addBg(img4)" id="imgD{{n}}">
+            </div>
 
             <div class="dataBox">
               <div class="dataComp" id="data1" draggable="true" (dragstart)="dragstart($event,'固定文本框');">
@@ -106,64 +114,15 @@
               删除自定义组件
             </button>
           </div>
-        </div>
 
-        <!--视图-->
-        <div class="view_box">
-          <div id="capture" (drop)="drop($event)" (dragover)="allowDrop($event)">
-            <!--公共图片-->
-            <div class="imgComponent" *ngFor="let img1 of imgLists1" id="{{img1.id}}" (click)="select1(img1)" [class.selected]="selected === img1"
-                 [ngStyle]="img1.style" (mousedown)="eventDown($event);select1(img1)" (mouseup)="eventUp($event)">
-              <img src="{{img1.src}}" alt="">
-              <div class="scale" (mousedown)="select1(img1); resizeItem($event)">
-              </div>
-            </div>
-
-            <!--单形态图片-->
-            <div class="imgComponent" *ngFor="let img2 of imgLists2" id="{{img2.id}}" (click)="select12(img2)" [class.selected]="selected === img2"
-                 [ngStyle]="img2.style" (mousedown)="eventDown($event);select12(img2)" (mouseup)="eventUp($event)">
-              <img src="{{img2.src}}" alt="">
-              <div class="scale" (mousedown)="select12(img2); resizeItem($event)">
-              </div>
-            </div>
-
-            <!--多形态图片-->
-            <div class="imgComponent" *ngFor="let img3 of imgLists3" id="{{img3.id}}" (click)="select13(img3)" [class.selected]="selected === img3"
-                 [ngStyle]="img3.style" (mousedown)="eventDown($event);select13(img3)" (mouseup)="eventUp($event)">
-              <img src="{{img3.src}}" alt="">
-              <div class="scale" (mousedown)="select13(img3); resizeItem($event)">
-              </div>
-            </div>
-
-
-            <!--数据-->
-            <div class="dataComponent" *ngFor="let data1 of dataLists1" id="{{data1.id}}" (click)="select21(data1)" [class.selected]="selected === data1"
-                 [ngStyle]="data1.style" (mousedown)="eventDown($event);select21(data1)" (mouseup)="eventUp($event)">
-              <!--{{data1.chanName}}: 监测值--> {{data1.text}}
-            </div>
-
-            <div class="dataComponent" *ngFor="let data2 of dataLists2" id="{{data2.id}}" (click)="select22(data2)" [class.selected]="selected === data2"
-                 [ngStyle]="data2.style" (mousedown)="eventDown($event);select22(data2)" (mouseup)="eventUp($event)">
-              {{data2.chanName}}: 监测值
-            </div>
-
-
-            <!--按钮-->
-            <div class="btnComponent" *ngFor="let btn of btnLists" id="{{btn.id}}" (click)="select3(btn)" [class.selected]="selected === btn"
-                 [ngStyle]="btn.style" (mousedown)="eventDown($event);select3(btn)" (mouseup)="eventUp($event)">
-              <button class="b_switch">
-                <!--{{btn.cName}}-->
-                <!--<img src="assets/images/customize/switch.png" alt="">-->
-              </button>
-              <!--<nz-switch [ngModel]="true"></nz-switch>-->
-            </div>
-
+          <!--切换按钮-->
+          <div style="position: absolute; top:2px; right: 5px; cursor: pointer; color: #666EE8;">
+            <i (click)="showCtrl=!showCtrl" class="fa fa-cog" title="点击显示设置面板"></i>
           </div>
-
         </div>
 
         <!--控制-->
-        <div class="ctrl_container">
+        <div class="ctrl_container" *ngIf="showCtrl">
           <div>
             <div class="ct_item">
               <div class="ct_label">
@@ -326,7 +285,73 @@
             </div>
           </div>
 
+          <!--切换按钮-->
+          <div style="position: absolute; top:2px; right: 5px; cursor: pointer; color: #666EE8;">
+            <i (click)="showCtrl=!showCtrl" class="fa fa-reply" title="点击显示组件面板"></i>
+          </div>
+
         </div>
+
+        <!--视图-->
+        <div class="view_box">
+          <div id="capture" (drop)="drop($event)" (dragover)="allowDrop($event)">
+            <!--背景图-->
+            <div class="bgCompontent">
+              <img src="{{bgImg}}" alt="">
+            </div>
+
+            <!--公共图片-->
+            <div class="imgComponent" *ngFor="let img1 of imgLists1" id="{{img1.id}}" (click)="select1(img1)" [class.selected]="selected === img1"
+                 [ngStyle]="img1.style" (mousedown)="eventDown($event);select1(img1)" (mouseup)="eventUp($event)">
+              <img src="{{img1.src}}" alt="">
+              <div class="scale" (mousedown)="select1(img1); resizeItem($event)">
+              </div>
+            </div>
+
+            <!--单形态图片-->
+            <div class="imgComponent" *ngFor="let img2 of imgLists2" id="{{img2.id}}" (click)="select12(img2)" [class.selected]="selected === img2"
+                 [ngStyle]="img2.style" (mousedown)="eventDown($event);select12(img2)" (mouseup)="eventUp($event)">
+              <img src="{{img2.src}}" alt="">
+              <div class="scale" (mousedown)="select12(img2); resizeItem($event)">
+              </div>
+            </div>
+
+            <!--多形态图片-->
+            <div class="imgComponent" *ngFor="let img3 of imgLists3" id="{{img3.id}}" (click)="select13(img3)" [class.selected]="selected === img3"
+                 [ngStyle]="img3.style" (mousedown)="eventDown($event);select13(img3)" (mouseup)="eventUp($event)">
+              <img src="{{img3.src}}" alt="">
+              <div class="scale" (mousedown)="select13(img3); resizeItem($event)">
+              </div>
+            </div>
+
+
+            <!--数据-->
+            <div class="dataComponent" *ngFor="let data1 of dataLists1" id="{{data1.id}}" (click)="select21(data1)" [class.selected]="selected === data1"
+                 [ngStyle]="data1.style" (mousedown)="eventDown($event);select21(data1)" (mouseup)="eventUp($event)">
+              <!--{{data1.chanName}}: 监测值--> {{data1.text}}
+            </div>
+
+            <div class="dataComponent" *ngFor="let data2 of dataLists2" id="{{data2.id}}" (click)="select22(data2)" [class.selected]="selected === data2"
+                 [ngStyle]="data2.style" (mousedown)="eventDown($event);select22(data2)" (mouseup)="eventUp($event)">
+              {{data2.chanName}}: 监测值
+            </div>
+
+
+            <!--按钮-->
+            <div class="btnComponent" *ngFor="let btn of btnLists" id="{{btn.id}}" (click)="select3(btn)" [class.selected]="selected === btn"
+                 [ngStyle]="btn.style" (mousedown)="eventDown($event);select3(btn)" (mouseup)="eventUp($event)">
+              <button class="b_switch">
+                <!--{{btn.cName}}-->
+                <!--<img src="assets/images/customize/switch.png" alt="">-->
+              </button>
+              <!--<nz-switch [ngModel]="true"></nz-switch>-->
+            </div>
+
+          </div>
+
+        </div>
+
+
       </div>
     </div>
 

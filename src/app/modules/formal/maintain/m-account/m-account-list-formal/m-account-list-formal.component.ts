@@ -260,6 +260,7 @@ export class MAccountListFormalComponent implements OnInit {
     let that = this;
     const modalRef = this.modalService.open(MAccountDisabledFComponent, {windowClass: 'modal_md', centered: true});
     modalRef.componentInstance.currentData = checked;
+    modalRef.componentInstance.title = '批量禁用';
     modalRef.result.then((result) => {
       if (result === 'ok') {
         that.pageChange();

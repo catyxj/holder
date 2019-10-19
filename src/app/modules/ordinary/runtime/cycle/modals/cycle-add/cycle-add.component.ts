@@ -30,6 +30,12 @@ export class CycleAddComponent implements OnInit {
     console.log('onChange: ', result);
   }
 
+  // 不可选时间
+  disabledDate = (current: Date): boolean => {
+    let today = new Date();
+    return current > today ;
+  }
+
   save() {
     let that = this;
     let post = {

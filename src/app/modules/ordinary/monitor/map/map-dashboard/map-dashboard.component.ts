@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {RuntimeService} from '../../../../../shared/runtime.service';
 import {BoilerService} from '../../../../../shared/boiler.service';
 import {el} from '@angular/platform-browser/testing/src/browser_util';
 
@@ -24,11 +23,13 @@ export class MapDashboardComponent implements OnInit, OnDestroy {
   public statusData;
   private status;
   private markerClusterer;
+  public roleId;
 
   constructor(private eptService: BoilerService,
               private router: Router) { }
 
   ngOnInit() {
+    this.roleId = localStorage.getItem('roleId');
     this.initMap();
     this.getStatus();
 
@@ -240,22 +241,7 @@ export class MapDashboardComponent implements OnInit, OnDestroy {
       map.addOverlay(ply);
       // map.setViewport(ply.getPath());    // 调整视野
     });
-    for (let i = 0; i < province.length; i++) {
-      bdary.get(province[i], function (rs) {       // 获取行政区域
-        const ply = new BMap.Polygon(rs.boundaries[0], { strokeWeight: 1, strokeColor: '#818181', fillColor: '#818181' });
-        map.addOverlay(ply);
-      });
-    }*/
-    /*bdary.get('新疆', function (rs) {       // 获取行政区域
-      const ply = new BMap.Polygon(rs.boundaries[0], { strokeWeight: 1, strokeColor: '#818181', fillColor: '#818181' });
-      map.addOverlay(ply);
-    });
-    bdary.get('西藏', function (rs) {       // 获取行政区域
-      const ply = new BMap.Polygon(rs.boundaries[0], { strokeWeight: 1, strokeColor: '#818181', fillColor: '#818181' });
-      map.addOverlay(ply);
-    });*/
-
-
+    */
 
     // 添加控件
     // map.addControl(new BMap.OverviewMapControl());
@@ -363,6 +349,9 @@ export class MapDashboardComponent implements OnInit, OnDestroy {
     });*/
     marker.addEventListener('click', function(e) {
       // console.log(mark);
+      if (that.roleId === '11' && mark.status === 1) {
+        return;
+      }
       that.router.navigate(['/admin/ordinary/runtime', mark.uid]);
     });
   }

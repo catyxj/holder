@@ -103,6 +103,17 @@ export class MaintainService {
       );
   }
 
+  // 获取维保账号设备详情-批量删除
+  getUserMtBatchDel(uid, n: number, pageSize: number, search?: string, value?: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get(`/api/formal/mt/user/bind/ept/list?uid=${uid}&page=${n}&rows=${pageSize}&search=${search}&value=${value}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
 
   // 修改维保账号
   updateUser(data): Observable<any> {
@@ -259,6 +270,9 @@ export class MaintainService {
     if (roleId === '10') {
       url = `/api/formal/mt/log/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}&status=${status}&ept_id=${eptId}`;
     }
+    if (roleId === '11') {
+      url = `/api/general/mt/log/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}&status=${status}&ept_id=${eptId}`;
+    }
     if (roleId === '15') {
       url = `/api/maintenance/ept/mt/log/list?page=${n}&rows=${pageSize}&search=${search}&value=${value}&status=${status}`;
     }
@@ -278,6 +292,9 @@ export class MaintainService {
     let url;
     if (roleId === '10') {
       url = `/api/formal/mt/log/detail?id=${id}`;
+    }
+    if (roleId === '11') {
+      url = `/api/general/mt/log/detail?id=${id}`;
     }
     if (roleId === '15') {
       url = `/api/maintenance/ept/mt/log/detail?id=${id}`;

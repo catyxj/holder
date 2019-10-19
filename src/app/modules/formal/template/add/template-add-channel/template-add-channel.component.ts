@@ -511,12 +511,12 @@ export class TemplateAddChannelComponent implements OnInit {
         } else if (!this.analogueList[i].Func || !this.analogueList[i].Byte || !this.analogueList[i].Modbus || !this.analogueList[i].Parameter.Scale || !this.analogueList[i].Parameter.Unit) {
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
-            nzContent: `模拟通道[ ${i + 1} ]配置信息不全 ，参数不能为0 `
+            nzContent: `模拟通道[ ${i + 1} ]配置信息不全 ，参数不能为0 或 空 `
           });
           return false;
         }
 
-        if (parseInt(this.analogueList[i].Func) !== 99 && (!this.analogueList[i].slaveAddress || this.analogueList[i].slaveAddress > 255 || this.analogueList[i].slaveAddress < 1)) {
+        if (parseInt(this.analogueList[i].Func) !== 99 && ((!this.analogueList[i].slaveAddress && this.analogueList[i].slaveAddress !== 0) || this.analogueList[i].slaveAddress > 247 || this.analogueList[i].slaveAddress < 0)) {
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
             nzContent: `模拟通道[ ${i + 1} ]从机地址错误 `
@@ -580,7 +580,7 @@ export class TemplateAddChannelComponent implements OnInit {
           });
           return false;
         }
-        if (parseInt(this.switchList[i].Func) !== 99 && (!this.switchList[i].slaveAddress || this.switchList[i].slaveAddress > 255 || this.switchList[i].slaveAddress < 1)) {
+        if (parseInt(this.switchList[i].Func) !== 99 && ((!this.switchList[i].slaveAddress && this.switchList[i].slaveAddress !== 0) || this.switchList[i].slaveAddress > 247 || this.switchList[i].slaveAddress < 0)) {
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
             nzContent: `开关通道[ ${i + 1} ]从机地址错误 `
@@ -673,7 +673,7 @@ export class TemplateAddChannelComponent implements OnInit {
           return false;
         }
 
-        if ((parseInt(this.rangeList[i].Func) !== 99) && (!this.rangeList[i].slaveAddress || this.rangeList[i].slaveAddress > 255 || this.rangeList[i].slaveAddress < 1)) {
+        if ((parseInt(this.rangeList[i].Func) !== 99) && ((!this.rangeList[i].slaveAddress && this.rangeList[i].slaveAddress !== 0) || this.rangeList[i].slaveAddress > 247 || this.rangeList[i].slaveAddress < 0)) {
           this.nzmodalService.error({
             nzTitle: '通道配置更新失败',
             nzContent: `状态通道[ ${i + 1} ]从机地址错误 `

@@ -28,16 +28,19 @@
 .or_item_label{
   width: 100px;
   text-align: right;
-  font-size:16px;
+  font-size:15px;
   font-weight:bold;
   color: #464855;
   margin-bottom: 17px;
 }
 .or_item_text{
   margin-left: 50px;
-  font-size:16px;
+  font-size:15px;
   font-weight:bold;
   color: #666EE8;
+}
+.or_item_text span{
+  font-size:15px;
 }
 
 

@@ -33,6 +33,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
   public imgChans = [];
   public dataChans = [];
   public btnChans = [];
+  public bgImg = []; // 背景图片
 
   constructor(private boilerWsService: BoilerSocketService,
               private runtimeService: RuntimeService,
@@ -73,6 +74,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
         that.btns = that.elements.btns;
         that.dataLists1 = that.elements.data1;
         that.dataLists2 = that.elements.data2;
+        that.bgImg = that.elements.bgImg;
         // console.log(that.elements);
         this.getData();
       }, err => {

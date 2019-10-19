@@ -211,7 +211,7 @@
           <span>*</span>详细地址：
         </div>
         <div class="m_input" style="width: 358px;">
-          <input type="text" class="form-control" [(ngModel)]="newAddress.address">
+          <input type="text" class="form-control" [(ngModel)]="newAddress.address" maxlength="30">
         </div>
       </div>
 
@@ -277,7 +277,7 @@
 
             <div *ngIf="showDefInfo">
               <mat-form-field class="invoice_input">
-                <input matInput placeholder="公司注册名称" [(ngModel)]="selectedInfo.name">
+                <input matInput placeholder="公司注册名称" [(ngModel)]="selectedInfo.name" maxlength="20">
               </mat-form-field>
 
               <mat-form-field class="invoice_input">
@@ -293,7 +293,7 @@
               </mat-form-field>
 
               <mat-form-field class="invoice_input">
-                <input matInput placeholder="注册场地" [(ngModel)]="selectedInfo.address">
+                <input matInput placeholder="注册场地" [(ngModel)]="selectedInfo.address" maxlength="40">
               </mat-form-field>
 
               <mat-form-field class="invoice_input">
@@ -325,7 +325,7 @@
               <div *ngIf="selectedInfo.id === data.id" style="margin-bottom: 10px;">
                 <div *ngIf="data.showInfo">
                   <mat-form-field class="invoice_input">
-                    <input matInput placeholder="公司注册名称" [(ngModel)]="selectedInfo.name">
+                    <input matInput placeholder="公司注册名称" [(ngModel)]="selectedInfo.name" maxlength="20">
                   </mat-form-field>
 
                   <mat-form-field class="invoice_input">
@@ -333,7 +333,7 @@
                   </mat-form-field>
 
                   <mat-form-field class="invoice_input">
-                    <input matInput placeholder="开户银行名称" [(ngModel)]="selectedInfo.address">
+                    <input matInput placeholder="开户银行名称" [(ngModel)]="selectedInfo.bank">
                   </mat-form-field>
 
                   <mat-form-field class="invoice_input">
@@ -341,7 +341,7 @@
                   </mat-form-field>
 
                   <mat-form-field class="invoice_input">
-                    <input matInput placeholder="注册场地" [(ngModel)]="selectedInfo.address">
+                    <input matInput placeholder="注册场地" [(ngModel)]="selectedInfo.address" maxlength="40">
                   </mat-form-field>
 
                   <mat-form-field class="invoice_input">
@@ -406,7 +406,7 @@
 
         <div *ngIf="showNewInfo">
           <mat-form-field class="invoice_input">
-            <input matInput placeholder="公司注册名称" [(ngModel)]="newInfo.name">
+            <input matInput placeholder="公司注册名称" [(ngModel)]="newInfo.name" maxlength="20">
           </mat-form-field>
 
           <mat-form-field class="invoice_input">
@@ -422,7 +422,7 @@
           </mat-form-field>
 
           <mat-form-field class="invoice_input">
-            <input matInput placeholder="注册场地" [(ngModel)]="newInfo.address">
+            <input matInput placeholder="注册场地" [(ngModel)]="newInfo.address" maxlength="40">
           </mat-form-field>
 
           <mat-form-field class="invoice_input">

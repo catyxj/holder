@@ -56,6 +56,7 @@ export class MainComponent implements OnInit, OnDestroy {
       // window.location.reload();
     }*/
 
+
     this.getSide();
     this.getUser();
 
@@ -69,8 +70,9 @@ export class MainComponent implements OnInit, OnDestroy {
 
   getUser(): void {
     let roleId = localStorage.getItem('roleId');
+    let token = localStorage.getItem('authToken');
 
-    this.userService.getUser()
+    this.userService.getUser(token)
       .subscribe(user => {
         this.user = user;
         sessionStorage.setItem('currentUser', JSON.stringify(this.user));

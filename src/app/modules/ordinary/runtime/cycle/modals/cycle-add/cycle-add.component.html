@@ -36,7 +36,10 @@
       设置日期：
     </div>
     <div class="m_input">
-      <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)" style="width: 100%;"></nz-date-picker>
+      <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"
+                      [nzDisabledDate]="disabledDate"
+                      style="width: 100%;">
+      </nz-date-picker>
     </div>
   </div>
 

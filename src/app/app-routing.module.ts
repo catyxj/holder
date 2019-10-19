@@ -4,41 +4,42 @@ import {LoginComponent} from './login/login.component';
 import {MainComponent} from './main/main.component';
 import {NotFound404Component} from './global/not-found404/not-found404.component';
 import {QiantianComponent} from './homepage/qiantian/qiantian.component';
-import {RuikongComponent} from "./homepage/ruikong/ruikong.component";
-import {SignUpComponent} from "./register/sign-up/sign-up.component";
-import {RecoverPasswordComponent} from "./register/recover-password/recover-password.component";
-import {UserloginGuard} from "./shared/userlogin.guard";
-import {DirMainComponent} from "./modules/directives/dir-main/dir-main.component";
-import {SignInComponent} from "./register/sign-in/sign-in.component";
-import {VideoLiveComponent} from "./modules/directives/video-live/video-live.component";
-import {Err404Component} from "./global/error/err404/err404.component";
-import {ChargeMainDirComponent} from "./modules/directives/charge/charge-main-dir/charge-main-dir.component";
-import {ChargeOverviewDirComponent} from "./modules/directives/charge/overview/charge-overview-dir/charge-overview-dir.component";
-import {BillMainDirComponent} from "./modules/directives/charge/bill/bill-main-dir/bill-main-dir.component";
-import {BillDetailDirComponent} from "./modules/directives/charge/bill/bill-detail-dir/bill-detail-dir.component";
-import {BillGeneralDirComponent} from "./modules/directives/charge/bill/bill-general-dir/bill-general-dir.component";
-import {OrderMainDirComponent} from "./modules/directives/charge/order/order-main-dir/order-main-dir.component";
-import {RenewalMainDirComponent} from "./modules/directives/charge/renewal/renewal-main-dir/renewal-main-dir.component";
-import {InvoiceMainDirComponent} from "./modules/directives/charge/invoice/invoice-main-dir/invoice-main-dir.component";
-import {OrderInfoDirComponent} from "./modules/directives/charge/order/order-info-dir/order-info-dir.component";
-import {OrderListDirComponent} from "./modules/directives/charge/order/order-list-dir/order-list-dir.component";
-import {RenewalListDirComponent} from "./modules/directives/charge/renewal/renewal-list-dir/renewal-list-dir.component";
-import {InvoiceListDirComponent} from "./modules/directives/charge/invoice/invoice-list-dir/invoice-list-dir.component";
-import {InvoiceInfoDirComponent} from "./modules/directives/charge/invoice/invoice-info-dir/invoice-info-dir.component";
-import {OrderServiceMainDirComponent} from "./modules/directives/charge/order-service/order-service-main-dir/order-service-main-dir.component";
-import {OrderServiceDashboardDirComponent} from "./modules/directives/charge/order-service/order-service-dashboard-dir/order-service-dashboard-dir.component";
-import {BluetoothOrderServiceDirComponent} from "./modules/directives/charge/order-service/add/bluetooth-order-service-dir/bluetooth-order-service-dir.component";
-import {TerminalOrderServiceDirComponent} from "./modules/directives/charge/order-service/add/terminal-order-service-dir/terminal-order-service-dir.component";
-import {VideoOrderServiceDirComponent} from "./modules/directives/charge/order-service/add/video-order-service-dir/video-order-service-dir.component";
-import {SensorOrderServiceDirComponent} from "./modules/directives/charge/order-service/add/sensor-order-service-dir/sensor-order-service-dir.component";
-import {LogoOrderServiceDirComponent} from "./modules/directives/charge/order-service/upgrade/logo-order-service-dir/logo-order-service-dir.component";
-import {StorageOrderServiceDirComponent} from "./modules/directives/charge/order-service/service/storage-order-service-dir/storage-order-service-dir.component";
-import {PaymentOrderServiceDirComponent} from "./modules/directives/charge/order-service/payment-order-service-dir/payment-order-service-dir.component";
-import {TrafficOrderServiceDirComponent} from "./modules/directives/charge/order-service/traffic-order-service-dir/traffic-order-service-dir.component";
-import {DeliveryMainComponent} from "./modules/directives/operator/delivery/delivery-main/delivery-main.component";
-import {DeliveryListComponent} from "./modules/directives/operator/delivery/delivery-list/delivery-list.component";
-import {DeliveryInfoComponent} from "./modules/directives/operator/delivery/delivery-info/delivery-info.component";
-import {AgreementComponent} from "./register/agreement/agreement.component";
+import {RuikongComponent} from './homepage/ruikong/ruikong.component';
+import {SignUpComponent} from './register/sign-up/sign-up.component';
+import {RecoverPasswordComponent} from './register/recover-password/recover-password.component';
+import {UserloginGuard} from './shared/userlogin.guard';
+import {DirMainComponent} from './modules/directives/dir-main/dir-main.component';
+import {SignInComponent} from './register/sign-in/sign-in.component';
+import {VideoLiveComponent} from './modules/directives/video-live/video-live.component';
+import {Err404Component} from './global/error/err404/err404.component';
+import {ChargeMainDirComponent} from './modules/directives/charge/charge-main-dir/charge-main-dir.component';
+import {ChargeOverviewDirComponent} from './modules/directives/charge/overview/charge-overview-dir/charge-overview-dir.component';
+import {BillMainDirComponent} from './modules/directives/charge/bill/bill-main-dir/bill-main-dir.component';
+import {BillDetailDirComponent} from './modules/directives/charge/bill/bill-detail-dir/bill-detail-dir.component';
+import {BillGeneralDirComponent} from './modules/directives/charge/bill/bill-general-dir/bill-general-dir.component';
+import {OrderMainDirComponent} from './modules/directives/charge/order/order-main-dir/order-main-dir.component';
+import {RenewalMainDirComponent} from './modules/directives/charge/renewal/renewal-main-dir/renewal-main-dir.component';
+import {InvoiceMainDirComponent} from './modules/directives/charge/invoice/invoice-main-dir/invoice-main-dir.component';
+import {OrderInfoDirComponent} from './modules/directives/charge/order/order-info-dir/order-info-dir.component';
+import {OrderListDirComponent} from './modules/directives/charge/order/order-list-dir/order-list-dir.component';
+import {RenewalListDirComponent} from './modules/directives/charge/renewal/renewal-list-dir/renewal-list-dir.component';
+import {InvoiceListDirComponent} from './modules/directives/charge/invoice/invoice-list-dir/invoice-list-dir.component';
+import {InvoiceInfoDirComponent} from './modules/directives/charge/invoice/invoice-info-dir/invoice-info-dir.component';
+import {OrderServiceMainDirComponent} from './modules/directives/charge/order-service/order-service-main-dir/order-service-main-dir.component';
+import {OrderServiceDashboardDirComponent} from './modules/directives/charge/order-service/order-service-dashboard-dir/order-service-dashboard-dir.component';
+import {BluetoothOrderServiceDirComponent} from './modules/directives/charge/order-service/add/bluetooth-order-service-dir/bluetooth-order-service-dir.component';
+import {TerminalOrderServiceDirComponent} from './modules/directives/charge/order-service/add/terminal-order-service-dir/terminal-order-service-dir.component';
+import {VideoOrderServiceDirComponent} from './modules/directives/charge/order-service/add/video-order-service-dir/video-order-service-dir.component';
+import {SensorOrderServiceDirComponent} from './modules/directives/charge/order-service/add/sensor-order-service-dir/sensor-order-service-dir.component';
+import {LogoOrderServiceDirComponent} from './modules/directives/charge/order-service/upgrade/logo-order-service-dir/logo-order-service-dir.component';
+import {StorageOrderServiceDirComponent} from './modules/directives/charge/order-service/service/storage-order-service-dir/storage-order-service-dir.component';
+import {PaymentOrderServiceDirComponent} from './modules/directives/charge/order-service/payment-order-service-dir/payment-order-service-dir.component';
+import {TrafficOrderServiceDirComponent} from './modules/directives/charge/order-service/traffic-order-service-dir/traffic-order-service-dir.component';
+import {DeliveryMainComponent} from './modules/directives/operator/delivery/delivery-main/delivery-main.component';
+import {DeliveryListComponent} from './modules/directives/operator/delivery/delivery-list/delivery-list.component';
+import {DeliveryInfoComponent} from './modules/directives/operator/delivery/delivery-info/delivery-info.component';
+import {AgreementComponent} from './register/agreement/agreement.component';
+
 
 
 
@@ -46,7 +47,7 @@ import {AgreementComponent} from "./register/agreement/agreement.component";
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'admin',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {

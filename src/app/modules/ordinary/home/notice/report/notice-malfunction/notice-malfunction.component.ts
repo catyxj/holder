@@ -22,6 +22,7 @@ export class NoticeMalfunctionComponent implements OnInit {
   }
 
   getData() {
+
     this.eptService.getNoticeInfo(this.uid)
       .subscribe(data => {
         this.info = data;

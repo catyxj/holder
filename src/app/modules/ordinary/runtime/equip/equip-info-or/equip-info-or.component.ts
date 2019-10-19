@@ -32,7 +32,6 @@ export class EquipInfoOrComponent implements OnInit {
   public infoList = [];
   public roleId;
 
-
   tplModal: NzModalRef;
 
 

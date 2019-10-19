@@ -55,10 +55,15 @@ export class UserService {
 
 
   // 获取用户信息
-  getUser(): Observable< any > {
+  getUser(data?): Observable< any > {
     console.log('environment:', environment.production);
-    let token = localStorage.getItem('authToken');
+    let token = data;
+    // let token = localStorage.getItem('authToken');
     // httpOptions.headers = httpOptions.headers.set('Authorization', token);
+    if (!token) {
+      let auth = localStorage.getItem('authToken');
+      token = auth ? auth : 'token';
+    }
     let options = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -82,6 +87,7 @@ export class UserService {
           catchError(this.handleError2)
         );
     }*/
+
     // return this.http.get< any >('assets/server/user.json');
     return this.http.get< any >('/api/user', options)
         .pipe(
@@ -93,7 +99,6 @@ export class UserService {
           }),
           catchError(this.handleError2)
         );
-
 
   }
 
@@ -210,9 +215,9 @@ export class UserService {
         `body was: ${error.error}`);
     }
     if (error.status === 550) {
-      localStorage.user = 'false';
+      // localStorage.user = 'false';
       sessionStorage.removeItem('currentUser');
-      localStorage.removeItem('authToken');
+      // localStorage.removeItem('authToken');
       alert(error.error);
     }
     if (!error.status) {

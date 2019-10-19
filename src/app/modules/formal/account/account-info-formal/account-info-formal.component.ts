@@ -4,6 +4,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AccountEditFormalComponent} from "../modals/account-edit-formal/account-edit-formal.component";
 import {UserService} from "../../../../shared/user.service";
 import {AccountPasswordFormalComponent} from "../modals/account-password-formal/account-password-formal.component";
+import {ChargeService} from "../../../../shared/charge.service";
 
 @Component({
   selector: 'app-account-info-formal',
@@ -17,7 +18,8 @@ export class AccountInfoFormalComponent implements OnInit {
 
   constructor(private accountService: AccountService,
               private modalService: NgbModal,
-              private userService: UserService) {
+              private userService: UserService,
+              private chargeService: ChargeService) {
     this.userService.userStatus$ // 监测父组件user
       .subscribe( data => {
           this.user = data;
@@ -31,7 +33,7 @@ export class AccountInfoFormalComponent implements OnInit {
 
 
     // this.expand = [{name: 'LOGO定制'}, {name: '视频监控'}];
-
+    this.getInfo();
     this.getOperate();
   }
 
@@ -40,9 +42,22 @@ export class AccountInfoFormalComponent implements OnInit {
   refresh() {
     this.userService.ChangeMission('changed');
     // this.user = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.getInfo();
     this.getOperate();
   }
 
+
+  // 获取财务及账号信息-扩展应用
+  getInfo() {
+
+    this.chargeService.getConsumerInfo()
+      .subscribe(data => {
+        this.expand = data.service;
+      }, err => {
+
+      });
+
+  }
 
   // 获取记录信息
   getOperate() {
@@ -75,6 +90,7 @@ export class AccountInfoFormalComponent implements OnInit {
     modalRef.result.then((result) => {
       if (result === 'ok') {
         that.userService.ChangeMission('changed');
+        that.getInfo();
         that.getOperate();
       }
     }, (reason) => {

@@ -111,14 +111,15 @@
               <div class="status_bar_in" [ngStyle]="{'background-color': data.life_cycle>0.1 ? '#28D094' : '#FFC06A', 'width': data.life_cycle>0 ? data.life_cycle*100+'%': '0%' }"></div>
             </div>
             <span *ngIf="data.life_cycle>0.1">
-            正常
-          </span>
+              正常
+            </span>
             <span style="color: #FFC06A;" *ngIf="data.life_cycle<=0.1 && data.life_cycle>0">
-            即将过期
-          </span>
+              即将过期
+            </span>
             <span style="color: #BE1414;" *ngIf="data.life_cycle<=0">
-            已经过期
-          </span>
+              已经过期
+            </span>
+            &nbsp;
             <a style="color: #666EE8; text-decoration: underline;" *ngIf="data.life_cycle<=0.1">
               联系厂家
             </a>

@@ -26,7 +26,7 @@
       </button>
 
       <button class="btn btn_purple btn_round bpm ml-1" [routerLink]="['/admin/ordinary/cluster/ept-del', uid]" *ngIf="roleId === '10'">
-        批量操作
+        批量取消
       </button>
 
     </div>
@@ -39,9 +39,10 @@
           <input type="text" nz-input [(ngModel)]="value" (keyup)="searchEnter($event)" maxlength="20"/>
         </nz-input-group>
         <ng-template #addOnBeforeTemplate>
-          <nz-select [(ngModel)]="search">
-            <nz-option [nzLabel]="'设备名称'" [nzValue]="'name'"></nz-option>
-          </nz-select>
+          设备名称
+          <!--<nz-select [(ngModel)]="search">-->
+            <!--<nz-option [nzLabel]="'设备名称'" [nzValue]="'name'"></nz-option>-->
+          <!--</nz-select>-->
         </ng-template>
         <ng-template #addOnAfterTemplate>
           <img src="assets/icons/icon_seach.png" alt="" class="search_icon" (click)="searchChange()">
@@ -82,7 +83,7 @@
               <div class="grid_col_1">
                 <div class="gc_l">
                   <div class="flex" *ngIf="data.online">
-                    <div class="dot bg_default" *ngIf="!data.run" title="未运行"></div>
+                    <div class="dot bg_grey" *ngIf="!data.run" title="未运行"></div>
                     <div class="dot bg_green" *ngIf="data.run" title="运行"></div>
                     <div class="dot bg_danger" *ngIf="data.alarm_count>0" title="有告警"></div>
                     <div class="dot bg_warning" *ngIf="data.malfunction" title="有故障"></div>

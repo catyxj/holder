@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {BoilerService} from "../../../../shared/boiler.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {EqListAddComponent} from "../../monitor/list/modals/eq-list-add/eq-list-add.component";
+import {EqListLinkComponent} from "../../monitor/list/modals/eq-list-link/eq-list-link.component";
 
 @Component({
   selector: 'app-home-dashboard',
@@ -117,6 +118,18 @@ export class HomeDashboardComponent implements OnInit {
   }
 
 
+  linkTerm() {
+    let that = this;
+    const modalRef = this.modalService.open(EqListLinkComponent, {windowClass: 'modal_md', centered: true});
+    // modalRef.componentInstance.currentData = this.config;
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+        // that.router.navigate(['/admin/ordinary/graphic/dashborad']);
+      }
+    }, (reason) => {
+      console.log(reason);
+    });
+  }
 
 
 }

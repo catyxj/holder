@@ -1,16 +1,26 @@
 <div class="cus_d_content">
   <div class="cus_d_img">
+    <h6>单形态组件</h6>
     <ul>
       <li *ngFor="let img of img1" (click)="check(img)" [class.active]="img.checked">
         <img src="{{img.img}}" alt="" title="{{img.name}}">
       </li>
     </ul>
     <hr style="margin-top: 0;">
+    <h6>多形态组件</h6>
     <ul>
       <li *ngFor="let img of img2" (click)="check(img)" [class.active]="img.checked">
         <img src="{{img.imgs[0].img}}" alt="" title="{{img.name}}">
       </li>
     </ul>
+    <hr style="margin-top: 0;">
+    <h6>背景组件</h6>
+    <ul>
+      <li *ngFor="let img of img3" (click)="check(img)" [class.active]="img.checked">
+        <img src="{{img.img}}" alt="" title="{{img.name}}">
+      </li>
+    </ul>
+
   </div>
 
 

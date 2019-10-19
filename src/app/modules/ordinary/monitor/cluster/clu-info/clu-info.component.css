@@ -53,6 +53,8 @@ a{
 .grid{
   padding: 28px 24px;
   box-sizing: border-box;
+  height: 507px;
+  overflow: auto;
 }
 .grid_content{
   display: flex;
@@ -86,7 +88,7 @@ a{
   border-radius: 10px;
   margin-right: 6px;
 }
-.bg_default{
+.bg_grey{
   background-color: #9CC9F6;
 }
 

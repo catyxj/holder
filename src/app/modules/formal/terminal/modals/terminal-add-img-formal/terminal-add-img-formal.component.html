@@ -16,6 +16,7 @@
       <select name="" class="form-control" [(ngModel)]="type" (change)="typeChange(type)" style="width: 138px;">
         <option value="1">单形态</option>
         <option value="2">多形态</option>
+        <option value="3">背景图</option>
       </select>
     </div>
   </div>
@@ -25,7 +26,7 @@
       展示素材
     </div>
     <div class="cus_content">
-      *素材大小100kb以内
+      *素材大小200kb以内
     </div>
   </div>
 
@@ -127,6 +128,28 @@
       </div>
     </div>
 
+  </div>
+
+
+  <!--背景图-->
+  <div class="cus_img" *ngIf="type === '3'">
+    <div class="img_con m_img">
+      <nz-upload
+        nzAction="/api/dialogue/attach/upload"
+        nzListType="picture-card"
+        [nzHeaders]="headOption"
+        [nzShowUploadList]="false"
+        [nzBeforeUpload]="beforeUpload2"
+        (nzChange)="imgChange3($event)"
+      >
+        <ng-container *ngIf="!imgBg">
+          <img src="assets/images/photo.png" style="width: 133px; height: 133px;" alt="">
+        </ng-container>
+        <img *ngIf="imgBg" [src]="imgBg" style="width: 133px; height: 133px;"/>
+      </nz-upload>
+      <!--<img src="{{img}}" title="点击上传图片">
+      <input type="file"  (change)="imgChange1($event)" class="img_input">-->
+    </div>
   </div>
 
   <div>

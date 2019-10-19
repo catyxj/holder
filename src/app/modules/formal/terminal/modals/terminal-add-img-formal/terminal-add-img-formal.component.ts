@@ -20,8 +20,10 @@ export class TerminalAddImgFormalComponent implements OnInit {
   public chan; // 通道
   public img; // 单形态图片
   public imgs; // 多形态图片列表
+  public imgBg; // 背景图片
   public imgFile1;
   public imgFiles = [];
+  public imgFileBg;
   public errMes;
   public isValid = true;
   public headOption;
@@ -36,6 +38,7 @@ export class TerminalAddImgFormalComponent implements OnInit {
     };
 
     this.img = 'assets/images/photo.png';
+    this.imgBg = 'assets/images/photo.png';
     this.imgs = [
       {
         num: 1,
@@ -84,6 +87,28 @@ export class TerminalAddImgFormalComponent implements OnInit {
     return true;
   }
 
+  beforeUpload2 = (file: File) => {
+    const isJPG = file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/gif';
+    if (!isJPG) {
+      Swal(
+        '请上传png,jpg,gif图片',
+        '',
+        'error'
+      );
+      return false;
+    }
+    const isLt2M = file.size / 1024  < 500;
+    if (!isLt2M) {
+      Swal(
+        '图片大小不能超过500k',
+        '',
+        'error'
+      );
+      return false;
+    }
+    return true;
+  }
+
   getBase64(img: File, callback: (img: string) => void): void {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result!.toString()));
@@ -123,6 +148,27 @@ export class TerminalAddImgFormalComponent implements OnInit {
         that.imgFiles[n] = info.file;
         this.getBase64(info.file!.originFileObj!, (img: string) => {
           that.imgs[n].imgUrl = img;
+        });
+        break;
+      case 'error':
+        Swal(
+          '上传失败，请重试',
+          info.file.message,
+          'error'
+        );
+        break;
+    }
+  }
+
+  imgChange3(info: { file: UploadFile }): void {
+    switch (info.file.status) {
+      case 'uploading':
+        break;
+      case 'done':
+        console.log(info);
+        this.imgFileBg = info.file;
+        this.getBase64(info.file!.originFileObj!, (img: string) => {
+          this.imgBg = img;
         });
         break;
       case 'error':

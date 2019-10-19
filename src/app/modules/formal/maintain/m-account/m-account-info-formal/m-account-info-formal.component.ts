@@ -7,6 +7,7 @@ import {MaintainService} from "../../../../../shared/maintain.service";
 
 import Swal from 'sweetalert2';
 import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
+import {MAccountDisabledFComponent} from "../modals/m-account-disabled-f/m-account-disabled-f.component";
 
 @Component({
   selector: 'app-m-account-info-formal',
@@ -115,12 +116,24 @@ export class MAccountInfoFormalComponent implements OnInit {
   // 禁用
   dataDisabled() {
     let that = this;
-    let title = '确认要禁用此账号吗？';
+    let post = [this.uid];
+    const modalRef = this.modalService.open(MAccountDisabledFComponent, {windowClass: 'modal_md', centered: true});
+    modalRef.componentInstance.currentData = post;
+    modalRef.componentInstance.title = '账号禁用';
+    modalRef.result.then((result) => {
+      if (result === 'ok') {
+        that.getInfo();
+        that.getOperate();
+      }
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(reason);
+    });
+
+    /*let title = '确认要禁用此账号吗？';
     let subtitle = '';
     this.creatModal(title, subtitle, () => {
-      let post = {
-        data: [this.uid]
-      };
+
       this.maintainService.updateUserStatus(post)
         .subscribe(val => {
           Swal(
@@ -137,7 +150,7 @@ export class MAccountInfoFormalComponent implements OnInit {
             'error'
           );
         });
-    });
+    });*/
 
   }
 

@@ -142,6 +142,7 @@ export class DeliveryInfoComponent implements OnInit {
     modalRef.result.then((result) => {
       if (result === 'ok') {
         that.getBasic();
+        that.getList();
       }
     }, (reason) => {
       console.log(reason);

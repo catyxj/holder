@@ -80,8 +80,8 @@ export class ChargeOverviewDirComponent implements OnInit {
       yAxis: [
         {
           name: 'RMB',
-          nameLocation: 'center',
-          nameGap: 26,
+          // nameLocation: 'center',
+          // nameGap: 26,
           type: 'value',
           // min: function(value) {  // 'dataMin'
           //   return value.min;

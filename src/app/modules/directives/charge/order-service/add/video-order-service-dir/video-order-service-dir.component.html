@@ -56,8 +56,11 @@
         购买数量：
       </div>
       <div>
-        <input type="number" [(ngModel)]="count"
-               style="width:286px; height:28px; border:1px solid #979797;">
+        <input type="number" [(ngModel)]="count" pattern="^[1-9]\d*" #num="ngModel" min="1"
+               style="width:286px; height:28px; border:1px solid #979797;" required>
+        <span style="color: red; font-size: 12px;" *ngIf="num.invalid && (num.dirty || num.touched)">
+           请输入大于0的整数
+        </span>
       </div>
     </div>
 
@@ -97,7 +100,7 @@
     </div>
 
     <div>
-      <button class="btn btn_purple bpm" (click)="save()">
+      <button class="btn btn_purple bpm" (click)="save()" [disabled]="num.invalid">
         提交
       </button>
     </div>
