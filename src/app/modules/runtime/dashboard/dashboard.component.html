@@ -220,7 +220,7 @@
 
       <!--控制-->
       <div *ngIf="controlShow && termStatus === 1"  class="control_box">
-        <div class="btn-group" style="width: 100%;">
+        <div class="btn-group" style="width: 100%;" *ngIf="uid!='3792e9fd-07da-4cf5-a748-8da3cb2897bd'">
           <button class="btn btn-outline-info" style="width: 33%;" (click)="equipControl(2)"
                   [disabled]="termStatus === 1 && eptStatus === true || isLoading === true">
             启动
@@ -232,6 +232,21 @@
           <button class="btn btn-outline-success" style="width: 33%;" (click)="equipControl(3)"
                   [disabled]="isLoading === true">
             重置
+          </button>
+        </div>
+
+        <div class="btn-group" style="width: 100%;" *ngIf="uid==='3792e9fd-07da-4cf5-a748-8da3cb2897bd'">
+          <button class="btn btn-outline-info" style="width: 33%;" (click)="equipControl(2)"
+                  [disabled]="termStatus === 1 && eptStatus === true || isLoading === true">
+            手动启停
+          </button>
+          <button class="btn btn-outline-danger" style="width: 33%;" (click)="equipControl(1)"
+                  [disabled]="termStatus !== 1 || eptStatus === false || isLoading === true">
+            手自切换
+          </button>
+          <button class="btn btn-outline-success" style="width: 33%;" (click)="equipControl(3)"
+                  [disabled]="isLoading === true">
+            主备切换
           </button>
         </div>
       </div>

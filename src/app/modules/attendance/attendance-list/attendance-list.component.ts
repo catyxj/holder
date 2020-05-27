@@ -37,15 +37,37 @@ export class AttendanceListComponent implements OnInit {
 
     /*this.attendances = [
       {
-        num: 'asdfsadsf22222',
+        Uid: 'at1111111111',
         name: 'sdfgsd',
-        date: new Date(),
-        location: 'asdf',
+        CreatedDate: new Date(),
+        AttendanceAddress: 'asdf',
         user: 'asdfa',
-        we: 'asdf',
-        contact: 'asdfa'
+        WeixinName: 'asdf',
+        CreatedBy: {
+          MobileNumber: '12355891',
+          Name: 'aaaaa'
+        },
+        Equipment: {
+          Name: 'bbb'
+        }
+      },
+      {
+        Uid: 'at1111122222',
+        name: 'aasddddd',
+        CreatedDate: new Date(),
+        AttendanceAddress: 'asdf',
+        user: 'asdfa',
+        WeixinName: 'qqqq',
+        CreatedBy: {
+          MobileNumber: '12355891',
+          Name: 'ggggg'
+        },
+        Equipment: {
+          Name: 'cccc'
+        }
       }
-    ];*/
+    ];
+    this.totalItems = 2;*/
 
 
     this.isSpinning = true;
@@ -78,15 +100,22 @@ export class AttendanceListComponent implements OnInit {
 
     /*this.attendanceAll = [
       {
-        num: 'asdfsadsf22222',
+        Uid: 'asdfsadsf22222',
         name: 'sdfgsd',
-        date: new Date(),
-        location: 'asdf',
+        CreatedDate: new Date(),
+        AttendanceAddress: 'asdf',
         user: 'asdfa',
-        we: 'asdf',
-        contact: 'asdfa'
+        WeixinName: 'asdf',
+        CreatedBy: {
+          MobileNumber: '12355891',
+          Name: 'aaaaa'
+        },
+        Equipment: {
+          Name: 'bbb'
+        }
       }
-    ];*/
+    ];
+    this.export();*/
   }
 
   export() {
