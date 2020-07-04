@@ -78,6 +78,7 @@ import {MaintainViewComponent} from './runtime/maintain/maintain-view/maintain-v
 import {MaintainAddComponent} from './runtime/maintain/maintain-add/maintain-add.component';
 import {ChargeMainComponent} from "./recharge/charge-main/charge-main.component";
 import {Charge1Component} from "./recharge/charge1/charge1.component";
+import {HistoryAnalysisComponent} from "./runtime/history-analysis/history-analysis.component";
 
 
 
@@ -154,6 +155,10 @@ export const ModulesRoutingModule = [
           {
             path: 'dashboard',
             component: RuntimeDashboardComponent
+          },
+          {
+            path: 'analysis',
+            component: HistoryAnalysisComponent
           },
           {
             path: 'operate',

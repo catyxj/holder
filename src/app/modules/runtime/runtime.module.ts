@@ -24,6 +24,7 @@ import {MaintainComponent} from './maintain/maintain-main/maintain.component';
 import {MaintainDashboardComponent} from './maintain/maintain-dashboard/maintain-dashboard.component';
 import {MaintainAddComponent} from './maintain/maintain-add/maintain-add.component';
 import {MaintainViewComponent} from './maintain/maintain-view/maintain-view.component';
+import { HistoryAnalysisComponent } from './history-analysis/history-analysis.component';
 
 
 
@@ -53,7 +54,8 @@ import {MaintainViewComponent} from './maintain/maintain-view/maintain-view.comp
     LifeAddComponent,
     LifeEditComponent,
     VDashboardComponent,
-    VMainComponent
+    VMainComponent,
+    HistoryAnalysisComponent,
   ],
   entryComponents: [
     ChartExpandComponent,

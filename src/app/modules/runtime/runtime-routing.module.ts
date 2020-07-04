@@ -15,6 +15,7 @@ import {MaintainComponent} from './maintain/maintain-main/maintain.component';
 import {MaintainDashboardComponent} from './maintain/maintain-dashboard/maintain-dashboard.component';
 import {MaintainViewComponent} from './maintain/maintain-view/maintain-view.component';
 import {MaintainAddComponent} from './maintain/maintain-add/maintain-add.component';
+import {HistoryAnalysisComponent} from "./history-analysis/history-analysis.component";
 
 
 export const RuntimeRoutingModule = [
@@ -26,6 +27,10 @@ export const RuntimeRoutingModule = [
       {
         path: 'dashboard',
         component: RuntimeDashboardComponent
+      },
+      {
+        path: 'analysis',
+        component: HistoryAnalysisComponent
       },
       {
         path: 'operate',

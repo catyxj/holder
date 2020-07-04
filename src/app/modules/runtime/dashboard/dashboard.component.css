@@ -9,9 +9,20 @@
   display: flex;
   flex-direction: column;
   flex: 2;
+}
+
+.fl_top{
   background-color: #ffffff;
   box-shadow: 1px 1px 5px #bbbbbb;
 }
+
+.fl_bottom{
+  margin-top: 10px;
+  background-color: #ffffff;
+  box-shadow: 1px 1px 5px #bbbbbb;
+}
+
+
 .flash_left .fl_head{
   padding: 20px;
   display: flex;
@@ -82,12 +93,12 @@
 }
 
 .flash_left .fl_img{
-  height: 630px;
+  height: 500px;
   position: relative;
 }
 .flash_left .fl_img img{
   width: 100%;
-  height: 630px;
+  height: 500px;
 }
 
 .control_box{
@@ -138,6 +149,33 @@
   background-color: #b5b5b5;
 }
 
+.fl_bottom{
+  /*padding: 0 20px;*/
+}
+.fl_bottom ul{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 20px;
+  background-color: #ffffff;
+  /*border: 1px solid #eeeeee;*/
+}
+.fl_bottom ul li{
+  width: 30%;
+  background-color: #247bd7;
+  color: #ffffff;
+  border-radius: 3px;
+  padding: 6px 20px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  margin-right: 3.3%;
+  display: flex;
+  justify-content: space-between;
+}
+.fl_bottom ul li .fl_b_label{
+  /*width: 60%;*/
+}
+
+
 .flash_right{
   display: flex;
   flex-direction: column;
@@ -168,7 +206,7 @@
 }
 
 .fr_1{
-  height: 500px;
+  height: 550px;
   background-color: #ffffff;
   box-shadow: 1px 1px 5px #bbbbbb;
   box-sizing: border-box;
@@ -188,7 +226,7 @@
   border: 1px solid #eeeeee;
   border-radius: 4px;
   padding: 5px 10px;
-  height: 372px;
+  height: 422px;
 }
 .an_list .table{
   border: none;

@@ -75,6 +75,15 @@ export class RuntimeService {
   }
 
 
+  getAnalysis(n: number, pageSize: number): Observable<any> {
+    const url = `/equipment_runtime_history?page=${n}&pageSize=${pageSize}`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);

@@ -52,6 +52,8 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
   public expand3 = false;
   public exTotal1 = 0;
   public exTotal3 = 0;
+  public analysis; // 运行分析数据
+
 
 
   constructor(private boilerWsService: BoilerSocketService,
@@ -62,7 +64,6 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.uid = sessionStorage.getItem('runtimeUid');
     this.name = sessionStorage.getItem('runtimeName');
-
     this.initStatus();
 
     // this.initTest();

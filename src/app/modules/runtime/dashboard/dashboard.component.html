@@ -165,114 +165,182 @@
 
 <div class="flash" *ngIf="!expand1 && !expand2 && !expand3">
   <div class="flash_left">
-    <div class="fl_head">
-      <h6>
-        <a [routerLink]="['/admin/equipments/equipment-info', uid]">
-          {{name}}
-        </a>
-      </h6>
-      <div class="status_row">
-        <div class="status_col"
-             [ngClass]="{'s_blue': termStatus === 1, 's_grey': termStatus !== 1 }">
-          <div class="status_t">
-            终端状态
+    <div class="fl_top">
+      <div class="fl_head">
+        <h6>
+          <a [routerLink]="['/admin/equipments/equipment-info', uid]">
+            {{name}}
+          </a>
+        </h6>
+        <div class="status_row">
+          <div class="status_col"
+               [ngClass]="{'s_blue': termStatus === 1, 's_grey': termStatus !== 1 }">
+            <div class="status_t">
+              终端状态
+            </div>
+            <div class="status_text">
+              {{online}}
+            </div>
           </div>
-          <div class="status_text">
-            {{online}}
+
+          <div class="status_col"
+               [ngClass]="{'s_blue': termStatus === 1 && eptStatus === true, 's_grey': termStatus !== 1 || eptStatus === false}">
+            <div class="status_t">
+              运行状态
+            </div>
+            <div class="status_text">
+              {{isBurning}}
+            </div>
+          </div>
+
+          <div class="status_col"
+               [ngClass]="{'s_red': termStatus === 1 && alarmStatus === true, 's_blue': termStatus === 1 && alarmStatus === false, 's_grey': termStatus !== 1}">
+            <div class="status_t">
+              告警状态
+            </div>
+            <div class="status_text">
+              {{hasWarning}}
+            </div>
+          </div>
+
+          <div class="status_col"
+               [ngClass]="{'s_yellow': termStatus === 1 && malfunction === true, 's_blue': termStatus === 1 && malfunction === false, 's_grey': termStatus !== 1}">
+            <div class="status_t">
+              故障状态
+            </div>
+            <div class="status_text">
+              {{hasMalfunction}}
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="fl_img">
+        <img src="{{img}}" alt="">
+
+
+        <!--控制-->
+        <div *ngIf="controlShow && termStatus === 1 && uid!='3792e9fd-07da-4cf5-a748-8da3cb2897bd'"  class="control_box">
+          <div class="btn-group" style="width: 100%;">
+            <button class="btn btn-outline-info" style="width: 33%;" (click)="equipControl(2)"
+                    [disabled]="termStatus === 1 && eptStatus === true || isLoading === true">
+              启动
+            </button>
+            <button class="btn btn-outline-danger" style="width: 33%;" (click)="equipControl(1)"
+                    [disabled]="termStatus !== 1 || eptStatus === false || isLoading === true">
+              关闭
+            </button>
+            <button class="btn btn-outline-success" style="width: 33%;" (click)="equipControl(3)"
+                    [disabled]="isLoading === true">
+              重置
+            </button>
+          </div>
+
+        </div>
+
+
+        <div *ngIf="controlShow && termStatus === 1 && uid==='3792e9fd-07da-4cf5-a748-8da3cb2897bd'"  class="control_box" style="width: 260px;">
+          <div class="btn-group" style="width: 100%;">
+            <button class="btn btn-outline-info" style="width: 33%;" (click)="equipControl(2)"
+                    [disabled]="isLoading === true">
+              手动启停
+            </button>
+            <button class="btn btn-outline-danger" style="width: 33%;" (click)="equipControl(1)"
+                    [disabled]="isLoading === true">
+              手自切换
+            </button>
+            <button class="btn btn-outline-success" style="width: 33%;" (click)="equipControl(3)"
+                    [disabled]="isLoading === true">
+              主备切换
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="fl_sw">
+        <!--左箭头-->
+        <div class="sw_arrow" (click)="preP()" *ngIf="page2 > 1">
+          <i class="fa fa-angle-left"></i>
+        </div>
+
+        <!--开关量-->
+        <div class="sw_content row">
+          <div class="sw_cell col-2" *ngFor="let data of switchs2; trackBy: trackByUid;">
+            <div class="sw_circle" [ngClass]="{'c_info':data.SwitchStatus === 1, 'c_warning':data.SwitchStatus === 2 }">
+            </div>
+            <div class="">
+              {{ data.ChannelName }}
+            </div>
           </div>
         </div>
 
-        <div class="status_col"
-             [ngClass]="{'s_blue': termStatus === 1 && eptStatus === true, 's_grey': termStatus !== 1 || eptStatus === false}">
-          <div class="status_t">
-            运行状态
-          </div>
-          <div class="status_text">
-            {{isBurning}}
-          </div>
-        </div>
-
-        <div class="status_col"
-             [ngClass]="{'s_red': termStatus === 1 && alarmStatus === true, 's_blue': termStatus === 1 && alarmStatus === false, 's_grey': termStatus !== 1}">
-          <div class="status_t">
-            告警状态
-          </div>
-          <div class="status_text">
-            {{hasWarning}}
-          </div>
-        </div>
-
-        <div class="status_col"
-             [ngClass]="{'s_yellow': termStatus === 1 && malfunction === true, 's_blue': termStatus === 1 && malfunction === false, 's_grey': termStatus !== 1}">
-          <div class="status_t">
-            故障状态
-          </div>
-          <div class="status_text">
-            {{hasMalfunction}}
-          </div>
+        <!--右箭头-->
+        <div class="sw_arrow" (click)="nextP()" *ngIf="page2 < tpage2">
+          <i class="fa fa-angle-right"></i>
         </div>
 
       </div>
     </div>
-    <div class="fl_img">
-      <img src="{{img}}" alt="">
 
 
-      <!--控制-->
-      <div *ngIf="controlShow && termStatus === 1"  class="control_box">
-        <div class="btn-group" style="width: 100%;" *ngIf="uid!='3792e9fd-07da-4cf5-a748-8da3cb2897bd'">
-          <button class="btn btn-outline-info" style="width: 33%;" (click)="equipControl(2)"
-                  [disabled]="termStatus === 1 && eptStatus === true || isLoading === true">
-            启动
-          </button>
-          <button class="btn btn-outline-danger" style="width: 33%;" (click)="equipControl(1)"
-                  [disabled]="termStatus !== 1 || eptStatus === false || isLoading === true">
-            关闭
-          </button>
-          <button class="btn btn-outline-success" style="width: 33%;" (click)="equipControl(3)"
-                  [disabled]="isLoading === true">
-            重置
-          </button>
+    <div class="fl_bottom">
+      <div class="fl_head" style="align-items: center;">
+        <div class="an_title" style="font-weight: bold;">
+          今日运行分析
         </div>
-
-        <div class="btn-group" style="width: 100%;" *ngIf="uid==='3792e9fd-07da-4cf5-a748-8da3cb2897bd'">
-          <button class="btn btn-outline-info" style="width: 33%;" (click)="equipControl(2)"
-                  [disabled]="termStatus === 1 && eptStatus === true || isLoading === true">
-            手动启停
-          </button>
-          <button class="btn btn-outline-danger" style="width: 33%;" (click)="equipControl(1)"
-                  [disabled]="termStatus !== 1 || eptStatus === false || isLoading === true">
-            手自切换
-          </button>
-          <button class="btn btn-outline-success" style="width: 33%;" (click)="equipControl(3)"
-                  [disabled]="isLoading === true">
-            主备切换
-          </button>
+        <div>
+          <a class="" style="color: #247bd7;" [routerLink]="['../analysis']">
+            历史运行分析报告 >>
+          </a>
         </div>
       </div>
-    </div>
-    <div class="fl_sw">
-      <!--左箭头-->
-      <div class="sw_arrow" (click)="preP()" *ngIf="page2 > 1">
-        <i class="fa fa-angle-left"></i>
-      </div>
 
-      <!--开关量-->
-      <div class="sw_content row">
-        <div class="sw_cell col-2" *ngFor="let data of switchs2; trackBy: trackByUid;">
-          <div class="sw_circle" [ngClass]="{'c_info':data.SwitchStatus === 1, 'c_warning':data.SwitchStatus === 2 }">
+
+      <ul>
+        <li>
+          <div class="fl_b_label">
+            运行时长
           </div>
-          <div class="">
-            {{ data.ChannelName }}
+          <div class="fl_b_value">
+            1.1 小时
           </div>
-        </div>
-      </div>
+        </li>
 
-      <!--右箭头-->
-      <div class="sw_arrow" (click)="nextP()" *ngIf="page2 < tpage2">
-        <i class="fa fa-angle-right"></i>
-      </div>
+        <li>
+          <div class="fl_b_label">
+            最高排烟温度
+          </div>
+          <div class="fl_b_value">
+            1.1 ℃
+          </div>
+        </li>
 
+        <li>
+          <div class="fl_b_label">
+            预估当日燃气消耗量
+          </div>
+          <div class="fl_b_value">
+            1.1 m³
+          </div>
+        </li>
+
+        <li>
+          <div class="fl_b_label">
+            启炉次数
+          </div>
+          <div class="fl_b_value">
+            1.1 次
+          </div>
+        </li>
+
+        <li>
+          <div class="fl_b_label">
+            平均排烟温度
+          </div>
+          <div class="fl_b_value">
+            1.1 ℃
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 
