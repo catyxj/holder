@@ -96,6 +96,7 @@ export class RuntimeDashboardComponent implements OnInit, OnDestroy {
           this.eptStatus = this.equip.eptStatus;
           this.alarmStatus = this.equip.alarmStatus;
           this.malfunction = this.equip.mtStatus;
+          this.analysis = this.equip.analysis;
 
           this.isBurning = '未测定';
           this.hasWarning = '未测定';

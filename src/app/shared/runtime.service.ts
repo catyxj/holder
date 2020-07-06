@@ -6,7 +6,7 @@ import {catchError} from 'rxjs/internal/operators';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': 'Ida'
+    'Authorization': 'holder'
   })
 };
 
@@ -75,14 +75,23 @@ export class RuntimeService {
   }
 
 
-  getAnalysis(n: number, pageSize: number): Observable<any> {
-    const url = `/equipment_runtime_history?page=${n}&pageSize=${pageSize}`;
+  // 历史分析报告
+  getAnalysis(n: number, pageSize: number, uid): Observable<any> {
+    const url = `/equipment_analysis_history?page=${n}&size=${pageSize}&uid=${uid}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError) // then handle the error
       );
   }
 
+  // 下载分析报告
+  getAnalysisExport(uid): Observable<any> {
+    const url = `/equipment_analysis_download?uid=${uid}`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

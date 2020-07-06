@@ -301,7 +301,7 @@
             运行时长
           </div>
           <div class="fl_b_value">
-            1.1 小时
+            {{analysis?.runtime}} 小时
           </div>
         </li>
 
@@ -310,7 +310,7 @@
             最高排烟温度
           </div>
           <div class="fl_b_value">
-            1.1 ℃
+            {{analysis?.max_temper}} ℃
           </div>
         </li>
 
@@ -319,7 +319,7 @@
             预估当日燃气消耗量
           </div>
           <div class="fl_b_value">
-            1.1 m³
+            {{analysis?.fuel_consumer}} m³
           </div>
         </li>
 
@@ -328,7 +328,7 @@
             启炉次数
           </div>
           <div class="fl_b_value">
-            1.1 次
+            {{analysis?.run_count}} 次
           </div>
         </li>
 
@@ -337,7 +337,7 @@
             平均排烟温度
           </div>
           <div class="fl_b_value">
-            1.1 ℃
+            {{analysis?.aver_temper}} ℃
           </div>
         </li>
       </ul>
